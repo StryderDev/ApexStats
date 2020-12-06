@@ -36,21 +36,19 @@ module.exports = {
           player: player,
         })
         .then(function (result) {
-          var total = "110";
-          var current = result.global.battlepass.level;
-          var size = "1";
-          var line = "DASH";
-          var slider = "O";
-
           const stats = new Discord.MessageEmbed()
             .setTitle(`Apex Stats for ${result.global.name}`)
             .setThumbnail(result.global.avatar)
             .setDescription(
-              `Level ${result.global.battlepass.level}/110\n${percentagebar(
-                110,
+              `Account Level ${result.global.level}/500\n${percentagebar(
+                500,
+                result.global.level,
+                10
+              )}\n\nBattlepass Level ${
                 result.global.battlepass.level
-              )}`
-            );
+              }/110\n${percentagebar(110, result.global.battlepass.level, 10)}`
+            )
+            .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO);
 
           msg.delete();
           message.reply(stats);
