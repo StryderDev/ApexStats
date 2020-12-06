@@ -36,19 +36,69 @@ module.exports = {
           player: player,
         })
         .then(function (result) {
+          var seasonBP = result.global.battlepass.history.season7;
+          var currentSeason = "7";
+
+          function getLegendBanner(legend) {
+            var legends = [
+              // Current list of legends that have banner images
+              "Bangalore",
+              "Bloodhound",
+              "Caustic",
+              "Crypto",
+              "Gibraltar",
+              "Horizon",
+              "Lifeline",
+              "Loba",
+              "Mirage",
+              "Octane",
+              "Pathfinder",
+              "Rampart",
+              "Revenant",
+              "Wattson",
+              "Wraith",
+            ];
+
+            if (legends.indexOf(legend) != -1) {
+              return `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legend}.png`;
+            } else {
+              return `https://sdcore.dev/cdn/ApexStats/LegendBanners/NoBanner.png`;
+            }
+          }
+
+          function getBPLevel() {
+            if (seasonBP != -1) {
+              return seasonBP;
+            } else {
+              return "0";
+            }
+          }
+
+          function getAccountLevel() {
+            if (result.global.level >= 500) {
+              return 500;
+            } else {
+              return result.global.level;
+            }
+          }
+
           const stats = new Discord.MessageEmbed()
-            .setTitle(`Apex Stats for ${result.global.name}`)
+            .setTitle(`Apex Legends Stats for ${result.global.name}`)
             .setThumbnail(result.global.avatar)
-            .setDescription(
-              `Account Level ${result.global.level}/500\n${percentagebar(
-                500,
-                result.global.level,
-                10
-              )}\n\nBattlepass Level ${
-                result.global.battlepass.level
-              }/110\n${percentagebar(110, result.global.battlepass.level, 10)}`
+            .setDescription("Description")
+            .addField(
+              `Account Level ${getAccountLevel()}/500`,
+              `${percentagebar(500, getAccountLevel(), 10)}`,
+              true
             )
-            .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO);
+            .addField(
+              `Season ${currentSeason} Battlepass Level ${getBPLevel()}/110`,
+              `${percentagebar(110, getBPLevel(), 10)}`,
+              true
+            )
+            .setImage(getLegendBanner(result.legends.selected.LegendName))
+            .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
+            .setTimestamp();
 
           msg.delete();
           message.reply(stats);
