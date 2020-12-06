@@ -21,7 +21,7 @@ process.on("unhandledRejection", (error) => {
 
 module.exports = {
   client: client,
-  Discord: require("discord.js"),
+  Discord: require("discord.js-light"),
 };
 
 // Login to Discord
