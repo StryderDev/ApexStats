@@ -1,0 +1,82 @@
+{
+  global: {
+    name: 'SDCore',
+    uid: 1000196748336,
+    avatar: 'https://secure.download.dm.origin.com/production/avatar/prod/userAvatar/31308729/416x416.PNG',
+    platform: 'PC',
+    level: 696,
+    toNextLevelPercent: 9,
+    internalUpdateCount: 26069,
+    bans: {
+      isActive: false,
+      remainingSeconds: 0,
+      last_banReason: 'COMPETITIVE_DODGE_COOLDOWN'
+    },
+    rank: {
+      rankScore: 5846,
+      rankName: 'Platinum',
+      rankDiv: 3,
+      ladderPos: -1,
+      rankImg: 'https://api.mozambiquehe.re/assets/ranks/platinum3.png',
+      rankedSeason: 'period07_split_1'
+    },
+    battlepass: { level: '59', history: [Object] }
+  },
+  realtime: {
+    lobbyState: 'invite',
+    isOnline: 0,
+    isInGame: 0,
+    canJoin: 0,
+    partyFull: 0,
+    selectedLegend: 'Octane'
+  },
+  legends: {
+    selected: { LegendName: 'Octane', data: [], ImgAssets: [Object] },
+    all: {
+      Bangalore: [Object],
+      Bloodhound: [Object],
+      Lifeline: [Object],
+      Caustic: [Object],
+      Gibraltar: [Object],
+      Mirage: [Object],
+      Pathfinder: [Object],
+      Wraith: [Object],
+      Octane: [Object],
+      Wattson: [Object],
+      Crypto: [Object],
+      Revenant: [Object],
+      Loba: [Object],
+      Rampart: [Object],
+      Horizon: [Object]
+    }
+  },
+  mozambiquehere_internal: {
+    isNewToDB: false,
+    claimedBy: '-1',
+    APIAccessType: 'BASIC',
+    ClusterID: '7',
+    rate_limit: { max_per_second: 3, current_req: '1' }
+  },
+  total: {
+    kills: { name: 'Kills', value: 6919 },
+    damage: { name: 'Damage', value: 2112452 },
+    wins_season_5: { name: 'Season 5 Wins', value: 64 },
+    wins_season_6: { name: 'Season 6 Wins', value: 53 },
+    kills_season_6: { name: 'Season 6 Kills', value: 894 },
+    kills_season_7: { name: 'Season 7 Kills', value: 327 },
+    wins_season_7: { name: 'Season 7 Wins', value: 15 },
+    grandsoiree_wins: { name: 'Grand Soiree wins', value: 23 },
+    grandsoiree_kills: { name: 'Grand Soiree kills', value: 523 },
+    grandsoiree_damage: { name: 'Grand Soiree damage', value: 188612 },
+    doc_drone_healing: { name: 'Doc drone healing', value: 56542 },
+    wins_season_4: { name: 'Season 4 Wins', value: 61 },
+    kills_season_5: { name: 'Season 5 Kills', value: 263 },
+    bamboozles: { name: 'Bamboozles', value: 264 },
+    damage_season_1: { name: 'Season 1 Damage', value: 39226 },
+    kills_season_1: { name: 'Season 1 Kills', value: 86 },
+    distance_on_stim: { name: 'Distance on stim', value: 639989 },
+    wins_season_2: { name: 'Season 2 Wins', value: 4 },
+    tactical_tp_distance: { name: 'Bracelet teleport distance', value: 3991127 },
+    kd: { value: -1, name: 'KD' }
+  }
+}

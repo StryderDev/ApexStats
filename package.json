@@ -18,7 +18,9 @@
     "dotenv": "^8.2.0",
     "fs": "0.0.1-security",
     "moment": "^2.29.1",
-    "moment-timezone": "^0.5.32"
+    "moment-timezone": "^0.5.32",
+    "mozambique-api-wrapper": "^1.3.0",
+    "percentagebar": "^1.0.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
