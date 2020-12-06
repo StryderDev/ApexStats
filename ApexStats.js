@@ -1,0 +1,28 @@
+require("dotenv").config();
+
+const Discord = require("discord.js-light");
+const client = new Discord.Client({
+  cacheRoles: false,
+  cacheGuilds: true,
+  cacheEmojis: false,
+  cacheChannels: true,
+  cachePresences: false,
+  cacheOverwrites: false,
+});
+
+const fs = require("fs");
+require("./functions.js")(client);
+
+const config = require("./config.json");
+
+process.on("unhandledRejection", (error) => {
+  console.log(error.message, "error");
+});
+
+module.exports = {
+  client: client,
+  Discord: require("discord.js"),
+};
+
+// Login to Discord
+client.login(config.token);
