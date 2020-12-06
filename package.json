@@ -12,5 +12,14 @@
   "bugs": {
     "url": "https://github.com/SDCore/ApexStats/issues"
   },
-  "homepage": "https://github.com/SDCore/ApexStats#readme"
+  "homepage": "https://github.com/SDCore/ApexStats#readme",
+  "dependencies": {
+    "discord.js-light": "^3.4.2",
+    "dotenv": "^8.2.0",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.32"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
 }
