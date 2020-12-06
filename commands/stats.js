@@ -15,24 +15,13 @@ module.exports = {
   name: "stats",
   description: "Apex user stats.",
   execute(message, args) {
-    let platform = args[0];
+    let platform = args[0].toUpperCase();
     let player = args[1];
-
-    function getPlatform(platform) {
-      if (
-        platform == "pc" ||
-        platform == "pC" ||
-        platform == "Pc" ||
-        platform == "PC"
-      ) {
-        return "PC";
-      }
-    }
 
     message.channel.send("Fetching stats...").then(async (msg) => {
       mozambiqueClient
         .search({
-          platform: getPlatform(platform),
+          platform: platform,
           player: player,
         })
         .then(function (result) {
@@ -82,9 +71,17 @@ module.exports = {
             }
           }
 
+          function hasAvatar() {
+            if (result.global.avatar != "Not available") {
+              return result.global.avatar;
+            } else {
+              return "https://sdcore.dev/cdn/ApexStats/Icon.png";
+            }
+          }
+
           const stats = new Discord.MessageEmbed()
             .setTitle(`Apex Legends Stats for ${result.global.name}`)
-            .setThumbnail(result.global.avatar)
+            .setThumbnail(hasAvatar())
             .setDescription("Description")
             .addField(
               `Account Level ${getAccountLevel()}/500`,
