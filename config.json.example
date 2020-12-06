@@ -1,4 +1,5 @@
 {
-    "prefix": "TOKEN HERE",
-    "token": "TOKEN HERE"
+    "prefix": "PREFIX HERE",
+    "token": "TOKEN HERE",
+    "APIKey": "APEXLEGENDSAPI API KEY HERE"
 }
