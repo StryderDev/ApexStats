@@ -1,5 +1,6 @@
 const { client } = require("../ApexStats.js");
 const moment = require("moment");
+const config = require("../config.json");
 
 client.once("ready", () => {
   console.log(`Logging in as ${client.user.tag}`);
@@ -8,7 +9,7 @@ client.once("ready", () => {
     client.user
       .setPresence({
         activity: {
-          name: `>help | Providing data for ${client.guilds.cache.size} servers`,
+          name: `${config.prefix}help | Providing data for ${client.guilds.cache.size} servers`,
           type: "WATCHING",
         },
         status: "online",
