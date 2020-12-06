@@ -1,0 +1,16 @@
+{
+  "name": "apexstatsbot",
+  "version": "0.0.1",
+  "description": "Shows Apex Legends player stats and other information provided by the apexlegendsstatus.com API.",
+  "main": "ShardManager.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SDCore/ApexStats.git"
+  },
+  "author": "SDCore",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SDCore/ApexStats/issues"
+  },
+  "homepage": "https://github.com/SDCore/ApexStats#readme"
+}
