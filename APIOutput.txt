@@ -1,82 +1,689 @@
 {
-  global: {
-    name: 'SDCore',
-    uid: 1000196748336,
-    avatar: 'https://secure.download.dm.origin.com/production/avatar/prod/userAvatar/31308729/416x416.PNG',
-    platform: 'PC',
-    level: 696,
-    toNextLevelPercent: 9,
-    internalUpdateCount: 26069,
-    bans: {
-      isActive: false,
-      remainingSeconds: 0,
-      last_banReason: 'COMPETITIVE_DODGE_COOLDOWN'
+    "global": {
+        "name": "SDCore",
+        "uid": 1000196748336,
+        "avatar": "https:\/\/secure.download.dm.origin.com\/production\/avatar\/prod\/userAvatar\/31308729\/416x416.PNG",
+        "platform": "PC",
+        "level": 699,
+        "toNextLevelPercent": 49,
+        "internalUpdateCount": 26143,
+        "bans": {
+            "isActive": false,
+            "remainingSeconds": 0,
+            "last_banReason": "COMPETITIVE_DODGE_COOLDOWN"
+        },
+        "rank": {
+            "rankScore": 5846,
+            "rankName": "Platinum",
+            "rankDiv": 3,
+            "ladderPos": -1,
+            "rankImg": "https:\/\/api.mozambiquehe.re\/assets\/ranks\/platinum3.png",
+            "rankedSeason": "period07_split_1"
+        },
+        "battlepass": {
+            "level": "61",
+            "history": {
+                "season1": -1,
+                "season2": -1,
+                "season3": -1,
+                "season4": -1,
+                "season5": 111,
+                "season6": 111,
+                "season7": 61
+            }
+        }
     },
-    rank: {
-      rankScore: 5846,
-      rankName: 'Platinum',
-      rankDiv: 3,
-      ladderPos: -1,
-      rankImg: 'https://api.mozambiquehe.re/assets/ranks/platinum3.png',
-      rankedSeason: 'period07_split_1'
+    "realtime": {
+        "lobbyState": "invite",
+        "isOnline": 0,
+        "isInGame": 0,
+        "canJoin": 0,
+        "partyFull": 0,
+        "selectedLegend": "Wattson"
     },
-    battlepass: { level: '59', history: [Object] }
-  },
-  realtime: {
-    lobbyState: 'invite',
-    isOnline: 0,
-    isInGame: 0,
-    canJoin: 0,
-    partyFull: 0,
-    selectedLegend: 'Octane'
-  },
-  legends: {
-    selected: { LegendName: 'Octane', data: [], ImgAssets: [Object] },
-    all: {
-      Bangalore: [Object],
-      Bloodhound: [Object],
-      Lifeline: [Object],
-      Caustic: [Object],
-      Gibraltar: [Object],
-      Mirage: [Object],
-      Pathfinder: [Object],
-      Wraith: [Object],
-      Octane: [Object],
-      Wattson: [Object],
-      Crypto: [Object],
-      Revenant: [Object],
-      Loba: [Object],
-      Rampart: [Object],
-      Horizon: [Object]
+    "legends": {
+        "selected": {
+            "LegendName": "Wattson",
+            "data": [
+                {
+                    "name": "Kills",
+                    "value": 408,
+                    "key": "kills"
+                },
+                {
+                    "name": "Season 7 Kills",
+                    "value": 1,
+                    "key": "kills_season_7"
+                },
+                {
+                    "name": "Season 7 Wins",
+                    "value": 0,
+                    "key": "wins_season_7"
+                }
+            ],
+            "ImgAssets": {
+                "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/wattson.png",
+                "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/wattson.jpg"
+            }
+        },
+        "all": {
+            "Bangalore": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 497,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Damage",
+                        "value": 167471,
+                        "key": "damage"
+                    },
+                    {
+                        "name": "Season 5 Wins",
+                        "value": 0,
+                        "key": "wins_season_5"
+                    },
+                    {
+                        "name": "Season 6 Wins",
+                        "value": 0,
+                        "key": "wins_season_6"
+                    },
+                    {
+                        "name": "Season 6 Kills",
+                        "value": 9,
+                        "key": "kills_season_6"
+                    },
+                    {
+                        "name": "Season 7 Kills",
+                        "value": 2,
+                        "key": "kills_season_7"
+                    },
+                    {
+                        "name": "Season 7 Wins",
+                        "value": 0,
+                        "key": "wins_season_7"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/bangalore.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/bangalore.jpg"
+                }
+            },
+            "Bloodhound": {
+                "data": [
+                    {
+                        "name": "Grand Soiree wins",
+                        "value": 9,
+                        "key": "grandsoiree_wins"
+                    },
+                    {
+                        "name": "Grand Soiree kills",
+                        "value": 192,
+                        "key": "grandsoiree_kills"
+                    },
+                    {
+                        "name": "Grand Soiree damage",
+                        "value": 65853,
+                        "key": "grandsoiree_damage"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/bloodhound.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/bloodhound.jpg"
+                }
+            },
+            "Lifeline": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 742,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Damage",
+                        "value": 236566,
+                        "key": "damage"
+                    },
+                    {
+                        "name": "Doc drone healing",
+                        "value": 56542,
+                        "key": "doc_drone_healing"
+                    },
+                    {
+                        "name": "Season 4 Wins",
+                        "value": 11,
+                        "key": "wins_season_4"
+                    },
+                    {
+                        "name": "Season 5 Wins",
+                        "value": 1,
+                        "key": "wins_season_5"
+                    },
+                    {
+                        "name": "Season 5 Kills",
+                        "value": 17,
+                        "key": "kills_season_5"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/lifeline.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/lifeline.jpg"
+                }
+            },
+            "Caustic": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 126,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Damage",
+                        "value": 42027,
+                        "key": "damage"
+                    },
+                    {
+                        "name": "Season 4 Wins",
+                        "value": 0,
+                        "key": "wins_season_4"
+                    },
+                    {
+                        "name": "Season 6 Wins",
+                        "value": 0,
+                        "key": "wins_season_6"
+                    },
+                    {
+                        "name": "Season 6 Kills",
+                        "value": 0,
+                        "key": "kills_season_6"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/caustic.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/caustic.jpg"
+                }
+            },
+            "Gibraltar": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 124,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Damage",
+                        "value": 49002,
+                        "key": "damage"
+                    },
+                    {
+                        "name": "Season 4 Wins",
+                        "value": 2,
+                        "key": "wins_season_4"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/gibraltar.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/gibraltar.jpg"
+                }
+            },
+            "Mirage": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 155,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Bamboozles",
+                        "value": 264,
+                        "key": "bamboozles"
+                    },
+                    {
+                        "name": "Season 4 Wins",
+                        "value": 3,
+                        "key": "wins_season_4"
+                    },
+                    {
+                        "name": "Season 6 Wins",
+                        "value": 0,
+                        "key": "wins_season_6"
+                    },
+                    {
+                        "name": "Season 6 Kills",
+                        "value": 11,
+                        "key": "kills_season_6"
+                    },
+                    {
+                        "name": "Season 7 Kills",
+                        "value": 13,
+                        "key": "kills_season_7"
+                    },
+                    {
+                        "name": "Season 7 Wins",
+                        "value": 1,
+                        "key": "wins_season_7"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/mirage.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/mirage.jpg"
+                }
+            },
+            "Pathfinder": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 89,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Season 1 Damage",
+                        "value": 39226,
+                        "key": "damage_season_1"
+                    },
+                    {
+                        "name": "Season 1 Kills",
+                        "value": 86,
+                        "key": "kills_season_1"
+                    },
+                    {
+                        "name": "Grand Soiree kills",
+                        "value": 195,
+                        "key": "grandsoiree_kills"
+                    },
+                    {
+                        "name": "Grand Soiree wins",
+                        "value": 7,
+                        "key": "grandsoiree_wins"
+                    },
+                    {
+                        "name": "Grand Soiree damage",
+                        "value": 78459,
+                        "key": "grandsoiree_damage"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/pathfinder.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/pathfinder.jpg"
+                }
+            },
+            "Wraith": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 277,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Damage",
+                        "value": 85364,
+                        "key": "damage"
+                    },
+                    {
+                        "name": "Season 5 Wins",
+                        "value": 0,
+                        "key": "wins_season_5"
+                    },
+                    {
+                        "name": "Season 6 Wins",
+                        "value": 0,
+                        "key": "wins_season_6"
+                    },
+                    {
+                        "name": "Season 6 Kills",
+                        "value": 10,
+                        "key": "kills_season_6"
+                    },
+                    {
+                        "name": "Season 7 Kills",
+                        "value": 13,
+                        "key": "kills_season_7"
+                    },
+                    {
+                        "name": "Season 7 Wins",
+                        "value": 1,
+                        "key": "wins_season_7"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/wraith.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/wraith.jpg"
+                }
+            },
+            "Octane": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 3917,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Damage",
+                        "value": 1228168,
+                        "key": "damage"
+                    },
+                    {
+                        "name": "Distance on stim",
+                        "value": 639989,
+                        "key": "distance_on_stim"
+                    },
+                    {
+                        "name": "Season 2 Wins",
+                        "value": 4,
+                        "key": "wins_season_2"
+                    },
+                    {
+                        "name": "Season 4 Wins",
+                        "value": 41,
+                        "key": "wins_season_4"
+                    },
+                    {
+                        "name": "Season 5 Wins",
+                        "value": 40,
+                        "key": "wins_season_5"
+                    },
+                    {
+                        "name": "Season 6 Wins",
+                        "value": 49,
+                        "key": "wins_season_6"
+                    },
+                    {
+                        "name": "Season 6 Kills",
+                        "value": 772,
+                        "key": "kills_season_6"
+                    },
+                    {
+                        "name": "Season 7 Kills",
+                        "value": 298,
+                        "key": "kills_season_7"
+                    },
+                    {
+                        "name": "Season 7 Wins",
+                        "value": 13,
+                        "key": "wins_season_7"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/octane.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/octane.jpg"
+                }
+            },
+            "Wattson": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 408,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Damage",
+                        "value": 146451,
+                        "key": "damage"
+                    },
+                    {
+                        "name": "Season 4 Wins",
+                        "value": 4,
+                        "key": "wins_season_4"
+                    },
+                    {
+                        "name": "Season 5 Wins",
+                        "value": 1,
+                        "key": "wins_season_5"
+                    },
+                    {
+                        "name": "Season 6 Wins",
+                        "value": 0,
+                        "key": "wins_season_6"
+                    },
+                    {
+                        "name": "Season 6 Kills",
+                        "value": 17,
+                        "key": "kills_season_6"
+                    },
+                    {
+                        "name": "Season 7 Kills",
+                        "value": 1,
+                        "key": "kills_season_7"
+                    },
+                    {
+                        "name": "Season 7 Wins",
+                        "value": 0,
+                        "key": "wins_season_7"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/wattson.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/wattson.jpg"
+                }
+            },
+            "Crypto": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 80,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Damage",
+                        "value": 31937,
+                        "key": "damage"
+                    },
+                    {
+                        "name": "Season 4 Wins",
+                        "value": 0,
+                        "key": "wins_season_4"
+                    },
+                    {
+                        "name": "Season 6 Wins",
+                        "value": 0,
+                        "key": "wins_season_6"
+                    },
+                    {
+                        "name": "Season 6 Kills",
+                        "value": 0,
+                        "key": "kills_season_6"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/crypto.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/crypto.jpg"
+                }
+            },
+            "Revenant": {
+                "data": [
+                    {
+                        "name": "Grand Soiree wins",
+                        "value": 7,
+                        "key": "grandsoiree_wins"
+                    },
+                    {
+                        "name": "Grand Soiree kills",
+                        "value": 136,
+                        "key": "grandsoiree_kills"
+                    },
+                    {
+                        "name": "Grand Soiree damage",
+                        "value": 44300,
+                        "key": "grandsoiree_damage"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/revenant.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/revenant.jpg"
+                }
+            },
+            "Loba": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 407,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Damage",
+                        "value": 118504,
+                        "key": "damage"
+                    },
+                    {
+                        "name": "Bracelet teleport distance",
+                        "value": 3991127,
+                        "key": "tactical_tp_distance"
+                    },
+                    {
+                        "name": "Season 5 Wins",
+                        "value": 22,
+                        "key": "wins_season_5"
+                    },
+                    {
+                        "name": "Season 5 Kills",
+                        "value": 246,
+                        "key": "kills_season_5"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/loba.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/loba.jpg"
+                }
+            },
+            "Rampart": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 75,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Season 6 Wins",
+                        "value": 4,
+                        "key": "wins_season_6"
+                    },
+                    {
+                        "name": "Season 6 Kills",
+                        "value": 75,
+                        "key": "kills_season_6"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/rampart.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/rampart.jpg"
+                }
+            },
+            "Horizon": {
+                "data": [
+                    {
+                        "name": "Kills",
+                        "value": 22,
+                        "key": "kills"
+                    },
+                    {
+                        "name": "Damage",
+                        "value": 6962,
+                        "key": "damage"
+                    },
+                    {
+                        "name": "Season 7 Wins",
+                        "value": 0,
+                        "key": "wins_season_7"
+                    }
+                ],
+                "ImgAssets": {
+                    "icon": "https:\/\/api.mozambiquehe.re\/assets\/icons\/horizon.png",
+                    "banner": "https:\/\/api.mozambiquehe.re\/assets\/banners\/horizon.jpg"
+                }
+            }
+        }
+    },
+    "mozambiquehere_internal": {
+        "isNewToDB": false,
+        "claimedBy": "-1",
+        "APIAccessType": "BASIC",
+        "ClusterID": "2",
+        "rate_limit": {
+            "max_per_second": 3,
+            "current_req": "1"
+        }
+    },
+    "total": {
+        "kills": {
+            "name": "Kills",
+            "value": 6919
+        },
+        "damage": {
+            "name": "Damage",
+            "value": 2112452
+        },
+        "wins_season_5": {
+            "name": "Season 5 Wins",
+            "value": 64
+        },
+        "wins_season_6": {
+            "name": "Season 6 Wins",
+            "value": 53
+        },
+        "kills_season_6": {
+            "name": "Season 6 Kills",
+            "value": 894
+        },
+        "kills_season_7": {
+            "name": "Season 7 Kills",
+            "value": 327
+        },
+        "wins_season_7": {
+            "name": "Season 7 Wins",
+            "value": 15
+        },
+        "grandsoiree_wins": {
+            "name": "Grand Soiree wins",
+            "value": 23
+        },
+        "grandsoiree_kills": {
+            "name": "Grand Soiree kills",
+            "value": 523
+        },
+        "grandsoiree_damage": {
+            "name": "Grand Soiree damage",
+            "value": 188612
+        },
+        "doc_drone_healing": {
+            "name": "Doc drone healing",
+            "value": 56542
+        },
+        "wins_season_4": {
+            "name": "Season 4 Wins",
+            "value": 61
+        },
+        "kills_season_5": {
+            "name": "Season 5 Kills",
+            "value": 263
+        },
+        "bamboozles": {
+            "name": "Bamboozles",
+            "value": 264
+        },
+        "damage_season_1": {
+            "name": "Season 1 Damage",
+            "value": 39226
+        },
+        "kills_season_1": {
+            "name": "Season 1 Kills",
+            "value": 86
+        },
+        "distance_on_stim": {
+            "name": "Distance on stim",
+            "value": 639989
+        },
+        "wins_season_2": {
+            "name": "Season 2 Wins",
+            "value": 4
+        },
+        "tactical_tp_distance": {
+            "name": "Bracelet teleport distance",
+            "value": 3991127
+        },
+        "kd": {
+            "value": -1,
+            "name": "KD"
+        }
     }
-  },
-  mozambiquehere_internal: {
-    isNewToDB: false,
-    claimedBy: '-1',
-    APIAccessType: 'BASIC',
-    ClusterID: '7',
-    rate_limit: { max_per_second: 3, current_req: '1' }
-  },
-  total: {
-    kills: { name: 'Kills', value: 6919 },
-    damage: { name: 'Damage', value: 2112452 },
-    wins_season_5: { name: 'Season 5 Wins', value: 64 },
-    wins_season_6: { name: 'Season 6 Wins', value: 53 },
-    kills_season_6: { name: 'Season 6 Kills', value: 894 },
-    kills_season_7: { name: 'Season 7 Kills', value: 327 },
-    wins_season_7: { name: 'Season 7 Wins', value: 15 },
-    grandsoiree_wins: { name: 'Grand Soiree wins', value: 23 },
-    grandsoiree_kills: { name: 'Grand Soiree kills', value: 523 },
-    grandsoiree_damage: { name: 'Grand Soiree damage', value: 188612 },
-    doc_drone_healing: { name: 'Doc drone healing', value: 56542 },
-    wins_season_4: { name: 'Season 4 Wins', value: 61 },
-    kills_season_5: { name: 'Season 5 Kills', value: 263 },
-    bamboozles: { name: 'Bamboozles', value: 264 },
-    damage_season_1: { name: 'Season 1 Damage', value: 39226 },
-    kills_season_1: { name: 'Season 1 Kills', value: 86 },
-    distance_on_stim: { name: 'Distance on stim', value: 639989 },
-    wins_season_2: { name: 'Season 2 Wins', value: 4 },
-    tactical_tp_distance: { name: 'Bracelet teleport distance', value: 3991127 },
-    kd: { value: -1, name: 'KD' }
-  }
 }

@@ -2,7 +2,8 @@ const { client, Discord } = require("../ApexStats.js");
 require("dotenv").config();
 const config = require("../config.json");
 const fs = require("fs");
-const moment = require("moment");
+// Not requiring atm bc it may not be needed and uses a lot of resources
+// const moment = require("moment");
 const percentagebar = require("percentagebar");
 
 // Require Wrapper Library
