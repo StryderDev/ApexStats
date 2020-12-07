@@ -15,8 +15,12 @@ module.exports = {
   name: "stats",
   description: "Apex user stats.",
   execute(message, args) {
-    let platform = args[0].toUpperCase();
+    let platformArg = args[0];
     let player = args[1];
+
+    if (platformArg != null && player != null) {
+      var platform = platformArg.toUpperCase();
+    }
 
     message.channel.send("Fetching stats...").then(async (msg) => {
       mozambiqueClient
@@ -25,84 +29,104 @@ module.exports = {
           player: player,
         })
         .then(function (result) {
-          var seasonBP = result.global.battlepass.history.season7;
-          var currentSeason = "7";
+          if (platform != null && player != null) {
+            if (platform == "PC" || platform == "PS4" || platform == "X1") {
+              var seasonBP = result.global.battlepass.history.season7;
+              var currentSeason = "7";
 
-          function getLegendBanner(legend) {
-            var legends = [
-              // Current list of legends that have banner images
-              "Bangalore",
-              "Bloodhound",
-              "Caustic",
-              "Crypto",
-              "Gibraltar",
-              "Horizon",
-              "Lifeline",
-              "Loba",
-              "Mirage",
-              "Octane",
-              "Pathfinder",
-              "Rampart",
-              "Revenant",
-              "Wattson",
-              "Wraith",
-            ];
+              function getLegendBanner(legend) {
+                var legends = [
+                  // Current list of legends that have banner images
+                  "Bangalore",
+                  "Bloodhound",
+                  "Caustic",
+                  "Crypto",
+                  "Gibraltar",
+                  "Horizon",
+                  "Lifeline",
+                  "Loba",
+                  "Mirage",
+                  "Octane",
+                  "Pathfinder",
+                  "Rampart",
+                  "Revenant",
+                  "Wattson",
+                  "Wraith",
+                ];
 
-            if (legends.indexOf(legend) != -1) {
-              return `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legend}.png`;
+                if (legends.indexOf(legend) != -1) {
+                  return `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legend}.png`;
+                } else {
+                  return `https://sdcore.dev/cdn/ApexStats/LegendBanners/NoBanner.png`;
+                }
+              }
+
+              function getBPLevel() {
+                if (seasonBP != -1) {
+                  return seasonBP;
+                } else {
+                  return "0";
+                }
+              }
+
+              function getAccountLevel() {
+                if (result.global.level >= 500) {
+                  return 500;
+                } else {
+                  return result.global.level;
+                }
+              }
+
+              function hasAvatar() {
+                if (result.global.avatar != "Not available") {
+                  return result.global.avatar;
+                } else {
+                  return "https://sdcore.dev/cdn/ApexStats/Icon.png";
+                }
+              }
+
+              const stats = new Discord.MessageEmbed()
+                .setTitle(
+                  `Apex Legends Stats for ${result.global.name} on ${platform}`
+                )
+                .setThumbnail(hasAvatar())
+                .setDescription("Description")
+                .addField(
+                  `Account Level ${getAccountLevel()}/500`,
+                  `${percentagebar(500, getAccountLevel(), 10)}`,
+                  true
+                )
+                .addField(
+                  `Season ${currentSeason} Battlepass Level ${getBPLevel()}/110`,
+                  `${percentagebar(110, getBPLevel(), 10)}`,
+                  true
+                )
+                .setImage(getLegendBanner(result.legends.selected.LegendName))
+                .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
+                .setTimestamp();
+
+              msg.delete();
+              message.reply(stats);
             } else {
-              return `https://sdcore.dev/cdn/ApexStats/LegendBanners/NoBanner.png`;
+              msg.delete();
+              message.reply(
+                "Sorry, it looks like you didn't provide a valid platform.\nFor reference, PC = Origin/Steam, X1 = Xbox, and PS4 = Playstation Network."
+              );
             }
           }
-
-          function getBPLevel() {
-            if (seasonBP != -1) {
-              return seasonBP;
-            } else {
-              return "0";
-            }
-          }
-
-          function getAccountLevel() {
-            if (result.global.level >= 500) {
-              return 500;
-            } else {
-              return result.global.level;
-            }
-          }
-
-          function hasAvatar() {
-            if (result.global.avatar != "Not available") {
-              return result.global.avatar;
-            } else {
-              return "https://sdcore.dev/cdn/ApexStats/Icon.png";
-            }
-          }
-
-          const stats = new Discord.MessageEmbed()
-            .setTitle(`Apex Legends Stats for ${result.global.name}`)
-            .setThumbnail(hasAvatar())
-            .setDescription("Description")
-            .addField(
-              `Account Level ${getAccountLevel()}/500`,
-              `${percentagebar(500, getAccountLevel(), 10)}`,
-              true
-            )
-            .addField(
-              `Season ${currentSeason} Battlepass Level ${getBPLevel()}/110`,
-              `${percentagebar(110, getBPLevel(), 10)}`,
-              true
-            )
-            .setImage(getLegendBanner(result.legends.selected.LegendName))
-            .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
-            .setTimestamp();
-
-          msg.delete();
-          message.reply(stats);
         })
         .catch(function (e) {
+          if (platform == null && player == null) {
+            msg.delete();
+            message.channel.send(
+              `To use this command, use the following format:\n\`${config.prefix}stats [platform] [username]\``
+            );
+            return;
+          }
           msg.delete();
-          message.reply("Error processing stats. Please try again.");
+          message.channel.send(
+            "Uncaught error processing stats. Please try again or contact a mod if the problem persists."
+          );
           console.log(e);
         });
     });
