@@ -2,8 +2,7 @@ const { client, Discord } = require("../ApexStats.js");
 require("dotenv").config();
 const config = require("../config.json");
 const fs = require("fs");
-// Not requiring atm bc it may not be needed and uses a lot of resources
-// const moment = require("moment");
+const moment = require("moment");
 const percentagebar = require("percentagebar");
 
 // Require Wrapper Library
@@ -56,9 +55,9 @@ module.exports = {
                 ];
 
                 if (legends.indexOf(legend) != -1) {
-                  return `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legend}.png`;
+                  return `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legend}.png?q=${moment().valueOf()}`;
                 } else {
-                  return `https://sdcore.dev/cdn/ApexStats/LegendBanners/NoBanner.png`;
+                  return `https://sdcore.dev/cdn/ApexStats/LegendBanners/NoBanner.png?q=${moment().valueOf()}`;
                 }
               }
 
@@ -90,6 +89,7 @@ module.exports = {
                 .setTitle(
                   `Apex Legends Stats for ${result.global.name} on ${platform}`
                 )
+                .setColor("C21D27")
                 .setThumbnail(hasAvatar())
                 .setDescription("Description")
                 .addField(
