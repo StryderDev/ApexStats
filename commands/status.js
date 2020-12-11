@@ -11,8 +11,6 @@ const MozambiqueAPI = require("mozambique-api-wrapper");
 // Create Client instance by passing in API key
 let mozambiqueClient = new MozambiqueAPI(config.APIKey);
 
-// Up Emoji ID 786800700533112872
-// Slow Emoji ID 786800700541501461
 var UpEmoji = "<:StatusUp:786800700533112872>";
 var SlowEmoji = "<:StatusSlow:786800700541501461>";
 var DownEmoji = "<:StatusDown:786800700201238570>";
@@ -285,6 +283,10 @@ module.exports = {
           msg.channel.send(status);
         })
         .catch(function (e) {
+          msg.delete();
+          msg.channel.send(
+            "Unable to get server status. Please try again or contact a mod if the problem persists."
+          );
           console.log(e);
         });
     });
