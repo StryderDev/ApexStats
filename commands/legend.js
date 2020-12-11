@@ -74,13 +74,34 @@ module.exports = {
         const info = new Discord.MessageEmbed()
           .setTitle(`${results[0].name}`)
           .setColor(results[0].hex)
-          .setThumbnail(
-            `https://sdcore.dev/cdn/ApexStats/LegendIcons/${
-              results[0].name
-            }.png?q=${moment().valueOf()}`
-          )
+          // Temporarily disabling the thumbnail since it
+          // just takes up precious space that could be used
+          // for more info. If discord allowed any-size-width
+          // for embeds, it'd work a lot better :/
+          //.setThumbnail(
+          //  `https://sdcore.dev/cdn/ApexStats/LegendIcons/${
+          //    results[0].name
+          //  }.png?q=${moment().valueOf()}`
+          //)
           .setDescription(`${results[0].description}`)
+          .addField("Entry Season", `Season ${results[0].season}`, true)
           .addField("Age", results[0].age, true)
+          .addField("Home World", results[0].homeWorld, true)
+          .addField(
+            "Passive",
+            `<:${results[0].shortName}Passive:${results[0].passiveEmote}> ${results[0].passive}`,
+            true
+          )
+          .addField(
+            "Tactical",
+            `<:${results[0].shortName}Tactical:${results[0].tacticalEmote}> ${results[0].tactical}`,
+            true
+          )
+          .addField(
+            "Ultimate",
+            `<:${results[0].shortName}Ultimate:${results[0].ultimateEmote}> ${results[0].ultimate}`,
+            true
+          )
           .setImage(
             `https://sdcore.dev/cdn/ApexStats/LegendBanners/${
               results[0].name
