@@ -98,7 +98,7 @@ module.exports = {
                   true
                 )
                 .addField(
-                  `Season ${currentSeason} Battlepass Level ${getBPLevel()}/110`,
+                  `S${currentSeason} BP Level ${getBPLevel()}/110`,
                   `${percentagebar(110, getBPLevel(), 10)}`,
                   true
                 )
