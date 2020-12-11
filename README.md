@@ -12,13 +12,13 @@ The bot currently has the following features:
 - Server Status (soon)
 - Some fun server easter eggs ;)
 
-# Credits
+## Credits
 
 This bot was made possibly by the ApexLegendsStatus API, which can be found here: https://apexlegendsapi.com/ ([GitHub Repo Here](https://github.com/HugoDerave/ApexLegendsAPI)).
 
 It uses the [Mozambique API Wrapper by arubinofaux](https://github.com/arubinofaux/mozambique-api-wrapper).
 
-# Support
+## Support
 
 If you find an error or need help with something else, [join the support server!](https://discord.gg/eH8VxssFW6).
 
