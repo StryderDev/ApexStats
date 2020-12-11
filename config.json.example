@@ -1,5 +1,12 @@
 {
     "prefix": "PREFIX HERE",
     "token": "TOKEN HERE",
-    "APIKey": "APEXLEGENDSAPI API KEY HERE"
+    "APIKey": "APEXLEGENDSAPI API KEY HERE",
+    "SQL": {
+        "host": "MySQL HOST IP",
+        "username": "MySQL Username",
+        "password": "MySQL Password",
+        "database": "MySQL Database",
+        "legendTable": "Legends Table"
+  }
 }
