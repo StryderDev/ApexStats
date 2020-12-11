@@ -9,8 +9,7 @@ The bot currently has the following features:
 - User Stats
   - `>>stats platform username` will show account and battle pass levels, as well as kills, damage, and seasons wins, and the current 3 selected trackers.
 - Most recent news article
-- Server Status (soon)
-- Some fun server easter eggs ;)
+- Server Status
 
 ## Credits
 
