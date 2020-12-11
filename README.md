@@ -17,3 +17,9 @@ The bot currently has the following features:
 This bot was made possibly by the ApexLegendsStatus API, which can be found here: https://apexlegendsapi.com/ ([GitHub Repo Here](https://github.com/HugoDerave/ApexLegendsAPI)).
 
 It uses the [Mozambique API Wrapper by arubinofaux](https://github.com/arubinofaux/mozambique-api-wrapper).
+
+# Support
+
+If you find an error or need help with something else, [join the support server!](https://discord.gg/eH8VxssFW6).
+
+You can find the somewhat-but-not-really frequently update trello [here](https://trello.com/b/PGSmA4op/apex-legends-discord-stats-bot).

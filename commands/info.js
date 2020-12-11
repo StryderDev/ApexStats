@@ -18,6 +18,10 @@ module.exports = {
       .addField("Server Count", `${client.guilds.cache.size} Servers`, true)
       .addField("Support Server", process.env.SUPPORT_SERVER)
       .addField("GitHub Repo", process.env.REPO)
+      .addField(
+        "Trello",
+        "https://trello.com/b/PGSmA4op/apex-legends-discord-stats-bot"
+      )
       .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
       .setTimestamp();
 
