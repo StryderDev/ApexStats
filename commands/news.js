@@ -21,14 +21,17 @@ module.exports = {
         .then(function (result) {
           const news = new Discord.MessageEmbed()
             .setTitle(result[0].title)
+            .setColor("C21D27")
             .setThumbnail(process.env.BOT_ICON)
             .setURL(result[0].link)
             .setDescription(
               `${result[0].short_desc}\n\n**[Link to Full Article](${result[0].link})**`
             )
             .setImage(result[0].img)
-            .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
-            .setTimestamp();
+            .setFooter(
+              `${process.env.CREATOR_NAME}  •  Data provided by https://apexlegendsapi.com`,
+              process.env.CREATOR_LOGO
+            );
 
           msg.delete();
           msg.channel.send(news);

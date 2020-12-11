@@ -103,8 +103,10 @@ module.exports = {
                   true
                 )
                 .setImage(getLegendBanner(result.legends.selected.LegendName))
-                .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
-                .setTimestamp();
+                .setFooter(
+                  `${process.env.CREATOR_NAME}  •  Data provided by https://apexlegendsapi.com`,
+                  process.env.CREATOR_LOGO
+                );
 
               msg.delete();
               message.reply(stats);

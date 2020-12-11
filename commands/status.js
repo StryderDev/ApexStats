@@ -39,6 +39,7 @@ module.exports = {
 
           const status = new Discord.MessageEmbed()
             .setTitle("Apex Legends Server Status")
+            .setColor("C21D27")
             .addField(
               "Origin Login",
               `${getStatus(result.Origin_login["EU-West"].Status)}EU West (${
@@ -276,8 +277,7 @@ module.exports = {
             .setFooter(
               `${process.env.CREATOR_NAME}  •  Data provided by https://apexlegendsstatus.com`,
               process.env.CREATOR_LOGO
-            )
-            .setTimestamp();
+            );
 
           msg.delete();
           msg.channel.send(status);
