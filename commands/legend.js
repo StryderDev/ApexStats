@@ -72,7 +72,7 @@ module.exports = {
         }
 
         const info = new Discord.MessageEmbed()
-          .setTitle(`${results[0].name}`)
+          .setTitle(`${results[0].name} - ${results[0].tagline}`)
           .setColor(results[0].hex)
           // Temporarily disabling the thumbnail since it
           // just takes up precious space that could be used
