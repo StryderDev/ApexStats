@@ -4,7 +4,7 @@ const Discord = require("discord.js-light");
 const client = new Discord.Client({
   cacheRoles: false,
   cacheGuilds: true,
-  cacheEmojis: false,
+  cacheEmojis: true,
   cacheChannels: true,
   cachePresences: false,
   cacheOverwrites: false,
