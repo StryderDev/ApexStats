@@ -9,7 +9,7 @@ client.once("ready", () => {
     client.user
       .setPresence({
         activity: {
-          name: `${config.prefix}help | Providing data for ${client.guilds.cache.size} servers`,
+          name: `${config.prefix}commands | Providing data for ${client.guilds.cache.size} servers`,
           type: "WATCHING",
         },
         status: "online",
