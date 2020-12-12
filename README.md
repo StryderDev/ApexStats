@@ -7,7 +7,7 @@ This bot was developed as an easy way to show off user stats for Apex Legends.
 The bot currently has the following features:
 
 - User Stats
-  - `>>stats platform username` will show account and battle pass levels, as well as kills, damage, and seasons wins, the current 3 selected trackers, and some basic ranked info.
+  - `>>stats platform username` will show account and battle pass levels, the current 3 selected legend trackers, and some basic ranked info.
 - Most recent news article
 - Server Status
 - Legend info
