@@ -14,6 +14,27 @@ The bot currently has the following features:
 - Season info (soon)
 - Weapon info (soon)
 
+## Preview
+
+### Stats
+
+---
+
+![Stats Preview 1](https://sdcore.dev/i/m4ew825o.png)
+![Stats Preview 2](https://sdcore.dev/i/x9yjik6p.png)
+
+### Server Status
+
+---
+
+![Server Status Preview](https://sdcore.dev/i/7zunxm0k.png)
+
+### News
+
+---
+
+![News Article](https://sdcore.dev/i/g5g0yrqw.png)
+
 ## Credits
 
 This bot was made possibly by the ApexLegendsStatus API, which can be found here: https://apexlegendsapi.com/ ([GitHub Repo Here](https://github.com/HugoDerave/ApexLegendsAPI)).
