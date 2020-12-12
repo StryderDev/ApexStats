@@ -4,6 +4,7 @@ const config = require("../config.json");
 const fs = require("fs");
 const moment = require("moment");
 const percentagebar = require("percentagebar");
+const colours = require("../legendColours.json");
 
 // Require Wrapper Library
 const MozambiqueAPI = require("mozambique-api-wrapper");
@@ -63,7 +64,11 @@ module.exports = {
 
               function getBPLevel() {
                 if (seasonBP != -1) {
-                  return seasonBP;
+                  if (seasonBP >= 110) {
+                    return 110;
+                  } else {
+                    return seasonBP;
+                  }
                 } else {
                   return "0";
                 }
@@ -85,13 +90,61 @@ module.exports = {
                 }
               }
 
+              function getRank(name) {
+                if (name == "Silver") {
+                  return "<:rankedSilver:787174770424021083>";
+                } else if (name == "Gold") {
+                  return "<:rankedGold:787174769942462474>";
+                } else if (name == "Platinum") {
+                  return "<:rankedPlatinum:787174770780667944>";
+                } else if (name == "Diamond") {
+                  return "<:rankedDiamond:787174769728290816>";
+                } else if (name == "Master") {
+                  return "<:rankedMaster:787174770680135680>";
+                } else if (name == "Predator" || name == "Apex Predator") {
+                  // I, for the life of me, cannot find a single person who
+                  // is Apex Predator this season. At this point I'm pretty
+                  // convinced the API only returns Masters people. Guess we'll
+                  // find out when I dig more into it... sometime.
+                  return "<:rankedPredator:787174770730336286>";
+                } else {
+                  return "<:rankedBronze:787174769623302204>";
+                }
+              }
+
+              function getFieldTitle(fieldData) {
+                if (fieldData != null) {
+                  return fieldData;
+                } else {
+                  return "No data";
+                }
+              }
+
+              function getFieldValue(fieldData) {
+                if (fieldData != null) {
+                  return fieldData;
+                } else {
+                  return "-";
+                }
+              }
+
+              var legendName = result.legends.selected.LegendName;
+
               const stats = new Discord.MessageEmbed()
-                .setTitle(
-                  `Apex Legends Stats for ${result.global.name} on ${platform}`
+                .setColor(colours[legendName])
+                .setAuthor(
+                  `Apex Legends Stats for ${result.global.name} on ${platform}`,
+                  hasAvatar()
                 )
-                .setColor("C21D27")
-                .setThumbnail(hasAvatar())
-                .setDescription("Description")
+                .setDescription(
+                  `Rank: ${getRank(result.global.rank.rankName)} ${
+                    result.global.rank.rankName
+                  } ${
+                    result.global.rank.rankDiv
+                  }\nScore: ${result.global.rank.rankScore.toLocaleString(
+                    "en-US"
+                  )}`
+                )
                 .addField(
                   `Account Level ${getAccountLevel()}/500`,
                   `${percentagebar(500, getAccountLevel(), 10)}`,
@@ -100,6 +153,34 @@ module.exports = {
                 .addField(
                   `S${currentSeason} BP Level ${getBPLevel()}/110`,
                   `${percentagebar(110, getBPLevel(), 10)}`,
+                  true
+                )
+                .addField("\u200b", "\u200b", true)
+                .addField(
+                  `${getFieldTitle(result.legends.selected.data[0].name)}`,
+                  `${getFieldValue(
+                    result.legends.selected.data[0].value.toLocaleString(
+                      "en-US"
+                    )
+                  )}`,
+                  true
+                )
+                .addField(
+                  `${getFieldTitle(result.legends.selected.data[1].name)}`,
+                  `${getFieldValue(
+                    result.legends.selected.data[1].value.toLocaleString(
+                      "en-US"
+                    )
+                  )}`,
+                  true
+                )
+                .addField(
+                  `${getFieldTitle(result.legends.selected.data[2].name)}`,
+                  `${getFieldValue(
+                    result.legends.selected.data[2].value.toLocaleString(
+                      "en-US"
+                    )
+                  )}`,
                   true
                 )
                 .setImage(getLegendBanner(result.legends.selected.LegendName))
