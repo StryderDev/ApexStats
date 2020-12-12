@@ -7,6 +7,8 @@
         "username": "MySQL Username",
         "password": "MySQL Password",
         "database": "MySQL Database",
-        "legendTable": "Legends Table"
+        "legendTable": "Legends Table",
+        "seasonTable": "Seasons Table",
+        "weaponTable": "Weapons Table"
   }
 }
