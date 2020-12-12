@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const Discord = require("discord.js-light");
 const client = new Discord.Client({
-  cacheRoles: false,
+  cacheRoles: true,
   cacheGuilds: true,
   cacheEmojis: true,
   cacheChannels: true,
