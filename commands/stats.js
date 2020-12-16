@@ -114,15 +114,19 @@ module.exports = {
 
               function getFieldTitle(fieldData) {
                 if (fieldData != null) {
-                  return fieldData;
+                  return fieldData.name;
+                } else if (fieldData == "undefined") {
+                  return "No data";
                 } else {
                   return "No data";
                 }
               }
 
               function getFieldValue(fieldData) {
-                if (fieldData != null) {
-                  return fieldData;
+                if (fieldData != null && fieldData != "undefined") {
+                  return fieldData.value.toLocaleString("en-US");
+                } else if (fieldData == "undefined") {
+                  return "-";
                 } else {
                   return "-";
                 }
@@ -157,30 +161,18 @@ module.exports = {
                 )
                 .addField("\u200b", "\u200b", true)
                 .addField(
-                  `${getFieldTitle(result.legends.selected.data[0].name)}`,
-                  `${getFieldValue(
-                    result.legends.selected.data[0].value.toLocaleString(
-                      "en-US"
-                    )
-                  )}`,
+                  `${getFieldTitle(result.legends.selected.data[0])}`,
+                  `${getFieldValue(result.legends.selected.data[0])}`,
                   true
                 )
                 .addField(
-                  `${getFieldTitle(result.legends.selected.data[1].name)}`,
-                  `${getFieldValue(
-                    result.legends.selected.data[1].value.toLocaleString(
-                      "en-US"
-                    )
-                  )}`,
+                  `${getFieldTitle(result.legends.selected.data[1])}`,
+                  `${getFieldValue(result.legends.selected.data[1])}`,
                   true
                 )
                 .addField(
-                  `${getFieldTitle(result.legends.selected.data[2].name)}`,
-                  `${getFieldValue(
-                    result.legends.selected.data[2].value.toLocaleString(
-                      "en-US"
-                    )
-                  )}`,
+                  `${getFieldTitle(result.legends.selected.data[2])}`,
+                  `${getFieldValue(result.legends.selected.data[2])}`,
                   true
                 )
                 .setImage(getLegendBanner(result.legends.selected.LegendName))
