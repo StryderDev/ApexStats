@@ -18,16 +18,16 @@ The bot currently has the following features:
 
 ### Stats
 
-![Stats Preview 1](https://sdcore.dev/i/m4ew825o.png)
-![Stats Preview 2](https://sdcore.dev/i/x9yjik6p.png)
+![Stats Preview 1](https://sdcore.dev/i/tchntbph.png)
+![Stats Preview 2](https://sdcore.dev/i/h99klpyi.png)
 
 ### Server Status
 
-![Server Status Preview](https://sdcore.dev/i/7zunxm0k.png)
+![Server Status Preview](https://sdcore.dev/i/0v9u9xbz.png)
 
 ### News
 
-![News Article](https://sdcore.dev/i/g5g0yrqw.png)
+![News Article](https://sdcore.dev/i/r2bzoj1o.png)
 
 ### Legend Info
 
