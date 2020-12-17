@@ -29,6 +29,11 @@ module.exports = {
         "Shows basic information about the bot.",
         true
       )
+      .addField(
+        `${config.prefix}legend [legend name]`,
+        "Shows information about a legend such as their backstory, age, home world, and abilities.",
+        true
+      )
       .addField(`${config.prefix}commands`, "Shows this embed.", true)
       .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
       .setTimestamp();

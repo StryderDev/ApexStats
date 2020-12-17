@@ -11,7 +11,7 @@ module.exports = {
       .setColor("C21D27")
       .setThumbnail(process.env.BOT_ICON)
       .setDescription(
-        "This bot has the ability to show user stats, news, and server status."
+        `This bot has the ability to show user stats, news, and server status. \`${config.prefix}commands\` for commands.`
       )
       .addField("Bot Version", process.env.BOT_VERSION, true)
       .addField("Last Updated", process.env.LAST_UPDATED, true)
