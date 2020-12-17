@@ -53,10 +53,17 @@ module.exports = {
                   "Revenant",
                   "Wattson",
                   "Wraith",
+                  88599337, // Horizon cdata value until it gets updated on the API
                 ];
 
+                var tempLegendCDataValue = 88599337;
+
                 if (legends.indexOf(legend) != -1) {
-                  return `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legend}.png?q=${moment().valueOf()}`;
+                  if (legend == tempLegendCDataValue) {
+                    return `https://sdcore.dev/cdn/ApexStats/LegendBanners/Horizon.png?q=${moment().valueOf()}`;
+                  } else {
+                    return `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legend}.png?q=${moment().valueOf()}`;
+                  }
                 } else {
                   return `https://sdcore.dev/cdn/ApexStats/LegendBanners/NoBanner.png?q=${moment().valueOf()}`;
                 }
@@ -141,7 +148,9 @@ module.exports = {
                   hasAvatar()
                 )
                 .setDescription(
-                  `Rank: ${getRank(result.global.rank.rankName)} ${
+                  `playing character: ${
+                    result.legends.selected.LegendName
+                  } \nRank: ${getRank(result.global.rank.rankName)} ${
                     result.global.rank.rankName
                   } ${
                     result.global.rank.rankDiv
