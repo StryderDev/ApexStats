@@ -148,9 +148,7 @@ module.exports = {
                   hasAvatar()
                 )
                 .setDescription(
-                  `playing character: ${
-                    result.legends.selected.LegendName
-                  } \nRank: ${getRank(result.global.rank.rankName)} ${
+                  `Rank: ${getRank(result.global.rank.rankName)} ${
                     result.global.rank.rankName
                   } ${
                     result.global.rank.rankDiv
