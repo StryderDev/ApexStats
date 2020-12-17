@@ -53,14 +53,14 @@ module.exports = {
                   "Revenant",
                   "Wattson",
                   "Wraith",
-                  88599337, // Horizon cdata value until it gets updated on the API
+                  99999999, // Temp new character CData value until it gets updated on the API
                 ];
 
-                var tempLegendCDataValue = 88599337;
+                var tempLegendCDataValue = 99999999;
 
                 if (legends.indexOf(legend) != -1) {
                   if (legend == tempLegendCDataValue) {
-                    return `https://sdcore.dev/cdn/ApexStats/LegendBanners/Horizon.png?q=${moment().valueOf()}`;
+                    return `https://sdcore.dev/cdn/ApexStats/LegendBanners/NoBanner.png?q=${moment().valueOf()}`;
                   } else {
                     return `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legend}.png?q=${moment().valueOf()}`;
                   }
