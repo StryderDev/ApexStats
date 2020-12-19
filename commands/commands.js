@@ -15,9 +15,18 @@ module.exports = {
         "Shows user stats. Platform can be PC, X1, or PS4."
       )
       .addField(
+        `${config.prefix}map`,
+        "Shows the current and upcoming map in the current map rotation.",
+        true
+      )
+      .addField(
         `${config.prefix}status`,
         "Shows current Apex Legends server status.",
         true
+      )
+      .addField(
+        `${config.prefix}legend [legend name]`,
+        "Shows information about a legend such as their backstory, age, home world, and abilities."
       )
       .addField(
         `${config.prefix}news`,
@@ -27,11 +36,6 @@ module.exports = {
       .addField(
         `${config.prefix}info`,
         "Shows basic information about the bot.",
-        true
-      )
-      .addField(
-        `${config.prefix}legend [legend name]`,
-        "Shows information about a legend such as their backstory, age, home world, and abilities.",
         true
       )
       .addField(`${config.prefix}commands`, "Shows this embed.", true)
