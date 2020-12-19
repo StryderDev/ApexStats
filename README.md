@@ -11,6 +11,7 @@ The bot currently has the following features:
 - Most recent news article
 - Server Status
 - Legend info
+- Current map rotations
 - Season info (soon)
 - Weapon info (soon)
 
