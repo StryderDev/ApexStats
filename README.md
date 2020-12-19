@@ -22,6 +22,10 @@ The bot currently has the following features:
 ![Stats Preview 1](https://sdcore.dev/i/tchntbph.png)
 ![Stats Preview 2](https://sdcore.dev/i/h99klpyi.png)
 
+### Map Rotation
+
+![Map Rotation Preview](https://sdcore.dev/i/0clab374.png)
+
 ### Server Status
 
 ![Server Status Preview](https://sdcore.dev/i/0v9u9xbz.png)
