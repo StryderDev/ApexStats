@@ -2,7 +2,7 @@ let mysql = require("mysql");
 const { client, Discord } = require("../ApexStats.js");
 require("dotenv").config();
 const config = require("../config.json");
-const moment = require("moment");
+var { DateTime } = require("luxon");
 
 let connection = mysql.createPool({
   host: config.SQL.host,
@@ -83,6 +83,8 @@ module.exports = {
           //    results[0].name
           //  }.png?q=${moment().valueOf()}`
           //)
+          // If I change this in the future, make sure to update the
+          // moment call since moment will no longer be used
           .setDescription(`${results[0].description}`)
           .addField("Entry Season", `Season ${results[0].season}`, true)
           .addField("Age", results[0].age, true)
@@ -105,7 +107,7 @@ module.exports = {
           .setImage(
             `https://sdcore.dev/cdn/ApexStats/LegendBanners/${
               results[0].name
-            }.png?q=${moment().valueOf()}`
+            }.png?q=${DateTime.local().toFormat("X")}`
           )
           .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO);
 

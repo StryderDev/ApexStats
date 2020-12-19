@@ -1,9 +1,6 @@
 const { client, Discord } = require("../ApexStats.js");
 require("dotenv").config();
 const config = require("../config.json");
-const fs = require("fs");
-const moment = require("moment");
-const percentagebar = require("percentagebar");
 
 // Require Wrapper Library
 const MozambiqueAPI = require("mozambique-api-wrapper");

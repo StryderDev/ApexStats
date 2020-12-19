@@ -1,8 +1,7 @@
 const { client, Discord } = require("../ApexStats.js");
 require("dotenv").config();
 const config = require("../config.json");
-const fs = require("fs");
-const moment = require("moment");
+var { DateTime } = require("luxon");
 const percentagebar = require("percentagebar");
 const colours = require("../legendColours.json");
 
@@ -60,12 +59,18 @@ module.exports = {
 
                 if (legends.indexOf(legend) != -1) {
                   if (legend == tempLegendCDataValue) {
-                    return `https://sdcore.dev/cdn/ApexStats/LegendBanners/NoBanner.png?q=${moment().valueOf()}`;
+                    return `https://sdcore.dev/cdn/ApexStats/LegendBanners/NoBanner.png?q=${DateTime.local().toFormat(
+                      "X"
+                    )}`;
                   } else {
-                    return `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legend}.png?q=${moment().valueOf()}`;
+                    return `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legend}.png?q=${DateTime.local().toFormat(
+                      "X"
+                    )}`;
                   }
                 } else {
-                  return `https://sdcore.dev/cdn/ApexStats/LegendBanners/NoBanner.png?q=${moment().valueOf()}`;
+                  return `https://sdcore.dev/cdn/ApexStats/LegendBanners/NoBanner.png?q=${DateTime.local().toFormat(
+                    "X"
+                  )}`;
                 }
               }
 

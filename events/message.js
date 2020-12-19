@@ -1,6 +1,5 @@
 const { client, Discord } = require("../ApexStats.js");
 const config = require("../config.json");
-const moment = require("moment");
 const fs = require("fs");
 
 const prefix = config.prefix;
@@ -18,10 +17,6 @@ for (const file of commandFiles) {
 
 client.on("message", (message) => {
   if (message.channel.type == "dm" && !message.author.bot) {
-    dmContent = `**(${moment(message.createdAt).format(
-      "MMMM Do, YYYY h:mm:ss A"
-    )}) [${message.author}]**\n${message.content}`;
-
     message.reply(
       `Hey! Join the support server at ${process.env.SUPPORT_SERVER} to get support.\n\n*These DM's are not monitored.*`
     );

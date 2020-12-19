@@ -1,5 +1,5 @@
 const { client } = require("../ApexStats.js");
-const moment = require("moment");
+var { DateTime } = require("luxon");
 const config = require("../config.json");
 
 client.once("ready", () => {
@@ -19,6 +19,8 @@ client.once("ready", () => {
 
   setPresence();
   console.log(
-    `[${moment().format("hh:mm:ss")}] Updated presence for ${client.user.tag}`
+    `[${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${
+      client.user.tag
+    }`
   );
 });
