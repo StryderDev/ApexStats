@@ -14,10 +14,10 @@ The bot currently has the following features:
   - `>>news`
 - Apex Legends Server Status
   - `>>status`
-- Legend info
+- Legend Biographies and Information
   - `>>legend [legend name]`
     - Replace [legend name] with the name of a legend currently in the game
-- Current map rotations
+- Current in-game map rotations
   - `>>map`
 
 ## Preview
