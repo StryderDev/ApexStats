@@ -49,6 +49,8 @@ This bot was made possibly by the ApexLegendsStatus API, which can be found here
 
 It uses the [Mozambique API Wrapper by arubinofaux](https://github.com/arubinofaux/mozambique-api-wrapper).
 
+Lots of help with some more obscure data from Rexx <3
+
 ## Support
 
 If you find an error or need help with something else, [join the support server](https://discord.gg/eH8VxssFW6)!
