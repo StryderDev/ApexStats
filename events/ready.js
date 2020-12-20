@@ -3,6 +3,18 @@ var { DateTime, Duration } = require("luxon");
 const config = require("../config.json");
 const axios = require("axios");
 
+// Top.GG API
+const DBL = require("dblapi.js");
+
+if (config.topGG == "0") {
+  console.log("Don't send data to Top.GG");
+} else {
+  const dbl = new DBL(config.topGG, client);
+  dbl.on("posted", () => {
+    console.log("Server count posted!");
+  });
+}
+
 client.once("ready", () => {
   console.log(`Logging in as ${client.user.tag}`);
 
