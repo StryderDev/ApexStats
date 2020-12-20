@@ -1,4 +1,4 @@
-![CI/CD to Vultr](https://github.com/SDCore/ApexStats/workflows/CI/CD%20to%20Vultr/badge.svg) ![CodeQL](https://github.com/SDCore/ApexStats/workflows/CodeQL/badge.svg) ![Discord](https://img.shields.io/discord/664717517666910220?label=Support%20Server)
+![CI/CD to Vultr](https://github.com/SDCore/ApexStats/workflows/CI/CD%20to%20Vultr/badge.svg) ![CodeQL](https://github.com/SDCore/ApexStats/workflows/CodeQL/badge.svg) ![Compress Images](https://github.com/SDCore/Apex-Stats-Bot/workflows/Compress%20Images/badge.svg) ![Discord](https://img.shields.io/discord/664717517666910220?label=Support%20Server)
 
 # Apex Stats Bot
 
