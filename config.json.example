@@ -1,14 +1,20 @@
 {
-    "prefix": "PREFIX HERE",
-    "token": "TOKEN HERE",
-    "APIKey": "APEXLEGENDSAPI API KEY HERE",
-    "SQL": {
-        "host": "MySQL HOST IP",
-        "username": "MySQL Username",
-        "password": "MySQL Password",
-        "database": "MySQL Database",
-        "legendTable": "Legends Table",
-        "seasonTable": "Seasons Table",
-        "weaponTable": "Weapons Table"
+  "prefix": "PREFIX HERE",
+  "token": "TOKEN HERE",
+  "APIKey": "APEXLEGENDSAPI API KEY HERE",
+  "SQL": {
+    "host": "MySQL HOST IP",
+    "username": "MySQL Username",
+    "password": "MySQL Password",
+    "database": "MySQL Database",
+    "legendTable": "Legends Table",
+    "seasonTable": "Seasons Table",
+    "weaponTable": "Weapons Table"
+  },
+  "mapRotation": {
+    "guildID": "Guild ID",
+    "channelID": "Channel ID",
+    "messageID": "Message ID",
+    "updateInterval": "Update Interval in Minutes"
   }
 }
