@@ -39,13 +39,11 @@ jobs:
         id: calibre
         uses: calibreapp/image-actions@main
         with:
-          jpegQuality: '80'
+          jpegQuality: "80"
           jpegProgressive: false
-          pngQuality: '80'
-          webpQuality: '80'
-        with:
-          ignorePaths: 'node_modules/**,build'
-        with:
+          pngQuality: "80"
+          webpQuality: "80"
+          ignorePaths: "node_modules/**,build"
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           # For non-Pull Requests, run in compressOnly mode and we'll PR after.
           compressOnly: ${{ github.event_name != 'pull_request' }}
