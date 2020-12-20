@@ -6,14 +6,19 @@ This bot was developed as an easy way to show off user stats for Apex Legends.
 
 The bot currently has the following features:
 
-- User Stats
-  - `>>stats platform username` will show account and battle pass levels, the current 3 selected legend trackers, and some basic ranked info.
-- Most recent news article
-- Server Status
+- Apex Legends User Stats
+  - `>>stats [platform] [username]`
+    - Replace [platform] with PC, PS4, or X1
+    - Replace [username] with the username of your apex account
+- Most recent news article from the official Apex Legends blog
+  - `>>news`
+- Apex Legends Server Status
+  - `>>status`
 - Legend info
+  - `>>legend [legend name]`
+    - Replace [legend name] with the name of a legend currently in the game
 - Current map rotations
-- Season info (soon)
-- Weapon info (soon)
+  - `>>map`
 
 ## Preview
 
