@@ -17,10 +17,23 @@ client.once("ready", () => {
       .catch(console.error);
   }
 
+  // Set intitial bot presence on load, otherwise presence
+  // will be empty until the next update
   setPresence();
   console.log(
     `[${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${
       client.user.tag
     }`
   );
+
+  // Update the bot presence every 30 minutes to update
+  // the amount of servers the bot is in
+  setInterval(function () {
+    setPresence();
+    console.log(
+      `[${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${
+        client.user.tag
+      }`
+    );
+  }, Math.max(1, 30 || 1) * 60 * 1000);
 });
