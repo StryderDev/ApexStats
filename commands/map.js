@@ -32,9 +32,9 @@ module.exports = {
             }
 
             function time(seconds) {
-              return Duration.fromObject({ seconds: seconds }).toFormat(
-                "mm 'minutes' ss 'seconds'"
-              );
+              return DateTime.local()
+                .plus({ seconds: seconds })
+                .toRelative({ style: "long" });
             }
 
             const map = new Discord.MessageEmbed()
@@ -43,7 +43,7 @@ module.exports = {
                   res.data.map
                 }**.\nThe next map in rotation is **${nextMap(
                   res.data.map
-                )}** in **${time(res.data.times.remaining.seconds)}.**`
+                )} ${time(res.data.times.remaining.seconds)}.**`
               )
               .setImage(
                 `https://sdcore.dev/cdn/ApexStats/Maps/${mapImage(

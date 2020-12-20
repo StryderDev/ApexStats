@@ -62,22 +62,23 @@ client.once("ready", () => {
         }
 
         function time(seconds) {
-          return Duration.fromObject({ seconds: seconds }).toFormat(
-            "mm 'minutes' ss 'seconds'"
-          );
+          return DateTime.local()
+            .plus({ seconds: seconds })
+            .toRelative({ style: "long" });
         }
 
         const mapRotation = new Discord.MessageEmbed()
           .setDescription(
             `The current map is **${
               res.data.map
-            }**.\nThe next map in rotation is **${nextMap(
-              res.data.map
-            )}** in **${time(res.data.times.remaining.seconds)}.**`
+            }**.\nThe next map in rotation is **${nextMap(res.data.map)} ${time(
+              res.data.times.remaining.seconds
+            )}.**`
           )
           .setImage(
             `https://sdcore.dev/cdn/ApexStats/Maps/${mapImage(res.data.map)}`
-          );
+          )
+          .setTimestamp();
 
         const guild = client.guilds.cache.get(config.mapRotation.guildID);
         if (!guild) return console.log("Unable to find guild.");
