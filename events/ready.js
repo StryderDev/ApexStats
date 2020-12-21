@@ -296,19 +296,19 @@ client.once("ready", () => {
           .setImage(`https://sdcore.dev/cdn/ApexStats/Events/NoEvent.png`)
           .setTimestamp();
 
-        const guild = client.guilds.cache.get(config.apexInfo.guildID);
+        const guild = client.guilds.cache.get(config.eventInfo.guildID);
         if (!guild) return console.log("Unable to find guild.");
 
         const channel = guild.channels.cache.find(
-          (c) => c.id === config.apexInfo.channelID && c.type === "text"
+          (c) => c.id === config.eventInfo.channelID && c.type === "text"
         );
         if (!channel) return console.log("Unable to find channel.");
 
         try {
-          const message = channel.messages.fetch(config.apexInfo.messageID);
+          const message = channel.messages.fetch(config.eventInfo.messageID);
           if (!message) return console.log("Unable to find message.");
 
-          channel.messages.fetch(config.apexInfo.messageID).then((mesg) => {
+          channel.messages.fetch(config.eventInfo.messageID).then((mesg) => {
             // end date test 2021-01-04T18:00:00+0000
 
             if (dateMath <= 0) {
