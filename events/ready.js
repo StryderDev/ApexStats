@@ -318,7 +318,7 @@ client.once("ready", () => {
             }
           });
         } catch (err) {
-          console.error(err);
+          console.error(`Other Error: ${err}`);
         }
       });
     });
