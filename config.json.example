@@ -9,9 +9,25 @@
     "database": "MySQL Database",
     "legendTable": "Legends Table",
     "seasonTable": "Seasons Table",
-    "weaponTable": "Weapons Table"
+    "weaponTable": "Weapons Table",
+    "eventTable": "Events Table"
   },
   "mapRotation": {
+    "enabled": "true or false",
+    "guildID": "Guild ID",
+    "channelID": "Channel ID",
+    "messageID": "Message ID",
+    "updateInterval": "Update Interval in Minutes"
+  },
+  "apexInfo": {
+    "enabled": "true or false",
+    "guildID": "Guild ID",
+    "channelID": "Channel ID",
+    "messageID": "Message ID",
+    "updateInterval": "Update Interval in Minutes"
+  },
+  "eventInfo": {
+    "enabled": "true or false",
     "guildID": "Guild ID",
     "channelID": "Channel ID",
     "messageID": "Message ID",
