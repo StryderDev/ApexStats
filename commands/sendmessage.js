@@ -12,7 +12,7 @@ module.exports = {
       const placeholder = new Discord.MessageEmbed()
         .setTitle("Placeholder Embed")
         .setDescription(
-          "This a placeholder embed, and will be replaced with the map rotation embed once it has been setup."
+          "This a placeholder embed, and will be replaced when the module is set up."
         );
       message.channel.send(placeholder);
     }

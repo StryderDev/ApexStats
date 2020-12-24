@@ -19,7 +19,7 @@
     "messageID": "Message ID",
     "updateInterval": "Update Interval in Minutes"
   },
-  "apexInfo": {
+  "statusInfo": {
     "enabled": "true or false",
     "guildID": "Guild ID",
     "channelID": "Channel ID",
