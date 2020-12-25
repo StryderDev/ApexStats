@@ -26,6 +26,7 @@ The bot currently has the following features:
 
 ![Stats Preview 1](https://sdcore.dev/i/tchntbph.png)
 ![Stats Preview 2](https://sdcore.dev/i/h99klpyi.png)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSDCore%2FApex-Stats-Bot.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FSDCore%2FApex-Stats-Bot?ref=badge_shield)
 
 ### Map Rotation
 
@@ -56,3 +57,7 @@ Lots of help with some more obscure data from Rexx <3
 If you find an error or need help with something else, [join the support server](https://discord.gg/eH8VxssFW6)!
 
 You can find the somewhat-but-not-really frequently update trello [here](https://trello.com/b/PGSmA4op/apex-legends-discord-stats-bot).
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSDCore%2FApex-Stats-Bot.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FSDCore%2FApex-Stats-Bot?ref=badge_large)
