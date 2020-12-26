@@ -30,7 +30,6 @@ The bot currently has the following features:
 
 ![Stats Preview 1](https://sdcore.dev/i/tchntbph.png)
 ![Stats Preview 2](https://sdcore.dev/i/h99klpyi.png)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSDCore%2FApex-Stats-Bot.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FSDCore%2FApex-Stats-Bot?ref=badge_shield)
 
 ### Map Rotation
 
