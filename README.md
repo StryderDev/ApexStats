@@ -1,5 +1,9 @@
 ![CI/CD to Vultr](https://github.com/SDCore/ApexStats/workflows/CI/CD%20to%20Vultr/badge.svg) ![CodeQL](https://github.com/SDCore/ApexStats/workflows/CodeQL/badge.svg) ![Compress Images](https://github.com/SDCore/Apex-Stats-Bot/workflows/Compress%20Images/badge.svg) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSDCore%2FApex-Stats-Bot.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FSDCore%2FApex-Stats-Bot?ref=badge_shield) ![Discord](https://img.shields.io/discord/664717517666910220?label=Support%20Server)
 
+<p align="center">
+  <img src="https://top.gg/api/widget/690474732310626354.svg">
+</p>
+
 # Apex Stats Bot
 
 This bot was developed as an easy way to show off user stats for Apex Legends.
@@ -58,6 +62,6 @@ If you find an error or need help with something else, [join the support server]
 
 You can find the somewhat-but-not-really frequently update trello [here](https://trello.com/b/PGSmA4op/apex-legends-discord-stats-bot).
 
-
 ## License
+
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSDCore%2FApex-Stats-Bot.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FSDCore%2FApex-Stats-Bot?ref=badge_large)
