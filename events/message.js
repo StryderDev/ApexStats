@@ -36,13 +36,13 @@ client.on("message", (message) => {
   const commandName = args.shift().toLowerCase();
 
   if (!client.commands.has(commandName))
-    return message.reply("That is not a valid command.");
+    return message.reply("that's not a valid command.");
   const command = client.commands.get(commandName);
 
   try {
     command.execute(message, args);
   } catch (error) {
     console.log(error);
-    message.reply("There was an issue running that command.");
+    message.reply("there was an issue running that command.");
   }
 });
