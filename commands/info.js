@@ -17,7 +17,11 @@ module.exports = {
       )
       .addField("Bot Version", process.env.BOT_VERSION, true)
       .addField("Last Updated", process.env.LAST_UPDATED, true)
-      .addField("Server Count", `${client.guilds.cache.size} Servers`, true)
+      .addField(
+        "Bot Stats",
+        `**Shard Count:** ${client.shard.count}\n**Guild Shard ID:** ${message.guild.shardID}\n**Guild Count:** ${client.guilds.cache.size}`,
+        true
+      )
       .addField("Support Server", process.env.SUPPORT_SERVER)
       .addField("GitHub Repo", process.env.REPO)
       .addField("Trello", process.env.TRELLO)
