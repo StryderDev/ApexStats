@@ -3,7 +3,7 @@ const config = require("../config.json");
 
 // Mozambique Wrapper Library
 const MozambiqueAPI = require("mozambique-api-wrapper");
-let mozambiqueClient = new MozambiqueAPI(config.APIKey);
+let mozambiqueClient = new MozambiqueAPI(config.MozambiqueAPI);
 
 module.exports = {
   name: "news",

@@ -1,8 +1,8 @@
 {
   "prefix": "PREFIX HERE",
   "token": "TOKEN HERE",
-  "APIKey": "APEXLEGENDSAPI API KEY HERE",
-  "topGG": "0 = disabled, 1 = enabled",
+  "MozambiqueAPI": "APEXLEGENDSAPI API KEY HERE",
+  "topGG": "0 = disabled",
   "SQL": {
     "host": "MySQL HOST IP",
     "username": "MySQL Username",
