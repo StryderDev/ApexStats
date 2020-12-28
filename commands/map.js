@@ -1,5 +1,6 @@
 const { Discord } = require("../ApexStats.js");
 const axios = require("axios");
+
 var { DateTime } = require("luxon");
 
 module.exports = {
@@ -14,7 +15,9 @@ module.exports = {
           .then((result) => {
             var map = result.data;
             var nextMap = map.next[0];
-            var currentTimestamp = DateTime.local().toFormat("X") / 2;
+            var currentTimestamp = Math.floor(
+              DateTime.local().toFormat("X") / 2
+            );
 
             function mapImage(name) {
               var maps = [
@@ -52,7 +55,7 @@ module.exports = {
               .setImage(
                 `https://sdcore.dev/cdn/ApexStats/Maps/${mapImage(
                   map.map
-                )}.png?q=${Math.floor(currentTimestamp)}`
+                )}.png?q=${currentTimestamp}`
               );
 
             msg.delete();

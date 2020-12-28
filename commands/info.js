@@ -1,6 +1,7 @@
+require("dotenv").config();
+
 const { client, Discord } = require("../ApexStats.js");
 const config = require("../config.json");
-require("dotenv").config();
 
 module.exports = {
   name: "info",
