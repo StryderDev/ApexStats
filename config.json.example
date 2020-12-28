@@ -2,6 +2,7 @@
   "prefix": "PREFIX HERE",
   "token": "TOKEN HERE",
   "MozambiqueAPI": "APEXLEGENDSAPI API KEY HERE",
+  "ApexAPI": "REXX API KEY HERE",
   "topGG": "0 = disabled",
   "SQL": {
     "host": "MySQL HOST IP",
