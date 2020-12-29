@@ -1,36 +1,36 @@
 {
   "prefix": "PREFIX HERE",
   "token": "TOKEN HERE",
-  "APIKey": "APEXLEGENDSAPI API KEY HERE",
+  "MozambiqueAPI": "APEXLEGENDSAPI API KEY HERE",
+  "ApexAPI": "REXX API KEY HERE",
+  "topGG": "0 = disabled",
   "SQL": {
     "host": "MySQL HOST IP",
     "username": "MySQL Username",
     "password": "MySQL Password",
     "database": "MySQL Database",
     "legendTable": "Legends Table",
-    "seasonTable": "Seasons Table",
-    "weaponTable": "Weapons Table",
     "eventTable": "Events Table"
   },
-  "mapRotation": {
-    "enabled": "true or false",
+  "autoUpdate": {
     "guildID": "Guild ID",
-    "channelID": "Channel ID",
-    "messageID": "Message ID",
-    "updateInterval": "Update Interval in Minutes"
-  },
-  "statusInfo": {
-    "enabled": "true or false",
-    "guildID": "Guild ID",
-    "channelID": "Channel ID",
-    "messageID": "Message ID",
-    "updateInterval": "Update Interval in Minutes"
-  },
-  "eventInfo": {
-    "enabled": "true or false",
-    "guildID": "Guild ID",
-    "channelID": "Channel ID",
-    "messageID": "Message ID",
-    "updateInterval": "Update Interval in Minutes"
+    "map": {
+      "enabled": "true or false",
+      "channel": "Channel ID",
+      "message": "Message ID",
+      "interval": "Update Interval in Minutes"
+    },
+    "event": {
+      "enabled": "true or false",
+      "channel": "Channel ID",
+      "message": "Message ID",
+      "interval": "Update Interval in Minutes"
+    },
+    "status": {
+      "enabled": "true or false",
+      "channel": "Channel ID",
+      "message": "Message ID",
+      "interval": "Update Interval in Minutes"
+    }
   }
 }

@@ -1,33 +1,40 @@
-const { client, Discord } = require("../ApexStats.js");
-require("dotenv").config();
+const { Discord } = require("../ApexStats.js");
 const axios = require("axios");
-var { DateTime, Duration } = require("luxon");
+
+var { DateTime } = require("luxon");
 
 module.exports = {
   name: "map",
-  description: "Shows current map rotation.",
-  execute(message, args) {
+  description: "Shows the current and next in-game map in rotation.",
+  execute(message) {
     message.channel
-      .send("Getting current map rotation schedule...")
+      .send("Getting current in-game map rotation schedule...")
       .then(async (msg) => {
         axios
-          .get("https://fn.alphaleagues.com/v1/apex/map/")
-          .then((res) => {
-            function mapImage(name) {
-              if (name == "Olympus") {
-                return `Olympus.png?q=${DateTime.local().toFormat("X")}`;
-              } else if (name == "World's Edge") {
-                return `WorldsEdge.png?q=${DateTime.local().toFormat("X")}`;
-              } else {
-                return `NoMapData.png?q=${DateTime.local().toFormat("X")}`;
-              }
-            }
+          .get("https://fn.alphaleagues.com/v1/apex/map/?next=1")
+          .then((result) => {
+            var map = result.data;
+            var nextMap = map.next[0];
+            var currentTimestamp = Math.floor(
+              DateTime.local().toFormat("X") / 2
+            );
 
-            function nextMap(name) {
-              if (name == "Olympus") {
-                return "World's Edge";
-              } else if (name == "World's Edge") {
-                return "Olympus";
+            function mapImage(name) {
+              var maps = [
+                // Current list of in-game maps
+                // "Kings Canyon",
+                "World's Edge",
+                "Olympus",
+              ];
+
+              if (maps.indexOf(name) != -1) {
+                if (name == "World's Edge") {
+                  return "WorldsEdge";
+                }
+
+                return name;
+              } else {
+                return "NoMapData";
               }
             }
 
@@ -37,24 +44,28 @@ module.exports = {
                 .toRelative({ style: "long" });
             }
 
-            const map = new Discord.MessageEmbed()
+            const mapEmbed = new Discord.MessageEmbed()
               .setDescription(
                 `The current map is **${
-                  res.data.map
-                }**.\nThe next map in rotation is **${nextMap(
-                  res.data.map
-                )} ${time(res.data.times.remaining.seconds)}.**`
+                  map.map
+                }**.\nThe next map in rotation is **${nextMap.map} ${time(
+                  map.times.remaining.seconds
+                )}** for a length of **${nextMap.duration} minutes**.`
               )
               .setImage(
                 `https://sdcore.dev/cdn/ApexStats/Maps/${mapImage(
-                  res.data.map
-                )}`
+                  map.map
+                )}.png?q=${currentTimestamp}`
               );
 
             msg.delete();
-            msg.channel.send(map);
+            msg.channel.send(mapEmbed);
           })
           .catch((err) => {
+            msg.delete();
+            msg.channel.send(
+              "Could not retreive in-game map rotation schedule. Please try again later."
+            );
             console.log(err);
           });
       });

@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const Discord = require("discord.js-light");
 const client = new Discord.Client({
   cacheRoles: true,
@@ -10,7 +8,6 @@ const client = new Discord.Client({
   cacheOverwrites: false,
 });
 
-const fs = require("fs");
 require("./functions.js")(client);
 
 const config = require("./config.json");

@@ -1,44 +1,40 @@
-const { client, Discord } = require("../ApexStats.js");
-require("dotenv").config();
+const { Discord } = require("../ApexStats.js");
 const config = require("../config.json");
 
-// Require Wrapper Library
+// Mozambique Wrapper Library
 const MozambiqueAPI = require("mozambique-api-wrapper");
-
-// Create Client instance by passing in API key
-let mozambiqueClient = new MozambiqueAPI(config.APIKey);
+let mozambiqueClient = new MozambiqueAPI(config.MozambiqueAPI);
 
 module.exports = {
   name: "news",
-  description: "The most recent news from Apex Legends blog.",
-  execute(message, args) {
+  description:
+    "The most recent news article from the official Apex Legends blog.",
+  execute(message) {
     message.channel.send("Retrieving latest article...").then(async (msg) => {
       mozambiqueClient
         .news()
         .then(function (result) {
-          const news = new Discord.MessageEmbed()
-            .setTitle(result[0].title)
+          const news = result[0];
+
+          const newsEmbed = new Discord.MessageEmbed()
+            .setTitle(news.title)
             .setColor("C21D27")
-            .setThumbnail(process.env.BOT_ICON)
-            .setURL(result[0].link)
+            .setURL(news.link)
             .setDescription(
-              `${result[0].short_desc}\n\n**[Link to Full Article](${result[0].link})**`
+              `${news.short_desc}\n\n**[Link to full article](${news.link})**`
             )
-            .setImage(result[0].img)
-            .setFooter(
-              `${process.env.CREATOR_NAME}  •  Data provided by https://apexlegendsapi.com`,
-              process.env.CREATOR_LOGO
-            );
+            .setImage(news.img)
+            .setFooter("Data provided by https://apexlegendsapi.com");
 
           msg.delete();
-          msg.channel.send(news);
+          msg.channel.send(newsEmbed);
         })
-        .catch(function (e) {
+        .catch(function (err) {
           msg.delete();
           msg.channel.send(
-            "Could not retreive latest article. Please try again later."
+            "Could not retreive the latest article. Please try again later."
           );
-          console.log(e);
+          console.log(err);
         });
     });
   },

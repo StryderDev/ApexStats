@@ -1,9 +1,7 @@
-let mysql = require("mysql");
-const { client, Discord } = require("../ApexStats.js");
-require("dotenv").config();
+const { Discord } = require("../ApexStats.js");
 const config = require("../config.json");
-var { DateTime } = require("luxon");
 
+let mysql = require("mysql");
 let connection = mysql.createPool({
   host: config.SQL.host,
   user: config.SQL.username,
@@ -11,41 +9,43 @@ let connection = mysql.createPool({
   database: config.SQL.database,
 });
 
+var { DateTime } = require("luxon");
+
 module.exports = {
   name: "event",
-  description: "Info about the current in-game event.",
-  execute(message, args) {
-    let sql = `SELECT * FROM ${config.SQL.eventTable} ORDER BY \`id\` DESC`;
+  description:
+    "Shows information about the current in-game event (if there is one).",
+  execute(message) {
+    let query = `SELECT * FROM ${config.SQL.eventTable} ORDER BY \`id\` DESC`;
 
     connection.getConnection(function (err, connection) {
       if (err) {
         console.log(err);
-        console.log(
-          "There was a problem with our database. If this problem persists, please contact a mod."
+        return message.channel.send(
+          "There was an error connecting to the database. Please try again later."
         );
       }
 
-      connection.query(sql, function (err, results, fields) {
+      connection.query(query, function (err, results, fields) {
         if (err) {
           connection.release();
           console.log(err);
-          console.log(
-            "There was a problem with our database. If this problem persists, please contact a mod."
+          return message.channel.send(
+            "There was a problem with the SQL syntax. Please try again later."
           );
         }
 
-        // URL to construct
-        // https://time.is/countdown/10:00am_4_january_2021_pst
+        var event = results[0];
 
-        var timeisDate = DateTime.fromISO(results[0].eventEnd, {
+        var countdown = DateTime.fromISO(event.eventEnd, {
           zone: "America/Los_Angeles",
         }).toFormat("hh:mma_d_LLLL_yyyy_ZZZZ");
 
-        var currentDate = DateTime.local().toMillis();
-        var endDate = DateTime.fromISO(results[0].eventEnd).toMillis();
+        var currentTime = DateTime.local().toMillis();
+        var endDate = DateTime.fromISO(event.eventEnd).toMillis();
 
-        var dateMath = currentDate - endDate;
-        var realDateMath = endDate - currentDate;
+        var dateMath = currentTime - endDate;
+        var realDateMath = endDate - currentTime;
 
         function time(milliseconds) {
           return DateTime.local()
@@ -53,51 +53,51 @@ module.exports = {
             .toRelative({ style: "long" });
         }
 
-        const event = new Discord.MessageEmbed()
-          .setTitle(`${results[0].eventName}`)
+        const eventEmbed = new Discord.MessageEmbed()
+          .setTitle(`${event.eventName} Event`)
           .setDescription(
-            `${results[0].eventDescription}\n\n[Read the full article here.](${results[0].blogURL})`
+            `${event.eventDescription}\n\n[Read the full article.](${event.blogURL})`
           )
           .addField(
             "Event Start",
-            `${DateTime.fromISO(results[0].eventStart, {
+            `${DateTime.fromISO(event.eventStart, {
               zone: "America/Los_Angeles",
-            }).toFormat("cccc, LLLL d, yyyy\nhh:mm a ZZZZ")}`,
+            }).toFormat("cccc LLLL d, yyyy\nhh:mm a ZZZZ")}`,
             true
           )
           .addField(
             "Event End",
-            `${DateTime.fromISO(results[0].eventEnd, {
+            `${DateTime.fromISO(event.eventEnd, {
               zone: "America/Los_Angeles",
             }).toFormat(
-              "cccc, LLLL d, yyyy\nhh:mm a ZZZZ"
-            )}\n[Countdown in Your Timezone](https://time.is/countdown/${timeisDate})`,
+              "cccc LLLL d, yyyy\nhh:mm a ZZZZ"
+            )}\n[Countdown in Your Timezone](https://time.is/countdown/${countdown})`,
             true
           )
           .addField(
             "Countdown",
-            `The **${results[0].eventName}** event will end **${time(
+            `The **${event.eventName} Event** will end **${time(
               realDateMath
-            )}**.`
+            )}**`
           )
-          .setImage(
-            `https://sdcore.dev/cdn/ApexStats/Events/${results[0].imageURL}`
-          )
+          .setImage(`https://sdcore.dev/cdn/ApexStats/Events/${event.imageURL}`)
           .setTimestamp();
 
-        const noEvent = new Discord.MessageEmbed()
-          .setTitle(`No Active Event`)
+        const noEventEmbed = new Discord.MessageEmbed()
+          .setTitle("No Active Event")
           .setDescription(
-            `There is no active event. Check back another time to see if there is an active event!`
+            "There is no currently active event. Check back another time!"
           )
-          .setImage(`https://sdcore.dev/cdn/ApexStats/Events/NoEvent.png`)
+          .setImage("https://sdcore.dev/cdn/ApexStats/Events/NoEvent.png")
           .setTimestamp();
 
         if (dateMath <= 0) {
-          message.channel.send(event);
+          message.channel.send(eventEmbed);
         } else {
-          message.channel.send(noEvent);
+          message.channel.send(noEventEmbed);
         }
+
+        connection.release();
       });
     });
   },

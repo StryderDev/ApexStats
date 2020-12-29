@@ -1,40 +1,81 @@
-const { client, Discord } = require("../ApexStats.js");
-require("dotenv").config();
+const { Discord } = require("../ApexStats.js");
 const config = require("../config.json");
-var { DateTime } = require("luxon");
-const percentagebar = require("percentagebar");
+const percentage = require("percentagebar");
 const colours = require("../legendColours.json");
+const axios = require("axios");
 
-// Require Wrapper Library
-const MozambiqueAPI = require("mozambique-api-wrapper");
-
-// Create Client instance by passing in API key
-let mozambiqueClient = new MozambiqueAPI(config.APIKey);
+var { DateTime } = require("luxon");
 
 module.exports = {
   name: "stats",
-  description: "Apex user stats.",
+  description: "Shows user stats such as kills, damage done, wins, and more.",
   execute(message, args) {
-    let platformArg = args[0];
-    let player = args[1];
+    let platform = args[0];
 
-    if (platformArg != null && player != null) {
-      var platform = platformArg.toUpperCase();
+    if (args[1]) {
+      if (args[2]) {
+        if (args[3]) {
+          var player = `${args[1]}%20${args[2]}%20${args[3]}`;
+        } else {
+          var player = `${args[1]}%20${args[2]}`;
+        }
+      } else {
+        var player = args[1];
+      }
     }
 
-    message.channel.send("Fetching stats...").then(async (msg) => {
-      mozambiqueClient
-        .search({
-          platform: platform,
-          player: player,
-        })
-        .then(function (result) {
-          if (platform != null && player != null) {
-            if (platform == "PC" || platform == "PS4" || platform == "X1") {
-              var seasonBP = result.global.battlepass.history.season7;
-              var currentSeason = "7";
+    function addCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 
-              function getLegendBanner(legend) {
+    if (!args.length)
+      // No args
+      return message.channel.send(
+        `To use this command, use the following format:\n\`${config.prefix}stats [platform] [username]\``
+      );
+
+    if (!platform || !player)
+      // Arg 1 or 2 is missing
+      return message.channel.send(
+        `To use this command, use the following format:\n\`${config.prefix}stats [platform] [username]\``
+      );
+
+    if (platform && player) var platformUppercase = platform.toUpperCase();
+
+    var plats = [
+      // Current list of supported platforms
+      "X1",
+      "PS4",
+      "PC",
+    ];
+
+    if (plats.indexOf(platformUppercase) != -1) {
+      var mozam = axios.get(
+        `https://api.mozambiquehe.re/bridge?version=4&platform=${platformUppercase}&player=${player}&auth=${config.MozambiqueAPI}`
+      );
+
+      if (platform == "PC") {
+        var rexx = axios.get(
+          `https://fn.alphaleagues.com/v1/apex/stats/?username=${player}&platform=pc&auth=${config.ApexAPI}`
+        );
+      } else {
+        var rexx = axios.get(
+          `https://fn.alphaleagues.com/v1/apex/stats/?username=sdcore&platform=pc&auth=${config.ApexAPI}`
+        );
+      }
+
+      message.channel.send("Retrieving stats...").then(async (msg) => {
+        axios
+          .all([mozam, rexx])
+          .then(
+            axios.spread((...responses) => {
+              const mozam = responses[0].data;
+              const rexx = responses[1].data;
+
+              var seasonBP = mozam.global.battlepass.history.season7;
+              var season = "7";
+
+              function legendBanner(legend) {
                 var legends = [
                   // Current list of legends that have banner images
                   "Bangalore",
@@ -55,26 +96,36 @@ module.exports = {
                   99999999, // Temp new character CData value until it gets updated on the API
                 ];
 
-                var tempLegendCDataValue = 99999999;
+                var tempLegend = 99999999;
 
                 if (legends.indexOf(legend) != -1) {
-                  if (legend == tempLegendCDataValue) {
-                    return `https://sdcore.dev/cdn/ApexStats/LegendBanners/NoBanner.png?q=${DateTime.local().toFormat(
-                      "X"
-                    )}`;
+                  if (legend == tempLegend) {
+                    return "NoBanner";
                   } else {
-                    return `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legend}.png?q=${DateTime.local().toFormat(
-                      "X"
-                    )}`;
+                    return legend;
                   }
                 } else {
-                  return `https://sdcore.dev/cdn/ApexStats/LegendBanners/NoBanner.png?q=${DateTime.local().toFormat(
-                    "X"
-                  )}`;
+                  return "NoBanner";
                 }
               }
 
-              function getBPLevel() {
+              function avatar() {
+                if (mozam.global.avatar != "Not available") {
+                  return mozam.global.avatar;
+                } else {
+                  return "https://sdcore.dev/cdn/ApexStats/Icon.png";
+                }
+              }
+
+              function accountLevel() {
+                if (mozam.global.level >= 500) {
+                  return 500;
+                } else {
+                  return mozam.global.level;
+                }
+              }
+
+              function bpLevel() {
                 if (seasonBP != -1) {
                   if (seasonBP >= 110) {
                     return 110;
@@ -82,27 +133,11 @@ module.exports = {
                     return seasonBP;
                   }
                 } else {
-                  return "0";
+                  return 0;
                 }
               }
 
-              function getAccountLevel() {
-                if (result.global.level >= 500) {
-                  return 500;
-                } else {
-                  return result.global.level;
-                }
-              }
-
-              function hasAvatar() {
-                if (result.global.avatar != "Not available") {
-                  return result.global.avatar;
-                } else {
-                  return "https://sdcore.dev/cdn/ApexStats/Icon.png";
-                }
-              }
-
-              function getRank(name) {
+              function rank(name) {
                 if (name == "Silver") {
                   return "<:rankedSilver:787174770424021083>";
                 } else if (name == "Gold") {
@@ -144,79 +179,146 @@ module.exports = {
                 }
               }
 
-              var legendName = result.legends.selected.LegendName;
+              var currentTimestamp = DateTime.local().toFormat("X") / 2;
 
-              const stats = new Discord.MessageEmbed()
-                .setColor(colours[legendName])
-                .setAuthor(
-                  `Apex Legends Stats for ${result.global.name} on ${platform}`,
-                  hasAvatar()
-                )
-                .setDescription(
-                  `Rank: ${getRank(result.global.rank.rankName)} ${
-                    result.global.rank.rankName
-                  } ${
-                    result.global.rank.rankDiv
-                  }\nScore: ${result.global.rank.rankScore.toLocaleString(
-                    "en-US"
-                  )}`
-                )
-                .addField(
-                  `Account Level ${getAccountLevel()}/500`,
-                  `${percentagebar(500, getAccountLevel(), 10)}`,
-                  true
-                )
-                .addField(
-                  `S${currentSeason} BP Level ${getBPLevel()}/110`,
-                  `${percentagebar(110, getBPLevel(), 10)}`,
-                  true
-                )
-                .addField("\u200b", "\u200b", true)
-                .addField(
-                  `${getFieldTitle(result.legends.selected.data[0])}`,
-                  `${getFieldValue(result.legends.selected.data[0])}`,
-                  true
-                )
-                .addField(
-                  `${getFieldTitle(result.legends.selected.data[1])}`,
-                  `${getFieldValue(result.legends.selected.data[1])}`,
-                  true
-                )
-                .addField(
-                  `${getFieldTitle(result.legends.selected.data[2])}`,
-                  `${getFieldValue(result.legends.selected.data[2])}`,
-                  true
-                )
-                .setImage(getLegendBanner(result.legends.selected.LegendName))
-                .setFooter(
-                  `${process.env.CREATOR_NAME}  •  Data provided by https://apexlegendsapi.com`,
-                  process.env.CREATOR_LOGO
-                );
+              if (platformUppercase == "PC") {
+                // Use Rexx's API to get global account data
+                var totalKills = addCommas(rexx.player.stats.kills);
+                var totalMatches = addCommas(rexx.player.stats.matches);
+                var KPM = rexx.player.stats.kills_per_match;
+                var totalWins = addCommas(rexx.player.stats.wins.total);
+                var winRatio = addCommas(rexx.player.stats.wins["win%"]);
+                var damageDealt = addCommas(rexx.player.stats.damage.dealt);
 
-              msg.delete();
-              message.reply(stats);
-            } else {
-              msg.delete();
-              message.reply(
-                "Sorry, it looks like you didn't provide a valid platform.\nFor reference, PC = Origin/Steam, X1 = Xbox, and PS4 = Playstation Network."
-              );
-            }
-          }
-        })
-        .catch(function (e) {
-          if (platform == null && player == null) {
-            msg.delete();
+                const statsEmbed = new Discord.MessageEmbed()
+                  .setAuthor(
+                    `Apex Legends Stats for ${mozam.global.name} on ${platformUppercase} playing ${mozam.legends.selected.LegendName}`,
+                    avatar()
+                  )
+                  .setColor(colours[mozam.legends.selected.LegendName])
+                  .setDescription(
+                    `**Rank:** ${rank(mozam.global.rank.rankName)} ${
+                      mozam.global.rank.rankName
+                    } ${
+                      mozam.global.rank.rankDiv
+                    }\n**Score:** ${mozam.global.rank.rankScore.toLocaleString(
+                      "en-US"
+                    )} `
+                  )
+                  .addField(
+                    `Account Level ${accountLevel()}/500`,
+                    percentage(500, accountLevel(), 10),
+                    true
+                  )
+                  .addField(
+                    `S${season} BP Level ${bpLevel()}/110`,
+                    percentage(110, bpLevel(), 10),
+                    true
+                  )
+                  .addField("\u200b", "\u200b", true)
+                  .addField("Account Kill, Damage & Win Stats", "\u200b")
+                  .addField(
+                    "Kills",
+                    `**Total Kills:** ${totalKills}\n**Total Matches:** ${totalMatches}\n**Kills per Match:** ${KPM}`,
+                    true
+                  )
+                  .addField(
+                    "Wins/Damage",
+                    `**Total Wins:** ${totalWins}\n**Win Rate**: ${winRatio}%\n**Damage Dealt:** ${damageDealt}`,
+                    true
+                  )
+                  .addField("\u200b", "\u200b", true)
+                  .addField("Currently Equipped Trackers", "\u200b")
+                  .addField(
+                    `${getFieldTitle(mozam.legends.selected.data[0])}`,
+                    `${getFieldValue(mozam.legends.selected.data[0])}`,
+                    true
+                  )
+                  .addField(
+                    `${getFieldTitle(mozam.legends.selected.data[1])}`,
+                    `${getFieldValue(mozam.legends.selected.data[1])}`,
+                    true
+                  )
+                  .addField(
+                    `${getFieldTitle(mozam.legends.selected.data[2])}`,
+                    `${getFieldValue(mozam.legends.selected.data[2])}`,
+                    true
+                  )
+                  .setImage(
+                    `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legendBanner(
+                      mozam.legends.selected.LegendName
+                    )}.png?q=${currentTimestamp}`
+                  )
+                  .setFooter("Data provided by https://apexlegendsapi.com/");
+
+                msg.delete();
+                msg.channel.send(statsEmbed);
+              } else {
+                // Only show data from main API
+                const statsEmbed = new Discord.MessageEmbed()
+                  .setAuthor(
+                    `Apex Legends Stats for ${mozam.global.name} on ${platformUppercase} playing ${mozam.legends.selected.LegendName}`,
+                    avatar()
+                  )
+                  .setColor(colours[mozam.legends.selected.LegendName])
+                  .setDescription(
+                    `**Rank:** ${rank(mozam.global.rank.rankName)} ${
+                      mozam.global.rank.rankName
+                    } ${
+                      mozam.global.rank.rankDiv
+                    }\n**Score:** ${mozam.global.rank.rankScore.toLocaleString(
+                      "en-US"
+                    )} `
+                  )
+                  .addField(
+                    `Account Level ${accountLevel()}/500`,
+                    percentage(500, accountLevel(), 10),
+                    true
+                  )
+                  .addField(
+                    `S${season} BP Level ${bpLevel()}/110`,
+                    percentage(110, bpLevel(), 10),
+                    true
+                  )
+                  .addField("Currently Equipped Trackers", "\u200b")
+                  .addField(
+                    `${getFieldTitle(mozam.legends.selected.data[0])}`,
+                    `${getFieldValue(mozam.legends.selected.data[0])}`,
+                    true
+                  )
+                  .addField(
+                    `${getFieldTitle(mozam.legends.selected.data[1])}`,
+                    `${getFieldValue(mozam.legends.selected.data[1])}`,
+                    true
+                  )
+                  .addField(
+                    `${getFieldTitle(mozam.legends.selected.data[2])}`,
+                    `${getFieldValue(mozam.legends.selected.data[2])}`,
+                    true
+                  )
+                  .setImage(
+                    `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legendBanner(
+                      mozam.legends.selected.LegendName
+                    )}.png?q=${currentTimestamp}`
+                  )
+                  .setFooter("Data provided by https://apexlegendsapi.com/");
+
+                msg.delete();
+                msg.channel.send(statsEmbed);
+              }
+            })
+          )
+          .catch((errors) => {
             message.channel.send(
-              `To use this command, use the following format:\n\`${config.prefix}stats [platform] [username]\``
+              "There was an error processing stats. Please try again or join the support server for help."
             );
-            return;
-          }
-          msg.delete();
-          message.channel.send(
-            "Uncaught error processing stats. Please try again or contact a mod if the problem persists."
-          );
-          console.log(e);
-        });
-    });
+            console.log(errors);
+          });
+      });
+    } else {
+      return message.channel.send(
+        "Sorry, it looks like you didn't provide a valid platform.\nFor reference, PC = Origin/Steam, X1 = Xbox, and PS4 = Playstation Network."
+      );
+    }
   },
 };

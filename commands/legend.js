@@ -1,9 +1,7 @@
-let mysql = require("mysql");
-const { client, Discord } = require("../ApexStats.js");
-require("dotenv").config();
+const { Discord } = require("../ApexStats.js");
 const config = require("../config.json");
-var { DateTime } = require("luxon");
 
+let mysql = require("mysql");
 let connection = mysql.createPool({
   host: config.SQL.host,
   user: config.SQL.username,
@@ -11,23 +9,20 @@ let connection = mysql.createPool({
   database: config.SQL.database,
 });
 
+var { DateTime } = require("luxon");
+
 module.exports = {
   name: "legend",
-  description: "Info about specific legends in-game.",
+  description:
+    "Information about a legend such as their biography, age, home world, and abilities.",
   execute(message, args) {
-    var legendName = args[0];
+    if (!args.length)
+      return message.channel.send("Please provide a legend name.");
 
-    if (legendName == null)
-      return message.channel.send(
-        "Please provide a legend name to view their stats and info."
-      );
+    var legend = args[0].toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
 
-    var fixName = legendName
-      .toLowerCase()
-      .replace(/^\w/, (c) => c.toUpperCase());
-
+    // List of current supported legends
     var legends = [
-      // Current list of legends that have banner images
       "Bangalore",
       "Bloodhound",
       "Caustic",
@@ -45,47 +40,38 @@ module.exports = {
       "Wraith",
     ];
 
-    if (legends.indexOf(fixName) == -1)
+    if (legends.indexOf(legend) == -1)
       return message.channel.send(
         "Seems that legend isn't in our database yet."
       );
 
-    var name = mysql.escape(legendName);
-
-    let sql = `SELECT * FROM ${config.SQL.legendTable} WHERE \`name\` = ${name}`;
+    let query = `SELECT * FROM ${
+      config.SQL.legendTable
+    } WHERE \`name\` = ${mysql.escape(legend)}`;
 
     connection.getConnection(function (err, connection) {
       if (err) {
         console.log(err);
         return message.channel.send(
-          "There was a problem with our database. If this problem persists, please contact a mod."
+          "There was an error connecting to the database. Please try again later."
         );
       }
 
-      connection.query(sql, function (err, results, fields) {
+      connection.query(query, function (err, results, fields) {
         if (err) {
           connection.release();
           console.log(err);
           return message.channel.send(
-            "There was a problem with our database. If this problem persists, please contact a mod."
+            "There was a problem with the SQL syntax. Please try again later."
           );
         }
 
-        const info = new Discord.MessageEmbed()
+        var currentTimestamp = Math.floor(DateTime.local().toFormat("X") / 2);
+
+        const legendEmbed = new Discord.MessageEmbed()
           .setTitle(`${results[0].name} - ${results[0].tagline}`)
           .setColor(results[0].hex)
-          // Temporarily disabling the thumbnail since it
-          // just takes up precious space that could be used
-          // for more info. If discord allowed any-size-width
-          // for embeds, it'd work a lot better :/
-          //.setThumbnail(
-          //  `https://sdcore.dev/cdn/ApexStats/LegendIcons/${
-          //    results[0].name
-          //  }.png?q=${moment().valueOf()}`
-          //)
-          // If I change this in the future, make sure to update the
-          // moment call since moment will no longer be used
-          .setDescription(`${results[0].description}`)
+          .setDescription(results[0].description)
           .addField("Entry Season", `Season ${results[0].season}`, true)
           .addField("Age", results[0].age, true)
           .addField("Home World", results[0].homeWorld, true)
@@ -105,13 +91,10 @@ module.exports = {
             true
           )
           .setImage(
-            `https://sdcore.dev/cdn/ApexStats/LegendBanners/${
-              results[0].name
-            }.png?q=${DateTime.local().toFormat("X")}`
-          )
-          .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO);
+            `https://sdcore.dev/cdn/ApexStats/LegendBanners/${results[0].name}.png?q=${currentTimestamp}`
+          );
 
-        message.channel.send(info);
+        message.channel.send(legendEmbed);
         connection.release();
       });
     });
