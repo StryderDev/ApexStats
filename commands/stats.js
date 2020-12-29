@@ -11,7 +11,22 @@ module.exports = {
   description: "Shows user stats such as kills, damage done, wins, and more.",
   execute(message, args) {
     let platform = args[0];
-    let player = args[1];
+
+    if (args[1]) {
+      if (args[2]) {
+        if (args[3]) {
+          var player = `${args[1]}%20${args[2]}%20${args[3]}`;
+        } else {
+          var player = `${args[1]}%20${args[2]}`;
+        }
+      } else {
+        var player = args[1];
+      }
+    }
+
+    function addCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 
     if (!args.length)
       // No args
@@ -167,11 +182,14 @@ module.exports = {
               var currentTimestamp = DateTime.local().toFormat("X") / 2;
 
               if (platformUppercase == "PC") {
-                const statsEmbed = "being worked on";
+                // Use Rexx's API to get global account data
+                var totalKills = addCommas(rexx.player.stats.kills);
+                var totalMatches = addCommas(rexx.player.stats.matches);
+                var KPM = rexx.player.stats.kills_per_match;
+                var totalWins = addCommas(rexx.player.stats.wins.total);
+                var winRatio = addCommas(rexx.player.stats.wins["win%"]);
+                var damageDealt = addCommas(rexx.player.stats.damage.dealt);
 
-                msg.delete();
-                msg.channel.send(statsEmbed);
-              } else {
                 const statsEmbed = new Discord.MessageEmbed()
                   .setAuthor(
                     `Apex Legends Stats for ${mozam.global.name} on ${platformUppercase} playing ${mozam.legends.selected.LegendName}`,
@@ -198,6 +216,19 @@ module.exports = {
                     true
                   )
                   .addField("\u200b", "\u200b", true)
+                  .addField("Account Kill, Damage & Win Stats", "\u200b")
+                  .addField(
+                    "Kills",
+                    `**Total Kills:** ${totalKills}\n**Total Matches:** ${totalMatches}\n**Kills per Match:** ${KPM}`,
+                    true
+                  )
+                  .addField(
+                    "Wins/Damage",
+                    `**Total Wins:** ${totalWins}\n**Win Rate**: ${winRatio}%\n**Damage Dealt:** ${damageDealt}`,
+                    true
+                  )
+                  .addField("\u200b", "\u200b", true)
+                  .addField("Currently Equipped Trackers", "\u200b")
                   .addField(
                     `${getFieldTitle(mozam.legends.selected.data[0])}`,
                     `${getFieldValue(mozam.legends.selected.data[0])}`,
@@ -218,7 +249,59 @@ module.exports = {
                       mozam.legends.selected.LegendName
                     )}.png?q=${currentTimestamp}`
                   )
-                  .setTimestamp();
+                  .setFooter("Data provided by https://apexlegendsapi.com/");
+
+                msg.delete();
+                msg.channel.send(statsEmbed);
+              } else {
+                // Only show data from main API
+                const statsEmbed = new Discord.MessageEmbed()
+                  .setAuthor(
+                    `Apex Legends Stats for ${mozam.global.name} on ${platformUppercase} playing ${mozam.legends.selected.LegendName}`,
+                    avatar()
+                  )
+                  .setColor(colours[mozam.legends.selected.LegendName])
+                  .setDescription(
+                    `**Rank:** ${rank(mozam.global.rank.rankName)} ${
+                      mozam.global.rank.rankName
+                    } ${
+                      mozam.global.rank.rankDiv
+                    }\n**Score:** ${mozam.global.rank.rankScore.toLocaleString(
+                      "en-US"
+                    )} `
+                  )
+                  .addField(
+                    `Account Level ${accountLevel()}/500`,
+                    percentage(500, accountLevel(), 10),
+                    true
+                  )
+                  .addField(
+                    `S${season} BP Level ${bpLevel()}/110`,
+                    percentage(110, bpLevel(), 10),
+                    true
+                  )
+                  .addField("Currently Equipped Trackers", "\u200b")
+                  .addField(
+                    `${getFieldTitle(mozam.legends.selected.data[0])}`,
+                    `${getFieldValue(mozam.legends.selected.data[0])}`,
+                    true
+                  )
+                  .addField(
+                    `${getFieldTitle(mozam.legends.selected.data[1])}`,
+                    `${getFieldValue(mozam.legends.selected.data[1])}`,
+                    true
+                  )
+                  .addField(
+                    `${getFieldTitle(mozam.legends.selected.data[2])}`,
+                    `${getFieldValue(mozam.legends.selected.data[2])}`,
+                    true
+                  )
+                  .setImage(
+                    `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legendBanner(
+                      mozam.legends.selected.LegendName
+                    )}.png?q=${currentTimestamp}`
+                  )
+                  .setFooter("Data provided by https://apexlegendsapi.com/");
 
                 msg.delete();
                 msg.channel.send(statsEmbed);
