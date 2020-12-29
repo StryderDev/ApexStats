@@ -54,15 +54,19 @@ module.exports = {
         `https://api.mozambiquehe.re/bridge?version=4&platform=${platformUppercase}&player=${player}&auth=${config.MozambiqueAPI}`
       );
 
-      if (platform == "PC") {
-        var rexx = axios.get(
-          `https://fn.alphaleagues.com/v1/apex/stats/?username=${player}&platform=pc&auth=${config.ApexAPI}`
-        );
-      } else {
-        var rexx = axios.get(
-          `https://fn.alphaleagues.com/v1/apex/stats/?username=sdcore&platform=pc&auth=${config.ApexAPI}`
-        );
+      function getRexx() {
+        if (platformUppercase == "PC") {
+          return player;
+        } else {
+          return "SDCore";
+        }
       }
+
+      var rexx = axios.get(
+        `https://fn.alphaleagues.com/v1/apex/stats/?username=${getRexx()}&platform=pc&auth=${
+          config.ApexAPI
+        }`
+      );
 
       message.channel.send("Retrieving stats...").then(async (msg) => {
         axios
