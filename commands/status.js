@@ -1,12 +1,9 @@
-const { client, Discord } = require("../ApexStats.js");
-require("dotenv").config();
+const { Discord } = require("../ApexStats.js");
 const config = require("../config.json");
 
-// Require Wrapper Library
+// Mozambique Wrapper Library
 const MozambiqueAPI = require("mozambique-api-wrapper");
-
-// Create Client instance by passing in API key
-let mozambiqueClient = new MozambiqueAPI(config.APIKey);
+let mozambiqueClient = new MozambiqueAPI(config.MozambiqueAPI);
 
 var UpEmoji = "<:StatusUp:786800700533112872>";
 var SlowEmoji = "<:StatusSlow:786800700541501461>";
@@ -16,7 +13,7 @@ var NoDataEmoji = "<:StatusNoData:786800700499034122>";
 module.exports = {
   name: "status",
   description: "Apex Legends server status.",
-  execute(message, args) {
+  execute(message) {
     message.channel.send("Retrieving server status...").then(async (msg) => {
       // Get server status
       mozambiqueClient
@@ -34,7 +31,7 @@ module.exports = {
             }
           }
 
-          const status = new Discord.MessageEmbed()
+          const statusEmbed = new Discord.MessageEmbed()
             .setTitle("Apex Legends Server Status")
             .setColor("C21D27")
             .addField(
@@ -271,18 +268,15 @@ module.exports = {
               }ms)`,
               true
             )
-            .setFooter(
-              `${process.env.CREATOR_NAME}  •  Data provided by https://apexlegendsstatus.com`,
-              process.env.CREATOR_LOGO
-            );
+            .setFooter("Data provided by https://apexlegendsstatus.com");
 
           msg.delete();
-          msg.channel.send(status);
+          msg.channel.send(statusEmbed);
         })
         .catch(function (e) {
           msg.delete();
           msg.channel.send(
-            "Unable to get server status. Please try again or contact a mod if the problem persists."
+            "Unable to get server status. Please try again later."
           );
           console.log(e);
         });
