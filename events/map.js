@@ -88,7 +88,7 @@ client.once("ready", () => {
     if (config.autoUpdate.map.enabled == "true") {
       var date = new Date();
 
-      if (date.getMinutes() % config.mapRotation.updateInterval == 0) {
+      if (date.getMinutes() % config.autoUpdate.map.interval == 0) {
         updateMapRotation();
         console.log(
           `[${DateTime.local().toFormat(
