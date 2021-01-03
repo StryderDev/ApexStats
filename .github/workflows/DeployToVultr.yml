@@ -41,4 +41,4 @@ jobs:
             git pull
             npm prune
             npm ci
-            pm2 reload 5
+            pm2 reload 0
