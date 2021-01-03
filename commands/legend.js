@@ -57,7 +57,7 @@ module.exports = {
         );
       }
 
-      connection.query(query, function (err, results, fields) {
+      connection.query(query, function (err, results) {
         if (err) {
           connection.release();
           console.log(err);

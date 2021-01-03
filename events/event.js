@@ -1,4 +1,4 @@
-const { Discord } = require("../ApexStats.js");
+const { client, Discord } = require("../ApexStats.js");
 const config = require("../config.json");
 
 let mysql = require("mysql");
@@ -11,11 +11,8 @@ let connection = mysql.createPool({
 
 var { DateTime } = require("luxon");
 
-module.exports = {
-  name: "event",
-  description:
-    "Shows information about the current in-game event (if there is one).",
-  execute(message) {
+client.once("ready", () => {
+  function updateEventInfo() {
     let query = `SELECT * FROM ${config.SQL.eventTable} ORDER BY \`id\` DESC`;
 
     connection.getConnection(function (err, connection) {
@@ -91,14 +88,59 @@ module.exports = {
           .setImage("https://sdcore.dev/cdn/ApexStats/Events/NoEvent.png")
           .setTimestamp();
 
-        if (dateMath <= 0) {
-          message.channel.send(eventEmbed);
-        } else {
-          message.channel.send(noEventEmbed);
-        }
+        const guild = client.guilds.cache.get(config.autoUpdate.guildID);
+        if (!guild) return console.log("Unable to find guild.");
 
-        connection.release();
+        const channel = guild.channels.cache.find(
+          (c) => c.id === config.autoUpdate.event.channel && c.type === "text"
+        );
+        if (!channel) return console.log("Unable to find channel.");
+
+        try {
+          const message = channel.messages.fetch(
+            config.autoUpdate.event.message
+          );
+          if (!message) return console.log("Unable to find message.");
+
+          channel.messages
+            .fetch(config.autoUpdate.event.message)
+            .then((msg) => {
+              if (dateMath <= 0) {
+                msg.edit(eventEmbed);
+              } else {
+                msg.edit(noEventEmbed);
+              }
+            });
+
+          connection.release();
+        } catch (err) {
+          console.error(`Other Error: ${err}`);
+        }
       });
     });
-  },
-};
+  }
+
+  if (config.autoUpdate.event.enabled == "true") {
+    updateEventInfo();
+    console.log(
+      `[${DateTime.local().toFormat(
+        "hh:mm:ss"
+      )}] Updated Event Information Embed`
+    );
+  }
+
+  setInterval(function () {
+    if (config.autoUpdate.event.enabled == "true") {
+      var date = new Date();
+
+      if (date.getMinutes() % config.autoUpdate.event.interval == 0) {
+        updateEventInfo();
+        console.log(
+          `[${DateTime.local().toFormat(
+            "hh:mm:ss"
+          )}] Updated Event Information Embed`
+        );
+      }
+    }
+  }, Math.max(1, 1 || 1) * 60 * 1000);
+});

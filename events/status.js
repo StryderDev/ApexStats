@@ -250,23 +250,25 @@ client.once("ready", () => {
     });
   }
 
-  updateStatus();
-  console.log(
-    `[${DateTime.local().toFormat("hh:mm:ss")}] Updated Server Status Embed`
-  );
+  if (config.autoUpdate.status.enabled == "true") {
+    updateStatus();
+    console.log(
+      `[${DateTime.local().toFormat("hh:mm:ss")}] Updated Server Status Embed`
+    );
+  }
 
   setInterval(function () {
-    var date = new Date();
+    if (config.autoUpdate.status.enabled == "true") {
+      var date = new Date();
 
-    if (date.getMinutes() % config.autoUpdate.status.interval == 0) {
-      updateStatus();
-      console.log(
-        `[${DateTime.local().toFormat("hh:mm:ss")}] Updated Server Status Embed`
-      );
+      if (date.getMinutes() % config.autoUpdate.status.interval == 0) {
+        updateStatus();
+        console.log(
+          `[${DateTime.local().toFormat(
+            "hh:mm:ss"
+          )}] Updated Server Status Embed`
+        );
+      }
     }
   }, Math.max(1, 1 || 1) * 60 * 1000);
 });
-
-// for (i = 0; i < numbers.length; i++) {
-//  console.log(numbers[i]);
-//}
