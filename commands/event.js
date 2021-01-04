@@ -42,6 +42,7 @@ module.exports = {
         }).toFormat("hh:mma_d_LLLL_yyyy_ZZZZ");
 
         var currentTime = DateTime.local().toMillis();
+        var startDate = DateTime.fromISO(event.eventStart).toMillis();
         var endDate = DateTime.fromISO(event.eventEnd).toMillis();
 
         var dateMath = currentTime - endDate;
@@ -91,7 +92,10 @@ module.exports = {
           .setImage("https://sdcore.dev/cdn/ApexStats/Events/NoEvent.png")
           .setTimestamp();
 
-        if (dateMath <= 0) {
+        var timeTillDate = startDate - currentTime;
+        if (timeTillDate >= 0) {
+          message.channel.send(noEventEmbed);
+        } else if (dateMath <= 0) {
           message.channel.send(eventEmbed);
         } else {
           message.channel.send(noEventEmbed);

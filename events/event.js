@@ -39,6 +39,7 @@ client.once("ready", () => {
         }).toFormat("hh:mma_d_LLLL_yyyy_ZZZZ");
 
         var currentTime = DateTime.local().toMillis();
+        var startDate = DateTime.fromISO(event.eventStart).toMillis();
         var endDate = DateTime.fromISO(event.eventEnd).toMillis();
 
         var dateMath = currentTime - endDate;
@@ -105,7 +106,10 @@ client.once("ready", () => {
           channel.messages
             .fetch(config.autoUpdate.event.message)
             .then((msg) => {
-              if (dateMath <= 0) {
+              var timeTillDate = startDate - currentTime;
+              if (timeTillDate >= 0) {
+                msg.edit(noEventEmbed);
+              } else if (dateMath <= 0) {
                 msg.edit(eventEmbed);
               } else {
                 msg.edit(noEventEmbed);
