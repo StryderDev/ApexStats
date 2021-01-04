@@ -29,7 +29,9 @@ The bot currently has the following features:
 ### Stats
 
 ![Stats Preview 1](https://sdcore.dev/i/tchntbph.png)
-![Stats Preview 2](https://sdcore.dev/i/h99klpyi.png)
+![Stats Preview 2](https://sdcore.dev/i/h0u0sz1o.png)
+
+\*Account Kill/Damage/Win Stats available for PC accounts only. Currently Equipped Trackers are available for all platforms.
 
 ### Map Rotation
 
