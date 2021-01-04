@@ -23,6 +23,8 @@ The bot currently has the following features:
     - Replace [legend name] with the name of a legend currently in the game
 - Current in-game map rotations
   - `>>map`
+- Current active in-game events
+  - `>>event`
 
 ## Preview
 
@@ -40,6 +42,10 @@ The bot currently has the following features:
 ### Server Status
 
 ![Server Status Preview](https://sdcore.dev/i/0v9u9xbz.png)
+
+### In-Game Events
+
+![In-Game Events Preview](https://sdcore.dev/i/bkh1qev4.png)
 
 ### News
 
