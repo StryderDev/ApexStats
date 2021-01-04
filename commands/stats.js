@@ -163,9 +163,48 @@ module.exports = {
                 }
               }
 
+              function checkBanner(type, legend) {
+                var legends = [
+                  "Bloodhound",
+                  "Gibraltar",
+                  "Lifeline",
+                  "Loba",
+                  "Mirage",
+                  "Octane",
+                  "Pathfinder",
+                  "Rampart",
+                  "Revenant",
+                ];
+
+                function getType(type) {
+                  if (type == "Grand Soiree kills") {
+                    return "Kills";
+                  } else if (type == "Grand Soiree wins") {
+                    return "Wins";
+                  } else if (type == "Grand Soiree damage") {
+                    return "Damage";
+                  }
+                }
+
+                if (legends.indexOf(legend) != -1) {
+                  return `${getType(type)} as ${legend}`;
+                }
+              }
+
               function getFieldTitle(fieldData) {
                 if (fieldData != null) {
-                  return fieldData.name;
+                  if (
+                    fieldData.name == "Grand Soiree kills" ||
+                    fieldData.name == "Grand Soiree wins" ||
+                    fieldData.name == "Grand Soiree damage"
+                  ) {
+                    return checkBanner(
+                      fieldData.name,
+                      mozam.legends.selected.LegendName
+                    );
+                  } else {
+                    return fieldData.name;
+                  }
                 } else if (fieldData == "undefined") {
                   return "No data";
                 } else {
