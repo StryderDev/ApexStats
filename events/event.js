@@ -44,11 +44,24 @@ client.once("ready", () => {
 
         var dateMath = currentTime - endDate;
         var realDateMath = endDate - currentTime;
+        var timeTillDate = startDate - currentTime;
 
         function time(milliseconds) {
           return DateTime.local()
             .plus({ milliseconds: milliseconds })
             .toRelative({ style: "long" });
+        }
+
+        function formatDate(date) {
+          return DateTime.fromISO(date, {
+            zone: "America/Los_Angeles",
+          }).toFormat("cccc LLLL d, yyyy\nhh:mm a ZZZZ");
+        }
+
+        function getCountdownURL(date) {
+          return `https://time.is/countdown/${DateTime.fromISO(date, {
+            zone: "America/Los_Angeles",
+          }).toFormat("hh:mma_d_LLLL_yyyy_ZZZZ")}`;
         }
 
         const eventEmbed = new Discord.MessageEmbed()
@@ -89,6 +102,38 @@ client.once("ready", () => {
           .setImage("https://sdcore.dev/cdn/ApexStats/Events/NoEvent.png")
           .setTimestamp();
 
+        const preEventEmbed = new Discord.MessageEmbed()
+          .setTitle(`[Event Countdown] ${event.eventName} Event`)
+          .setDescription(
+            `${event.eventDescription}\n\n[Read the full article.](${event.blogURL})`
+          )
+          .addField(
+            "Event Start",
+            `${formatDate(
+              event.eventStart
+            )}\n[Countdown in Your Timezone](${getCountdownURL(
+              event.eventStart
+            )})`,
+            true
+          )
+          .addField(
+            "Event End",
+            `${formatDate(
+              event.eventEnd
+            )}\n[Countdown in Your Timezone](${getCountdownURL(
+              event.eventEnd
+            )})`,
+            true
+          )
+          .addField(
+            "Countdown",
+            `The **${event.eventName} Event** will start **${time(
+              timeTillDate
+            )}**.`
+          )
+          .setImage(`https://sdcore.dev/cdn/ApexStats/Events/${event.imageURL}`)
+          .setTimestamp();
+
         const guild = client.guilds.cache.get(config.autoUpdate.guildID);
         if (!guild) return console.log("Unable to find guild.");
 
@@ -106,9 +151,8 @@ client.once("ready", () => {
           channel.messages
             .fetch(config.autoUpdate.event.message)
             .then((msg) => {
-              var timeTillDate = startDate - currentTime;
               if (timeTillDate >= 0) {
-                msg.edit(noEventEmbed);
+                msg.edit(preEventEmbed);
               } else if (dateMath <= 0) {
                 msg.edit(eventEmbed);
               } else {
