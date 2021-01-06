@@ -21,12 +21,20 @@ client.once("ready", () => {
             "Olympus",
           ];
 
-          if (maps.indexOf(name) != -1) {
-            if (name == "World's Edge") {
+          if (name.includes("Olympus")) {
+            var mapName = "Olympus";
+          } else if (name.includes("World's")) {
+            var mapName = "World's Edge";
+          } else {
+            var mapName = name;
+          }
+
+          if (maps.indexOf(mapName) != -1) {
+            if (mapName == "World's Edge") {
               return "WorldsEdge";
             }
 
-            return name;
+            return mapName;
           } else {
             return "NoMapData";
           }
