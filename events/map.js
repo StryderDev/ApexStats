@@ -41,18 +41,29 @@ client.once("ready", () => {
         }
 
         function time(seconds) {
-          return DateTime.local()
-            .plus({ seconds: seconds })
-            .toRelative({ style: "long" });
+          var currentDate = DateTime.local();
+          var futureDate = DateTime.local().plus({
+            seconds: seconds,
+          });
+
+          var timeTill = futureDate.diff(currentDate, [
+            "hours",
+            "minutes",
+            "seconds",
+          ]);
+
+          var finalTime = timeTill.toObject();
+
+          return `${finalTime.hours} hour(s), ${finalTime.minutes} minute(s)`;
         }
 
         const mapEmbed = new Discord.MessageEmbed()
           .setDescription(
-            `The current map is **${
-              map.map
-            }**.\nThe next map in rotation is **${nextMap.map} ${time(
+            `The current map is **${map.map}**.\nThe next map is **${
+              nextMap.map
+            }** in **${time(
               map.times.remaining.seconds
-            )}** for a length of **${nextMap.duration} minutes**.`
+            )}** which will last for **${nextMap.duration} minutes**.`
           )
           .setImage(
             `https://sdcore.dev/cdn/ApexStats/Maps/${mapImage(
