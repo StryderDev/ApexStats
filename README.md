@@ -25,6 +25,8 @@ The bot currently has the following features:
   - `>>map`
 - Current active in-game events
   - `>>event`
+- Pick a random spot to drop based on the current map in rotation
+  - `>>drop`
 
 ## Preview
 
@@ -42,6 +44,10 @@ The bot currently has the following features:
 ### Server Status
 
 ![Server Status Preview](https://sdcore.dev/i/0v9u9xbz.png)
+
+### Where to Drop
+
+![Where to Drop](https://sdcore.dev/i/etb6ijkr.png)
 
 ### In-Game Events
 
