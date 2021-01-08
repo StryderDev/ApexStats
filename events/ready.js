@@ -25,11 +25,11 @@ client.once("ready", () => {
 
   const reqHeaders = {
     "Content-Type": "application/json",
-    Authorization: config.DELToken,
+    "Authorization": config.DELToken,
   };
 
   const reqBody = {
-    guildCount: client.guilds.cache.size,
+    "guildCount": client.guilds.cache.size,
   };
 
   if (config.DELToken == "0") {
