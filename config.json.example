@@ -4,6 +4,7 @@
   "MozambiqueAPI": "APEXLEGENDSAPI API KEY HERE",
   "ApexAPI": "REXX API KEY HERE",
   "topGG": "0 = disabled, otherwise use API key",
+  "DELToken": "0 = disabled, otherwise use API key",
   "SQL": {
     "host": "MySQL HOST IP",
     "username": "MySQL Username",
