@@ -1,7 +1,6 @@
 const { client } = require("../ApexStats.js");
 const config = require("../config.json");
 const fetch = require("node-fetch");
-const botID = client.user.id;
 
 // Top.GG API
 const DBL = require("dblapi.js");
@@ -18,6 +17,7 @@ if (config.topGG == "0") {
 }
 
 client.once("ready", () => {
+  const botID = client.user.id;
   console.log(`Logging in as ${client.user.tag}`);
 
   // Discord Extreme List API
