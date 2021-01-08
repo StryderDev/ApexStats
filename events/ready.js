@@ -58,7 +58,7 @@ client.once("ready", () => {
   };
 
   const DBLBody = {
-    guildCount: client.guilds.cache.size,
+    guilds: client.guilds.cache.size,
   };
 
   if (config.DBLToken == "0") {
