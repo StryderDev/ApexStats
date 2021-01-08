@@ -17,19 +17,20 @@ if (config.topGG == "0") {
 }
 
 client.once("ready", () => {
-  const botID = client.user.id;
   console.log(`Logging in as ${client.user.tag}`);
+
+  const botID = client.user.id;
 
   // Discord Extreme List API
   const DELURL = `https://api.discordextremelist.xyz/v2/bot/${botID}/stats`;
 
-  const reqHeaders = {
+  const DELHeaders = {
     "Content-Type": "application/json",
-    "Authorization": config.DELToken,
+    Authorization: config.DELToken,
   };
 
-  const reqBody = {
-    "guildCount": client.guilds.cache.size,
+  const DELBody = {
+    guildCount: client.guilds.cache.size,
   };
 
   if (config.DELToken == "0") {
@@ -37,8 +38,36 @@ client.once("ready", () => {
   } else {
     fetch(DELURL, {
       method: "POST",
-      headers: reqHeaders,
-      body: JSON.stringify(reqBody),
+      headers: DELHeaders,
+      body: JSON.stringify(DELBody),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        console.log(json);
+      });
+  }
+
+  // Discord Bot List API
+  const DBLURL = `https://discordbotlist.com/api/v1/bots/${botID}/stats`;
+
+  const DBLHeaders = {
+    "Content-Type": "application/json",
+    Authorization: config.DBLToken,
+  };
+
+  const DBLBody = {
+    guildCount: client.guilds.cache.size,
+  };
+
+  if (config.DBLToken == "0") {
+    // Don't send data to DEL
+  } else {
+    fetch(DBLURL, {
+      method: "POST",
+      headers: DBLHeaders,
+      body: JSON.stringify(DBLBody),
     })
       .then((res) => {
         return res.json();
