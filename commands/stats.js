@@ -1,7 +1,7 @@
 const { Discord } = require("../ApexStats.js");
 const config = require("../config.json");
 const percentage = require("percentagebar");
-const colours = require("../legendColours.json");
+const colours = require("../GameData/legendColors.json");
 const axios = require("axios");
 
 var { DateTime } = require("luxon");
