@@ -1,5 +1,7 @@
 ![CI/CD to Vultr](https://github.com/SDCore/ApexStats/workflows/CI/CD%20to%20Vultr/badge.svg) ![CodeQL](https://github.com/SDCore/ApexStats/workflows/CodeQL/badge.svg) ![Compress Images](https://github.com/SDCore/Apex-Stats-Bot/workflows/Compress%20Images/badge.svg) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSDCore%2FApex-Stats-Bot.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FSDCore%2FApex-Stats-Bot?ref=badge_shield) ![Discord](https://img.shields.io/discord/664717517666910220?label=Support%20Server)
 
+**WHILE THIS BOT IS OPEN SOURCE, THERE CURRENTLY WILL BE NO SUPPORT FOR SELF-HOSTING THE BOT.**
+
 # Apex Stats Bot
 
 This bot was developed as an easy way to show off user stats for Apex Legends.
