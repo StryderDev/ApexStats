@@ -222,7 +222,7 @@ module.exports = {
                 }
               }
 
-              var currentTimestamp = DateTime.local().toFormat("X") / 2;
+              var currentTimestamp = DateTime.local().toFormat("ooo") / 2;
 
               if (platformUppercase == "PC") {
                 // Use Rexx's API to get global account data

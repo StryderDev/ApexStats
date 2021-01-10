@@ -15,9 +15,7 @@ module.exports = {
           .then((result) => {
             var map = result.data;
             var nextMap = map.next[0];
-            var currentTimestamp = Math.floor(
-              DateTime.local().toFormat("X") / 2
-            );
+            var currentTimestamp = Math.floor(DateTime.local().toFormat("ooo"));
 
             function mapImage(name) {
               var maps = [

@@ -66,7 +66,7 @@ module.exports = {
           );
         }
 
-        var currentTimestamp = Math.floor(DateTime.local().toFormat("X") / 2);
+        var currentTimestamp = Math.floor(DateTime.local().toFormat("ooo") / 2);
 
         const legendEmbed = new Discord.MessageEmbed()
           .setTitle(`${results[0].name} - ${results[0].tagline}`)
