@@ -55,7 +55,13 @@ client.once("ready", () => {
 
           var finalTime = timeTill.toObject();
 
-          return `${finalTime.hours} hour(s), ${finalTime.minutes} minute(s)`;
+          const pluralize = (count, noun, suffix = "s") =>
+            `${count} ${noun}${count !== 1 ? suffix : ""}`;
+
+          return `${pluralize(finalTime.hours, "hour")}, ${pluralize(
+            finalTime.minutes,
+            "minute"
+          )}`;
         }
 
         const mapEmbed = new Discord.MessageEmbed()
