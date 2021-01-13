@@ -176,7 +176,9 @@ client.once("ready", () => {
         )
         .addField(
           "[Crossplay] Apex Login",
-          `${getStatus(OauthCrossplay["EU-East"].Status)}EU East (${
+          `${getStatus(OauthCrossplay["EU-West"].Status)}EU West (${
+            OauthCrossplay["EU-West"].ResponseTime
+          }ms)\n${getStatus(OauthCrossplay["EU-East"].Status)}EU East (${
             OauthCrossplay["EU-East"].ResponseTime
           }ms)\n${getStatus(OauthCrossplay["US-West"].Status)}US West (${
             OauthCrossplay["US-West"].ResponseTime
@@ -195,7 +197,9 @@ client.once("ready", () => {
         )
         .addField(
           "[Steam] Apex Login",
-          `${getStatus(OauthSteam["EU-East"].Status)}EU East (${
+          `${getStatus(OauthSteam["EU-West"].Status)}EU West (${
+            OauthSteam["EU-West"].ResponseTime
+          }ms)\n${getStatus(OauthSteam["EU-East"].Status)}EU East (${
             OauthSteam["EU-East"].ResponseTime
           }ms)\n${getStatus(OauthSteam["US-West"].Status)}US West (${
             OauthSteam["US-West"].ResponseTime
