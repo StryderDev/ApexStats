@@ -47,9 +47,28 @@ client.once("ready", () => {
         var timeTillDate = startDate - currentTime;
 
         function time(milliseconds) {
-          return DateTime.local()
-            .plus({ milliseconds: milliseconds })
-            .toRelative({ style: "long" });
+          var currentDate = DateTime.local();
+          var fixMilliseconds = milliseconds + 6000;
+          var futureDate = DateTime.local().plus({
+            milliseconds: fixMilliseconds,
+          });
+
+          var timeTill = futureDate.diff(currentDate, [
+            "days",
+            "hours",
+            "minutes",
+            "seconds",
+          ]);
+
+          var finalTime = timeTill.toObject();
+
+          const pluralize = (count, noun, suffix = "s") =>
+            `${count} ${noun}${count !== 1 ? suffix : ""}`;
+
+          return `${pluralize(
+            finalTime.days,
+            "day"
+          )}, ${pluralize(finalTime.hours, "hour")}, ${pluralize(finalTime.minutes, "minute")}.`;
         }
 
         function formatDate(date) {
