@@ -58,7 +58,7 @@ module.exports = {
 
         const dropMessage = `Drop in **${dropLocation(
           map.map
-        )}** in ${getMapName(map.map)}.`;
+        )}** on ${getMapName(map.map)}.`;
 
         message.channel.send(dropMessage);
       })
