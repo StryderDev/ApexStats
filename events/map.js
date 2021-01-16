@@ -14,29 +14,45 @@ client.once("ready", () => {
         var currentTimestamp = Math.floor(DateTime.local().toFormat("ooo"));
 
         function mapImage(name) {
-          var maps = [
-            // Current list of in-game maps
-            // "Kings Canyon",
-            "World's Edge",
-            "Olympus",
-          ];
+          var maps = ["Kings Canyon", "World's Edge", "Olympus"];
 
           if (name.includes("Olympus")) {
             var mapName = "Olympus";
           } else if (name.includes("World's")) {
             var mapName = "World's Edge";
+          } else if (name.includes("Kings") || name.includes("King's")) {
+            var mapName = "Kings Canyon";
           } else {
             var mapName = name;
           }
 
           if (maps.indexOf(mapName) != -1) {
             if (mapName == "World's Edge") {
-              return "WorldsEdge";
+              return "Season%207/WorldsEdge";
+            } else if (
+              mapName == "Kings Canyon" ||
+              mapName == "King's Canyon"
+            ) {
+              return "Season%207/KingsCanyon";
+            } else if (mapName == "Olympus") {
+              return "Season%207/Olympus";
             }
 
             return mapName;
           } else {
             return "NoMapData";
+          }
+        }
+
+        function getMapName(name) {
+          if (name.includes("Olympus")) {
+            return (mapName = "Olympus");
+          } else if (name.includes("World's")) {
+            return (mapName = "World's Edge");
+          } else if (name.includes("Kings") || name.includes("King's")) {
+            return (mapName = "Kings Canyon");
+          } else {
+            return (mapName = name);
           }
         }
 
@@ -66,9 +82,9 @@ client.once("ready", () => {
 
         const mapEmbed = new Discord.MessageEmbed()
           .setDescription(
-            `The current map is **${map.map}**.\nThe next map is **${
-              nextMap.map
-            }** in **${time(
+            `The current map is **${getMapName(
+              map.map
+            )}**.\nThe next map is **${nextMap.map}** in **${time(
               map.times.remaining.seconds
             )}** which will last for **${nextMap.duration} minutes**.`
           )
