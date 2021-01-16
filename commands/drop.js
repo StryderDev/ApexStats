@@ -1,29 +1,26 @@
 const axios = require("axios");
 const WorldsEdgeDrops = require("../GameData/MapDrops/WorldsEdge.json");
 const OlympusDrops = require("../GameData/MapDrops/Olympus.json");
+const KingsCanyonDrops = require("../GameData/MapDrops/KingsCanyon.json");
 
 module.exports = {
   name: "drop",
   description: "Picks a random place to drop based on the current in-game map.",
   execute(message) {
     axios
-      .get("https://fn.alphaleagues.com/v1/apex/map/?next=1")
+      .get("https://fn.alphaleagues.com/v1/apex/map/")
       .then((result) => {
         var map = result.data;
-        var nextMap = map.next[0];
 
-        function mapName(name) {
-          var maps = [
-            // Current list of in-game maps
-            // "Kings Canyon",
-            "World's Edge",
-            "Olympus",
-          ];
+        function dropLocation(name) {
+          var maps = ["Kings Canyon", "World's Edge", "Olympus"];
 
           if (name.includes("Olympus")) {
             var mapName = "Olympus";
           } else if (name.includes("World's")) {
             var mapName = "World's Edge";
+          } else if (name.includes("Kings") || name.includes("King's")) {
+            var mapName = "Kings Canyon";
           } else {
             var mapName = name;
           }
@@ -33,17 +30,35 @@ module.exports = {
               return WorldsEdgeDrops[
                 Math.floor(Math.random() * WorldsEdgeDrops.length)
               ];
+            } else if (mapName == "Kings Canyon") {
+              return KingsCanyonDrops[
+                Math.floor(Math.random() * KingsCanyonDrops.length)
+              ];
+            } else if (mapName == "Olympus") {
+              return OlympusDrops[
+                Math.floor(Math.random() * OlympusDrops.length)
+              ];
             }
-
-            return OlympusDrops[
-              Math.floor(Math.random() * OlympusDrops.length)
-            ];
           } else {
             return "NoMapData";
           }
         }
 
-        const dropMessage = `Drop in **${mapName(map.map)}** in ${map.map}.`;
+        function getMapName(name) {
+          if (name.includes("Olympus")) {
+            return (mapName = "Olympus");
+          } else if (name.includes("World's")) {
+            return (mapName = "World's Edge");
+          } else if (name.includes("Kings") || name.includes("King's")) {
+            return (mapName = "Kings Canyon");
+          } else {
+            return (mapName = name);
+          }
+        }
+
+        const dropMessage = `Drop in **${dropLocation(
+          map.map
+        )}** in ${getMapName(map.map)}.`;
 
         message.channel.send(dropMessage);
       })
