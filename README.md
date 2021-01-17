@@ -61,7 +61,7 @@ The bot currently has the following features:
 
 ## Credits
 
-This bot was made possibly by the ApexLegendsStatus API, which can be found here: https://apexlegendsapi.com/ ([GitHub Repo Here](https://github.com/HugoDerave/ApexLegendsAPI)).
+This bot was made possible by the ApexLegendsStatus API, which can be found here: https://apexlegendsapi.com/ ([GitHub Repo Here](https://github.com/HugoDerave/ApexLegendsAPI)).
 
 It uses the [Mozambique API Wrapper by arubinofaux](https://github.com/arubinofaux/mozambique-api-wrapper).
 
