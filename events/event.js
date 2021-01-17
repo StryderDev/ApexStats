@@ -48,7 +48,7 @@ client.once("ready", () => {
 
         function time(milliseconds) {
           var currentDate = DateTime.local();
-          var fixMilliseconds = milliseconds + 6000;
+          var fixMilliseconds = milliseconds + 60000;
           var futureDate = DateTime.local().plus({
             milliseconds: fixMilliseconds,
           });
