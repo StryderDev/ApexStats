@@ -239,38 +239,41 @@ module.exports = {
                     avatar()
                   )
                   .setColor(colours[mozam.legends.selected.LegendName])
-                  .setDescription(
+                  .addField(
+                    "Ranked Placement",
                     `**Rank:** ${rank(mozam.global.rank.rankName)} ${
                       mozam.global.rank.rankName
                     } ${
                       mozam.global.rank.rankDiv
                     }\n**Score:** ${mozam.global.rank.rankScore.toLocaleString(
                       "en-US"
-                    )} `
-                  )
-                  .addField(
-                    `Account Level ${accountLevel()}/500`,
-                    percentage(500, accountLevel(), 10),
+                    )} `,
                     true
                   )
                   .addField(
-                    `S${season} BP Level ${bpLevel()}/110`,
-                    percentage(110, bpLevel(), 10),
+                    `Account and Season ${season} BattlePass Level`,
+                    `**Account Level ${accountLevel()}/500**\n${percentage(
+                      500,
+                      accountLevel(),
+                      10
+                    )}\n**BattlePass Level ${bpLevel()}/110**\n${percentage(
+                      110,
+                      bpLevel(),
+                      10
+                    )}`,
                     true
                   )
-                  .addField("\u200b", "\u200b", true)
-                  .addField("Account Kill, Damage & Win Stats", "\u200b")
+                  .addField("\u200b", "\u200b")
                   .addField(
-                    "Kills",
+                    "Account Kills",
                     `**Total Kills:** ${totalKills}\n**Total Matches:** ${totalMatches}\n**Kills per Match:** ${KPM}`,
                     true
                   )
                   .addField(
-                    "Wins/Damage",
+                    "Account Wins/Damage",
                     `**Total Wins:** ${totalWins}\n**Win Rate**: ${winRatio}%\n**Damage Dealt:** ${damageDealt}`,
                     true
                   )
-                  .addField("\u200b", "\u200b", true)
                   .addField("Currently Equipped Trackers", "\u200b")
                   .addField(
                     `${getFieldTitle(mozam.legends.selected.data[0])}`,
@@ -304,23 +307,28 @@ module.exports = {
                     avatar()
                   )
                   .setColor(colours[mozam.legends.selected.LegendName])
-                  .setDescription(
+                  .addField(
+                    "Ranked Placement",
                     `**Rank:** ${rank(mozam.global.rank.rankName)} ${
                       mozam.global.rank.rankName
                     } ${
                       mozam.global.rank.rankDiv
                     }\n**Score:** ${mozam.global.rank.rankScore.toLocaleString(
                       "en-US"
-                    )} `
-                  )
-                  .addField(
-                    `Account Level ${accountLevel()}/500`,
-                    percentage(500, accountLevel(), 10),
+                    )} `,
                     true
                   )
                   .addField(
-                    `S${season} BP Level ${bpLevel()}/110`,
-                    percentage(110, bpLevel(), 10),
+                    `Account and Season ${season} BattlePass Level`,
+                    `**Account Level ${accountLevel()}/500**\n${percentage(
+                      500,
+                      accountLevel(),
+                      10
+                    )}\n**BattlePass Level ${bpLevel()}/110**\n${percentage(
+                      110,
+                      bpLevel(),
+                      10
+                    )}`,
                     true
                   )
                   .addField("Currently Equipped Trackers", "\u200b")
