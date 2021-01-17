@@ -16,7 +16,7 @@ The bot currently has the following features:
   - `>>news`
 - Apex Legends Server Status
   - `>>status`
-- Legend Biographies and Information
+- Legend Bios and Information
   - `>>legend [legend name]`
     - Replace [legend name] with the name of a legend currently in the game
 - Current in-game map rotations
@@ -61,7 +61,7 @@ The bot currently has the following features:
 
 ## Credits
 
-This bot was made possible by the ApexLegendsStatus API, which can be found here: https://apexlegendsapi.com/ ([GitHub Repo Here](https://github.com/HugoDerave/ApexLegendsAPI)).
+This bot was made possible by the ([ApexLegendsAPI](https://apexlegendsapi.com)).
 
 It uses the [Mozambique API Wrapper by arubinofaux](https://github.com/arubinofaux/mozambique-api-wrapper).
 
@@ -71,8 +71,4 @@ Lots of help with some more obscure data from Rexx <3
 
 If you find an error or need help with something else, [join the support server](https://discord.gg/eH8VxssFW6)!
 
-You can find the somewhat-but-not-really frequently update trello [here](https://trello.com/b/PGSmA4op/apex-legends-discord-stats-bot).
-
-## License
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSDCore%2FApex-Stats-Bot.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FSDCore%2FApex-Stats-Bot?ref=badge_large)
+You can find the somewhat-but-not-really frequently update Trello [here](https://trello.com/b/PGSmA4op/apex-legends-discord-stats-bot).
