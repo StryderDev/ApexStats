@@ -61,7 +61,7 @@ The bot currently has the following features:
 
 ## Credits
 
-This bot was made possible by the ([ApexLegendsAPI](https://apexlegendsapi.com)).
+This bot was made possible by the [ApexLegendsAPI](https://apexlegendsapi.com).
 
 It uses the [Mozambique API Wrapper by arubinofaux](https://github.com/arubinofaux/mozambique-api-wrapper).
 
