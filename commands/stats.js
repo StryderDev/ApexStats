@@ -360,10 +360,10 @@ module.exports = {
             })
           )
           .catch((errors) => {
+            console.log(`Error: ${errors}`);
             message.channel.send(
-              "There was an error processing stats. Please try again or join the support server for help."
+              "That player doesn't exist or we cannot connect to the API. Please try again later."
             );
-            console.log(errors);
           });
       });
     } else {
