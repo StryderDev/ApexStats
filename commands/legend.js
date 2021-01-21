@@ -38,6 +38,7 @@ module.exports = {
       "Revenant",
       "Wattson",
       "Wraith",
+      "Fuse",
     ];
 
     if (legends.indexOf(legend) == -1)
@@ -66,7 +67,7 @@ module.exports = {
           );
         }
 
-        var currentTimestamp = Math.floor(DateTime.local().toFormat("ooo") / 2);
+        var currentTimestamp = Math.floor(DateTime.local().toFormat("ooo") * 2);
 
         const legendEmbed = new Discord.MessageEmbed()
           .setTitle(`${results[0].name} - ${results[0].tagline}`)
