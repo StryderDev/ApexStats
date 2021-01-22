@@ -1,7 +1,7 @@
 const { Discord } = require("../ApexStats.js");
 const axios = require("axios");
 
-var { DateTime, IANAZone } = require("luxon");
+var { DateTime } = require("luxon");
 
 module.exports = {
   name: "map",

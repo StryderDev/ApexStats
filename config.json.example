@@ -11,7 +11,8 @@
     "password": "MySQL Password",
     "database": "MySQL Database",
     "legendTable": "Legends Table",
-    "eventTable": "Events Table"
+    "eventTable": "Events Table",
+    "seasonTable": "Season Table"
   },
   "autoUpdate": {
     "guildID": "Guild ID",
