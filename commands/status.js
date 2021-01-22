@@ -101,29 +101,6 @@ module.exports = {
             }ms)`,
             true
           )
-          .addField(
-            "EA Accounts",
-            `${getStatus(accountsResult["EU-West"].Status)}EU West (${
-              accountsResult["EU-West"].ResponseTime
-            }ms)\n${getStatus(accountsResult["EU-East"].Status)}EU East (${
-              accountsResult["EU-East"].ResponseTime
-            }ms)\n${getStatus(accountsResult["US-West"].Status)}US West (${
-              accountsResult["US-West"].ResponseTime
-            }ms)\n${getStatus(
-              accountsResult["US-Central"].Status
-            )}US Central (${
-              accountsResult["US-Central"].ResponseTime
-            }ms)\n${getStatus(accountsResult["US-East"].Status)}US East (${
-              accountsResult["US-East"].ResponseTime
-            }ms)\n${getStatus(
-              accountsResult["SouthAmerica"].Status
-            )}South America (${
-              accountsResult["SouthAmerica"].ResponseTime
-            }ms)\n${getStatus(accountsResult["Asia"].Status)}Asia (${
-              accountsResult["Asia"].ResponseTime
-            }ms)`,
-            true
-          )
           /* .addField(
             "[PC] Apex Login",
             `${getStatus(OauthPC["EU-West"].Status)}EU West (${
