@@ -108,8 +108,9 @@ module.exports = {
               "day"
             )}`
           )
-          .addField("Featured Map", `${result.map}`, true)
-          .addField("Legend Debut", `${result.legend}`, true);
+          .addField("Featured Map", result.map, true)
+          .addField("Legend Debut", result.legend, true)
+          .addField("Weapon Debut", result.weapon, true);
 
         connection.release();
         return message.channel.send(seasonEmbed);
