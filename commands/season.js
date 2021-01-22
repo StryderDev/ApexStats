@@ -67,7 +67,7 @@ module.exports = {
         }
 
         var result = results[0];
-        var currentTimestamp = Math.floor(DateTime.local().toFormat("ooo"));
+        var currentTimestamp = DateTime.local().toFormat("ooo");
         var startDate = DateTime.fromISO(result.startDate);
         var startFormat = DateTime.fromISO(startDate).toFormat(
           "cccc, LLLL d, y"
@@ -87,6 +87,21 @@ module.exports = {
 
         const pluralize = (count, noun, suffix = "s") =>
           `${count} ${noun}${count !== 1 ? suffix : ""}`;
+
+        function isWhiteSpace(text) {
+          return " \t\n".includes(text);
+        }
+
+        function isPunct(text) {
+          return ";:.,?!-'\"(){}".includes(text);
+        }
+
+        function compress(string) {
+          return string
+            .split("")
+            .filter((char) => !isWhiteSpace(char) && !isPunct(char))
+            .join("");
+        }
 
         const seasonEmbed = new Discord.MessageEmbed()
           .setAuthor(
@@ -110,7 +125,12 @@ module.exports = {
           )
           .addField("Featured Map", result.map, true)
           .addField("Legend Debut", result.legend, true)
-          .addField("Weapon Debut", result.weapon, true);
+          .addField("Weapon Debut", result.weapon, true)
+          .setImage(
+            `https://sdcore.dev/cdn/ApexStats/Maps/SeasonList/${compress(
+              result.map
+            )}.png?q=${currentTimestamp}`
+          );
 
         connection.release();
         return message.channel.send(seasonEmbed);
