@@ -1,17 +1,31 @@
 const { Discord } = require("../ApexStats.js");
 const axios = require("axios");
 
-var { DateTime } = require("luxon");
+var { DateTime, IANAZone } = require("luxon");
 
 module.exports = {
   name: "map",
   description: "Shows the current and next in-game map in rotation.",
-  execute(message) {
+  execute(message, args) {
+    if (!args) {
+      var mapURL = "https://fn.alphaleagues.com/v1/apex/map/?next=1";
+    } else {
+      if (isNaN(args[0])) {
+        var mapURL = "https://fn.alphaleagues.com/v1/apex/map/?next=1";
+      } else if (args[0] >= 10) {
+        var mapURL = "https://fn.alphaleagues.com/v1/apex/map/?next=10";
+      } else if (args[0] <= 1) {
+        var mapURL = "https://fn.alphaleagues.com/v1/apex/map/?next=1";
+      } else {
+        var mapURL = `https://fn.alphaleagues.com/v1/apex/map/?next=${args[0]}`;
+      }
+    }
+
     message.channel
       .send("Getting current in-game map rotation schedule...")
       .then(async (msg) => {
         axios
-          .get("https://fn.alphaleagues.com/v1/apex/map/?next=1")
+          .get(mapURL)
           .then((result) => {
             var map = result.data;
             var nextMap = map.next[0];
