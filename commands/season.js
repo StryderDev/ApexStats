@@ -130,6 +130,10 @@ module.exports = {
             `https://sdcore.dev/cdn/ApexStats/Maps/SeasonList/${compress(
               result.map
             )}.png?q=${currentTimestamp}`
+          )
+          .addField(
+            "Season Trailers",
+            `${result.SFTO}\n${result.launchTrailer}\n${result.gameplayTrailer}\n${result.characterTrailer}\n${result.battlepassTrailer}`
           );
 
         connection.release();
