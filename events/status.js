@@ -117,7 +117,7 @@ client.once("ready", () => {
           }ms)`,
           true
         )
-        .addField(
+        /* .addField(
           "[PC] Apex Login",
           `${getStatus(OauthPC["EU-West"].Status)}EU West (${
             OauthPC["EU-West"].ResponseTime
@@ -173,7 +173,7 @@ client.once("ready", () => {
             OauthX1["Asia"].ResponseTime
           }ms)`,
           true
-        )
+        ) */
         .addField(
           "[Crossplay] Apex Login",
           `${getStatus(OauthCrossplay["EU-West"].Status)}EU West (${
