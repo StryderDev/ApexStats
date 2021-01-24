@@ -1,1 +1,25 @@
-{}
+{
+  "kills": "Kills",
+  "winning_kills": "Winning Kills",
+  "damage": "Damage Done",
+  "headshots": "Headshots",
+  "finishers": "Finishers",
+  "wins_with_full_squad": "Wins w/ Full Squad",
+  "1845361959": "Shotgun Kills",
+  "1520641962": "Care Package Weapon Kills",
+  "1352253203": "Voice Warnings Heard",
+  "1151119455": "Into the Void Time",
+  "281170868": "Squadmates Phased",
+  "1286524970": "Season 1 Wins",
+  "53192724": "Season 1 Kills",
+  "1676982795": "Season 1 Damage Done",
+  "2023347527": "Season 2 Wins",
+  "508273158": "Season 3 Wins",
+  "season_4_wins": "Season 4 Wins",
+  "1220667776": "Season 5 Wins",
+  "818555734": "Season 5 Kills",
+  "443123954": "Season 6 Wins",
+  "1531146180": "Season 6 Kills",
+  "394877014": "Season 7 Wins",
+  "867941940": "Season 7 Kills"
+}
