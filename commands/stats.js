@@ -191,21 +191,18 @@ module.exports = {
                 }
               }
 
-              function getFieldTitle(fieldData) {
-                if (fieldData != null) {
-                  if (
-                    fieldData.name == "Grand Soiree kills" ||
-                    fieldData.name == "Grand Soiree wins" ||
-                    fieldData.name == "Grand Soiree damage"
-                  ) {
-                    return checkBanner(
-                      fieldData.name,
-                      mozam.legends.selected.LegendName
-                    );
+              function getFieldTitle(fieldData, legend) {
+                if (fieldData != null && fieldData != "empty_tracker") {
+                  if (platformUppercase == "PC") {
+                    var trackerFile = require(`../GameData/TrackerData/${legend}.json`);
+                    return trackerFile[fieldData];
                   } else {
                     return fieldData.name;
                   }
-                } else if (fieldData == "undefined") {
+                } else if (
+                  fieldData == "undefined" ||
+                  fieldData == "empty_tracker"
+                ) {
                   return "No data";
                 } else {
                   return "No data";
@@ -213,7 +210,11 @@ module.exports = {
               }
 
               function getFieldValue(fieldData) {
-                if (fieldData != null && fieldData != "undefined") {
+                if (
+                  fieldData != null &&
+                  fieldData != "undefined" &&
+                  fieldData.tracker != "empty_tracker"
+                ) {
                   return fieldData.value.toLocaleString("en-US");
                 } else if (fieldData == "undefined") {
                   return "-";
@@ -232,6 +233,15 @@ module.exports = {
                 var totalWins = addCommas(rexx.player.stats.wins.total);
                 var winRatio = addCommas(rexx.player.stats.wins["win%"]);
                 var damageDealt = addCommas(rexx.player.stats.damage.dealt);
+
+                var activeLegend = rexx.player.stats.activeLegend.name;
+
+                var trackerOne =
+                  rexx.player.stats.activeLegend.banner.trackers[0];
+                var trackerTwo =
+                  rexx.player.stats.activeLegend.banner.trackers[1];
+                var trackerThree =
+                  rexx.player.stats.activeLegend.banner.trackers[2];
 
                 const statsEmbed = new Discord.MessageEmbed()
                   .setAuthor(
@@ -276,18 +286,18 @@ module.exports = {
                   )
                   .addField("Currently Equipped Trackers", "\u200b")
                   .addField(
-                    `${getFieldTitle(mozam.legends.selected.data[0])}`,
-                    `${getFieldValue(mozam.legends.selected.data[0])}`,
+                    `${getFieldTitle(trackerOne.tracker, activeLegend)}`,
+                    `${getFieldValue(trackerOne)}`,
                     true
                   )
                   .addField(
-                    `${getFieldTitle(mozam.legends.selected.data[1])}`,
-                    `${getFieldValue(mozam.legends.selected.data[1])}`,
+                    `${getFieldTitle(trackerTwo.tracker, activeLegend)}`,
+                    `${getFieldValue(trackerTwo)}`,
                     true
                   )
                   .addField(
-                    `${getFieldTitle(mozam.legends.selected.data[2])}`,
-                    `${getFieldValue(mozam.legends.selected.data[2])}`,
+                    `${getFieldTitle(trackerThree.tracker, activeLegend)}`,
+                    `${getFieldValue(trackerThree)}`,
                     true
                   )
                   .setImage(
