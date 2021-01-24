@@ -163,34 +163,6 @@ module.exports = {
                 }
               }
 
-              function checkBanner(type, legend) {
-                var legends = [
-                  "Bloodhound",
-                  "Gibraltar",
-                  "Lifeline",
-                  "Loba",
-                  "Mirage",
-                  "Octane",
-                  "Pathfinder",
-                  "Rampart",
-                  "Revenant",
-                ];
-
-                function getType(type) {
-                  if (type == "Grand Soiree kills") {
-                    return "Kills";
-                  } else if (type == "Grand Soiree wins") {
-                    return "Wins";
-                  } else if (type == "Grand Soiree damage") {
-                    return "Damage";
-                  }
-                }
-
-                if (legends.indexOf(legend) != -1) {
-                  return `${getType(type)} as ${legend}`;
-                }
-              }
-
               function getFieldTitle(fieldData, legend) {
                 if (fieldData != null && fieldData != "empty_tracker") {
                   if (platformUppercase == "PC") {
