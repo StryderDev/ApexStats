@@ -164,16 +164,21 @@ module.exports = {
               }
 
               function getFieldTitle(fieldData, legend) {
-                if (fieldData != null && fieldData != "empty_tracker") {
+                if (fieldData != null && fieldData != "MTkwNTczNTkzMQ==") {
                   if (platformUppercase == "PC") {
                     var trackerFile = require(`../GameData/TrackerData/${legend}.json`);
-                    return trackerFile[fieldData];
+
+                    if (trackerFile[fieldData] == null) {
+                      return fieldData;
+                    } else {
+                      return trackerFile[fieldData];
+                    }
                   } else {
                     return fieldData.name;
                   }
                 } else if (
                   fieldData == "undefined" ||
-                  fieldData == "empty_tracker"
+                  fieldData == "MTkwNTczNTkzMQ=="
                 ) {
                   return "No data";
                 } else {
@@ -185,7 +190,7 @@ module.exports = {
                 if (
                   fieldData != null &&
                   fieldData != "undefined" &&
-                  fieldData.tracker != "empty_tracker"
+                  fieldData.id != "MTkwNTczNTkzMQ=="
                 ) {
                   return fieldData.value.toLocaleString("en-US");
                 } else if (fieldData == "undefined") {
@@ -258,17 +263,17 @@ module.exports = {
                   )
                   .addField("Currently Equipped Trackers", "\u200b")
                   .addField(
-                    `${getFieldTitle(trackerOne.tracker, activeLegend)}`,
+                    `${getFieldTitle(trackerOne.id, activeLegend)}`,
                     `${getFieldValue(trackerOne)}`,
                     true
                   )
                   .addField(
-                    `${getFieldTitle(trackerTwo.tracker, activeLegend)}`,
+                    `${getFieldTitle(trackerTwo.id, activeLegend)}`,
                     `${getFieldValue(trackerTwo)}`,
                     true
                   )
                   .addField(
-                    `${getFieldTitle(trackerThree.tracker, activeLegend)}`,
+                    `${getFieldTitle(trackerThree.id, activeLegend)}`,
                     `${getFieldValue(trackerThree)}`,
                     true
                   )
