@@ -1,6 +1,6 @@
 ![CI/CD to Vultr](https://github.com/SDCore/ApexStats/workflows/CI/CD%20to%20Vultr/badge.svg) ![Discord](https://img.shields.io/discord/664717517666910220?label=Support%20Server)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 **WHILE THIS BOT IS OPEN SOURCE, THERE CURRENTLY WILL BE NO SUPPORT FOR SELF-HOSTING THE BOT.**
@@ -86,6 +86,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://sdcore.github.io"><img src="https://avatars.githubusercontent.com/u/5140203?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michael Voell</b></sub></a><br /><a href="https://github.com/SDCore/Apex-Stats-Bot/commits?author=SDCore" title="Code">💻</a> <a href="#data-SDCore" title="Data">🔣</a> <a href="#design-SDCore" title="Design">🎨</a></td>
+    <td align="center"><a href="http://stats.alphaleagues.com"><img src="https://avatars.githubusercontent.com/u/67599507?v=4?s=100" width="100px;" alt=""/><br /><sub><b>r-ex</b></sub></a><br /><a href="#data-r-ex" title="Data">🔣</a></td>
   </tr>
 </table>
 
