@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "SDCore",
+      "name": "Michael Voell",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5140203?v=4",
+      "profile": "https://sdcore.github.io",
+      "contributions": [
+        "code",
+        "data",
+        "design"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Apex-Stats-Bot",
+  "projectOwner": "SDCore",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
