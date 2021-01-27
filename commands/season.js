@@ -110,7 +110,7 @@ module.exports = {
             result.link
           )
           .setThumbnail(
-            `https://sdcore.dev/cdn/ApexStats/SeasonIcons/Season_${result.id}.png?q=${currentTimestamp}`
+            `https://apexstats.dev/ApexStats/SeasonIcons/Season_${result.id}.png?q=${currentTimestamp}`
           )
           .setDescription(result.description)
           .addField(
@@ -127,7 +127,7 @@ module.exports = {
           .addField("Legend Debut", result.legend, true)
           .addField("Weapon Debut", result.weapon, true)
           .setImage(
-            `https://sdcore.dev/cdn/ApexStats/Maps/SeasonList/${compress(
+            `https://apexstats.dev/ApexStats/Maps/SeasonList/${compress(
               result.map
             )}.png?q=${currentTimestamp}`
           )

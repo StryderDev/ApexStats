@@ -111,7 +111,7 @@ module.exports = {
               realDateMath
             )}**`
           )
-          .setImage(`https://sdcore.dev/cdn/ApexStats/Events/${event.imageURL}`)
+          .setImage(`https://apexstats.dev/ApexStats/Events/${event.imageURL}`)
           .setTimestamp();
 
         const noEventEmbed = new Discord.MessageEmbed()
@@ -119,7 +119,7 @@ module.exports = {
           .setDescription(
             "There is no currently active event. Check back another time!"
           )
-          .setImage("https://sdcore.dev/cdn/ApexStats/Events/NoEvent.png")
+          .setImage("https://apexstats.dev/ApexStats/Events/NoEvent.png")
           .setTimestamp();
 
         const preEventEmbed = new Discord.MessageEmbed()
@@ -151,7 +151,7 @@ module.exports = {
               timeTillDate
             )}**.`
           )
-          .setImage(`https://sdcore.dev/cdn/ApexStats/Events/${event.imageURL}`)
+          .setImage(`https://apexstats.dev/ApexStats/Events/${event.imageURL}`)
           .setTimestamp();
 
         if (timeTillDate >= 0) {

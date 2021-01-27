@@ -106,7 +106,7 @@ module.exports = {
                 )}** which will last for **${nextMap.duration} minutes**.`
               )
               .setImage(
-                `https://sdcore.dev/cdn/ApexStats/Maps/${mapImage(
+                `https://apexstats.dev/ApexStats/Maps/${mapImage(
                   map.map
                 )}.png?q=${currentTimestamp}`
               );

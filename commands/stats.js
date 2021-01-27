@@ -117,7 +117,7 @@ module.exports = {
                 if (mozam.global.avatar != "Not available") {
                   return mozam.global.avatar;
                 } else {
-                  return "https://sdcore.dev/cdn/ApexStats/Icon.png";
+                  return "https://apexstats.dev/ApexStats/Icon.png";
                 }
               }
 
@@ -278,7 +278,7 @@ module.exports = {
                     true
                   )
                   .setImage(
-                    `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legendBanner(
+                    `https://apexstats.dev/ApexStats/LegendBanners/${legendBanner(
                       mozam.legends.selected.LegendName
                     )}.png?q=${currentTimestamp}`
                   )
@@ -335,7 +335,7 @@ module.exports = {
                     true
                   )
                   .setImage(
-                    `https://sdcore.dev/cdn/ApexStats/LegendBanners/${legendBanner(
+                    `https://apexstats.dev/ApexStats/LegendBanners/${legendBanner(
                       mozam.legends.selected.LegendName
                     )}.png?q=${currentTimestamp}`
                   )
