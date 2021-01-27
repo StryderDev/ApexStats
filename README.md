@@ -1,4 +1,7 @@
 ![CI/CD to Vultr](https://github.com/SDCore/ApexStats/workflows/CI/CD%20to%20Vultr/badge.svg) ![Discord](https://img.shields.io/discord/664717517666910220?label=Support%20Server)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 **WHILE THIS BOT IS OPEN SOURCE, THERE CURRENTLY WILL BE NO SUPPORT FOR SELF-HOSTING THE BOT.**
 
@@ -72,3 +75,23 @@ Lots of help with some more obscure data from Rexx <3
 If you find an error or need help with something else, [join the support server](https://discord.gg/eH8VxssFW6)!
 
 You can find the somewhat-but-not-really frequently update Trello [here](https://trello.com/b/PGSmA4op/apex-legends-discord-stats-bot).
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://sdcore.github.io"><img src="https://avatars.githubusercontent.com/u/5140203?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michael Voell</b></sub></a><br /><a href="https://github.com/SDCore/Apex-Stats-Bot/commits?author=SDCore" title="Code">💻</a> <a href="#data-SDCore" title="Data">🔣</a> <a href="#design-SDCore" title="Design">🎨</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
