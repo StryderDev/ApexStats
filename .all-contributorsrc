@@ -15,6 +15,15 @@
         "data",
         "design"
       ]
+    },
+    {
+      "login": "r-ex",
+      "name": "r-ex",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67599507?v=4",
+      "profile": "http://stats.alphaleagues.com",
+      "contributions": [
+        "data"
+      ]
     }
   ],
   "contributorsPerLine": 7,
