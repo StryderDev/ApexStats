@@ -34,7 +34,6 @@ client.once("ready", () => {
 
       const statusEmbed = new Discord.MessageEmbed()
         .setTitle("Apex Legends Server Status")
-        .setColor("C21D27")
         .addField(
           "Origin Login",
           `${getStatus(originResult["EU-West"].Status)}EU West (${

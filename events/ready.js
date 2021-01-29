@@ -1,6 +1,7 @@
 const { client } = require("../ApexStats.js");
 const config = require("../config.json");
 const fetch = require("node-fetch");
+const axios = require("axios");
 
 // Top.GG API
 const DBL = require("dblapi.js");
@@ -78,15 +79,34 @@ client.once("ready", () => {
   }
 
   function setPresence() {
-    client.user
-      .setPresence({
-        activity: {
-          name: `${config.prefix}commands | Providing stats for ${client.guilds.cache.size} servers`,
-          type: "WATCHING",
-        },
-        status: "online",
+    axios
+      .get("https://fn.alphaleagues.com/v1/apex/map/?next=1")
+      .then((result) => {
+        var map = result.data;
+
+        client.user
+          .setPresence({
+            activity: {
+              name: ` on ${map.map} · ${config.prefix}commands · Providing stats for ${client.guilds.cache.size} servers`,
+              type: "PLAYING",
+            },
+            status: "online",
+          })
+          .catch(console.error);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.log(err);
+
+        client.user
+          .setPresence({
+            activity: {
+              name: `${config.prefix}commands · Providing stats for ${client.guilds.cache.size} servers`,
+              type: "WATCHING",
+            },
+            status: "online",
+          })
+          .catch(console.error);
+      });
   }
 
   // Set intitial bot presence on load, otherwise presence
