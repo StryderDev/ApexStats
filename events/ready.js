@@ -118,14 +118,17 @@ client.once("ready", () => {
     }`
   );
 
-  // Update the bot presence every 30 minutes to update
-  // the amount of servers the bot is in
+  // Update the bot presence every 5 minutes to update
+  // the amount of servers the bot is in and to update
+  // the current map in rotation
   setInterval(function () {
-    setPresence();
-    console.log(
-      `[${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${
-        client.user.tag
-      }`
-    );
+    if (date.getMinutes() % 5 == 0) {
+      setPresence();
+      console.log(
+        `[${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${
+          client.user.tag
+        }`
+      );
+    }
   }, Math.max(1, 30 || 1) * 60 * 1000);
 });
