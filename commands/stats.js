@@ -89,8 +89,8 @@ module.exports = {
               const mozam = responses[0].data;
               const rexx = responses[1].data;
 
-              var seasonBP = mozam.global.battlepass.history.season7;
-              var season = "7";
+              var seasonBP = mozam.global.battlepass.history.season8;
+              var season = "8";
 
               function legendBanner(legend) {
                 var legends = [
