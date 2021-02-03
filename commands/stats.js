@@ -63,33 +63,28 @@ module.exports = {
     ];
 
     if (plats.indexOf(platformCheck) != -1) {
-      var mozam = axios.get(
-        `https://api.mozambiquehe.re/bridge?version=4&platform=${platformCheck}&player=${player}&auth=${config.MozambiqueAPI}`
-      );
-
-      function getRexx() {
-        if (platformCheck == "PC") {
-          return player;
-        } else {
-          return "SDCore";
-        }
+      if (platformCheck == "PC") {
+        var rexx = axios.get(
+          `https://fn.alphaleagues.com/v1/apex/stats/?username=${player}&platform=pc&auth=${config.ApexAPI}`
+        );
+      } else {
+        var mozam = axios.get(
+          `https://api.mozambiquehe.re/bridge?version=4&platform=${platformCheck}&player=${player}&auth=${config.MozambiqueAPI}`
+        );
       }
-
-      var rexx = axios.get(
-        `https://fn.alphaleagues.com/v1/apex/stats/?username=${getRexx()}&platform=pc&auth=${
-          config.ApexAPI
-        }`
-      );
 
       message.channel.send("Retrieving stats...").then(async (msg) => {
         axios
           .all([mozam, rexx])
           .then(
             axios.spread((...responses) => {
-              const mozam = responses[0].data;
-              const rexx = responses[1].data;
+              if (platformCheck == "PC") {
+                var rexx = responses[1].data;
+              } else {
+                var mozam = responses[0].data;
+              }
 
-              var seasonBP = mozam.global.battlepass.history.season8;
+              var seasonBP = 0;
               var season = "8";
 
               function legendBanner(legend) {
@@ -111,15 +106,15 @@ module.exports = {
                   "Wattson",
                   "Wraith",
                   "Fuse",
-                  "405279270", // Temporary tracker for Fuse
+                  405279270, // Temporary tracker for Fuse
                   99999999, // Temp new character CData value until it gets updated on the API
                 ];
 
-                var tempLegend = 99999999;
+                var tempLegend = 405279270;
 
                 if (legends.indexOf(legend) != -1) {
                   if (legend == tempLegend) {
-                    return "NoBanner";
+                    return "Fuse";
                   } else {
                     return legend;
                   }
@@ -129,22 +124,24 @@ module.exports = {
               }
 
               function avatar() {
-                if (mozam.global.avatar != "Not available") {
-                  return mozam.global.avatar;
-                } else {
-                  return "https://apexstats.dev/ApexStats/Icon.png";
-                }
+                //if (mozam.global.avatar != "Not available") {
+                //  return mozam.global.avatar;
+                //} else {
+                //  return "https://apexstats.dev/ApexStats/Icon.png";
+                // }
+
+                return "https://apexstats.dev/ApexStats/Icon.png";
               }
 
-              function accountLevel() {
-                if (mozam.global.level >= 500) {
+              function accountLevel(level) {
+                if (level >= 500) {
                   return 500;
                 } else {
-                  return mozam.global.level;
+                  return level;
                 }
               }
 
-              function bpLevel() {
+              function bpLevel(BP) {
                 if (seasonBP != -1) {
                   if (seasonBP >= 110) {
                     return 110;
@@ -211,9 +208,9 @@ module.exports = {
                 }
               }
 
-              var currentTimestamp = DateTime.local().toFormat("ooo") / 2;
+              var currentTimestamp = DateTime.local().toFormat("ooo") * 2;
 
-              if (platformUppercase == "PC") {
+              if (platformCheck == "PC") {
                 // Use Rexx's API to get global account data
                 var totalKills = addCommas(rexx.player.stats.kills);
                 var totalMatches = addCommas(rexx.player.stats.matches);
@@ -233,26 +230,32 @@ module.exports = {
 
                 const statsEmbed = new Discord.MessageEmbed()
                   .setAuthor(
-                    `Apex Legends Stats for ${mozam.global.name} on ${platformUppercase} playing ${mozam.legends.selected.LegendName}`,
+                    `Apex Legends Stats for ${
+                      rexx.player.name
+                    } on ${platformUppercase} playing ${legendBanner(
+                      rexx.player.stats.activeLegend.name
+                    )}`,
                     avatar()
                   )
-                  .setColor(colours[mozam.legends.selected.LegendName])
+                  .setColor(colours[rexx.player.stats.activeLegend.name])
                   .addField(
                     "Ranked Placement",
-                    `**Rank:** ${rank(mozam.global.rank.rankName)} ${
-                      mozam.global.rank.rankName
+                    `**Rank:** ${rank(rexx.player.level.rank)} ${
+                      rexx.player.level.rank
                     } ${
-                      mozam.global.rank.rankDiv
-                    }\n**Score:** ${mozam.global.rank.rankScore.toLocaleString(
+                      rexx.player.level.rankPosition
+                    }\n**Score:** ${rexx.player.level.rankedRP.toLocaleString(
                       "en-US"
                     )} `,
                     true
                   )
                   .addField(
                     `Account and Season ${season} BattlePass Level`,
-                    `**Account Level ${accountLevel()}/500**\n${percentage(
+                    `**Account Level ${accountLevel(
+                      rexx.player.level.level
+                    )}/500**\n${percentage(
                       500,
-                      accountLevel(),
+                      accountLevel(rexx.player.level.level),
                       10
                     )}\n**BattlePass Level ${bpLevel()}/110**\n${percentage(
                       110,
@@ -290,7 +293,7 @@ module.exports = {
                   )
                   .setImage(
                     `https://apexstats.dev/ApexStats/LegendBanners/${legendBanner(
-                      mozam.legends.selected.LegendName
+                      rexx.player.stats.activeLegend.name
                     )}.png?q=${currentTimestamp}`
                   )
                   .setFooter(
