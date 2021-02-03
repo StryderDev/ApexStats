@@ -168,10 +168,6 @@ module.exports = {
                 } else if (name == "Master") {
                   return "<:rankedMaster:787174770680135680>";
                 } else if (name == "Predator" || name == "Apex Predator") {
-                  // I, for the life of me, cannot find a single person who
-                  // is Apex Predator this season. At this point I'm pretty
-                  // convinced the API only returns Masters people. Guess we'll
-                  // find out when I dig more into it... sometime.
                   return "<:rankedPredator:787174770730336286>";
                 } else {
                   return "<:rankedBronze:787174769623302204>";
