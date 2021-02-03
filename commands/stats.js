@@ -67,6 +67,9 @@ module.exports = {
         var rexx = axios.get(
           `https://fn.alphaleagues.com/v1/apex/stats/?username=${player}&platform=pc&auth=${config.ApexAPI}`
         );
+        var mozam = axios.get(
+          `https://api.mozambiquehe.re/bridge?version=4&platform=${platformCheck}&player=${player}&auth=${config.MozambiqueAPI}`
+        );
       } else {
         var mozam = axios.get(
           `https://api.mozambiquehe.re/bridge?version=4&platform=${platformCheck}&player=${player}&auth=${config.MozambiqueAPI}`
@@ -80,11 +83,12 @@ module.exports = {
             axios.spread((...responses) => {
               if (platformCheck == "PC") {
                 var rexx = responses[1].data;
+                var mozam = responses[0].data;
               } else {
                 var mozam = responses[0].data;
               }
 
-              var seasonBP = 0;
+              var seasonBP = mozam.global.battlepass.history.season8;
               var season = "8";
 
               function legendBanner(legend) {
@@ -306,7 +310,11 @@ module.exports = {
                 // Only show data from main API
                 const statsEmbed = new Discord.MessageEmbed()
                   .setAuthor(
-                    `Apex Legends Stats for ${mozam.global.name} on ${platformUppercase} playing ${mozam.legends.selected.LegendName}`,
+                    `Apex Legends Stats for ${
+                      mozam.global.name
+                    } on ${platformUppercase} playing ${legendBanner(
+                      mozam.legends.selected.LegendName
+                    )}`,
                     avatar()
                   )
                   .setColor(colours[mozam.legends.selected.LegendName])
@@ -323,9 +331,11 @@ module.exports = {
                   )
                   .addField(
                     `Account and Season ${season} BattlePass Level`,
-                    `**Account Level ${accountLevel()}/500**\n${percentage(
+                    `**Account Level ${accountLevel(
+                      mozam.global.level
+                    )}/500**\n${percentage(
                       500,
-                      accountLevel(),
+                      accountLevel(mozam.global.level),
                       10
                     )}\n**BattlePass Level ${bpLevel()}/110**\n${percentage(
                       110,
