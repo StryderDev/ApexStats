@@ -93,6 +93,7 @@ client.once("ready", () => {
               map.map
             )}.png?q=${currentTimestamp}`
           )
+          .setFooter("Provided by https://rexx.live")
           .setTimestamp();
 
         const guild = client.guilds.cache.get(config.autoUpdate.guildID);

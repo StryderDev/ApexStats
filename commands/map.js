@@ -109,7 +109,8 @@ module.exports = {
                 `https://apexstats.dev/ApexStats/Maps/${mapImage(
                   map.map
                 )}.png?q=${currentTimestamp}`
-              );
+              )
+              .setFooter("Provided by https://rexx.live");
 
             msg.delete();
             msg.channel.send(mapEmbed);
