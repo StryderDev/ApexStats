@@ -43,7 +43,11 @@ module.exports = {
     if (platform && player) var platformUppercase = platform.toUpperCase();
 
     // Check is user uses PSN or PS5, XBOX or XBSX when checking stats
-    if (platformUppercase == "PSN" || platformUppercase == "PS5") {
+    if (
+      platformUppercase == "PSN" ||
+      platformUppercase == "PS5" ||
+      platformUppercase == "PS"
+    ) {
       var platformCheck = "PS4";
     } else if (platformUppercase == "XBOX" || platformUppercase == "XBSX") {
       var platformCheck = "X1";
