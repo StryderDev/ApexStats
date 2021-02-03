@@ -297,7 +297,9 @@ module.exports = {
                       mozam.legends.selected.LegendName
                     )}.png?q=${currentTimestamp}`
                   )
-                  .setFooter("Data provided by https://apexlegendsapi.com/");
+                  .setFooter(
+                    "Data provided by https://apexlegendsapi.com and https://rexx.live"
+                  );
 
                 msg.delete();
                 msg.channel.send(statsEmbed);
@@ -354,7 +356,7 @@ module.exports = {
                       mozam.legends.selected.LegendName
                     )}.png?q=${currentTimestamp}`
                   )
-                  .setFooter("Data provided by https://apexlegendsapi.com/");
+                  .setFooter("Data provided by https://apexlegendsapi.com");
 
                 msg.delete();
                 msg.channel.send(statsEmbed);
