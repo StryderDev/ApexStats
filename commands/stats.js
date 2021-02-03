@@ -42,6 +42,15 @@ module.exports = {
 
     if (platform && player) var platformUppercase = platform.toUpperCase();
 
+    // Check is user uses PSN or PS5, XBOX or XBSX when checking stats
+    if (platformUppercase == "PSN" || platformUppercase == "PS5") {
+      var platformCheck = "PS4";
+    } else if (platformUppercase == "XBOX" || platformUppercase == "XBSX") {
+      var platformCheck = "X1";
+    } else {
+      var platformCheck = platformUppercase;
+    }
+
     var plats = [
       // Current list of supported platforms
       "X1",
@@ -49,13 +58,13 @@ module.exports = {
       "PC",
     ];
 
-    if (plats.indexOf(platformUppercase) != -1) {
+    if (plats.indexOf(platformCheck) != -1) {
       var mozam = axios.get(
-        `https://api.mozambiquehe.re/bridge?version=4&platform=${platformUppercase}&player=${player}&auth=${config.MozambiqueAPI}`
+        `https://api.mozambiquehe.re/bridge?version=4&platform=${platformCheck}&player=${player}&auth=${config.MozambiqueAPI}`
       );
 
       function getRexx() {
-        if (platformUppercase == "PC") {
+        if (platformCheck == "PC") {
           return player;
         } else {
           return "SDCore";
@@ -97,6 +106,8 @@ module.exports = {
                   "Revenant",
                   "Wattson",
                   "Wraith",
+                  "Fuse",
+                  "405279270", // Temporary tracker for Fuse
                   99999999, // Temp new character CData value until it gets updated on the API
                 ];
 
