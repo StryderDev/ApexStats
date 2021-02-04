@@ -46,14 +46,14 @@ module.exports = {
 
               if (maps.indexOf(mapName) != -1) {
                 if (mapName == "World's Edge") {
-                  return "Season%207/WorldsEdge";
+                  return "Season%208/WorldsEdge";
                 } else if (
                   mapName == "Kings Canyon" ||
                   mapName == "King's Canyon"
                 ) {
-                  return "Season%207/KingsCanyon";
+                  return "Season%208/KingsCanyon";
                 } else if (mapName == "Olympus") {
-                  return "Season%207/Olympus";
+                  return "Season%208/Olympus";
                 }
 
                 return mapName;

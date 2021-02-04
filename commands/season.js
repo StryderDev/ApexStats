@@ -35,6 +35,7 @@ module.exports = {
         "5",
         "6",
         "7",
+        "8",
       ];
 
       if (seasons.indexOf(season) == -1)
@@ -67,7 +68,7 @@ module.exports = {
         }
 
         var result = results[0];
-        var currentTimestamp = DateTime.local().toFormat("ooo");
+        var currentTimestamp = DateTime.local().toFormat("ooo") * 2;
         var startDate = DateTime.fromISO(result.startDate);
         var startFormat = DateTime.fromISO(startDate).toFormat(
           "cccc, LLLL d, y"
