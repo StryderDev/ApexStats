@@ -147,9 +147,9 @@ module.exports = {
           )
           .addField(
             "Countdown",
-            `The **${event.eventName} Event** will start **${time(
+            `The **${event.eventName} Event** will start in **${time(
               timeTillDate
-            )}**.`
+            )}**`
           )
           .setImage(`https://apexstats.dev/ApexStats/Events/${event.imageURL}`)
           .setTimestamp();
