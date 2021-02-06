@@ -1,6 +1,9 @@
 ![CI/CD to Vultr](https://github.com/SDCore/ApexStats/workflows/CI/CD%20to%20Vultr/badge.svg) ![Discord](https://img.shields.io/discord/664717517666910220?label=Support%20Server)
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 **WHILE THIS BOT IS OPEN SOURCE, THERE CURRENTLY WILL BE NO SUPPORT FOR SELF-HOSTING THE BOT.**
@@ -33,8 +36,7 @@ The bot currently has the following features:
 
 ### Stats
 
-![Stats Preview 1](https://sdcore.dev/i/tchntbph.png)
-![Stats Preview 2](https://sdcore.dev/i/h0u0sz1o.png)
+![Stats Preview 1](https://sdcore.dev/i/3zqqmgnk.png)
 
 \*Account Kill/Damage/Win Stats available for PC accounts only. Currently Equipped Trackers are available for all platforms.
 
