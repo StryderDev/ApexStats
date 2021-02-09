@@ -111,7 +111,7 @@ module.exports = {
             result.link
           )
           .setThumbnail(
-            `https://apexstats.dev/ApexStats/SeasonIcons/Season_${result.id}.png?q=${currentTimestamp}`
+            `https://cdn.apexstats.dev/SeasonIcons/Season_${result.id}.png?q=${currentTimestamp}`
           )
           .setDescription(result.description)
           .addField(
@@ -128,7 +128,7 @@ module.exports = {
           .addField("Legend Debut", result.legend, true)
           .addField("Weapon Debut", result.weapon, true)
           .setImage(
-            `https://apexstats.dev/ApexStats/Maps/SeasonList/${compress(
+            `https://cdn.apexstats.dev/Maps/SeasonList/${compress(
               result.map
             )}.png?q=${currentTimestamp}`
           )

@@ -134,7 +134,7 @@ module.exports = {
                 //  return "https://apexstats.dev/ApexStats/Icon.png";
                 // }
 
-                return "https://apexstats.dev/ApexStats/Icon.png";
+                return "https://cdn.apexstats.dev/Icon.png";
               }
 
               function accountLevel(level) {
@@ -296,7 +296,7 @@ module.exports = {
                     true
                   )
                   .setImage(
-                    `https://apexstats.dev/ApexStats/LegendBanners/${legendBanner(
+                    `https://cdn.apexstats.dev/LegendBanners/${legendBanner(
                       rexx.player.stats.activeLegend.name
                     )}.png?q=${currentTimestamp}`
                   )
@@ -361,7 +361,7 @@ module.exports = {
                     true
                   )
                   .setImage(
-                    `https://apexstats.dev/ApexStats/LegendBanners/${legendBanner(
+                    `https://cdn.apexstats.dev/LegendBanners/${legendBanner(
                       mozam.legends.selected.LegendName
                     )}.png?q=${currentTimestamp}`
                   )
