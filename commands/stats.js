@@ -160,6 +160,28 @@ module.exports = {
             }
           }
 
+          function getTrackerTitle(id, legend) {
+            if (id == "1905735931") {
+              return "No data";
+            } else {
+              var trackerFile = require(`../GameData/TrackerData/${legend}.json`);
+
+              if (trackerFile[id] == "undefined" || trackerFile[id] == null) {
+                return id;
+              } else {
+                return trackerFile[id];
+              }
+            }
+          }
+
+          function getTrackerValue(id, value) {
+            if (id == "1905735931") {
+              return "-";
+            } else {
+              return value;
+            }
+          }
+
           // PC Embed
           const statsPC = new Discord.MessageEmbed()
             .setAuthor(
@@ -206,18 +228,36 @@ module.exports = {
             )
             .addField("Currently Equipped Trackers", "\u200b")
             .addField(
-              `${trackerOne.id}`,
-              `${formatNumbers(trackerOne.value)}`,
+              `${getTrackerTitle(
+                trackerOne.id,
+                findLegendByID(selectedLegend)
+              )}`,
+              `${getTrackerValue(
+                trackerOne.id,
+                formatNumbers(trackerOne.value)
+              )}`,
               true
             )
             .addField(
-              `${trackerTwo.id}`,
-              `${formatNumbers(trackerTwo.value)}`,
+              `${getTrackerTitle(
+                trackerTwo.id,
+                findLegendByID(selectedLegend)
+              )}`,
+              `${getTrackerValue(
+                trackerTwo.id,
+                formatNumbers(trackerTwo.value)
+              )}`,
               true
             )
             .addField(
-              `${trackerThree.id}`,
-              `${formatNumbers(trackerThree.value)}`,
+              `${getTrackerTitle(
+                trackerThree.id,
+                findLegendByID(selectedLegend)
+              )}`,
+              `${getTrackerValue(
+                trackerThree.id,
+                formatNumbers(trackerThree.value)
+              )}`,
               true
             )
             .setImage(
@@ -261,18 +301,36 @@ module.exports = {
             )
             .addField("Currently Equipped Trackers", "\u200b")
             .addField(
-              `${trackerOne.id}`,
-              `${formatNumbers(trackerOne.value)}`,
+              `${getTrackerTitle(
+                trackerOne.id,
+                findLegendByID(selectedLegend)
+              )}`,
+              `${getTrackerValue(
+                trackerOne.id,
+                formatNumbers(trackerOne.value)
+              )}`,
               true
             )
             .addField(
-              `${trackerTwo.id}`,
-              `${formatNumbers(trackerTwo.value)}`,
+              `${getTrackerTitle(
+                trackerTwo.id,
+                findLegendByID(selectedLegend)
+              )}`,
+              `${getTrackerValue(
+                trackerTwo.id,
+                formatNumbers(trackerTwo.value)
+              )}`,
               true
             )
             .addField(
-              `${trackerThree.id}`,
-              `${formatNumbers(trackerThree.value)}`,
+              `${getTrackerTitle(
+                trackerThree.id,
+                findLegendByID(selectedLegend)
+              )}`,
+              `${getTrackerValue(
+                trackerThree.id,
+                formatNumbers(trackerThree.value)
+              )}`,
               true
             )
             .setImage(
