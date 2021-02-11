@@ -1,11 +1,11 @@
-const { Discord } = require("../ApexStats.js");
+const {Discord} = require("../ApexStats.js");
 const config = require("../config.json");
 const percentage = require("percentagebar");
 const legends = require("../GameData/legends.json");
 const colours = require("../GameData/legendColors.json");
 
-var { DateTime } = require("luxon");
-const { default: axios } = require("axios");
+var {DateTime} = require("luxon");
+const {default: axios} = require("axios");
 
 var currentTimestamp = DateTime.local().toFormat("ooo") * 2;
 
@@ -42,11 +42,7 @@ module.exports = {
     if (platform && player) var platformUppercase = platform.toUpperCase();
 
     // Check is user uses PSN or PS5, XBOX or XBSX when checking stats
-    if (
-      platformUppercase == "PSN" ||
-      platformUppercase == "PS5" ||
-      platformUppercase == "PS"
-    ) {
+    if (platformUppercase == "PSN" || platformUppercase == "PS5" || platformUppercase == "PS") {
       var platformCheck = "PS4";
     } else if (platformUppercase == "XBOX" || platformUppercase == "XBSX") {
       var platformCheck = "X1";
@@ -109,12 +105,8 @@ module.exports = {
             var totalMatches = formatNumbers(rexxResponse.player.stats.matches);
             var KPM = rexxResponse.player.stats.kills_per_match;
             var totalWins = formatNumbers(rexxResponse.player.stats.wins.total);
-            var winRatio = formatNumbers(
-              rexxResponse.player.stats.wins["win%"]
-            );
-            var damageDealt = formatNumbers(
-              rexxResponse.player.stats.damage.dealt
-            );
+            var winRatio = formatNumbers(rexxResponse.player.stats.wins["win%"]);
+            var damageDealt = formatNumbers(rexxResponse.player.stats.damage.dealt);
 
             // Account Trackers
             var trackerOne = mainResponse.legends.selected.data[0];
@@ -162,10 +154,7 @@ module.exports = {
                 return "<:rankedDiamond:787174769728290816>";
               } else if (rankName == "Master") {
                 return "<:rankedMaster:787174770680135680>";
-              } else if (
-                rankName == "Predator" ||
-                rankName == "Apex Predator"
-              ) {
+              } else if (rankName == "Predator" || rankName == "Apex Predator") {
                 return "<:rankedPredator:787174770730336286>";
               } else {
                 return "<:rankedBronze:787174769623302204>";
@@ -199,32 +188,28 @@ module.exports = {
               .setAuthor(
                 `Legend Stats for ${
                   mainResponse.global.name
-                } on ${platformUppercase} playing ${findLegendByID(
-                  selectedLegend
-                )}`,
+                } on ${platformUppercase} playing ${findLegendByID(selectedLegend)}`,
                 avatar
               )
               .setColor(colours[findLegendByID(selectedLegend)])
               .addField(
                 "Ranked Placement",
-                `**Rank:** ${getRankBadge(currentRank.rankName)} ${
-                  currentRank.rankName
-                } ${currentRank.rankDiv}\n**Score:** ${formatNumbers(
-                  currentRank.rankScore
-                )}`,
+                `**Rank:** ${getRankBadge(currentRank.rankName)} ${currentRank.rankName} ${
+                  currentRank.rankDiv
+                }\n**Score:** ${formatNumbers(currentRank.rankScore)}`,
                 true
               )
               .addField(
                 `Account & Season ${season} BattlePass Level`,
-                `**Account Level ${getAccountLevel(
-                  accountLevel
-                )}/500**\n${percentage(
+                `**Account Level ${getAccountLevel(accountLevel)}/500**\n${percentage(
                   500,
                   getAccountLevel(accountLevel),
                   10
-                )}\n**BattlePass Level ${getAccountBP(
-                  accountBP
-                )}/110**\n${percentage(110, getAccountBP(accountBP), 10)}`,
+                )}\n**BattlePass Level ${getAccountBP(accountBP)}/110**\n${percentage(
+                  110,
+                  getAccountBP(accountBP),
+                  10
+                )}`,
                 true
               )
               .addField("\u200b", "\u200b")
@@ -240,36 +225,18 @@ module.exports = {
               )
               .addField("Currently Equipped Trackers", "\u200b")
               .addField(
-                `${getTrackerTitle(
-                  trackerOne.id,
-                  findLegendByID(selectedLegend)
-                )}`,
-                `${getTrackerValue(
-                  trackerOne.id,
-                  formatNumbers(trackerOne.value)
-                )}`,
+                `${getTrackerTitle(trackerOne.id, findLegendByID(selectedLegend))}`,
+                `${getTrackerValue(trackerOne.id, formatNumbers(trackerOne.value))}`,
                 true
               )
               .addField(
-                `${getTrackerTitle(
-                  trackerTwo.id,
-                  findLegendByID(selectedLegend)
-                )}`,
-                `${getTrackerValue(
-                  trackerTwo.id,
-                  formatNumbers(trackerTwo.value)
-                )}`,
+                `${getTrackerTitle(trackerTwo.id, findLegendByID(selectedLegend))}`,
+                `${getTrackerValue(trackerTwo.id, formatNumbers(trackerTwo.value))}`,
                 true
               )
               .addField(
-                `${getTrackerTitle(
-                  trackerThree.id,
-                  findLegendByID(selectedLegend)
-                )}`,
-                `${getTrackerValue(
-                  trackerThree.id,
-                  formatNumbers(trackerThree.value)
-                )}`,
+                `${getTrackerTitle(trackerThree.id, findLegendByID(selectedLegend))}`,
+                `${getTrackerValue(trackerThree.id, formatNumbers(trackerThree.value))}`,
                 true
               )
               .setImage(
@@ -283,66 +250,44 @@ module.exports = {
               .setAuthor(
                 `Legend Stats for ${
                   mainResponse.global.name
-                } on ${platformUppercase} playing ${findLegendByID(
-                  selectedLegend
-                )}`,
+                } on ${platformUppercase} playing ${findLegendByID(selectedLegend)}`,
                 avatar
               )
               .setColor(colours[findLegendByID(selectedLegend)])
               .addField(
                 "Ranked Placement",
-                `**Rank:** ${getRankBadge(currentRank.rankName)} ${
-                  currentRank.rankName
-                } ${currentRank.rankDiv}\n**Score:** ${formatNumbers(
-                  currentRank.rankScore
-                )}`,
+                `**Rank:** ${getRankBadge(currentRank.rankName)} ${currentRank.rankName} ${
+                  currentRank.rankDiv
+                }\n**Score:** ${formatNumbers(currentRank.rankScore)}`,
                 true
               )
               .addField(
                 `Account & Season ${season} BattlePass Level`,
-                `**Account Level ${getAccountLevel(
-                  accountLevel
-                )}/500**\n${percentage(
+                `**Account Level ${getAccountLevel(accountLevel)}/500**\n${percentage(
                   500,
                   getAccountLevel(accountLevel),
                   10
-                )}\n**BattlePass Level ${getAccountBP(
-                  accountBP
-                )}/110**\n${percentage(110, getAccountBP(accountBP), 10)}`,
+                )}\n**BattlePass Level ${getAccountBP(accountBP)}/110**\n${percentage(
+                  110,
+                  getAccountBP(accountBP),
+                  10
+                )}`,
                 true
               )
               .addField("Currently Equipped Trackers", "\u200b")
               .addField(
-                `${getTrackerTitle(
-                  trackerOne.id,
-                  findLegendByID(selectedLegend)
-                )}`,
-                `${getTrackerValue(
-                  trackerOne.id,
-                  formatNumbers(trackerOne.value)
-                )}`,
+                `${getTrackerTitle(trackerOne.id, findLegendByID(selectedLegend))}`,
+                `${getTrackerValue(trackerOne.id, formatNumbers(trackerOne.value))}`,
                 true
               )
               .addField(
-                `${getTrackerTitle(
-                  trackerTwo.id,
-                  findLegendByID(selectedLegend)
-                )}`,
-                `${getTrackerValue(
-                  trackerTwo.id,
-                  formatNumbers(trackerTwo.value)
-                )}`,
+                `${getTrackerTitle(trackerTwo.id, findLegendByID(selectedLegend))}`,
+                `${getTrackerValue(trackerTwo.id, formatNumbers(trackerTwo.value))}`,
                 true
               )
               .addField(
-                `${getTrackerTitle(
-                  trackerThree.id,
-                  findLegendByID(selectedLegend)
-                )}`,
-                `${getTrackerValue(
-                  trackerThree.id,
-                  formatNumbers(trackerThree.value)
-                )}`,
+                `${getTrackerTitle(trackerThree.id, findLegendByID(selectedLegend))}`,
+                `${getTrackerValue(trackerThree.id, formatNumbers(trackerThree.value))}`,
                 true
               )
               .setImage(
@@ -365,7 +310,7 @@ module.exports = {
           console.log(`Error: ${errors}`);
           msg.delete();
           message.channel.send(
-            "That player doesn't exist, we cannot connect to the API, or there was some other error. If the problem persists, please try again or contact support."
+            "There was an error looking up that username. If you're on PC, try your origin username. If the problem persists, contact support."
           );
         });
     });
