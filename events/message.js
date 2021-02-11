@@ -61,6 +61,7 @@ client.on("message", (message) => {
       return console.log("User is not allowed to do that command here.");
     }
   } else {
+    // Just a normal server, ignore the above
     try {
       command.execute(message, args);
     } catch (error) {
