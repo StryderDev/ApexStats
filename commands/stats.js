@@ -107,6 +107,8 @@ module.exports = {
             var totalWins = formatNumbers(rexxResponse.player.stats.wins.total);
             var winRatio = formatNumbers(rexxResponse.player.stats.wins["win%"]);
             var damageDealt = formatNumbers(rexxResponse.player.stats.damage.dealt);
+            var avgDamage =
+              rexxResponse.player.stats.damage.dealt / rexxResponse.player.stats.matches;
 
             // Account Trackers
             var trackerOne = mainResponse.legends.selected.data[0];
@@ -220,7 +222,9 @@ module.exports = {
               )
               .addField(
                 "Account Wins/Damage",
-                `**Total Wins:** ${totalWins}\n**Win Rate:** ${winRatio}%\n**Damage Dealt:** ${damageDealt}`,
+                `**Total Wins:** ${totalWins}\n**Win Rate:** ${winRatio}%\n**Damage Dealt:** ${damageDealt}\n**Average Damage:** ${parseFloat(
+                  avgDamage
+                ).toFixed(2)}`,
                 true
               )
               .addField("Currently Equipped Trackers", "\u200b")
