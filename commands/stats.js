@@ -74,10 +74,7 @@ module.exports = {
       return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    rexxURL = `https://fn.alphaleagues.com/v1/apex/stats/?username=${checkPlat(
-      platformCheck,
-      player
-    )}&platform=pc&auth=${config.ApexAPI}`;
+    rexxURL = `https://api.apexstats.dev/v5.php?platform=${platformCheck}&player=${player}`;
     mainURL = `https://api.apexstats.dev/v5.php?platform=${platformCheck}&player=${player}`;
 
     var rexx = axios.get(rexxURL);
@@ -101,14 +98,14 @@ module.exports = {
             var accountLevel = mainResponse.global.level;
 
             // Account Data
-            var totalKills = formatNumbers(rexxResponse.player.stats.kills);
-            var totalMatches = formatNumbers(rexxResponse.player.stats.matches);
-            var KPM = rexxResponse.player.stats.kills_per_match;
-            var totalWins = formatNumbers(rexxResponse.player.stats.wins.total);
-            var winRatio = formatNumbers(rexxResponse.player.stats.wins["win%"]);
-            var damageDealt = formatNumbers(rexxResponse.player.stats.damage.dealt);
-            var avgDamage =
-              rexxResponse.player.stats.damage.dealt / rexxResponse.player.stats.matches;
+            //var totalKills = formatNumbers(rexxResponse.player.stats.kills);
+            //var totalMatches = formatNumbers(rexxResponse.player.stats.matches);
+            //var KPM = rexxResponse.player.stats.kills_per_match;
+            //var totalWins = formatNumbers(rexxResponse.player.stats.wins.total);
+            //var winRatio = formatNumbers(rexxResponse.player.stats.wins["win%"]);
+            //var damageDealt = formatNumbers(rexxResponse.player.stats.damage.dealt);
+            //var avgDamage =
+            //  rexxResponse.player.stats.damage.dealt / rexxResponse.player.stats.matches;
 
             // Account Trackers
             var trackerOne = mainResponse.legends.selected.data[0];
@@ -214,19 +211,19 @@ module.exports = {
                 )}`,
                 true
               )
-              .addField("\u200b", "\u200b")
-              .addField(
-                "Account Kills",
-                `**Total Kills:** ${totalKills}\n**Total Matches:** ${totalMatches}\n**Kills p/Match:** ${KPM}`,
-                true
-              )
-              .addField(
-                "Account Wins/Damage",
-                `**Total Wins:** ${totalWins}\n**Win Rate:** ${winRatio}%\n**Damage Dealt:** ${damageDealt}\n**Average Damage:** ${parseFloat(
-                  avgDamage
-                ).toFixed(2)}`,
-                true
-              )
+              //.addField("\u200b", "\u200b")
+              //.addField(
+              //  "Account Kills",
+              //  `**Total Kills:** ${totalKills}\n**Total Matches:** ${totalMatches}\n**Kills p/Match:** ${KPM}`,
+              //  true
+              //)
+              //.addField(
+              //  "Account Wins/Damage",
+              //  `**Total Wins:** ${totalWins}\n**Win Rate:** ${winRatio}%\n**Damage Dealt:** ${damageDealt}\n**Average Damage:** ${parseFloat(
+              //    avgDamage
+              //  ).toFixed(2)}`,
+              //  true
+              //)
               .addField("Currently Equipped Trackers", "\u200b")
               .addField(
                 `${getTrackerTitle(trackerOne.id, findLegendByID(selectedLegend))}`,
