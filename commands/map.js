@@ -112,7 +112,7 @@ module.exports = {
           const nextMapEmbed = new Discord.MessageEmbed().setDescription(getMap());
 
           msg.delete();
-          msg.channel.send(nextMapEmbed);
+          msg.channel.send(mapEmbed);
         })
         .catch((err) => {
           msg.delete();
