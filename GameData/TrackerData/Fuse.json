@@ -1,1 +1,22 @@
-{"752923862": "Kills", "393792034": "Damage Done", "182364136": "Knuckle Cluster Hits"}
+{
+  "752923862": "Kills",
+  "1500357428": "Winning Kills",
+  "330135310": "Kills as Kill Leader",
+  "393792034": "Damage Done",
+  "1022637552": "Headshots",
+  "981046576": "Finishers",
+  "131676603": "Revives",
+  "1065920678": "Games Played",
+  "929469739": "Wins w/ Full Squad",
+  "785637271": "Times Placed Top 3",
+  "1906774186": "Pistol Kills",
+  "986094151": "Shotgun Kills",
+  "1464957912": "SMG Kills",
+  "908861253": "AR Kills",
+  "44714030": "LMG Kills",
+  "937405830": "Sniper Kills",
+  "701502578": "Care Package Weapon Kills",
+  "1574568399": "Grenade Distance Thrown",
+  "182364136": "Knuckle Cluster Hits",
+  "2086371213": "Motherlode: Enemies Captured"
+}
