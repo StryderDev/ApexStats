@@ -27,6 +27,7 @@ module.exports = {
         .then((result) => {
           var map = result.data;
           var nextMap = map.next[0];
+          var nextMaps = map.next;
           var currentTimestamp = Math.floor(DateTime.local().toFormat("ooo"));
 
           function mapImage(name) {
@@ -88,6 +89,22 @@ module.exports = {
             )}`;
           }
 
+          function getMapCountdown(startTime) {
+            var currentTime = DateTime.local().toMillis();
+            var startDate = DateTime.fromISO(startTime).toMillis();
+
+            return time(startDate / 1000 - currentTime / 1000);
+          }
+
+          function getMap() {
+            return nextMaps.map(
+              (x) =>
+                `**${x.map}**\n**Duration**: ${
+                  x.duration
+                } minutes.\n**Starts in:** ${getMapCountdown(x.start)}\n`
+            );
+          }
+
           const mapEmbed = new Discord.MessageEmbed()
             .setDescription(
               `The current map is **${getMapName(map.map)}**.\nThe next map is **${
@@ -101,18 +118,18 @@ module.exports = {
             )
             .setFooter("Provided by https://rexx.live");
 
-          var nextMaps = map.next;
+          const nextMapEmbed = new Discord.MessageEmbed()
+            .setTitle("Upcoming Maps")
+            .setDescription(getMap())
+            .setFooter("Provided by https://rexx.live");
 
-          function getMap() {
-            return nextMaps.map(
-              (x) => `The next map is **${x.map}** for **${x.duration}** minutes.\n`
-            );
+          if (!args[0] || isNaN(args[0])) {
+            msg.delete();
+            msg.channel.send(mapEmbed);
+          } else {
+            msg.delete();
+            msg.channel.send(nextMapEmbed);
           }
-
-          const nextMapEmbed = new Discord.MessageEmbed().setDescription(getMap());
-
-          msg.delete();
-          msg.channel.send(mapEmbed);
         })
         .catch((err) => {
           msg.delete();
