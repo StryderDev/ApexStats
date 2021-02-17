@@ -90,10 +90,9 @@ module.exports = {
           }
 
           function getMapCountdown(startTime) {
-            var currentTime = DateTime.local().toMillis();
-            var startDate = DateTime.fromISO(startTime).toMillis();
+            var currentTime = DateTime.local().toMillis() / 1000;
 
-            return time(startDate / 1000 - currentTime / 1000);
+            return time(startTime - currentTime);
           }
 
           function getMap() {
@@ -101,7 +100,7 @@ module.exports = {
               (x) =>
                 `**${x.map}**\n**Duration**: ${
                   x.duration
-                } minutes.\n**Starts in:** ${getMapCountdown(x.start)}\n`
+                } minutes.\n**Starts in:** ${getMapCountdown(x.timestamp)}\n`
             );
           }
 
