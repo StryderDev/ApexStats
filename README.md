@@ -42,6 +42,8 @@ The bot currently has the following features:
 
 ### Map Rotation
 
+You can also do `>>map #` where # is the amount of future rotations you'd like to see.
+
 ![Map Rotation Preview](https://sdcore.dev/i/0clab374.png)
 
 ### Server Status
