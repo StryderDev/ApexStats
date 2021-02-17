@@ -106,9 +106,9 @@ module.exports = {
 
           const mapEmbed = new Discord.MessageEmbed()
             .setDescription(
-              `The current map is **${getMapName(map.map)}**.\nThe next map is **${
+              `The current map is **${getMapName(map.map)}**.\nThe next map is **${getMapName(
                 nextMap.map
-              }** in **${time(map.times.remaining.seconds)}** which will last for **${
+              )}** in **${time(map.times.remaining.seconds)}** which will last for **${
                 nextMap.duration
               } minutes**.`
             )

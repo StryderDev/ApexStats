@@ -1,5 +1,5 @@
-const { client, Discord } = require("../ApexStats.js");
-var { DateTime } = require("luxon");
+const {client, Discord} = require("../ApexStats.js");
+var {DateTime} = require("luxon");
 const config = require("../config.json");
 const axios = require("axios");
 
@@ -29,10 +29,7 @@ client.once("ready", () => {
           if (maps.indexOf(mapName) != -1) {
             if (mapName == "World's Edge") {
               return "Season%208/WorldsEdge";
-            } else if (
-              mapName == "Kings Canyon" ||
-              mapName == "King's Canyon"
-            ) {
+            } else if (mapName == "Kings Canyon" || mapName == "King's Canyon") {
               return "Season%208/KingsCanyon";
             } else if (mapName == "Olympus") {
               return "Season%208/Olympus";
@@ -63,36 +60,25 @@ client.once("ready", () => {
             seconds: fixSeconds,
           });
 
-          var timeTill = futureDate.diff(currentDate, [
-            "hours",
-            "minutes",
-            "seconds",
-          ]);
+          var timeTill = futureDate.diff(currentDate, ["hours", "minutes", "seconds"]);
 
           var finalTime = timeTill.toObject();
 
           const pluralize = (count, noun, suffix = "s") =>
             `${count} ${noun}${count !== 1 ? suffix : ""}`;
 
-          return `${pluralize(finalTime.hours, "hour")}, ${pluralize(
-            finalTime.minutes,
-            "minute"
-          )}`;
+          return `${pluralize(finalTime.hours, "hour")}, ${pluralize(finalTime.minutes, "minute")}`;
         }
 
         const mapEmbed = new Discord.MessageEmbed()
           .setDescription(
-            `The current map is **${getMapName(
-              map.map
-            )}**.\nThe next map is **${nextMap.map}** in **${time(
-              map.times.remaining.seconds
-            )}** which will last for **${nextMap.duration} minutes**.`
+            `The current map is **${getMapName(map.map)}**.\nThe next map is **${getMapName(
+              nextMap.map
+            )}** in **${time(map.times.remaining.seconds)}** which will last for **${
+              nextMap.duration
+            } minutes**.`
           )
-          .setImage(
-            `https://cdn.apexstats.dev/Maps/${mapImage(
-              map.map
-            )}.png?q=${currentTimestamp}`
-          )
+          .setImage(`https://cdn.apexstats.dev/Maps/${mapImage(map.map)}.png?q=${currentTimestamp}`)
           .setFooter("Provided by https://rexx.live")
           .setTimestamp();
 
@@ -122,9 +108,7 @@ client.once("ready", () => {
 
   if (config.autoUpdate.map.enabled == "true") {
     updateMapRotation();
-    console.log(
-      `[${DateTime.local().toFormat("hh:mm:ss")}] Updated Map Rotation Embed`
-    );
+    console.log(`[${DateTime.local().toFormat("hh:mm:ss")}] Updated Map Rotation Embed`);
   }
 
   setInterval(function () {
@@ -133,11 +117,7 @@ client.once("ready", () => {
 
       if (date.getMinutes() % config.autoUpdate.map.interval == 0) {
         updateMapRotation();
-        console.log(
-          `[${DateTime.local().toFormat(
-            "hh:mm:ss"
-          )}] Updated Map Rotation Embed`
-        );
+        console.log(`[${DateTime.local().toFormat("hh:mm:ss")}] Updated Map Rotation Embed`);
       }
     }
   }, Math.max(1, 1 || 1) * 60 * 1000);
