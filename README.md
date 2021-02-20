@@ -40,8 +40,6 @@ The bot currently has the following features:
 
 ![Stats Preview 1](https://sdcore.dev/i/yysr940u.png)
 
-\*Will only show data for the 3 selected trackers on the currently selected legend.
-
 ### Map Rotation
 
 You can also do `>>map #` where # is the amount of future rotations you'd like to see.
