@@ -38,7 +38,7 @@ The bot currently has the following features:
 
 ### Stats
 
-![Stats Preview 1](https://sdcore.dev/i/3zqqmgnk.png)
+![Stats Preview 1](https://sdcore.dev/i/yysr940u.png)
 
 \*Will only show data for the 3 selected trackers on the currently selected legend.
 
