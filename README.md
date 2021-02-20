@@ -27,6 +27,8 @@ The bot currently has the following features:
     - Replace [legend name] with the name of a legend currently in the game
 - Current in-game map rotations
   - `>>map`
+  - `>>map #`
+    - Replace "#" with a number (between 1 and 10) to get future map rotations
 - Current active in-game events
   - `>>event`
 - Pick a random spot to drop based on the current map in rotation
@@ -67,10 +69,6 @@ You can also do `>>map #` where # is the amount of future rotations you'd like t
 ![Legend Information](https://sdcore.dev/i/rx3z31vn.png)
 
 ## Credits
-
-This bot was made possible by the [ApexLegendsAPI](https://apexlegendsapi.com).
-
-It uses the [Mozambique API Wrapper by arubinofaux](https://github.com/arubinofaux/mozambique-api-wrapper).
 
 Lots of help with some more obscure data from Rexx <3
 

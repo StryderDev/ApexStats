@@ -1,10 +1,11 @@
 {
   "prefix": "PREFIX HERE",
-  "token": "TOKEN HERE",
+  "token": "DISCORD BOT TOKEN HERE",
   "MozambiqueAPI": "APEXLEGENDSAPI API KEY HERE",
-  "ApexAPI": "REXX API KEY HERE",
+  "ApexAPI": "PC STATS API KEY HERE (CURRENTLY DEPRICATED)",
   "topGG": "0 = disabled, otherwise use API key",
   "DELToken": "0 = disabled, otherwise use API key",
+  "DBLToken": "0 = disabled, otherwise use API key",
   "SQL": {
     "host": "MySQL HOST IP",
     "username": "MySQL Username",

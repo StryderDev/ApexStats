@@ -245,7 +245,9 @@ module.exports = {
                   selectedLegend
                 )}.png?q=${currentTimestamp}`
               )
-              .setFooter(" Weird tracker name? Let SDCore#1234 know!");
+              .setFooter(
+                " Weird tracker name? Let SDCore#1234 know! • BattlePass level 0? Make sure you have the BP Badge equipped!"
+              );
 
             const statsConsole = new Discord.MessageEmbed()
               .setAuthor(
@@ -296,7 +298,9 @@ module.exports = {
                   selectedLegend
                 )}.png?q=${currentTimestamp}`
               )
-              .setFooter(" Weird tracker name? Let SDCore#1234 know!");
+              .setFooter(
+                " Weird tracker name? Let SDCore#1234 know! • BattlePass level 0? Make sure you have the BP Badge equipped!"
+              );
 
             if (platformUppercase == "PC") {
               msg.delete();
