@@ -92,10 +92,10 @@ module.exports = {
             // Season/Account Info
             var season = "8";
             var avatar = "https://cdn.apexstats.dev/Icon.png";
-            var selectedLegend = mainResponse.legends.selected.LegendName;
-            var currentRank = mainResponse.global.rank;
-            var accountBP = mainResponse.global.battlepass.history.season8;
-            var accountLevel = mainResponse.global.level;
+            var selectedLegend = mainResponse.accountInfo.active.legend;
+            var currentRank = mainResponse.accountInfo.ranked;
+            var accountBP = mainResponse.accountInfo.battlepass.level;
+            var accountLevel = mainResponse.accountInfo.level;
 
             // Account Data
             //var totalKills = formatNumbers(rexxResponse.player.stats.kills);
@@ -108,12 +108,12 @@ module.exports = {
             //  rexxResponse.player.stats.damage.dealt / rexxResponse.player.stats.matches;
 
             // Account Trackers
-            var trackerOne = mainResponse.legends.selected.data[0];
-            var trackerTwo = mainResponse.legends.selected.data[1];
-            var trackerThree = mainResponse.legends.selected.data[2];
+            var trackerOne = mainResponse.accountInfo.active.trackers[0];
+            var trackerTwo = mainResponse.accountInfo.active.trackers[1];
+            var trackerThree = mainResponse.accountInfo.active.trackers[2];
 
             function findLegendByID() {
-              var getLegend = legends[mainResponse.legends.selected.LegendName];
+              var getLegend = legends[mainResponse.accountInfo.active.legend];
 
               if (getLegend == "undefined" || getLegend == null) {
                 return "NoBanner";
@@ -186,16 +186,16 @@ module.exports = {
             const statsPC = new Discord.MessageEmbed()
               .setAuthor(
                 `Legend Stats for ${
-                  mainResponse.global.name
+                  mainResponse.userData.username
                 } on ${platformUppercase} playing ${findLegendByID(selectedLegend)}`,
                 avatar
               )
               .setColor(colours[findLegendByID(selectedLegend)])
               .addField(
                 "Ranked Placement",
-                `**Rank:** ${getRankBadge(currentRank.rankName)} ${currentRank.rankName} ${
-                  currentRank.rankDiv
-                }\n**Score:** ${formatNumbers(currentRank.rankScore)}`,
+                `**Rank:** ${getRankBadge(currentRank.name)} ${currentRank.name} ${
+                  currentRank.division
+                }\n**Score:** ${formatNumbers(currentRank.score)}`,
                 true
               )
               .addField(
@@ -252,16 +252,16 @@ module.exports = {
             const statsConsole = new Discord.MessageEmbed()
               .setAuthor(
                 `Legend Stats for ${
-                  mainResponse.global.name
+                  mainResponse.userData.username
                 } on ${platformUppercase} playing ${findLegendByID(selectedLegend)}`,
                 avatar
               )
               .setColor(colours[findLegendByID(selectedLegend)])
               .addField(
                 "Ranked Placement",
-                `**Rank:** ${getRankBadge(currentRank.rankName)} ${currentRank.rankName} ${
-                  currentRank.rankDiv
-                }\n**Score:** ${formatNumbers(currentRank.rankScore)}`,
+                `**Rank:** ${getRankBadge(currentRank.name)} ${currentRank.name} ${
+                  currentRank.division
+                }\n**Score:** ${formatNumbers(currentRank.score)}`,
                 true
               )
               .addField(
