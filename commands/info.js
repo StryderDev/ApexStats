@@ -1,31 +1,47 @@
 require("dotenv").config();
 
-const { client, Discord } = require("../ApexStats.js");
+const {client, Discord} = require("../ApexStats.js");
 const config = require("../config.json");
+
+var {DateTime} = require("luxon");
 
 module.exports = {
   name: "info",
   description: "Shows info about the bot.",
   execute(message) {
+    var uptime = client.uptime;
+
+    let days = Math.floor(client.uptime / 86400000);
+    let hours = Math.floor(client.uptime / 3600000) % 24;
+    let minutes = Math.floor(client.uptime / 60000) % 60;
+    let seconds = Math.floor(client.uptime / 1000) % 60;
+
     const infoEmbed = new Discord.MessageEmbed()
-      .setTitle(
-        `Apex Legends Stats Bot (${client.user.username}#${client.user.discriminator})`
-      )
+      .setTitle(`Apex Legends Stats Bot (${client.user.username}#${client.user.discriminator})`)
       .setColor("C21D27")
       .setThumbnail(process.env.BOT_ICON)
       .setDescription(
         `This bot has the ability to show user stats, events, in-game map rotations, server status, and more. Use \`${config.prefix}commands\` to see commands available to the bot.`
       )
-      .addField("Bot Version", process.env.BOT_VERSION, true)
-      .addField("Last Updated", process.env.LAST_UPDATED, true)
       .addField(
-        "Bot Stats",
+        "Bot Info",
+        `**Version:** ${process.env.BOT_VERSION}\n**Last Updated:** ${process.env.LAST_UPDATED}`,
+        true
+      )
+      .addField(
+        "Guilds/Shards",
         `**Shard Count:** ${client.shard.count}\n**Guild Shard ID:** ${message.guild.shardID}\n**Guild Count:** ${client.guilds.cache.size}`,
         true
       )
-      .addField("Support Server", process.env.SUPPORT_SERVER)
-      .addField("GitHub Repo", process.env.REPO)
-      .addField("Trello", process.env.TRELLO)
+      .addField(
+        "Useful Links",
+        `[Support Server](https://apexstats.dev/invite)\n[Github Repo](https://apexstats.dev/github)\n[Trello](https://apexstats.dev/trello)`,
+        true
+      )
+      .addField(
+        "Bot Stats",
+        `**Uptime:** ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`
+      )
       .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
       .setTimestamp();
 
