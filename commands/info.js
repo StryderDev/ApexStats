@@ -3,8 +3,6 @@ require("dotenv").config();
 const {client, Discord} = require("../ApexStats.js");
 const config = require("../config.json");
 
-var {DateTime} = require("luxon");
-
 module.exports = {
   name: "info",
   description: "Shows info about the bot.",
@@ -40,7 +38,11 @@ module.exports = {
       )
       .addField(
         "Bot Stats",
-        `**Uptime:** ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`
+        `**Uptime:** ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds\n**Mem Usage:** ${(
+          process.memoryUsage().heapUsed /
+          1024 /
+          1024
+        ).toFixed(2)} MB`
       )
       .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
       .setTimestamp();
