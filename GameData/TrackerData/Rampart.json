@@ -1,6 +1,20 @@
 {
   "81517437": "Kills",
   "18649475": "Damage Done",
+  "531261879": "Winning Kills",
+  "1270143351": "Kills as Kill Leader",
+  "1947146183": "Headshots",
+  "741695335": "Finishers",
+  "453928835": "Revives",
+  "33961012": "Games Played",
+  "1455647402": "Wins w/ Full Squad",
+  "1813960570": "Times Placed Top 3",
+  "1867264401": "Pistol Kills",
+  "598606375": "Shotgun Kills",
+  "1602837499": "SMG Kills",
+  "1002028467": "AR Kills",
+  "574328562": "LMG Kills",
+  "955558501": "Sniper Kills",
   "216310604": "Care Package Weapon Kills",
   "439205869": "Bullets Amped",
   "1687566091": "Wall Damage Blocked",
@@ -11,5 +25,7 @@
   "1507924180": "Wins as Rampart",
   "1909899282": "Damage Done as Rampart",
   "1828342562": "Season 7 Wins",
-  "1942284525": "Season 7 Kills"
+  "1942284525": "Season 7 Kills",
+  "43621774": "Season 8 Wins",
+  "2144384225": "Season 8 Kills"
 }
