@@ -1,4 +1,4 @@
-const { client } = require("../ApexStats.js");
+const {client} = require("../ApexStats.js");
 const config = require("../config.json");
 const fetch = require("node-fetch");
 const axios = require("axios");
@@ -6,7 +6,7 @@ const axios = require("axios");
 // Top.GG API
 const DBL = require("dblapi.js");
 
-var { DateTime } = require("luxon");
+var {DateTime} = require("luxon");
 
 if (config.topGG == "0") {
   // Don't send data to TopGG
@@ -112,22 +112,18 @@ client.once("ready", () => {
   // Set intitial bot presence on load, otherwise presence
   // will be empty until the next update
   setPresence();
-  console.log(
-    `[${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${
-      client.user.tag
-    }`
-  );
+  console.log(`[${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${client.user.tag}`);
 
   // Update the bot presence every 5 minutes to update
   // the amount of servers the bot is in and to update
   // the current map in rotation
   setInterval(function () {
+    var date = new Date();
+
     if (date.getMinutes() % 5 == 0) {
       setPresence();
       console.log(
-        `[${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${
-          client.user.tag
-        }`
+        `[${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${client.user.tag}`
       );
     }
   }, Math.max(1, 30 || 1) * 60 * 1000);
