@@ -4,6 +4,14 @@ const percentage = require("percentagebar");
 const legends = require("../GameData/legends.json");
 const colours = require("../GameData/legendColors.json");
 
+let mysql = require("mysql");
+let connection = mysql.createPool({
+  host: config.APISQL.host,
+  user: config.APISQL.username,
+  password: config.APISQL.password,
+  database: config.APISQL.database,
+});
+
 var {DateTime} = require("luxon");
 const {default: axios} = require("axios");
 
@@ -92,10 +100,46 @@ module.exports = {
             // Season/Account Info
             var season = "8";
             var avatar = "https://cdn.apexstats.dev/Icon.png";
+            var userID = mainResponse.userData.userID;
+            var userName = mainResponse.userData.username;
+            var userPlatform = mainResponse.userData.platform;
             var selectedLegend = mainResponse.accountInfo.active.legend;
             var currentRank = mainResponse.accountInfo.ranked;
             var accountBP = mainResponse.accountInfo.battlepass.level;
             var accountLevel = mainResponse.accountInfo.level;
+            var lastUpdated = new Date().getTime();
+
+            let checkQuery = `SELECT * FROM \`users\` WHERE \`PlayerID\` = '${userID}';`;
+            let insertQuery = `INSERT INTO \`users\` (\`PlayerID\`, \`PlayerName\`, \`Platform\`, \`lastUpdated\`) VALUES ('${userID}', '${userName}', '${userPlatform}', '${lastUpdated}')`;
+
+            connection.getConnection(function (err, connection) {
+              if (err) {
+                console.log(err);
+                return message.channel.send(
+                  "There was an error connecting to the database. Please try again later."
+                );
+              }
+
+              connection.query(checkQuery, function (err, results) {
+                if (err) {
+                  connection.release();
+                  console.log(err);
+                  return message.channel.send(
+                    "There was a problem with the SQL syntax. Please try again later."
+                  );
+                }
+
+                if (results.length > 0) {
+                  console.log("found user.");
+                } else {
+                  connection.query(insertQuery, function (err, results) {
+                    console.log(err);
+                  });
+                }
+
+                connection.release();
+              });
+            });
 
             // Account Data
             //var totalKills = formatNumbers(rexxResponse.player.stats.kills);
