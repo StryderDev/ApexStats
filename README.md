@@ -42,29 +42,33 @@ The bot currently has the following features:
 
 ### Map Rotation
 
-You can also do `>>map #` where # is the amount of future rotations you'd like to see.
+![Map Rotation Preview](https://sdcore.dev/i/ucaf63ev.png)
 
-![Map Rotation Preview](https://sdcore.dev/i/0clab374.png)
+![Future Map Rotations Preview](https://sdcore.dev/i/aloczkdg.png)
 
 ### Server Status
 
-![Server Status Preview](https://sdcore.dev/i/0v9u9xbz.png)
+![Server Status Preview](https://sdcore.dev/i/ufe8sb3d.png)
 
 ### Where to Drop
 
-![Where to Drop](https://sdcore.dev/i/etb6ijkr.png)
+![Where to Drop](https://sdcore.dev/i/c1uz5tk1.png)
 
 ### In-Game Events
 
-![In-Game Events Preview](https://sdcore.dev/i/bkh1qev4.png)
+![In-Game Events Preview](https://sdcore.dev/i/kmmlrir5.png)
 
 ### News
 
-![News Article](https://sdcore.dev/i/r2bzoj1o.png)
+![News Article](https://sdcore.dev/i/0gof7do3.png)
 
 ### Legend Info
 
-![Legend Information](https://sdcore.dev/i/rx3z31vn.png)
+![Legend Information](https://sdcore.dev/i/bu4knvzk.png)
+
+### Season Info
+
+![Season Information](https://sdcore.dev/i/xs2o6ad4.png)
 
 ## Credits
 
