@@ -100,7 +100,11 @@ module.exports = {
             // Season/Account Info
             var season = "8";
             var avatar = "https://cdn.apexstats.dev/Icon.png";
-            var userID = mainResponse.userData.userID;
+            if (platformCheck == "PS4") {
+              var userID = mainResponse.userData.userID.toString().slice(0, -5);
+            } else {
+              var userID = mainResponse.userData.userID;
+            }
             var userName = mainResponse.userData.username;
             var userPlatform = mainResponse.userData.platform;
             var selectedLegend = mainResponse.accountInfo.active.legend;

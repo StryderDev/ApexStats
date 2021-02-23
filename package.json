@@ -20,6 +20,7 @@
     "discord.js-light": "^3.5.3",
     "dotenv": "^8.2.0",
     "fs": "0.0.1-security",
+    "lossless-json": "^1.0.4",
     "luxon": "^1.26.0",
     "mozambique-api-wrapper": "^2.0.0",
     "mysql": "^2.18.1",
