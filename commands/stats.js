@@ -114,7 +114,7 @@ module.exports = {
             var lastUpdated = Math.floor(new Date().getTime() / 1000);
 
             let checkQuery = `SELECT * FROM \`users\` WHERE \`PlayerID\` = '${userID}';`;
-            let insertQuery = `INSERT INTO \`users\` (\`PlayerID\`, \`PlayerName\`, \`Platform\`, \`lastUpdated\`) VALUES ('${userID}', '${userName}', '${userPlatform}', '${lastUpdated}')`;
+            let insertQuery = `INSERT INTO \`users\` (\`PlayerID\`, \`PlayerName\`, \`Platform\`, \`Level\`, \`RankScore\`, \`lastUpdated\`) VALUES ('${userID}', '${userName}', '${userPlatform}', '${accountLevel}', '${currentRank.score}', '${lastUpdated}')`;
 
             connection.getConnection(function (err, connection) {
               if (err) {
