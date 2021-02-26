@@ -27,8 +27,14 @@ module.exports = {
         true
       )
       .addField(
-        "Guilds/Shards",
-        `**Shard Count:** ${client.shard.count}\n**Guild Shard ID:** ${message.guild.shardID}\n**Guild Count:** ${client.guilds.cache.size}`,
+        "Guilds/Members",
+        `**Shard Count:** ${client.shard.count}\n**Guild Shard ID:** ${
+          message.guild.shardID
+        }\n**Guild Count:** ${
+          client.guilds.cache.size
+        }\n**Member Count:** ${message.client.guilds.cache
+          .map((g) => g.memberCount)
+          .reduce((a, c) => a + c)}`,
         true
       )
       .addField(
