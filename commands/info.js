@@ -44,11 +44,7 @@ module.exports = {
         `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
         true
       )
-      .addField(
-        "Uptime",
-        `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`,
-        true
-      )
+      .addField("Uptime", `${days}d, ${hours}h, ${minutes}m, ${seconds}s`, true)
       .addField(
         "Useful Links",
         `[Support Server](https://apexstats.dev/invite)\n[Github Repo](https://apexstats.dev/github)\n[Trello](https://apexstats.dev/trello)`,
