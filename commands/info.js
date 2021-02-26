@@ -34,7 +34,8 @@ module.exports = {
           client.guilds.cache.size
         }\n**Member Count:** ${message.client.guilds.cache
           .map((g) => g.memberCount)
-          .reduce((a, c) => a + c)}`,
+          .reduce((a, c) => a + c)
+          .toLocaleString()}`,
         true
       )
       .addField(
