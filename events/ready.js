@@ -60,6 +60,7 @@ client.once("ready", () => {
 
   const DBLBody = {
     guilds: client.guilds.cache.size,
+    users: client.guilds.cache.map((g) => g.memberCount).reduce((a, c) => a + c),
   };
 
   if (config.DBLToken == "0") {
