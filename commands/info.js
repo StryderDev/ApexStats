@@ -38,18 +38,21 @@ module.exports = {
           .toLocaleString()}`,
         true
       )
+      .addField("\u200b", "\u200b")
+      .addField(
+        "Mem Usage",
+        `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
+        true
+      )
+      .addField(
+        "Uptime",
+        `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`,
+        true
+      )
       .addField(
         "Useful Links",
         `[Support Server](https://apexstats.dev/invite)\n[Github Repo](https://apexstats.dev/github)\n[Trello](https://apexstats.dev/trello)`,
         true
-      )
-      .addField(
-        "Bot Stats",
-        `**Uptime:** ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds\n**Mem Usage:** ${(
-          process.memoryUsage().heapUsed /
-          1024 /
-          1024
-        ).toFixed(2)} MB`
       )
       .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
       .setTimestamp();
