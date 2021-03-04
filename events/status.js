@@ -89,63 +89,6 @@ client.once("ready", () => {
           }ms)`,
           true
         )
-        /* .addField(
-          "[PC] Apex Login",
-          `${getStatus(OauthPC["EU-West"].Status)}EU West (${
-            OauthPC["EU-West"].ResponseTime
-          }ms)\n${getStatus(OauthPC["EU-East"].Status)}EU East (${
-            OauthPC["EU-East"].ResponseTime
-          }ms)\n${getStatus(OauthPC["US-West"].Status)}US West (${
-            OauthPC["US-West"].ResponseTime
-          }ms)\n${getStatus(OauthPC["US-Central"].Status)}US Central (${
-            OauthPC["US-Central"].ResponseTime
-          }ms)\n${getStatus(OauthPC["US-East"].Status)}US East (${
-            OauthPC["US-East"].ResponseTime
-          }ms)\n${getStatus(OauthPC["SouthAmerica"].Status)}South America (${
-            OauthPC["SouthAmerica"].ResponseTime
-          }ms)\n${getStatus(OauthPC["Asia"].Status)}Asia (${
-            OauthPC["Asia"].ResponseTime
-          }ms)`,
-          true
-        )
-        .addField(
-          "[PS4] Apex Login",
-          `${getStatus(OauthPS4["EU-West"].Status)}EU West (${
-            OauthPS4["EU-West"].ResponseTime
-          }ms)\n${getStatus(OauthPS4["EU-East"].Status)}EU East (${
-            OauthPS4["EU-East"].ResponseTime
-          }ms)\n${getStatus(OauthPS4["US-West"].Status)}US West (${
-            OauthPS4["US-West"].ResponseTime
-          }ms)\n${getStatus(OauthPS4["US-Central"].Status)}US Central (${
-            OauthPS4["US-Central"].ResponseTime
-          }ms)\n${getStatus(OauthPS4["US-East"].Status)}US East (${
-            OauthPS4["US-East"].ResponseTime
-          }ms)\n${getStatus(OauthPS4["SouthAmerica"].Status)}South America (${
-            OauthPS4["SouthAmerica"].ResponseTime
-          }ms)\n${getStatus(OauthPS4["Asia"].Status)}Asia (${
-            OauthPS4["Asia"].ResponseTime
-          }ms)`,
-          true
-        )
-        .addField(
-          "[Xbox 1] Apex Login",
-          `${getStatus(OauthX1["EU-West"].Status)}EU West (${
-            OauthX1["EU-West"].ResponseTime
-          }ms)\n${getStatus(OauthX1["EU-East"].Status)}EU East (${
-            OauthX1["EU-East"].ResponseTime
-          }ms)\n${getStatus(OauthX1["US-West"].Status)}US West (${
-            OauthX1["US-West"].ResponseTime
-          }ms)\n${getStatus(OauthX1["US-Central"].Status)}US Central (${
-            OauthX1["US-Central"].ResponseTime
-          }ms)\n${getStatus(OauthX1["US-East"].Status)}US East (${
-            OauthX1["US-East"].ResponseTime
-          }ms)\n${getStatus(OauthX1["SouthAmerica"].Status)}South America (${
-            OauthX1["SouthAmerica"].ResponseTime
-          }ms)\n${getStatus(OauthX1["Asia"].Status)}Asia (${
-            OauthX1["Asia"].ResponseTime
-          }ms)`,
-          true
-        ) */
         .addField(
           "[Crossplay] Apex Login",
           `${getStatus(OauthCrossplay["EU-West"].Status)}EU West (${

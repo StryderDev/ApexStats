@@ -134,7 +134,7 @@ module.exports = {
                 }
 
                 if (results.length > 0) {
-                  console.log("found user.");
+                  // console.log("found user.");
                 } else {
                   connection.query(insertQuery, function (err, results) {
                     console.log(err);
