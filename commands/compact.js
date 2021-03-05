@@ -18,8 +18,8 @@ const {default: axios} = require("axios");
 var currentTimestamp = DateTime.local().toFormat("ooo") * 2;
 
 module.exports = {
-  name: "stats",
-  description: "Shows user legend stats.",
+  name: "compact",
+  description: "Shows user legend stats, but compact.",
   execute(message, args) {
     let platform = args[0];
 
@@ -38,13 +38,13 @@ module.exports = {
     if (!args.length)
       // No args
       return message.channel.send(
-        `To use this command, use the following format: \n\`${config.prefix}stats [platform] [username]\``
+        `To use this command, use the following format: \n\`${config.prefix}compact [platform] [username]\``
       );
 
     if (!platform || !player)
       // Arg 1 or 2 is missing
       return message.channel.send(
-        `To use this command, use the following format:\n\`${config.prefix}stats [platform] [username]\``
+        `To use this command, use the following format:\n\`${config.prefix}compact [platform] [username]\``
       );
 
     if (platform && player) var platformUppercase = platform.toUpperCase();
@@ -145,21 +145,6 @@ module.exports = {
               });
             });
 
-            // Account Data
-            //var totalKills = formatNumbers(rexxResponse.player.stats.kills);
-            //var totalMatches = formatNumbers(rexxResponse.player.stats.matches);
-            //var KPM = rexxResponse.player.stats.kills_per_match;
-            //var totalWins = formatNumbers(rexxResponse.player.stats.wins.total);
-            //var winRatio = formatNumbers(rexxResponse.player.stats.wins["win%"]);
-            //var damageDealt = formatNumbers(rexxResponse.player.stats.damage.dealt);
-            //var avgDamage =
-            //  rexxResponse.player.stats.damage.dealt / rexxResponse.player.stats.matches;
-
-            // Account Trackers
-            var trackerOne = mainResponse.accountInfo.active.trackers[0];
-            var trackerTwo = mainResponse.accountInfo.active.trackers[1];
-            var trackerThree = mainResponse.accountInfo.active.trackers[2];
-
             function findLegendByID() {
               var getLegend = legends[mainResponse.accountInfo.active.legend];
 
@@ -233,12 +218,9 @@ module.exports = {
             // Main Stats Embed
             const statsMain = new Discord.MessageEmbed()
               .setAuthor(
-                `Legend Stats for ${
-                  mainResponse.userData.username
-                } on ${platformUppercase} playing ${findLegendByID(selectedLegend)}`,
+                `Legend Stats for ${mainResponse.userData.username} on ${platformUppercase}`,
                 avatar
               )
-              .setColor(colours[findLegendByID(selectedLegend)])
               .addField(
                 "Ranked Placement",
                 `**Rank:** ${getRankBadge(currentRank.name)} ${currentRank.name} ${
@@ -247,7 +229,7 @@ module.exports = {
                 true
               )
               .addField(
-                `Account & Season ${season} BattlePass Level`,
+                `Account & S${season} BattlePass Level`,
                 `**Account Level ${getAccountLevel(accountLevel)}/500**\n${percentage(
                   500,
                   getAccountLevel(accountLevel),
@@ -258,30 +240,6 @@ module.exports = {
                   10
                 )}`,
                 true
-              )
-              .addField("Currently Equipped Trackers", "\u200b")
-              .addField(
-                `${getTrackerTitle(trackerOne.id, findLegendByID(selectedLegend))}`,
-                `${getTrackerValue(trackerOne.id, formatNumbers(trackerOne.value))}`,
-                true
-              )
-              .addField(
-                `${getTrackerTitle(trackerTwo.id, findLegendByID(selectedLegend))}`,
-                `${getTrackerValue(trackerTwo.id, formatNumbers(trackerTwo.value))}`,
-                true
-              )
-              .addField(
-                `${getTrackerTitle(trackerThree.id, findLegendByID(selectedLegend))}`,
-                `${getTrackerValue(trackerThree.id, formatNumbers(trackerThree.value))}`,
-                true
-              )
-              .setImage(
-                `https://cdn.apexstats.dev/LegendBanners/${findLegendByID(
-                  selectedLegend
-                )}.png?q=${currentTimestamp}`
-              )
-              .setFooter(
-                " Weird tracker name? Let SDCore#1234 know! • BattlePass level 0? Make sure you have the BP Badge equipped!"
               );
 
             msg.delete();
