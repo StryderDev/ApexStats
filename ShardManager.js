@@ -7,7 +7,7 @@ const config = require("./config.json");
 // plan on making the bot public, but as it stands right now,
 // Guess we'll see ;)
 
-const { ShardingManager } = require("discord.js-light");
+const {ShardingManager} = require("discord.js-light");
 const manager = new ShardingManager("./ApexStats.js", {
   token: config.token,
 });
@@ -17,7 +17,7 @@ manager.on("shardCreate", (shard) => {
   shard.on("ready", () => {
     console.log(`Shard ${shard.id} connected to Discord's Gateway.`);
     // Sending the data to the shard.
-    shard.send({ type: "shardId", data: { shardId: shard.id } });
+    shard.send({type: "shardId", data: {shardId: shard.id}});
   });
 });
 
