@@ -150,7 +150,8 @@ client.once("ready", () => {
             .setImage(
               `https://cdn.apexstats.dev/Maps/${mapImage(event.mapName)}.png?q=${currentTimestamp}`
             )
-            .setFooter("Provided by https://rexx.live");
+            .setFooter("Provided by https://rexx.live")
+            .setTimestamp();
 
           const guild = client.guilds.cache.get(config.autoUpdate.guildID);
           if (!guild) return console.log("Unable to find guild.");
