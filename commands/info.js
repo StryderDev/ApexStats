@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const {client, Discord} = require("../ApexStats.js");
 const config = require("../config.json");
+const {version} = require("../package.json");
 
 module.exports = {
   name: "info",
@@ -23,7 +24,7 @@ module.exports = {
       )
       .addField(
         "Bot Info",
-        `**Version:** ${process.env.BOT_VERSION}\n**Last Updated:** ${process.env.LAST_UPDATED}`,
+        `**Version:** ${version}\n**Last Updated:** ${process.env.LAST_UPDATED}`,
         true
       )
       .addField(
