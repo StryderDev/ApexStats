@@ -40,5 +40,6 @@ jobs:
             cd ${{ secrets.PATH }}
             git pull
             npm prune
+            npm i
             npm ci
             pm2 reload 0
