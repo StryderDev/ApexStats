@@ -80,7 +80,7 @@ module.exports = {
                     if (mapName == "World's Edge") {
                       return "Season%208/WorldsEdge";
                     } else if (mapName == "Kings Canyon") {
-                      return "Season%208/KingsCanyon";
+                      return "Season%208/KingsCanyonChaosTheory";
                     } else if (mapName == "Olympus") {
                       return "Season%208/Olympus";
                     }
