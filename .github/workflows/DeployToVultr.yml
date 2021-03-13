@@ -24,7 +24,7 @@ jobs:
         env:
           CI: true
 
-  install:
+  Install on Host:
     runs-on: ubuntu-latest
     needs: Setup
     if: github.ref == 'refs/heads/production'
@@ -42,7 +42,7 @@ jobs:
             npm prune
             npm i
 
-  deploy:
+  Deploy Bot:
     runs-on: ubuntu-latest
     needs: install
     if: github.ref == 'refs/heads/production'
