@@ -17,6 +17,9 @@ const {default: axios} = require("axios");
 
 var currentTimestamp = DateTime.local().toFormat("ooo") * 2;
 
+var OnlineEmoji = "<:StatusUp:786800700533112872>";
+var OfflineEmoji = "<:StatusDown:786800700201238570>";
+
 module.exports = {
   name: "stats",
   description: "Shows user legend stats.",
@@ -107,6 +110,7 @@ module.exports = {
             }
             var userName = mainResponse.userData.username;
             var userPlatform = mainResponse.userData.platform;
+            var isOnline = mainResponse.userData.online;
             var selectedLegend = mainResponse.accountInfo.active.legend;
             var currentRank = mainResponse.accountInfo.ranked;
             var accountBP = mainResponse.accountInfo.battlepass.level;
@@ -230,14 +234,22 @@ module.exports = {
               }
             }
 
+            function getUserStatus() {
+              if (isOnline == "1") {
+                return `**Status:** ${OnlineEmoji}Online`;
+              } else {
+                return `**Status:** ${OfflineEmoji}Offline`;
+              }
+            }
+
             // Main Stats Embed
             const statsMain = new Discord.MessageEmbed()
-              .setAuthor(
-                `Legend Stats for ${
+              .setTitle(
+                `Stats for ${
                   mainResponse.userData.username
-                } on ${platformUppercase} playing ${findLegendByID(selectedLegend)}`,
-                avatar
+                } on ${platformUppercase} playing ${findLegendByID(selectedLegend)}`
               )
+              .setDescription(getUserStatus())
               .setColor(colours[findLegendByID(selectedLegend)])
               .addField(
                 "Ranked Placement",
