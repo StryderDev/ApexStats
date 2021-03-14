@@ -244,7 +244,7 @@ module.exports = {
               )
               .addField(
                 `Account & S${season} BattlePass Level`,
-                `**Account Level ${getAccountLevel(accountLevel)}/500**\n${percentage(
+                `**Account Level ${accountLevel.toLocaleString()}/500**\n${percentage(
                   500,
                   getAccountLevel(accountLevel),
                   10
