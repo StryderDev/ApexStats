@@ -103,7 +103,7 @@ client.once("ready", () => {
           function getMapCountdown(startTime) {
             var currentTime = DateTime.local().toMillis() / 1000;
 
-            return time(startTime - currentTime);
+            return time(startTime - (currentTime - 60));
           }
 
           function getMap() {
