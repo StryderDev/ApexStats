@@ -168,6 +168,8 @@ client.once("ready", () => {
             channel.messages.fetch(config.autoUpdate.map.message).then((msg) => {
               msg.edit(mapEventChecker());
             });
+
+            connection.release();
           } catch (err) {
             console.error(`Other Error: ${err}`);
           }
