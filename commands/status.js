@@ -20,6 +20,8 @@ module.exports = {
             return SlowEmoji;
           } else if (status == "DOWN") {
             return DownEmoji;
+          } else if (status == "OVERLOADED") {
+            return DownEmoji;
           } else {
             return NoDataEmoji;
           }
