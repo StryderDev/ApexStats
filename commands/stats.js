@@ -3,6 +3,7 @@ const config = require("../config.json");
 const percentage = require("percentagebar");
 const legends = require("../GameData/legends.json");
 const colours = require("../GameData/legendColors.json");
+const {updateKills} = require("./functions/updateKills.js");
 
 let mysql = require("mysql");
 let connection = mysql.createPool({
