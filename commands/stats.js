@@ -297,6 +297,10 @@ module.exports = {
                 " Weird tracker name? Let SDCore#1234 know! • BattlePass level 0? Make sure you have the BP Badge equipped!"
               );
 
+            updateKills(trackerOne.id, trackerOne.value);
+            updateKills(trackerTwo.id, trackerTwo.value);
+            updateKills(trackerThree.id, trackerThree.value);
+
             msg.delete();
             msg.channel.send(statsMain);
           })
