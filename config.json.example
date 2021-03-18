@@ -13,7 +13,16 @@
     "database": "MySQL Database",
     "legendTable": "Legends Table",
     "eventTable": "Events Table",
-    "seasonTable": "Season Table"
+    "seasonTable": "Season Table",
+    "mapEvenTable": "Map Event Table",
+  },
+  "APISQL": {
+    "host": "MySQL HOST IP",
+    "username": "MySQL Username",
+    "password": "MySQL Password",
+    "database": "MySQL Database",
+    "usersTable": "Users Table",
+    "killsTable": "USer Kills Table"
   },
   "autoUpdate": {
     "guildID": "Guild ID",
