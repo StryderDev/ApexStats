@@ -1,18 +1,18 @@
 {
-  "Bangalore": "AB3B2F",
   "Bloodhound": "B93933",
-  "Caustic": "A48857",
-  "Crypto": "594F7F",
-  "Fuse": "AA4F34",
   "Gibraltar": "C17743",
-  "Horizon": "406BBE",
   "Lifeline": "9E6DAE",
-  "Loba": "C59456",
+  "Pathfinder": "619BC4",
+  "Wraith": "875FF1",
+  "Bangalore": "AB3B2F",
+  "Caustic": "A48857",
   "Mirage": "D19342",
   "Octane": "7CB660",
-  "Pathfinder": "619BC4",
-  "Rampart": "AE3A84",
-  "Revenant": "A3A36A",
   "Wattson": "406BBE",
-  "Wraith": "875FF1"
+  "Crypto": "594F7F",
+  "Revenant": "A3A36A",
+  "Loba": "C59456",
+  "Rampart": "AE3A84",
+  "Horizon": "406BBE",
+  "Fuse": "AA4F34"
 }
