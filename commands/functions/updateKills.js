@@ -8,7 +8,7 @@ let connection = mysql.createPool({
   database: config.APISQL.database,
 });
 
-function updateKills(userID, legendID, trackerID, trackerValue) {
+function updateKills(userID, userPlatform, legendID, trackerID, trackerValue) {
   // List of current supported kill trackers
   var killTrackers = [
     1814522143, // Bang Kills
@@ -72,7 +72,7 @@ function updateKills(userID, legendID, trackerID, trackerValue) {
 
       if (results.length == 0) {
         // User does not exist, create row with user info and populate kills
-        var createUser = `INSERT INTO userKills (PlayerID, lastUpdated, \`${legendID}\`) VALUES ('${userID}', '${lastUpdated}', '${trackerValue}')`;
+        var createUser = `INSERT INTO userKills (PlayerID, Platform, lastUpdated, \`${legendID}\`) VALUES ('${userID}', '${userPlatform}', '${lastUpdated}', '${trackerValue}')`;
 
         connection.query(createUser, function (err, result) {
           if (err) throw err;
@@ -82,7 +82,7 @@ function updateKills(userID, legendID, trackerID, trackerValue) {
         });
       } else {
         // User does not exist, create row with user info
-        var createUser = `UPDATE userKills SET \`lastUpdated\` = '${lastUpdated}', \`${legendID}\` = '${trackerValue}' WHERE \`PlayerID\` = '${userID}'`;
+        var createUser = `UPDATE userKills SET \`lastUpdated\` = '${lastUpdated}', \`${legendID}\` = '${trackerValue}', \`Platform\` = '${userPlatform}' WHERE \`PlayerID\` = '${userID}'`;
 
         connection.query(createUser, function (err, result) {
           if (err) throw err;
