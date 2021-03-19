@@ -243,6 +243,40 @@ module.exports = {
               }
             }
 
+            function totalAccountKills() {
+              return new Promise((resolve, reject) => {
+                getKillCount = `SELECT SUM(\`898565421\` + \`182221730\` + \`1409694078\` + \`1464849662\` + \`827049897\` + \`725342087\` + \`1111853120\` + \`2045656322\` + \`843405508\` + \`187386164\` + \`80232848\` + \`64207844\` + \`1579967516\` + \`2105222312\` + \`88599337\` + \`405279270\`) as killTotal FROM userKills WHERE \`PlayerID\` = '${userID}'`;
+
+                connection.query(getKillCount, function (err, results) {
+                  if (err) {
+                    reject(err);
+                    connection.release();
+                    console.log(err);
+                    return message.channel.send(
+                      "There was a problem with the SQL syntax. Please try again later."
+                    );
+                  }
+
+                  resolve(results[0].killTotal);
+                });
+              });
+            }
+
+            async function getprefix() {
+              return new Promise((resolve, reject) => {
+                getKillCount = `SELECT SUM(\`898565421\` + \`182221730\` + \`1409694078\` + \`1464849662\` + \`827049897\` + \`725342087\` + \`1111853120\` + \`2045656322\` + \`843405508\` + \`187386164\` + \`80232848\` + \`64207844\` + \`1579967516\` + \`2105222312\` + \`88599337\` + \`405279270\`) as killTotal FROM userKills WHERE \`PlayerID\` = '${userID}'`;
+
+                connection.query(getKillCount, function (err, result) {
+                  if (err) {
+                    console.log(err);
+                    reject(err);
+                  } else {
+                    resolve(result[0].killTotal);
+                  }
+                });
+              });
+            }
+
             // Main Stats Embed
             const statsMain = new Discord.MessageEmbed()
               .setTitle(
@@ -253,8 +287,10 @@ module.exports = {
               .setDescription(getUserStatus())
               .setColor(colours[findLegendByID(selectedLegend)])
               .addField(
-                "Ranked Placement",
-                `**Rank:** ${getRankBadge(currentRank.name)} ${currentRank.name} ${
+                "Account Stats",
+                `**Total Kills:** ${getprefix().then((x) => {
+                  return x;
+                })}\n**Rank:** ${getRankBadge(currentRank.name)} ${currentRank.name} ${
                   currentRank.division
                 }\n**Score:** ${formatNumbers(currentRank.score)}`,
                 true
