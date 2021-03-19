@@ -261,6 +261,9 @@ module.exports = {
                 } else {
                   return userKills.toLocaleString();
                 }
+
+                // Use for when introducing kills into embed
+                // **Total Kills:** ${getUserKills()}\n
               }
 
               // Main Stats Embed
@@ -274,11 +277,9 @@ module.exports = {
                 .setColor(colours[findLegendByID(selectedLegend)])
                 .addField(
                   "Account Stats",
-                  `**Total Kills:** ${getUserKills()}\n**Rank:** ${getRankBadge(
-                    currentRank.name
-                  )} ${currentRank.name} ${currentRank.division}\n**Score:** ${formatNumbers(
-                    currentRank.score
-                  )}`,
+                  `**Rank:** ${getRankBadge(currentRank.name)} ${currentRank.name} ${
+                    currentRank.division
+                  }\n**Score:** ${formatNumbers(currentRank.score)}`,
                   true
                 )
                 .addField(
