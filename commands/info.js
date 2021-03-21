@@ -51,7 +51,7 @@ module.exports = {
           )
           .addField(
             "Bot Info",
-            `**Version:** ${version}\n**Users Stats Tracked:** ${results[0].UserCount.toLocaleString()}`,
+            `**Version:** ${version}\n**Users Tracked:** ${results[0].UserCount.toLocaleString()}`,
             true
           )
           .addField(
@@ -75,7 +75,7 @@ module.exports = {
           .addField("Uptime", `${days}d, ${hours}h, ${minutes}m, ${seconds}s`, true)
           .addField(
             "Useful Links",
-            `[Support Server](https://apexstats.dev/invite)\n[Github Repo](https://apexstats.dev/github)\n[Trello](https://apexstats.dev/trello)`,
+            `[Stats Site](https://apexstats.dev/)\n[Support Server](https://apexstats.dev/invite)\n[Github Repo](https://apexstats.dev/github)\n[Trello](https://apexstats.dev/trello)`,
             true
           )
           .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
