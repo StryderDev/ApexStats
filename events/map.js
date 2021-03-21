@@ -83,7 +83,7 @@ client.once("ready", () => {
           function time(seconds) {
             var currentDate = DateTime.local();
             var futureDate = DateTime.local().plus({
-              seconds: seconds,
+              seconds: seconds + 60,
             });
 
             var timeTill = futureDate.diff(currentDate, ["hours", "minutes", "seconds"]);
