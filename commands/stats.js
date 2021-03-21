@@ -4,6 +4,7 @@ const percentage = require("percentagebar");
 const legends = require("../GameData/legends.json");
 const colours = require("../GameData/legendColors.json");
 const {updateKills} = require("./functions/updateKills.js");
+const {findBadgeByID} = require("./functions/badgeHandler.js");
 
 let mysql = require("mysql");
 let connection = mysql.createPool({
@@ -295,6 +296,10 @@ module.exports = {
                   )}`,
                   true
                 )
+                .addField("Currently Equipped Badges", "\u200b")
+                .addField("Badge 1", findBadgeByID(1), true)
+                .addField("Badge 1", findBadgeByID(2), true)
+                .addField("Badge 1", findBadgeByID(3), true)
                 .addField("Currently Equipped Trackers", "\u200b")
                 .addField(
                   `${getTrackerTitle(trackerOne.id, findLegendByID(selectedLegend))}`,
