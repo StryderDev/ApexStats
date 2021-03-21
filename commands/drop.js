@@ -6,41 +6,62 @@ const KingsCanyonDrops = require("../GameData/MapDrops/KingsCanyon.json");
 module.exports = {
   name: "drop",
   description: "Picks a random place to drop based on the current in-game map.",
-  execute(message) {
+  execute(message, args) {
     axios
       .get("https://fn.alphaleagues.com/v1/apex/map/")
       .then((result) => {
         var map = result.data;
 
         function dropLocation(name) {
-          var maps = ["Kings Canyon", "World's Edge", "Olympus"];
+          if (args[0]) {
+            var manualMaps = ["KC", "WE", "OLYMPUS"];
+            var mapArg = args[0].toUpperCase();
 
-          if (name.includes("Olympus")) {
-            var mapName = "Olympus";
-          } else if (name.includes("World's")) {
-            var mapName = "World's Edge";
-          } else if (name.includes("Kings") || name.includes("King's")) {
-            var mapName = "Kings Canyon";
-          } else {
-            var mapName = name;
-          }
-
-          if (maps.indexOf(mapName) != -1) {
-            if (mapName == "World's Edge") {
-              return WorldsEdgeDrops[
-                Math.floor(Math.random() * WorldsEdgeDrops.length)
-              ];
-            } else if (mapName == "Kings Canyon") {
-              return KingsCanyonDrops[
-                Math.floor(Math.random() * KingsCanyonDrops.length)
-              ];
-            } else if (mapName == "Olympus") {
-              return OlympusDrops[
-                Math.floor(Math.random() * OlympusDrops.length)
-              ];
+            if (manualMaps.indexOf(mapArg) != -1) {
+              if (mapArg == "WE") {
+                return `Drop in **${
+                  WorldsEdgeDrops[Math.floor(Math.random() * WorldsEdgeDrops.length)]
+                }** on World's Edge.`;
+              } else if (mapArg == "KC") {
+                return `Drop in **${
+                  KingsCanyonDrops[Math.floor(Math.random() * KingsCanyonDrops.length)]
+                }** on Kings Canyon.`;
+              } else if (mapArg == "OLYMPUS") {
+                return `Drop in **${
+                  OlympusDrops[Math.floor(Math.random() * OlympusDrops.length)]
+                }** on Olympus.`;
+              }
             }
           } else {
-            return "NoMapData";
+            var maps = ["Kings Canyon", "World's Edge", "Olympus"];
+
+            if (name.includes("Olympus")) {
+              var mapName = "Olympus";
+            } else if (name.includes("World's")) {
+              var mapName = "World's Edge";
+            } else if (name.includes("Kings") || name.includes("King's")) {
+              var mapName = "Kings Canyon";
+            } else {
+              var mapName = name;
+            }
+
+            if (maps.indexOf(mapName) != -1) {
+              if (mapName == "World's Edge") {
+                return `Drop in **${
+                  WorldsEdgeDrops[Math.floor(Math.random() * WorldsEdgeDrops.length)]
+                }** on World's Edge.`;
+              } else if (mapName == "Kings Canyon") {
+                return `Drop in **${
+                  KingsCanyonDrops[Math.floor(Math.random() * KingsCanyonDrops.length)]
+                }** on Kings Canyon.`;
+              } else if (mapName == "Olympus") {
+                return `Drop in **${
+                  OlympusDrops[Math.floor(Math.random() * OlympusDrops.length)]
+                }** on Olympus.`;
+              }
+            } else {
+              return "NoMapData";
+            }
           }
         }
 
@@ -56,14 +77,12 @@ module.exports = {
           }
         }
 
-        const dropMessage = `Drop in **${dropLocation(
-          map.map
-        )}** on ${getMapName(map.map)}.`;
+        const dropMessage = dropLocation(map.map);
 
         message.channel.send(dropMessage);
       })
       .catch((err) => {
-        msg.channel.send(
+        message.channel.send(
           "Could not retreive in-game map rotation schedule to determine a drop location. Please try again later."
         );
         console.log(err);
