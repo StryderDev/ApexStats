@@ -38,7 +38,6 @@ client.once("ready", () => {
           var event = results[0];
           var map = result.data;
           var nextMap = map.next[0];
-          var nextMaps = map.next;
           var currentTimestamp = Math.floor(DateTime.local().toFormat("ooo"));
 
           function mapImage(name) {
@@ -106,15 +105,6 @@ client.once("ready", () => {
             return time(startTime - (currentTime - 60));
           }
 
-          function getMap() {
-            return nextMaps.map(
-              (x) =>
-                `**${x.map}**\n**Duration**: ${
-                  x.duration
-                } minutes.\n**Starts in:** ${getMapCountdown(x.timestamp)}\n`
-            );
-          }
-
           function mapEventChecker() {
             var currentTime = Math.floor(DateTime.local().toSeconds());
 
@@ -136,7 +126,8 @@ client.once("ready", () => {
             .setImage(
               `https://cdn.apexstats.dev/Maps/${mapImage(map.map)}.png?q=${currentTimestamp}`
             )
-            .setFooter("Provided by https://rexx.live");
+            .setFooter("Provided by https://rexx.live")
+            .setTimestamp();
 
           const mapEventEmbed = new Discord.MessageEmbed()
             .setTitle(`Map Rotations Disabled - ${getMapName(event.mapName)}`)
