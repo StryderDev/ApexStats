@@ -1,12 +1,19 @@
-function findBadgeByID(id) {
-  return id;
+function findBadgeEmote(id) {
+  return `<${id}:name>`;
 }
 
-module.exports = {findBadgeByID};
+function findBadgeName(id) {
+  return `badge name: ${id}`;
+}
+
+module.exports = {findBadgeEmote, findBadgeName};
 
 // BADGE NOTES
 //
 // Main idea is:
+// Check if ID is empty badge ID.
+// If yes, Display "No Data" and "-", similar to trackers
+// Otherwise:
 // Step 1.
 // Check if the ID of the badge is one of the following:
 // - Account Badge
