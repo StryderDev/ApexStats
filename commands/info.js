@@ -58,9 +58,7 @@ module.exports = {
             "Guilds/Members",
             `**Shard Count:** ${client.shard.count}\n**Guild Shard ID:** ${
               message.guild.shardID
-            }\n**Guild Count:** ${
-              client.guilds.cache.size
-            }\n**Member Count:** ${message.client.guilds.cache
+            }\n**Guild Count:** ${client.guilds.cache.size.toLocaleString()}\n**Member Count:** ${message.client.guilds.cache
               .map((g) => g.memberCount)
               .reduce((a, c) => a + c)
               .toLocaleString()}`,
