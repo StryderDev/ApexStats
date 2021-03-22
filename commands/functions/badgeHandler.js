@@ -15,6 +15,7 @@ module.exports = {findBadgeByID};
 // - Content Pack Badge
 // - GameMode Badge
 // - Ranked Badge
+// - Event Badges
 // If it is, return the nessecary info
 // If it isn't, get the current character, check their related
 //  badge json file, and return the nessecary info
