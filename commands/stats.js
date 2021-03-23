@@ -4,7 +4,7 @@ const percentage = require("percentagebar");
 const legends = require("../GameData/legends.json");
 const colours = require("../GameData/legendColors.json");
 const {updateKills} = require("./functions/updateKills.js");
-const {findBadgeName, findBadgeEmote} = require("./functions/badgeHandler.js");
+const {badgeTitle, badgeValue} = require("./functions/badgeHandler.js");
 
 let mysql = require("mysql");
 let connection = mysql.createPool({
@@ -75,14 +75,6 @@ module.exports = {
         "Sorry, it looks like you didn't provide a valid platform.\nFor reference, PC = Origin/Steam, X1 = Xbox, and PS4 = Playstation Network."
       );
 
-    function checkPlat(platform, username) {
-      if (platform == "PC") {
-        return username;
-      } else {
-        return "SDCore";
-      }
-    }
-
     function formatNumbers(number) {
       return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
@@ -118,6 +110,11 @@ module.exports = {
             var accountBP = mainResponse.accountInfo.battlepass.level;
             var accountLevel = mainResponse.accountInfo.level;
             var lastUpdated = Math.floor(new Date().getTime() / 1000);
+
+            // Badges
+            var badgeOne = mainResponse.accountInfo.active.badges[0];
+            var badgeTwo = mainResponse.accountInfo.active.badges[1];
+            var badgeThree = mainResponse.accountInfo.active.badges[2];
 
             let checkQuery = `SELECT * FROM \`users\` WHERE \`PlayerID\` = '${userID}';`;
             let insertQuery = `INSERT INTO \`users\` (\`PlayerID\`, \`PlayerName\`, \`Platform\`, \`Level\`, \`RankScore\`, \`lastUpdated\`) VALUES ('${userID}', '${userName}', '${userPlatform}', '${accountLevel}', '${currentRank.score}', '${lastUpdated}')`;
@@ -297,9 +294,13 @@ module.exports = {
                   true
                 )
                 .addField("Currently Equipped Badges", "\u200b")
-                .addField(findBadgeEmote(1), findBadgeName(1), true)
-                .addField(findBadgeEmote(2), findBadgeName(2), true)
-                .addField(findBadgeEmote(3), findBadgeName(3), true)
+                .addField(badgeTitle(badgeOne.id), badgeValue(badgeOne.id, badgeOne.value), true)
+                // .addField(badgeTitle(badgeTwo.id), badgeValue(badgeTwo.id, badgeTwo.value), true)
+                //.addField(
+                //  badgeTitle(badgeThree.id),
+                //  badgeValue(badgeThree.id, badgeThree.value),
+                //  true
+                //)
                 .addField("Currently Equipped Trackers", "\u200b")
                 .addField(
                   `${getTrackerTitle(trackerOne.id, findLegendByID(selectedLegend))}`,

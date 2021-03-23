@@ -1,12 +1,19 @@
-function findBadgeEmote(id) {
-  return `<${id}:name>`;
+const accountBadges = require("../../GameData/BadgeData/accountBadges.json");
+
+function badgeTitle(id) {
+  var badgeName = accountBadges[id].fullName;
+
+  return badgeName;
 }
 
-function findBadgeName(id) {
-  return `badge name: ${id}`;
+function badgeValue(id, value) {
+  var emoteID = accountBadges[id].id;
+  var emoteName = accountBadges[id].emoteNAme;
+
+  return `<:${emoteName}:${emoteID}> Level ${value}`;
 }
 
-module.exports = {findBadgeEmote, findBadgeName};
+module.exports = {badgeTitle, badgeValue};
 
 // BADGE NOTES
 //
