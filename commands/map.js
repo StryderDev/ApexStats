@@ -80,9 +80,9 @@ module.exports = {
                     if (mapName == "World's Edge") {
                       return "Season%208/WorldsEdge";
                     } else if (mapName == "Kings Canyon") {
-                      return "Season%208/KingsCanyonChaosTheory";
+                      return "Season%208/KCSplit2";
                     } else if (mapName == "Olympus") {
-                      return "Season%208/Olympus";
+                      return "Season%208/OlympusSplit2";
                     }
 
                     return mapName;
@@ -139,7 +139,9 @@ module.exports = {
 
                 const mapEmbed = new Discord.MessageEmbed()
                   .setDescription(
-                    `The current map is **${getMapName(map.map)}**.\nThe next map is **${getMapName(
+                    `The current map is **${getMapName(
+                      map.map
+                    )}**. The current ranked map is **Olympus**.\nThe next map is **${getMapName(
                       nextMap.map
                     )}** in **${time(map.times.remaining.seconds)}** which will last for **${
                       nextMap.duration
