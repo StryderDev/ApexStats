@@ -2,6 +2,13 @@
   "1774065557": {
     "id": "823703913345581077",
     "emoteName": "AccountLevel",
+    "fix": "1",
     "fullName": "Account Level"
+  },
+  "2027544950": {
+    "id": "823703913345581077",
+    "emoteName": "AccountLevel",
+    "fix": "2",
+    "fullName": "Battle Pass Level"
   }
 }

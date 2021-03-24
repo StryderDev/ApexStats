@@ -1,16 +1,26 @@
 const accountBadges = require("../../GameData/BadgeData/accountBadges.json");
 
 function badgeTitle(id) {
-  var badgeName = accountBadges[id].fullName;
+  // Empty badge
+  if (id == "1488777442") return "No Data";
 
-  return badgeName;
+  // If badge isn't found
+  if (accountBadges[id] == null) return id;
+
+  return `${accountBadges[id].fullName} - ${accountBadges[id].fix}`;
 }
 
 function badgeValue(id, value) {
-  var emoteID = accountBadges[id].id;
-  var emoteName = accountBadges[id].emoteNAme;
+  // Empty badge
+  if (id == "1488777442") return "-";
 
-  return `<:${emoteName}:${emoteID}> Level ${value}`;
+  // If badge isn't found
+  if (accountBadges[id] == null) return "-";
+
+  var emoteID = accountBadges[id].id;
+  var emoteName = accountBadges[id].emoteName;
+
+  return `<:${emoteName}:${emoteID}> Level ${value - accountBadges[id].fix}`;
 }
 
 module.exports = {badgeTitle, badgeValue};
