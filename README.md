@@ -2,6 +2,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cac0f45e81cd49f689d3216d916fb903)](https://app.codacy.com/gh/SDCore/Apex-Stats-Bot?utm_source=github.com&utm_medium=referral&utm_content=SDCore/Apex-Stats-Bot&utm_campaign=Badge_Grade_Settings)
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
