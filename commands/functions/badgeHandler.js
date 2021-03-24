@@ -1,7 +1,7 @@
 const accountBadges = require("../../GameData/BadgeData/accountBadges.json");
 
 function badgeTitle(id) {
-  // Empty badge
+  // If there's no badge equipped
   if (id == "1488777442") return "No Data";
 
   // If badge isn't found
@@ -11,11 +11,11 @@ function badgeTitle(id) {
 }
 
 function badgeValue(id, value) {
-  // Empty badge
-  if (id == "1488777442") return "-";
+  // If there's no badge equipped
+  if (id == "1488777442") return "<:DefaultBadge:824409685553053716> -";
 
   // If badge isn't found
-  if (accountBadges[id] == null) return "-";
+  if (accountBadges[id] == null) return "<:DefaultBadge:824409685553053716> -";
 
   var emoteID = accountBadges[id].id;
   var emoteName = accountBadges[id].emoteName;
