@@ -18,32 +18,35 @@ function badgeValue(id, value) {
   if (id == "1488777442") return "<:DefaultBadge:824409685553053716> -";
 
   // If badge is found
-  function checkValue(pretext, value, fix) {
-    if (pretext != false) return `${pretext} ${value - fix}`;
-
-    return "";
-  }
-
-  function checkTier(tiered, tiers, value) {
+  function checkBadgeValue(emote, id, pretext, fix, tiered, tiers, value) {
+    if (pretext != false) return `<:${emote}:${id}> ${pretext} ${value - fix}`;
     if (tiered != false) return tiers[value];
 
-    return value;
+    return console.log(value);
   }
 
   // If badge has multiple tiers, it will have the same ID, but not the
   // same value. There needs to be a way to check the value before
   // outputting the badge and title
   if (accountBadges[id] != null)
-    return `<:${accountBadges[id].emoteName}:${accountBadges[id].id}> ${checkValue(
+    return `${checkBadgeValue(
+      accountBadges[id].emoteName,
+      accountBadges[id].id,
       accountBadges[id].preText,
-      value,
-      accountBadges[id].fix
+      accountBadges[id].fix,
+      accountBadges[id].tiered,
+      accountBadges[id].tiers,
+      value
     )}`;
   if (bpBadges[id] != null)
-    return `<:${bpBadges[id].emoteName}:${bpBadges[id].id}> ${checkValue(
+    return `${checkBadgeValue(
+      bpBadges[id].emoteName,
+      bpBadges[id].id,
       bpBadges[id].preText,
-      value,
-      bpBadges[id].fix
+      bpBadges[id].fix,
+      bpBadges[id].tiered,
+      bpBadges[id].tiers,
+      value
     )}`;
 
   // If badge is found

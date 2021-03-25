@@ -4,6 +4,7 @@
     "emoteName": "Season8BP",
     "fix": "2",
     "fullName": "Season 8 BP",
-    "preText": "Level "
+    "preText": "Level ",
+    "tiered": false
   }
 }
