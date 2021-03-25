@@ -24,6 +24,15 @@ function badgeValue(id, value) {
     return "";
   }
 
+  function checkTier(tiered, tiers, value) {
+    if (tiered != false) return tiers[value];
+
+    return value;
+  }
+
+  // If badge has multiple tiers, it will have the same ID, but not the
+  // same value. There needs to be a way to check the value before
+  // outputting the badge and title
   if (accountBadges[id] != null)
     return `<:${accountBadges[id].emoteName}:${accountBadges[id].id}> ${checkValue(
       accountBadges[id].preText,
