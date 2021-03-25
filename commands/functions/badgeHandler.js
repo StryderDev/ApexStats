@@ -18,12 +18,24 @@ function badgeValue(id, value) {
   if (id == "1488777442") return "<:DefaultBadge:824409685553053716> -";
 
   // If badge is found
+  function checkValue(pretext, value, fix) {
+    if (pretext != false) return `${pretext} ${value - fix}`;
+
+    return "";
+  }
+
   if (accountBadges[id] != null)
-    return `<:${accountBadges[id].emoteName}:${accountBadges[id].id}> Level ${
-      value - accountBadges[id].fix
-    }`;
+    return `<:${accountBadges[id].emoteName}:${accountBadges[id].id}> ${checkValue(
+      accountBadges[id].preText,
+      value,
+      accountBadges[id].fix
+    )}`;
   if (bpBadges[id] != null)
-    return `<:${bpBadges[id].emoteName}:${bpBadges[id].id}> Level ${value - bpBadges[id].fix}`;
+    return `<:${bpBadges[id].emoteName}:${bpBadges[id].id}> ${checkValue(
+      bpBadges[id].preText,
+      value,
+      bpBadges[id].fix
+    )}`;
 
   // If badge is found
   return "<:DefaultBadge:824409685553053716> -";

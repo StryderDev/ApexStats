@@ -3,6 +3,14 @@
     "id": "824571962420101122",
     "emoteName": "AccountLevel",
     "fix": "1",
-    "fullName": "Account Level"
+    "fullName": "Account Level",
+    "preText": "Level "
+  },
+  "756181602": {
+    "id": "824586766505476166",
+    "emoteName": "3KDamageBadge",
+    "fix": "0",
+    "fullName": "3K Damage Badge",
+    "preText": false
   }
 }
