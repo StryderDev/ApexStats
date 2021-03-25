@@ -1,33 +1,32 @@
-// const accountBadges = require("../../GameData/badges.json");
-var minify = require("jsonminify");
-
-var badgeObject = minify.minify("../../GameData/badges.json");
+const accountBadges = require("../../GameData/BadgeData/accountBadges.json");
+const bpBadges = require("../../GameData/BadgeData/battlepassBadges.json");
 
 function badgeTitle(id) {
   // If there's no badge equipped
   if (id == "1488777442") return "No Data";
 
-  return console.log(badges);
+  // If badge is found
+  if (accountBadges[id] != null) return `${accountBadges[id].fullName}`;
+  if (bpBadges[id] != null) return `${bpBadges[id].fullName}`;
 
   // If badge isn't found
-  if (badgeObject[id] == null) return id;
-
-  return `${badgeObject[id].fullName} - ${badgeObject[id].fix}`;
+  return id;
 }
 
 function badgeValue(id, value) {
   // If there's no badge equipped
   if (id == "1488777442") return "<:DefaultBadge:824409685553053716> -";
 
-  return console.log(badges);
+  // If badge is found
+  if (accountBadges[id] != null)
+    return `<:${accountBadges[id].emoteName}:${accountBadges[id].id}> Level ${
+      value - accountBadges[id].fix
+    }`;
+  if (bpBadges[id] != null)
+    return `<:${bpBadges[id].emoteName}:${bpBadges[id].id}> Level ${value - bpBadges[id].fix}`;
 
-  // If badge isn't found
-  if (badgeObject[id] == null) return "<:DefaultBadge:824409685553053716> -";
-
-  var emoteID = badgeObject[id].id;
-  var emoteName = badgeObject[id].emoteName;
-
-  return `<:${emoteName}:${emoteID}> Level ${value - badgeObject[id].fix}`;
+  // If badge is found
+  return "<:DefaultBadge:824409685553053716> -";
 }
 
 module.exports = {badgeTitle, badgeValue};
