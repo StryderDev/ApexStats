@@ -1,26 +1,33 @@
-const accountBadges = require("../../GameData/BadgeData/accountBadges.json");
+// const accountBadges = require("../../GameData/badges.json");
+var minify = require("jsonminify");
+
+var badgeObject = minify.minify("../../GameData/badges.json");
 
 function badgeTitle(id) {
   // If there's no badge equipped
   if (id == "1488777442") return "No Data";
 
-  // If badge isn't found
-  if (accountBadges[id] == null) return id;
+  return console.log(badges);
 
-  return `${accountBadges[id].fullName} - ${accountBadges[id].fix}`;
+  // If badge isn't found
+  if (badgeObject[id] == null) return id;
+
+  return `${badgeObject[id].fullName} - ${badgeObject[id].fix}`;
 }
 
 function badgeValue(id, value) {
   // If there's no badge equipped
   if (id == "1488777442") return "<:DefaultBadge:824409685553053716> -";
 
+  return console.log(badges);
+
   // If badge isn't found
-  if (accountBadges[id] == null) return "<:DefaultBadge:824409685553053716> -";
+  if (badgeObject[id] == null) return "<:DefaultBadge:824409685553053716> -";
 
-  var emoteID = accountBadges[id].id;
-  var emoteName = accountBadges[id].emoteName;
+  var emoteID = badgeObject[id].id;
+  var emoteName = badgeObject[id].emoteName;
 
-  return `<:${emoteName}:${emoteID}> Level ${value - accountBadges[id].fix}`;
+  return `<:${emoteName}:${emoteID}> Level ${value - badgeObject[id].fix}`;
 }
 
 module.exports = {badgeTitle, badgeValue};
