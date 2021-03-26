@@ -1,7 +1,9 @@
 const accountBadges = require("../../GameData/BadgeData/accountBadges.json");
 const bpBadges = require("../../GameData/BadgeData/battlepassBadges.json");
 
-function badgeTitle(id) {
+function badgeTitle(id, legend) {
+  var trackerFile = require(`../../GameData/BadgeData/legendBadges/${legend}.json`);
+
   // If there's no badge equipped
   if (id == "1488777442") return "No Data";
 
@@ -9,11 +11,15 @@ function badgeTitle(id) {
   if (accountBadges[id] != null) return `${accountBadges[id].fullName}`;
   if (bpBadges[id] != null) return `${bpBadges[id].fullName}`;
 
+  if (trackerFile[id] != null) return `${trackerFile[id].fullName}`;
+
   // If badge isn't found
   return id;
 }
 
-function badgeValue(id, value) {
+function badgeValue(id, value, legend) {
+  var trackerFile = require(`../../GameData/BadgeData/legendBadges/${legend}.json`);
+
   // If there's no badge equipped
   if (id == "1488777442") return "<:DefaultBadge:824409685553053716> -";
 
@@ -22,7 +28,7 @@ function badgeValue(id, value) {
     if (pretext != false) return `<:${emote}:${id}> ${pretext} ${value - fix}`;
     if (tiered != false) return tiers[value];
 
-    return console.log(value);
+    return `<:${emote}:${id}>`;
   }
 
   // If badge has multiple tiers, it will have the same ID, but not the
@@ -46,6 +52,17 @@ function badgeValue(id, value) {
       bpBadges[id].fix,
       bpBadges[id].tiered,
       bpBadges[id].tiers,
+      value
+    )}`;
+
+  if (trackerFile[id] != null)
+    return `${checkBadgeValue(
+      trackerFile[id].emoteName,
+      trackerFile[id].id,
+      trackerFile[id].preText,
+      trackerFile[id].fix,
+      trackerFile[id].tiered,
+      trackerFile[id].tiers,
       value
     )}`;
 

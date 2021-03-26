@@ -294,11 +294,19 @@ module.exports = {
                   true
                 )
                 .addField("Currently Equipped Badges", "\u200b")
-                .addField(badgeTitle(badgeOne.id), badgeValue(badgeOne.id, badgeOne.value), true)
-                .addField(badgeTitle(badgeTwo.id), badgeValue(badgeTwo.id, badgeTwo.value), true)
                 .addField(
-                  badgeTitle(badgeThree.id),
-                  badgeValue(badgeThree.id, badgeThree.value),
+                  badgeTitle(badgeOne.id, findLegendByID(selectedLegend)),
+                  badgeValue(badgeOne.id, badgeOne.value, findLegendByID(selectedLegend)),
+                  true
+                )
+                .addField(
+                  badgeTitle(badgeTwo.id, findLegendByID(selectedLegend)),
+                  badgeValue(badgeTwo.id, badgeTwo.value, findLegendByID(selectedLegend)),
+                  true
+                )
+                .addField(
+                  badgeTitle(badgeThree.id, findLegendByID(selectedLegend)),
+                  badgeValue(badgeThree.id, badgeThree.value, findLegendByID(selectedLegend)),
                   true
                 )
                 .addField("Currently Equipped Trackers", "\u200b")

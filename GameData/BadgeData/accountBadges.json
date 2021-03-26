@@ -7,19 +7,28 @@
     "preText": "Level ",
     "tiered": false
   },
-  "756181602": {
-    "id": "824586766505476166",
-    "emoteName": "DefaultBadge",
+  "320244274": {
+    "id": "824831718426673152",
+    "emoteName": "Baller",
     "fix": "0",
-    "fullName": "Damage Badge",
+    "fullName": "Baller",
     "preText": false,
-    "tiered": true,
-    "tiers": {
-      "1": "<:DefaultBadge:824409685553053716> 2K",
-      "2": "<:DefaultBadge:824409685553053716> 2K",
-      "3": "<:DefaultBadge:824409685553053716> 2.5K",
-      "4": "<:3KDamageBadge:824586766505476166> 3K",
-      "5": "<:DefaultBadge:824409685553053716> 4K"
-    }
+    "tiered": false
+  },
+  "1164941559": {
+    "id": "824830604490178600",
+    "emoteName": "BannerLegend",
+    "fix": "0",
+    "fullName": "Banner Legend",
+    "preText": false,
+    "tiered": false
+  },
+  "650330268": {
+    "id": "824829138162417704",
+    "emoteName": "BlackLivesMatter",
+    "fix": "0",
+    "fullName": "Black Lives Matter",
+    "preText": false,
+    "tiered": false
   }
 }
