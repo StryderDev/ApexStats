@@ -121,7 +121,7 @@ client.once("ready", () => {
   setInterval(function () {
     var date = new Date();
 
-    if (date.getMinutes() % 5 == 0) {
+    if (date.getMinutes() % 10 == 0) {
       setPresence();
       console.log(
         `[${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${client.user.tag}`
