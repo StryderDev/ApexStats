@@ -127,5 +127,5 @@ client.once("ready", () => {
         `[${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${client.user.tag}`
       );
     }
-  }, Math.max(1, 30 || 1) * 60 * 1000);
+  }, Math.max(1, 1 || 1) * 60 * 1000);
 });
