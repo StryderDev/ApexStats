@@ -13,5 +13,13 @@
       "4": "<:3KDamageBadge:824586766505476166> 3K",
       "5": "<:4KDamageBadge:824798861926072322> 4K"
     }
+  },
+  "195641987": {
+    "id": "824575089558421505",
+    "emoteName": "HonorableMention",
+    "fix": "0",
+    "fullName": "Honorable Mention",
+    "preText": false,
+    "tiered": false
   }
 }
