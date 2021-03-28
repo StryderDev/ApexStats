@@ -88,7 +88,9 @@ client.once("ready", () => {
         client.user
           .setPresence({
             activity: {
-              name: ` on ${map.map} · ${config.prefix}commands · Providing stats for ${client.guilds.cache.size} servers`,
+              name: ` on ${map.map} · ${
+                config.prefix
+              }commands · Providing stats for ${client.guilds.cache.size.toLocaleString()} servers`,
               type: "PLAYING",
             },
             status: "online",
@@ -101,7 +103,9 @@ client.once("ready", () => {
         client.user
           .setPresence({
             activity: {
-              name: `${config.prefix}commands · Providing stats for ${client.guilds.cache.size} servers`,
+              name: `${
+                config.prefix
+              }commands · Providing stats for ${client.guilds.cache.size.toLocaleString()} servers`,
               type: "WATCHING",
             },
             status: "online",
