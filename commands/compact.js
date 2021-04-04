@@ -96,8 +96,10 @@ module.exports = {
             }
           }
 
-          function getRankBadge(rankName) {
-            if (rankName == "Silver") {
+          function getRankBadge(rankName, rankPos) {
+            if (rankPos > "750") {
+              return "<:rankedMaster:787174770680135680>";
+            } else if (rankName == "Silver") {
               return "<:rankedSilver:787174770424021083>";
             } else if (rankName == "Gold") {
               return "<:rankedGold:787174769942462474>";
@@ -115,13 +117,23 @@ module.exports = {
           }
 
           function findRank(rankName, ladderPos, rankDiv) {
-            if (rankName == "Apex Predator") {
-              var rank = `[#${ladderPos}] Apex Predator`;
-            } else {
-              var rank = `${rankName} ${rankDiv}`;
+            function isMaster(name, div) {
+              if (name == "Master") {
+                return;
+              } else {
+                return div;
+              }
             }
 
-            return `${getRankBadge(rankName)} ${rank}`;
+            if (ladderPos > "750") {
+              var rank = "Master";
+            } else if (rankName == "Apex Predator") {
+              var rank = `[#${ladderPos}] Apex Predator`;
+            } else {
+              var rank = `${rankName} ${isMaster(rankName, rankDiv)}`;
+            }
+
+            return `${getRankBadge(rankName, ladderPos)} ${rank}`;
           }
 
           // Main Stats Embed
