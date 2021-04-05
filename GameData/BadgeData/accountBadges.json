@@ -1,0 +1,34 @@
+{
+  "1774065557": {
+    "id": "824571962420101122",
+    "emoteName": "AccountLevel",
+    "fix": "1",
+    "fullName": "Account Level",
+    "preText": "Level ",
+    "tiered": false
+  },
+  "320244274": {
+    "id": "824831718426673152",
+    "emoteName": "Baller",
+    "fix": "0",
+    "fullName": "Baller",
+    "preText": false,
+    "tiered": false
+  },
+  "1164941559": {
+    "id": "824830604490178600",
+    "emoteName": "BannerLegend",
+    "fix": "0",
+    "fullName": "Banner Legend",
+    "preText": false,
+    "tiered": false
+  },
+  "650330268": {
+    "id": "824829138162417704",
+    "emoteName": "BlackLivesMatter",
+    "fix": "0",
+    "fullName": "Black Lives Matter",
+    "preText": false,
+    "tiered": false
+  }
+}

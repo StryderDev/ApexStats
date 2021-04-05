@@ -4,6 +4,7 @@ const percentage = require("percentagebar");
 const legends = require("../GameData/legends.json");
 const colours = require("../GameData/legendColors.json");
 const {updateKills} = require("./functions/updateKills.js");
+const {badgeTitle, badgeValue} = require("./functions/badgeHandler.js");
 
 let mysql = require("mysql");
 let connection = mysql.createPool({
@@ -110,6 +111,11 @@ module.exports = {
           var accountBP = mainResponse.accountInfo.battlepass.level;
           var accountLevel = mainResponse.accountInfo.level;
           var lastUpdated = Math.floor(new Date().getTime() / 1000);
+
+          // Badges
+          var badgeOne = mainResponse.accountInfo.active.badges[0];
+          var badgeTwo = mainResponse.accountInfo.active.badges[1];
+          var badgeThree = mainResponse.accountInfo.active.badges[2];
 
           let checkQuery = `SELECT * FROM \`users\` WHERE \`PlayerID\` = '${userID}';`;
           let insertQuery = `INSERT INTO \`users\` (\`PlayerID\`, \`PlayerName\`, \`Platform\`, \`Level\`, \`RankScore\`, \`lastUpdated\`) VALUES ('${userID}', '${userName}', '${userPlatform}', '${accountLevel}', '${currentRank.score}', '${lastUpdated}')`;
@@ -302,6 +308,22 @@ module.exports = {
                 )}`,
                 true
               )
+              .addField("Currently Equipped Badges", "\u200b")
+              .addField(
+                badgeTitle(badgeOne.id, findLegendByID(selectedLegend)),
+                badgeValue(badgeOne.id, badgeOne.value, findLegendByID(selectedLegend)),
+                true
+              )
+              .addField(
+                badgeTitle(badgeTwo.id, findLegendByID(selectedLegend)),
+                badgeValue(badgeTwo.id, badgeTwo.value, findLegendByID(selectedLegend)),
+                true
+              )
+              .addField(
+                badgeTitle(badgeThree.id, findLegendByID(selectedLegend)),
+                badgeValue(badgeThree.id, badgeThree.value, findLegendByID(selectedLegend)),
+                true
+              )
               .addField("Currently Equipped Trackers", "\u200b")
               .addField(
                 `${getTrackerTitle(trackerOne.id, findLegendByID(selectedLegend))}`,
@@ -324,7 +346,7 @@ module.exports = {
                 )}.png?q=${currentTimestamp}`
               )
               .setFooter(
-                " Weird tracker name? Let SDCore#1234 know! • BattlePass level 0? Make sure you have the BP Badge equipped!"
+                " Weird tracker/badge name? Let SDCore#1234 know! • BattlePass level 0? Make sure you have the BP Badge equipped!"
               );
 
             updateKills(userID, userPlatform, selectedLegend, trackerOne.id, trackerOne.value);

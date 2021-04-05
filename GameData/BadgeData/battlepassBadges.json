@@ -1,0 +1,34 @@
+{
+  "1450368797": {
+    "id": "824835746077868122",
+    "emoteName": "Season1BP",
+    "fix": "2",
+    "fullName": "Season 1 BP",
+    "preText": "Level ",
+    "tiered": false
+  },
+  "1642424884": {
+    "id": "824838551313186836",
+    "emoteName": "Season2BP",
+    "fix": "3",
+    "fullName": "Season 2 BP",
+    "preText": "Level ",
+    "tiered": false
+  },
+  "2093626156": {
+    "id": "824840544756301864",
+    "emoteName": "Season3BP",
+    "fix": "3",
+    "fullName": "Season 3 BP",
+    "preText": "Level ",
+    "tiered": false
+  },
+  "2027544950": {
+    "id": "824575089558421505",
+    "emoteName": "Season8BP",
+    "fix": "3",
+    "fullName": "Season 8 BP",
+    "preText": "Level ",
+    "tiered": false
+  }
+}

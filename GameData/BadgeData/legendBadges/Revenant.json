@@ -1,0 +1,17 @@
+{
+  "1749928677": {
+    "id": "824586766505476166",
+    "emoteName": "DefaultBadge",
+    "fix": "0",
+    "fullName": "Revenant Damage Badge",
+    "preText": false,
+    "tiered": true,
+    "tiers": {
+      "1": "<:DefaultBadge:824409685553053716> 2K",
+      "2": "<:2KDamageBadge:824798860832276512> 2K",
+      "3": "<:25KDamageBadge:824798861818200132> 2.5K",
+      "4": "<:3KDamageBadge:824586766505476166> 3K",
+      "5": "<:4KDamageBadge:824798861926072322> 4K"
+    }
+  }
+}
