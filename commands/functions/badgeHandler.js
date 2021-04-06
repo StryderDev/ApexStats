@@ -44,7 +44,13 @@ function badgeValue(id, value, legend) {
       accountBadges[id].tiers,
       value
     )}`;
-  if (bpBadges[id] != null)
+  if (bpBadges[id] != null) {
+    if (value > 110) {
+      var setValue = 110;
+    } else {
+      var setValue = value;
+    }
+
     return `${checkBadgeValue(
       bpBadges[id].emoteName,
       bpBadges[id].id,
@@ -52,8 +58,9 @@ function badgeValue(id, value, legend) {
       bpBadges[id].fix,
       bpBadges[id].tiered,
       bpBadges[id].tiers,
-      value
+      setValue
     )}`;
+  }
 
   if (trackerFile[id] != null)
     return `${checkBadgeValue(
