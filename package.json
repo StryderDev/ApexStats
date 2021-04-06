@@ -17,7 +17,7 @@
     "axios": "^0.21.1",
     "canvas": "^2.7.0",
     "dblapi.js": "^2.4.1",
-    "discord.js-light": "^3.5.8",
+    "discord.js-light": "^3.5.9",
     "dotenv": "^8.2.0",
     "fs": "0.0.1-security",
     "lossless-json": "^1.0.4",
