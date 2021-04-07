@@ -46,7 +46,7 @@ function badgeValue(id, value, legend) {
     )}`;
   if (bpBadges[id] != null) {
     if (value > 110) {
-      var setValue = 110;
+      var setValue = 112;
     } else {
       var setValue = value;
     }
