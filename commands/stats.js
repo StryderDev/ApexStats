@@ -87,7 +87,7 @@ module.exports = {
       return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    mainURL = `https://api.apexstats.dev/v5.php?platform=${platformCheck}&player=${player}`;
+    mainURL = `https://api.apexstats.dev/stats.php?platform=${platformCheck}&player=${player}`;
 
     message.channel.send("Retrieving stats...").then(async (msg) => {
       axios
@@ -105,7 +105,7 @@ module.exports = {
           }
           var userName = mainResponse.userData.username;
           var userPlatform = mainResponse.userData.platform;
-          var isOnline = mainResponse.userData.online;
+          var isOnline = mainResponse.userData.status;
           var selectedLegend = mainResponse.accountInfo.active.legend;
           var currentRank = mainResponse.accountInfo.ranked;
           var accountBP = mainResponse.accountInfo.battlepass.level;
@@ -290,7 +290,7 @@ module.exports = {
                 "Account Stats",
                 `**Rank**\n${findRank(
                   currentRank.name,
-                  currentRank.ladderPOS,
+                  currentRank.ladderPos,
                   currentRank.division
                 )}\n**Score**\n${formatNumbers(currentRank.score)}`,
                 true
