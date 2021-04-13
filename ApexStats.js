@@ -1,4 +1,5 @@
-const Discord = require("discord.js-light");
+//const Discord = require("discord.js-light");
+const Discord = require("discord.js");
 const client = new Discord.Client({
   cacheRoles: true,
   cacheGuilds: true,
@@ -19,7 +20,8 @@ process.on("unhandledRejection", (error) => {
 
 module.exports = {
   client: client,
-  Discord: require("discord.js-light"),
+  //Discord: require("discord.js-light"),
+  Discord: require("discord.js"),
 };
 
 // Login to Discord
