@@ -6,6 +6,7 @@ const client = new Discord.Client({
   cacheChannels: true,
   cachePresences: false,
   cacheOverwrites: false,
+  shards: [0],
 });
 
 require("./functions.js")(client);
