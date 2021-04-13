@@ -61,7 +61,7 @@ module.exports = {
       return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    mainURL = `https://api.apexstats.dev/v5.php?platform=${platformCheck}&player=${player}`;
+    mainURL = `https://api.apexstats.dev/stats.php?platform=${platformCheck}&player=${player}`;
 
     message.channel
       .send("Retrieving stats...")
