@@ -1,5 +1,9 @@
 {
-  "898565421": "Bloodhound",
+  "898565421": {
+    "Name": "Bloodhound",
+    "Colour": "123456",
+    "EmoteID": "12345678910987654321"
+  },
   "182221730": "Gibraltar",
   "1409694078": "Lifeline",
   "1464849662": "Pathfinder",
