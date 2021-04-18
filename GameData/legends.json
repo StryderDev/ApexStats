@@ -1,22 +1,66 @@
 {
   "898565421": {
     "Name": "Bloodhound",
-    "Colour": "123456",
-    "EmoteID": "12345678910987654321"
+    "Color": "B93933"
   },
-  "182221730": "Gibraltar",
-  "1409694078": "Lifeline",
-  "1464849662": "Pathfinder",
-  "827049897": "Wraith",
-  "725342087": "Bangalore",
-  "1111853120": "Caustic",
-  "2045656322": "Mirage",
-  "843405508": "Octane",
-  "187386164": "Wattson",
-  "80232848": "Crypto",
-  "64207844": "Revenant",
-  "1579967516": "Loba",
-  "2105222312": "Rampart",
-  "88599337": "Horizon",
-  "405279270": "Fuse"
+  "182221730": {
+    "Name": "Gibraltar",
+    "Color": "C17743"
+  },
+  "1409694078": {
+    "Name": "Lifeline",
+    "Color": "9E6DAE"
+  },
+  "1464849662": {
+    "Name": "Pathfinder",
+    "Color": "619BC4"
+  },
+  "827049897": {
+    "Name": "Wraith",
+    "Color": "875FF1"
+  },
+  "725342087": {
+    "Name": "Bangalore",
+    "Color": "AB3B2F"
+  },
+  "1111853120": {
+    "Name": "Caustic",
+    "Color": "A48857"
+  },
+  "2045656322": {
+    "Name": "Mirage",
+    "Color": "D19342"
+  },
+  "843405508": {
+    "Name": "Octane",
+    "Color": "7CB660"
+  },
+  "187386164": {
+    "Name": "Wattson",
+    "Color": "406BBE"
+  },
+  "80232848": {
+    "Name": "Crypto",
+    "Color": "594F7F"
+  },
+  "64207844": {
+    "Name": "Revenant",
+    "Color": "A3A36A"
+  },
+  "1579967516": {
+    "Name": "Loba",
+    "Color": "C59456"
+  },
+  "2105222312": {
+    "Name": "Rampart",
+    "Color": "AE3A84"
+  },
+  "88599337": {
+    "Name": "Horizon",
+    "Color": "406BBE"
+  },
+  "405279270": {
+    "Name": "Fuse",
+    "Color": "AA4F34"
+  }
 }

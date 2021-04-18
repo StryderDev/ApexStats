@@ -2,7 +2,6 @@ const {Discord} = require("../ApexStats.js");
 const config = require("../config.json");
 const percentage = require("percentagebar");
 const legends = require("../GameData/legends.json");
-const colours = require("../GameData/legendColors.json");
 const {updateKills} = require("./functions/updateKills.js");
 const {badgeTitle, badgeValue} = require("./functions/badgeHandler.js");
 
@@ -156,7 +155,7 @@ module.exports = {
           var trackerThree = mainResponse.accountInfo.active.trackers[2];
 
           function findLegendByID() {
-            var getLegend = legends[mainResponse.accountInfo.active.legend];
+            var getLegend = legends[mainResponse.accountInfo.active.legend].Name;
 
             if (getLegend == "undefined" || getLegend == null) {
               return "NoBanner";
@@ -285,7 +284,7 @@ module.exports = {
                 } on ${platformUppercase} playing ${findLegendByID(selectedLegend)}`
               )
               .setDescription(getUserStatus())
-              .setColor(colours[findLegendByID(selectedLegend)])
+              .setColor(legends[mainResponse.accountInfo.active.legend].Color)
               .addField(
                 "Account Stats",
                 `**Rank**\n${findRank(
