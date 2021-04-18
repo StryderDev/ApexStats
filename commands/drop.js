@@ -83,7 +83,7 @@ module.exports = {
       })
       .catch((err) => {
         message.channel.send(
-          "Could not retreive in-game map rotation schedule to determine a drop location. Please try again later."
+            "Could not retreive in-game map rotation schedule to determine a drop location. Use `>>drop kc`, `>>drop we`, or `>>drop olympus` for map specific drops."
         );
         console.log(err);
       });

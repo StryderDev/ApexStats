@@ -93,7 +93,7 @@ client.once("ready", () => {
               }commands · Providing stats for ${client.guilds.cache.size.toLocaleString()} servers`,
               type: "PLAYING",
             },
-            status: "online",
+            status: "dnd",
           })
           .catch(console.error);
       })
@@ -108,7 +108,7 @@ client.once("ready", () => {
               }commands · Providing stats for ${client.guilds.cache.size.toLocaleString()} servers`,
               type: "WATCHING",
             },
-            status: "online",
+            status: "dnd",
           })
           .catch(console.error);
       });
