@@ -15,6 +15,7 @@
     "eventTable": "Events Table",
     "seasonTable": "Season Table",
     "mapEvenTable": "Map Event Table",
+    "ALGSTable": "ALGS Table"
   },
   "APISQL": {
     "host": "MySQL HOST IP",
@@ -42,6 +43,11 @@
       "enabled": "true or false",
       "channel": "Channel ID",
       "message": "Message ID",
+      "interval": "Update Interval in Minutes"
+    },
+    "channelStatus": {
+      "enabled": "true or false",
+      "channel": "Channel ID",
       "interval": "Update Interval in Minutes"
     }
   }
