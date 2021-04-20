@@ -119,7 +119,7 @@ client.once("ready", () => {
         }
 
         function statusSum() {
-          var sum = checkOrigin() + checkNova() + checkAccounts() + checkSteam() + checkCrossplay();
+          var sum = checkOrigin() + checkNova() + checkAccounts() + checkCrossplay();
 
           return sum;
         }
