@@ -16,7 +16,6 @@ client.once("ready", () => {
         var originResult = responses[0].data["Origin_login"];
         var novaResult = responses[0].data["EA_novafusion"];
         var accountsResult = responses[0].data["EA_accounts"];
-        var OauthSteam = responses[0].data["ApexOauth_Steam"];
         var OauthCrossplay = responses[0].data["ApexOauth_Crossplay"];
 
         function checkOrigin() {
@@ -94,31 +93,6 @@ client.once("ready", () => {
           return EUWest + EUEast + USWest + USEast + USCentral + SouthAmerica + Asia;
         }
 
-        function checkSteam() {
-          if (OauthSteam["EU-West"].Status != "UP") var EUWest = 0.1;
-          else var EUWest = 0;
-
-          if (OauthSteam["EU-East"].Status != "UP") var EUEast = 0.1;
-          else var EUEast = 0;
-
-          if (OauthSteam["US-West"].Status != "UP") var USWest = 0.1;
-          else var USWest = 0;
-
-          if (OauthSteam["US-East"].Status != "UP") var USEast = 0.1;
-          else var USEast = 0;
-
-          if (OauthSteam["US-Central"].Status != "UP") var USCentral = 0.1;
-          else var USCentral = 0;
-
-          if (OauthSteam["SouthAmerica"].Status != "UP") var SouthAmerica = 0.1;
-          else var SouthAmerica = 0;
-
-          if (OauthSteam["Asia"].Status != "UP") var Asia = 0.1;
-          else var Asia = 0;
-
-          return EUWest + EUEast + USWest + USEast + USCentral + SouthAmerica + Asia;
-        }
-
         function checkCrossplay() {
           if (OauthCrossplay["EU-West"].Status != "UP") var EUWest = 0.1;
           else var EUWest = 0;
@@ -150,9 +124,9 @@ client.once("ready", () => {
           return sum;
         }
 
-        if (statusSum() > 2) {
+        if (statusSum() > 1.8) {
           var statusEmoji = "🔴";
-        } else if (statusSum() > 1.1) {
+        } else if (statusSum() > 1) {
           var statusEmoji = "🟡";
         } else {
           var statusEmoji = "🟢";
