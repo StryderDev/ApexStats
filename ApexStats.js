@@ -1,12 +1,17 @@
 //const Discord = require("discord.js-light");
-const Discord = require("discord.js-light");
-const client = new Discord.Client({
-  cacheRoles: true,
-  cacheGuilds: true,
-  cacheEmojis: true,
-  cacheChannels: true,
-  cachePresences: false,
-  cacheOverwrites: false,
+//const client = new Discord.Client({
+//  cacheRoles: true,
+//  cacheGuilds: true,
+//  cacheEmojis: true,
+// cacheChannels: true,
+//  cachePresences: false,
+//  cacheOverwrites: false,
+//});
+
+const Commando = require("discord.js-light-commando");
+
+const client = new Commando.Client({
+  owner: "360564818123554836",
 });
 
 require("./functions.js")(client);
