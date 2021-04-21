@@ -9,10 +9,38 @@
 //});
 
 const Commando = require("discord.js-light-commando");
+const sqlite = require("sqlite");
+const sqlite3 = require("sqlite3");
 
 const client = new Commando.Client({
   owner: "360564818123554836",
+  commandPrefix: ">>",
+  disableEveryone: true,
+  invite: "https://discord.gg/eH8VxssFW6",
+  cacheRoles: true,
+  cacheGuilds: true,
+  cacheEmojis: true,
+  cacheChannels: true,
+  cachePresences: false,
+  cacheOverwrites: false,
 });
+
+const path = require("path");
+
+client.registry
+  .registerDefaultTypes()
+  .registerGroups([["misc", "Uncategorized commands."]])
+  .registerDefaultGroups()
+  .registerDefaultCommands({help: false, unknownCommand: false})
+  .registerCommandsIn(path.join(__dirname, "commands"));
+
+client
+  .setProvider(
+    sqlite
+      .open({filename: "database.db", driver: sqlite3.Database})
+      .then((db) => new Commando.SQLiteProvider(db))
+  )
+  .catch(console.error);
 
 require("./functions.js")(client);
 
