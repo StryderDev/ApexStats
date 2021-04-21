@@ -1,5 +1,6 @@
 const accountBadges = require("../../GameData/BadgeData/accountBadges.json");
 const bpBadges = require("../../GameData/BadgeData/battlepassBadges.json");
+const teaserBadges = require("../../GameData/BadgeData/teaserBadges.json");
 
 function badgeTitle(id, legend) {
   var trackerFile = require(`../../GameData/BadgeData/legendBadges/${legend}.json`);
@@ -10,7 +11,7 @@ function badgeTitle(id, legend) {
   // If badge is found
   if (accountBadges[id] != null) return `${accountBadges[id].fullName}`;
   if (bpBadges[id] != null) return `${bpBadges[id].fullName}`;
-
+  if (teaserBadges[id] != null) return `${teaserBadges[id].fullName}`;
   if (trackerFile[id] != null) return `${trackerFile[id].fullName}`;
 
   // If badge isn't found
@@ -44,6 +45,7 @@ function badgeValue(id, value, legend) {
       accountBadges[id].tiers,
       value
     )}`;
+
   if (bpBadges[id] != null) {
     if (value > 110) {
       var setValue = 112;
@@ -72,6 +74,17 @@ function badgeValue(id, value, legend) {
       trackerFile[id].fix,
       trackerFile[id].tiered,
       trackerFile[id].tiers,
+      value
+    )}`;
+
+  if (teaserBadges[id] != null)
+    return `${checkBadgeValue(
+      teaserBadges[id].emoteName,
+      teaserBadges[id].id,
+      teaserBadges[id].preText,
+      teaserBadges[id].fix,
+      teaserBadges[id].tiered,
+      teaserBadges[id].tiers,
       value
     )}`;
 
