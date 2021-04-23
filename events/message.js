@@ -21,7 +21,7 @@ client.on("message", (message) => {
   }
 
   // If the message does not start with the prefix, ignore it
-  if (!message.content.startsWith(config.prefix) || message.author.bot) return;
+  if (message.author.bot) return;
 
   // Temporary logging for debugging
   client.guilds.cache
