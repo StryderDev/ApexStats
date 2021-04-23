@@ -39,8 +39,9 @@ module.exports = class MapCommand extends Command {
       return msg.say("future rotations: 19238102301983");
     } else {
       // Just show current map
-      axios.get("https://fn.alphaleagues.com/v1/apex/map/").then((result) => {
+      axios.get("https://fn.alphaleagues.com/v1/apex/map/?next=1").then((result) => {
         var map = result.data;
+        var nextMap = result.data.next;
 
         function getTime(time) {
           var now = DateTime.local();
@@ -58,11 +59,32 @@ module.exports = class MapCommand extends Command {
           return `${pluralize(time.hours, "hour")}, ${pluralize(time.minutes, "minute")}`;
         }
 
-        const mapEmbed = new MessageEmbed().setDescription(
-          `The current map is **${map.map}**, which lasts for ${getTime(
-            map.times.nextMap
-          )}.\nThe current ranked map is **Olympus**.`
-        );
+        function mapImage(map) {
+          var maps = ["Kings Canyon", "World's Edge", "Olympus"];
+          var mapName = map
+            .replace(
+              /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
+              ""
+            )
+            .replace(/\s/g, "");
+
+          if (maps.indexOf(map) != -1) {
+            return `Season%208/${mapName}`;
+          } else {
+            return "NoMapData";
+          }
+        }
+
+        const mapEmbed = new MessageEmbed()
+          .setDescription(
+            `:map: The current map is **${map.map}** for ${getTime(
+              map.times.nextMap
+            )}.\n:clock1: The next map is **${nextMap[0].map}** which lasts for ${
+              nextMap[0].duration
+            } minutes.\n<:ApexPredator:787174770730336286> The current ranked map is **Olympus**.`
+          )
+          .setImage(`https://cdn.apexstats.dev/Maps/${mapImage(map.map)}.png`)
+          .setFooter("Provided by https://rexx.live/");
 
         return msg.embed(mapEmbed);
       });
