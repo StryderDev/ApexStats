@@ -1,9 +1,8 @@
-const {exists} = require("fs");
-const {exit} = require("process");
+const {axios} = require("axios");
 
 function checkMsg(msg) {
   // If the server is the apex server
-  if (msg.guild.id == "835268919174365275") {
+  if (msg.guild.id == "541484311354933258") {
     // Check if user is a discord mod or admin
     if (
       msg.member.roles.cache.some((role) => role.name === "Discord Moderator") ||
@@ -15,7 +14,7 @@ function checkMsg(msg) {
 
     // If user is not discord mod or admin, check
     // to see if the channel is #use-bots-here
-    if (msg.channel.id == "835268919668768791") {
+    if (msg.channel.id == "632283707482308608") {
       console.log(`+(A)[${msg.guild.name}][#${msg.channel.name}] ${msg.content}`);
       return 0;
     }
