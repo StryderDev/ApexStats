@@ -29,7 +29,11 @@ const path = require("path");
 
 client.registry
   .registerDefaultTypes()
-  .registerGroups([["misc", "Uncategorized commands."]])
+  .registerGroups([
+    ["utility", "Map/Event/Other Information"],
+    ["competitive", "ALGS Info"],
+    ["misc", "Uncategorized"],
+  ])
   .registerDefaultGroups()
   .registerDefaultCommands({help: false, unknownCommand: false})
   .registerCommandsIn(path.join(__dirname, "commands"));
