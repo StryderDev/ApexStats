@@ -31,7 +31,7 @@ client.registry
   .registerDefaultTypes()
   .registerGroups([
     ["utility", "Map/Event/Other Information"],
-    ["competitive", "ALGS Info"],
+    ["comp", "ALGS Info"],
     ["misc", "Uncategorized"],
   ])
   .registerDefaultGroups()
