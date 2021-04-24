@@ -2,6 +2,8 @@ const {client} = require("../ApexStats.js");
 const config = require("../config.json");
 const fetch = require("node-fetch");
 const axios = require("axios");
+const chalk = require("chalk");
+var {DateTime} = require("luxon");
 
 // Top.GG API
 const DBL = require("dblapi.js");
@@ -18,7 +20,10 @@ if (config.topGG == "0") {
 }
 
 client.once("ready", () => {
-  console.log(`Logging in as ${client.user.tag}`);
+  console.log(chalk`{yellow [${DateTime.local().toFormat("hh:mm:ss")}] Logging in...}`);
+  console.log(
+    chalk`{green [${DateTime.local().toFormat("hh:mm:ss")}] Logging in as ${client.user.tag}}`
+  );
 
   const botID = client.user.id;
 
@@ -117,7 +122,11 @@ client.once("ready", () => {
   // Set intitial bot presence on load, otherwise presence
   // will be empty until the next update
   setPresence();
-  console.log(`[${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${client.user.tag}`);
+  console.log(
+    chalk`{blueBright [${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${
+      client.user.tag
+    }}`
+  );
 
   // Update the bot presence every 5 minutes to update
   // the amount of servers the bot is in and to update
@@ -128,7 +137,9 @@ client.once("ready", () => {
     if (date.getMinutes() % 10 == 0) {
       setPresence();
       console.log(
-        `[${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${client.user.tag}`
+        chalk`{blueBright [${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${
+          client.user.tag
+        }}`
       );
     }
   }, Math.max(1, 1 || 1) * 60 * 1000);
