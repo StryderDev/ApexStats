@@ -1,3 +1,4 @@
+const chalk = require("chalk");
 const {Command} = require("discord.js-light-commando");
 const {MessageEmbed} = require("discord.js");
 const axios = require("axios");
@@ -21,6 +22,9 @@ module.exports = class MapCommand extends Command {
         },
       ],
     });
+  }
+  onError(error, message) {
+    console.log(`Error: ${error}`);
   }
   run(msg, {amount}) {
     if (checkMsg(msg) == 1) return;
