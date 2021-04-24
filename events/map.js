@@ -1,5 +1,6 @@
 const {client, Discord} = require("../ApexStats.js");
-var {DateTime} = require("luxon");
+var {DateTime, Duration} = require("luxon");
+const {MessageEmbed} = require("discord.js");
 const config = require("../config.json");
 const axios = require("axios");
 
@@ -14,160 +15,74 @@ let connection = mysql.createPool({
 client.once("ready", () => {
   // ----- APEX MAP ROTATION UPDATE ----- //
   function updateMapRotation() {
-    let query = `SELECT * FROM ${config.SQL.mapEventTable} ORDER BY \`id\` DESC LIMIT 1`;
-    var mapURL = "https://fn.alphaleagues.com/v1/apex/map/?next=1";
+    const pluralize = (count, noun, suffix = "s") => `${count} ${noun}${count !== 1 ? suffix : ""}`;
 
-    connection.getConnection(function (err, connection) {
-      if (err) {
-        console.log(err);
-        return message.channel.send(
-          "There was an error connecting to the database. Please try again later."
-        );
+    function getTime(time) {
+      var now = DateTime.local();
+      var nowSeconds = Math.floor(DateTime.local().toSeconds());
+      var math = time - nowSeconds;
+      var future = DateTime.local().plus({seconds: math});
+
+      var timeUntil = future.diff(now, ["hours", "minutes", "seconds"]);
+
+      var time = timeUntil.toObject();
+
+      return `${pluralize(time.hours, "hour")}, ${pluralize(time.minutes, "minute")}`;
+    }
+
+    function mapImage(map) {
+      var maps = ["Kings Canyon", "World's Edge", "Olympus"];
+      var mapName = map
+        .replace(
+          /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
+          ""
+        )
+        .replace(/\s/g, "");
+
+      if (maps.indexOf(map) != -1) {
+        // _01 for Ranked Split 1
+        // _02 for Ranked Split 2
+        return `Season%208/${mapName}_02`;
+      } else {
+        return "NoMapData";
       }
+    }
 
-      connection.query(query, function (err, results) {
-        if (err) {
-          connection.release();
-          console.log(err);
-          return message.channel.send(
-            "There was a problem with the SQL syntax. Please try again later."
-          );
-        }
+    axios.get("https://fn.alphaleagues.com/v1/apex/map/?next=1").then((result) => {
+      var map = result.data;
+      var nextMap = result.data.next;
 
-        axios.get("https://fn.alphaleagues.com/v1/apex/map/?next=1").then((result) => {
-          var event = results[0];
-          var map = result.data;
-          var nextMap = map.next[0];
-          var currentTimestamp = Math.floor(DateTime.local().toFormat("ooo"));
+      const mapEmbed = new MessageEmbed()
+        .setDescription(
+          `:map: The current map is **${map.map}** for ${getTime(
+            map.times.nextMap
+          )}.\n:clock1: The next map is **${nextMap[0].map}** and lasts for ${Duration.fromMillis(
+            nextMap[0].duration * 60 * 1000
+          ).toFormat(
+            "h'h,' m'm.'"
+          )}\n<:ApexPredator:787174770730336286> The current ranked map is **Olympus**.`
+        )
+        .setImage(`https://cdn.apexstats.dev/Maps/${mapImage(map.map)}.png`)
+        .setFooter("Provided by https://rexx.live/");
 
-          function mapImage(name) {
-            var maps = ["Kings Canyon", "World's Edge", "Olympus"];
+      const guild = client.guilds.cache.get(config.autoUpdate.guildID);
+      if (!guild) return console.log("Unable to find guild.");
 
-            if (name.includes("Olympus")) {
-              var mapName = "Olympus";
-            } else if (name.includes("World's")) {
-              var mapName = "World's Edge";
-            } else if (name.includes("Kings")) {
-              var mapName = "Kings Canyon";
-            } else {
-              var mapName = name;
-            }
+      const channel = guild.channels.cache.find(
+        (c) => c.id === config.autoUpdate.map.channel && c.type === "text"
+      );
+      if (!channel) return console.log("Unable to find channel.");
 
-            if (maps.indexOf(mapName) != -1) {
-              if (mapName == "World's Edge") {
-                return "Season%208/WorldsEdge";
-              } else if (mapName == "Kings Canyon") {
-                return "Season%208/KCSplit2";
-              } else if (mapName == "Olympus") {
-                return "Season%208/OlympusSplit2";
-              }
+      try {
+        const message = channel.messages.fetch(config.autoUpdate.map.message);
+        if (!message) return console.log("Unable to find message.");
 
-              return mapName;
-            } else {
-              return "NoMapData";
-            }
-          }
-
-          function getMapName(name) {
-            if (name.includes("Olympus")) {
-              return (mapName = "Olympus");
-            } else if (name.includes("World's")) {
-              return (mapName = "World's Edge");
-            } else if (name.includes("Kings") || name.includes("King's")) {
-              return (mapName = "Kings Canyon");
-            } else {
-              return (mapName = name);
-            }
-          }
-
-          function time(seconds) {
-            var currentDate = DateTime.local();
-            var futureDate = DateTime.local().plus({
-              seconds: seconds + 60,
-            });
-
-            var timeTill = futureDate.diff(currentDate, ["hours", "minutes", "seconds"]);
-
-            var finalTime = timeTill.toObject();
-
-            const pluralize = (count, noun, suffix = "s") =>
-              `${count} ${noun}${count !== 1 ? suffix : ""}`;
-
-            return `${pluralize(finalTime.hours, "hour")}, ${pluralize(
-              finalTime.minutes,
-              "minute"
-            )}`;
-          }
-
-          function getMapCountdown(startTime) {
-            var currentTime = DateTime.local().toMillis() / 1000;
-
-            return time(startTime - (currentTime - 60));
-          }
-
-          function mapEventChecker() {
-            var currentTime = Math.floor(DateTime.local().toSeconds());
-
-            if (event.timeStart < currentTime && event.timeEnd > currentTime) {
-              return mapEventEmbed;
-            } else {
-              return mapEmbed;
-            }
-          }
-
-          const mapEmbed = new Discord.MessageEmbed()
-            .setDescription(
-              `The current map is **${getMapName(
-                map.map
-              )}**. The current ranked map is **Olympus**.\nThe next map is **${getMapName(
-                nextMap.map
-              )}** in **${time(map.times.remaining.seconds)}** which will last for **${
-                nextMap.duration
-              } minutes**.`
-            )
-            .setImage(
-              `https://cdn.apexstats.dev/Maps/${mapImage(map.map)}.png?q=${currentTimestamp}`
-            )
-            .setFooter("Provided by https://rexx.live")
-            .setTimestamp();
-
-          const mapEventEmbed = new Discord.MessageEmbed()
-            .setTitle(`Map Rotations Disabled - ${getMapName(event.mapName)}`)
-            .setDescription(
-              `**${
-                event.eventName
-              } Active** - All in-game map rotations are disabled for another **${getMapCountdown(
-                event.timeEnd
-              )}**.`
-            )
-            .setImage(
-              `https://cdn.apexstats.dev/Maps/${mapImage(event.mapName)}.png?q=${currentTimestamp}`
-            )
-            .setFooter("Provided by https://rexx.live")
-            .setTimestamp();
-
-          const guild = client.guilds.cache.get(config.autoUpdate.guildID);
-          if (!guild) return console.log("Unable to find guild.");
-
-          const channel = guild.channels.cache.find(
-            (c) => c.id === config.autoUpdate.map.channel && c.type === "text"
-          );
-          if (!channel) return console.log("Unable to find channel.");
-
-          try {
-            const message = channel.messages.fetch(config.autoUpdate.map.message);
-            if (!message) return console.log("Unable to find message.");
-
-            channel.messages.fetch(config.autoUpdate.map.message).then((msg) => {
-              msg.edit(mapEventChecker());
-            });
-
-            connection.release();
-          } catch (err) {
-            console.error(`Other Error: ${err}`);
-          }
+        channel.messages.fetch(config.autoUpdate.map.message).then((msg) => {
+          msg.edit(mapEmbed);
         });
-      });
+      } catch (err) {
+        console.error(`Other Error: ${err}`);
+      }
     });
   }
 
