@@ -34,6 +34,8 @@ module.exports = class MapCommand extends Command {
       return num;
     }
 
+    const pluralize = (count, noun, suffix = "s") => `${count} ${noun}${count !== 1 ? suffix : ""}`;
+
     function getTime(time) {
       var now = DateTime.local();
       var nowSeconds = Math.floor(DateTime.local().toSeconds());
@@ -43,9 +45,6 @@ module.exports = class MapCommand extends Command {
       var timeUntil = future.diff(now, ["hours", "minutes", "seconds"]);
 
       var time = timeUntil.toObject();
-
-      const pluralize = (count, noun, suffix = "s") =>
-        `${count} ${noun}${count !== 1 ? suffix : ""}`;
 
       return `${pluralize(time.hours, "hour")}, ${pluralize(time.minutes, "minute")}`;
     }
@@ -82,7 +81,7 @@ module.exports = class MapCommand extends Command {
                   `**${x.map}**\nStarts in ${getTime(
                     x.timestamp
                   )} and lasts for ${Duration.fromMillis(x.duration * 60 * 1000).toFormat(
-                    "h 'hours,' m 'minutes.'"
+                    "h'h,' m'm.'"
                   )}\n`
               );
             }
@@ -102,16 +101,15 @@ module.exports = class MapCommand extends Command {
           var map = result.data;
           var nextMap = result.data.next;
 
-          // NEED TO ADD PLURAL FOR DURATION OFLAST MAP ON THIS AND NEXT MAP COMMAND
           const mapEmbed = new MessageEmbed()
             .setDescription(
               `:map: The current map is **${map.map}** for ${getTime(
                 map.times.nextMap
               )}.\n:clock1: The next map is **${
                 nextMap[0].map
-              }** which lasts for ${Duration.fromMillis(nextMap[0].duration * 60 * 1000).toFormat(
-                "h 'hours,' m 'minutes'"
-              )}.\n<:ApexPredator:787174770730336286> The current ranked map is **Olympus**.`
+              }** and lasts for ${Duration.fromMillis(nextMap[0].duration * 60 * 1000).toFormat(
+                "h'h,' m'm.'"
+              )}\n<:ApexPredator:787174770730336286> The current ranked map is **Olympus**.`
             )
             .setImage(`https://cdn.apexstats.dev/Maps/${mapImage(map.map)}.png`)
             .setFooter("Provided by https://rexx.live/");
