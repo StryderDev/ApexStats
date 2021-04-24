@@ -23,8 +23,8 @@ module.exports = class MapCommand extends Command {
       ],
     });
   }
-  onError(error, message) {
-    console.log(`Error: ${error}`);
+  onError(error) {
+    console.log(chalk`{red Error: ${error}}`);
   }
   run(msg, {amount}) {
     if (checkMsg(msg) == 1) return;
