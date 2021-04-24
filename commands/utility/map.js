@@ -1,7 +1,7 @@
 const {Command} = require("discord.js-light-commando");
 const {MessageEmbed} = require("discord.js");
 const axios = require("axios");
-var {DateTime} = require("luxon");
+var {DateTime, Duration} = require("luxon");
 const {checkMsg} = require("../functions/checkMsg.js");
 
 module.exports = class MapCommand extends Command {
@@ -79,9 +79,11 @@ module.exports = class MapCommand extends Command {
             function nextMaps() {
               return nextMap.map(
                 (x) =>
-                  `**${x.map}**\nStarts in ${getTime(x.timestamp)} and lasts for ${
-                    x.duration
-                  } minutes.\n`
+                  `**${x.map}**\nStarts in ${getTime(
+                    x.timestamp
+                  )} and lasts for ${Duration.fromMillis(x.duration * 60 * 1000).toFormat(
+                    "h 'hours,' m 'minutes.'"
+                  )}\n`
               );
             }
 
@@ -100,13 +102,16 @@ module.exports = class MapCommand extends Command {
           var map = result.data;
           var nextMap = result.data.next;
 
+          // NEED TO ADD PLURAL FOR DURATION OFLAST MAP ON THIS AND NEXT MAP COMMAND
           const mapEmbed = new MessageEmbed()
             .setDescription(
               `:map: The current map is **${map.map}** for ${getTime(
                 map.times.nextMap
-              )}.\n:clock1: The next map is **${nextMap[0].map}** which lasts for ${
-                nextMap[0].duration
-              } minutes.\n<:ApexPredator:787174770730336286> The current ranked map is **Olympus**.`
+              )}.\n:clock1: The next map is **${
+                nextMap[0].map
+              }** which lasts for ${Duration.fromMillis(nextMap[0].duration * 60 * 1000).toFormat(
+                "h 'hours,' m 'minutes'"
+              )}.\n<:ApexPredator:787174770730336286> The current ranked map is **Olympus**.`
             )
             .setImage(`https://cdn.apexstats.dev/Maps/${mapImage(map.map)}.png`)
             .setFooter("Provided by https://rexx.live/");
