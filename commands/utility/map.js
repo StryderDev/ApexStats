@@ -34,49 +34,71 @@ module.exports = class MapCommand extends Command {
       return num;
     }
 
+    function getTime(time) {
+      var now = DateTime.local();
+      var nowSeconds = Math.floor(DateTime.local().toSeconds());
+      var math = time - nowSeconds;
+      var future = DateTime.local().plus({seconds: math});
+
+      var timeUntil = future.diff(now, ["hours", "minutes", "seconds"]);
+
+      var time = timeUntil.toObject();
+
+      const pluralize = (count, noun, suffix = "s") =>
+        `${count} ${noun}${count !== 1 ? suffix : ""}`;
+
+      return `${pluralize(time.hours, "hour")}, ${pluralize(time.minutes, "minute")}`;
+    }
+
+    function mapImage(map) {
+      var maps = ["Kings Canyon", "World's Edge", "Olympus"];
+      var mapName = map
+        .replace(
+          /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
+          ""
+        )
+        .replace(/\s/g, "");
+
+      if (maps.indexOf(map) != -1) {
+        // _01 for Ranked Split 1
+        // _02 for Ranked Split 2
+        return `Season%208/${mapName}_02`;
+      } else {
+        return "NoMapData";
+      }
+    }
+
     if (lengthCheck(amount) >= 1) {
-      // Do current map rotation + however many future rotations
-      return msg.say("future rotations: 19238102301983");
+      msg.say("Retrieving in-game map rotation schedule...").then(async (message) => {
+        // Just show current map
+        axios
+          .get(`https://fn.alphaleagues.com/v1/apex/map/?next=${lengthCheck(amount)}`)
+          .then((result) => {
+            var nextMap = result.data.next;
+
+            function nextMaps() {
+              return nextMap.map(
+                (x) =>
+                  `**${x.map}**\nStarts in ${getTime(x.timestamp)} and lasts for ${
+                    x.duration
+                  } minutes.\n`
+              );
+            }
+
+            const mapEmbed = new MessageEmbed()
+              .setDescription(nextMaps())
+              .setFooter("Provided by https://rexx.live/");
+
+            message.delete();
+            message.embed(mapEmbed);
+          });
+      });
     } else {
       msg.say("Retrieving in-game map rotation schedule...").then(async (message) => {
         // Just show current map
         axios.get("https://fn.alphaleagues.com/v1/apex/map/?next=1").then((result) => {
           var map = result.data;
           var nextMap = result.data.next;
-
-          function getTime(time) {
-            var now = DateTime.local();
-            var nowSeconds = Math.floor(DateTime.local().toSeconds());
-            var math = time - nowSeconds;
-            var future = DateTime.local().plus({seconds: math});
-
-            var timeUntil = future.diff(now, ["hours", "minutes", "seconds"]);
-
-            var time = timeUntil.toObject();
-
-            const pluralize = (count, noun, suffix = "s") =>
-              `${count} ${noun}${count !== 1 ? suffix : ""}`;
-
-            return `${pluralize(time.hours, "hour")}, ${pluralize(time.minutes, "minute")}`;
-          }
-
-          function mapImage(map) {
-            var maps = ["Kings Canyon", "World's Edge", "Olympus"];
-            var mapName = map
-              .replace(
-                /(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g,
-                ""
-              )
-              .replace(/\s/g, "");
-
-            if (maps.indexOf(map) != -1) {
-              // _01 for Ranked Split 1
-              // _02 for Ranked Split 2
-              return `Season%208/${mapName}_02`;
-            } else {
-              return "NoMapData";
-            }
-          }
 
           const mapEmbed = new MessageEmbed()
             .setDescription(
