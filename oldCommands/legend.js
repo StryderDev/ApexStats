@@ -1,4 +1,4 @@
-const { Discord } = require("../ApexStats.js");
+const {Discord} = require("../ApexStats.js");
 const config = require("../config.json");
 
 let mysql = require("mysql");
@@ -9,15 +9,14 @@ let connection = mysql.createPool({
   database: config.SQL.database,
 });
 
-var { DateTime } = require("luxon");
+var {DateTime} = require("luxon");
 
 module.exports = {
   name: "legend",
   description:
     "Information about a legend such as their biography, age, home world, and abilities.",
   execute(message, args) {
-    if (!args.length)
-      return message.channel.send("Please provide a legend name.");
+    if (!args.length) return message.channel.send("Please provide a legend name.");
 
     var legend = args[0].toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
 
@@ -39,16 +38,13 @@ module.exports = {
       "Wattson",
       "Wraith",
       "Fuse",
+      "Valkyrie",
     ];
 
     if (legends.indexOf(legend) == -1)
-      return message.channel.send(
-        "Seems that legend isn't in our database yet."
-      );
+      return message.channel.send("Seems that legend isn't in our database yet.");
 
-    let query = `SELECT * FROM ${
-      config.SQL.legendTable
-    } WHERE \`name\` = ${mysql.escape(legend)}`;
+    let query = `SELECT * FROM ${config.SQL.legendTable} WHERE \`name\` = ${mysql.escape(legend)}`;
 
     connection.getConnection(function (err, connection) {
       if (err) {
