@@ -35,7 +35,7 @@ module.exports = class MapCommand extends Command {
       var onlineBottom = "<:onlineBottom:836525149645045760>";
       var slowTop = "<:slowTop:836525570112225291>";
       var slowMiddle = "<:slowMiddle:836525642299867147>";
-      var slowMottom = "<:slowMottom:836525570078539806>";
+      var slowBottom = "<:slowMottom:836525570078539806>";
       var downTop = "<:onlineTop:836526070559539280>";
       var downMiddle = "<:onlineMiddle:836526063290810429>";
       var downBottom = "<:onlineBottom:836526055128694794>";
@@ -47,6 +47,7 @@ module.exports = class MapCommand extends Command {
           var novaResult = responses[0].data["EA_novafusion"];
           var accountsResult = responses[0].data["EA_accounts"];
           var platformResult = responses[0].data["otherPlatforms"];
+          var mozamResponse = responses[0].data["selfCoreTest"];
 
           function getStatus(status, position) {
             if (status == "UP") {
@@ -113,8 +114,11 @@ module.exports = class MapCommand extends Command {
               true
             )
             .addField(
-              "Xbox/Playstation",
-              `${getStatus(platformResult["Xbox-Live"].Status, "top")}Xbox Live\n${getStatus(
+              "Origin/XBL/PSN",
+              `${getStatus(mozamResponse["Origin-API"].Status, "top")}Origin\n${getStatus(
+                platformResult["Xbox-Live"].Status,
+                "middle"
+              )}Xbox Live\n${getStatus(
                 platformResult["Playstation-Network"].Status,
                 "bottom"
               )}PlayStation Network`,
