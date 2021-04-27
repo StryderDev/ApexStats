@@ -46,6 +46,7 @@ module.exports = class MapCommand extends Command {
           var OauthCrossplay = responses[0].data["ApexOauth_Crossplay"];
           var novaResult = responses[0].data["EA_novafusion"];
           var accountsResult = responses[0].data["EA_accounts"];
+          var platformResult = responses[0].data["otherPlatforms"];
 
           function getStatus(status, position) {
             if (status == "UP") {
@@ -111,7 +112,14 @@ module.exports = class MapCommand extends Command {
               }ms)\n`,
               true
             )
-            .addField("\u200b", "\u200b", true)
+            .addField(
+              "Xbox/Playstation",
+              `${getStatus(platformResult["Xbox-Live"].Status, "top")}Xbox Live\n${getStatus(
+                platformResult["Playstation-Network"].Status,
+                "bottom"
+              )}PlayStation Network`,
+              true
+            )
             .addField(
               "EA Accounts",
               `${getStatus(accountsResult["EU-West"].Status, "top")}EU West (${
