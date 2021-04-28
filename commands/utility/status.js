@@ -72,9 +72,21 @@ module.exports = class MapCommand extends Command {
             }
           }
 
+          function checkAnnouncement() {
+            var now = Math.round(new Date().getTime() / 1000);
+            var release = responses[1].data.Release;
+            var duration = responses[1].data.Duration;
+            var math = now - release;
+
+            if (math >= duration) return "🟢 No announcements at this time.";
+
+            return `🚨 ${responses[1].data.Content}`;
+          }
+
           const statusEmbed = new MessageEmbed()
             .setTitle("Apex Legends Server Status")
             .setColor("C21D27")
+            .setDescription(checkAnnouncement())
             .addField(
               "[CrossPlay] Apex Login",
               `${getStatus(OauthCrossplay["EU-West"].Status, "top")}EU West (${
@@ -163,7 +175,7 @@ module.exports = class MapCommand extends Command {
               true
             )
             .addField("\u200b", "\u200b", true)
-            .setFooter("Data provided by https://apexlegendsstatus.com");
+            .setFooter("Data provided by https://apexlegendsstatus.com/");
 
           msg.delete();
           msg.say(statusEmbed);
