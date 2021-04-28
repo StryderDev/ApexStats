@@ -30,6 +30,7 @@ module.exports = class MapCommand extends Command {
       var announcement = axios.get(announcementURL);
 
       // Status Emojis
+      var onlineCircle = "<:StatusUp:786800700533112872>";
       var onlineTop = "<:onlineTop:836525149674536980>";
       var onlineMiddle = "<:onlineMiddle:836525149553426454>";
       var onlineBottom = "<:onlineBottom:836525149645045760>";
@@ -78,7 +79,7 @@ module.exports = class MapCommand extends Command {
             var duration = responses[1].data.Duration;
             var math = now - release;
 
-            if (math >= duration) return "🟢 No announcements at this time.";
+            if (math >= duration) return `${onlineCircle} No announcements at this time.`;
 
             return `🚨 ${responses[1].data.Content}`;
           }
