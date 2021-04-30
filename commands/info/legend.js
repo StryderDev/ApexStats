@@ -1,6 +1,6 @@
 const chalk = require("chalk");
 const {Command} = require("discord.js-light-commando");
-const {MessageEmbed, Message} = require("discord.js");
+const {MessageEmbed} = require("discord.js");
 const {checkMsg} = require("../functions/checkMsg.js");
 const config = require("../../config.json");
 
@@ -74,15 +74,42 @@ module.exports = class MapCommand extends Command {
 
         var legend = result[0];
 
-        // TODO: Add icons for recon/scout/medic/whatever and add them to embed title
+        function getType(type) {
+          if (type == "Offensive") return "<:offensive:837590674743230464>";
+          if (type == "Defensive") return "<:defensive:837590674945474631>";
+          if (type == "Support") return "<:support:837590675045220352>";
+          if (type == "Recon") return "<:recon:837590674882560020>";
+        }
 
         const legendEmbed = new MessageEmbed()
           .setTitle(
-            `${legend.type} <:onlineMiddle:836526063290810429> ${legend.name} (${legend.realName}) - ${legend.tagline}`
+            `${getType(legend.type)} ${legend.name} (${legend.realName}) - ${legend.tagline}`
           )
-          .setDescription(`*${legend.introLine}*\n\n${legend.description}`);
+          .setColor(legend.hex)
+          .setDescription(legend.description)
+          .addField("Entry Season", legend.season, true)
+          .addField("Age", legend.age, true)
+          .addField("Home World", legend.homeWorld, true)
+          .addField(
+            "Passive",
+            `<:${legend.shortName}Passive:${legend.passiveEmote}> ${legend.passive}`,
+            true
+          )
+          .addField(
+            "Tactical",
+            `<:${legend.shortName}Tactical:${legend.tacticalEmote}> ${legend.tactical}`,
+            true
+          )
+          .addField(
+            "Ultimate",
+            `<:${legend.shortName}Ultimate:${legend.ultimateEmote}> ${legend.ultimate}`,
+            true
+          )
+          .setImage(`https://cdn.apexstats.dev/LegendBanners/${legend.name}.png`)
+          .setFooter(legend.introLine);
 
         msg.say(legendEmbed);
+        connection.release();
       });
     });
   }
