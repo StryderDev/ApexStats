@@ -32,6 +32,7 @@ client.registry
   .registerGroups([
     ["utility", "Map/Event/Other Information"],
     ["fun", "Fun commands"],
+    ["info", "Game Info"],
     ["comp", "ALGS Info"],
     ["misc", "Uncategorized"],
   ])
