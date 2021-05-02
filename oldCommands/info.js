@@ -23,7 +23,7 @@ module.exports = {
     let minutes = Math.floor(client.uptime / 60000) % 60;
     let seconds = Math.floor(client.uptime / 1000) % 60;
 
-    var userQuery = "SELECT COUNT(*) AS UserCount FROM users";
+    var userQuery = "SELECT COUNT(*) AS UserCount FROM UsersV2";
 
     connection.getConnection(function (err, connection) {
       if (err) {
