@@ -16,6 +16,9 @@ module.exports = class MapCommand extends Command {
   onError(error) {
     console.log(chalk`{red Error: ${error}}`);
   }
+  hasPermission(msg) {
+    return this.client.isOwner(msg.author);
+  }
   run(msg) {
     if (checkMsg(msg) == 1) return;
 
@@ -26,8 +29,5 @@ module.exports = class MapCommand extends Command {
       );
 
     msg.say(placeholderEmbed);
-  }
-  hasPermission(msg) {
-    return this.client.isOwner(msg.author);
   }
 };
