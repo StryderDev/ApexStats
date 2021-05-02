@@ -72,7 +72,7 @@ function updateKills(userID, userPlatform, legendID, trackerID, trackerValue) {
 
       if (results.length == 0) {
         // User does not exist, create row with user info and populate kills
-        var createUser = `INSERT INTO userKills (PlayerID, Platform, lastUpdated, \`${legendID}\`) VALUES ('${userID}', '${userPlatform}', '${lastUpdated}', '${trackerValue}')`;
+        //var createUser = `INSERT INTO userKills (PlayerID, Platform, lastUpdated, \`${legendID}\`) VALUES ('${userID}', '${userPlatform}', '${lastUpdated}', '${trackerValue}')`;
 
         connection.query(createUser, function (err, result) {
           if (err) throw err;

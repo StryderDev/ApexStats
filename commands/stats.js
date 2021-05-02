@@ -97,11 +97,7 @@ module.exports = {
 
           // Season/Account Info
           var season = "8";
-          if (platformCheck == "PS4") {
-            var userID = mainResponse.userData.userID.toString().slice(0, -5);
-          } else {
-            var userID = mainResponse.userData.userID;
-          }
+          var userID = mainResponse.userData.userID;
           var userName = mainResponse.userData.username;
           var userPlatform = mainResponse.userData.platform;
           var isOnline = mainResponse.userData.status;
@@ -116,38 +112,38 @@ module.exports = {
           var badgeTwo = mainResponse.accountInfo.active.badges[1];
           var badgeThree = mainResponse.accountInfo.active.badges[2];
 
-          let checkQuery = `SELECT * FROM \`UsersV2\` WHERE \`PlayerID\` = '${userID}';`;
-          let insertQuery = `INSERT INTO \`UsersV2\` (\`PlayerID\`, \`PlayerName\`, \`Platform\`, \`Level\`, \`RankScore\`, \`lastUpdated\`) VALUES ('${userID}', '${userName}', '${userPlatform}', '${accountLevel}', '${currentRank.score}', '${lastUpdated}')`;
-          var killsQuery = `SELECT SUM(\`898565421\` + \`182221730\` + \`1409694078\` + \`1464849662\` + \`827049897\` + \`725342087\` + \`1111853120\` + \`2045656322\` + \`843405508\` + \`187386164\` + \`80232848\` + \`64207844\` + \`1579967516\` + \`2105222312\` + \`88599337\` + \`405279270\`) as killTotal FROM userKills WHERE \`PlayerID\` = '${userID}'`;
+          //let checkQuery = `SELECT * FROM \`UsersV2\` WHERE \`PlayerID\` = '${userID}';`;
+          //let insertQuery = `INSERT INTO \`UsersV2\` (\`PlayerID\`, \`PlayerName\`, \`Platform\`, \`Level\`, \`RankScore\`, \`lastUpdated\`) VALUES ('${userID}', '${userName}', '${userPlatform}', '${accountLevel}', '${currentRank.score}', '${lastUpdated}')`;
+          //var killsQuery = `SELECT SUM(\`898565421\` + \`182221730\` + \`1409694078\` + \`1464849662\` + \`827049897\` + \`725342087\` + \`1111853120\` + \`2045656322\` + \`843405508\` + \`187386164\` + \`80232848\` + \`64207844\` + \`1579967516\` + \`2105222312\` + \`88599337\` + \`405279270\`) as killTotal FROM userKills WHERE \`PlayerID\` = '${userID}'`;
 
-          connection.getConnection(function (err, connection) {
-            if (err) {
-              console.log(err);
-              return message.channel.send(
-                "There was an error connecting to the database. Please try again later."
-              );
-            }
+          //connection.getConnection(function (err, connection) {
+          //  if (err) {
+          //    console.log(err);
+          //    return message.channel.send(
+          //      "There was an error connecting to the database. Please try again later."
+          //    );
+          //  }
 
-            connection.query(checkQuery, function (err, results) {
-              if (err) {
-                connection.release();
-                console.log(err);
-                return message.channel.send(
-                  "There was a problem with the SQL syntax. Please try again later."
-                );
-              }
+          //  connection.query(checkQuery, function (err, results) {
+          //    if (err) {
+          //      connection.release();
+          //      console.log(err);
+          //      return message.channel.send(
+          //        "There was a problem with the SQL syntax. Please try again later."
+          //      );
+          //    }
 
-              if (results.length > 0) {
-                // console.log("found user.");
-              } else {
-                connection.query(insertQuery, function (err, results) {
-                  console.log(err);
-                });
-              }
+          //    if (results.length > 0) {
+          //      // console.log("found user.");
+          //    } else {
+          //      connection.query(insertQuery, function (err, results) {
+          //        console.log(err);
+          //      });
+          //    }
 
-              connection.release();
-            });
-          });
+          //    connection.release();
+          //  });
+          //});
 
           // Account Trackers
           var trackerOne = mainResponse.accountInfo.active.trackers[0];
@@ -234,127 +230,127 @@ module.exports = {
             }
           }
 
-          connection.query(killsQuery, function (err, killResults) {
-            if (err) {
-              connection.release();
-              console.log(err);
-              return message.channel.send(
-                "There was a problem with the SQL syntax. Please try again later."
-              );
-            }
+          //connection.query(killsQuery, function (err, killResults) {
+          //  if (err) {
+          //    connection.release();
+          //    console.log(err);
+          //    return message.channel.send(
+          //      "There was a problem with the SQL syntax. Please try again later."
+          //    );
+          //  }
 
-            function getUserKills() {
-              var userKills = killResults[0].killTotal;
+          //  function getUserKills() {
+          //    var userKills = killResults[0].killTotal;
 
-              if (userKills == null || userKills == undefined) {
-                return 0;
+          //if (userKills == null || userKills == undefined) {
+          //  return 0;
+          //} else {
+          //  return userKills.toLocaleString();
+          //}
+
+          // Use for when introducing kills into embed
+          // **Total Kills:** ${getUserKills()}\n
+          //}
+
+          function findRank(rankName, ladderPos, rankDiv) {
+            function isMaster(name, div) {
+              if (name == "Master") {
+                return;
               } else {
-                return userKills.toLocaleString();
+                return div;
               }
-
-              // Use for when introducing kills into embed
-              // **Total Kills:** ${getUserKills()}\n
             }
 
-            function findRank(rankName, ladderPos, rankDiv) {
-              function isMaster(name, div) {
-                if (name == "Master") {
-                  return;
-                } else {
-                  return div;
-                }
-              }
-
-              if (ladderPos > "750") {
-                var rank = "Master";
-              } else if (rankName == "Apex Predator") {
-                var rank = `[#${ladderPos}] Apex Predator`;
-              } else {
-                var rank = `${rankName} ${isMaster(rankName, rankDiv)}`;
-              }
-
-              return `${getRankBadge(rankName, ladderPos)} ${rank}`;
+            if (ladderPos > "750") {
+              var rank = "Master";
+            } else if (rankName == "Apex Predator") {
+              var rank = `[#${ladderPos}] Apex Predator`;
+            } else {
+              var rank = `${rankName} ${isMaster(rankName, rankDiv)}`;
             }
 
-            // Main Stats Embed
-            const statsMain = new Discord.MessageEmbed()
-              .setTitle(
-                `Stats for ${
-                  mainResponse.userData.username
-                } on ${platformUppercase} playing ${findLegendByID(selectedLegend)}`
-              )
-              .setDescription(getUserStatus())
-              .setColor(legends[mainResponse.accountInfo.active.legend].Color)
-              .addField(
-                "Account Stats",
-                `**Rank**\n${findRank(
-                  currentRank.name,
-                  currentRank.ladderPos,
-                  currentRank.division
-                )}\n**Score**\n${formatNumbers(currentRank.score)}`,
-                true
-              )
-              .addField(
-                `Account & Season ${season} BattlePass Level`,
-                `**Account Level ${accountLevel.toLocaleString()}/500**\n${percentage(
-                  500,
-                  getAccountLevel(accountLevel),
-                  10
-                )}\n**BattlePass Level ${getAccountBP(accountBP)}/110**\n${percentage(
-                  110,
-                  getAccountBP(accountBP),
-                  10
-                )}`,
-                true
-              )
-              .addField("Currently Equipped Badges", "\u200b")
-              .addField(
-                badgeTitle(badgeOne.id, findLegendByID(selectedLegend)),
-                badgeValue(badgeOne.id, badgeOne.value, findLegendByID(selectedLegend)),
-                true
-              )
-              .addField(
-                badgeTitle(badgeTwo.id, findLegendByID(selectedLegend)),
-                badgeValue(badgeTwo.id, badgeTwo.value, findLegendByID(selectedLegend)),
-                true
-              )
-              .addField(
-                badgeTitle(badgeThree.id, findLegendByID(selectedLegend)),
-                badgeValue(badgeThree.id, badgeThree.value, findLegendByID(selectedLegend)),
-                true
-              )
-              .addField("Currently Equipped Trackers", "\u200b")
-              .addField(
-                `${getTrackerTitle(trackerOne.id, findLegendByID(selectedLegend))}`,
-                `${getTrackerValue(trackerOne.id, formatNumbers(trackerOne.value))}`,
-                true
-              )
-              .addField(
-                `${getTrackerTitle(trackerTwo.id, findLegendByID(selectedLegend))}`,
-                `${getTrackerValue(trackerTwo.id, formatNumbers(trackerTwo.value))}`,
-                true
-              )
-              .addField(
-                `${getTrackerTitle(trackerThree.id, findLegendByID(selectedLegend))}`,
-                `${getTrackerValue(trackerThree.id, formatNumbers(trackerThree.value))}`,
-                true
-              )
-              .setImage(
-                `https://cdn.apexstats.dev/LegendBanners/${findLegendByID(
-                  selectedLegend
-                )}.png?q=${currentTimestamp}`
-              )
-              .setFooter(
-                " Weird tracker/badge name? Let SDCore#1234 know! • BattlePass level 0? Make sure you have the BP Badge equipped!"
-              );
+            return `${getRankBadge(rankName, ladderPos)} ${rank}`;
+          }
 
-            updateKills(userID, userPlatform, selectedLegend, trackerOne.id, trackerOne.value);
-            updateKills(userID, userPlatform, selectedLegend, trackerTwo.id, trackerTwo.value);
-            updateKills(userID, userPlatform, selectedLegend, trackerThree.id, trackerThree.value);
+          // Main Stats Embed
+          const statsMain = new Discord.MessageEmbed()
+            .setTitle(
+              `Stats for ${
+                mainResponse.userData.username
+              } on ${platformUppercase} playing ${findLegendByID(selectedLegend)}`
+            )
+            .setDescription(getUserStatus())
+            .setColor(legends[mainResponse.accountInfo.active.legend].Color)
+            .addField(
+              "Account Stats",
+              `**Rank**\n${findRank(
+                currentRank.name,
+                currentRank.ladderPos,
+                currentRank.division
+              )}\n**Score**\n${formatNumbers(currentRank.score)}`,
+              true
+            )
+            .addField(
+              `Account & Season ${season} BattlePass Level`,
+              `**Account Level ${accountLevel.toLocaleString()}/500**\n${percentage(
+                500,
+                getAccountLevel(accountLevel),
+                10
+              )}\n**BattlePass Level ${getAccountBP(accountBP)}/110**\n${percentage(
+                110,
+                getAccountBP(accountBP),
+                10
+              )}`,
+              true
+            )
+            .addField("Currently Equipped Badges", "\u200b")
+            .addField(
+              badgeTitle(badgeOne.id, findLegendByID(selectedLegend)),
+              badgeValue(badgeOne.id, badgeOne.value, findLegendByID(selectedLegend)),
+              true
+            )
+            .addField(
+              badgeTitle(badgeTwo.id, findLegendByID(selectedLegend)),
+              badgeValue(badgeTwo.id, badgeTwo.value, findLegendByID(selectedLegend)),
+              true
+            )
+            .addField(
+              badgeTitle(badgeThree.id, findLegendByID(selectedLegend)),
+              badgeValue(badgeThree.id, badgeThree.value, findLegendByID(selectedLegend)),
+              true
+            )
+            .addField("Currently Equipped Trackers", "\u200b")
+            .addField(
+              `${getTrackerTitle(trackerOne.id, findLegendByID(selectedLegend))}`,
+              `${getTrackerValue(trackerOne.id, formatNumbers(trackerOne.value))}`,
+              true
+            )
+            .addField(
+              `${getTrackerTitle(trackerTwo.id, findLegendByID(selectedLegend))}`,
+              `${getTrackerValue(trackerTwo.id, formatNumbers(trackerTwo.value))}`,
+              true
+            )
+            .addField(
+              `${getTrackerTitle(trackerThree.id, findLegendByID(selectedLegend))}`,
+              `${getTrackerValue(trackerThree.id, formatNumbers(trackerThree.value))}`,
+              true
+            )
+            .setImage(
+              `https://cdn.apexstats.dev/LegendBanners/${findLegendByID(
+                selectedLegend
+              )}.png?q=${currentTimestamp}`
+            )
+            .setFooter(
+              " Weird tracker/badge name? Let SDCore#1234 know! • BattlePass level 0? Make sure you have the BP Badge equipped!"
+            );
 
-            msg.delete();
-            msg.channel.send(statsMain);
-          });
+          updateKills(userID, userPlatform, selectedLegend, trackerOne.id, trackerOne.value);
+          updateKills(userID, userPlatform, selectedLegend, trackerTwo.id, trackerTwo.value);
+          updateKills(userID, userPlatform, selectedLegend, trackerThree.id, trackerThree.value);
+
+          msg.delete();
+          msg.channel.send(statsMain);
+          //});
         })
         .catch((errors) => {
           console.log(`Error: ${errors}`);
