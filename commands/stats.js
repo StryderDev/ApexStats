@@ -116,8 +116,8 @@ module.exports = {
           var badgeTwo = mainResponse.accountInfo.active.badges[1];
           var badgeThree = mainResponse.accountInfo.active.badges[2];
 
-          let checkQuery = `SELECT * FROM \`users\` WHERE \`BigID\` = '${userID}';`;
-          let insertQuery = `INSERT INTO \`users\` (\`PlayerID\`, \`PlayerName\`, \`Platform\`, \`Level\`, \`RankScore\`, \`lastUpdated\`) VALUES ('${userID}', '${userName}', '${userPlatform}', '${accountLevel}', '${currentRank.score}', '${lastUpdated}')`;
+          let checkQuery = `SELECT * FROM \`UsersV2\` WHERE \`PlayerID\` = '${userID}';`;
+          let insertQuery = `INSERT INTO \`UsersV2\` (\`PlayerID\`, \`PlayerName\`, \`Platform\`, \`Level\`, \`RankScore\`, \`lastUpdated\`) VALUES ('${userID}', '${userName}', '${userPlatform}', '${accountLevel}', '${currentRank.score}', '${lastUpdated}')`;
           var killsQuery = `SELECT SUM(\`898565421\` + \`182221730\` + \`1409694078\` + \`1464849662\` + \`827049897\` + \`725342087\` + \`1111853120\` + \`2045656322\` + \`843405508\` + \`187386164\` + \`80232848\` + \`64207844\` + \`1579967516\` + \`2105222312\` + \`88599337\` + \`405279270\`) as killTotal FROM userKills WHERE \`PlayerID\` = '${userID}'`;
 
           connection.getConnection(function (err, connection) {
