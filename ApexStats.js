@@ -30,6 +30,7 @@ const path = require("path");
 client.registry
   .registerDefaultTypes()
   .registerGroups([
+    ["admin", "Admin only commands."],
     ["utility", "Map/Event/Other Information"],
     ["fun", "Fun commands"],
     ["info", "Game Info"],
