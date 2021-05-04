@@ -6,6 +6,10 @@
   "topGG": "0 = disabled, otherwise use API key",
   "DELToken": "0 = disabled, otherwise use API key",
   "DBLToken": "0 = disabled, otherwise use API key",
+  "checkMessage": {
+    "guildID": "Guild ID",
+    "channelID": "Channel ID"
+  },
   "SQL": {
     "host": "MySQL HOST IP",
     "username": "MySQL Username",

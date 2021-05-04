@@ -1,10 +1,11 @@
-const {client, Discord} = require("../ApexStats.js");
-const config = require("../config.json");
-const {MessageEmbed} = require("discord.js");
-var {DateTime} = require("luxon");
 const chalk = require("chalk");
+const {Command} = require("discord.js-light-commando");
+const {MessageEmbed} = require("discord.js");
+const {checkMsg} = require("../functions/checkMsg.js");
+const config = require("../../config.json");
 
 let mysql = require("mysql");
+const {DateTime} = require("luxon");
 let connection = mysql.createPool({
   host: config.SQL.host,
   user: config.SQL.username,
@@ -12,25 +13,31 @@ let connection = mysql.createPool({
   database: config.SQL.database,
 });
 
-client.once("ready", () => {
-  function updateEvent() {
-    let query = `SELECT * FROM ${config.SQL.eventTable} ORDER BY \`id\` DESC`;
+module.exports = class MapCommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: "event",
+      group: "info",
+      memberName: "event",
+      description: "Shows information current in-game events.",
+      examples: ["event"],
+    });
+  }
+  onError(error) {
+    console.log(chalk`{red Error: ${error}}`);
+  }
+  run(msg) {
+    if (checkMsg(msg) == 1) return;
+
+    let legendQuery = `SELECT * FROM ${config.SQL.eventTable} ORDER BY \`id\` DESC`;
 
     connection.getConnection(function (err, connection) {
-      if (err) {
-        console.log(err);
-        return message.channel.send(
-          "There was an error connecting to the database. Please try again later."
-        );
-      }
+      if (err) return console.log(chalk`{red ${err}}`);
 
-      connection.query(query, function (err, result) {
+      connection.query(legendQuery, function (err, result) {
         if (err) {
           connection.release();
-          console.log(err);
-          return message.channel.send(
-            "There was a problem with the SQL syntax. Please try again later."
-          );
+          console.log(chalk`{red ${err}}`);
         }
 
         var event = result[0];
@@ -109,47 +116,14 @@ client.once("ready", () => {
           .setImage("https://cdn.apexstats.dev/Events/NoEvent.png")
           .setTimestamp();
 
-        const guild = client.guilds.cache.get(config.autoUpdate.guildID);
-        if (!guild) return console.log("Unable to find guild.");
+        if (checkTime() == 0) msg.say(eventEmbed);
 
-        const channel = guild.channels.cache.find(
-          (c) => c.id === config.autoUpdate.event.channel && c.type === "text"
-        );
-        if (!channel) return console.log("Unable to find channel.");
+        if (checkTime() == 1) msg.say(preEventEmbed);
 
-        try {
-          const message = channel.messages.fetch(config.autoUpdate.event.message);
-          if (!message) return console.log("Unable to find message.");
+        if (checkTime() == 2) msg.say(noEventEmbed);
 
-          channel.messages.fetch(config.autoUpdate.event.message).then((msg) => {
-            if (checkTime() == 0) msg.edit(eventEmbed);
-
-            if (checkTime() == 1) msg.edit(preEventEmbed);
-
-            if (checkTime() == 2) msg.edit(noEventEmbed);
-          });
-
-          console.log(
-            chalk`{blueBright [${DateTime.local().toFormat("hh:mm:ss")}] Updated event embed}`
-          );
-
-          connection.release();
-        } catch (err) {
-          console.error(`Other Error: ${err}`);
-        }
+        connection.release();
       });
     });
   }
-
-  updateEvent();
-
-  setInterval(function () {
-    if (config.autoUpdate.event.enabled == "true") {
-      var date = new Date();
-
-      if (date.getMinutes() % config.autoUpdate.event.interval == 0) {
-        updateEvent();
-      }
-    }
-  }, Math.max(1, 1 || 1) * 60 * 1000);
-});
+};
