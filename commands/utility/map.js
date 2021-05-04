@@ -65,9 +65,9 @@ module.exports = class MapCommand extends Command {
       if (maps.indexOf(map) != -1) {
         // _01 for Ranked Split 1
         // _02 for Ranked Split 2
-        return `Season%208/${mapName}_02`;
+        return `Season%209/${mapName}_01.gif`;
       } else {
-        return "NoMapData";
+        return "NoMapData.png";
       }
     }
 
@@ -115,7 +115,7 @@ module.exports = class MapCommand extends Command {
                 "h'h,' m'm.'"
               )}\n<:ApexPredator:787174770730336286> The current ranked map is **Olympus**.`
             )
-            .setImage(`https://cdn.apexstats.dev/Maps/${mapImage(map.map)}.png`)
+            .setImage(`https://cdn.apexstats.dev/Maps/${mapImage(map.map)}`)
             .setFooter("Provided by https://rexx.live/");
 
           message.delete();
