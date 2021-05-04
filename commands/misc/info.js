@@ -1,8 +1,6 @@
 const chalk = require("chalk");
 const {Command} = require("discord.js-light-commando");
 const {checkMsg} = require("../functions/checkMsg.js");
-const config = require("../../config.json");
-const {version} = require("../../package.json");
 const {MessageEmbed} = require("discord.js");
 
 module.exports = class MapCommand extends Command {
