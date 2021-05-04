@@ -49,7 +49,7 @@ client
   )
   .catch(console.error);
 
-require("./functions.js")(client);
+require("./events.js")(client);
 
 const config = require("./config.json");
 

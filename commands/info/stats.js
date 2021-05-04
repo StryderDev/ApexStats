@@ -66,13 +66,13 @@ module.exports = class MapCommand extends Command {
         `${platform} is not a valid platform.\nFor reference, Use PC for Origin/Steam, X1 for Xbox, or PS4 for PlayStation.`
       );
 
-    function formatNumbers(number) {
-      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
     msg.say("Retrieving user stats...").then(async (msg) => {
       axios
-        .get(`https://api.apexstats.dev/stats.php?platform=${platform}&player=${username}`)
+        .get(
+          `https://api.apexstats.dev/stats.php?platform=${checkPlatform(
+            platform
+          )}&player=${username}`
+        )
         .then(function (response) {
           // Set main response to data object
           var response = response.data;

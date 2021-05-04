@@ -20,7 +20,7 @@ module.exports = class MapCommand extends Command {
       group: "info",
       memberName: "event",
       description: "Shows information current in-game events.",
-      examples: ["legend Octane"],
+      examples: ["event"],
     });
   }
   onError(error) {

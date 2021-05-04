@@ -23,7 +23,7 @@ module.exports = class MapCommand extends Command {
       .setTitle("Bot Commands")
       .addField(
         "Commands",
-        ">>drop\n>>who\n>>commands\n>>legend\n>>news\n>>stats\n>>info\n>>invite\n>>privacypolicy\n>>map\n>>status",
+        ">>drop\n>>who\n>>commands\n>>command\n>>legend\n>>news\n>>season\n>>stats\n>>info\n>>invite\n>>privacypolicy\n>>map\n>>status",
         true
       );
 
