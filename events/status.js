@@ -191,7 +191,7 @@ client.once("ready", () => {
     if (config.autoUpdate.status.enabled == "true") {
       var date = new Date();
 
-      if (date.getMinutes() % config.autoUpdate.mstatusap.interval == 0) {
+      if (date.getMinutes() % config.autoUpdate.status.interval == 0) {
         updateStatus();
       }
     }
