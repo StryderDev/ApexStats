@@ -35,6 +35,8 @@ module.exports = class MapCommand extends Command {
     console.log(chalk`{red Error: ${error}}`);
   }
   run(msg, {season}) {
+    if (checkMsg(msg) == 1) return;
+
     if (!season) {
       // no args
       var query = `SELECT * FROM ${config.SQL.seasonTable} ORDER BY \`id\` DESC LIMIT 1`;

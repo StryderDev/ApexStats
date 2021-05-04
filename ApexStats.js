@@ -50,6 +50,7 @@ client
   .catch(console.error);
 
 require("./events.js")(client);
+require("./rotations.js")(client);
 
 const config = require("./config.json");
 
