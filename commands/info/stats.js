@@ -85,7 +85,7 @@ module.exports = class MapCommand extends Command {
           // Banner info
           var legend = response.accountInfo.active.legend;
           var level = response.accountInfo.level;
-          var bpLevel = response.accountInfo.battlepass.level;
+          var bpLevel = response.accountInfo.battlepass.history.season9;
 
           // Ranked
           var rankName = response.accountInfo.ranked.name;
@@ -113,7 +113,7 @@ module.exports = class MapCommand extends Command {
               true
             )
             .addField(
-              "Account & Season 8 BattlePass Level",
+              "Account & Season 9 BattlePass Level",
               `**Account Level ${level.toLocaleString()}/500**\n${percentage(
                 500,
                 level,
