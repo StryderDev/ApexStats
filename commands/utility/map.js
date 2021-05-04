@@ -113,7 +113,7 @@ module.exports = class MapCommand extends Command {
                 nextMap[0].map
               }** and lasts for ${Duration.fromMillis(nextMap[0].duration * 60 * 1000).toFormat(
                 "h'h,' m'm.'"
-              )}\n<:ApexPredator:787174770730336286> The current ranked map is **Olympus**.`
+              )}\n<:ApexPredator:787174770730336286> The current ranked map is **World's Edge**.`
             )
             .setImage(`https://cdn.apexstats.dev/Maps/${mapImage(map.map)}`)
             .setFooter("Provided by https://rexx.live/");
