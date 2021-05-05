@@ -15,7 +15,7 @@
   "homepage": "https://github.com/SDCore/ApexStats#readme",
   "dependencies": {
     "axios": "^0.21.1",
-    "chalk": "^3.0.0",
+    "chalk": "^4.1.1",
     "dblapi.js": "^2.4.1",
     "discord.js-light": "^3.5.9",
     "discord.js-light-commando": "^1.1.0",
