@@ -17,12 +17,12 @@
   "1909482822": "SMG Kills",
   "1303603316": "Sniper Kills",
   "431839893": "Care Package Weapon Kills",
-  "1170974273": "Arenas Wins",
-  "541938325": "Arenas Kills",
-  "1985042728": "Arenas Damage Done",
   "557724680": "VTOL Jets: Distance Travelled",
   "179683769": "Missile Swarm: Enemies Hit",
   "1498689400": "Skyward Dive: Allies Repositioned",
   "1534840100": "Season 9 Wins",
-  "1727506017": "Season 9 Kills"
+  "1727506017": "Season 9 Kills",
+  "541938325": "Arenas Kills",
+  "1170974273": "Arenas Wins",
+  "1985042728": "Arenas Damage Done"
 }
