@@ -25,6 +25,7 @@ module.exports = class MapCommand extends Command {
           key: "name",
           prompt: "Reply with the name of a legend from the current in-game roster.",
           type: "string",
+          default: "Valkyrie",
         },
       ],
     });

@@ -86,7 +86,7 @@ client.once("ready", () => {
     });
   }
 
-  updateMap();
+  if (config.autoUpdate.map.enabled == "true") updateMap();
 
   setInterval(function () {
     if (config.autoUpdate.map.enabled == "true") {

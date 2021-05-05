@@ -16,6 +16,7 @@
   "888068016": "AR Kills",
   "39760556": "LMG Kills",
   "1502057616": "Sniper Kills",
+  "489250900": "Marksman Kills",
   "42379430": "Loot Pinged Through Walls",
   "1370374388": "Meters Teleported",
   "842827023": "Loot Taken by Allies",
@@ -29,5 +30,7 @@
   "1411790226": "Season 7 Wins",
   "1635648258": "Season 7 Kills",
   "1632149633": "Season 8 Kills",
-  "917447046": "Season 8 Wins"
+  "917447046": "Season 8 Wins",
+  "728519239": "Season 9 Kills",
+  "923318986": "Season 9 Wins"
 }

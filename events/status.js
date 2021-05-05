@@ -185,7 +185,7 @@ client.once("ready", () => {
     );
   }
 
-  updateStatus();
+  if (config.autoUpdate.status.enabled == "true") updateStatus();
 
   setInterval(function () {
     if (config.autoUpdate.status.enabled == "true") {

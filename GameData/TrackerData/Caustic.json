@@ -11,6 +11,7 @@
   "953608563": "AR Kills",
   "2133370972": "LMG Kills",
   "1276323647": "Sniper Kills",
+  "440594487": "Marksman Kills",
   "1994224855": "Care Package Weapon Kills",
   "1982656769": "Gas Trap Times Activated",
   "1561709953": "Gas Damage Dealt",
@@ -31,5 +32,7 @@
   "611142039": "Season 8 Wins",
   "213184912": "Kills as Caustic",
   "383359091": "Damage Done as Caustic",
-  "287054978": "Wins as Caustic"
+  "287054978": "Wins as Caustic",
+  "160406719": "Season 9 Kills",
+  "323480406": "Season 9 Wins"
 }

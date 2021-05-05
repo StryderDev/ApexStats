@@ -141,7 +141,7 @@ client.once("ready", () => {
     });
   }
 
-  updateEvent();
+  if (config.autoUpdate.event.enabled == "true") updateEvent();
 
   setInterval(function () {
     if (config.autoUpdate.event.enabled == "true") {

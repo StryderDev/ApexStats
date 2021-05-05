@@ -7,6 +7,7 @@ module.exports = class MapCommand extends Command {
   constructor(client) {
     super(client, {
       name: "commands",
+      aliases: ["help"],
       group: "info",
       memberName: "commands",
       description: "Shows bot commands.",

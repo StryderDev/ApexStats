@@ -27,11 +27,13 @@ module.exports = class MapCommand extends Command {
           key: "platform",
           prompt: "What platform are you on?",
           type: "string",
+          default: "",
         },
         {
           key: "username",
           prompt: "What is your username?",
           type: "string",
+          default: "RSPN_Hideouts",
         },
       ],
     });
@@ -63,7 +65,7 @@ module.exports = class MapCommand extends Command {
     // return an error
     if (checkPlatform(platform) == 0)
       return msg.say(
-        `${platform} is not a valid platform.\nFor reference, Use PC for Origin/Steam, X1 for Xbox, or PS4 for PlayStation.`
+        `There was not a valid platform provided.\nFor reference, Use PC for Origin/Steam, X1 for Xbox, or PS4 for PlayStation.`
       );
 
     msg.say("Retrieving user stats...").then(async (msg) => {
