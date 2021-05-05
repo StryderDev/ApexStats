@@ -10,7 +10,7 @@ const config = require("./config.json");
 const {ShardingManager} = require("discord.js-light");
 const manager = new ShardingManager("./ApexStats.js", {
   token: config.token,
-  totalShards: 1,
+  totalShards: 2,
 });
 
 manager.on("shardCreate", (shard) => {
