@@ -155,6 +155,7 @@ module.exports = class MapCommand extends Command {
         })
         .catch((error) => {
           console.log("-- ERROR OUTPUT --");
+          console.log(error.response);
 
           if (
             error.response.data == null ||
