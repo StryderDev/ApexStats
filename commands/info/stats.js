@@ -73,7 +73,7 @@ module.exports = class MapCommand extends Command {
         .get(
           `https://api.apexstats.dev/stats.php?platform=${checkPlatform(
             platform
-          )}&player=${username}`
+          )}&player=${encodeURIComponent(username)}`
         )
         .then(function (response) {
           // Set main response to data object
