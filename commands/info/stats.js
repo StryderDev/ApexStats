@@ -157,7 +157,7 @@ module.exports = class MapCommand extends Command {
           console.log("-- ERROR OUTPUT --");
           var error = error.response.data;
 
-          if (error == undefined) {
+          if (error == null) {
             console.log("-- ERROR WAS NOT DEFINED --");
             return msg.say("There was an error that was not caught. Please try again.");
           }
