@@ -89,7 +89,7 @@ module.exports = class MapCommand extends Command {
           // Banner info
           var legend = response.accountInfo.active.legend;
           var level = response.accountInfo.level;
-          var bpLevel = response.accountInfo.battlepass.history.season9;
+          var bpLevel = response.accountInfo.battlepass.level;
 
           // Ranked
           var rankName = response.accountInfo.ranked.name;
