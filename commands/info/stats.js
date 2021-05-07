@@ -155,12 +155,17 @@ module.exports = class MapCommand extends Command {
         })
         .catch((error) => {
           console.log("-- ERROR OUTPUT --");
-          var error = error.response.data;
 
-          if (error == null) {
+          if (
+            error.response.data == null ||
+            error.response.data == undefined ||
+            error.response.data == "undefined"
+          ) {
             console.log("-- ERROR WAS NOT DEFINED --");
             return msg.say("There was an error that was not caught. Please try again.");
           }
+
+          var error = error.response.data;
 
           console.log(chalk`{red Error: ${error.error}}`);
 
