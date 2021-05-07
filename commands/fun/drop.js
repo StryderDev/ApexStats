@@ -65,11 +65,11 @@ module.exports = class MapCommand extends Command {
 
     // Get map from args
     var map = map.toUpperCase();
-    var mapList = ["KC", "WE", "OLYMPUS"];
+    var mapList = ["KC", "WE", "OLYMPUS", "RANKED"];
 
     if (mapList.indexOf(map) != -1) {
       if (map == "KC") msg.say(getMap("Kings Canyon"));
-      if (map == "WE") msg.say(getMap("World's Edge"));
+      if (map == "WE" || map == "RANKED") msg.say(getMap("World's Edge"));
       if (map == "OLYMPUS") msg.say(getMap("Olympus"));
     }
   }
