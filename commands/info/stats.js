@@ -77,7 +77,9 @@ module.exports = class MapCommand extends Command {
         )
         .then(function (response) {
           // Set main response to data object
+          console.log("-- LOOKING UP USER DATA --");
           var response = response.data;
+          console.log("-- USER DATA ASSIGNED HERE --");
 
           // Sort data into variables for organization :bop:
           var username = response.userData.username;
@@ -152,6 +154,7 @@ module.exports = class MapCommand extends Command {
           msg.say(embed);
         })
         .catch((error) => {
+          console.log("-- ERROR OUTPUT --");
           var error = error.response.data;
 
           console.log(chalk`{red Error: ${error.error}}`);
