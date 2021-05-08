@@ -63,7 +63,7 @@ function trackerTitle(id, legend) {
 
   if (tracker[id] == "undefined" || tracker[id] == null) return id;
 
-  return tracker[id];
+  return tracker[id].Name;
 }
 
 function trackerValue(id, value) {
