@@ -120,6 +120,10 @@ module.exports = class MapCommand extends Command {
           var rankDiv = response.accountInfo.ranked.division;
           var rankScore = response.accountInfo.ranked.score;
 
+          function truncate(str, n) {
+            return str.length > n ? str.substr(0, n - 1) + "..." : str;
+          }
+
           // Trackers
           var tracker = response.accountInfo.active;
           var tOne = tracker.trackers[0];
@@ -132,28 +136,25 @@ module.exports = class MapCommand extends Command {
           ctx.drawImage(legendImage, 0, 0, canvas.width, canvas.height);
 
           const tOneImage = await Canvas.loadImage(
-            `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${trackerImage(
-              tOne.id,
-              findLegendByID(legend)
-            )}.png`
+            `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${findLegendByID(
+              legend
+            )}/${trackerImage(tOne.id, findLegendByID(legend))}.png`
           );
 
           ctx.drawImage(tOneImage, 14, 432, 237, 79);
 
           const tTwoImage = await Canvas.loadImage(
-            `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${trackerImage(
-              tTwo.id,
-              findLegendByID(legend)
-            )}.png`
+            `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${findLegendByID(
+              legend
+            )}/${trackerImage(tTwo.id, findLegendByID(legend))}.png`
           );
 
           ctx.drawImage(tTwoImage, 14, 514, 237, 79);
 
           const tThreeImage = await Canvas.loadImage(
-            `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${trackerImage(
-              tThree.id,
-              findLegendByID(legend)
-            )}.png`
+            `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${findLegendByID(
+              legend
+            )}/${trackerImage(tThree.id, findLegendByID(legend))}.png`
           );
 
           ctx.drawImage(tThreeImage, 14, 596, 237, 79);
@@ -162,7 +163,7 @@ module.exports = class MapCommand extends Command {
           ctx.fillStyle = "#ffffff"; // White text
           ctx.font = "28px arial";
           ctx.textAlign = "center";
-          let text = username;
+          let text = truncate(username, 12);
           ctx.fillText(text, 127, 56);
 
           ctx.fillStyle = "#ffffff"; // White text
