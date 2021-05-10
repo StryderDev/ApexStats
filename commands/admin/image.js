@@ -43,11 +43,9 @@ module.exports = class MapCommand extends Command {
   onError(error) {
     console.log(chalk`{red Error: ${error}}`);
   }
-  hasPermission(msg) {
-    return this.client.isOwner(msg.author);
-  }
   async run(msg, {platform, username}) {
     if (checkMsg(msg) == 1) return;
+    if (msg.guild.id != "664717517666910220" && msg.guild.id != "553989741565968409") return;
 
     // Set platform to uppercase because the API
     // only accepts uppercase platform variables
