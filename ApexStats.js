@@ -60,7 +60,6 @@ process.on("unhandledRejection", (error) => {
 
 module.exports = {
   client: client,
-  //Discord: require("discord.js-light"),
   Discord: require("discord.js-light"),
 };
 

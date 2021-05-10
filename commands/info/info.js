@@ -62,7 +62,7 @@ module.exports = class MapCommand extends Command {
               process.memoryUsage().heapUsed /
               1024 /
               1024
-            ).toFixed(2)} MB`,
+            ).toFixed(2)} MB\n**Guild Shard ID:** ${msg.guild.shardID}`,
             true
           )
           .addField(
