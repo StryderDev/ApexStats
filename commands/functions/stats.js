@@ -78,7 +78,6 @@ function trackerValue(id, value) {
   }
 
   if (id == "1905735931") return "-";
-  if (id == "557724680") return subString(value, -2);
 
   return value.toLocaleString();
 }
