@@ -32,6 +32,12 @@
   },
   "autoUpdate": {
     "guildID": "Guild ID",
+    "arena": {
+      "enabled": "true or false",
+      "channel": "Channel ID",
+      "message": "Message ID",
+      "interval": "Update Interval in Minutes"
+    },
     "map": {
       "enabled": "true or false",
       "channel": "Channel ID",

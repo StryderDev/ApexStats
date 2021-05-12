@@ -86,7 +86,7 @@ client.once("ready", () => {
     });
   }
 
-  updateMap();
+  if (guildConfig.GamingMerchant.enabled == "true") updateMap();
 
   setInterval(function () {
     if (guildConfig.GamingMerchant.enabled == "true") {
