@@ -25,6 +25,8 @@ const client = new Commando.Client({
   cacheOverwrites: false,
 });
 
+client.setMaxListeners(15);
+
 const path = require("path");
 
 client.registry
