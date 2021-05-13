@@ -45,7 +45,12 @@ module.exports = class MapCommand extends Command {
   }
   async run(msg, {platform, username}) {
     if (checkMsg(msg) == 1) return;
-    if (msg.guild.id != "664717517666910220" && msg.guild.id != "553989741565968409") return;
+    if (
+      msg.guild.id != "664717517666910220" &&
+      msg.guild.id != "553989741565968409" &&
+      msg.guild.id != "541484311354933258"
+    )
+      return;
 
     // Set platform to uppercase because the API
     // only accepts uppercase platform variables
