@@ -47,11 +47,12 @@ module.exports = class MapCommand extends Command {
   async run(msg, {platform, username}) {
     if (checkMsg(msg) == 1) return;
 
-    // Apex server, Console server, Dev server
+    // Apex server, Console server, TGM Server, Dev server
     if (
       msg.guild.id != "664717517666910220" &&
       msg.guild.id != "553989741565968409" &&
-      msg.guild.id != "541484311354933258"
+      msg.guild.id != "541484311354933258" &&
+      msg.guild.id != "546118385092788251"
     )
       return;
 
