@@ -149,10 +149,9 @@ module.exports = class MapCommand extends Command {
         // Top Tracker
         // Image
         const oneImage = await Canvas.loadImage(
-          `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${trackerImage(
-            one.id,
-            findLegendByID(legend)
-          )}.png`
+          `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${findLegendByID(
+            legend
+          )}/${trackerImage(one.id, findLegendByID(legend))}.png`
         );
         ctx.drawImage(oneImage, 14, 432, 237, 79);
 
@@ -173,10 +172,9 @@ module.exports = class MapCommand extends Command {
         // Middle Tracker
         // Image
         const twoImage = await Canvas.loadImage(
-          `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${trackerImage(
-            two.id,
-            findLegendByID(legend)
-          )}.png`
+          `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${findLegendByID(
+            legend
+          )}/${trackerImage(two.id, findLegendByID(legend))}.png`
         );
         ctx.drawImage(twoImage, 14, 514, 237, 79);
 
@@ -197,10 +195,9 @@ module.exports = class MapCommand extends Command {
         // Bottom Tracker
         // Image
         const threeImage = await Canvas.loadImage(
-          `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${trackerImage(
-            three.id,
-            findLegendByID(legend)
-          )}.png`
+          `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${findLegendByID(
+            legend
+          )}/${trackerImage(three.id, findLegendByID(legend))}.png`
         );
         ctx.drawImage(threeImage, 14, 596, 237, 79);
 
