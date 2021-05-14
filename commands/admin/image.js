@@ -15,6 +15,7 @@ const {
   trackerTitle,
   trackerValue,
 } = require("../functions/stats.js");
+const {truncate} = require("fs");
 
 module.exports = class MapCommand extends Command {
   constructor(client) {
@@ -29,7 +30,7 @@ module.exports = class MapCommand extends Command {
           key: "platform",
           prompt: "What platform are you on?",
           type: "string",
-          default: "",
+          default: "PC",
         },
         {
           key: "username",
@@ -45,6 +46,8 @@ module.exports = class MapCommand extends Command {
   }
   async run(msg, {platform, username}) {
     if (checkMsg(msg) == 1) return;
+
+    // Apex server, Console server, Dev server
     if (
       msg.guild.id != "664717517666910220" &&
       msg.guild.id != "553989741565968409" &&
@@ -52,12 +55,16 @@ module.exports = class MapCommand extends Command {
     )
       return;
 
-    // Set platform to uppercase because the API
-    // only accepts uppercase platform variables
+    function truncate(str, n) {
+      return str.length > n ? str.substr(0, n - 1) + "..." : str;
+    }
+
+    // Set platform to uppercase since the API only allows
+    // uppercase platform variables
     var platform = platform.toUpperCase();
 
-    // Check to see if the platform is a supported
-    // platform on the API
+    // Check to see if the platform is a supported platform
+    // on the API
     function checkPlatform(platform) {
       if (platform == "PSN" || platform == "PS5" || platform == "PS" || platform == "PS4")
         return "PS4";
@@ -69,234 +76,153 @@ module.exports = class MapCommand extends Command {
       return 0;
     }
 
-    // If the platform isn't one that is supported,
-    // return an error
+    // If there wasn't a valid platform sent, return an error
     if (checkPlatform(platform) == 0)
       return msg.say(
         `There was not a valid platform provided.\nFor reference, Use PC for Origin/Steam, X1 for Xbox, or PS4 for PlayStation.`
       );
 
-    msg.say("Retrieving user stats...").then(async (msg) => {
-      axios
-        .get(
-          `https://api.apexstats.dev/stats.php?platform=${checkPlatform(
-            platform
-          )}&player=${encodeURIComponent(username)}`
-        )
-        .then(async function (response) {
-          // Set main response to data object
-          console.log("-- LOOKING UP USER DATA --");
-          var response = response.data;
-          console.log("-- USER DATA ASSIGNED HERE --");
+    function trackerImage(id, legend) {
+      if (id == "1905735931") return "Default";
 
-          const canvas = Canvas.createCanvas(500, 700);
-          const ctx = canvas.getContext("2d");
-          const background = await Canvas.loadImage(
-            "https://cdn.apexstats.dev/CanvasTesting/013.png"
-          );
+      var tracker = require(`../../GameData/TrackerData/${legend}.json`);
 
-          function trackerImage(id, legend) {
-            if (id == "1905735931") return "Default";
+      if (tracker[id] == "undefined" || tracker[id] == null) return id;
 
-            var tracker = require(`../../GameData/TrackerData/${legend}.json`);
+      return tracker[id].Image;
+    }
 
-            if (tracker[id] == "undefined" || tracker[id] == null) return id;
+    // Constructed API URL from args
+    var APIURL = `https://api.apexstats.dev/stats?platform=${checkPlatform(
+      platform
+    )}&player=${encodeURIComponent(username)}`;
 
-            return tracker[id].Image;
-          }
+    msg.say(`Retrieving user stats for ${username}...`).then(async (msg) => {
+      axios.get(APIURL).then(async function (response) {
+        // Create Canvas with info
+        // Username
+        Canvas.registerFont("fonts/blocktastic.otf", {family: "blocktastic"});
+        // Tracker Titles
+        Canvas.registerFont("fonts/OpenSans-Regular.ttf", {family: "OpenSans"});
+        Canvas.registerFont("fonts/OpenSans-Bold.ttf", {family: "OSBold"});
+        Canvas.registerFont("fonts/OpenSans-Light.ttf", {family: "OSLight"});
+        // Tracker Values
+        Canvas.registerFont("fonts/Cousine.ttf", {family: "Cousine"});
 
-          ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+        const canvas = Canvas.createCanvas(500, 700);
+        const ctx = canvas.getContext("2d");
+        const background = await Canvas.loadImage(
+          "https://cdn.apexstats.dev/CanvasTesting/014.png"
+        );
 
-          // Sort data into variables for organization :bop:
-          var username = response.userData.username;
-          var platform = response.userData.platform;
-          var isOnline = response.userData.status;
+        // Draw background banner image
+        ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-          // Banner info
-          var legend = response.accountInfo.active.legend;
-          var level = response.accountInfo.level;
-          var bpLevel = response.accountInfo.battlepass.level;
+        console.log("-- Fetching user data --");
+        var response = response.data;
+        console.log("-- Data fetched, parsing --");
 
-          // Ranked
-          var rankName = response.accountInfo.ranked.name;
-          var rankPos = response.accountInfo.ranked.ladderPos;
-          var rankDiv = response.accountInfo.ranked.division;
-          var rankScore = response.accountInfo.ranked.score;
+        // Grab info for banner
+        var username = response.userData.username;
+        var legend = response.accountInfo.active.legend;
 
-          function truncate(str, n) {
-            return str.length > n ? str.substr(0, n - 1) + "..." : str;
-          }
+        // Trackers
+        var tracker = response.accountInfo.active;
+        var one = tracker.trackers[0];
+        var two = tracker.trackers[1];
+        var three = tracker.trackers[2];
 
-          // Trackers
-          var tracker = response.accountInfo.active;
-          var tOne = tracker.trackers[0];
-          var tTwo = tracker.trackers[1];
-          var tThree = tracker.trackers[2];
+        // Display user info on banner
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "28px blocktastic";
+        ctx.textAlign = "center";
+        let user = truncate(username, 15);
+        ctx.fillText(user, 127, 57);
 
-          const legendImage = await Canvas.loadImage(
-            `https://cdn.apexstats.dev/CanvasTesting/Legends/${findLegendByID(legend)}.png`
-          );
-          ctx.drawImage(legendImage, 0, 0, canvas.width, canvas.height);
+        // Legend Image
+        const legendImage = await Canvas.loadImage(
+          `https://cdn.apexstats.dev/CanvasTesting/Legends/${findLegendByID(legend)}.png`
+        );
+        ctx.drawImage(legendImage, 0, 0);
 
-          const tOneImage = await Canvas.loadImage(
-            `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${findLegendByID(
-              legend
-            )}/${trackerImage(tOne.id, findLegendByID(legend))}.png`
-          );
+        // Top Tracker
+        // Image
+        const oneImage = await Canvas.loadImage(
+          `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${trackerImage(
+            one.id,
+            findLegendByID(legend)
+          )}.png`
+        );
+        ctx.drawImage(oneImage, 14, 432, 237, 79);
 
-          ctx.drawImage(tOneImage, 14, 432, 237, 79);
+        // Title
+        ctx.fillStyle = "#FFFFFFF";
+        ctx.font = "15px OSBold";
+        ctx.textAlign = "left";
+        let oneTitle = truncate(trackerTitle(one.id, findLegendByID(legend)).toUpperCase(), 19);
+        ctx.fillText(oneTitle, 32, 458);
 
-          const tTwoImage = await Canvas.loadImage(
-            `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${findLegendByID(
-              legend
-            )}/${trackerImage(tTwo.id, findLegendByID(legend))}.png`
-          );
+        // Value
+        ctx.fillStyle = "#FFFFFF";
+        ctx.font = "30px Cousine";
+        ctx.textAlign = "left";
+        let oneValue = trackerValue(one.id, one.value);
+        ctx.fillText(oneValue, 32, 495);
 
-          ctx.drawImage(tTwoImage, 14, 514, 237, 79);
+        // Middle Tracker
+        // Image
+        const twoImage = await Canvas.loadImage(
+          `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${trackerImage(
+            two.id,
+            findLegendByID(legend)
+          )}.png`
+        );
+        ctx.drawImage(twoImage, 14, 514, 237, 79);
 
-          const tThreeImage = await Canvas.loadImage(
-            `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${findLegendByID(
-              legend
-            )}/${trackerImage(tThree.id, findLegendByID(legend))}.png`
-          );
+        // Title
+        ctx.fillStyle = "#FFFFFFF";
+        ctx.font = "15px OSBold";
+        ctx.textAlign = "left";
+        let twoTitle = truncate(trackerTitle(two.id, findLegendByID(legend)).toUpperCase(), 19);
+        ctx.fillText(twoTitle, 32, 540);
 
-          ctx.drawImage(tThreeImage, 14, 596, 237, 79);
+        // Value
+        ctx.fillStyle = "#FFFFFF";
+        ctx.font = "30px Cousine";
+        ctx.textAlign = "left";
+        let twoValue = trackerValue(two.id, two.value);
+        ctx.fillText(twoValue, 32, 577);
 
-          // Display user text
-          ctx.fillStyle = "#ffffff"; // White text
-          ctx.font = "28px arial";
-          ctx.textAlign = "center";
-          let text = truncate(username, 12);
-          ctx.fillText(text, 127, 56);
+        // Bottom Tracker
+        // Image
+        const threeImage = await Canvas.loadImage(
+          `https://cdn.apexstats.dev/CanvasTesting/trackerImages/${trackerImage(
+            three.id,
+            findLegendByID(legend)
+          )}.png`
+        );
+        ctx.drawImage(threeImage, 14, 596, 237, 79);
 
-          ctx.fillStyle = "#ffffff"; // White text
-          ctx.font = "18px arial";
-          ctx.textAlign = "left";
-          let trackerOneTitle = trackerTitle(tOne.id, findLegendByID(legend));
-          ctx.fillText(trackerOneTitle, 32, 460);
+        // Title
+        ctx.fillStyle = "#FFFFFFF";
+        ctx.font = "15px OSBold";
+        ctx.textAlign = "left";
+        let threeTitle = truncate(trackerTitle(three.id, findLegendByID(legend)).toUpperCase(), 23);
+        ctx.fillText(threeTitle, 32, 622);
 
-          ctx.fillStyle = "#ffffff"; // White text
-          ctx.font = "27px arial";
-          ctx.textAlign = "left";
-          let trackerOneValue = trackerValue(tOne.id, tOne.value);
-          ctx.fillText(trackerOneValue, 32, 492);
+        // Value
+        ctx.fillStyle = "#FFFFFF";
+        ctx.font = "30px Cousine";
+        ctx.textAlign = "left";
+        let threeValue = trackerValue(three.id, three.value);
+        ctx.fillText(threeValue, 32, 659);
 
-          ctx.fillStyle = "#ffffff"; // White text
-          ctx.font = "18px arial";
-          ctx.textAlign = "left";
-          let trackerTwoTitle = trackerTitle(tTwo.id, findLegendByID(legend));
-          ctx.fillText(trackerTwoTitle, 32, 542);
+        // Set canvas image as attachment and send
+        const attachment = new MessageAttachment(canvas.toBuffer(), "stats.png");
 
-          ctx.fillStyle = "#ffffff"; // White text
-          ctx.font = "27px arial";
-          ctx.textAlign = "left";
-          let trackerTwoValue = trackerValue(tTwo.id, tTwo.value);
-          ctx.fillText(trackerTwoValue, 32, 577);
-
-          ctx.fillStyle = "#ffffff"; // White text
-          ctx.font = "18px arial";
-          ctx.textAlign = "left";
-          let trackerThreeTitle = trackerTitle(tThree.id, findLegendByID(legend));
-          ctx.fillText(trackerThreeTitle, 32, 624);
-
-          ctx.fillStyle = "#ffffff"; // White text
-          ctx.font = "27px arial";
-          ctx.textAlign = "left";
-          let trackerThreeValue = trackerValue(tThree.id, tThree.value);
-          ctx.fillText(trackerThreeValue, 32, 659);
-
-          const embed = new MessageEmbed()
-            .setTitle(`Stats for ${username} on ${platform} playing ${findLegendByID(legend)}`)
-            .setDescription(checkStatus(isOnline))
-            .setColor(getColor(legend))
-            .addField(
-              "Account Stats",
-              `${findRank(
-                rankName,
-                rankPos,
-                rankDiv
-              )}\n**Score**\n${rankScore.toLocaleString()} RP`,
-              true
-            )
-            .addField(
-              "Account & Season 9 BattlePass Level",
-              `**Account Level ${level.toLocaleString()}/500**\n${percentage(
-                500,
-                level,
-                10
-              )}\n**BattlePass Level ${getBPLevel(bpLevel)}/110**\n${percentage(
-                110,
-                getBPLevel(bpLevel),
-                10
-              )}`,
-              true
-            )
-            .addField("\u200b", "**Currently Equipped Trackers**")
-            .addField(
-              trackerTitle(tOne.id, findLegendByID(legend)),
-              trackerValue(tOne.id, tOne.value),
-              true
-            )
-            .addField(
-              trackerTitle(tTwo.id, findLegendByID(legend)),
-              trackerValue(tTwo.id, tTwo.value),
-              true
-            )
-            .addField(
-              trackerTitle(tThree.id, findLegendByID(legend)),
-              trackerValue(tThree.id, tThree.value),
-              true
-            )
-            .setImage(`https://cdn.apexstats.dev/LegendBanners/${findLegendByID(legend)}.png`)
-            .setFooter(
-              "Weird tracker name? Let SDCore#1234 know!\nBattlePass level not correct? Equip the badge in-game!"
-            );
-
-          const attachment = new MessageAttachment(canvas.toBuffer(), "stats.png");
-
-          msg.delete();
-          msg.say(attachment);
-        })
-        .catch((error) => {
-          console.log("-- ERROR OUTPUT --");
-          console.log(error);
-
-          if (
-            error.response.data == null ||
-            error.response.data == undefined ||
-            error.response.data == "undefined"
-          ) {
-            console.log("-- ERROR WAS NOT DEFINED --");
-            return msg.say("There was an error that was not caught. Please try again.");
-          }
-
-          var error = error.response.data;
-
-          console.log(chalk`{red Error: ${error.error}}`);
-
-          function checkErrorType(code) {
-            if (code == 1)
-              return "**Error**\nThere was no platform and/or username specific. This shouldn't happen, so contact SDCore#1234 if you see this.";
-
-            if (code == 2)
-              return "**Error**\nThere was not a valid platform provided. Please use PC/X1/PS4.";
-
-            if (code == 3)
-              return "**Error**\nThere was an error connecting to an external API. Please try again or contact SDCore#1234 if the problem persists.";
-
-            if (code == 4)
-              return "**Error**\nThat username wasn't found. Either it is incorrect, or it doesn't exist. Try using the username of your Origin account.";
-
-            if (code == 5)
-              return "**Error**\nThe username was found, but that account hasn't played Apex. Try a different username.";
-
-            return "**Error**\nGeneric, unhandled error. Contact SDCore#1234 if you see this.";
-          }
-
-          canvas.clearRect(0, 0, canvas.width, canvas.height);
-          msg.delete();
-          msg.say(checkErrorType(error.errorCode));
-        });
+        msg.delete();
+        msg.say(attachment);
+      });
     });
   }
 };
