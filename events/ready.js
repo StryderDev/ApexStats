@@ -4,13 +4,13 @@ const {DateTime} = require("luxon");
 const config = require("../config.json");
 
 // Top.GG API
-const DBL = require("dblapi.js");
+const AutoPoster = require("topgg-autoposter");
 
 if (config.topGG == "0") {
   // Don't send data to TopGG
 } else {
-  const dbl = new DBL(config.topGG, client);
-  dbl.on("posted", () => {
+  const ap = new AutoPoster(config.topGG, client);
+  ap.on("posted", () => {
     console.log("Server count posted!");
   });
 }
