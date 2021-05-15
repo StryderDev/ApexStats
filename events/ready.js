@@ -1,6 +1,7 @@
 const {client} = require("../ApexStats.js");
 const chalk = require("chalk");
 const {DateTime} = require("luxon");
+const config = require("../config.json");
 
 // Top.GG API
 const DBL = require("dblapi.js");
