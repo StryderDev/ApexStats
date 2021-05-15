@@ -2,16 +2,25 @@ require("dotenv").config;
 
 const config = require("./config.json");
 
-// Just using the ShardManager now so I don't have to worry
-// about it in the future. Will probably regret it if I don't
-// plan on making the bot public, but as it stands right now,
-// Guess we'll see ;)
+// TopGG API
+const AutoPoster = require("topgg-autoposter");
 
 const {ShardingManager} = require("discord.js-light");
 const manager = new ShardingManager("./ApexStats.js", {
   token: config.token,
   totalShards: config.shards,
 });
+
+if (config.topGG == "0") {
+  // Do nothing
+} else {
+  const ap = AutoPoster(config.topGG, manager);
+  // optional
+  ap.on("posted", () => {
+    // ran when succesfully posted
+    console.log("Posted stats to top.gg");
+  });
+}
 
 manager.on("shardCreate", (shard) => {
   console.log(`- Spawned shard ${shard.id} -`);
