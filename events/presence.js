@@ -25,4 +25,17 @@ client.once("ready", () => {
   }
 
   setPresence();
+
+  setInterval(function () {
+    var date = new Date();
+
+    if (date.getMinutes() % 10 == 0) {
+      setPresence();
+      console.log(
+        chalk`{blueBright [${DateTime.local().toFormat("hh:mm:ss")}] Updated presence for ${
+          client.user.tag
+        }}`
+      );
+    }
+  }, Math.max(1, 1 || 1) * 60 * 1000);
 });
