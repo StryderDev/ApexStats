@@ -20,7 +20,8 @@
     "eventTable": "Events Table",
     "seasonTable": "Season Table",
     "mapEvenTable": "Map Event Table",
-    "ALGSTable": "ALGS Table"
+    "ALGSTable": "ALGS Table",
+    "changelogTable": "Changelog Table"
   },
   "APISQL": {
     "host": "MySQL HOST IP",

@@ -1,6 +1,7 @@
 const {client} = require("../ApexStats.js");
 const axios = require("axios");
 const config = require("../config.json");
+const chalk = require("chalk");
 
 var {DateTime} = require("luxon");
 
@@ -133,19 +134,21 @@ client.once("ready", () => {
         }
 
         const guild = client.guilds.cache.get(config.autoUpdate.guildID);
-        if (!guild) return console.log("Unable to find guild.");
+        if (!guild) return console.log(chalk`{red Unable to find guild.}`);
 
         const channel = guild.channels.cache.find(
           (c) => c.id === config.autoUpdate.channelStatus.channel && c.type === "text"
         );
-        if (!channel) return console.log("Unable to find channel.");
+        if (!channel) return console.log(chalk`{red Unable to find channel.}`);
 
         try {
           var channelName = client.channels.cache.get(config.autoUpdate.channelStatus.channel);
-          channelName.setName(`${statusEmoji}-game-status`);
+          channelName.setName(chalk`{red ${statusEmoji}-game-status}`);
 
           console.log(
-            `[${DateTime.local().toFormat("hh:mm:ss")}] Updated Channel Status Indicator`
+            chalk`{blueBright [${DateTime.local().toFormat(
+              "hh:mm:ss"
+            )}] Updated Channel Status Indicator}`
           );
         } catch (err) {
           console.error(`Other Error: ${err}`);
