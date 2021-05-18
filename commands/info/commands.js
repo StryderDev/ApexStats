@@ -22,9 +22,12 @@ module.exports = class MapCommand extends Command {
 
     const embed = new MessageEmbed()
       .setTitle("Bot Commands")
+      .addField("Fun", ">>drop\n>>who", true)
+      .addField("Misc.", ">>invite\n>>privacypolicy", true)
+      .addField("Utility", ">>arenas\n>>map\n>>status", true)
       .addField(
-        "Commands",
-        ">>drop\n>>who\n>>commands\n>>command\n>>legend\n>>news\n>>season\n>>stats\n>>info\n>>invite\n>>privacypolicy\n>>map\n>>status",
+        "Info",
+        ">>changelog\n>>commands\n>>event\n>>info\n>>legend\n>>news\n>>season\n>>stats",
         true
       );
 
