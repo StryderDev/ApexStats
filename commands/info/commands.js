@@ -25,11 +25,8 @@ module.exports = class MapCommand extends Command {
       .addField("Fun", ">>drop\n>>who", true)
       .addField("Misc.", ">>invite\n>>privacypolicy", true)
       .addField("Utility", ">>arenas\n>>map\n>>status", true)
-      .addField(
-        "Info",
-        ">>changelog\n>>commands\n>>event\n>>info\n>>legend\n>>news\n>>season\n>>stats",
-        true
-      );
+      .addField("Info", ">>changelog\n>>commands\n>>event\n>>info", true)
+      .addField(`\u200b`, ">>legend\n>>news\n>>season\n>>stats", true);
 
     msg.say(embed);
   }
