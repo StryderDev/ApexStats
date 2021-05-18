@@ -43,11 +43,11 @@ module.exports = class MapCommand extends Command {
         var changelog = result[0];
 
         function formatDate(timestamp) {
-          return DateTime.fromSeconds(timestamp).toFormat("cccc LLL dd, yyyy - hh:mm a ZZZZ");
+          return DateTime.fromSeconds(timestamp).toFormat("LLL dd, yyyy");
         }
 
         const changelogEmbed = new MessageEmbed()
-          .setTitle(`${formatDate(changelog.date)}`)
+          .setTitle(`${formatDate(changelog.date)} Patch`)
           .setDescription(`${changelog.text}\n\n[View Tweet](${changelog.link})`);
 
         msg.say(changelogEmbed);
