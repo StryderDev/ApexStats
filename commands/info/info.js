@@ -50,6 +50,11 @@ module.exports = class MapCommand extends Command {
           );
         }
 
+        let days = Math.floor(process.uptime() / 86400);
+        let hours = Math.floor(process.uptime() / 3600) % 24;
+        let minutes = Math.floor(process.uptime() / 60) % 60;
+        let seconds = Math.floor(process.uptime()) % 60;
+
         const embed = new MessageEmbed()
           .setTitle(`Apex Legends Stats Bot`)
           .setThumbnail(process.env.BOT_ICON)
@@ -69,6 +74,10 @@ module.exports = class MapCommand extends Command {
             "Useful Links",
             `[Trello](https://apexstats.dev/trello)\n[Stats Site](https://apexstats.dev/)\n[Github Repo](https://apexstats.dev/github)\n[Support Server](https://apexstats.dev/invite)`,
             true
+          )
+          .addField(
+            "Uptime",
+            `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`
           )
           .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
           .setTimestamp();
