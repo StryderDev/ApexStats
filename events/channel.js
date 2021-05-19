@@ -143,7 +143,7 @@ client.once("ready", () => {
 
         try {
           var channelName = client.channels.cache.get(config.autoUpdate.channelStatus.channel);
-          channelName.setName(chalk`{red ${statusEmoji}-game-status}`);
+          channelName.setName(`${statusEmoji}-game-status`);
 
           console.log(
             chalk`{blueBright [${DateTime.local().toFormat(

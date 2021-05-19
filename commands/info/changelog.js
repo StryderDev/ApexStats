@@ -48,7 +48,7 @@ module.exports = class MapCommand extends Command {
 
         const changelogEmbed = new MessageEmbed()
           .setTitle(`${formatDate(changelog.date)} Patch`)
-          .setDescription(`${changelog.text}\n\n[View Tweet](${changelog.link})`);
+          .setDescription(`${changelog.text}\n\n[View Full Changelog](${changelog.link})`);
 
         msg.say(changelogEmbed);
 
