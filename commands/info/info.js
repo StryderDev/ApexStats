@@ -72,7 +72,7 @@ module.exports = class MapCommand extends Command {
           )
           .addField(
             "Useful Links",
-            `[Trello](https://apexstats.dev/trello)\n[Stats Site](https://apexstats.dev/)\n[Github Repo](https://apexstats.dev/github)\n[Support Server](https://apexstats.dev/invite)`,
+            `[Trello](https://apexstats.dev/trello)\n[Stats Site](https://apexstats.dev/)\n[Invite Bot](https://apexstats.dev/invite)\n[Github Repo](https://apexstats.dev/github)\n[Support Server](https://discord.gg/eH8VxssFW6)`,
             true
           )
           .addField(
