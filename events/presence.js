@@ -2,26 +2,48 @@ const {client} = require("../ApexStats.js");
 const chalk = require("chalk");
 const {DateTime} = require("luxon");
 const axios = require("axios");
+const config = require("../config.json");
 
 client.once("ready", () => {
   function setPresence() {
-    axios.get("https://fn.alphaleagues.com/v1/apex/map/").then((result) => {
-      var map = result.data;
+    let BR = "https://fn.alphaleagues.com/v1/apex/map/";
+    let Arenas = `https://api.mozambiquehe.re/maprotation?version=2&auth=${config.MozambiqueAPI}`;
 
-      client.user.setPresence({
-        activity: {
-          name: ` on ${map.map} · Serving ${client.guilds.cache.size.toLocaleString()} guilds`,
-          type: "PLAYING",
-        },
-        status: "online",
-      });
+    const BRRequest = axios.get(BR);
+    const ArenasRequest = axios.get(Arenas);
 
-      console.log(
-        chalk`{blueBright [${DateTime.local().toFormat("hh:mm:ss")}] Updated presence, set map to ${
-          map.map
-        }}`
-      );
-    });
+    axios.all([BRRequest, ArenasRequest]).then(
+      axios.spread((...responses) => {
+        var BR = responses[0].data;
+        var Arenas = responses[1].data.arenas;
+
+        function arenaMapName(name) {
+          if (name == "Phase runner") return "Phase Runner";
+          if (name == "Party crasher") return "Party Crasher";
+          if (name == "Thermal station") return "Thermal Station";
+
+          return name;
+        }
+
+        client.user.setPresence({
+          activity: {
+            name: ` on ${BR.map}/${arenaMapName(
+              Arenas.current.map
+            )} · Serving ${client.guilds.cache.size.toLocaleString()} guilds`,
+            type: "PLAYING",
+          },
+          status: "online",
+        });
+
+        console.log(
+          chalk`{blueBright [${DateTime.local().toFormat(
+            "hh:mm:ss"
+          )}] Updated presence, set Battle Royal map to ${BR.map} and Areans map to ${arenaMapName(
+            Arenas.current.map
+          )}}`
+        );
+      })
+    );
   }
 
   setPresence();
