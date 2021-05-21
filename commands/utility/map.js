@@ -44,7 +44,7 @@ module.exports = class MapCommand extends Command {
       var now = DateTime.local();
       var nowSeconds = Math.floor(DateTime.local().toSeconds());
       var math = time - nowSeconds;
-      var future = DateTime.local().plus({seconds: math});
+      var future = DateTime.local().plus({seconds: math + 60});
 
       var timeUntil = future.diff(now, ["hours", "minutes", "seconds"]);
 
