@@ -28,11 +28,20 @@ module.exports = class MapCommand extends Command {
   onError(error) {
     console.log(chalk`{red Error: ${error}}`);
   }
-  run(msg) {
+  async run(msg) {
     if (checkMsg(msg) == 1) return;
 
     var botName = `${this.client.user.username}#${this.client.user.discriminator}`;
     var userQuery = `SELECT COUNT(*) AS UserCount FROM ${config.APISQL.usersTable}`;
+    var shardGuildCount = this.client.guilds.cache.size;
+
+    const getServerCount = async () => {
+      // get guild collection size from all the shards
+      const req = await this.client.shard.fetchClientValues("guilds.cache.size");
+
+      // return the added value
+      return req.reduce((p, n) => p + n, 0);
+    };
 
     connection.getConnection(function (err, connection) {
       if (err) {
@@ -56,34 +65,38 @@ module.exports = class MapCommand extends Command {
         let minutes = Math.floor(process.uptime() / 60) % 60;
         let seconds = Math.floor(process.uptime()) % 60;
 
-        const embed = new MessageEmbed()
-          .setTitle(botName)
-          .setThumbnail(process.env.BOT_ICON)
-          .setDescription(
-            "This bot has the ability to show user stats, events, in-game map rotations, server status, and more. Use `>>commands` to see commands available to the bot."
-          )
-          .addField(
-            "Bot Info",
-            `**Version:** ${version}\n**Players Tracked**: ${results[0].UserCount.toLocaleString()}\n**Memory Usage:** ${(
-              process.memoryUsage().heapUsed /
-              1024 /
-              1024
-            ).toFixed(2)} MB\n**Guild Shard ID:** ${msg.guild.shardID}`,
-            true
-          )
-          .addField(
-            "Useful Links",
-            `[Trello](https://apexstats.dev/trello)\n[Stats Site](https://apexstats.dev/)\n[Invite Bot](https://apexstats.dev/invite)\n[Github Repo](https://apexstats.dev/github)\n[Support Server](https://discord.gg/eH8VxssFW6)`,
-            true
-          )
-          .addField(
-            "Uptime",
-            `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`
-          )
-          .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
-          .setTimestamp();
+        getServerCount().then((count) => {
+          const embed = new MessageEmbed()
+            .setTitle(botName)
+            .setThumbnail(process.env.BOT_ICON)
+            .setDescription(
+              "This bot has the ability to show user stats, events, in-game map rotations, server status, and more. Use `>>commands` to see commands available to the bot."
+            )
+            .addField(
+              "Bot Info",
+              `**Version:** ${version}\n**Total Guilds**: ${count}\n**Guild Shard ID:** ${
+                msg.guild.shardID
+              }\n**Guilds on Shard**: ${shardGuildCount}\n**Players Tracked**: ${results[0].UserCount.toLocaleString()}\n**Memory Usage:** ${(
+                process.memoryUsage().heapUsed /
+                1024 /
+                1024
+              ).toFixed(2)} MB`,
+              true
+            )
+            .addField(
+              "Useful Links",
+              `[Trello](https://apexstats.dev/trello)\n[Stats Site](https://apexstats.dev/)\n[Invite Bot](https://apexstats.dev/invite)\n[Github Repo](https://apexstats.dev/github)\n[Support Server](https://discord.gg/eH8VxssFW6)`,
+              true
+            )
+            .addField(
+              "Uptime",
+              `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`
+            )
+            .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
+            .setTimestamp();
 
-        msg.say(embed);
+          msg.say(embed);
+        });
       });
     });
   }
