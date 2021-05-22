@@ -31,6 +31,7 @@ module.exports = class MapCommand extends Command {
   run(msg) {
     if (checkMsg(msg) == 1) return;
 
+    var botName = `${this.client.user.username}#${this.client.user.discriminator}`;
     var userQuery = `SELECT COUNT(*) AS UserCount FROM ${config.APISQL.usersTable}`;
 
     connection.getConnection(function (err, connection) {
@@ -56,7 +57,7 @@ module.exports = class MapCommand extends Command {
         let seconds = Math.floor(process.uptime()) % 60;
 
         const embed = new MessageEmbed()
-          .setTitle(`Apex Legends Stats Bot`)
+          .setTitle(botName)
           .setThumbnail(process.env.BOT_ICON)
           .setDescription(
             "This bot has the ability to show user stats, events, in-game map rotations, server status, and more. Use `>>commands` to see commands available to the bot."
