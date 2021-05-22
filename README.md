@@ -29,10 +29,23 @@ The bot currently has the following features:
   - `>>map`
   - `>>map #`
     - Replace "#" with a number (between 1 and 10) to get future map rotations
+- Current in-game arena rotations
+  - `>>arena`
 - Current active in-game events
   - `>>event`
 - Pick a random spot to drop based on the current map in rotation
   - `>>drop`
+- Pick a random legend to play
+  - `>>who`
+- See the most recent changelog/patch
+  - `>>changelog`
+- See info about the most recent and previous seasons
+  - `>>season`
+    - Shows most recent season by default
+  - `>>season #`
+    - Replace # with a season number to see other season information
+- `>>invite`
+  - Link to invite the bot to a server
 
 ## Preview
 
