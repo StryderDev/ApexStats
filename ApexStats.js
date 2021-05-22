@@ -1,13 +1,3 @@
-//const Discord = require("discord.js-light");
-//const client = new Discord.Client({
-//  cacheRoles: true,
-//  cacheGuilds: true,
-//  cacheEmojis: true,
-// cacheChannels: true,
-//  cachePresences: false,
-//  cacheOverwrites: false,
-//});
-
 const Commando = require("discord.js-light-commando");
 const sqlite = require("sqlite");
 const sqlite3 = require("sqlite3");
