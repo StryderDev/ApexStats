@@ -12,38 +12,48 @@ client.once("ready", () => {
     const BRRequest = axios.get(BR);
     const ArenasRequest = axios.get(Arenas);
 
-    axios.all([BRRequest, ArenasRequest]).then(
-      axios.spread((...responses) => {
-        var BR = responses[0].data;
-        var Arenas = responses[1].data.arenas;
+    const getServerCount = async () => {
+      // get guild collection size from all the shards
+      const req = await client.shard.fetchClientValues("guilds.cache.size");
 
-        function arenaMapName(name) {
-          if (name == "Phase runner") return "Phase Runner";
-          if (name == "Party crasher") return "Party Crasher";
-          if (name == "Thermal station") return "Thermal Station";
+      // return the added value
+      return req.reduce((p, n) => p + n, 0);
+    };
 
-          return name;
-        }
+    getServerCount().then((count) => {
+      axios.all([BRRequest, ArenasRequest]).then(
+        axios.spread((...responses) => {
+          var BR = responses[0].data;
+          var Arenas = responses[1].data.arenas;
 
-        client.user.setPresence({
-          activity: {
-            name: ` on ${BR.map}/${arenaMapName(
-              Arenas.current.map
-            )} · Serving ${client.guilds.cache.size.toLocaleString()} guilds`,
-            type: "PLAYING",
-          },
-          status: "online",
-        });
+          function arenaMapName(name) {
+            if (name == "Phase runner") return "Phase Runner";
+            if (name == "Party crasher") return "Party Crasher";
+            if (name == "Thermal station") return "Thermal Station";
 
-        console.log(
-          chalk`{blueBright [${DateTime.local().toFormat(
-            "hh:mm:ss"
-          )}] Updated presence, set Battle Royal map to ${BR.map} and Areans map to ${arenaMapName(
-            Arenas.current.map
-          )}}`
-        );
-      })
-    );
+            return name;
+          }
+
+          client.user.setPresence({
+            activity: {
+              name: ` on ${BR.map}/${arenaMapName(
+                Arenas.current.map
+              )} · Serving ${count.toLocaleString()} guilds`,
+              type: "PLAYING",
+            },
+            status: "online",
+          });
+
+          console.log(
+            chalk`{blueBright [${DateTime.local().toFormat(
+              "hh:mm:ss"
+            )}] Updated presence, set Battle Royal map to ${
+              BR.map
+            } and Areans map to ${arenaMapName(Arenas.current.map)}}`
+          );
+        })
+      );
+    });
   }
 
   setPresence();

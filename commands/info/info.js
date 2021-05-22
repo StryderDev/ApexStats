@@ -33,7 +33,7 @@ module.exports = class MapCommand extends Command {
 
     var botName = `${this.client.user.username}#${this.client.user.discriminator}`;
     var userQuery = `SELECT COUNT(*) AS UserCount FROM ${config.APISQL.usersTable}`;
-    var shardGuildCount = this.client.guilds.cache.size;
+    var shardGuildCount = this.client.guilds.cache.size.toLocaleString();
 
     const getServerCount = async () => {
       // get guild collection size from all the shards
@@ -74,7 +74,7 @@ module.exports = class MapCommand extends Command {
             )
             .addField(
               "Bot Info",
-              `**Version:** ${version}\n**Total Guilds**: ${count}\n**Guild Shard ID:** ${
+              `**Version:** ${version}\n**Total Guilds**: ${count.toLocaleString()}\n**Guild Shard ID:** ${
                 msg.guild.shardID
               }\n**Guilds on Shard**: ${shardGuildCount}\n**Players Tracked**: ${results[0].UserCount.toLocaleString()}\n**Memory Usage:** ${(
                 process.memoryUsage().heapUsed /
