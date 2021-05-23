@@ -3,10 +3,6 @@ const legends = require("../../GameData/legends.json");
 var OnlineEmoji = "<:StatusUp:786800700533112872>";
 var OfflineEmoji = "<:StatusDown:786800700201238570>";
 
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
 function findLegendByID(ID) {
   var legend = legends[ID].Name;
 
