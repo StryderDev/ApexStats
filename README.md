@@ -1,4 +1,4 @@
-![CI/CD to Vultr](https://github.com/SDCore/ApexStats/workflows/CI/CD%20to%20Vultr/badge.svg) ![Discord](https://img.shields.io/discord/664717517666910220?label=Support%20Server) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cac0f45e81cd49f689d3216d916fb903)](https://app.codacy.com/gh/SDCore/Apex-Stats-Bot?utm_source=github.com&utm_medium=referral&utm_content=SDCore/Apex-Stats-Bot&utm_campaign=Badge_Grade_Settings)
+![CI/CD to Vultr](https://github.com/SDCore/ApexStats/workflows/CI/CD%20to%20Vultr/badge.svg) ![Discord](https://img.shields.io/discord/664717517666910220?label=Support%20Server) [![CodeFactor](https://www.codefactor.io/repository/github/sdcore/apex-stats-bot/badge)](https://www.codefactor.io/repository/github/sdcore/apex-stats-bot)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
