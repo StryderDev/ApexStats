@@ -1,5 +1,3 @@
-const chalk = require("chalk");
-const config = require("../../config.json");
 const legends = require("../../GameData/legends.json");
 
 var OnlineEmoji = "<:StatusUp:786800700533112872>";
@@ -71,12 +69,6 @@ function trackerTitle(id, legend) {
 }
 
 function trackerValue(id, value) {
-  function subString(value, amount) {
-    var string = value.toString().slice(0, amount);
-
-    return numberWithCommas(string);
-  }
-
   if (id == "1905735931") return "-";
 
   return value.toLocaleString();
