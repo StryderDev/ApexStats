@@ -19,7 +19,7 @@
     "chalk": "^4.1.1",
     "discord.js-light": "^3.5.9",
     "discord.js-light-commando": "^1.1.0",
-    "dotenv": "^9.0.0",
+    "dotenv": "^10.0.0",
     "fs": "0.0.1-security",
     "luxon": "^1.26.0",
     "mozambique-api-wrapper": "^2.0.0",
