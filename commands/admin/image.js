@@ -15,7 +15,7 @@ const {
   trackerTitle,
   trackerValue,
 } = require("../functions/stats.js");
-const {truncate} = require("fs");
+const {badgeImage} = require("../functions/imageBadge.js");
 
 module.exports = class MapCommand extends Command {
   constructor(client) {
@@ -127,6 +127,12 @@ module.exports = class MapCommand extends Command {
         var username = response.userData.username;
         var legend = response.accountInfo.active.legend;
 
+        // Badges
+        var badge = response.accountInfo.active;
+        var bOne = badge.badges[0];
+        var bTwo = badge.badges[1];
+        var bThree = badge.badges[2];
+
         // Trackers
         var tracker = response.accountInfo.active;
         var one = tracker.trackers[0];
@@ -145,6 +151,24 @@ module.exports = class MapCommand extends Command {
           `https://cdn.apexstats.dev/CanvasTesting/Legends/${findLegendByID(legend)}.png`
         );
         ctx.drawImage(legendImage, 0, 0);
+
+        // Top Badge
+        const badgeOneImage = await Canvas.loadImage(
+          `https://cdn.apexstats.dev/Badges/${badgeImage(bOne.id, bOne.value)}`
+        );
+        ctx.drawImage(badgeOneImage, 80, 86, 95, 95);
+
+        // Middle Badge
+        const badgeTwoImage = await Canvas.loadImage(
+          `https://cdn.apexstats.dev/Badges/${badgeImage(bTwo.id, bTwo.value)}`
+        );
+        ctx.drawImage(badgeTwoImage, 80, 201, 95, 95);
+
+        // Bottom Badge
+        const badgeThreeImage = await Canvas.loadImage(
+          `https://cdn.apexstats.dev/Badges/${badgeImage(bThree.id, bThree.value)}`
+        );
+        ctx.drawImage(badgeThreeImage, 80, 321, 95, 95);
 
         // Top Tracker
         // Image
