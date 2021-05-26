@@ -15,7 +15,7 @@ const {
   trackerTitle,
   trackerValue,
 } = require("../functions/stats.js");
-const {badgeImage} = require("../functions/imageBadge.js");
+const {badgeImage, hasValue} = require("../functions/imageBadge.js");
 
 module.exports = class MapCommand extends Command {
   constructor(client) {
@@ -158,17 +158,59 @@ module.exports = class MapCommand extends Command {
         );
         ctx.drawImage(badgeOneImage, 80, 86, 95, 95);
 
+        // Top Badge Value
+        if (hasValue(bOne.id)) {
+          const textOneBackground = await Canvas.loadImage(
+            `https://cdn.apexstats.dev/Badges/textBackground.png`
+          );
+          ctx.drawImage(textOneBackground, 80, 86, 95, 95);
+
+          ctx.fillStyle = "#FFFFFFF";
+          ctx.font = "13px OSBold";
+          ctx.textAlign = "center";
+          let oneTitle = bOne.value;
+          ctx.fillText(oneTitle, 127, 170);
+        }
+
         // Middle Badge
         const badgeTwoImage = await Canvas.loadImage(
           `https://cdn.apexstats.dev/Badges/${badgeImage(bTwo.id, bTwo.value)}`
         );
         ctx.drawImage(badgeTwoImage, 80, 201, 95, 95);
 
+        // Middle Badge Value
+        if (hasValue(bTwo.id)) {
+          const textTwoBackground = await Canvas.loadImage(
+            `https://cdn.apexstats.dev/Badges/textBackground.png`
+          );
+          ctx.drawImage(textTwoBackground, 80, 201, 95, 95);
+
+          ctx.fillStyle = "#FFFFFFF";
+          ctx.font = "13px OSBold";
+          ctx.textAlign = "center";
+          let oneTitle = bTwo.value;
+          ctx.fillText(oneTitle, 127, 286);
+        }
+
         // Bottom Badge
         const badgeThreeImage = await Canvas.loadImage(
           `https://cdn.apexstats.dev/Badges/${badgeImage(bThree.id, bThree.value)}`
         );
         ctx.drawImage(badgeThreeImage, 80, 321, 95, 95);
+
+        // Bottom Badge Value
+        if (hasValue(bThree.id)) {
+          const textThreeBackground = await Canvas.loadImage(
+            `https://cdn.apexstats.dev/Badges/textBackground.png`
+          );
+          ctx.drawImage(textThreeBackground, 80, 321, 95, 95);
+
+          ctx.fillStyle = "#FFFFFFF";
+          ctx.font = "13px OSBold";
+          ctx.textAlign = "center";
+          let oneTitle = bThree.value;
+          ctx.fillText(oneTitle, 127, 406);
+        }
 
         // Top Tracker
         // Image

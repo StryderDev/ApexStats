@@ -1,7 +1,7 @@
 {
-  "650330268": {
-    "name": "AccountBadges/BlackLivesMatter.png",
-    "hasValue": false,
+  "1774065557": {
+    "name": "AccountBadges/AccountLevel.png",
+    "hasValue": true,
     "tiered": false
   },
   "320244274": {
@@ -11,6 +11,11 @@
   },
   "1164941559": {
     "name": "AccountBadges/BannerLegend.png",
+    "hasValue": false,
+    "tiered": false
+  },
+  "650330268": {
+    "name": "AccountBadges/BlackLivesMatter.png",
     "hasValue": false,
     "tiered": false
   }
