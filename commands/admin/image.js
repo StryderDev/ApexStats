@@ -1,20 +1,11 @@
 const axios = require("axios");
 const Canvas = require("canvas");
 const chalk = require("chalk");
-const {MessageEmbed, MessageAttachment} = require("discord.js");
+const {MessageAttachment} = require("discord.js");
 const {Command} = require("discord.js-light-commando");
 const {checkMsg} = require("../functions/checkMsg.js");
 
-const percentage = require("percentagebar");
-const {
-  findLegendByID,
-  checkStatus,
-  getColor,
-  findRank,
-  getBPLevel,
-  trackerTitle,
-  trackerValue,
-} = require("../functions/stats.js");
+const {findLegendByID, getBPLevel, trackerTitle, trackerValue} = require("../functions/stats.js");
 const {badgeImage, hasValue} = require("../functions/imageBadge.js");
 
 module.exports = class MapCommand extends Command {
