@@ -91,11 +91,11 @@ module.exports = class MapCommand extends Command {
           var level = response.accountInfo.level;
           var bpLevel = response.accountInfo.battlepass.level;
 
-          // Ranked
-          var rankName = response.accountInfo.ranked.name;
-          var rankPos = response.accountInfo.ranked.ladderPos;
-          var rankDiv = response.accountInfo.ranked.division;
-          var rankScore = response.accountInfo.ranked.score;
+          // Battle Royal Ranked
+          var rankName = response.accountInfo.Ranked_BR.name;
+          var rankPos = response.accountInfo.Ranked_BR.ladderPos;
+          var rankDiv = response.accountInfo.Ranked_BR.division;
+          var rankScore = response.accountInfo.Ranked_BR.score;
 
           // Trackers
           var tracker = response.accountInfo.active;
