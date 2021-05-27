@@ -6,6 +6,9 @@ const {MessageEmbed} = require("discord.js");
 var {DateTime} = require("luxon");
 
 client.once("ready", () => {
+  const guild = client.guilds.cache.get(config.autoUpdate.guildID);
+  if (!guild) return console.log(chalk`{gray Unable to find guild for Status Updates.}`);
+
   function updateStatus() {
     var status = axios.get(`https://api.mozambiquehe.re/servers?auth=${config.MozambiqueAPI}`);
     var announcement = axios.get("https://apexlegendsstatus.com/anno.json");
@@ -176,7 +179,7 @@ client.once("ready", () => {
           });
 
           console.log(
-            chalk`{blueBright [${DateTime.local().toFormat("hh:mm:ss")}] Updated status embed}`
+            chalk`{blueBright [${DateTime.local().toFormat("hh:mm:ss")}] Updated Status Embed}`
           );
         } catch (err) {
           console.error(`Other Error: ${err}`);

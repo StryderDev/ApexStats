@@ -6,6 +6,9 @@ const config = require("../config.json");
 const {MessageEmbed} = require("discord.js");
 
 client.once("ready", () => {
+  const guild = client.guilds.cache.get(config.autoUpdate.guildID);
+  if (!guild) return console.log(chalk`{gray Unable to find guild for Arena Updates.}`);
+
   function updateArena() {
     axios
       .get(`https://api.mozambiquehe.re/maprotation?version=2&auth=${config.MozambiqueAPI}`)
@@ -78,9 +81,7 @@ client.once("ready", () => {
           });
 
           console.log(
-            chalk`{blueBright [${DateTime.local().toFormat(
-              "hh:mm:ss"
-            )}] Updated map embed, set map to ${arena.next.map}}`
+            chalk`{blueBright [${DateTime.local().toFormat("hh:mm:ss")}] Updated Arena Map Embed}`
           );
         } catch (err) {
           console.error(`Other Error: ${err}`);

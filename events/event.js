@@ -13,6 +13,9 @@ let connection = mysql.createPool({
 });
 
 client.once("ready", () => {
+  const guild = client.guilds.cache.get(config.autoUpdate.guildID);
+  if (!guild) return console.log(chalk`{gray Unable to find guild for Event Updates.}`);
+
   function updateEvent() {
     let query = `SELECT * FROM ${config.SQL.eventTable} ORDER BY \`id\` DESC`;
 
@@ -130,7 +133,7 @@ client.once("ready", () => {
           });
 
           console.log(
-            chalk`{blueBright [${DateTime.local().toFormat("hh:mm:ss")}] Updated event embed}`
+            chalk`{blueBright [${DateTime.local().toFormat("hh:mm:ss")}] Updated Event Embed}`
           );
 
           connection.release();

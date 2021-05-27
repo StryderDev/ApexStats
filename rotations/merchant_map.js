@@ -6,6 +6,10 @@ const guildConfig = require("../guildConfig.json");
 const {MessageEmbed} = require("discord.js");
 
 client.once("ready", () => {
+  const guild = client.guilds.cache.get(guildConfig.GamingMerchant.GuildID);
+  if (!guild)
+    return console.log(chalk`{gray Unable to find guild for Gaming Merchant Map Updates.}`);
+
   function updateMap() {
     axios.get("https://fn.alphaleagues.com/v1/apex/map/?next=1").then((result) => {
       var map = result.data;
@@ -78,7 +82,7 @@ client.once("ready", () => {
         console.log(
           chalk`{blueBright [${DateTime.local().toFormat(
             "hh:mm:ss"
-          )}] Updated Gaming Merchant map embed, set map to ${map.map}}`
+          )}] Updated Gaming Merchant Map Embed}`
         );
       } catch (err) {
         console.error(`Other Error: ${err}`);

@@ -6,6 +6,9 @@ const chalk = require("chalk");
 var {DateTime} = require("luxon");
 
 client.once("ready", () => {
+  const guild = client.guilds.cache.get(config.autoUpdate.guildID);
+  if (!guild) return console.log(chalk`{gray Unable to find guild for Channel Status Updates.}`);
+
   function updateStatus() {
     statusURL = `https://api.mozambiquehe.re/servers?auth=${config.MozambiqueAPI}`;
 
