@@ -28,7 +28,7 @@
     "percentagebar": "^1.0.3",
     "sqlite": "^4.0.21",
     "sqlite3": "^5.0.2",
-    "topgg-autoposter": "^1.1.10"
+    "topgg-autoposter": "^2.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
