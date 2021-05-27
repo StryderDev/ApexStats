@@ -3,7 +3,7 @@ require("dotenv").config;
 const config = require("./config.json");
 
 // TopGG API
-const AutoPoster = require("topgg-autoposter");
+const {AutoPoster} = require("topgg-autoposter");
 
 const {ShardingManager} = require("discord.js-light");
 const manager = new ShardingManager("./ApexStats.js", {
