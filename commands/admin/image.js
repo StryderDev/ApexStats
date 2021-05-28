@@ -216,7 +216,7 @@ module.exports = class MapCommand extends Command {
         ctx.fillStyle = "#FFFFFFF";
         ctx.font = "15px OSBold";
         ctx.textAlign = "left";
-        let oneTitle = truncate(trackerTitle(one.id, findLegendByID(legend)).toUpperCase(), 19);
+        let oneTitle = truncate(trackerTitle(one.id, findLegendByID(legend)).toUpperCase(), 21);
         ctx.fillText(oneTitle, 32, 458);
 
         // Value
@@ -239,7 +239,7 @@ module.exports = class MapCommand extends Command {
         ctx.fillStyle = "#FFFFFFF";
         ctx.font = "15px OSBold";
         ctx.textAlign = "left";
-        let twoTitle = truncate(trackerTitle(two.id, findLegendByID(legend)).toUpperCase(), 19);
+        let twoTitle = truncate(trackerTitle(two.id, findLegendByID(legend)).toUpperCase(), 21);
         ctx.fillText(twoTitle, 32, 540);
 
         // Value
@@ -262,7 +262,7 @@ module.exports = class MapCommand extends Command {
         ctx.fillStyle = "#FFFFFFF";
         ctx.font = "15px OSBold";
         ctx.textAlign = "left";
-        let threeTitle = truncate(trackerTitle(three.id, findLegendByID(legend)).toUpperCase(), 23);
+        let threeTitle = truncate(trackerTitle(three.id, findLegendByID(legend)).toUpperCase(), 21);
         ctx.fillText(threeTitle, 32, 622);
 
         // Value
