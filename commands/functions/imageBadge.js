@@ -11,7 +11,7 @@ function badgeImage(id) {
 }
 
 function hasValue(id) {
-  if (id == "1488777442") return "EmptyBadge.png";
+  if (id == "1488777442") return false;
 
   if (accountBadges[id] != null) return accountBadges[id].hasValue;
   if (teaserBadges[id] != null) return teaserBadges[id].hasValue;
@@ -19,4 +19,20 @@ function hasValue(id) {
   return false;
 }
 
-module.exports = {badgeImage, hasValue};
+function getValue(id, value) {
+  if (id == "1488777442") return false;
+
+  if (accountBadges[id] != null) {
+    if (accountBadges[id].fix != false) return value - accountBadges[id].fix;
+
+    return accountBadges[id].hasValue;
+  }
+
+  if (teaserBadges[id] != null) {
+    if (teaserBadges[id].fix != false) return value - teaserBadges[id].fix;
+
+    return teaserBadges[id].hasValue;
+  }
+}
+
+module.exports = {badgeImage, hasValue, getValue};

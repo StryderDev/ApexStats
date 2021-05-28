@@ -77,9 +77,9 @@ module.exports = class MapCommand extends Command {
         )
         .then(function (response) {
           // Set main response to data object
-          console.log("-- LOOKING UP USER DATA --");
+          console.log("-- Fetching user data --");
           var response = response.data;
-          console.log("-- USER DATA ASSIGNED HERE --");
+          console.log("-- Data fetched, parsing --");
 
           // Sort data into variables for organization :bop:
           var username = response.userData.username;

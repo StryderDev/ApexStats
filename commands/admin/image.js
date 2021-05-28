@@ -6,7 +6,7 @@ const {Command} = require("discord.js-light-commando");
 const {checkMsg} = require("../functions/checkMsg.js");
 
 const {findLegendByID, getBPLevel, trackerTitle, trackerValue} = require("../functions/stats.js");
-const {badgeImage, hasValue} = require("../functions/imageBadge.js");
+const {badgeImage, hasValue, getValue} = require("../functions/imageBadge.js");
 
 module.exports = class MapCommand extends Command {
   constructor(client) {
@@ -150,7 +150,7 @@ module.exports = class MapCommand extends Command {
         ctx.drawImage(badgeOneImage, 80, 86, 95, 95);
 
         // Top Badge Value
-        if (hasValue(bOne.id)) {
+        if (hasValue(bOne.id, bOne.value)) {
           const textOneBackground = await Canvas.loadImage(
             `https://cdn.apexstats.dev/Badges/textBackground.png`
           );
@@ -159,7 +159,7 @@ module.exports = class MapCommand extends Command {
           ctx.fillStyle = "#FFFFFFF";
           ctx.font = "13px OSBold";
           ctx.textAlign = "center";
-          let oneTitle = bOne.value;
+          let oneTitle = getValue(bOne.id, bOne.value);
           ctx.fillText(oneTitle, 127, 170);
         }
 
@@ -170,7 +170,7 @@ module.exports = class MapCommand extends Command {
         ctx.drawImage(badgeTwoImage, 80, 201, 95, 95);
 
         // Middle Badge Value
-        if (hasValue(bTwo.id)) {
+        if (hasValue(bTwo.id, bTwo.value)) {
           const textTwoBackground = await Canvas.loadImage(
             `https://cdn.apexstats.dev/Badges/textBackground.png`
           );
@@ -179,7 +179,7 @@ module.exports = class MapCommand extends Command {
           ctx.fillStyle = "#FFFFFFF";
           ctx.font = "13px OSBold";
           ctx.textAlign = "center";
-          let oneTitle = bTwo.value;
+          let oneTitle = getValue(bTwo.id, bTwo.value);
           ctx.fillText(oneTitle, 127, 286);
         }
 
@@ -190,7 +190,7 @@ module.exports = class MapCommand extends Command {
         ctx.drawImage(badgeThreeImage, 80, 321, 95, 95);
 
         // Bottom Badge Value
-        if (hasValue(bThree.id)) {
+        if (hasValue(bThree.id, bThree.value)) {
           const textThreeBackground = await Canvas.loadImage(
             `https://cdn.apexstats.dev/Badges/textBackground.png`
           );
@@ -199,7 +199,7 @@ module.exports = class MapCommand extends Command {
           ctx.fillStyle = "#FFFFFFF";
           ctx.font = "13px OSBold";
           ctx.textAlign = "center";
-          let oneTitle = bThree.value;
+          let oneTitle = getValue(bThree.id, bThree.value);
           ctx.fillText(oneTitle, 127, 406);
         }
 

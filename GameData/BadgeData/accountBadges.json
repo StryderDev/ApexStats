@@ -2,6 +2,7 @@
   "1774065557": {
     "name": "AccountBadges/AccountLevel.png",
     "hasValue": true,
+    "fix": "1",
     "tiered": false
   },
   "320244274": {
@@ -19,8 +20,74 @@
     "hasValue": false,
     "tiered": false
   },
+  "1480441935": {
+    "name": "AccountBadges/InTheGame.png",
+    "hasValue": false,
+    "tiered": false
+  },
+  "167239552": {
+    "name": "AccountBadges/EliteStreak.png",
+    "hasValue": true,
+    "fix": 2,
+    "tiered": false
+  },
+  "600970543": {
+    "name": "AccountBadges/Fashionista.png",
+    "hasValue": false,
+    "tiered": false
+  },
+  "314986752": {
+    "name": "AccountBadges/FullyKitted.png",
+    "hasValue": false,
+    "tiered": false
+  },
+  "2141092556": {
+    "name": "AccountBadges/LongShot.png",
+    "hasValue": false,
+    "tiered": false
+  },
+  "1721484615": {
+    "name": "AccountBadges/MasterOfAll.png",
+    "hasValue": false,
+    "tiered": false
+  },
+  "498953496": {
+    "name": "AccountBadges/NoWitnesses.png",
+    "hasValue": false,
+    "tiered": false
+  },
+  "1041083132": {
+    "name": "AccountBadges/PackVictory.png",
+    "hasValue": false,
+    "tiered": false
+  },
+  "153944881": {
+    "name": "AccountBadges/Starter.png",
+    "hasValue": false,
+    "tiered": false
+  },
   "2012685013": {
     "name": "AccountBadges/StopAsianHate.png",
+    "hasValue": false,
+    "tiered": false
+  },
+  "1163465131": {
+    "name": "AccountBadges/LiveDieLive.png",
+    "hasValue": false,
+    "tiered": false
+  },
+  "300105934": {
+    "name": "AccountBadges/ValentinesDay.png",
+    "hasValue": false,
+    "tiered": false
+  },
+  "1126877325": {
+    "name": "AccountBadges/Warlord.png",
+    "hasValue": false,
+    "tiered": false
+  },
+  "14539498": {
+    "name": "AccountBadges/WellRounded.png",
     "hasValue": false,
     "tiered": false
   }
