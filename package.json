@@ -1,6 +1,6 @@
 {
   "name": "apexstatsbot",
-  "version": "0.4.24",
+  "version": "0.4.25",
   "description": "Shows Apex Legends player stats and other information provided by the apexlegendsstatus.com API.",
   "main": "ShardManager.js",
   "repository": {
