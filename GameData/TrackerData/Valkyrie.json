@@ -20,8 +20,8 @@
   "557724680": {"Name": "Jet Distance Travelled", "Image": "Default"},
   "179683769": {"Name": "Missile Swarm Hits", "Image": "Default"},
   "1498689400": {"Name": "Allies Repositioned", "Image": "Default"},
-  "1534840100": {"Name": "Season 9 Wins", "Image": "Default"},
-  "1727506017": {"Name": "Season 9 Kills", "Image": "Default"},
+  "1534840100": {"Name": "Season 9 Wins", "Image": "Season09"},
+  "1727506017": {"Name": "Season 9 Kills", "Image": "Season09"},
   "541938325": {"Name": "Arenas Kills", "Image": "Default"},
   "1170974273": {"Name": "Arenas Wins", "Image": "Default"},
   "1985042728": {"Name": "Arenas Damage Done", "Image": "Default"}

@@ -40,8 +40,8 @@
   "2032005479": {"Name": "Damage Done as Pathfinder", "Image": "Default"},
   "1128450176": {"Name": "Season 8 Kills", "Image": "Default"},
   "166871337": {"Name": "Season 8 Wins", "Image": "Default"},
-  "1307894911": {"Name": "Season 9 Kills", "Image": "Default"},
-  "627970749": {"Name": "Season 9 Wins", "Image": "Default"},
+  "1307894911": {"Name": "Season 9 Kills", "Image": "Season09"},
+  "627970749": {"Name": "Season 9 Wins", "Image": "Season09"},
   "647998371": {"Name": "Arenas Kills", "Image": "Default"},
   "680996922": {"Name": "Arenas Wins", "Image": "Default"},
   "406092415": {"Name": "Arenas Damage Done", "Image": "Default"}

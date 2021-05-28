@@ -25,8 +25,8 @@
   "526398026": {"Name": "Kills as Crypto", "Image": "Default"},
   "1273460007": {"Name": "Wins as Crypto", "Image": "Default"},
   "663548666": {"Name": "Damage Done as Crypto", "Image": "Default"},
-  "1250011816": {"Name": "Season 9 Kills", "Image": "Default"},
-  "1237656687": {"Name": "Season 9 Wins", "Image": "Default"},
+  "1250011816": {"Name": "Season 9 Kills", "Image": "Season09"},
+  "1237656687": {"Name": "Season 9 Wins", "Image": "Season09"},
   "1229543499": {"Name": "Arenas Kills", "Image": "Default"},
   "1213512951": {"Name": "Arenas Wins", "Image": "Default"},
   "1182223152": {"Name": "Arenas Damage Done", "Image": "Default"}

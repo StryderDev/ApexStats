@@ -27,8 +27,8 @@
   "1070984503": {"Name": "Damage Done as Wattson", "Image": "Default"},
   "2053445625": {"Name": "Season 8 Kills", "Image": "Default"},
   "579355869": {"Name": "Season 8 Wins", "Image": "Default"},
-  "193162836": {"Name": "Season 9 Kills", "Image": "Default"},
-  "1308296139": {"Name": "Season 9 Wins", "Image": "Default"},
+  "193162836": {"Name": "Season 9 Kills", "Image": "Season09"},
+  "1308296139": {"Name": "Season 9 Wins", "Image": "Season09"},
   "1800261070": {"Name": "Arenas Kills", "Image": "Default"},
   "412979201": {"Name": "Arenas Wins", "Image": "Default"},
   "1700706365": {"Name": "Arenas Damage Done", "Image": "Default"}

@@ -36,8 +36,8 @@
   "1111231217": {"Name": "Season 7 Kills", "Image": "Default"},
   "741509982": {"Name": "Season 8 Kills", "Image": "Default"},
   "691295567": {"Name": "Season 8 Wins", "Image": "Default"},
-  "81015494": {"Name": "Season 9 Kills", "Image": "Default"},
-  "455746662": {"Name": "Season 9 Wins", "Image": "Default"},
+  "81015494": {"Name": "Season 9 Kills", "Image": "Season09"},
+  "455746662": {"Name": "Season 9 Wins", "Image": "Season09"},
   "308578169": {"Name": "Arenas Kills", "Image": "Default"},
   "684837229": {"Name": "Arenas Wins", "Image": "Default"},
   "2067503334": {"Name": "Arenas Damage Done", "Image": "Default"}

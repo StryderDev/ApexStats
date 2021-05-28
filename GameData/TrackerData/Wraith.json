@@ -29,8 +29,8 @@
   "1498180750": {"Name": "Damage Done as Wraith", "Image": "Default"},
   "1005786086": {"Name": "Season 8 Kills", "Image": "Default"},
   "144414654": {"Name": "Season 8 Wins", "Image": "Default"},
-  "580343081": {"Name": "Season 9 Kills", "Image": "Default"},
-  "2054872280": {"Name": "Season 9 Wins", "Image": "Default"},
+  "580343081": {"Name": "Season 9 Kills", "Image": "Season09"},
+  "2054872280": {"Name": "Season 9 Wins", "Image": "Season09"},
   "508076419": {"Name": "Arenas Kills", "Image": "Default"},
   "1184138829": {"Name": "Arenas Wins", "Image": "Default"},
   "1903358690": {"Name": "Arenas Damage Done", "Image": "Default"}

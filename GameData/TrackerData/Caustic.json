@@ -33,8 +33,8 @@
   "213184912": {"Name": "Kills as Caustic", "Image": "Default"},
   "383359091": {"Name": "Damage Done as Caustic", "Image": "Default"},
   "287054978": {"Name": "Wins as Caustic", "Image": "Default"},
-  "160406719": {"Name": "Season 9 Kills", "Image": "Default"},
-  "323480406": {"Name": "Season 9 Wins", "Image": "Default"},
+  "160406719": {"Name": "Season 9 Kills", "Image": "Season09"},
+  "323480406": {"Name": "Season 9 Wins", "Image": "Season09"},
   "1611702859": {"Name": "Arenas Kills", "Image": "Default"},
   "1795203786": {"Name": "Arenas Wins", "Image": "Default"},
   "1386198068": {"Name": "Arenas Damage Done", "Image": "Default"}

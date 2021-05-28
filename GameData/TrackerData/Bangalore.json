@@ -37,8 +37,8 @@
   "607426151": {"Name": "Kills as Bangalore", "Image": "Default"},
   "1524967622": {"Name": "Wins as Bangalore", "Image": "Default"},
   "1690192676": {"Name": "Damage Done as Bangalore", "Image": "Default"},
-  "1000050441": {"Name": "Season 9 Kills", "Image": "Default"},
-  "1568429639": {"Name": "Season 9 Wins", "Image": "Default"},
+  "1000050441": {"Name": "Season 9 Kills", "Image": "Season09"},
+  "1568429639": {"Name": "Season 9 Wins", "Image": "Season09"},
   "6285628": {"Name": "Arenas Kills", "Image": "Default"},
   "1947508608": {"Name": "Arenas Wins", "Image": "Default"},
   "1284689717": {"Name": "Arenas Damage Done", "Image": "Default"}
