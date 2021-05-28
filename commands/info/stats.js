@@ -211,10 +211,10 @@ module.exports = class MapCommand extends Command {
               return "**Error**\nThere was an error connecting to an external API. Please try again or contact SDCore#1234 if the problem persists.";
 
             if (code == 4)
-              return "**Error**\nThat username wasn't found. Either it is incorrect, or it doesn't exist. Try using the username of your Origin account.";
+              return `**Error**\nUsername '${username}' on ${platform} not found. Either it is incorrect, or it doesn't exist. Try using the username of your Origin account.`;
 
             if (code == 5)
-              return "**Error**\nThe username was found, but that account hasn't played Apex. Try a different username.";
+              return `**Error**\nUsername '${username}' on ${platform} was found, but that account hasn't played Apex. Try a different username.`;
 
             return "**Error**\nGeneric, unhandled error. Contact SDCore#1234 if you see this.";
           }
