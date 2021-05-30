@@ -76,17 +76,6 @@ module.exports = class MapCommand extends Command {
             .setDescription(
               "This bot has the ability to show user stats, events, in-game map rotations, server status, and more. Use `>>commands` to see commands available to the bot."
             )
-            //.addField(
-            //  "Bot Info",
-            //  `**Version:** ${version}\n**Total Guilds**: ${count.toLocaleString()}\n**Guild Shard ID:** ${
-            //    msg.guild.shardID
-            //  }\n**Guilds on Shard**: ${shardGuildCount}\n**Players Tracked**: ${results[0].UserCount.toLocaleString()}\n**Memory Usage:** ${(
-            //    process.memoryUsage().heapUsed /
-            //    1024 /
-            //    1024
-            //  ).toFixed(2)} MB`,
-            //  true
-            //)
             .addField(
               "Bot Stats",
               `**Version**: ${version}\n**Players Tracked**: ${results[0].UserCount.toLocaleString()}\n**Uptime**: ${days}d, ${hours}h, ${minutes}m, ${seconds}s\n**Memory Usage**: ${memUsage()}`,

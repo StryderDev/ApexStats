@@ -122,19 +122,6 @@ module.exports = class MapCommand extends Command {
             .setTitle(`Stats for ${username} on ${platform} playing ${findLegendByID(legend)}`)
             .setDescription(checkStatus(isOnline))
             .setColor(getColor(legend))
-            // .addField(
-            // "Account & Season 9 BattlePass Level",
-            //   `**Account Level ${level.toLocaleString()}/500**\n${percentage(
-            //     500,
-            //     level,
-            //     10
-            //   )}\n**BattlePass Level ${getBPLevel(bpLevel)}/110**\n${percentage(
-            //     110,
-            //     getBPLevel(bpLevel),
-            //     10
-            //   )}`,
-            //   true
-            // )
             .addField(
               "<:AccountLevel:824571962420101122> Account",
               `Level ${level.toLocaleString()}/500\n${percentage(
@@ -152,22 +139,9 @@ module.exports = class MapCommand extends Command {
                 BR_RankName,
                 BR_RankPos,
                 BR_RankDiv
-              )}\n<:Season_0:802049756254830632> ${BR_RankScore.toLocaleString()} RP\n\n**Arenas Ranked**\nComing Soon?`,
+              )}\n<:Season_0:802049756254830632> ${BR_RankScore.toLocaleString()} RP\n\n**Arenas Ranked**\nComing Soon!`,
               true
             )
-            //.addField("\u200b", "\u200b")
-            //.addField("BR_Ranked", "1", true)
-            //.addField("Arenas_Ranked", "1", true)
-            //.addField("\u200b", "\u200b", true)
-            // .addField(
-            //   "Account Stats",
-            //   `${findRank(
-            //     BR_RankName,
-            //     BR_RankPos,
-            //     BR_RankDiv
-            //   )}\n**Score**\n${BR_RankScore.toLocaleString()} RP`,
-            //   true
-            // )
             .addField("\u200b", "**Currently Equipped Trackers**")
             .addField(
               trackerTitle(tOne.id, findLegendByID(legend)),
