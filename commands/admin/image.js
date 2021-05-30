@@ -65,6 +65,8 @@ module.exports = class MapCommand extends Command {
 
       if (platform == "PC" || platform == "STEAM" || platform == "ORIGIN") return "PC";
 
+      if (platform == "SWITCH" || platform == "NINTENDO" || platform == "NINTENDO SWITCH") return 1;
+
       return 0;
     }
 
@@ -72,6 +74,13 @@ module.exports = class MapCommand extends Command {
     if (checkPlatform(platform) == 0)
       return msg.say(
         `There was not a valid platform provided.\nFor reference, Use PC for Origin/Steam, X1 for Xbox, or PS4 for PlayStation.`
+      );
+
+    // If platform returns 1, return an error saying
+    // switch stats aren't supported
+    if (checkPlatform(platform) == 1)
+      return msg.say(
+        "Unfortunately, stats for the Nintendo Switch are not currently supported. Sorry for the inconvenience."
       );
 
     function trackerImage(id, legend) {
