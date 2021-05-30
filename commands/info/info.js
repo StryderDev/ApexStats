@@ -65,6 +65,10 @@ module.exports = class MapCommand extends Command {
         let minutes = Math.floor(process.uptime() / 60) % 60;
         let seconds = Math.floor(process.uptime()) % 60;
 
+        function memUsage() {
+          return `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`;
+        }
+
         getServerCount().then((count) => {
           const embed = new MessageEmbed()
             .setTitle(botName)
@@ -72,15 +76,20 @@ module.exports = class MapCommand extends Command {
             .setDescription(
               "This bot has the ability to show user stats, events, in-game map rotations, server status, and more. Use `>>commands` to see commands available to the bot."
             )
+            //.addField(
+            //  "Bot Info",
+            //  `**Version:** ${version}\n**Total Guilds**: ${count.toLocaleString()}\n**Guild Shard ID:** ${
+            //    msg.guild.shardID
+            //  }\n**Guilds on Shard**: ${shardGuildCount}\n**Players Tracked**: ${results[0].UserCount.toLocaleString()}\n**Memory Usage:** ${(
+            //    process.memoryUsage().heapUsed /
+            //    1024 /
+            //    1024
+            //  ).toFixed(2)} MB`,
+            //  true
+            //)
             .addField(
-              "Bot Info",
-              `**Version:** ${version}\n**Total Guilds**: ${count.toLocaleString()}\n**Guild Shard ID:** ${
-                msg.guild.shardID
-              }\n**Guilds on Shard**: ${shardGuildCount}\n**Players Tracked**: ${results[0].UserCount.toLocaleString()}\n**Memory Usage:** ${(
-                process.memoryUsage().heapUsed /
-                1024 /
-                1024
-              ).toFixed(2)} MB`,
+              "Bot Stats",
+              `**Version**: ${version}\n**Players Tracked**: ${results[0].UserCount.toLocaleString()}\n**Uptime**: ${days}d, ${hours}h, ${minutes}m, ${seconds}s\n**Memory Usage**: ${memUsage()}`,
               true
             )
             .addField(
@@ -88,11 +97,21 @@ module.exports = class MapCommand extends Command {
               `[Trello](https://apexstats.dev/trello)\n[Stats Site](https://apexstats.dev/)\n[Invite Bot](https://apexstats.dev/invite)\n[Github Repo](https://apexstats.dev/github)\n[Support Server](https://discord.gg/eH8VxssFW6)`,
               true
             )
+            .addField("\u200b", "\u200b", true)
             .addField(
-              "Uptime",
-              `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`
+              "Bot Guild/Shard Info",
+              `**Total Shards**: ${config.shards}\n**Guild Shard ID**: ${msg.guild.shardID + 1}/${
+                config.shards
+              }`,
+              true
+            )
+            .addField(
+              "\u200b",
+              `**Guilds on Shard**: ${shardGuildCount}\n**Total Guild Count**: ${count.toLocaleString()}`,
+              true
             )
             .setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO)
+            .addField("\u200b", "\u200b", true)
             .setTimestamp();
 
           msg.say(embed);
