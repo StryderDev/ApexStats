@@ -1,8 +1,8 @@
 {
   "81517437": {"Name": "Kills", "Image": "Default"},
-  "18649475": {"Name": "Damage Done", "Image": "Default"},
   "531261879": {"Name": "Winning Kills", "Image": "Default"},
   "1270143351": {"Name": "Kills as Kill Leader", "Image": "Default"},
+  "18649475": {"Name": "Damage Done", "Image": "Default"},
   "1947146183": {"Name": "Headshots", "Image": "Default"},
   "741695335": {"Name": "Finishers", "Image": "Default"},
   "453928835": {"Name": "Revives", "Image": "Default"},

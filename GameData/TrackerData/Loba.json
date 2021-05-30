@@ -1,9 +1,8 @@
 {
   "1359275248": {"Name": "Kills", "Image": "Default"},
-  "1416294179": {"Name": "Damage Done", "Image": "Default"},
-  "1573771376": {"Name": "Care Package Weapon Kills", "Image": "Default"},
   "1927694151": {"Name": "Winning Kills", "Image": "Default"},
   "604873453": {"Name": "Kills as Kill Leader", "Image": "Default"},
+  "1416294179": {"Name": "Damage Done", "Image": "Default"},
   "671033689": {"Name": "Headshots", "Image": "Default"},
   "1461345513": {"Name": "Finishers", "Image": "Default"},
   "1391825387": {"Name": "Revives", "Image": "Default"},
@@ -17,6 +16,7 @@
   "39760556": {"Name": "LMG Kills", "Image": "Default"},
   "1502057616": {"Name": "Sniper Kills", "Image": "Default"},
   "489250900": {"Name": "Marksman Kills", "Image": "Default"},
+  "1573771376": {"Name": "Care Package Weapon Kills", "Image": "Default"},
   "42379430": {"Name": "Loot Pinged Through Walls", "Image": "Default"},
   "1370374388": {"Name": "Meters Teleported", "Image": "Default"},
   "842827023": {"Name": "Loot Taken by Allies", "Image": "Default"},
