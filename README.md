@@ -51,17 +51,20 @@ The bot currently has the following features:
 
 ### Stats
 
-![Stats Preview 1](https://sdcore.dev/i/yysr940u.png)
+![Stats Preview](https://sdcore.dev/i/daowc2pz.png)
+![Image Preview](https://sdcore.dev/i/u3b1q1nd.png)
+
+(Image stats in development and not available to all servers.)
 
 ### Map Rotation
 
-![Map Rotation Preview](https://sdcore.dev/i/ucaf63ev.png)
+![Map Rotation Preview](https://sdcore.dev/i/briwawad.png)
 
-![Future Map Rotations Preview](https://sdcore.dev/i/aloczkdg.png)
+![Future Map Rotations Preview](https://sdcore.dev/i/4y92fwmt.png)
 
 ### Server Status
 
-![Server Status Preview](https://sdcore.dev/i/ufe8sb3d.png)
+![Server Status Preview](https://sdcore.dev/i/9bfpq67r.png)
 
 ### Where to Drop
 
