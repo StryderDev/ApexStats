@@ -58,7 +58,13 @@ module.exports = class MapCommand extends Command {
 
       if (platform == "PC" || platform == "STEAM" || platform == "ORIGIN") return "PC";
 
-      if (platform == "SWITCH" || platform == "NINTENDO" || platform == "NINTENDO SWITCH") return 1;
+      if (
+        platform == "SWITCH" ||
+        platform == "NINTENDO" ||
+        platform == "NINTENDO SWITCH" ||
+        platform == "NS"
+      )
+        return 1;
 
       return 0;
     }
