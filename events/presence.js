@@ -30,6 +30,7 @@ client.once("ready", () => {
             if (name == "Phase runner") return "Phase Runner";
             if (name == "Party crasher") return "Party Crasher";
             if (name == "Thermal station") return "Thermal Station";
+            if (name == "Golden gardens") return "Golden Gardens";
 
             return name;
           }

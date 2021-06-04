@@ -4,6 +4,7 @@ const {DateTime} = require("luxon");
 const axios = require("axios");
 const config = require("../config.json");
 const {MessageEmbed} = require("discord.js");
+const {version} = require("../package.json");
 
 client.once("ready", () => {
   const guild = client.guilds.cache.get(config.autoUpdate.guildID);
@@ -46,6 +47,7 @@ client.once("ready", () => {
           if (name == "Phase runner") return "Phase Runner";
           if (name == "Party crasher") return "Party Crasher";
           if (name == "Thermal station") return "Thermal Station";
+          if (name == "Golden gardens") return "Golden Gardens";
 
           return name;
         }
@@ -59,7 +61,7 @@ client.once("ready", () => {
           .setImage(
             `https://cdn.apexstats.dev/Maps/Season%209/Arena_${mapImage(
               mapName(arena.current.map)
-            )}_01.gif`
+            )}_01.gif?v=${version}`
           )
           .setTimestamp()
           .setFooter("Provided by https://apexlegendsapi.com/");

@@ -5,6 +5,7 @@ const axios = require("axios");
 var {DateTime, Duration} = require("luxon");
 const {checkMsg} = require("../functions/checkMsg.js");
 const config = require("../../config.json");
+const {version} = require("../../package.json");
 
 module.exports = class MapCommand extends Command {
   constructor(client) {
@@ -53,6 +54,7 @@ module.exports = class MapCommand extends Command {
       if (name == "Phase runner") return "Phase Runner";
       if (name == "Party crasher") return "Party Crasher";
       if (name == "Thermal station") return "Thermal Station";
+      if (name == "Golden gardens") return "Golden Gardens";
 
       return name;
     }
@@ -73,7 +75,7 @@ module.exports = class MapCommand extends Command {
             .setImage(
               `https://cdn.apexstats.dev/Maps/Season%209/Arena_${mapImage(
                 mapName(arena.current.map)
-              )}_01.gif`
+              )}_01.gif?v=${version}`
             )
             .setFooter("Provided by https://apexlegendsapi.com/");
 
