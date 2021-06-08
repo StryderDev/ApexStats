@@ -59,4 +59,5 @@ jobs:
             git pull
             npm prune
             npm ci
+            npm audit fix
             pm2 reload 0
