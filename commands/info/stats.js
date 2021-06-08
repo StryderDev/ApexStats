@@ -104,7 +104,12 @@ module.exports = class MapCommand extends Command {
           // Banner info
           var legend = response.accountInfo.active.legend;
           var level = response.accountInfo.level;
-          var bpLevel = response.accountInfo.battlepass.level;
+
+          function bpLevel() {
+            if (response.accountInfo.battlepass.history === null) return 0;
+
+            return response.accountInfo.battlepass.history.season9;
+          }
 
           // Battle Royal Ranked
           var BR_RankName = response.accountInfo.Ranked_BR.name;
@@ -135,8 +140,8 @@ module.exports = class MapCommand extends Command {
                 level,
                 10
               )}\n\n**<:Season_9:847250004087144458> Season 9 BattlePass**\nLevel ${getBPLevel(
-                bpLevel
-              )}/110\n${percentage(110, getBPLevel(bpLevel), 10)}`,
+                bpLevel()
+              )}/110\n${percentage(110, getBPLevel(bpLevel()), 10)}`,
               true
             )
             .addField(
