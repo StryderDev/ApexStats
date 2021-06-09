@@ -4,6 +4,7 @@ const {MessageEmbed} = require("discord.js");
 const axios = require("axios");
 const {checkMsg} = require("../functions/checkMsg.js");
 const percentage = require("percentagebar");
+const config = require("../../config.json");
 const {
   findLegendByID,
   checkStatus,
@@ -12,6 +13,7 @@ const {
   getBPLevel,
   trackerTitle,
   trackerValue,
+  getPercent,
 } = require("../functions/stats.js");
 
 module.exports = class MapCommand extends Command {
@@ -138,10 +140,28 @@ module.exports = class MapCommand extends Command {
               `Level ${level.toLocaleString()}/500\n${percentage(
                 500,
                 level,
-                10
-              )}\n\n**<:Season_9:847250004087144458> Season 9 BattlePass**\nLevel ${getBPLevel(
+                10,
+                "▓",
+                "░",
+                "[",
+                "]",
+                false
+              )} ${getPercent(
+                level,
+                500,
+                false
+              )}%\n\n**<:Season_9:847250004087144458> Season 9 BattlePass**\nLevel ${getBPLevel(
                 bpLevel()
-              )}/110\n${percentage(110, getBPLevel(bpLevel()), 10)}`,
+              )}/110\n${percentage(
+                110,
+                getBPLevel(bpLevel()),
+                10,
+                "▓",
+                "░",
+                "[",
+                "]",
+                false
+              )} ${getPercent(bpLevel(), 110, false)}%`,
               true
             )
             .addField(
@@ -179,7 +199,10 @@ module.exports = class MapCommand extends Command {
         })
         .catch((error) => {
           console.log("-- ERROR OUTPUT --");
-          // console.log(error);
+
+          if (config.debug == true) {
+            console.log(error);
+          }
 
           if (
             error.response.data == null ||

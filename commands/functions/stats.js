@@ -70,6 +70,18 @@ function trackerValue(id, value) {
   return value.toLocaleString();
 }
 
+function getPercent(one, two, allowOver) {
+  var percent = Math.floor((one / two) * 100);
+
+  if (allowOver == false) {
+    if (percent > 100) return 100;
+
+    return percent;
+  }
+
+  return percent;
+}
+
 module.exports = {
   findLegendByID,
   checkStatus,
@@ -78,4 +90,5 @@ module.exports = {
   getBPLevel,
   trackerTitle,
   trackerValue,
+  getPercent,
 };

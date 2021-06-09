@@ -1,4 +1,5 @@
 {
+  "debug": "true or false",
   "prefix": "PREFIX HERE",
   "shards": NUMBER OF SHARDS,
   "token": "DISCORD BOT TOKEN HERE",
