@@ -101,7 +101,7 @@ module.exports = class MapCommand extends Command {
           // Sort data into variables for organization :bop:
           var username = response.userData.username;
           var platform = response.userData.platform;
-          var isOnline = response.userData.status;
+          var isOnline = response.userData.online;
 
           // Banner info
           var legend = response.accountInfo.active.legend;
