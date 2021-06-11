@@ -102,6 +102,7 @@ module.exports = class MapCommand extends Command {
           var username = response.userData.username;
           var platform = response.userData.platform;
           var isOnline = response.userData.online;
+          var isInGame = response.userData.ingame;
 
           // Banner info
           var legend = response.accountInfo.active.legend;
@@ -133,7 +134,7 @@ module.exports = class MapCommand extends Command {
 
           const embed = new MessageEmbed()
             .setTitle(`Stats for ${username} on ${platform} playing ${findLegendByID(legend)}`)
-            .setDescription(checkStatus(isOnline))
+            .setDescription(checkStatus(isOnline, isInGame))
             .setColor(getColor(legend))
             .addField(
               "<:AccountLevel:824571962420101122> Account",

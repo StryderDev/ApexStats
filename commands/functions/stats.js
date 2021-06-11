@@ -1,7 +1,8 @@
 const legends = require("../../GameData/legends.json");
 
-var OnlineEmoji = "<:StatusUp:786800700533112872>";
-var OfflineEmoji = "<:StatusDown:786800700201238570>";
+var onlineEmoji = "<:StatusUp:786800700533112872>";
+var matchEmoji = "<:StatusSlow:786800700541501461>";
+var offlineEmoji = "<:StatusDown:786800700201238570>";
 
 function findLegendByID(ID) {
   var legend = legends[ID].Name;
@@ -11,10 +12,12 @@ function findLegendByID(ID) {
   return legend;
 }
 
-function checkStatus(status) {
-  if (status == "1") return `${OnlineEmoji} In Game`;
+function checkStatus(online, ingame) {
+  if (online == "1" && ingame == "1") return `${onlineEmoji} In a Match`;
 
-  return `${OfflineEmoji} Offline`;
+  if (online == "1") return `${matchEmoji} Online [Lobby]`;
+
+  return `${offlineEmoji} Offline`;
 }
 
 function getColor(legend) {
