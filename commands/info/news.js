@@ -15,7 +15,7 @@ module.exports = class MapCommand extends Command {
       group: "info",
       memberName: "news",
       description: "Gets the latest blog post from the official Apex Legends blog.",
-      examples: ["who"],
+      examples: ["news"],
     });
   }
   onError(error) {

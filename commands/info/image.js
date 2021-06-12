@@ -12,7 +12,7 @@ module.exports = class MapCommand extends Command {
   constructor(client) {
     super(client, {
       name: "image",
-      group: "admin",
+      group: "info",
       memberName: "image",
       description: "N/A. Only usable by bot owner.",
       examples: ["image"],

@@ -174,6 +174,10 @@ module.exports = class MapCommand extends Command {
               )}\n<:Season_0:802049756254830632> ${BR_RankScore.toLocaleString()} RP\n\n**Arenas Ranked**\nComing Soon!`,
               true
             )
+            .addField("\u200b", "\u200b", true)
+            .addField("Battle Royal Kills", response.data.Total_BR_Kills.toLocaleString(), true)
+            .addField("Arenas Kills", response.data.Total_Arenas_Kills.toLocaleString(), true)
+            .addField("Total Kills", response.data.Total_Kills.toLocaleString(), true)
             .addField("\u200b", "**Currently Equipped Trackers**")
             .addField(
               trackerTitle(tOne.id, findLegendByID(legend)),
@@ -192,7 +196,7 @@ module.exports = class MapCommand extends Command {
             )
             .setImage(`https://cdn.apexstats.dev/LegendBanners/${findLegendByID(legend)}.png`)
             .setFooter(
-              "Weird tracker name? Let SDCore#1234 know!\nBattlePass level not correct? Equip the badge in-game!"
+              "Weird tracker name? Let SDCore#1234 know!\nBattlePass level not correct? Equip the badge in-game!\nTotal kills may not be up-to-date. Type >>killhelp for info."
             );
 
           msg.delete();
