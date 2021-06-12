@@ -25,10 +25,10 @@ function getColor(legend) {
 }
 
 function findRank(name, pos, div) {
-  function isMaster(name, div) {
-    if (name == "Master") return "";
+  function isMaster(rankName, rankDiv) {
+    if (rankName == "Master") return "";
 
-    return div;
+    return rankDiv;
   }
 
   if (name == "Apex Predator")
