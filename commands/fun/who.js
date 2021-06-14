@@ -36,6 +36,7 @@ module.exports = class MapCommand extends Command {
       "2105222312",
       "88599337",
       "405279270",
+      "435256162",
     ];
 
     const randomLegend = Math.floor(Math.random() * legendIDs.length);
