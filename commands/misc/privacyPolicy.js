@@ -17,6 +17,10 @@ module.exports = class MapCommand extends Command {
   run(msg) {
     if (checkMsg(msg) == 1) return;
 
-    msg.say("Privacy Policy: https://apexstats.dev/privacypolicy.php");
+    msg.channel.startTyping();
+
+    msg.say("Privacy Policy: https://apexstats.dev/privacypolicy");
+
+    msg.channel.stopTyping();
   }
 };

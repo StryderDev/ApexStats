@@ -24,6 +24,8 @@ module.exports = class MapCommand extends Command {
   run(msg) {
     if (checkMsg(msg) == 1) return;
 
+    msg.channel.startTyping();
+
     const pluralize = (count, noun, suffix = "s") => `${count} ${noun}${count !== 1 ? suffix : ""}`;
 
     function getTime(time) {
@@ -81,6 +83,8 @@ module.exports = class MapCommand extends Command {
 
           message.delete();
           message.embed(mapEmbed);
+
+          msg.channel.stopTyping();
         });
     });
   }

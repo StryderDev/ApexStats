@@ -31,6 +31,8 @@ module.exports = class MapCommand extends Command {
   async run(msg) {
     if (checkMsg(msg) == 1) return;
 
+    msg.channel.startTyping();
+
     var botName = `${this.client.user.username}#${this.client.user.discriminator}`;
     var userQuery = `SELECT COUNT(*) AS UserCount FROM ${config.APISQL.usersTable}`;
     var shardGuildCount = this.client.guilds.cache.size.toLocaleString();
@@ -104,7 +106,11 @@ module.exports = class MapCommand extends Command {
             .setTimestamp();
 
           msg.say(embed);
+
+          msg.channel.stopTyping();
         });
+
+        msg.channel.stopTyping();
       });
     });
   }

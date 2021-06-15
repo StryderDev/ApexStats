@@ -29,6 +29,8 @@ module.exports = class MapCommand extends Command {
   run(msg) {
     if (checkMsg(msg) == 1) return;
 
+    msg.channel.startTyping();
+
     let legendQuery = `SELECT * FROM ${config.SQL.changelogTable} ORDER BY \`id\` DESC`;
 
     connection.getConnection(function (err, connection) {
@@ -54,6 +56,8 @@ module.exports = class MapCommand extends Command {
 
         connection.release();
       });
+
+      msg.channel.stopTyping();
     });
   }
 };

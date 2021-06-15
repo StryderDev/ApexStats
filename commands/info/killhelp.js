@@ -19,6 +19,8 @@ module.exports = class MapCommand extends Command {
   run(msg) {
     if (checkMsg(msg) == 1) return;
 
+    msg.channel.startTyping();
+
     const killEmbed = new MessageEmbed()
       .setTitle("Kill Logging")
       .setDescription(
@@ -27,5 +29,7 @@ module.exports = class MapCommand extends Command {
       .setImage("https://cdn.apexstats.dev/Examples/KillsExample.png");
 
     msg.say(killEmbed);
+
+    msg.channel.stopTyping();
   }
 };

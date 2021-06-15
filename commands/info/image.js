@@ -115,6 +115,8 @@ module.exports = class MapCommand extends Command {
       axios
         .get(APIURL)
         .then(async function (response) {
+          msg.channel.startTyping();
+
           // Create Canvas with info
           // Username
           Canvas.registerFont("fonts/blocktastic.otf", {family: "blocktastic"});
@@ -304,6 +306,8 @@ module.exports = class MapCommand extends Command {
 
           msg.delete();
           msg.say(attachment);
+
+          msg.channel.stopTyping();
         })
         .catch((error) => {
           console.log("-- ERROR OUTPUT --");
@@ -343,7 +347,11 @@ module.exports = class MapCommand extends Command {
 
           msg.delete();
           msg.say(checkErrorType(error.errorCode));
+
+          msg.channel.stopTyping();
         });
+
+      msg.channel.stopTyping();
     });
   }
 };

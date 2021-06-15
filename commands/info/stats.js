@@ -93,6 +93,8 @@ module.exports = class MapCommand extends Command {
           )}&player=${encodeURIComponent(username)}`
         )
         .then(function (response) {
+          msg.channel.startTyping();
+
           // Set main response to data object
           console.log("-- Fetching user data --");
           var response = response.data;
@@ -201,6 +203,8 @@ module.exports = class MapCommand extends Command {
 
           msg.delete();
           msg.say(embed);
+
+          msg.channel.stopTyping();
         })
         .catch((error) => {
           console.log("-- ERROR OUTPUT --");
@@ -243,6 +247,8 @@ module.exports = class MapCommand extends Command {
 
           msg.delete();
           msg.say(checkErrorType(error.errorCode));
+
+          msg.channel.stopTyping();
         });
     });
   }

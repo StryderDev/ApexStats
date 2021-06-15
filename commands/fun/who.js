@@ -45,6 +45,10 @@ module.exports = class MapCommand extends Command {
     var legendEmoteID = legends[legendIDs[randomLegend]].EmoteID;
     var legendEmote = `<:${legendName}:${legendEmoteID}>`;
 
+    msg.channel.startTyping();
+
     msg.say(`${legendEmote} ${legendName}`);
+
+    msg.channel.stopTyping();
   }
 };

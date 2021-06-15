@@ -29,6 +29,8 @@ module.exports = class MapCommand extends Command {
   run(msg, {amount}) {
     if (checkMsg(msg) == 1) return;
 
+    msg.channel.startTyping();
+
     function lengthCheck(num) {
       if (!num) return 0;
       if (isNaN(num)) return 0;
@@ -96,6 +98,8 @@ module.exports = class MapCommand extends Command {
 
             message.delete();
             message.embed(mapEmbed);
+
+            msg.channel.stopTyping();
           });
       });
     } else {
@@ -120,6 +124,8 @@ module.exports = class MapCommand extends Command {
 
           message.delete();
           message.embed(mapEmbed);
+
+          msg.channel.stopTyping();
         });
       });
     }

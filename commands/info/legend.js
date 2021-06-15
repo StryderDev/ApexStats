@@ -36,6 +36,8 @@ module.exports = class MapCommand extends Command {
   run(msg, {name}) {
     if (checkMsg(msg) == 1) return;
 
+    msg.channel.startTyping();
+
     var name = name.toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
 
     var legends = [
@@ -110,8 +112,13 @@ module.exports = class MapCommand extends Command {
           .setFooter(legend.introLine);
 
         msg.say(legendEmbed);
+
+        msg.channel.stopTyping();
+
         connection.release();
       });
+
+      msg.channel.stopTyping();
     });
   }
 };

@@ -5,6 +5,7 @@ const WorldsEdgeDrops = require("../../GameData/MapDrops/WorldsEdge.json");
 const OlympusDrops = require("../../GameData/MapDrops/Olympus.json");
 const KingsCanyonDrops = require("../../GameData/MapDrops/KingsCanyon.json");
 const {default: axios} = require("axios");
+const {Channel} = require("discord.js");
 
 module.exports = class MapCommand extends Command {
   constructor(client) {
@@ -29,6 +30,8 @@ module.exports = class MapCommand extends Command {
   }
   run(msg, {map}) {
     if (checkMsg(msg) == 1) return;
+
+    msg.channel.startTyping();
 
     function getMap(mapName) {
       if (mapName == "Kings Canyon")
@@ -72,5 +75,7 @@ module.exports = class MapCommand extends Command {
       if (map == "WE" || map == "RANKED") msg.say(getMap("World's Edge"));
       if (map == "OLYMPUS") msg.say(getMap("Olympus"));
     }
+
+    msg.channel.stopTyping();
   }
 };

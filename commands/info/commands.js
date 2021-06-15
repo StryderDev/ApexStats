@@ -20,6 +20,8 @@ module.exports = class MapCommand extends Command {
   run(msg) {
     if (checkMsg(msg) == 1) return;
 
+    msg.channel.startTyping();
+
     const embed = new MessageEmbed()
       .setTitle("Bot Commands")
       .addField("Fun", ">>drop\n>>who", true)
@@ -29,5 +31,7 @@ module.exports = class MapCommand extends Command {
       .addField(`\u200b`, ">>legend\n>>news\n>>season\n>>stats", true);
 
     msg.say(embed);
+
+    msg.channel.stopTyping();
   }
 };

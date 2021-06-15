@@ -21,6 +21,8 @@ module.exports = class MapCommand extends Command {
   run(msg) {
     if (checkMsg(msg) == 1) return;
 
+    msg.channel.startTyping();
+
     msg.say("Retrieving server status...").then(async (msg) => {
       var statusURL = `https://api.mozambiquehe.re/servers?auth=${config.MozambiqueAPI}`;
       var announcementURL = "https://apexlegendsstatus.com/anno.json";
@@ -179,6 +181,8 @@ module.exports = class MapCommand extends Command {
 
           msg.delete();
           msg.say(statusEmbed);
+
+          msg.channel.stopTyping();
         })
       );
     });

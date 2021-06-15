@@ -18,6 +18,10 @@ module.exports = class MapCommand extends Command {
   run(msg) {
     if (checkMsg(msg) == 1) return;
 
+    msg.channel.startTyping();
+
     msg.say("Invite the bot to your server: <https://apexstats.dev/invite>");
+
+    msg.channel.stopTyping();
   }
 };

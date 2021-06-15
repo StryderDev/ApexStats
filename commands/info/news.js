@@ -28,6 +28,8 @@ module.exports = class MapCommand extends Command {
       mozambiqueClient
         .news()
         .then(function (result) {
+          msg.channel.startTyping();
+
           const news = result[0];
 
           const newsEmbed = new MessageEmbed()
@@ -38,12 +40,16 @@ module.exports = class MapCommand extends Command {
 
           msg.delete();
           msg.say(newsEmbed);
+
+          msg.channel.stopTyping();
         })
         .catch(function (err) {
           msg.delete();
           msg.say("Could not retreive the latest article. Please try again later.");
           console.log(chalk`{red Error: ${err}}`);
         });
+
+      msg.channel.stopTyping();
     });
   }
 };

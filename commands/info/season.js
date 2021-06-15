@@ -37,6 +37,8 @@ module.exports = class MapCommand extends Command {
   run(msg, {season}) {
     if (checkMsg(msg) == 1) return;
 
+    msg.channel.startTyping();
+
     if (!season) {
       // no args
       var query = `SELECT * FROM ${config.SQL.seasonTable} ORDER BY \`id\` DESC LIMIT 1`;
@@ -130,8 +132,13 @@ module.exports = class MapCommand extends Command {
           );
 
         connection.release();
+
+        msg.channel.stopTyping();
+
         return msg.say(seasonEmbed);
       });
+
+      msg.channel.stopTyping();
     });
   }
 };

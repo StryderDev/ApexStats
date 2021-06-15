@@ -22,6 +22,10 @@ module.exports = class MapCommand extends Command {
     const gunOne = Math.floor(Math.random() * guns.length);
     const gunTwo = Math.floor(Math.random() * guns.length);
 
+    msg.channel.startTyping();
+
     msg.say(`Run the **${guns[gunOne]}** and the **${guns[gunTwo]}** this round.`);
+
+    msg.channel.stopTyping();
   }
 };
