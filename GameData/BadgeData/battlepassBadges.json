@@ -1,34 +1,27 @@
 {
   "1450368797": {
-    "id": "824835746077868122",
-    "emoteName": "Season1BP",
-    "fix": "2",
-    "fullName": "Season 1 BP",
-    "preText": "Level ",
+    "name": "Season1BP.png",
+    "hasValue": false,
     "tiered": false
   },
   "1642424884": {
-    "id": "824838551313186836",
-    "emoteName": "Season2BP",
-    "fix": "2",
-    "fullName": "Season 2 BP",
-    "preText": "Level ",
+    "name": "Season2BP.png",
+    "hasValue": false,
     "tiered": false
   },
   "2093626156": {
-    "id": "824840544756301864",
-    "emoteName": "Season3BP",
-    "fix": "2",
-    "fullName": "Season 3 BP",
-    "preText": "Level ",
+    "name": "Season3BP.png",
+    "hasValue": false,
     "tiered": false
   },
-  "2027544950": {
-    "id": "824575089558421505",
-    "emoteName": "Season8BP",
-    "fix": "2",
-    "fullName": "Season 8 BP",
-    "preText": "Level ",
+  "394671452": {
+    "name": "Season4BP.png",
+    "hasValue": false,
+    "tiered": false
+  },
+  "1968726813": {
+    "name": "Season5BP.png",
+    "hasValue": false,
     "tiered": false
   }
 }

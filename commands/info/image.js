@@ -4,6 +4,7 @@ const chalk = require("chalk");
 const {MessageAttachment} = require("discord.js");
 const {Command} = require("discord.js-light-commando");
 const {checkMsg} = require("../functions/checkMsg.js");
+const config = require("../../config.json");
 
 const {findLegendByID, getBPLevel, trackerTitle, trackerValue} = require("../functions/stats.js");
 const {badgeImage, hasValue, getValue} = require("../functions/imageBadge.js");
@@ -173,7 +174,7 @@ module.exports = class MapCommand extends Command {
           const badgeOneImage = await Canvas.loadImage(
             `https://cdn.apexstats.dev/Badges/${badgeImage(bOne.id, bOne.value)}`
           );
-          ctx.drawImage(badgeOneImage, 80, 86, 95, 95);
+          ctx.drawImage(badgeOneImage, 69, 71, 115, 115);
 
           // Top Badge Value
           if (hasValue(bOne.id, bOne.value)) {
@@ -193,7 +194,7 @@ module.exports = class MapCommand extends Command {
           const badgeTwoImage = await Canvas.loadImage(
             `https://cdn.apexstats.dev/Badges/${badgeImage(bTwo.id, bTwo.value)}`
           );
-          ctx.drawImage(badgeTwoImage, 80, 201, 95, 95);
+          ctx.drawImage(badgeTwoImage, 70, 191, 115, 115);
 
           // Middle Badge Value
           if (hasValue(bTwo.id, bTwo.value)) {
@@ -213,7 +214,7 @@ module.exports = class MapCommand extends Command {
           const badgeThreeImage = await Canvas.loadImage(
             `https://cdn.apexstats.dev/Badges/${badgeImage(bThree.id, bThree.value)}`
           );
-          ctx.drawImage(badgeThreeImage, 80, 321, 95, 95);
+          ctx.drawImage(badgeThreeImage, 70, 311, 115, 115);
 
           // Bottom Badge Value
           if (hasValue(bThree.id, bThree.value)) {
@@ -311,7 +312,10 @@ module.exports = class MapCommand extends Command {
         })
         .catch((error) => {
           console.log("-- ERROR OUTPUT --");
-          // console.log(error);
+
+          if (config.debug == true) {
+            console.log(error);
+          }
 
           if (
             error.response.data == null ||

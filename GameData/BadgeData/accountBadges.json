@@ -1,103 +1,103 @@
 {
   "97219464": {
-    "name": "AccountBadges/Respawn.png",
+    "name": "Respawn.png",
     "hasValue": false,
     "tiered": false
   },
   "1774065557": {
-    "name": "AccountBadges/AccountLevel.png",
+    "name": "AccountLevel.png",
     "hasValue": true,
     "fix": "1",
     "tiered": false
   },
   "320244274": {
-    "name": "AccountBadges/Baller.png",
+    "name": "Baller.png",
     "hasValue": false,
     "tiered": false
   },
   "1164941559": {
-    "name": "AccountBadges/BannerLegend.png",
+    "name": "BannerLegend.png",
     "hasValue": false,
     "tiered": false
   },
   "650330268": {
-    "name": "AccountBadges/BlackLivesMatter.png",
+    "name": "BlackLivesMatter.png",
     "hasValue": false,
     "tiered": false
   },
   "1480441935": {
-    "name": "AccountBadges/InTheGame.png",
+    "name": "InTheGame.png",
     "hasValue": false,
     "tiered": false
   },
   "167239552": {
-    "name": "AccountBadges/EliteStreak.png",
+    "name": "EliteStreak.png",
     "hasValue": true,
     "fix": 2,
     "tiered": false
   },
   "600970543": {
-    "name": "AccountBadges/Fashionista.png",
+    "name": "Fashionista.png",
     "hasValue": false,
     "tiered": false
   },
   "314986752": {
-    "name": "AccountBadges/FullyKitted.png",
+    "name": "FullyKitted.png",
     "hasValue": false,
     "tiered": false
   },
   "2141092556": {
-    "name": "AccountBadges/LongShot.png",
+    "name": "LongShot.png",
     "hasValue": false,
     "tiered": false
   },
   "1721484615": {
-    "name": "AccountBadges/MasterOfAll.png",
+    "name": "MasterOfAll.png",
     "hasValue": false,
     "tiered": false
   },
   "498953496": {
-    "name": "AccountBadges/NoWitnesses.png",
+    "name": "NoWitnesses.png",
     "hasValue": false,
     "tiered": false
   },
   "1041083132": {
-    "name": "AccountBadges/PackVictory.png",
+    "name": "PackVictory.png",
     "hasValue": false,
     "tiered": false
   },
   "1519787133": {
-    "name": "AccountBadges/Pride.png",
+    "name": "Pride.png",
     "hasValue": false,
     "tiered": false
   },
   "153944881": {
-    "name": "AccountBadges/Starter.png",
+    "name": "Starter.png",
     "hasValue": false,
     "tiered": false
   },
   "2012685013": {
-    "name": "AccountBadges/StopAsianHate.png",
+    "name": "StopAsianHate.png",
     "hasValue": false,
     "tiered": false
   },
   "1163465131": {
-    "name": "AccountBadges/LiveDieLive.png",
+    "name": "LiveDieLive.png",
     "hasValue": false,
     "tiered": false
   },
   "300105934": {
-    "name": "AccountBadges/ValentinesDay.png",
+    "name": "ValentinesDay.png",
     "hasValue": false,
     "tiered": false
   },
   "1126877325": {
-    "name": "AccountBadges/Warlord.png",
+    "name": "Warlord.png",
     "hasValue": false,
     "tiered": false
   },
   "14539498": {
-    "name": "AccountBadges/WellRounded.png",
+    "name": "WellRounded.png",
     "hasValue": false,
     "tiered": false
   }

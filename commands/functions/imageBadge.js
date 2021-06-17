@@ -1,11 +1,13 @@
 const accountBadges = require("../../GameData/BadgeData/accountBadges.json");
+const battlepassBadges = require("../../GameData/BadgeData/battlepassBadges.json");
 const teaserBadges = require("../../GameData/BadgeData/teaserBadges.json");
 
 function badgeImage(id) {
   if (id == "1488777442") return "EmptyBadge.png";
 
-  if (accountBadges[id] != null) return accountBadges[id].name;
-  if (teaserBadges[id] != null) return teaserBadges[id].name;
+  if (accountBadges[id] != null) return `/AccountBadges/${accountBadges[id].name}`;
+  if (battlepassBadges[id] != null) return `/BattlePassBadges/${battlepassBadges[id].name}`;
+  if (teaserBadges[id] != null) return `/TeaserBadges/${teaserBadges[id].name}`;
 
   return "EmptyBadge.png";
 }
