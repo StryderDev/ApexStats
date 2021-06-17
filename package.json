@@ -1,6 +1,6 @@
 {
   "name": "apexstatsbot",
-  "version": "0.4.42",
+  "version": "0.4.43",
   "description": "Shows Apex Legends player stats, map rotations, event info, and more.",
   "main": "ShardManager.js",
   "repository": {
