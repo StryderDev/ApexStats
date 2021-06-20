@@ -8,3 +8,7 @@ const client = new Commando.Client({
 });
 
 client.login(config.discord.token);
+
+process.on("unhandledRejection", (error) => {
+	console.log(chalk`{red Error: ${error}}`);
+});

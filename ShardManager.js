@@ -5,7 +5,7 @@ const chalk = require("chalk");
 const { ShardingManager } = require("discord.js-light");
 const Manager = new ShardingManager("./Apex.js", {
 	token: config.discord.token,
-	totalShards: config.shards,
+	totalShards: config.discord.shards,
 });
 
 Manager.on("shardCreate", (shard) => {
