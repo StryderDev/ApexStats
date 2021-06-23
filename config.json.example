@@ -3,6 +3,10 @@
         "shards": Number,
 		"token": "Bot Token"
 	},
+    "logs": {
+        "webhookID": "Webhook ID",
+        "webhookToken": "Webhook Token"
+    },
 	"botLists": {
 		"topGG": {
 			"enabled": True or False,
