@@ -27,8 +27,6 @@ module.exports = class MapCommand extends Command {
     console.log(chalk`{red Error: ${error}}`);
   }
   run(msg) {
-    if (checkMsg(msg) == 1) return;
-
     msg.channel.startTyping();
 
     let legendQuery = `SELECT * FROM ${config.SQL.eventTable} ORDER BY \`id\` DESC`;
