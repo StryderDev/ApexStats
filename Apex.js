@@ -6,9 +6,17 @@ const client = new Commando.Client({
 	owner: "360564818123554836",
 	commandPrefix: ">>",
 	disabledEveryone: true,
+	cacheGuilds: true,
+	cacheChannels: true,
+	cacheOverwrites: false,
+	cacheRoles: false,
+	cacheEmojis: false,
+	cachePresences: false,
 });
 
-client.login(config.discord.token);
+require("./events.js")(client);
+
+client.login(config.discord.token).catch(console.error);
 
 client.on("message", (msg) => {
 	function logMessage(message) {
@@ -18,7 +26,9 @@ client.on("message", (msg) => {
 
 		webhook
 			.send(
-				`<t:${Math.floor(message.createdTimestamp / 1000)}:R> \`(${message.channel.name})\` ${message.content}`
+				`<t:${Math.floor(message.createdTimestamp / 1000)}:R> \`[${message.guild.name}](#${
+					message.channel.name
+				})\` **${message.author.tag}:** ${message.content}`
 			)
 			.catch(console.error);
 	}
@@ -29,3 +39,8 @@ client.on("message", (msg) => {
 process.on("unhandledRejection", (error) => {
 	console.log(chalk`{red Error: ${error}}`);
 });
+
+module.exports = {
+	client: client,
+	Discord: require("discord.js-light"),
+};
