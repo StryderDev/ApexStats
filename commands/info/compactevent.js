@@ -16,11 +16,11 @@ let connection = mysql.createPool({
 module.exports = class MapCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "event",
+      name: "compactevent",
       group: "info",
-      memberName: "event",
-      description: "Shows information on current in-game events.",
-      examples: ["event"],
+      memberName: "compactevent",
+      description: "Shows compact information on current in-game events.",
+      examples: ["compactevent"],
     });
   }
   onError(error) {
@@ -91,34 +91,28 @@ module.exports = class MapCommand extends Command {
         }
 
         const preEventEmbed = new MessageEmbed()
-          .setTitle(`[Event Countdown] ${event.name} Event`)
-          .setDescription(`${event.description}\n\n[Read the full article.](${event.blogURL})`)
-          .addField("Start Time", `${formatDate(event.start)}\n${countdownURL(event.start)}`, true)
-          .addField("End Time", `${formatDate(event.end)}\n${countdownURL(event.end)}`, true)
-          .addField(
-            "Countdown",
-            `The **${event.name} Event** will start in ${time(event.start * 1000 - Date.now())}`
+          .setTitle(`${event.name} Event`)
+          .setDescription(
+            `[Read event article.](${event.blogURL})\nStarts in ${time(
+              event.start * 1000 - Date.now()
+            )}`
           )
-          .setImage(`https://cdn.apexstats.dev/Events/${event.image}`)
-          .setTimestamp();
+          .addField("Start Time", `${formatDate(event.start)}\n${countdownURL(event.start)}`, true)
+          .addField("End Time", `${formatDate(event.end)}\n${countdownURL(event.end)}`, true);
 
         const eventEmbed = new MessageEmbed()
-          .setTitle(`${event.name} Event`)
+          .setTitle(
+            `${event.name} Event\nEnds in **${event.name} Event** will end in ${time(
+              event.end * 1000 - Date.now()
+            )}`
+          )
           .setDescription(`${event.description}\n\n[Read the full article.](${event.blogURL})`)
           .addField("Start Time", formatDate(event.start), true)
-          .addField("End Time", `${formatDate(event.end)}\n${countdownURL(event.end)}`, true)
-          .addField(
-            "Countdown",
-            `The **${event.name} Event** will end in ${time(event.end * 1000 - Date.now())}`
-          )
-          .setImage(`https://cdn.apexstats.dev/Events/${event.image}`)
-          .setTimestamp();
+          .addField("End Time", `${formatDate(event.end)}\n${countdownURL(event.end)}`, true);
 
         const noEventEmbed = new MessageEmbed()
           .setTitle("No Active Event")
-          .setDescription("There is no currently active event. Check back another time!")
-          .setImage("https://cdn.apexstats.dev/Events/NoEvent.png")
-          .setTimestamp();
+          .setDescription("There is no currently active event.");
 
         if (checkTime() == 0) msg.say(eventEmbed);
 

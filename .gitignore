@@ -1,5 +1,7 @@
 **/node_modules/
 /config.json
+/config_1.json
+/config_2.json
 /guildConfig.json
 **/API/
 **/package-lock.json
