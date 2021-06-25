@@ -1,7 +1,7 @@
-const { client, Discord } = require("../Apex.js");
+const { client, Discord } = require("../../Apex.js");
 const chalk = require("chalk");
 const { DateTime } = require("luxon");
-const config = require("../config.json");
+const config = require("../../config.json");
 
 client.on("message", (msg) => {
 	if (msg.channel.type == "dm" || msg.author.bot || msg.webhookID) return;

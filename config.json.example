@@ -3,6 +3,9 @@
         "shards": Number,
 		"token": "Bot Token"
 	},
+    "api": {
+        "Mozambique": "Apex Legends API Key"
+    },
     "logs": {
         "webhookID": "Webhook ID",
         "webhookToken": "Webhook Token"
