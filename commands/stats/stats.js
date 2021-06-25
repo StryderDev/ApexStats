@@ -56,7 +56,7 @@ module.exports = class MapCommand extends Command {
 				`\`${platform}\` is not a valid platform.\nTry PC for Origin/Steam, X1 for Xbox, or PS4 for PlayStation.`
 			);
 
-		// If platform is Switch
+		// If provided platform is Switch
 		if (checkPlatform(platform) == 1)
 			return msg.channel.send(`Stats for the Nintendo Switch are not currently supported. Sorry!`);
 	}
