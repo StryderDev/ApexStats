@@ -23,7 +23,7 @@ require("./events/events.js")(client);
 
 client.registry
 	.registerDefaultTypes()
-	.registerGroups(["info", "game info"])
+	.registerGroups([["stats", "Stats commands."]])
 	.registerDefaultGroups()
 	.registerDefaultCommands({ help: false, unknownCommand: false })
 	.registerCommandsIn(path.join(__dirname, "commands"));
