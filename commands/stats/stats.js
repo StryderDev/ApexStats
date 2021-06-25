@@ -52,10 +52,12 @@ module.exports = class MapCommand extends Command {
 
 		// If there is no valid platform provided
 		if (checkPlatform(platform) == 0)
-			return msg.channel.send(`\`${platform}\` is not a valid platform.\nTry PC, X1, or PS4.`);
+			return msg.channel.send(
+				`\`${platform}\` is not a valid platform.\nTry PC for Origin/Steam, X1 for Xbox, or PS4 for PlayStation.`
+			);
 
 		// If platform is Switch
 		if (checkPlatform(platform) == 1)
-			return msg.channel.send(`Stats for the Nintendo Swich are not currently supported. Sorry!`);
+			return msg.channel.send(`Stats for the Nintendo Switch are not currently supported. Sorry!`);
 	}
 };
