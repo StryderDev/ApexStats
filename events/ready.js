@@ -1,11 +1,8 @@
-// export the object so it can be required
-module.exports = {
-	// we want a message event
-	event: "ready",
-	// we want it to trigger multiple times
-	once: false,
-	// the actual function
-	run(message) {
-		console.log("ready");
-	},
-};
+const { client } = require("../Apex.js");
+const chalk = require("chalk");
+const { DateTime } = require("luxon");
+
+client.once("ready", () => {
+	console.log(chalk`{yellow [${DateTime.local().toFormat("hh:mm:ss")}] Logging in...}`);
+	console.log(chalk`{green [${DateTime.local().toFormat("hh:mm:ss")}] Logged in as ${client.user.tag}}`);
+});
