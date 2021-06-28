@@ -18,44 +18,44 @@
 		"charVer": 33082,           // 0 if never played the game, otherwise the value is 1 or greater
 		"charIdx": 0,               // Unused
 		"privacy": "invite",        // Party privacy settings (Open/Invite)
-		"cdata0": 0,
-		"cdata1": 2147483648,
-		"cdata2": 435256162,
-		"cdata3": 915197631,
-		"cdata4": 1282833149,
-		"cdata5": 1246248671,
-		"cdata6": 927221089,
-		"cdata7": 100,
-		"cdata8": 518790943,
-		"cdata9": 11,
-		"cdata10": 693567667,
-		"cdata11": 4,
-		"cdata12": 290090468,
-		"cdata13": 76202,
-		"cdata14": 1727506017,
-		"cdata15": 76202,
-		"cdata16": 1534840100,
-		"cdata17": 3102,
-		"cdata18": 1154724583,
-		"cdata19": 2147483648,
-		"cdata20": 2147483648,
-		"cdata21": 2147483648,
-		"cdata22": 2147483648,
-		"cdata23": 944,
-		"cdata24": 54,
-		"cdata25": 2147483648,
-		"cdata26": 2147483648,
-		"cdata27": 2147483648,
-		"cdata28": 2147483648,
-		"cdata29": 2147483648,
-		"cdata30": 2147483648,
-		"cdata31": 0,
-		"online": 0,
-		"joinable": 0,
-		"partyFull": 0,
-		"partyInMatch": 0,
-		"timeSinceServerChange": -1,
-		"endpoint": "",
-		"communities": {}
+		"cdata0": 0,                // Unused
+		"cdata1": 2147483648,       // Unused
+		"cdata2": 435256162,        // Current Legend
+		"cdata3": 915197631,        // Legend Skin
+		"cdata4": 1282833149,       // Banner Frame
+		"cdata5": 1246248671,       // Banner Pose
+		"cdata6": 927221089,        // Badge 1
+		"cdata7": 100,              // Badge 1 - Tier
+		"cdata8": 518790943,        // Badge 2
+		"cdata9": 11,               // Badge 2 - Tier
+		"cdata10": 693567667,       // Badge 3
+		"cdata11": 4,               // Badge 3 - Tier
+		"cdata12": 290090468,       // Tracker 1
+		"cdata13": 76202,           // Tracker 1 - Value
+		"cdata14": 1727506017,      // Tracker 2
+		"cdata15": 76202,           // Tracker 2 - Value
+		"cdata16": 1534840100,      // Tracker 3
+		"cdata17": 3102,            // Tracker 3 - Value
+		"cdata18": 1154724583,      // Intro Quip
+		"cdata19": 2147483648,      // Unused
+		"cdata20": 2147483648,      // Unused
+		"cdata21": 2147483648,      // Unused
+		"cdata22": 2147483648,      // Unused
+		"cdata23": 944,             // Account Level
+		"cdata24": 54,              // Account Progress Till Next Level
+		"cdata25": 2147483648,      // Unused
+		"cdata26": 2147483648,      // Unused
+		"cdata27": 2147483648,      // Unused
+		"cdata28": 2147483648,      // Unused
+		"cdata29": 2147483648,      // Unused
+		"cdata30": 2147483648,      // Unused
+		"cdata31": 0,               // In a game
+		"online": 0,                // In lobby
+		"joinable": 0,              // Whether party is joinable or not
+		"partyFull": 0,             // Whether lobby has 3 players or not
+		"partyInMatch": 0,          // Whether the full party is in a match
+		"timeSinceServerChange": -1,// Unused
+		"endpoint": "",             // Unused
+		"communities": {}           // Unused
 	}
 }
