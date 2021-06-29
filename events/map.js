@@ -42,7 +42,7 @@ client.once("ready", () => {
         if (maps.indexOf(map) != -1) {
           // _01 for Ranked Split 1
           // _02 for Ranked Split 2
-          return `Season%209/${mapName}_02.gif`;
+          return `Season%209/Genesis/${mapName}_02.gif`;
         } else {
           return "NoMapData.png";
         }
