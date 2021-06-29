@@ -57,6 +57,7 @@ module.exports = class MapCommand extends Command {
       if (name == "Party crasher") return "Party Crasher";
       if (name == "Thermal station") return "Thermal Station";
       if (name == "Golden gardens") return "Golden Gardens";
+      if (name == "Skull town") return "Skulltown";
 
       return name;
     }
