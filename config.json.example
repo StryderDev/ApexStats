@@ -6,6 +6,10 @@
     "api": {
         "Mozambique": "Apex Legends API Key"
     },
+    "checkMessage": {
+        "guildID": "Apex Guild ID",
+        "channelID": "Use Bots Here ID",
+    },
     "logs": {
         "webhookID": "Webhook ID",
         "webhookToken": "Webhook Token"

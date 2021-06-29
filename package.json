@@ -22,6 +22,7 @@
 		"discord.js-light-commando": "^1.1.0",
 		"luxon": "^1.27.0",
 		"path": "^0.12.7",
+		"percentagebar": "^1.0.3",
 		"sqlite": "^4.0.23",
 		"sqlite3": "^5.0.2",
 		"topgg-autoposter": "^2.0.0",

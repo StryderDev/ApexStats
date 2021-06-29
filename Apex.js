@@ -12,7 +12,7 @@ const client = new Commando.Client({
 	cacheGuilds: true,
 	cacheChannels: true,
 	cacheOverwrites: false,
-	cacheRoles: false,
+	cacheRoles: true,
 	cacheEmojis: false,
 	cachePresences: false,
 });
