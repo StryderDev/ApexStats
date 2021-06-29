@@ -1,11 +1,10 @@
 const chalk = require("chalk");
 const {Command} = require("discord.js-light-commando");
 const {checkMsg} = require("../functions/checkMsg.js");
-const WorldsEdgeDrops = require("../../GameData/MapDrops/WorldsEdge.json");
-const OlympusDrops = require("../../GameData/MapDrops/Olympus.json");
-const KingsCanyonDrops = require("../../GameData/MapDrops/KingsCanyon.json");
+const WorldsEdgeDrops = require("../../GameData/MapDrops/Season09/WorldsEdge.json");
+const OlympusDrops = require("../../GameData/MapDrops/Season09/Olympus.json");
+const KingsCanyonDrops = require("../../GameData/MapDrops/Season09/KingsCanyon.json");
 const {default: axios} = require("axios");
-const {Channel} = require("discord.js");
 
 module.exports = class MapCommand extends Command {
   constructor(client) {
