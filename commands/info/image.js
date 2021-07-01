@@ -59,7 +59,7 @@ module.exports = class MapCommand extends Command {
     // Check to see if the platform is a supported platform
     // on the API
     function checkPlatform(platform) {
-      if (platform == "PSN" || platform == "PS5" || platform == "PS" || platform == "PS4")
+      if (platform == "PSN" || platform == "PS5" || platform == "PS" || platform == "PS4" || platform == "PLAYSTATION")
         return "PS4";
 
       if (platform == "XBOX" || platform == "X1") return "X1";
