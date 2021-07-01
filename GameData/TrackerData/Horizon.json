@@ -29,7 +29,7 @@
   "1668156128": {"Name": "Arenas Kills"},
   "319807887": {"Name": "Arenas Wins"},
   "1460185816": {"Name": "Arenas Damage Done"},
-  "283139582": {"Name": "Kills"},
-  "2007447659": {"Name": "Wins"},
+  "283139582": {"Name": "Kills", "Image": "Total_Top_01"},
+  "2007447659": {"Name": "Wins", "Image": "Total_Middle_01"},
   "1417561363": {"Name": "Damage Done", "Image": "Total_Bottom_01"}
 }
