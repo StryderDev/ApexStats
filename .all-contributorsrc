@@ -24,6 +24,15 @@
       "contributions": [
         "data"
       ]
+    },
+    {
+      "login": "ConnorDoesDev",
+      "name": "Connor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/69979824?v=4",
+      "profile": "https://connor.is-a.dev",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
