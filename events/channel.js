@@ -128,9 +128,9 @@ client.once("ready", () => {
           return sum;
         }
 
-        if (statusSum() > 1.8) {
+        if (statusSum() > 1.4) {
           var statusEmoji = "🔴";
-        } else if (statusSum() > 1) {
+        } else if (statusSum() > 0.6) {
           var statusEmoji = "🟡";
         } else {
           var statusEmoji = "🟢";
