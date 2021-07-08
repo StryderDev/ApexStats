@@ -179,7 +179,7 @@ module.exports = class MapCommand extends Command {
                 BR_RankName,
                 BR_RankPos,
                 BR_RankDiv
-              )}\n<:Season_0:802049756254830632> ${BR_RankScore.toLocaleString()} RP\n\n**Arenas Ranked**\nComing Soon!`,
+              )}\n<:Season_0:802049756254830632> ${BR_RankScore.toLocaleString()} RP\n\n**Arenas Ranked**\nComing Season 10!`,
               true
             )
             .addField("\u200b", "\u200b", true)
