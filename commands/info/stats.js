@@ -122,7 +122,7 @@ module.exports = class MapCommand extends Command {
             return response.accountInfo.battlepass.history.season9;
           }
 
-          // Battle Royal Ranked
+          // Battle Royale Ranked
           var BR_RankName = response.accountInfo.Ranked_BR.name;
           var BR_RankPos = response.accountInfo.Ranked_BR.ladderPos;
           var BR_RankDiv = response.accountInfo.Ranked_BR.division;
@@ -174,7 +174,7 @@ module.exports = class MapCommand extends Command {
               true
             )
             .addField(
-              "Battle Royal Ranked",
+              "Battle Royale Ranked",
               `${findRank(
                 BR_RankName,
                 BR_RankPos,
@@ -183,7 +183,7 @@ module.exports = class MapCommand extends Command {
               true
             )
             .addField("\u200b", "\u200b", true)
-            .addField("Battle Royal Kills", response.data.Total_BR_Kills.toLocaleString(), true)
+            .addField("Battle Royale Kills", response.data.Total_BR_Kills.toLocaleString(), true)
             .addField("Arenas Kills", response.data.Total_Arenas_Kills.toLocaleString(), true)
             .addField("Total Kills", response.data.Total_Kills.toLocaleString(), true)
             .addField("\u200b", "**Currently Equipped Trackers**")

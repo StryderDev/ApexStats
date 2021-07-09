@@ -49,7 +49,7 @@ client.once("ready", () => {
           console.log(
             chalk`{blueBright [${DateTime.local().toFormat(
               "hh:mm:ss"
-            )}] Updated presence, set Battle Royal map to ${
+            )}] Updated presence, set Battle Royale map to ${
               BR.map
             } and Areans map to ${arenaMapName(Arenas.current.map)}}`
           );
