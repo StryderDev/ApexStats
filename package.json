@@ -21,7 +21,7 @@
     "discord.js-light-commando": "^1.1.0",
     "dotenv": "^10.0.0",
     "fs": "0.0.1-security",
-    "luxon": "^1.26.0",
+    "luxon": "^2.0.1",
     "mozambique-api-wrapper": "^2.0.0",
     "mysql": "^2.18.1",
     "percentagebar": "^1.0.3",
