@@ -41,5 +41,8 @@
   "455746662": {"Name": "Season 9 Wins", "Image": "Season09"},
   "308578169": {"Name": "Arenas Kills"},
   "684837229": {"Name": "Arenas Wins"},
-  "2067503334": {"Name": "Arenas Damage Done"}
+  "2067503334": {"Name": "Arenas Damage Done"},
+  "2004675696": {"Name": "Arenas Kills", "Image": "Total_Top_02"},
+  "863907373": {"Name": "Arenas Wins", "Image": "Total_Middle_02"},
+  "1449747989": {"Name": "Arenas Damage Done", "Image": "Total_Bottom_02"}
 }
