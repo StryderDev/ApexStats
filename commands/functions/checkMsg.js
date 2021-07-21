@@ -3,6 +3,9 @@ const config = require("../../config.json");
 var {DateTime} = require("luxon");
 
 function checkMsg(msg) {
+  // Apex Console Blacklist
+  if (msg.guild.id == "553989741565968409") return 1;
+
   // If the server is the apex server
   if (msg.guild.id == config.checkMessage.guildID) {
     // Check if user is a discord mod or admin
