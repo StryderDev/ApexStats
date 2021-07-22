@@ -3,7 +3,7 @@ require("dotenv").config();
 const chalk = require("chalk");
 const {Command} = require("discord.js-light-commando");
 const {checkMsg} = require("../functions/checkMsg.js");
-const {MessageEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js-light");
 const {version} = require("../../package.json");
 const config = require("../../config.json");
 

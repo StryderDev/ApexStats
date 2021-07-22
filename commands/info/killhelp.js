@@ -1,7 +1,7 @@
 const chalk = require("chalk");
 const {Command} = require("discord.js-light-commando");
 const {checkMsg} = require("../functions/checkMsg.js");
-const {MessageEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js-light");
 
 module.exports = class MapCommand extends Command {
   constructor(client) {

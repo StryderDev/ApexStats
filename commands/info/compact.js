@@ -1,6 +1,6 @@
 const chalk = require("chalk");
 const {Command} = require("discord.js-light-commando");
-const {MessageEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js-light");
 const axios = require("axios");
 const {checkMsg} = require("../functions/checkMsg.js");
 const percentage = require("percentagebar");
@@ -107,31 +107,31 @@ module.exports = class MapCommand extends Command {
           var bpLevel = response.accountInfo.battlepass.level;
 
           // Battle Royale Ranked
-          var BR_RankName = response.accountInfo.Ranked_BR.name;
-          var BR_RankPos = response.accountInfo.Ranked_BR.ladderPos;
-          var BR_RankDiv = response.accountInfo.Ranked_BR.division;
-          var BR_RankScore = response.accountInfo.Ranked_BR.score;
+          var BR_RankName = response.accountInfo.Ranked.BR.name;
+          var BR_RankPos = response.accountInfo.Ranked.BR.ladderPos;
+          var BR_RankDiv = response.accountInfo.Ranked.BR.division;
+          var BR_RankScore = response.accountInfo.Ranked.BR.score;
 
           // Arenas Ranked
-          var Arenas_RankName = response.accountInfo.Ranked_BR.name;
-          var Arenas_RankPos = response.accountInfo.Ranked_BR.ladderPos;
-          var Arenas_RankDiv = response.accountInfo.Ranked_BR.division;
-          var Arenas_RankScore = response.accountInfo.Ranked_BR.score;
+          var Arenas_RankName = response.accountInfo.Ranked.Arenas.name;
+          var Arenas_RankPos = response.accountInfo.Ranked.Arenas.ladderPos;
+          var Arenas_RankDiv = response.accountInfo.Ranked.Arenas.division;
+          var Arenas_RankScore = response.accountInfo.Ranked.Arenas.score;
 
           const embed = new MessageEmbed()
             .setTitle(`Compact Stats for ${username} on ${platform}`)
             .addField(
               "Account",
-              `Account Level: ${level.toLocaleString()}\nBattlePass Level: ${getBPLevel(bpLevel)}`,
+              `**Account Level:** ${level.toLocaleString()}\n**BattlePass Level:** ${getBPLevel(bpLevel)}`,
               true
             )
             .addField(
               "Ranked",
-              `BR: ${findRank(
+              `**BR:** ${findRank(
                 BR_RankName,
                 BR_RankPos,
                 BR_RankDiv
-              )} (${BR_RankScore.toLocaleString()} RP)\nArenas: Coming Soon!`,
+              )} (${BR_RankScore.toLocaleString()} RP)\n**Arenas:** Coming Season 10!`,
               true
             )
             .setFooter("BattlePass level not correct? Equip the badge in-game!");

@@ -3,7 +3,7 @@ const chalk = require("chalk");
 const {DateTime, Duration} = require("luxon");
 const axios = require("axios");
 const config = require("../config.json");
-const {MessageEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js-light");
 
 client.once("ready", () => {
   const guild = client.guilds.cache.get(config.autoUpdate.guildID);

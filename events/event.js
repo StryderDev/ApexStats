@@ -1,6 +1,6 @@
 const {client} = require("../ApexStats.js");
 const config = require("../config.json");
-const {MessageEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js-light");
 var {DateTime} = require("luxon");
 const chalk = require("chalk");
 

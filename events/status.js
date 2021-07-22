@@ -2,7 +2,7 @@ const {client} = require("../ApexStats.js");
 const axios = require("axios");
 const config = require("../config.json");
 const chalk = require("chalk");
-const {MessageEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js-light");
 var {DateTime} = require("luxon");
 
 client.once("ready", () => {

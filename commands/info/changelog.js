@@ -1,6 +1,6 @@
 const chalk = require("chalk");
 const {Command} = require("discord.js-light-commando");
-const {MessageEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js-light");
 const {checkMsg} = require("../functions/checkMsg.js");
 const config = require("../../config.json");
 

@@ -1,7 +1,7 @@
 const chalk = require("chalk");
 const {Command} = require("discord.js-light-commando");
 const {checkMsg} = require("../functions/checkMsg.js");
-const {MessageEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js-light");
 const config = require("../../config.json");
 
 // Mozambique Wrapper Library

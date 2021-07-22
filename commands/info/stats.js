@@ -1,6 +1,6 @@
 const chalk = require("chalk");
 const {Command} = require("discord.js-light-commando");
-const {MessageEmbed} = require("discord.js");
+const {MessageEmbed} = require("discord.js-light");
 const axios = require("axios");
 const {checkMsg} = require("../functions/checkMsg.js");
 const percentage = require("percentagebar");
@@ -123,16 +123,16 @@ module.exports = class MapCommand extends Command {
           }
 
           // Battle Royale Ranked
-          var BR_RankName = response.accountInfo.Ranked_BR.name;
-          var BR_RankPos = response.accountInfo.Ranked_BR.ladderPos;
-          var BR_RankDiv = response.accountInfo.Ranked_BR.division;
-          var BR_RankScore = response.accountInfo.Ranked_BR.score;
+          var BR_RankName = response.accountInfo.Ranked.BR.name;
+          var BR_RankPos = response.accountInfo.Ranked.BR.ladderPos;
+          var BR_RankDiv = response.accountInfo.Ranked.BR.division;
+          var BR_RankScore = response.accountInfo.Ranked.BR.score;
 
           // Arenas Ranked
-          var Arenas_RankName = response.accountInfo.Ranked_BR.name;
-          var Arenas_RankPos = response.accountInfo.Ranked_BR.ladderPos;
-          var Arenas_RankDiv = response.accountInfo.Ranked_BR.division;
-          var Arenas_RankScore = response.accountInfo.Ranked_BR.score;
+          var Arenas_RankName = response.accountInfo.Ranked.Arenas.name;
+          var Arenas_RankPos = response.accountInfo.Ranked.Arenas.ladderPos;
+          var Arenas_RankDiv = response.accountInfo.Ranked.Arenas.division;
+          var Arenas_RankScore = response.accountInfo.Ranked.Arenas.score;
 
           // Trackers
           var tracker = response.accountInfo.active;
