@@ -228,11 +228,6 @@ module.exports = class MapCommand extends Command {
             return msg.say("There was an error that was not caught. Please try again.");
           }
 
-            if(error.request) {
-                console.log(chalk`{red Error: Request error, possible rate limit reached. Please try again.}`);
-                return msg.say(`**Error**\nThere was an error with that request, please try again.`);
-          }
-
           var error = error.response.data;
 
           console.log(chalk`{red Error: ${error.error}}`);
@@ -258,6 +253,13 @@ module.exports = class MapCommand extends Command {
 
           msg.delete();
           msg.say(checkErrorType(error.errorCode));
+
+          if (error.request) {
+            console.log(
+              chalk`{red Error: Request error, possible rate limit reached. Please try again.}`
+            );
+            return msg.say(`**Error**\nThere was an error with that request, please try again.`);
+          }
 
           msg.channel.stopTyping();
         });
