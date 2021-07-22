@@ -1,8 +1,9 @@
+// Main Config
 const config = require("./config.json");
 const chalk = require("chalk");
 
 // Sharding Manager
-const { ShardingManager } = require("discord.js-light");
+const { ShardingManager } = require("discord.js");
 const Manager = new ShardingManager("./Apex.js", {
 	token: config.discord.token,
 	totalShards: config.discord.shards,
@@ -22,7 +23,7 @@ Manager.on("shardCreate", (shard) => {
 
 Manager.spawn();
 
-// Top GG API
+// Top GG
 const { AutoPoster } = require("topgg-autoposter");
 
 if (config.botLists.topGG.enabled == true) {

@@ -1,44 +1,13 @@
+// Main Config
 const config = require("./config.json");
-const Commando = require("discord.js-light-commando");
-const path = require("path");
-const chalk = require("chalk");
-const sqlite = require("sqlite");
-const sqlite3 = require("sqlite3");
 
-const client = new Commando.Client({
-	owner: "360564818123554836",
-	commandPrefix: ">>",
-	disabledEveryone: true,
-	cacheGuilds: true,
-	cacheChannels: true,
-	cacheOverwrites: false,
-	cacheRoles: true,
-	cacheEmojis: false,
-	cachePresences: false,
+// Discord Client
+const Discord = require('discord.js');
+const client = new Discord.Client({ intents: ['GUILDS', 'GUILD_MESSAGES'] });
+
+// On ready...
+client.once('ready', () => {
+	console.log('Ready!');
 });
 
-client.setMaxListeners(15);
-
-require("./events/events.js")(client);
-
-client.registry
-	.registerDefaultTypes()
-	.registerGroups([["stats", "Stats commands."]])
-	.registerDefaultGroups()
-	.registerDefaultCommands({ help: false, unknownCommand: false })
-	.registerCommandsIn(path.join(__dirname, "commands"));
-
-client.setProvider(
-	sqlite.open({ filename: "database.db", driver: sqlite3.Database }).then((db) => new Commando.SQLiteProvider(db))
-);
-
-client.login(config.discord.token).catch(console.error);
-
-process.on("unhandledRejection", (error) => {
-	console.log(chalk`{red Error: ${error}}`);
-});
-
-module.exports = {
-	client: client,
-	Discord: require("discord.js-light"),
-};
+client.login(config.discord.token);
