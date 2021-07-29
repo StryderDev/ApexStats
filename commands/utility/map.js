@@ -77,9 +77,9 @@ module.exports = class MapCommand extends Command {
       msg.say("Retrieving in-game map rotation schedule...").then(async (message) => {
         // Just show current map
         axios
-          .get(`https://fn.alphaleagues.com/v1/apex/map/?next=${lengthCheck(amount)}`)
+          .get(`https://fn.alphaleagues.com/v2/apex/map/?next=${lengthCheck(amount)}`)
           .then((result) => {
-            var nextMap = result.data.next;
+            var nextMap = result.data.br.next;
 
             function nextMaps() {
               return nextMap.map(
@@ -105,14 +105,14 @@ module.exports = class MapCommand extends Command {
     } else {
       msg.say("Retrieving in-game map rotation schedule...").then(async (message) => {
         // Just show current map
-        axios.get("https://fn.alphaleagues.com/v1/apex/map/?next=1").then((result) => {
-          var map = result.data;
-          var nextMap = result.data.next;
+        axios.get("https://fn.alphaleagues.com/v2/apex/map/?next=1").then((result) => {
+          var map = result.data.br;
+          var nextMap = result.data.br.next;
 
           const mapEmbed = new MessageEmbed()
             .setDescription(
               `:map: The current map is **${map.map}** for ${getTime(
-                map.times.nextMap
+                map.times.next
               )}.\n:clock1: The next map is **${
                 nextMap[0].map
               }** and lasts for ${Duration.fromMillis(nextMap[0].duration * 60 * 1000).toFormat(

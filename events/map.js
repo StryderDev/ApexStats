@@ -10,8 +10,8 @@ client.once("ready", () => {
   if (!guild) return console.log(chalk`{gray Unable to find guild for Map Updates.}`);
 
   function updateMap() {
-    axios.get("https://fn.alphaleagues.com/v1/apex/map/?next=1").then((result) => {
-      var map = result.data;
+    axios.get("https://fn.alphaleagues.com/v2/apex/map/?next=1").then((result) => {
+      var map = result.data.br;
       var next = map.next;
 
       const pluralize = (count, noun, suffix = "s") =>
@@ -51,7 +51,7 @@ client.once("ready", () => {
       const mapEmbed = new MessageEmbed()
         .setDescription(
           `:map: The current map is **${map.map}** for ${getTime(
-            map.times.nextMap
+            map.times.next
           )}.\n:clock1: The next map is **${next[0].map}** and lasts for ${Duration.fromMillis(
             next[0].duration * 60 * 1000
           ).toFormat(
