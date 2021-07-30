@@ -165,7 +165,7 @@ module.exports = {
 			})
 			.catch(error => {
 				if (config.debug == true) {
-					console.log(error.response.data);
+					console.log(error.response);
 				}
 
 				if (
