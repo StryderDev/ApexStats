@@ -120,14 +120,9 @@ module.exports = {
 							level,
 						)}\n\n**${battlepassLevelEmote} Season 9 BattlePass**\nLevel ${bpLevel(
 							accountInfo.battlepass.history,
-							accountInfo.battlepass.history.season9,
-						)}/110 (${getPercent(
-							bpLevel(accountInfo.battlepass.history, accountInfo.battlepass.history.season9),
+						)}/110 (${getPercent(bpLevel(accountInfo.battlepass.history), 110, false)})\n${getPercentageBar(
 							110,
-							false,
-						)})\n${getPercentageBar(
-							110,
-							bpLevel(accountInfo.battlepass.history, accountInfo.battlepass.history.season9),
+							bpLevel(accountInfo.battlepass.history),
 						)}`,
 						true,
 					)
@@ -165,16 +160,14 @@ module.exports = {
 			})
 			.catch(error => {
 				if (config.debug == true) {
-					console.log(error.response);
+					console.log(error);
 				}
 
-				if (
-					error.response.data == null ||
-					error.response.data == undefined ||
-					error.response.data == 'undefined'
-				) {
+				if (error.response == null || error.response == undefined || error.response == 'undefined') {
 					console.log('-- ERROR WAS NOT DEFINED --');
-					return msg.say('There was an error that was not caught. Please try again.');
+					return interaction.editReply({
+						content: `There was an error running that command. Please try again.`,
+					});
 				}
 
 				function checkErrorType(code) {

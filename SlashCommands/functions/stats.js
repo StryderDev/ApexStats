@@ -27,7 +27,7 @@ function checkStatus(online, ingame, partyInMatch, matchLength) {
 	if (partyInMatch == 0 && matchLength >= 1)
 		return `${matchEmoji} In Lobby (${timePadding(minutes, '0', 2)}:${timePadding(seconds, '0', 2)})`;
 
-	if (online == 1) eturn`${matchEmoji} Online [Lobby]`;
+	if (online == 1) return `${matchEmoji} Online [Lobby]`;
 
 	return `${offlineEmoji} Offline`;
 }
@@ -52,12 +52,12 @@ function getPercentageBar(total, current) {
 	return percent(total, current, 10, '▓', '░', '[', ']', false);
 }
 
-function bpLevel(history, current) {
-	if (history === null) return 0;
+function bpLevel(history) {
+	if (history == null || history.season9 == null) return 0;
 
-	if (current > 110) return 110;
+	if (history.season9 > 110) return 110;
 
-	return current;
+	return history.season9;
 }
 
 function findRank(name, pos, div) {
