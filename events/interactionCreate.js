@@ -1,19 +1,15 @@
-const client = require("../Apex.js");
+const client = require('../Apex.js');
 
-client.on("interactionCreate", async (interaction) => {
-  if (interaction.isCommand()) {
-    await interaction
-      .reply({ content: "Loading...", ephemeral: false })
-      .catch((err) => {
-        console.log(err);
-      });
+client.on('interactionCreate', async interaction => {
+	if (interaction.isCommand()) {
+		await interaction.defer().catch(() => {});
 
-    const cmd = client.slashCommands.get(interaction.commandName);
-    if (!cmd)
-      return interaction.followUp({
-        content: "An error has occured with that command.",
-      });
+		const cmd = client.slashCommands.get(interaction.commandName);
+		if (!cmd)
+			return interaction.followUp({
+				content: 'And error has occured.',
+			});
 
-    cmd.run(client, interaction);
-  }
+		cmd.run(client, interaction);
+	}
 });
