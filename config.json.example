@@ -13,7 +13,7 @@
 			"enabled": "true or false",
 			"channel": "ChannelID",
 			"message": "MessageID",
-			"interval": "2"
+			"interval": "Time In Minutes"
 		},
 		"map": {
 			"enabled": "true or false",
