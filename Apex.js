@@ -1,7 +1,7 @@
 const { Client, Collection } = require('discord.js');
 
 const client = new Client({
-	intents: ['GUILDS', 'GUILD_MESSAGES'],
+	intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_EMOJIS_AND_STICKERS'],
 });
 
 module.exports = client;

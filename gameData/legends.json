@@ -83,5 +83,10 @@
 		"Name": "Valkyrie",
 		"Color": "875FF1",
 		"EmoteID": "854549662090133554"
+	},
+	"1794483389": {
+		"Name": "Seer",
+		"Color": "117197",
+		"EmoteID": "0"
 	}
 }
