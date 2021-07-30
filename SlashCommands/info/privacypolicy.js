@@ -1,6 +1,4 @@
 const { CommandInteraction, MessageEmbed } = require('discord.js');
-const axios = require('axios');
-const { DateTime, Duration } = require('luxon');
 
 module.exports = {
 	name: 'privacypolicy',

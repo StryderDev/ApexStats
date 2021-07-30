@@ -4,7 +4,7 @@ const { DateTime, Duration } = require('luxon');
 
 module.exports = {
 	name: 'map',
-	description: 'Show current and future map rotations!',
+	description: 'Show current and future map rotations.',
 
 	options: [
 		{

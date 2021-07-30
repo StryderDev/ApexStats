@@ -5,7 +5,7 @@ const { version } = require('../../package.json');
 
 module.exports = {
 	name: 'arenas',
-	description: 'Show current and future arenas rotations!',
+	description: 'Show current and future arenas rotations.',
 
 	options: [
 		{
