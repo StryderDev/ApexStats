@@ -4,7 +4,9 @@ client.on("interactionCreate", async (interaction) => {
   if (interaction.isCommand()) {
     await interaction
       .reply({ content: "Loading...", ephemeral: false })
-      .catch(() => {});
+      .catch((err) => {
+        console.log(err);
+      });
 
     const cmd = client.slashCommands.get(interaction.commandName);
     if (!cmd)

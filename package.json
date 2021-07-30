@@ -15,7 +15,7 @@
 	"homepage": "https://github.com/SDCore/ApexStats#readme",
 	"devDependencies": {
 		"eslint": "^7.30.0",
-		"nodemon": "^2.0.7"
+		"nodemon": "^2.0.12"
 	},
 	"dependencies": {
 		"axios": "^0.21.1",
