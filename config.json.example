@@ -1,4 +1,5 @@
 {
+    "debug": true or false,
 	"discord": {
         "shards": Number,
 		"token": "Bot Token"
@@ -6,10 +7,34 @@
     "api": {
         "Mozambique": "Apex Legends API Key"
     },
-    "checkMessage": {
-        "guildID": "Apex Guild ID",
-        "channelID": "Use Bots Here ID",
-    },
+	"autoUpdate": {
+		"guild": "Main Guild ID",
+		"arena": {
+			"enabled": "true or false",
+			"channel": "ChannelID",
+			"message": "MessageID",
+			"interval": "2"
+		},
+		"map": {
+			"enabled": "true or false",
+			"channel": "ChannelID",
+			"message": "MessageID",
+			"interval": "Time In Minutes"
+		},
+		"status": {
+			"enabled": "true or false",
+			"channel": "ChannelID",
+			"message": "MessageID",
+			"interval": "Time In Minutes"
+		},
+		"merchant": "Merchant Guild ID",
+		"merchantMap": {
+			"enabled": "true or false",
+			"channel": "ChannelID",
+			"message": "MessageID",
+			"interval": "Time In Minutes"
+		}
+	},
     "logs": {
         "webhookID": "Webhook ID",
         "webhookToken": "Webhook Token"

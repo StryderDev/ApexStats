@@ -35,9 +35,9 @@ client.once('ready', () => {
 					});
 
 					console.log(
-						chalk`{blueBright [${DateTime.local().toFormat(
-							'hh:mm:ss',
-						)}] Updated presence, set Battle Royale map to ${BR.map} and Areans map to ${Arenas.map}}`,
+						chalk`{blueBright [${DateTime.local().toFormat('hh:mm:ss')}] Updated presence, Battle Royale: ${
+							BR.map
+						}. Areans map: ${Arenas.map}}.`,
 					);
 				}),
 			);
@@ -51,9 +51,6 @@ client.once('ready', () => {
 
 		if (date.getMinutes() % 10 == 0) {
 			setPresence();
-			console.log(
-				chalk`{blueBright [${DateTime.local().toFormat('hh:mm:ss')}] Updated presence for ${client.user.tag}}`,
-			);
 		}
 	}, Math.max(1, 1 || 1) * 60 * 1000);
 });
