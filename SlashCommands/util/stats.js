@@ -81,6 +81,8 @@ module.exports = {
 				var platform = userData.platform;
 				var online = userData.online;
 				var ingame = userData.ingame;
+				var partyInMatch = userData.partyInMatch;
+				var matchLength = userData.matchLength;
 
 				// Account Info
 				var accountInfo = response.accountInfo;
@@ -109,7 +111,7 @@ module.exports = {
 
 				const user = new MessageEmbed()
 					.setTitle(`Stats for ${username} on ${platform} playing ${findLegendByID(legend)}`)
-					.setDescription(checkStatus(online, ingame))
+					.setDescription(checkStatus(online, ingame, partyInMatch, matchLength))
 					.setColor(getColor(legend))
 					.addField(
 						`${accountLevelEmote} Account`,

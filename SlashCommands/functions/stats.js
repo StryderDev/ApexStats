@@ -13,10 +13,21 @@ function findLegendByID(ID) {
 	return legend;
 }
 
-function checkStatus(online, ingame) {
-	if (online == '1' && ingame == '1') return `${onlineEmoji} In a Match`;
+function checkStatus(online, ingame, partyInMatch, matchLength) {
+	var minutes = Math.floor(matchLength / 60);
+	var seconds = matchLength - minutes * 60;
 
-	if (online == '1') return `${matchEmoji} Online [Lobby]`;
+	function str_pad_left(string, pad, length) {
+		return (new Array(length + 1).join(pad) + string).slice(-length);
+	}
+
+	if (partyInMatch == 1 && matchLength >= 1)
+		return `${onlineEmoji} In Match (${str_pad_left(minutes, '0', 2)}:${str_pad_left(seconds, '0', 2)})`;
+
+	if (partyInMatch == 0 && matchLength >= 1)
+		return `${matchEmoji} MatchMaking (${str_pad_left(minutes, '0', 2)}:${str_pad_left(seconds, '0', 2)})`;
+
+	if (online == 1) eturn`${matchEmoji} Online [Lobby]`;
 
 	return `${offlineEmoji} Offline`;
 }
