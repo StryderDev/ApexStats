@@ -1,6 +1,7 @@
 const { CommandInteraction, MessageEmbed } = require('discord.js');
 const { version } = require('../../package.json');
 const config = require('../../config.json');
+const axios = require('axios');
 
 require('dotenv').config();
 
@@ -30,38 +31,42 @@ module.exports = {
 				return `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`;
 			}
 
-			const embed = new MessageEmbed()
-				.setTitle(botName)
-				.setThumbnail(process.env.BOT_ICON)
-				.setDescription(
-					'This bot has the ability to show user stats, events, in-game map rotations, server status, and more. Use `/commands` to see commands available to the bot.',
-				)
-				.addField(
-					'Bot Stats',
-					`**Version**: ${version}\n**Uptime**: ${days}d, ${hours}h, ${minutes}m, ${seconds}s\n**Memory Usage**: ${memUsage()}`,
-					true,
-				)
-				.addField(
-					'Useful Links',
-					`[Trello](https://apexstats.dev/trello)\n[Ranked Leaderboards](https://ranked.apexstats.dev/)\n[Invite Bot](https://apexstats.dev/invite)\n[Github Repo](https://apexstats.dev/github)\n[Support Server](https://discord.gg/eH8VxssFW6)`,
-					true,
-				)
-				.addField('\u200b', '\u200b', true)
-				.addField(
-					'Bot Guild/Shard Info',
-					`**Total Shards**: ${config.discord.shards}\n**Guild Shard ID**: ${client.shard.ids[0] + 1}/${
-						config.discord.shards
-					}`,
-					true,
-				)
-				.addField(
-					'\u200b',
-					`**Guilds on Shard**: ${shardGuildCount}\n**Total Guild Count**: ${count.toLocaleString()}`,
-					true,
-				)
-				.setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO);
+			axios.get(`https://api.apexstats.dev/playerCount`).then(result => {
+				const count = result.data.count;
 
-			interaction.editReply({ embeds: [embed] });
+				const embed = new MessageEmbed()
+					.setTitle(botName)
+					.setThumbnail(process.env.BOT_ICON)
+					.setDescription(
+						'This bot has the ability to show user stats, events, in-game map rotations, server status, and more. Use `/commands` to see commands available to the bot.',
+					)
+					.addField(
+						'Bot Stats',
+						`**Version**: ${version}\n**Uptime**: ${days}d, ${hours}h, ${minutes}m, ${seconds}s\n**Memory Usage**: ${memUsage()}\n**Players Tracked**: ${count.toLocaleString()}`,
+						true,
+					)
+					.addField(
+						'Useful Links',
+						`[Trello](https://apexstats.dev/trello)\n[Ranked Leaderboards](https://ranked.apexstats.dev/)\n[Invite Bot](https://apexstats.dev/invite)\n[Github Repo](https://apexstats.dev/github)\n[Support Server](https://discord.gg/eH8VxssFW6)`,
+						true,
+					)
+					.addField('\u200b', '\u200b', true)
+					.addField(
+						'Bot Guild/Shard Info',
+						`**Total Shards**: ${config.discord.shards}\n**Guild Shard ID**: ${client.shard.ids[0] + 1}/${
+							config.discord.shards
+						}`,
+						true,
+					)
+					.addField(
+						'\u200b',
+						`**Guilds on Shard**: ${shardGuildCount}\n**Total Guild Count**: ${count.toLocaleString()}`,
+						true,
+					)
+					.setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO);
+
+				interaction.editReply({ embeds: [embed] });
+			});
 		});
 	},
 };
