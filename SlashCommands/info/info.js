@@ -63,6 +63,7 @@ module.exports = {
 						`**Guilds on Shard**: ${shardGuildCount}\n**Total Guild Count**: ${count.toLocaleString()}`,
 						true,
 					)
+					.addField('\u200b', '\u200b', true)
 					.setFooter(process.env.CREATOR_NAME, process.env.CREATOR_LOGO);
 
 				interaction.editReply({ embeds: [embed] });
