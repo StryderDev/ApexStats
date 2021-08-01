@@ -9,7 +9,7 @@ module.exports = async client => {
 	commandFiles.map(value => {
 		const file = require(value);
 		const split = value.split('/');
-		const directory = splitted[split.length - 2];
+		const directory = split[split.length - 2];
 
 		if (file.name) {
 			const properties = { directory, ...file };
