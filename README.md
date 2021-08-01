@@ -7,6 +7,7 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 **WHILE THIS BOT IS OPEN SOURCE, THERE CURRENTLY WILL BE NO SUPPORT FOR SELF-HOSTING THE BOT.**
+**Self-Hosting the bot is possible, but some conversion to a public API will be needed.**
 
 # Apex Stats Bot
 
