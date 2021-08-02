@@ -34,6 +34,27 @@ module.exports = {
 				return `[Countdown in Your Timezone](https://time.is/countdown/${time})`;
 			}
 
+			// I don't want to change it in fear of breaking it,
+			// but maybe make this... better? in the future?
+			function time(milliseconds) {
+				var currentDate = DateTime.local();
+				var fixMilliseconds = milliseconds + 6000;
+				var futureDate = DateTime.local().plus({
+					milliseconds: fixMilliseconds,
+				});
+
+				var timeTill = futureDate.diff(currentDate, ['days', 'hours', 'minutes', 'seconds']);
+
+				var finalTime = timeTill.toObject();
+
+				const pluralize = (count, noun, suffix = 's') => `${count} ${noun}${count !== 1 ? suffix : ''}`;
+
+				return `${pluralize(finalTime.days, 'day')}, ${pluralize(finalTime.hours, 'hour')}, ${pluralize(
+					finalTime.minutes,
+					'minute',
+				)}.`;
+			}
+
 			const preEventEmbed = new MessageEmbed()
 				.setTitle(`[Pre-Event Countdown] ${event.info.name}`)
 				.setDescription(`${event.info.description}\n\n[Read Full Post](${event.assets.url})`)
@@ -47,6 +68,10 @@ module.exports = {
 					`${formatDate(event.dates.end_time)}\n${countdownURL(event.dates.end_time)}`,
 					true,
 				)
+				.addField(
+					'Countdown',
+					`The **${event.info.name}** will start in ${time(event.dates.start_time * 1000 - Date.now())}`,
+				)
 				.setImage(`${event.assets.image}?q=${version}`);
 
 			const currentEventEmbed = new MessageEmbed()
@@ -57,6 +82,10 @@ module.exports = {
 					'End Date',
 					`${formatDate(event.dates.end_time)}\n${countdownURL(event.dates.end_time)}`,
 					true,
+				)
+				.addField(
+					'Countdown',
+					`The **${event.info.name}** will end in ${time(event.dates.end_time * 1000 - Date.now())}`,
 				)
 				.setImage(`${event.assets.image}?q=${version}`);
 
