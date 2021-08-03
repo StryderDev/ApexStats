@@ -38,7 +38,7 @@ module.exports = {
 					.setTitle(botName)
 					.setThumbnail(process.env.BOT_ICON)
 					.setDescription(
-						'This bot has the ability to show user stats, events, in-game map rotations, server status, and more. Use `/commands` to see commands available to the bot.',
+						'This bot has the ability to show user stats, events, in-game map rotations, server status, and more. Type `/` and a command for a list of commands.',
 					)
 					.addField(
 						'Bot Stats',
