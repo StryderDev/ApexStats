@@ -132,11 +132,15 @@ module.exports = {
 							BR_Rank,
 							BR_Pos,
 							BR_Div,
-						)}\n<:Season_9:870573880006287392> ${BR_Score.toLocaleString()} RP\n\n**Arenas Ranked**\n${findRank(
+							'BR',
+							BR_Score,
+						)}\n${BR_Score.toLocaleString()} RP\n\n**Arenas Ranked**\n${findRank(
 							Arena_Rank,
 							Arena_Pos,
 							Arena_Div,
-						)}\n<:Season_9:870573880006287392> ${Arena_Score.toLocaleString()} RP`,
+							'Arena',
+							Arena_Score,
+						)}\n${Arena_Score.toLocaleString()} RP`,
 						true,
 					)
 					.addField('\u200b', '\u200b', true)

@@ -60,9 +60,10 @@ function bpLevel(history) {
 	return history.season10;
 }
 
-function findRank(name, pos, div) {
+function findRank(name, pos, div, type, score) {
 	function isMaster(rankName, rankDiv) {
 		if (rankName == 'Master') return '';
+		if (rankName == 'Unranked') return '';
 
 		return rankDiv;
 	}
@@ -70,6 +71,7 @@ function findRank(name, pos, div) {
 	if (name == 'Apex Predator') return `<:rankedPredator:787174770730336286> **[#${pos}]** Apex Predator`;
 
 	function findBadge(name) {
+		if (name == 'Unranked') return '<:rankedBronze:787174769623302204>';
 		if (name == 'Bronze') return '<:rankedBronze:787174769623302204>';
 		if (name == 'Silver') return '<:rankedSilver:787174770424021083>';
 		if (name == 'Gold') return '<:rankedGold:787174769942462474>';
@@ -80,6 +82,16 @@ function findRank(name, pos, div) {
 		return '<:rankedBronze:787174769623302204>';
 	}
 
+	if (type == 'BR') {
+		var name = name;
+	} else if (type == 'Arena') {
+		if (score < 1) {
+			var name = 'Unranked';
+		} else {
+			var name = name;
+		}
+	}
+
 	return `${findBadge(name)} ${name} ${isMaster(name, div)}`;
 }
 
@@ -88,7 +100,7 @@ function trackerTitle(id, legend) {
 
 	var tracker = require(`../../MainGameData/trackerData/${legend}.json`);
 
-	if (tracker[id] == 'undefined' || tracker[id] == null) return id;
+	if (tracker[id] == 'undefined' || tracker[id] == null || tracker[id] == undefined) return id;
 
 	return tracker[id].Name;
 }
