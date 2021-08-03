@@ -1,6 +1,6 @@
 {
 	"name": "apex-stats-bot",
-	"version": "0.5.1",
+	"version": "0.5.2",
 	"description": "Apex in-game stats, map rotations, event info, and more.",
 	"main": "ShardManager.js",
 	"repository": {
