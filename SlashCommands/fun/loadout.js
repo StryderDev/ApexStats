@@ -1,6 +1,6 @@
 const { CommandInteraction, MessageEmbed } = require('discord.js');
 const axios = require('axios');
-const guns = require('../../gameData/guns.json');
+const guns = require('../../MainGameData/guns.json');
 
 module.exports = {
 	name: 'loadout',

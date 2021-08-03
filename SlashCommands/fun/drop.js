@@ -1,8 +1,8 @@
 const { CommandInteraction, MessageEmbed } = require('discord.js');
 const axios = require('axios');
-const WorldsEdgeDrops = require('../../gameData/MainMapDrops/Season10/we.json');
-const OlympusDrops = require('../../gameData/MainMapDrops/Season10/olympus.json');
-const KingsCanyonDrops = require('../../gameData/MainMapDrops/Season10/kc.json');
+const WorldsEdgeDrops = require('../../MainGameData/mapDrops/Season10/we.json');
+const OlympusDrops = require('../../MainGameData/mapDrops/Season10/olympus.json');
+const KingsCanyonDrops = require('../../MainGameData/mapDrops/Season10/kc.json');
 
 module.exports = {
 	name: 'drop',

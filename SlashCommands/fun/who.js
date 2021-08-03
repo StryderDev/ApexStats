@@ -1,6 +1,6 @@
 const { CommandInteraction, MessageEmbed } = require('discord.js');
 const axios = require('axios');
-const legends = require('../../gameData/legends.json');
+const legends = require('../../MainGameData/legends.json');
 
 module.exports = {
 	name: 'who',

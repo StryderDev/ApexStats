@@ -1,4 +1,4 @@
-const legends = require('../../gameData/legends.json');
+const legends = require('../../MainGameData/legends.json');
 const percent = require('percentagebar');
 
 var onlineEmoji = '<:StatusUp:786800700533112872>';
@@ -86,7 +86,7 @@ function findRank(name, pos, div) {
 function trackerTitle(id, legend) {
 	if (id == '1905735931') return 'No data';
 
-	var tracker = require(`../../gameData/trackerData/${legend}.json`);
+	var tracker = require(`../../MainGameData/trackerData/${legend}.json`);
 
 	if (tracker[id] == 'undefined' || tracker[id] == null) return id;
 
