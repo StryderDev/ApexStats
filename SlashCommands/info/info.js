@@ -32,7 +32,7 @@ module.exports = {
 			}
 
 			axios.get(`https://api.apexstats.dev/playerCount`).then(result => {
-				const count = result.data.count;
+				const playerCount = result.data.count;
 
 				const embed = new MessageEmbed()
 					.setTitle(botName)
@@ -42,7 +42,7 @@ module.exports = {
 					)
 					.addField(
 						'Bot Stats',
-						`**Version**: ${version}\n**Uptime**: ${days}d, ${hours}h, ${minutes}m, ${seconds}s\n**Memory Usage**: ${memUsage()}\n**Players Tracked**: ${count.toLocaleString()}`,
+						`**Version**: ${version}\n**Uptime**: ${days}d, ${hours}h, ${minutes}m, ${seconds}s\n**Memory Usage**: ${memUsage()}\n**Players Tracked**: ${playerCount.toLocaleString()}`,
 						true,
 					)
 					.addField(
