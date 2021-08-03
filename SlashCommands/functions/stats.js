@@ -53,11 +53,11 @@ function getPercentageBar(total, current) {
 }
 
 function bpLevel(history) {
-	if (history == null || history.season9 == null) return 0;
+	if (history == null || history.season10 == null) return 0;
 
-	if (history.season9 > 110) return 110;
+	if (history.season10 > 110) return 110;
 
-	return history.season9;
+	return history.season10;
 }
 
 function findRank(name, pos, div) {

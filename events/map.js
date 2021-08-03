@@ -53,7 +53,7 @@ client.once('ready', () => {
 						next[0].duration * 60 * 1000,
 					).toFormat(
 						"m' minutes.'",
-					)}\n<:apexpredator:787174770730336286> The current ranked map is **Olympus**.`,
+					)}\n<:apexpredator:787174770730336286> The current ranked map is **World's Edge**.`,
 				)
 				.setImage(`https://cdn.apexstats.dev/Maps/${mapImage(map.map)}`)
 				.setTimestamp()
