@@ -118,7 +118,7 @@ module.exports = {
 						`Level ${level.toLocaleString()}/500 (${getPercent(level, 500, true)})\n${getPercentageBar(
 							500,
 							level,
-						)}\n\n**${battlepassLevelEmote} Season 9 BattlePass**\nLevel ${bpLevel(
+						)}\n\n**Season 10 BattlePass**\nLevel ${bpLevel(
 							accountInfo.battlepass.history,
 						)}/110 (${getPercent(bpLevel(accountInfo.battlepass.history), 110, false)})\n${getPercentageBar(
 							110,
