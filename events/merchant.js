@@ -7,7 +7,7 @@ const { MessageEmbed } = require('discord.js');
 const { version } = require('../package.json');
 
 client.once('ready', () => {
-	const guild = client.guilds.cache.get(config.autoUpdate.guild);
+	const guild = client.guilds.cache.get(config.autoUpdate.merchant);
 	if (!guild) return console.log(chalk`{gray Unable to find guild for Map Updates.}`);
 
 	function updateMap() {
@@ -59,19 +59,19 @@ client.once('ready', () => {
 				.setTimestamp()
 				.setFooter('Provided by https://rexx.live/');
 
-			const guild = client.guilds.cache.get(config.autoUpdate.guild);
+			const guild = client.guilds.cache.get(config.autoUpdate.merchant);
 			if (!guild) return console.log('Unable to find guild.');
 
 			const channel = guild.channels.cache.find(
-				c => c.id === config.autoUpdate.map.channel && c.type === 'GUILD_TEXT',
+				c => c.id === config.autoUpdate.merchantMap.channel && c.type === 'GUILD_TEXT',
 			);
 			if (!channel) return console.log('Unable to find channel.');
 
 			try {
-				const message = channel.messages.fetch(config.autoUpdate.map.message);
+				const message = channel.messages.fetch(config.autoUpdate.merchantMap.message);
 				if (!message) return console.log('Unable to find message.');
 
-				channel.messages.fetch(config.autoUpdate.map.message).then(msg => {
+				channel.messages.fetch(config.autoUpdate.merchantMap.message).then(msg => {
 					msg.edit({ embeds: [mapEmbed] });
 				});
 
@@ -82,13 +82,13 @@ client.once('ready', () => {
 		});
 	}
 
-	if (config.autoUpdate.map.enabled == 'true') updateMap();
+	if (config.autoUpdate.merchantMap.enabled == 'true') updateMap();
 
 	setInterval(function () {
-		if (config.autoUpdate.map.enabled == 'true') {
+		if (config.autoUpdate.merchantMap.enabled == 'true') {
 			var date = new Date();
 
-			if (date.getMinutes() % config.autoUpdate.map.interval == 0) {
+			if (date.getMinutes() % config.autoUpdate.merchantMap.interval == 0) {
 				updateMap();
 			}
 		}

@@ -1,34 +1,36 @@
-require("dotenv").config;
+// Main Config
+const config = require('./config.json');
+const chalk = require('chalk');
+const { DateTime } = require('luxon');
 
-const config = require("./config.json");
-
-// TopGG API
-const {AutoPoster} = require("topgg-autoposter");
-
-const {ShardingManager} = require("discord.js-light");
-const manager = new ShardingManager("./ApexStats.js", {
-  token: config.token,
-  totalShards: config.shards,
+// Sharding Manager
+const { ShardingManager } = require('discord.js');
+const Manager = new ShardingManager('./Apex.js', {
+	token: config.discord.token,
+	totalShards: config.discord.shards,
 });
 
-if (config.topGG == "0") {
-  // Do nothing
-} else {
-  const ap = AutoPoster(config.topGG, manager);
-  // optional
-  ap.on("posted", () => {
-    // ran when succesfully posted
-    console.log("Posted stats to top.gg");
-  });
+Manager.on('shardCreate', shard => {
+	console.log(chalk`{yellow [${DateTime.local().toFormat('hh:mm:ss')}] Spawning Shard ${shard.id}... }`);
+	console.log(chalk`{green [${DateTime.local().toFormat('hh:mm:ss')}] Shard ${shard.id} Spawned }`);
+
+	shard.on('ready', () => {
+		console.log(chalk`{green [${DateTime.local().toFormat('hh:mm:ss')}] Shard ${shard.id} Connected }`);
+
+		// Sending Data to Shard
+		shard.send({ type: 'shardId', data: { shardId: shard.id } });
+	});
+});
+
+Manager.spawn();
+
+// Top GG
+const { AutoPoster } = require('topgg-autoposter');
+
+if (config.botLists.topGG.enabled == true) {
+	const AP = AutoPoster(config.botLists.topGG.token, Manager);
+
+	AP.on('posted', () => {
+		console.log(chalk`{green Posted TopGG Stats}`);
+	});
 }
-
-manager.on("shardCreate", (shard) => {
-  console.log(`- Spawned shard ${shard.id} -`);
-  shard.on("ready", () => {
-    console.log(`Shard ${shard.id} connected to Discord's Gateway.`);
-    // Sending the data to the shard.
-    shard.send({type: "shardId", data: {shardId: shard.id}});
-  });
-});
-
-manager.spawn();

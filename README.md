@@ -1,10 +1,13 @@
 ![CI/CD to Vultr](https://github.com/SDCore/ApexStats/workflows/CI/CD%20to%20Vultr/badge.svg) ![Discord](https://img.shields.io/discord/664717517666910220?label=Support%20Server) [![CodeFactor](https://www.codefactor.io/repository/github/sdcore/apex-stats-bot/badge)](https://www.codefactor.io/repository/github/sdcore/apex-stats-bot)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 **WHILE THIS BOT IS OPEN SOURCE, THERE CURRENTLY WILL BE NO SUPPORT FOR SELF-HOSTING THE BOT.**
+**Self-Hosting the bot is possible, but some conversion to a public API will be needed.**
 
 # Apex Stats Bot
 
@@ -12,38 +15,38 @@ This bot was developed as an easy way to show off user stats for Apex Legends.
 
 The bot currently has the following features:
 
-- Apex Legends User Stats
-  - `>>stats [platform] [username]`
-    - Replace [platform] with PC, PS4, or X1
-    - Replace [username] with the username of your apex account
-- Most recent news article from the official Apex Legends blog
-  - `>>news`
-- Apex Legends Server Status
-  - `>>status`
-- Legend Bios and Information
-  - `>>legend [legend name]`
-    - Replace [legend name] with the name of a legend currently in the game
-- Current in-game map rotations
-  - `>>map`
-  - `>>map #`
-    - Replace "#" with a number (between 1 and 10) to get future map rotations
-- Current in-game arena rotations
-  - `>>arena`
-- Current active in-game events
-  - `>>event`
-- Pick a random spot to drop based on the current map in rotation
-  - `>>drop`
-- Pick a random legend to play
-  - `>>who`
-- See the most recent changelog/patch
-  - `>>changelog`
-- See info about the most recent and previous seasons
-  - `>>season`
-    - Shows most recent season by default
-  - `>>season #`
-    - Replace # with a season number to see other season information
-- `>>invite`
-  - Link to invite the bot to a server
+-   Apex Legends User Stats
+    -   `/stats [platform] [username]`
+        -   Replace [platform] with PC, PS4, or X1
+        -   Replace [username] with the username of your apex account
+-   Most recent news article from the official Apex Legends blog
+    -   `/news`
+-   Apex Legends Server Status
+    -   `/status`
+-   Legend Bios and Information
+    -   `/legend [legend name]`
+        -   Replace [legend name] with the name of a legend currently in the game
+-   Current in-game map rotations
+    -   `/map`
+    -   `/map #`
+        -   Replace "#" with a number (between 1 and 10) to get future map rotations
+-   Current in-game arena rotations
+    -   `/arena`
+-   Current active in-game events
+    -   `/event`
+-   Pick a random spot to drop based on the current map in rotation
+    -   `/drop`
+-   Pick a random legend to play
+    -   `/who`
+-   See the most recent changelog/patch
+    -   `/changelog`
+-   See info about the most recent and previous seasons
+    -   `/season`
+        -   Shows most recent season by default
+    -   `/season #`
+        -   Replace # with a season number to see other season information
+-   `/invite`
+    -   Link to invite the bot to a server
 
 ## Preview
 

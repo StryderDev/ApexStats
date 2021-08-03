@@ -1,36 +1,32 @@
 {
-  "name": "apexstatsbot",
-  "version": "0.4.53-2",
-  "description": "Shows Apex Legends player stats, map rotations, event info, and more.",
-  "main": "ShardManager.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SDCore/ApexStats.git"
-  },
-  "author": "SDCore",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/SDCore/ApexStats/issues"
-  },
-  "homepage": "https://github.com/SDCore/ApexStats#readme",
-  "dependencies": {
-    "axios": "^0.21.1",
-    "canvas": "^2.7.0",
-    "chalk": "^4.1.1",
-    "discord-buttons": "^4.0.0",
-    "discord.js-light": "^3.5.9",
-    "discord.js-light-commando": "^1.1.0",
-    "dotenv": "^10.0.0",
-    "fs": "0.0.1-security",
-    "luxon": "^2.0.1",
-    "mozambique-api-wrapper": "^2.0.0",
-    "mysql": "^2.18.1",
-    "percentagebar": "^1.0.3",
-    "sqlite": "^4.0.21",
-    "sqlite3": "^5.0.2",
-    "topgg-autoposter": "^2.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
-  }
+	"name": "apex-stats-bot",
+	"version": "0.5.1",
+	"description": "Apex in-game stats, map rotations, event info, and more.",
+	"main": "ShardManager.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SDCore/ApexStats.git"
+	},
+	"author": "SDCore",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/SDCore/ApexStats/issues"
+	},
+	"homepage": "https://github.com/SDCore/ApexStats#readme",
+	"devDependencies": {
+		"eslint": "^7.31.0",
+		"nodemon": "^2.0.12"
+	},
+	"dependencies": {
+		"axios": "^0.21.1",
+		"bufferutil": "^4.0.3",
+		"chalk": "^3.0.0",
+		"discord.js": "^13.0.0-dev.2675b08.1627603447",
+		"dotenv": "^10.0.0",
+		"glob": "^7.1.7",
+		"luxon": "^2.0.1",
+		"percentagebar": "^1.0.3",
+		"topgg-autoposter": "^2.0.0",
+		"utf-8-validate": "^5.0.5"
+	}
 }

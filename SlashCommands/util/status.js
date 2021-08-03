@@ -1,17 +1,16 @@
-const client = require('../Apex.js');
+const { CommandInteraction, MessageEmbed } = require('discord.js');
 const axios = require('axios');
-const config = require('../config.json');
-const chalk = require('chalk');
-const { MessageEmbed } = require('discord.js');
-var { DateTime } = require('luxon');
 
-client.once('ready', () => {
-	const guild = client.guilds.cache.get(config.autoUpdate.guild);
-	if (!guild) return console.log(chalk`{gray Unable to find guild for Status Updates.}`);
+module.exports = {
+	name: 'status',
+	description: 'Shows in-game server status.',
 
-	function updateStatus() {
-		var status = axios.get(`https://api.mozambiquehe.re/servers?auth=${config.api.Mozambique}`);
-		var announcement = axios.get('https://apexlegendsstatus.com/anno.json');
+	run: async (client, interaction) => {
+		var statusURL = `https://api.mozambiquehe.re/servers?auth=${client.config.api.Mozambique}`;
+		var announcementURL = 'https://apexlegendsstatus.com/anno.json';
+
+		var status = axios.get(statusURL);
+		var announcement = axios.get(announcementURL);
 
 		// Status Emojis
 		var onlineCircle = '<:StatusUp:786800700533112872>';
@@ -159,42 +158,12 @@ client.once('ready', () => {
 						true,
 					)
 					.addField('\u200b', '\u200b', true)
-					.setTimestamp()
 					.setFooter('Data provided by https://apexlegendsstatus.com/');
 
-				const guild = client.guilds.cache.get(config.autoUpdate.guild);
-				if (!guild) return console.log('Unable to find guild.');
-
-				const channel = guild.channels.cache.find(
-					c => c.id === config.autoUpdate.status.channel && c.type === 'GUILD_TEXT',
-				);
-				if (!channel) return console.log('Unable to find channel.');
-
-				try {
-					const message = channel.messages.fetch(config.autoUpdate.status.message);
-					if (!message) return console.log('Unable to find message.');
-
-					channel.messages.fetch(config.autoUpdate.status.message).then(msg => {
-						msg.edit({ embeds: [statusEmbed] });
-					});
-
-					console.log(chalk`{blueBright [${DateTime.local().toFormat('hh:mm:ss')}] Updated Status Embed}`);
-				} catch (err) {
-					console.error(`Other Error: ${err}`);
-				}
+				interaction.followUp({
+					embeds: [statusEmbed],
+				});
 			}),
 		);
-	}
-
-	if (config.autoUpdate.status.enabled == 'true') updateStatus();
-
-	setInterval(function () {
-		if (config.autoUpdate.status.enabled == 'true') {
-			var date = new Date();
-
-			if (date.getMinutes() % config.autoUpdate.status.interval == 0) {
-				updateStatus();
-			}
-		}
-	}, Math.max(1, 1 || 1) * 60 * 1000);
-});
+	},
+};
