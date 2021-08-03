@@ -37,7 +37,7 @@ module.exports = async client => {
 		if (client.config.debug == true) {
 			client.guilds.cache.get('664717517666910220').commands.set(arrayOfSlashCommands);
 		} else {
-			client.application.commands.set(arrayOfSlashCommands);
+			client.application?.commands.set(arrayOfSlashCommands);
 		}
 	});
 };
