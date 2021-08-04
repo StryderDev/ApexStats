@@ -20,7 +20,7 @@
 	"dependencies": {
 		"axios": "^0.21.1",
 		"bufferutil": "^4.0.3",
-		"chalk": "^3.0.0",
+		"chalk": "^4.1.2",
 		"discord.js": "^13.0.0-dev.2675b08.1627603447",
 		"dotenv": "^10.0.0",
 		"glob": "^7.1.7",
