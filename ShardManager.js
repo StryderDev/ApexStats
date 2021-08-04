@@ -34,3 +34,7 @@ if (config.botLists.topGG.enabled == true) {
 		console.log(chalk`{green Posted TopGG Stats}`);
 	});
 }
+
+process.on('uncaughtException', function (err) {
+	console.log(`Error: ${err}`);
+});
