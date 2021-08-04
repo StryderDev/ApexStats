@@ -1,4 +1,4 @@
-const legends = require('../../gameData/legends.json');
+const legends = require('../../MainGameData/legends.json');
 const percent = require('percentagebar');
 
 var onlineEmoji = '<:StatusUp:786800700533112872>';
@@ -53,16 +53,17 @@ function getPercentageBar(total, current) {
 }
 
 function bpLevel(history) {
-	if (history == null || history.season9 == null) return 0;
+	if (history == null || history.season10 == null) return 0;
 
-	if (history.season9 > 110) return 110;
+	if (history.season10 > 110) return 110;
 
-	return history.season9;
+	return history.season10;
 }
 
-function findRank(name, pos, div) {
+function findRank(name, pos, div, type, score) {
 	function isMaster(rankName, rankDiv) {
 		if (rankName == 'Master') return '';
+		if (rankName == 'Unranked') return '';
 
 		return rankDiv;
 	}
@@ -70,6 +71,7 @@ function findRank(name, pos, div) {
 	if (name == 'Apex Predator') return `<:rankedPredator:787174770730336286> **[#${pos}]** Apex Predator`;
 
 	function findBadge(name) {
+		if (name == 'Unranked') return '<:rankedBronze:787174769623302204>';
 		if (name == 'Bronze') return '<:rankedBronze:787174769623302204>';
 		if (name == 'Silver') return '<:rankedSilver:787174770424021083>';
 		if (name == 'Gold') return '<:rankedGold:787174769942462474>';
@@ -80,15 +82,25 @@ function findRank(name, pos, div) {
 		return '<:rankedBronze:787174769623302204>';
 	}
 
+	if (type == 'BR') {
+		var name = name;
+	} else if (type == 'Arena') {
+		if (score < 1) {
+			var name = 'Unranked';
+		} else {
+			var name = name;
+		}
+	}
+
 	return `${findBadge(name)} ${name} ${isMaster(name, div)}`;
 }
 
 function trackerTitle(id, legend) {
 	if (id == '1905735931') return 'No data';
 
-	var tracker = require(`../../gameData/trackerData/${legend}.json`);
+	var tracker = require(`../../MainGameData/trackerData/${legend}.json`);
 
-	if (tracker[id] == 'undefined' || tracker[id] == null) return id;
+	if (tracker[id] == 'undefined' || tracker[id] == null || tracker[id] == undefined) return id;
 
 	return tracker[id].Name;
 }

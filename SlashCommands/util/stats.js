@@ -118,7 +118,7 @@ module.exports = {
 						`Level ${level.toLocaleString()}/500 (${getPercent(level, 500, true)})\n${getPercentageBar(
 							500,
 							level,
-						)}\n\n**${battlepassLevelEmote} Season 9 BattlePass**\nLevel ${bpLevel(
+						)}\n\n**Season 10 BattlePass**\nLevel ${bpLevel(
 							accountInfo.battlepass.history,
 						)}/110 (${getPercent(bpLevel(accountInfo.battlepass.history), 110, false)})\n${getPercentageBar(
 							110,
@@ -132,11 +132,15 @@ module.exports = {
 							BR_Rank,
 							BR_Pos,
 							BR_Div,
-						)}\n<:Season_9:870573880006287392> ${BR_Score.toLocaleString()} RP\n\n**Arenas Ranked**\n${findRank(
+							'BR',
+							BR_Score,
+						)}\n${BR_Score.toLocaleString()} RP\n\n**Arenas Ranked**\n${findRank(
 							Arena_Rank,
 							Arena_Pos,
 							Arena_Div,
-						)}\n<:Season_9:870573880006287392> ${Arena_Score.toLocaleString()} RP`,
+							'Arena',
+							Arena_Score,
+						)}\n${Arena_Score.toLocaleString()} RP`,
 						true,
 					)
 					.addField('\u200b', '\u200b', true)
