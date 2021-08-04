@@ -100,7 +100,7 @@ function trackerTitle(id, legend) {
 
 	var tracker = require(`../../MainGameData/trackerData/${legend}.json`);
 
-	if (tracker[id] == 'undefined' || tracker[id] == null || tracker[id] == undefined) return id;
+	if (tracker[id] == 'undefined' || tracker[id] == null || tracker[id] == undefined) return id.toString();
 
 	return tracker[id].Name;
 }
