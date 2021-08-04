@@ -14,6 +14,7 @@ client.once('ready', () => {
 		axios.get('https://fn.alphaleagues.com/v2/apex/map/?next=1').then(result => {
 			var map = result.data.br;
 			var next = map.next;
+			var ranked = map.ranked;
 
 			const pluralize = (count, noun, suffix = 's') => `${count} ${noun}${count !== 1 ? suffix : ''}`;
 
@@ -28,6 +29,22 @@ client.once('ready', () => {
 				var time = timeUntil.toObject();
 
 				return `${pluralize(time.hours, 'hour')}, ${pluralize(time.minutes, 'minute')}`;
+			}
+
+			function getRankedTime(time) {
+				var now = DateTime.local();
+				var nowSeconds = Math.floor(DateTime.local().toSeconds());
+				var math = time - nowSeconds;
+				var future = DateTime.local().plus({ seconds: math + 60 });
+
+				var timeUntil = future.diff(now, ['weeks', 'days', 'hours', 'minutes', 'seconds']);
+
+				var time = timeUntil.toObject();
+
+				return `${pluralize(time.weeks, 'week')}, ${pluralize(time.days, 'day')}, ${pluralize(
+					time.hours,
+					'hour',
+				)}, ${pluralize(time.minutes, 'minute')}`;
 			}
 
 			function mapImage(map) {
@@ -51,11 +68,11 @@ client.once('ready', () => {
 						map.times.next,
 					)}.\n:clock1: The next map is **${next[0].map}** and lasts for ${Duration.fromMillis(
 						next[0].duration * 60 * 1000,
-					).toFormat(
-						"m' minutes.'",
-					)}\n<:apexpredator:787174770730336286> The current ranked map is **World's Edge**.`,
+					).toFormat("m' minutes.'")}\n<:apexpredator:787174770730336286> The current ranked map is **${
+						ranked.map
+					}** for ${getRankedTime(ranked.end)}.`,
 				)
-				.setImage(`https://cdn.apexstats.dev/Maps/${mapImage(map.map)}`)
+				.setImage(`https://cdn.apexstats.dev/Maps/${mapImage(map.map)}?q=${version}`)
 				.setTimestamp()
 				.setFooter('Provided by https://rexx.live/');
 
