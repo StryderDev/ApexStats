@@ -27,7 +27,7 @@ client.once('ready', () => {
 					client.user.setPresence({
 						activities: [
 							{
-								name: ` on ${BR.map}/${Arenas.map} · Serving ${count.toLocaleString()} guilds`,
+								name: `on ${BR.map}/${Arenas.map} · Serving ${count.toLocaleString()} guilds`,
 								type: 'PLAYING',
 							},
 						],
