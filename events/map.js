@@ -54,9 +54,9 @@ client.once('ready', () => {
 					.replace(/\s/g, '');
 
 				if (maps.indexOf(map) != -1) {
-					// _01 for Ranked Split 1
-					// _02 for Ranked Split 2
-					return `Season%209/${mapName}_02.gif`;
+					// _001 for Ranked Split 1
+					// _002 for Ranked Split 2
+					return `Season%2010/BR/${mapName}_001.gif`;
 				} else {
 					return 'NoMapData.png';
 				}
