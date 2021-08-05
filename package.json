@@ -17,5 +17,9 @@
 		"eslint": "^7.31.0",
 		"nodemon": "^2.0.12"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"discord.js": "^13.0.0-dev.t1628113225.a6d4035",
+		"glob": "^7.1.7",
+		"mongoose": "^5.13.2"
+	}
 }
