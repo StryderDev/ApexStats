@@ -36,5 +36,5 @@ if (config.botLists.topGG.enabled == true) {
 }
 
 process.on('uncaughtException', function (err) {
-	console.log(`Error: ${err}`);
+	console.log(`Uncaught Exception Error: ${err}`);
 });
