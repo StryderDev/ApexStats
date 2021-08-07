@@ -76,35 +76,35 @@ module.exports = {
 				var battlepassLevelEmote = '<:Season_9:870570775751573504>';
 
 				// User Data
-				var userData = response.userData;
+				var userData = response.user;
 				var username = userData.username;
 				var platform = userData.platform;
-				var online = userData.online;
-				var ingame = userData.ingame;
-				var partyInMatch = userData.partyInMatch;
-				var matchLength = userData.matchLength;
+				var online = userData.status.online;
+				var ingame = userData.status.ingame;
+				var partyInMatch = userData.status.partyInMatch;
+				var matchLength = userData.status.matchLength;
 
 				// Account Info
-				var accountInfo = response.accountInfo;
-				var legend = accountInfo.active.legend;
+				var accountInfo = response.account;
+				var legend = response.active.legend;
 				var level = accountInfo.level;
 
 				// BR Ranked
-				var BR = accountInfo.Ranked.BR;
+				var BR = response.ranked.BR;
 				var BR_Rank = BR.name;
 				var BR_Pos = BR.ladderPos;
 				var BR_Div = BR.division;
 				var BR_Score = BR.score;
 
 				// Arena Ranked
-				var Arena = accountInfo.Ranked.Arenas;
+				var Arena = response.ranked.Arenas;
 				var Arena_Rank = Arena.name;
 				var Arena_Pos = Arena.ladderPos;
 				var Arena_Div = Arena.division;
 				var Arena_Score = Arena.score;
 
 				// Trackers
-				var tracker = response.accountInfo.active;
+				var tracker = response.active;
 				var tOne = tracker.trackers[0];
 				var tTwo = tracker.trackers[1];
 				var tThree = tracker.trackers[2];
