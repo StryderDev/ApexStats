@@ -111,7 +111,7 @@ module.exports = {
 					}`,
 				)
 				.setDescription(legend.info.description)
-				.addField('Age', legend.info.age, true)
+				.addField('Age', legend.info.age.toString(), true)
 				.addField('Entry Season', legend.info.entry_season, true)
 				.addField('Home World', legend.info.home_world, true)
 				.addField('Passive', legend.abilities.passive, true)
