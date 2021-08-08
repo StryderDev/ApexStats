@@ -23,7 +23,11 @@ module.exports = {
 	 */
 	run: async (client, message, args) => {
 		// Args
-		const platform = args[0].toUpperCase();
+		if (!args[0]) {
+			return message.reply({ content: 'Use `>>stats platform username` to use this command.' });
+		} else {
+			platform = args[0].toUpperCase();
+		}
 
 		function getUser() {
 			if (!args[2]) return args[1];
