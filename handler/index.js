@@ -1,18 +1,20 @@
-const { glob } = require("glob");
-const { promisify } = require("util");
-const { Client } = require("discord.js");
+const { glob } = require('glob');
+const { promisify } = require('util');
+const { Client } = require('discord.js');
+
+const { debug } = require('../config.json');
 
 const globPromise = promisify(glob);
 
 /**
  * @param {Client} client
  */
-module.exports = async (client) => {
+module.exports = async client => {
 	// Commands
 	const commandFiles = await globPromise(`${process.cwd()}/commands/**/*.js`);
-	commandFiles.map((value) => {
+	commandFiles.map(value => {
 		const file = require(value);
-		const splitted = value.split("/");
+		const splitted = value.split('/');
 		const directory = splitted[splitted.length - 2];
 
 		if (file.name) {
@@ -23,28 +25,30 @@ module.exports = async (client) => {
 
 	// Events
 	const eventFiles = await globPromise(`${process.cwd()}/events/*.js`);
-	eventFiles.map((value) => require(value));
+	eventFiles.map(value => require(value));
 
 	// Slash Commands
-	const slashCommands = await globPromise(
-		`${process.cwd()}/SlashCommands/*/*.js`
-	);
+	const slashCommands = await globPromise(`${process.cwd()}/SlashCommands/*/*.js`);
 
 	const arrayOfSlashCommands = [];
-	slashCommands.map((value) => {
+	slashCommands.map(value => {
 		const file = require(value);
 		if (!file?.name) return;
 		client.slashCommands.set(file.name, file);
 		arrayOfSlashCommands.push(file);
 	});
-	client.on("ready", async () => {
-		// Register for a single guild
-		await client.guilds.cache
-			.get("835268919174365275")
-			.commands.set(arrayOfSlashCommands)
-			.catch((err) => console.log("error"));
-
-		// Register for all the guilds the bot is in
-		// await client.application.commands.set(arrayOfSlashCommands);
+	client.on('ready', async () => {
+		if (debug == true) {
+			// Register for a single guild
+			await client.guilds.cache
+				.get('873773620827131966')
+				.commands.set(arrayOfSlashCommands)
+				.catch(err => console.log(`Error: Possible missing permissions. Please re-invite the bot.`));
+		} else {
+			// Register for all the guilds the bot is in
+			await client.application.commands
+				.set(arrayOfSlashCommands)
+				.catch(err => console.log(`Error: Possible missing permissions. Please re-invite the bot.`));
+		}
 	});
 };

@@ -8,13 +8,12 @@ client.on("messageCreate", async (message) => {
 	)
 		return;
 
-	const [cmd, ...args] = message.content
-		.slice(client.config.prefix.length)
-		.trim()
-		.split(" ");
+	if (message.content.startsWith(client.config.prefix))
+		return message.reply({
+			content: "test",
+			allowedMentions: { repliedUser: false },
+		});
 
-	const command = client.commands.get(cmd.toLowerCase());
-
-	if (!command) return;
-	await command.run(client, message, args);
+	// if (!command) return;
+	// await command.run(client, message, args);
 });
