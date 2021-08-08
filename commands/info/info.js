@@ -26,7 +26,7 @@ module.exports = {
 			.setTitle(name)
 			.setThumbnail('https://cdn.apexstats.dev/Icon.png')
 			.setDescription(
-				'This bot has the ability to show user stats, events, in-game map rotations, server status, and more. Type `/` and a command for a list of commands.',
+				'This bot has the ability to show user stats, events, in-game map rotations, server status, and more. Type `>>help`for help.',
 			)
 			.addField(
 				'Version',
