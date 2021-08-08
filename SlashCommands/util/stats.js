@@ -1,6 +1,5 @@
 const { CommandInteraction, MessageEmbed } = require('discord.js');
 const config = require('../../config.json');
-const chalk = require('chalk');
 const axios = require('axios');
 const {
 	findLegendByID,
@@ -16,7 +15,7 @@ const {
 
 module.exports = {
 	name: 'stats',
-	description: 'Shows your current legend stats.',
+	description: 'Show your in-game legend stats.',
 
 	options: [
 		{
@@ -47,12 +46,19 @@ module.exports = {
 		},
 	],
 
+	/**
+	 *
+	 * @param {Client} client
+	 * @param {CommandInteraction} interaction
+	 */
 	run: async (client, interaction) => {
 		// Args
 		const platform = interaction.options.get('platform');
 		const username = interaction.options.get('username');
 
-		interaction.editReply({ content: 'Retrieving user stats...' });
+		interaction.followUp({
+			content: `Retreiving user stats...`,
+		});
 
 		axios
 			.get(
@@ -70,10 +76,6 @@ module.exports = {
 					var response = response.data;
 					console.log(`-- Data fetched --`);
 				}
-
-				// Emotes
-				var accountLevelEmote = '<:AccountLevel:870568814205624360>';
-				var battlepassLevelEmote = '<:Season_9:870570775751573504>';
 
 				// User Data
 				var userData = response.user;
@@ -109,12 +111,12 @@ module.exports = {
 				var tTwo = tracker.trackers[1];
 				var tThree = tracker.trackers[2];
 
-				const user = new MessageEmbed()
+				const stats = new MessageEmbed()
 					.setTitle(`Stats for ${username} on ${platform} playing ${findLegendByID(legend)}`)
 					.setDescription(checkStatus(online, ingame, partyInMatch, matchLength))
 					.setColor(getColor(legend))
 					.addField(
-						`${accountLevelEmote} Account`,
+						`Account`,
 						`Level ${level.toLocaleString()}/500 (${getPercent(level, 500, true)})\n${getPercentageBar(
 							500,
 							level,
@@ -160,37 +162,11 @@ module.exports = {
 						'Weird tracker name? Let SDCore#1234 know!\nBattlePass level not correct? Equip the badge in-game!\nTotal kills may not be up-to-date. Type /killhelp for info.',
 					);
 
-				interaction.editReply({ embeds: [user], content: `\u200B` });
+				interaction.editReply({ content: '\u200B', embeds: [stats] });
 			})
-			.catch(error => {
-				if (config.debug == true) {
-					console.log(error);
-				}
-
-				if (error.response == null || error.response == undefined || error.response == 'undefined') {
-					console.log('-- ERROR WAS NOT DEFINED --');
-					return interaction.editReply({
-						content: `There was an error running that command. Please try again.`,
-					});
-				}
-
-				function checkErrorType(code) {
-					if (code == '1')
-						return "**Error**\nThere was no platform and/or username specific. This shouldn't happen, so contact SDCore#1234 if you see this.";
-
-					if (code == '3')
-						return '**Error**\nThere was an error connecting to an external API. Please try again or contact SDCore#1234 if the problem persists.';
-
-					if (code == '4')
-						return `**Error**\nUsername '${username.value}' on ${platform.value} not found. Either it is incorrect, or it doesn't exist. Try using the username of your Origin account.`;
-
-					if (code == '5')
-						return `**Error**\nUsername '${username.value}' on ${platform.value} was found, but that account hasn't played Apex. Try a different username.`;
-
-					return '**Error**\nGeneric, unhandled error. Contact SDCore#1234 if you see this.';
-				}
-
-				interaction.editReply({ content: checkErrorType(error.response.data.errorCode) });
+			.catch(err => {
+				console.log(err.response.data);
+				interaction.editReply({ content: `**Error**\n${err.response.data.error}` });
 			});
 	},
 };

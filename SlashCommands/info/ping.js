@@ -1,8 +1,8 @@
 const { Client, CommandInteraction } = require('discord.js');
 
 module.exports = {
-	name: 'invite',
-	description: 'Invite the bot to your server.',
+	name: 'ping',
+	description: 'Returns current websocket ping.',
 
 	/**
 	 *
@@ -11,7 +11,7 @@ module.exports = {
 	 */
 	run: async (client, interaction) => {
 		interaction.followUp({
-			content: 'Invite the bot to your own server using this link: <https://apexstats.dev/invite>',
+			content: `API Latency is ${Math.round(client.ws.ping)}ms.`,
 		});
 	},
 };

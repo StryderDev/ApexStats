@@ -1,13 +1,18 @@
-const { CommandInteraction, MessageEmbed } = require('discord.js');
-const axios = require('axios');
-const legends = require('../../MainGameData/legends.json');
+const { Client, CommandInteraction } = require('discord.js');
+
+const legendList = require('../../data/legends.json');
 
 module.exports = {
 	name: 'who',
-	description: 'Choose a random legend to play.',
+	description: 'Picks a random legend to use in game.',
 
+	/**
+	 *
+	 * @param {Client} client
+	 * @param {CommandInteraction} interaction
+	 */
 	run: async (client, interaction) => {
-		const legendIDs = [
+		const legends = [
 			'898565421',
 			'182221730',
 			'1409694078',
@@ -28,12 +33,8 @@ module.exports = {
 			'1794483389',
 		];
 
-		const randomLegend = Math.floor(Math.random() * legendIDs.length);
+		const id = Math.floor(Math.random() * legends.length);
 
-		var legendName = legends[legendIDs[randomLegend]].Name;
-		var legendEmoteID = legends[legendIDs[randomLegend]].EmoteID;
-		var legendEmote = `<:${legendName}:${legendEmoteID}>`;
-
-		interaction.editReply({ content: `Play as ${legendName} this round!` });
+		interaction.followUp({ content: `Play as **${legendList[legends[id]].Name}** this round.` });
 	},
 };

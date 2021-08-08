@@ -1,17 +1,14 @@
-const { CommandInteraction, MessageEmbed } = require('discord.js');
+const { Client, CommandInteraction } = require('discord.js');
 const axios = require('axios');
-const WorldsEdgeDrops = require('../../MainGameData/mapDrops/Season10/we.json');
-const OlympusDrops = require('../../MainGameData/mapDrops/Season10/olympus.json');
-const KingsCanyonDrops = require('../../MainGameData/mapDrops/Season10/kc.json');
 
 module.exports = {
 	name: 'drop',
-	description: 'Choose a random place on the current map to drop.',
+	description: 'Picks a random place to drop based on the current map.',
 
 	options: [
 		{
 			name: 'map',
-			description: 'Which map to choose a location to drop.',
+			description: 'Which map you want to drop in.',
 			type: 'STRING',
 			required: false,
 			choices: [
@@ -31,23 +28,34 @@ module.exports = {
 		},
 	],
 
+	/**
+	 *
+	 * @param {Client} client
+	 * @param {CommandInteraction} interaction
+	 */
 	run: async (client, interaction) => {
 		// Args
 		const map = interaction.options.get('map');
 
+		function compress(string) {
+			function isWhiteSpace(text) {
+				return ' \t\n'.includes(text);
+			}
+
+			function isPunct(text) {
+				return ';:.,?!-\'"(){}'.includes(text);
+			}
+
+			return string
+				.split('')
+				.filter(char => !isWhiteSpace(char) && !isPunct(char))
+				.join('');
+		}
+
 		function getMap(map) {
-			if (map == 'Kings Canyon')
-				return `Drop in ${
-					KingsCanyonDrops[Math.floor(Math.random() * KingsCanyonDrops.length)]
-				} on Kings Canyon!`;
+			mapFile = require(`../../data/drops/season10/${compress(map)}.json`);
 
-			if (map == "World's Edge")
-				return `Drop in ${
-					WorldsEdgeDrops[Math.floor(Math.random() * WorldsEdgeDrops.length)]
-				} on World's Edge!`;
-
-			if (map == 'Olympus')
-				return `Drop in ${OlympusDrops[Math.floor(Math.random() * OlympusDrops.length)]} on Olympus!`;
+			return `Drop in **${mapFile[Math.floor(Math.random() * mapFile.length)]}** on ${map}.`;
 		}
 
 		if (map == null || map == undefined) {

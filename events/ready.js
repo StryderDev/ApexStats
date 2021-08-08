@@ -1,8 +1,5 @@
-const client = require('../Apex.js');
-const chalk = require('chalk');
-const { DateTime } = require('luxon');
+const client = require("../Apex");
 
-client.once('ready', () => {
-	console.log(chalk`{yellow [${DateTime.local().toFormat('hh:mm:ss')}] Logging in...}`);
-	console.log(chalk`{green [${DateTime.local().toFormat('hh:mm:ss')}] Logged in as ${client.user.tag}}`);
-});
+client.on("ready", () =>
+	console.log(`${client.user.tag} is up and ready to go!`)
+);

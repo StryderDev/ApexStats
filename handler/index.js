@@ -1,15 +1,21 @@
 const { glob } = require('glob');
 const { promisify } = require('util');
+const { Client } = require('discord.js');
+
+const { debug } = require('../config.json');
 
 const globPromise = promisify(glob);
 
+/**
+ * @param {Client} client
+ */
 module.exports = async client => {
 	// Commands
 	const commandFiles = await globPromise(`${process.cwd()}/commands/**/*.js`);
 	commandFiles.map(value => {
 		const file = require(value);
-		const split = value.split('/');
-		const directory = split[split.length - 2];
+		const splitted = value.split('/');
+		const directory = splitted[splitted.length - 2];
 
 		if (file.name) {
 			const properties = { directory, ...file };
@@ -23,15 +29,15 @@ module.exports = async client => {
 
 	// Slash Commands
 	const slashCommands = await globPromise(`${process.cwd()}/SlashCommands/*/*.js`);
-	const arrayOfSlashCommands = [];
 
+	const arrayOfSlashCommands = [];
 	slashCommands.map(value => {
 		const file = require(value);
 		if (!file?.name) return;
-
 		client.slashCommands.set(file.name, file);
 		arrayOfSlashCommands.push(file);
 	});
+<<<<<<< HEAD
 
 	client.on('ready', () => {
 		if (client.config.debug == true) {
@@ -43,6 +49,20 @@ module.exports = async client => {
 			client.application.commands
 				.set(arrayOfSlashCommands)
 				.catch(err => console.log('There was a permissions error with this guild.'));
+=======
+	client.on('ready', async () => {
+		if (debug == true) {
+			// Register for a single guild
+			await client.guilds.cache
+				.get('873773620827131966')
+				.commands.set(arrayOfSlashCommands)
+				.catch(err => console.log(`Error: Possible missing permissions. Please re-invite the bot.`));
+		} else {
+			// Register for all the guilds the bot is in
+			await client.application.commands
+				.set(arrayOfSlashCommands)
+				.catch(err => console.log(`Error: Possible missing permissions. Please re-invite the bot.`));
+>>>>>>> NewBot
 		}
 	});
 };

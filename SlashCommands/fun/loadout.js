@@ -1,15 +1,20 @@
-const { CommandInteraction, MessageEmbed } = require('discord.js');
-const axios = require('axios');
-const guns = require('../../MainGameData/guns.json');
+const { Client, CommandInteraction } = require('discord.js');
+
+const guns = require('../../data/guns.json');
 
 module.exports = {
 	name: 'loadout',
-	description: 'Choose a set of guns to use.',
+	description: 'Picks a random loadout to use in game.',
 
+	/**
+	 *
+	 * @param {Client} client
+	 * @param {CommandInteraction} interaction
+	 */
 	run: async (client, interaction) => {
-		const gunOne = Math.floor(Math.random() * guns.length);
-		const gunTwo = Math.floor(Math.random() * guns.length);
+		const one = Math.floor(Math.random() * guns.length);
+		const two = Math.floor(Math.random() * guns.length);
 
-		interaction.editReply({ content: `Run the **${guns[gunOne]}** and the **${guns[gunTwo]}** this round.` });
+		interaction.followUp({ content: `Run the **${guns[one]}** and the **${guns[two]}** this round.` });
 	},
 };
