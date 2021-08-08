@@ -37,19 +37,7 @@ module.exports = async client => {
 		client.slashCommands.set(file.name, file);
 		arrayOfSlashCommands.push(file);
 	});
-<<<<<<< HEAD
 
-	client.on('ready', () => {
-		if (client.config.debug == true) {
-			client.guilds.cache
-				.get('664717517666910220')
-				.commands.set(arrayOfSlashCommands)
-				.catch(err => console.log('There was a permissions error with this guild.'));
-		} else {
-			client.application.commands
-				.set(arrayOfSlashCommands)
-				.catch(err => console.log('There was a permissions error with this guild.'));
-=======
 	client.on('ready', async () => {
 		if (debug == true) {
 			// Register for a single guild
@@ -62,7 +50,6 @@ module.exports = async client => {
 			await client.application.commands
 				.set(arrayOfSlashCommands)
 				.catch(err => console.log(`Error: Possible missing permissions. Please re-invite the bot.`));
->>>>>>> NewBot
 		}
 	});
 };
