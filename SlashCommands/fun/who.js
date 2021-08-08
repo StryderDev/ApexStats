@@ -35,6 +35,6 @@ module.exports = {
 
 		const id = Math.floor(Math.random() * legends.length);
 
-		interaction.followUp({ content: `Play as **${legendList[legends[id]].Name}** this round!` });
+		interaction.followUp({ content: `Play as **${legendList[legends[id]].Name}** this round.` });
 	},
 };

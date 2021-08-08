@@ -55,7 +55,7 @@ module.exports = {
 		function getMap(map) {
 			mapFile = require(`../../data/drops/season10/${compress(map)}.json`);
 
-			return `Drop in **${mapFile[Math.floor(Math.random() * mapFile.length)]}** on ${map}!`;
+			return `Drop in **${mapFile[Math.floor(Math.random() * mapFile.length)]}** on ${map}.`;
 		}
 
 		if (map == null || map == undefined) {
