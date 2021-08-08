@@ -21,6 +21,7 @@
 		"axios": "^0.21.1",
 		"discord.js": "^13.0.1",
 		"glob": "^7.1.7",
+		"luxon": "^2.0.1",
 		"mongoose": "^5.13.2",
 		"percentagebar": "^1.0.3"
 	}
