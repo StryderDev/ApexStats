@@ -4,14 +4,13 @@ const { mozam } = require('../../config.json');
 
 module.exports = {
 	name: 'status',
-	description: 'Shows in-game server status.',
-
 	/**
 	 *
 	 * @param {Client} client
-	 * @param {CommandInteraction} interaction
+	 * @param {Message} message
+	 * @param {String[]} args
 	 */
-	run: async (client, interaction) => {
+	run: async (client, message, args) => {
 		var statusURL = `https://api.mozambiquehe.re/servers?auth=${mozam}`;
 		var announcementURL = 'https://apexlegendsstatus.com/anno.json';
 
@@ -166,7 +165,7 @@ module.exports = {
 					.addField('\u200b', '\u200b', true)
 					.setFooter('Data provided by https://apexlegendsstatus.com/');
 
-				interaction.followUp({
+				message.reply({
 					embeds: [statusEmbed],
 				});
 			}),

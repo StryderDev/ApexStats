@@ -4,14 +4,13 @@ const { mozam } = require('../../config.json');
 
 module.exports = {
 	name: 'news',
-	description: 'Shows the most recent news article from the Apex Legends blog.',
-
 	/**
 	 *
 	 * @param {Client} client
-	 * @param {CommandInteraction} interaction
+	 * @param {Message} message
+	 * @param {String[]} args
 	 */
-	run: async (client, interaction) => {
+	run: async (client, message, args) => {
 		axios.get(`https://api.mozambiquehe.re/news?lang=en-us&auth=${mozam}`).then(result => {
 			var data = result.data[0];
 
@@ -21,7 +20,7 @@ module.exports = {
 				.setImage(data.img)
 				.setFooter('Data provided by https://apexlegendsapi.com/');
 
-			interaction.followUp({
+			message.reply({
 				embeds: [news],
 			});
 		});

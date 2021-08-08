@@ -4,14 +4,13 @@ const legendList = require('../../data/legends.json');
 
 module.exports = {
 	name: 'who',
-	description: 'Picks a random legend to use in game.',
-
 	/**
 	 *
 	 * @param {Client} client
-	 * @param {CommandInteraction} interaction
+	 * @param {Message} message
+	 * @param {String[]} args
 	 */
-	run: async (client, interaction) => {
+	run: async (client, message, args) => {
 		const legends = [
 			'898565421',
 			'182221730',
@@ -35,6 +34,6 @@ module.exports = {
 
 		const id = Math.floor(Math.random() * legends.length);
 
-		interaction.followUp({ content: `Play as **${legendList[legends[id]].Name}** this round.` });
+		message.reply({ content: `Play as **${legendList[legends[id]].Name}** this round.` });
 	},
 };

@@ -3,13 +3,13 @@ const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
 module.exports = {
 	name: 'killhelp',
 	description: 'Information about tracked kills.',
-
 	/**
 	 *
 	 * @param {Client} client
-	 * @param {CommandInteraction} interaction
+	 * @param {Message} message
+	 * @param {String[]} args
 	 */
-	run: async (client, interaction) => {
+	run: async (client, message, args) => {
 		const kills = new MessageEmbed()
 			.setTitle('Kill Logging')
 			.setDescription(
@@ -17,7 +17,7 @@ module.exports = {
 			)
 			.setImage('https://cdn.apexstats.dev/Examples/KillsExample.png');
 
-		interaction.followUp({
+		message.reply({
 			embeds: [kills],
 		});
 	},

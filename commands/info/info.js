@@ -4,13 +4,13 @@ const { version } = require('../../package.json');
 module.exports = {
 	name: 'info',
 	description: 'Returns info about the bot.',
-
 	/**
 	 *
 	 * @param {Client} client
-	 * @param {CommandInteraction} interaction
+	 * @param {Message} message
+	 * @param {String[]} args
 	 */
-	run: async (client, interaction) => {
+	run: async (client, message, args) => {
 		const name = `${client.user.username}#${client.user.discriminator}`;
 
 		let days = Math.floor(process.uptime() / 86400);
@@ -41,7 +41,7 @@ module.exports = {
 			.addField('\u200b', '\u200b', true)
 			.setFooter('Stryder Dev 2021', 'https://sdcore.dev/i/1m3gbh27.png');
 
-		interaction.followUp({
+		message.reply({
 			embeds: [info],
 		});
 	},

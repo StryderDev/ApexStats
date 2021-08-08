@@ -5,32 +5,22 @@ const { version } = require('../../package.json');
 
 module.exports = {
 	name: 'arenas',
-	description: 'Show current and future arenas map rotations.',
-
-	options: [
-		{
-			name: 'amount',
-			description: 'Amount of future arenas rotations',
-			type: 'INTEGER',
-			required: false,
-		},
-	],
-
 	/**
 	 *
 	 * @param {Client} client
-	 * @param {CommandInteraction} interaction
+	 * @param {Message} message
+	 * @param {String[]} args
 	 */
-	run: async (client, interaction) => {
+	run: async (client, message, args) => {
 		// Args
-		const amount = interaction.options.get('amount');
+		const amount = args[0];
 
 		function checkAmount(amount) {
 			if (amount == null || amount == undefined) return '1';
 
-			if (amount.value > 10) return '10';
+			if (amount > 10) return '10';
 
-			return amount.value;
+			return amount;
 		}
 
 		const pluralize = (count, noun, suffix = 's') => `${count} ${noun}${count !== 1 ? suffix : ''}`;
@@ -85,9 +75,9 @@ module.exports = {
 				.setFooter('Provided by https://rexx.live/');
 
 			if (checkAmount(amount) == 1) {
-				interaction.followUp({ embeds: [current] });
+				message.reply({ embeds: [current] });
 			} else {
-				interaction.followUp({ embeds: [future] });
+				message.reply({ embeds: [future] });
 			}
 		});
 	},

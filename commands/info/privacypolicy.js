@@ -2,15 +2,14 @@ const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
 
 module.exports = {
 	name: 'privacypolicy',
-	description: 'Show the bots privacy policy.',
-
 	/**
 	 *
 	 * @param {Client} client
-	 * @param {CommandInteraction} interaction
+	 * @param {Message} message
+	 * @param {String[]} args
 	 */
-	run: async (client, interaction) => {
-		interaction.followUp({
+	run: async (client, message, args) => {
+		message.reply({
 			content: 'View our privacy policy: <https://apexstats.dev/privacypolicy>',
 		});
 	},

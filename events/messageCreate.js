@@ -1,10 +1,20 @@
-const client = require('../Apex.js');
-const { Message } = require('discord.js');
+const client = require("../Apex");
 
-client.on('messageCreate', msg => {
-	if (msg.author.bot || !msg.guild || !msg.content.toLowerCase().startsWith('>>')) return;
+client.on("messageCreate", async (message) => {
+    if (
+        message.author.bot ||
+        !message.guild ||
+        !message.content.toLowerCase().startsWith(client.config.prefix)
+    )
+        return;
 
-	msg.reply(
-		"Hey! We've switched to Slash Commands. Use `/` to start typing a command. If you're having issues, reinvite the bot using this link: <https://apexstats.dev/invite>.",
-	);
+    const [cmd, ...args] = message.content
+        .slice(client.config.prefix.length)
+        .trim()
+        .split(" ");
+
+    const command = client.commands.get(cmd.toLowerCase());
+
+    if (!command) return;
+    await command.run(client, message, args);
 });
