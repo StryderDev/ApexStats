@@ -9,15 +9,39 @@ function legendInfo(id, type) {
 }
 
 function rankedTitle(score, name, division, ladderPos) {
-	function isMaster(name, div) {
-		if (name == 'Master') return '';
+	function hasDivision(name, div) {
+		if (name == 'Master' || name == 'Unranked') return name;
 
-		return div;
+		return `${name} ${div}`;
 	}
 
 	if (name == 'Apex Predator') return `**[#${ladderPos}]** Apex Predator (${score.toLocaleString()} RP)`;
 
-	return `${name} ${isMaster(name, division)} (${score.toLocaleString()} RP)`;
+	return `${hasDivision(name, division)} (${score.toLocaleString()} RP)`;
 }
 
-module.exports = { legendInfo, rankedTitle };
+function getBP(history) {
+	if (history == null || history.season10 == null) return 0;
+
+	if (history.season > 110) return 110;
+
+	return history.season10;
+}
+
+function trackerTitle(tracker, legend) {
+	var trackers = require(`../data/trackers/${legend}.json`);
+
+	if (tracker.id == '1905735931') return 'No Data';
+
+	if (trackers[tracker.id] == undefined || trackers[tracker.id] == null) return tracker.id.toString();
+
+	return trackers[tracker.id].Name;
+}
+
+function trackerValue(tracker) {
+	if (tracker.id == '1905735931') return '-';
+
+	return tracker.value.toLocaleString();
+}
+
+module.exports = { legendInfo, rankedTitle, getBP, trackerTitle, trackerValue };

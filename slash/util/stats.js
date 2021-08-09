@@ -1,7 +1,7 @@
 const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
 const axios = require('axios');
 const { version } = require('../../package.json');
-const { legendInfo, rankedTitle } = require('../../functions/stats.js');
+const { legendInfo, rankedTitle, getBP, trackerTitle, trackerValue } = require('../../functions/stats.js');
 const { DateTime } = require('luxon');
 const chalk = require('chalk');
 
@@ -64,7 +64,7 @@ module.exports = {
 				// Account Info
 				var account = response.data.account;
 				var level = account.level;
-				var bp = account.battlepass.level;
+				var bp = account.battlepass.history;
 
 				// Active Data
 				var active = response.data.active;
@@ -84,13 +84,19 @@ module.exports = {
 				var Arenas_Division = arenas.division;
 				var Arenas_ladderPos = arenas.ladderPos;
 
+				// Trackers
+				var trackers = response.data.active.trackers;
+				var tOne = trackers[0];
+				var tTwo = trackers[1];
+				var tThree = trackers[2];
+
 				var title = `Stats for ${name} on ${platform} playing ${legend}`;
 
 				const stats = new MessageEmbed()
 					.setTitle(title)
 					.setColor(legendInfo(active.legend, 'Color'))
 					.addField('Account Level', `:small_blue_diamond: ${level}/500`, true)
-					.addField('Season 10 BattlePass', `:small_blue_diamond: ${bp}/110`, true)
+					.addField('Season 10 BattlePass', `:small_blue_diamond: ${getBP(bp)}/110`, true)
 					.addField('\u200B', '\u200B', true)
 					.addField(
 						'Battle Royale Ranked',
@@ -108,6 +114,9 @@ module.exports = {
 						true,
 					)
 					.addField('\u200B', '\u200B', true)
+					.addField(trackerTitle(tOne, legend), trackerValue(tOne), true)
+					.addField(trackerTitle(tTwo, legend), trackerValue(tTwo), true)
+					.addField(trackerTitle(tThree, legend), trackerValue(tThree), true)
 					.setImage(`https://cdn.apexstats.dev/LegendBanners/${legend}.png?q=${version}`);
 
 				interaction.followUp({ embeds: [stats] }).catch(err => {
@@ -118,7 +127,7 @@ module.exports = {
 			.catch(err => {
 				if (!err || !err.response || !err.response.data) return console.log(`${time} Unknown Error.\n${err}`);
 
-				console.log(err.response.data.error);
+				console.log(chalk`{red ${time} ${err.response.data.error}}`);
 
 				function getError(code) {
 					if (code == 1) return 'Player or Platform not specified.';
@@ -131,7 +140,7 @@ module.exports = {
 
 					if (code == 5) return "This player exists, but they haven't played Apex. Try another username.";
 
-					return `${time} Error: ${code}`;
+					return `Error: ${code}`;
 				}
 
 				interaction.followUp({ content: `\`${getError(err.response.data.errorCode)}\`` }).catch(err => {
