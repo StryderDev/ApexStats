@@ -1,6 +1,6 @@
 {
 	"name": "apexstats",
-	"version": "0.8.1",
+	"version": "0.8.1-1",
 	"description": "Apex Stats, Map Rotations, Status, and more.",
 	"main": "Shard.js",
 	"repository": {
