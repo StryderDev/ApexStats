@@ -1,16 +1,17 @@
 const { ShardingManager } = require('discord.js');
 const chalk = require('chalk');
 const { DateTime } = require('luxon');
+const Cluster = require('discord-hybrid-sharding');
 
 const { discord } = require('./config.json');
 
-const manager = new ShardingManager('./Apex.js', { token: discord.token, totalShards: discord.shards });
+const manager = new Cluster.Manager('./Apex.js', { mode: 'process', token: discord.token });
 
-manager.on('shardCreate', shard => {
+manager.on('clusterCreate', shard => {
 	const time = `[${DateTime.local().toFormat('hh:mm:ss')}]`;
 
-	console.log(chalk`{yellow ${time} - Spawning Shard ${shard.id}... -}`);
-	console.log(chalk`{green ${time} - Shard ${shard.id} Spawned -}`);
+	console.log(chalk`{yellow ${time} - Spawning Cluster ${shard.id}... -}`);
+	console.log(chalk`{green ${time} - Cluster ${shard.id} Spawned -}`);
 });
 
-manager.spawn();
+manager.spawn(undefined, undefined, -1);
