@@ -1,9 +1,14 @@
 const { Client, Intents, Collection } = require('discord.js');
 const fs = require('fs');
+const Cluster = require('discord-hybrid-sharding');
 
 const { discord } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+	shards: Cluster.data.SHARD_LIST,
+	shardCount: Cluster.data.TOTAL_SHARDS,
+});
 
 module.exports = client;
 
@@ -26,4 +31,5 @@ for (const file of events) {
 	}
 }
 
+client.cluster = new Cluster.Client(client);
 client.login(discord.token);
