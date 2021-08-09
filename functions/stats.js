@@ -15,9 +15,10 @@ function rankedTitle(score, name, division, ladderPos) {
 		return `${name} ${div}`;
 	}
 
-	if (name == 'Apex Predator') return `**[#${ladderPos}]** Apex Predator (${score.toLocaleString()} RP)`;
+	if (name == 'Apex Predator')
+		return `**[#${ladderPos}]** Apex Predator\n:small_orange_diamond: ${score.toLocaleString()} RP`;
 
-	return `${hasDivision(name, division)} (${score.toLocaleString()} RP)`;
+	return `${hasDivision(name, division)}\n:small_orange_diamond: ${score.toLocaleString()} RP`;
 }
 
 function getBP(history) {
