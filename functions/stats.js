@@ -1,19 +1,23 @@
 const legends = require('../data/legends.json');
 
-function legendName(id) {
-	var legend = legends[id].Name;
+function legendInfo(id, type) {
+	var legend = legends[id][type];
 
 	if (legend == undefined || legend == null) return 'Unknown';
 
 	return legend;
 }
 
-function legendColor(id) {
-	var legend = legends[id].Color;
+function rankedTitle(score, name, division, ladderPos) {
+	function isMaster(name, div) {
+		if (name == 'Master') return '';
 
-	if (legend == undefined || legend == null) return 'Unknown';
+		return div;
+	}
 
-	return legend;
+	if (name == 'Apex Predator') return `**[#${ladderPos}]** Apex Predator (${score.toLocaleString()} RP)`;
+
+	return `${name} ${isMaster(name, division)} (${score.toLocaleString()} RP)`;
 }
 
-module.exports = { legendName, legendColor };
+module.exports = { legendInfo, rankedTitle };

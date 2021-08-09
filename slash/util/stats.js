@@ -1,7 +1,7 @@
 const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
 const axios = require('axios');
 const { version } = require('../../package.json');
-const { legendName, legendColor } = require('../../functions/stats.js');
+const { legendInfo, rankedTitle } = require('../../functions/stats.js');
 const { DateTime } = require('luxon');
 const chalk = require('chalk');
 
@@ -68,32 +68,43 @@ module.exports = {
 
 				// Active Data
 				var active = response.data.active;
-				var legend = legendName(active.legend);
+				var legend = legendInfo(active.legend, 'Name');
 
 				// BR Ranked
 				var br = response.data.ranked.BR;
 				var BR_Score = br.score;
 				var BR_Name = br.name;
 				var BR_Division = br.division;
+				var BR_ladderPos = br.ladderPos;
 
 				// Arenas Ranked
 				var arenas = response.data.ranked.Arenas;
 				var Arenas_Score = arenas.score;
 				var Arenas_Name = arenas.name;
 				var Arenas_Division = arenas.division;
+				var Arenas_ladderPos = arenas.ladderPos;
 
 				var title = `Stats for ${name} on ${platform} playing ${legend}`;
 
 				const stats = new MessageEmbed()
 					.setTitle(title)
-					.setColor(legendColor(active.legend))
-					.addField(':crown: Account Level', `:small_blue_diamond: ${level}/500`, true)
-					.addField(':medal: Season 10 BattlePass', `:small_blue_diamond: ${bp}/110`, true)
+					.setColor(legendInfo(active.legend, 'Color'))
+					.addField('Account Level', `:small_blue_diamond: ${level}/500`, true)
+					.addField('Season 10 BattlePass', `:small_blue_diamond: ${bp}/110`, true)
 					.addField('\u200B', '\u200B', true)
-					.addField('BR Ranked', `:small_blue_diamond: ${BR_Name} ${BR_Division} (${BR_Score} RP)`, true)
+					.addField(
+						'Battle Royale Ranked',
+						`:small_blue_diamond: ${rankedTitle(BR_Score, BR_Name, BR_Division, BR_ladderPos)}`,
+						true,
+					)
 					.addField(
 						'Arenas Ranked',
-						`:small_blue_diamond: ${Arenas_Name} ${Arenas_Division} (${Arenas_Score} RP)`,
+						`:small_blue_diamond: ${rankedTitle(
+							Arenas_Score,
+							Arenas_Name,
+							Arenas_Division,
+							Arenas_ladderPos,
+						)}`,
 						true,
 					)
 					.addField('\u200B', '\u200B', true)
@@ -105,7 +116,7 @@ module.exports = {
 				});
 			})
 			.catch(err => {
-				if (!err || !err.response || !err.response.data) return console.log(`Unknown Error.\n${err}`);
+				if (!err || !err.response || !err.response.data) return console.log(`${time} Unknown Error.\n${err}`);
 
 				console.log(err.response.data.error);
 
@@ -120,7 +131,7 @@ module.exports = {
 
 					if (code == 5) return "This player exists, but they haven't played Apex. Try another username.";
 
-					return `Error: ${code}`;
+					return `${time} Error: ${code}`;
 				}
 
 				interaction.followUp({ content: `\`${getError(err.response.data.errorCode)}\`` }).catch(err => {
