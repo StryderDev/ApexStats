@@ -1,4 +1,5 @@
 const { Client, CommandInteraction } = require('discord.js');
+const { version } = require('../../package.json');
 
 module.exports = {
 	name: 'info',
@@ -15,6 +16,6 @@ module.exports = {
 		let minutes = Math.floor(process.uptime() / 60) % 60;
 		let seconds = Math.floor(process.uptime()) % 60;
 
-		interaction.followUp({ content: `Uptime: ${days}d, ${hours}h, ${minutes}m, ${seconds}s` });
+		interaction.followUp({ content: `Version: ${version}\nUptime: ${days}d, ${hours}h, ${minutes}m, ${seconds}s` });
 	},
 };
