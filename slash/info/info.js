@@ -16,15 +16,20 @@ module.exports = {
 			0,
 		);
 
+		let userCount = (await client.cluster.broadcastEval(`this.users.cache.size`)).reduce(
+			(acc, guildCount) => Number(acc + guildCount),
+			0,
+		);
+
 		let days = Math.floor(process.uptime() / 86400);
 		let hours = Math.floor(process.uptime() / 3600) % 24;
 		let minutes = Math.floor(process.uptime() / 60) % 60;
 		let seconds = Math.floor(process.uptime()) % 60;
 
 		interaction.followUp({
-			content: `Guilds: ${guildCount.toLocaleString()}\nGuild Cluster ID: ${client.cluster.id + 1}/${
-				client.cluster.count
-			}\nVersion: ${version}\nUptime: ${days}d, ${hours}h, ${minutes}m, ${seconds}s`,
+			content: `Guilds: ${guildCount.toLocaleString()}\nUsers: ${userCount.toLocaleString()}\nGuild Cluster ID: ${
+				client.cluster.id + 1
+			}/${client.cluster.count}\nVersion: ${version}\nUptime: ${days}d, ${hours}h, ${minutes}m, ${seconds}s`,
 		});
 	},
 };
