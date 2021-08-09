@@ -2,6 +2,8 @@ const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
 const axios = require('axios');
 const { version } = require('../../package.json');
 const { legendName, legendColor } = require('../../functions/stats.js');
+const { DateTime } = require('luxon');
+const chalk = require('chalk');
 
 module.exports = {
 	name: 'stats',
@@ -44,11 +46,16 @@ module.exports = {
 	run: async (client, interaction) => {
 		const platform = interaction.options.get('platform').value;
 		const username = interaction.options.get('username').value;
+		const time = `[${DateTime.local().toFormat('hh:mm:ss')}]`;
 
 		axios
 			.get(`https://api.apexstats.dev/stats?platform=${platform}&player=${encodeURIComponent(username)}`)
 			.then(response => {
-				if (!response.data) return console.log('Error');
+				console.log(chalk`{yellow ${time} Searching for user...}`);
+				if (!response.data) return console.log(chalk`{red Error}`);
+				console.log(
+					chalk`{green ${time} Data found for ${response.data.user.username} on ${response.data.user.platform}}`,
+				);
 
 				// User Data
 				var user = response.data.user;
