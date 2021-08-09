@@ -57,6 +57,8 @@ module.exports = {
 					chalk`{green ${time} Data found for ${response.data.user.username} on ${response.data.user.platform}}`,
 				);
 
+				if (!response.data.user.username) return interaction.followUp({ content: 'Error. Try again.' });
+
 				// User Data
 				var user = response.data.user;
 				var name = user.username;
