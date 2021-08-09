@@ -2,7 +2,7 @@
 	"name": "apexstats",
 	"version": "0.8.0",
 	"description": "Apex Stats, Map Rotations, Status, and more.",
-	"main": "Apex.js",
+	"main": "Shard.js",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/SDCore/ApexStats.git"
@@ -12,5 +12,16 @@
 	"bugs": {
 		"url": "https://github.com/SDCore/ApexStats/issues"
 	},
-	"homepage": "https://github.com/SDCore/ApexStats#readme"
+	"homepage": "https://github.com/SDCore/ApexStats#readme",
+	"dependencies": {
+		"axios": "^0.21.1",
+		"chalk": "^4.1.2",
+		"discord.js": "^13.0.1",
+		"glob": "^7.1.7",
+		"luxon": "^2.0.2"
+	},
+	"devDependencies": {
+		"eslint": "^7.32.0",
+		"nodemon": "^2.0.12"
+	}
 }
