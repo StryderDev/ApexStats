@@ -95,17 +95,19 @@ module.exports = {
 				const stats = new MessageEmbed()
 					.setTitle(title)
 					.setColor(legendInfo(active.legend, 'Color'))
-					.addField('Account Level', `:small_blue_diamond: ${level}/500`, true)
-					.addField('Season 10 BattlePass', `:small_blue_diamond: ${getBP(bp)}/110`, true)
-					.addField('\u200B', '\u200B', true)
 					.addField(
-						'Battle Royale Ranked',
-						`:small_blue_diamond: ${rankedTitle(BR_Score, BR_Name, BR_Division, BR_ladderPos)}`,
+						'Account Level',
+						`:small_blue_diamond: ${level.toLocaleString()}/500\n\n**Battle Royale Ranked**\n:small_blue_diamond: ${rankedTitle(
+							BR_Score,
+							BR_Name,
+							BR_Division,
+							BR_ladderPos,
+						)}`,
 						true,
 					)
 					.addField(
-						'Arenas Ranked',
-						`:small_blue_diamond: ${rankedTitle(
+						'Season 10 BattlePass',
+						`:small_blue_diamond: ${getBP(bp)}/110\n\n**Arenas Ranked**\n:small_blue_diamond: ${rankedTitle(
 							Arenas_Score,
 							Arenas_Name,
 							Arenas_Division,
@@ -113,11 +115,12 @@ module.exports = {
 						)}`,
 						true,
 					)
-					.addField('\u200B', '\u200B', true)
+					.addField('\u200B', '**Currently Equipped Trackers**')
 					.addField(trackerTitle(tOne, legend), trackerValue(tOne), true)
 					.addField(trackerTitle(tTwo, legend), trackerValue(tTwo), true)
 					.addField(trackerTitle(tThree, legend), trackerValue(tThree), true)
-					.setImage(`https://cdn.apexstats.dev/LegendBanners/${legend}.png?q=${version}`);
+					.setImage(`https://cdn.apexstats.dev/LegendBanners/${legend}.png?q=${version}`)
+					.setFooter('BattlePass level incorrect? Equip the badge in-game!');
 
 				interaction.followUp({ embeds: [stats] }).catch(err => {
 					console.log(err);
