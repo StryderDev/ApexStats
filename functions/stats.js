@@ -8,7 +8,7 @@ function legendInfo(id, type) {
 	return legend;
 }
 
-function rankedTitle(score, name, division, ladderPos) {
+function rankedTitle(score, name, division, ladderPos, type) {
 	function hasDivision(name, div) {
 		if (name == 'Master' || name == 'Unranked') return name;
 
@@ -16,9 +16,9 @@ function rankedTitle(score, name, division, ladderPos) {
 	}
 
 	if (name == 'Apex Predator')
-		return `**[#${ladderPos}]** Apex Predator\n:small_orange_diamond: ${score.toLocaleString()} RP`;
+		return `**[#${ladderPos}]** Apex Predator\n:small_orange_diamond: ${score.toLocaleString()} ${type}`;
 
-	return `${hasDivision(name, division)}\n:small_orange_diamond: ${score.toLocaleString()} RP`;
+	return `${hasDivision(name, division)}\n:small_orange_diamond: ${score.toLocaleString()} ${type}`;
 }
 
 function getBP(history) {

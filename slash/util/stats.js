@@ -104,6 +104,7 @@ module.exports = {
 							BR_Name,
 							BR_Division,
 							BR_ladderPos,
+							'RP',
 						)}`,
 						true,
 					)
@@ -114,6 +115,7 @@ module.exports = {
 							Arenas_Name,
 							Arenas_Division,
 							Arenas_ladderPos,
+							'AP',
 						)}`,
 						true,
 					)
