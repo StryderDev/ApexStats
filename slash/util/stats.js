@@ -155,12 +155,30 @@ module.exports = {
 				//	interaction.followUp({ content: `\`${err}\`` });
 				//});
 
-				if (!err) return console.log('No error specified. This should be looked into.');
-				if (!err.response) return console.log('No response specified in error. This should be looked into.');
-				if (!err.response.data) return console.log('No data specified in error. This should be looked into.');
+				// if (!err) return console.log('No error specified. This should be looked into.');
+				// if (!err.response) return console.log('No response specified in error. This should be looked into.');
+				// if (!err.response.data) return console.log('No data specified in error. This should be looked into.');
 
-				console.log(`${time} ${err.response.data.error}`);
-				interaction.followUp({ content: `Error: \`${err.response.data.error}\`` });
+				// console.log(`${time} ${err.response.data.error}`);
+				// interaction.followUp({ content: `Error: \`${err.response.data.error}\`` });
+
+				if (err.response) {
+					// Request made and server responded
+					console.log(err.response.data);
+					console.log(err.response.status);
+					console.log(err.response.headers);
+
+					interaction.followUp({ content: `Error: \`${err.response.data.error}\`` });
+				} else if (err.request) {
+					// The request was made but no response was received
+					console.log(err.request);
+
+					interaction.followUp({ content: `Error: \`${err.request}\`` });
+				} else {
+					// Something happened in setting up the request that triggered an Error
+					console.log('Error', err.message);
+					interaction.followUp({ content: `Error: \`${err.message}\`` });
+				}
 			});
 	},
 };
