@@ -130,28 +130,35 @@ module.exports = {
 				});
 			})
 			.catch(err => {
-				if (!err || !err.response || !err.response.data) return console.log(`${time} Unknown Error.\n${err}`);
+				// if (!err || !err.response || !err.response.data) return console.log(`${time} Unknown Error.\n${err}`);
 
-				console.log(chalk`{red ${time} ${err.response.data.error}}`);
+				// console.log(chalk`{red ${time} ${err.response.data.error}}`);
 
-				function getError(code) {
-					if (code == 1) return 'Player or Platform not specified.';
+				// function getError(code) {
+				//	if (code == 1) return 'Player or Platform not specified.';
 
-					if (code == 2) return 'There was not a valid platform provided';
+				//	if (code == 2) return 'There was not a valid platform provided';
 
-					if (code == 3) return 'Error loading search API. Try again later.';
+				//	if (code == 3) return 'Error loading search API. Try again later.';
 
-					if (code == 4) return 'Could not find a user with that username.';
+				//	if (code == 4) return 'Could not find a user with that username.';
 
-					if (code == 5) return "This player exists, but they haven't played Apex. Try another username.";
+				//	if (code == 5) return "This player exists, but they haven't played Apex. Try another username.";
 
-					return `Error: ${code}`;
-				}
+				//	return `Error: ${code}`;
+				//}
 
-				interaction.followUp({ content: `\`${getError(err.response.data.errorCode)}\`` }).catch(err => {
-					console.log(err);
-					interaction.followUp({ content: `\`${err}\`` });
-				});
+				//interaction.followUp({ content: `\`${getError(err.response.data.errorCode)}\`` }).catch(err => {
+				//	console.log(err);
+				//	interaction.followUp({ content: `\`${err}\`` });
+				//});
+
+				if (!err) return console.log('No error specified. This should be looked into.');
+				if (!err.response) return console.log('No response specified in error. This should be looked into.');
+				if (!err.response.data) return console.log('No data specified in error. This should be looked into.');
+
+				console.log(`${time} ${err.response.data.error}`);
+				interaction.followUp({ content: `Error: \`${err.response.data.error}\`` });
 			});
 	},
 };
