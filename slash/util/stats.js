@@ -45,7 +45,7 @@ module.exports = {
 	 */
 	run: async (client, interaction) => {
 		const platform = interaction.options.get('platform').value;
-		const username = interaction.options.get('username').value;
+		const username = interaction.options.get('username').value.toString();
 		const time = `[${DateTime.local().toFormat('hh:mm:ss')}]`;
 
 		axios
