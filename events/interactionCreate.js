@@ -3,7 +3,7 @@ module.exports = {
 	once: false,
 	async execute(interaction, client) {
 		if (interaction.isCommand()) {
-			await interaction.deferReply({ ephermal: false });
+			await interaction.deferReply();
 
 			const cmd = client.slashCommands.get(interaction.commandName);
 
