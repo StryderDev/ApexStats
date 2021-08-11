@@ -38,6 +38,8 @@ function mapImage(map) {
 	if (map == 'Phase Runner') return 'PhaseRunner_001';
 	if (map == 'Party Crasher') return 'PartyCrasher_001';
 	if (map == 'Overflow') return 'Overflow_001';
+	if (map == 'Oasis') return 'Oasis_001';
+	if (map == 'The Dome' || map == 'Dome') return 'TheDome_001';
 
 	return 'NoMapData';
 }
