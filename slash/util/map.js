@@ -3,6 +3,7 @@ const axios = require('axios');
 const { version } = require('../../package.json');
 const { DateTime } = require('luxon');
 const chalk = require('chalk');
+const { getTime, nextMap, checkAmount, mapImage } = require('../../functions/map.js');
 
 module.exports = {
 	name: 'map',
@@ -29,42 +30,22 @@ module.exports = {
 			var amount = interaction.options.get('amount').value;
 		}
 
-		function checkAmount(amount) {
-			if (amount == null || amount == undefined) return 1;
-			if (amount >= 10) return 10;
-			if (amount <= 1) return 1;
-
-			return amount;
-		}
-
 		axios
 			.get(`https://fn.alphaleagues.com/v2/apex/map/?next=${checkAmount(amount)}`)
 			.then(response => {
 				const data = response.data.br;
 				const next = data.next;
 
-				function getTime(timestamp) {
-					var time = Math.floor(Date.now() / 1000);
-					var seconds = timestamp - time;
-
-					var hours = Math.floor(seconds / 3600) % 24;
-					var minutes = Math.floor(seconds / 60) % 60;
-					var seconds = Math.floor(seconds) % 60;
-
-					return `${hours} hours, ${minutes} minutes`;
-				}
-
-				function nextMap(map) {
-					return map
-						.map(x => `**${x.map}**\nStarts in ${getTime(x.timestamp)} and lasts for ${x.duration}\n\n`)
-						.join(``);
-				}
-
 				const map = new MessageEmbed()
 					.setDescription(
-						`The current map is **${data.map}** for ${getTime(data.times.next)}.\nThe next map is **${
-							data.next[0].map
-						}** for ${data.next[0].duration} minutes.\nThe current ranked map is **${data.ranked.map}**.`,
+						`:map: The current map is **${data.map}** for ${getTime(
+							data.times.next,
+						)}.\n:clock3: The next map is **${data.next[0].map}** for ${
+							data.next[0].duration
+						} minutes.\n:fire: The current ranked map is **${data.ranked.map}**.`,
+					)
+					.setImage(
+						`https://cdn.apexstats.dev/ApexStats/Maps/Season_010/BR/${mapImage(data.map)}.gif?q=${version}`,
 					)
 					.setFooter('Data provided by https://rexx.live/');
 
