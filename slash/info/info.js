@@ -1,5 +1,6 @@
-const { Client, CommandInteraction } = require('discord.js');
+const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
 const { version } = require('../../package.json');
+const { isPlural } = require('../../functions/misc.js');
 
 module.exports = {
 	name: 'info',
@@ -21,10 +22,32 @@ module.exports = {
 		let minutes = Math.floor(process.uptime() / 60) % 60;
 		let seconds = Math.floor(process.uptime()) % 60;
 
+		const info = new MessageEmbed()
+			.setTitle('Apex Legends Stats Bot')
+			.setThumbnail('https://cdn.apexstats.dev/Icon.png')
+			.setDescription(
+				'Show Apex Legends User Stats, Map Rotations, Server Status, and more. Type `/` to see available commands. If you need help, or have any questions, join the [Support Server](https://discord.gg/eH8VxssFW6).',
+			)
+			.addField(
+				'Uptime',
+				`${isPlural(days, 'day')}, ${isPlural(hours, 'hour')}, ${isPlural(minutes, 'minute')}, ${isPlural(
+					seconds,
+					'second',
+				)}`,
+			)
+			.addField('Bot Info', `Version: ${version}\nGuild Count: ${guildCount.toLocaleString()}`, true)
+			.addField(
+				'Useful Links',
+				`[Trello](https://apexstats.dev/trello)\n[Invite Bot](https://apexstats.dev/invite)\n[Github Repo](https://apexstats.dev/github)`,
+				true,
+			)
+			.addField(
+				'Stats',
+				`[Apex Bot Stats](https://apexstats.dev/)\n[BR Ranked Leaderboards](https://br.apexstats.dev/)\n[Arenas Ranked Leaderboards](https://arenas.apexstats.dev/)`,
+				true,
+			);
 		interaction.followUp({
-			content: `Guilds: ${guildCount.toLocaleString()}\nGuild Cluster ID: ${client.cluster.id + 1}/${
-				client.cluster.count
-			}\nVersion: ${version}\nUptime: ${days}d, ${hours}h, ${minutes}m, ${seconds}s`,
+			embeds: [info],
 		});
 	},
 };
