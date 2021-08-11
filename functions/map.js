@@ -1,3 +1,5 @@
+const { isPlural } = require('./misc.js');
+
 function checkAmount(amount) {
 	if (amount == null || amount == undefined) return 1;
 	if (amount >= 10) return 10;
@@ -8,17 +10,22 @@ function checkAmount(amount) {
 
 function getTime(timestamp) {
 	var time = Math.floor(Date.now() / 1000);
-	var seconds = timestamp - time;
+	var seconds = timestamp - time + 60;
 
+	var days = Math.floor(seconds / (3600 * 24));
 	var hours = Math.floor(seconds / 3600) % 24;
 	var minutes = Math.floor(seconds / 60) % 60;
 	var seconds = Math.floor(seconds) % 60;
 
-	return `${hours} hours, ${minutes} minutes`;
+	if (days > 0) return `${isPlural(days, 'day')}, ${isPlural(hours, 'hour')}, ${isPlural(minutes, 'minute')}`;
+
+	return `${isPlural(hours, 'hour')}, ${isPlural(minutes, 'minute')}`;
 }
 
 function nextMap(map) {
-	return map.map(x => `**${x.map}**\nStarts in ${getTime(x.timestamp)} and lasts for ${x.duration}\n\n`).join(``);
+	return map
+		.map(x => `**${x.map}**\nStarts in ${getTime(x.timestamp)} and lasts for ${x.duration} minutes.\n\n`)
+		.join(``);
 }
 
 function mapImage(map) {

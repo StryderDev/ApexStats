@@ -42,7 +42,9 @@ module.exports = {
 							data.times.next,
 						)}.\n:clock3: The next map is **${data.next[0].map}** for ${
 							data.next[0].duration
-						} minutes.\n:fire: The current ranked map is **${data.ranked.map}**.`,
+						} minutes.\n:fire: The current ranked map is **${data.ranked.map}** for ${getTime(
+							data.ranked.end,
+						)}.`,
 					)
 					.setImage(
 						`https://cdn.apexstats.dev/ApexStats/Maps/Season_010/BR/${mapImage(data.map)}.gif?q=${version}`,
