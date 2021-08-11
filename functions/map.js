@@ -29,9 +29,15 @@ function nextMap(map) {
 }
 
 function mapImage(map) {
+	// BR
 	if (map == 'Kings Canyon') return 'KingsCanyon_001';
 	if (map == "World's Edge") return 'WorldsEdge_001';
 	if (map == 'Olympus') return 'Olympus_001';
+
+	// Arenas
+	if (map == 'Phase Runner') return 'PhaseRunner_001';
+	if (map == 'Party Crasher') return 'PartyCrasher_001';
+	if (map == 'Overflow') return 'Overflow_001';
 
 	return 'NoMapData';
 }
