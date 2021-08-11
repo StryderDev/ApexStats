@@ -17,7 +17,7 @@ module.exports = {
 
 				function getTime(timestamp) {
 					var time = Math.floor(Date.now() / 1000);
-					var seconds = timestamp - time;
+					var seconds = timestamp - time + 60;
 
 					var hours = Math.floor(seconds / 3600) % 24;
 					var minutes = Math.floor(seconds / 60) % 60;
