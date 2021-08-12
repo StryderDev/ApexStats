@@ -1,5 +1,5 @@
 const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
-const { version } = require('../../package.json');
+const { version, dependencies } = require('../../package.json');
 const { isPlural } = require('../../functions/misc.js');
 
 module.exports = {
@@ -35,7 +35,13 @@ module.exports = {
 					'second',
 				)}`,
 			)
-			.addField('Bot Info', `Version: ${version}\nGuild Count: ${guildCount.toLocaleString()}`, true)
+			.addField(
+				'Bot Info',
+				`Version: ${version}\nD.JS Version: ${
+					dependencies['discord.js']
+				}\nGuild Count: ${guildCount.toLocaleString()}`,
+				true,
+			)
 			.addField(
 				'Useful Links',
 				`[Trello](https://apexstats.dev/trello)\n[Invite Bot](https://apexstats.dev/invite)\n[Github Repo](https://apexstats.dev/github)`,
