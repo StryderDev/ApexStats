@@ -31,5 +31,17 @@ for (const file of events) {
 	}
 }
 
+const rotations = fs.readdirSync('./rotations').filter(file => file.endsWith('.js'));
+
+for (const file of rotations) {
+	const event = require(`./rotations/${file}`);
+
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args, client));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args, client));
+	}
+}
+
 client.cluster = new Cluster.Client(client);
 client.login(discord.token);
