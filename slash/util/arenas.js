@@ -38,11 +38,7 @@ module.exports = {
 
 				const map = new MessageEmbed()
 					.setDescription(
-						`:map: The current arenas map is **${data.map}** for ${getTime(
-							data.times.next,
-						)}.\n:clock3: The next arenas map is **${data.next[0].map}** for ${
-							data.next[0].duration
-						} minutes.`,
+						`:map: The current arenas map is **${data.map}** and ends <t:${data.times.next}:R>.\n:clock3: The next arenas map is **${data.next[0].map}** for ${data.next[0].duration} minutes.`,
 					)
 					.setImage(
 						`https://cdn.apexstats.dev/ApexStats/Maps/Season_010/Arenas/${mapImage(
@@ -53,7 +49,8 @@ module.exports = {
 
 				const future = new MessageEmbed()
 					.setTitle(`${checkAmount(amount)} Future Arenas Map Rotations`)
-					.setDescription(nextMap(next));
+					.setDescription(nextMap(next))
+					.setFooter('Hover over the times to get an exact time in your timezone!');
 
 				if (checkAmount(amount) > 1) {
 					interaction.followUp({ embeds: [future] }).catch(err => {

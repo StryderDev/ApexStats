@@ -23,9 +23,7 @@ function getTime(timestamp) {
 }
 
 function nextMap(map) {
-	return map
-		.map(x => `**${x.map}**\nStarts in ${getTime(x.timestamp)} and lasts for ${x.duration} minutes.\n\n`)
-		.join(``);
+	return map.map(x => `**${x.map}**\nStarts <t:${x.timestamp}:R> and lasts for ${x.duration} minutes.\n\n`).join(``);
 }
 
 function mapImage(map) {
