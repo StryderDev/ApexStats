@@ -18,13 +18,7 @@ module.exports = {
 
 				const map = new MessageEmbed()
 					.setDescription(
-						`:map: The current map is **${data.map}** for ${getTime(
-							data.times.next,
-						)}.\n:clock3: The next map is **${data.next[0].map}** for ${
-							data.next[0].duration
-						} minutes.\n:fire: The current ranked map is **${data.ranked.map}** for ${getTime(
-							data.ranked.end,
-						)}.`,
+						`:map: The current map is **${data.map}** and ends <t:${data.times.next}:R>.\n:clock3: The next map is **${data.next[0].map}** for ${data.next[0].duration} minutes.\n:fire: The current ranked map is **${data.ranked.map}** and ends <t:${data.ranked.end}:R>.`,
 					)
 					.setFooter('Data provided by https://rexx.live/')
 					.setImage(
@@ -60,11 +54,7 @@ module.exports = {
 
 				const map = new MessageEmbed()
 					.setDescription(
-						`:map: The current arenas map is **${data.map}** for ${getTime(
-							data.times.next,
-						)}.\n:clock3: The next arenas map is **${data.next[0].map}** for ${
-							data.next[0].duration
-						} minutes.`,
+						`:map: The current arena is **${data.map}** and ends <t:${data.times.next}:R>.\n:clock3: The next arenas map is **${data.next[0].map}** for ${data.next[0].duration} minutes.`,
 					)
 					.setFooter('Data provided by https://rexx.live/')
 					.setImage(

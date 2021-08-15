@@ -18,11 +18,7 @@ module.exports = {
 
 				const map = new MessageEmbed()
 					.setDescription(
-						`:map: The current arenas map is **${data.map}** for ${getTime(
-							data.times.next,
-						)}.\n:clock3: The next arenas map is **${data.next[0].map}** for ${
-							data.next[0].duration
-						} minutes.`,
+						`:map: The current arena is **${data.map}** and ends <t:${data.times.next}:R>.\n:clock3: The next arenas map is **${data.next[0].map}** for ${data.next[0].duration} minutes.`,
 					)
 					.setFooter('Data provided by https://rexx.live/')
 					.setImage(
