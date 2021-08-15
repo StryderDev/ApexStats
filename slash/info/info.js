@@ -48,7 +48,7 @@ module.exports = {
 				true,
 			)
 			.addField(
-				'Stats',
+				'\u200B',
 				`[Apex Bot Stats](https://apexstats.dev/)\n[BR Ranked Leaderboards](https://br.apexstats.dev/)\n[Arenas Ranked Leaderboards](https://arenas.apexstats.dev/)`,
 				true,
 			);
