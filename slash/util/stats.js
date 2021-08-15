@@ -1,5 +1,5 @@
 const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
-const axios = require('axios');
+const got = require('got');
 const { version } = require('../../package.json');
 const { legendInfo, rankedTitle, getBP, trackerTitle, trackerValue } = require('../../functions/stats.js');
 const { DateTime } = require('luxon');
@@ -48,46 +48,48 @@ module.exports = {
 		const username = interaction.options.get('username').value.toString();
 		const time = `[${DateTime.local().toFormat('hh:mm:ss')}]`;
 
-		axios
-			.get(`https://api.apexstats.dev/stats?platform=${platform}&player=${encodeURIComponent(username)}`)
-			.then(response => {
-				console.log(chalk`{yellow ${time} Searching for user...}`);
-				if (!response.data) return console.log(chalk`{red Error}`);
-				console.log(
-					chalk`{green ${time} Data found for ${response.data.user.username} on ${response.data.user.platform}}`,
-				);
+		got.get(`https://api.apexstats.dev/stats?platform=${platform}&player=${encodeURIComponent(username)}`, {
+			responseType: 'json',
+		})
+			.then(res => {
+				const data = JSON.parse(res.body);
 
-				if (!response.data.user.username) return interaction.followUp({ content: 'Error. Try again.' });
+				console.log(chalk`{yellow ${time} Searching for user...}`);
+
+				if (!data) return console.log(chalk`{red Error}`);
+				if (!data.user.username) return interaction.followUp({ content: 'Error. Try again.' });
+
+				console.log(chalk`{green ${time} Data found for ${data.user.username} on ${data.user.platform}}`);
 
 				// User Data
-				var user = response.data.user;
+				var user = data.user;
 				var name = user.username;
 
 				// Account Info
-				var account = response.data.account;
+				var account = data.account;
 				var level = account.level;
 				var bp = account.battlepass.history;
 
 				// Active Data
-				var active = response.data.active;
+				var active = data.active;
 				var legend = legendInfo(active.legend, 'Name');
 
 				// BR Ranked
-				var br = response.data.ranked.BR;
+				var br = data.ranked.BR;
 				var BR_Score = br.score;
 				var BR_Name = br.name;
 				var BR_Division = br.division;
 				var BR_ladderPos = br.ladderPos;
 
 				// Arenas Ranked
-				var arenas = response.data.ranked.Arenas;
+				var arenas = data.ranked.Arenas;
 				var Arenas_Score = arenas.score;
 				var Arenas_Name = arenas.name;
 				var Arenas_Division = arenas.division;
 				var Arenas_ladderPos = arenas.ladderPos;
 
 				// Trackers
-				var trackers = response.data.active.trackers;
+				var trackers = data.active.trackers;
 				var tOne = trackers[0];
 				var tTwo = trackers[1];
 				var tThree = trackers[2];
@@ -132,53 +134,15 @@ module.exports = {
 				});
 			})
 			.catch(err => {
-				// if (!err || !err.response || !err.response.data) return console.log(`${time} Unknown Error.\n${err}`);
+				if (!err.body) console.log(err);
 
-				// console.log(chalk`{red ${time} ${err.response.data.error}}`);
+				var error = JSON.parse(err.body);
 
-				// function getError(code) {
-				//	if (code == 1) return 'Player or Platform not specified.';
-
-				//	if (code == 2) return 'There was not a valid platform provided';
-
-				//	if (code == 3) return 'Error loading search API. Try again later.';
-
-				//	if (code == 4) return 'Could not find a user with that username.';
-
-				//	if (code == 5) return "This player exists, but they haven't played Apex. Try another username.";
-
-				//	return `Error: ${code}`;
-				//}
-
-				//interaction.followUp({ content: `\`${getError(err.response.data.errorCode)}\`` }).catch(err => {
-				//	console.log(err);
-				//	interaction.followUp({ content: `\`${err}\`` });
-				//});
-
-				// if (!err) return console.log('No error specified. This should be looked into.');
-				// if (!err.response) return console.log('No response specified in error. This should be looked into.');
-				// if (!err.response.data) return console.log('No data specified in error. This should be looked into.');
-
-				// console.log(`${time} ${err.response.data.error}`);
-				// interaction.followUp({ content: `Error: \`${err.response.data.error}\`` });
-
-				if (err.response) {
-					// Request made and server responded
-					console.log(err.response.data);
-					console.log(err.response.status);
-					console.log(err.response.headers);
-
-					interaction.followUp({ content: `Error: \`${err.response.data.error}\`` });
-				} else if (err.request) {
-					// The request was made but no response was received
-					console.log(err.request);
-
-					interaction.followUp({ content: `Error: \`${err.request}\`` });
-				} else {
-					// Something happened in setting up the request that triggered an Error
-					console.log('Error', err.message);
-					interaction.followUp({ content: `Error: \`${err.message}\`` });
-				}
+				console.log(chalk`{red ${time} Error: ${error.error}}`);
+				interaction.followUp({ content: `Error: \`${error.error}\`` }).catch(err => {
+					console.log(err);
+					interaction.followUp({ content: `\`${err}\`` });
+				});
 			});
 	},
 };
