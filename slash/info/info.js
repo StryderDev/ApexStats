@@ -12,10 +12,10 @@ module.exports = {
 	 * @param {CommandInteraction} interaction
 	 */
 	run: async (client, interaction) => {
-		let guildCount = (await client.cluster.broadcastEval(`this.guilds.cache.size`)).reduce(
-			(acc, guildCount) => Number(acc + guildCount),
-			0,
-		);
+		// let guildCount = (await client.cluster.broadcastEval(`this.guilds.cache.size`)).reduce(
+		//	(acc, guildCount) => Number(acc + guildCount),
+		//	0,
+		//);
 
 		let days = Math.floor(process.uptime() / 86400);
 		let hours = Math.floor(process.uptime() / 3600) % 24;
@@ -35,13 +35,7 @@ module.exports = {
 					'second',
 				)}`,
 			)
-			.addField(
-				'Bot Info',
-				`Version: ${version}\nD.JS Version: ${
-					dependencies['discord.js']
-				}\nGuild Count: ${guildCount.toLocaleString()}`,
-				true,
-			)
+			.addField('Bot Info', `Version: ${version}\nD.JS Version: ${dependencies['discord.js']}`, true)
 			.addField(
 				'Useful Links',
 				`[Trello](https://apexstats.dev/trello)\n[Invite Bot](https://apexstats.dev/invite)\n[Github Repo](https://apexstats.dev/github)`,
