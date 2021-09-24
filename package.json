@@ -1,0 +1,27 @@
+{
+	"name": "apex-stats-bot",
+	"version": "0.9.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "nodemon index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://sdcore: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@github.com/SDCore/Apex-Stats-Bot.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/SDCore/Apex-Stats-Bot/issues"
+	},
+	"homepage": "https://github.com/SDCore/Apex-Stats-Bot#readme",
+	"dependencies": {
+		"ascii-table": "^0.0.9",
+		"discord.js": "^13.1.0",
+		"ts-node": "^10.2.1",
+		"typescript": "^4.4.3"
+	}
+}
