@@ -14,9 +14,7 @@ client.config = require('./config.json');
 require('./handler/handler.js')(client);
 
 process.on('unhandledRejection', (reason, promise) => {
-	console.log(
-		chalk`{red.bold [FATAL] Possible Unhandled Rejection error at: Promise ${promise}, reason: ${reason.message}}`,
-	);
+	console.log(chalk`{red.bold [FATAL] Possible Unhandled Rejection Error. Reason: ${reason.message}.}`);
 });
 
 client.login(client.config.discord.token);
