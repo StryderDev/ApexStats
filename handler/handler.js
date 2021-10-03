@@ -38,17 +38,16 @@ module.exports = async client => {
 		arrayOfSlashCommands.push(file);
 	});
 	client.on('ready', async () => {
-		// Register for a single guild
 		const id = '893227807667273738';
 		const guild = client.guilds.cache.get(id);
 
 		if (guild) {
+			// If the guild exists in the cache (which it shouldn't, the dev bot is the
+			//  only one in the guild with that ID), then register commands in that guild
 			commands = guild.commands.set(arrayOfSlashCommands);
 		} else {
+			// Globally register all the commands
 			commands = client.application?.commands.set(arrayOfSlashCommands);
 		}
-
-		// Register for all the guilds the bot is in
-		// await client.application.commands.set(arrayOfSlashCommands);
 	});
 };
