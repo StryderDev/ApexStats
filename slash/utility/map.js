@@ -1,4 +1,4 @@
-const { Client, CommandInteraction } = require('discord.js');
+const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
 const axios = require('axios');
 const chalk = require('chalk');
 const { DateTime } = require('luxon');
@@ -14,30 +14,23 @@ module.exports = {
 	 * @param {String[]} args
 	 */
 	run: async (client, interaction, args) => {
-		// https://fn.alphaleagues.com/v2/apex/map/?next=1
-		const map = args[0];
 		const timeLogs = DateTime.local().toFormat('hh:mm:ss');
 
 		try {
 			const response = await axios.get('https://fn.alphaleagues.com/v2/apex/map/?next=1');
 
-			const mapName = response.data.br.map;
-
-			const mapFile = require(`../../data/maps/${mapName}.json`);
+			const map = new MessageEmbed().setDescription(
+				`The current map is **${response.data.br.map}** and ends <t:${response.data.br.times.next}:R>.\nThe next map is **${response.data.br.next[0].map}** for ${response.data.br.next[0].duration} minutes.\nThe current ranked map is **${response.data.br.ranked.map}** and ends <t:${response.data.br.ranked.end}:R>.`,
+			);
 
 			await interaction
-				.followUp({ content: 'Choosing a spot to drop...' })
-				.then(i =>
-					interaction.editReply(
-						`Drop in **${mapFile[Math.floor(Math.random() * mapFile.length)]}** on **${mapName}**.`,
-					),
-				)
+				.followUp({ content: 'Getting current map from map rotation API...', embeds: [] })
+				.then(i => interaction.editReply({ content: '\u200b', embeds: [map] }))
 				.catch(e => interaction.editReply(e));
 		} catch (error) {
-			console.error(chalk`{red.bold [${timeLogs}] Error: ${error.code} on Map Rotation API in Drop Command.}`);
+			console.error(chalk`{red.bold [${timeLogs}] Error: ${error.code} on Map Rotation API in Map Command.}`);
 			await interaction.followUp({
-				content:
-					'There was an error loading the Map Rotation API. Try `/drop Kings Canyon` for a manual drop spot.',
+				content: 'There was an error loading the Map Rotation API. Try again in a few minutes.',
 			});
 		}
 	},
