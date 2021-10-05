@@ -19,9 +19,22 @@ module.exports = {
 		try {
 			const response = await axios.get('https://fn.alphaleagues.com/v2/apex/map/?next=1');
 
-			const map = new MessageEmbed().setDescription(
-				`The current map is **${response.data.br.map}** and ends <t:${response.data.br.times.next}:R>.\nThe next map is **${response.data.br.next[0].map}** for ${response.data.br.next[0].duration} minutes.\nThe current ranked map is **${response.data.br.ranked.map}** and ends <t:${response.data.br.ranked.end}:R>.`,
-			);
+			function mapImageName(name) {
+				if (name == 'Kings Canyon') return 'KingsCanyon';
+				if (name == "World's Edge") return 'WorldsEdge';
+
+				return name;
+			}
+
+			const map = new MessageEmbed()
+				.setDescription(
+					`The current map is **${response.data.br.map}** and ends <t:${response.data.br.times.next}:R>.\nThe next map is **${response.data.br.next[0].map}** for ${response.data.br.next[0].duration} minutes.\nThe current ranked map is **${response.data.br.ranked.map}** and ends <t:${response.data.br.ranked.end}:R>.`,
+				)
+				.setImage(
+					`https://cdn.apexstats.dev/Maps/Season%2010/BR/${mapImageName(response.data.br.map)}_00${
+						response.data.br.ranked.split
+					}.gif`,
+				);
 
 			await interaction
 				.followUp({ content: 'Getting current map from map rotation API...', embeds: [] })

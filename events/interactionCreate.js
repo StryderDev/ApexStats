@@ -1,10 +1,13 @@
 const client = require('../index.js');
 const { WebhookClient } = require('discord.js');
+const { DateTime } = require('luxon');
+const chalk = require('chalk');
 
 client.on('interactionCreate', async interaction => {
 	const webhookClient = new WebhookClient({
 		url: client.config.logs.interaction,
 	});
+	const timeLogs = DateTime.local().toFormat('hh:mm:ss');
 
 	// Slash Command Handling
 	if (interaction.isCommand()) {
@@ -16,6 +19,10 @@ client.on('interactionCreate', async interaction => {
 		webhookClient.send({
 			content: `**User:** ${interaction.member.displayName}\n**Command:** /${interaction.commandName}`,
 		});
+
+		console.log(
+			chalk`{blue.bold [${timeLogs}] User ${interaction.member.displayName} ran command /${interaction.commandName}}`,
+		);
 
 		const args = [];
 
