@@ -1,7 +1,4 @@
 const { Client, CommandInteraction } = require('discord.js');
-const axios = require('axios');
-const chalk = require('chalk');
-const { DateTime } = require('luxon');
 
 module.exports = {
 	name: 'who',
