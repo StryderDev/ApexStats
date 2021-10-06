@@ -9,7 +9,7 @@ module.exports = {
 			name: 'platform',
 			type: 'STRING',
 			description: 'Pick your platform.',
-			require: true,
+			required: true,
 			choices: [
 				{
 					name: 'PC (Origin/Steam)',
@@ -33,7 +33,7 @@ module.exports = {
 			name: 'username',
 			type: 'STRING',
 			description: 'Your in-game username.',
-			require: true,
+			required: true,
 		},
 	],
 	/**
@@ -43,9 +43,13 @@ module.exports = {
 	 * @param {String[]} args
 	 */
 	run: async (client, interaction, args) => {
-		const embed = new MessageEmbed()
-			.setTitle('Module Title')
-			.setDescription('This will be updated when the module is configured.');
+		const platform = args[0];
+		const username = args[1];
+
+		if (platform == 'Switch')
+			return await interaction.followUp({
+				content: 'Unfortunately, stats for the Nintendo Switch are currently not supported.',
+			});
 
 		await interaction.followUp({ embeds: [embed] }).catch(e => interaction.editReply(e));
 	},
