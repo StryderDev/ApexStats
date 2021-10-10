@@ -1,4 +1,4 @@
-const client = require('../index.js');
+const client = require('../Apex.js');
 const { WebhookClient } = require('discord.js');
 const chalk = require('chalk');
 const { DateTime } = require('luxon');
