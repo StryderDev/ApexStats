@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "nodemon --trace-warnings index.js"
+		"dev": "nodemon Shards.js"
 	},
 	"repository": {
 		"type": "git",
@@ -22,7 +22,7 @@
 		"ascii-table": "^0.0.9",
 		"axios": "^0.22.0",
 		"chalk": "^4.1.2",
-		"discord.js": "^13.1.0",
+		"discord.js": "^13.2.0",
 		"glob": "^7.2.0",
 		"luxon": "^2.0.2",
 		"promisify": "^0.0.3",
