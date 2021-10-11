@@ -38,7 +38,7 @@ async function updateMap() {
 
 		try {
 			const message = channel.messages.fetch(rotations.map.message);
-			if (!message) return console.log('Unable to find message.');
+			if (!message) return; // console.log('Unable to find message.');
 
 			channel.messages.fetch(rotations.map.message).then(msg => {
 				msg.edit({ embeds: [map] });

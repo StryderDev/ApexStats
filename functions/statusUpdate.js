@@ -128,7 +128,7 @@ async function updateStatus() {
 
 		try {
 			const message = channel.messages.fetch(rotations.status.message);
-			if (!message) return console.log('Unable to find message.');
+			if (!message) return; // console.log('Unable to find message.');
 
 			channel.messages.fetch(rotations.status.message).then(msg => {
 				msg.edit({ embeds: [status] });

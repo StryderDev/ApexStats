@@ -44,33 +44,12 @@ client.on('ready', () => {
 					updateStatus();
 				}
 			} else {
-				const Apex = client.guilds.cache.get(config.rotations.guild);
-				const SD = client.guilds.cache.get(config.botStatus.guild);
+				console.log(now.getMinutes());
+				if (now.getMinutes() == now.getMinutes()) {
+					updateBotStatus();
 
-				if (!Apex) {
-					console.log('No Guild...');
-				} else if (!SD) {
-					console.log('No guild...');
-				} else {
-					if (
-						now.getMinutes() == 0 ||
-						now.getMinutes() == 5 ||
-						now.getMinutes() == 10 ||
-						now.getMinutes() == 15 ||
-						now.getMinutes() == 20 ||
-						now.getMinutes() == 20 ||
-						now.getMinutes() == 30 ||
-						now.getMinutes() == 35 ||
-						now.getMinutes() == 40 ||
-						now.getMinutes() == 45 ||
-						now.getMinutes() == 50 ||
-						now.getMinutes() == 55
-					) {
-						updateBotStatus();
-
-						updateMap();
-						updateStatus();
-					}
+					updateMap();
+					updateStatus();
 				}
 			}
 

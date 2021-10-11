@@ -70,7 +70,7 @@ async function updateBotStatus() {
 
 	try {
 		const message = channel.messages.fetch(botStatus.message);
-		if (!message) return console.log('Unable to find message.');
+		if (!message) return; // console.log('Unable to find message.');
 
 		channel.messages.fetch(botStatus.message).then(msg => {
 			msg.edit({ embeds: [map] });
