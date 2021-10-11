@@ -158,6 +158,10 @@ module.exports = {
 
 			await interaction.followUp({ embeds: [userStats] }).catch(e => interaction.editReply(e));
 		} catch (error) {
+			if (!error.response) {
+				return console.error(chalk`{red.bold [${timeLogs}] Error: ${error}}`);
+			}
+
 			console.error(
 				chalk`{red.bold [${timeLogs}] Error Code: ${error.response.data.errorCode}, "${error.response.data.error}" on Stats API in Stats Command.}`,
 			);

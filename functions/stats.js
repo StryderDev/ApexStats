@@ -31,7 +31,7 @@ function userRank(name, division, pos) {
 }
 
 function trackerTitle(id, legend) {
-	const tracker = require(`../../data/trackers/${legend}.json`);
+	const tracker = require(`../data/trackers/${legend}.json`);
 
 	if (id == '1905735931') return 'No Data';
 
