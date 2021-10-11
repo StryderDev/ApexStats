@@ -44,10 +44,13 @@ client.on('ready', () => {
 					updateStatus();
 				}
 			} else {
-				const guild = client.guilds.cache.get(rotations.guild);
+				const Apex = client.guilds.cache.get(config.rotations.guild);
+				const SD = client.guilds.cache.get(config.botStatus.guild);
 
-				if (!guild) {
+				if (!Apex) {
 					console.log('No Guild...');
+				} else if (!SD) {
+					console.log('No guild...');
 				} else {
 					if (
 						now.getMinutes() == 0 ||
