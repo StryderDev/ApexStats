@@ -86,7 +86,7 @@ module.exports = {
 			var level = account.level.toLocaleString();
 			var currentBP = account.battlepass.level;
 
-			if (!account.battlepass.history.season10 || account.battlepass.history.season10 == undefined) {
+			if (!account.battlepass.history || account.battlepass.history == undefined) {
 				var seasonBP = '0';
 			} else {
 				var seasonBP = account.battlepass.history.season10;
