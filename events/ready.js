@@ -44,8 +44,7 @@ client.on('ready', () => {
 					updateStatus();
 				}
 			} else {
-				console.log(now.getMinutes());
-				if (now.getMinutes() == now.getMinutes()) {
+				if (now.getMinutes() % 5) {
 					updateBotStatus();
 
 					updateMap();
