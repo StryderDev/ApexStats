@@ -139,7 +139,7 @@ async function updateStatus() {
 			console.error(`Other Error: ${err}`);
 		}
 	} catch (error) {
-		console.error(chalk`{red.bold [${timeLogs}] Error: ${error.code} on Status API in Status Update.}`);
+		console.error(chalk`{red.bold [${timeLogs}] Error: ${error} on Status API in Status Update.}`);
 	}
 }
 
