@@ -52,7 +52,7 @@ client.on('ready', () => {
 				) {
 					updateBotStatus();
 
-					updateMap();
+					// updateMap();
 					updateStatus();
 				}
 			}
