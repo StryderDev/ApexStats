@@ -44,7 +44,12 @@ client.on('ready', () => {
 					updateStatus();
 				}
 			} else {
-				if (now.getMinutes() % 5) {
+				if (
+					now.getMinutes() == 15 ||
+					now.getMinutes() == 30 ||
+					now.getMinutes() == 45 ||
+					now.getMinutes() == 00
+				) {
 					updateBotStatus();
 
 					updateMap();
