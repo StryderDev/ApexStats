@@ -85,7 +85,12 @@ module.exports = {
 			var account = response.data.account;
 			var level = account.level.toLocaleString();
 			var currentBP = account.battlepass.level;
-			var seasonBP = account.battlepass.history.season10;
+
+			if (!account.battlepass.history.season10 || account.battlepass.history.season10 == undefined) {
+				var seasonBP = '0';
+			} else {
+				var seasonBP = account.battlepass.history.season10;
+			}
 
 			// Battle Royale Ranked Data
 			var br = response.data.ranked.BR;
