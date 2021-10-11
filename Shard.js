@@ -6,7 +6,7 @@ const { DateTime } = require('luxon');
 const timeLogs = DateTime.local().toFormat('hh:mm:ss');
 
 const manager = new ShardingManager('./Apex.js', {
-	totalShards: 'auto',
+	totalShards: config.discord.shards,
 	token: config.discord.token,
 });
 

@@ -2,7 +2,14 @@ const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
 const chalk = require('chalk');
 const axios = require('axios');
 const { DateTime } = require('luxon');
-const { findLegendByID, userStatus, BPLevel, userRank, trackerTitle, trackerValue } = require('../functions/stats.js');
+const {
+	findLegendByID,
+	userStatus,
+	BPLevel,
+	userRank,
+	trackerTitle,
+	trackerValue,
+} = require('../../functions/stats.js');
 
 module.exports = {
 	name: 'stats',

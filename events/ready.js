@@ -3,7 +3,10 @@ const { WebhookClient } = require('discord.js');
 const chalk = require('chalk');
 const { DateTime } = require('luxon');
 
-const { updateMap } = require('../functions/updates.js');
+const { updateBotStatus } = require('../functions/botStatusUpdate.js');
+const { updateMap } = require('../functions/mapUpdate.js');
+const { updateStatus } = require('../functions/statusUpdate.js');
+const { config } = require('../Apex.js');
 
 client.on('ready', () => {
 	const time = new Date().getTime();
@@ -22,18 +25,36 @@ client.on('ready', () => {
 		content: `<t:${Math.floor(time / 1000)}:R> :white_check_mark: Bot Ready`,
 	});
 
+	client.user.setPresence({
+		status: 'dnd',
+		activities: [{ name: 'Titanfall Approaching Battlefield', type: 'WATCHING' }],
+	});
+
 	async function embedUpdate() {
 		(function loop() {
 			const timeLoop = DateTime.local().toFormat('hh:mm:ss');
 
 			var now = new Date();
-			if (now.getMinutes() === 15) {
-				updateMap();
+
+			if (config.debug == true) {
+				if (now.getMinutes() === now.getMinutes()) {
+					updateBotStatus();
+
+					updateMap();
+					updateStatus();
+				}
+			} else {
+				if (now.getMinutes() === 15) {
+					updateBotStatus();
+
+					updateMap();
+					updateStatus();
+				}
 			}
 
 			now = new Date();
 			var delay = 60000 - (now % 60000);
-			setTimeout(loop, delay);
+			setTimeout(loop, delay + 1000);
 			console.log(chalk`{yellow.bold [${timeLoop}] Checking...}`);
 		})();
 	}

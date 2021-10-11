@@ -1,4 +1,4 @@
-const legends = require('../../data/legends.json');
+const legends = require('../data/legends.json');
 
 function findLegendByID(id) {
 	const legend = legends[id];
