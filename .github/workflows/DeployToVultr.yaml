@@ -25,7 +25,6 @@ jobs:
                   CI: true
     Deploy-Bot:
         runs-on: ubuntu-latest
-        needs: Install-on-Host
         if: github.ref == 'refs/heads/production'
         steps:
             - name: Deploying to Vultr
