@@ -41,5 +41,4 @@ jobs:
                       git pull
                       npm prune
                       npm i
-                      npm ci
                       pm2 reload ${{ secrets.PM2_NUMBER }}
