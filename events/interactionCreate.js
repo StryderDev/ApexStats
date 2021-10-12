@@ -20,9 +20,10 @@ client.on('interactionCreate', async interaction => {
 			content: `**User:** ${interaction.member.displayName}\n**Command:** /${interaction.commandName}`,
 		});
 
-		console.log(
-			chalk`{blue.bold [${timeLogs}] User ${interaction.member.displayName} ran command /${interaction.commandName}}`,
-		);
+		const display = interaction.member.displayName;
+		const name = display === undefined ? 'User#0000' : display;
+
+		console.log(chalk`{blue.bold [${timeLogs}] User ${name} ran command /${interaction.commandName}}`);
 
 		const args = [];
 
