@@ -40,8 +40,8 @@ client.on('ready', () => {
 				if (now.getMinutes() === now.getMinutes()) {
 					updateBotStatus();
 
-					updateMap();
-					updateStatus();
+					if (config.rotations.map.enabled == true) updateMap();
+					if (config.rotations.status.enabled == true) updateStatus();
 				}
 			} else {
 				if (
@@ -52,15 +52,28 @@ client.on('ready', () => {
 				) {
 					updateBotStatus();
 
-					// updateMap();
-					updateStatus();
+					if (config.rotations.map.enabled == true) updateMap();
+					if (config.rotations.status.enabled == true) updateStatus();
+				}
+
+				if (
+					now.getMinutes() == 05 ||
+					now.getMinutes() == 10 ||
+					now.getMinutes() == 20 ||
+					now.getMinutes() == 25 ||
+					now.getMinutes() == 35 ||
+					now.getMinutes() == 40 ||
+					now.getMinutes() == 50 ||
+					now.getMinutes() == 55
+				) {
+					updateBotStatus();
 				}
 			}
 
 			now = new Date();
 			var delay = 60000 - (now % 60000);
 			setTimeout(loop, delay + 1000);
-			console.log(chalk`{yellow.bold [${timeLoop}] Checking...}`);
+			// console.log(chalk`{yellow.bold [${timeLoop}] Checking...}`);
 		})();
 	}
 
