@@ -56,16 +56,7 @@ client.on('ready', () => {
 					if (config.rotations.status.enabled == true) updateStatus();
 				}
 
-				if (
-					now.getMinutes() == 05 ||
-					now.getMinutes() == 10 ||
-					now.getMinutes() == 20 ||
-					now.getMinutes() == 25 ||
-					now.getMinutes() == 35 ||
-					now.getMinutes() == 40 ||
-					now.getMinutes() == 50 ||
-					now.getMinutes() == 55
-				) {
+				if (now.getMinutes() == now.getMinutes()) {
 					updateBotStatus();
 				}
 			}
