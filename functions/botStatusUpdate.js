@@ -45,12 +45,12 @@ async function updateBotStatus() {
 			'Bot Info',
 			`<:GuildIcon:896947200008019978> Server Count: ${servers.toLocaleString()}\n<:ShardCount:896952210171261010> Shard Count: ${
 				client.config.discord.shards
-			}\n<:UserCount:896957419840753684> User Count: ${users.toLocaleString()}`,
+			}`,
 			true,
 		)
 		.addField(
 			'Process Info',
-			`<:ID:896980819736928276> Process ID: \`${process.pid}\`\n<:CPU:896972486766366741> CPU Usage: ${cpu
+			`<:CPU:896972486766366741> CPU Usage: ${cpu
 				.usage()
 				.percent.toFixed(2)}%\n<:RAM:896972691737837598> RAM Usage: ${memoryUsage.toFixed(2)} MB`,
 			true,
