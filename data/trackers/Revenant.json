@@ -38,5 +38,8 @@
 	"1083790590": { "Name": "Arenas Wins" },
 	"1436961770": { "Name": "Arenas Damage Done" },
 	"658048604": { "Name": "Season 10 Kills" },
-	"839698371": { "Name": "Season 10 Wins" }
+	"839698371": { "Name": "Season 10 Wins" },
+	"963539172": { "Name": "Kills" },
+	"845761952": { "Name": "Enemies Silenced" },
+	"1622995866": { "Name": "Damage Done" }
 }
