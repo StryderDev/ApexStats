@@ -16,12 +16,12 @@ client.on('interactionCreate', async interaction => {
 		const cmd = client.slashCommands.get(interaction.commandName);
 		if (!cmd) return interaction.followUp({ content: 'An error has occured ' });
 
-		webhookClient.send({
-			content: `**User:** ${interaction.member.displayName}\n**Command:** /${interaction.commandName}`,
-		});
-
 		const display = interaction.member.displayName;
-		const name = display === undefined ? 'User#0000' : display;
+		const name = display === undefined ? 'User' : display;
+
+		webhookClient.send({
+			content: `**User:** ${name}\n**Command:** /${interaction.commandName}`,
+		});
 
 		console.log(chalk`{blue.bold [${timeLogs}] User ${name} ran command /${interaction.commandName}}`);
 
