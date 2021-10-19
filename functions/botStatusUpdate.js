@@ -11,17 +11,17 @@ const gauge = require('cpu-gauge');
 var cpu = gauge.start();
 
 async function updateBotStatus() {
-	const getServerCount = async () => {
-		const req = await client.shard.fetchClientValues('guilds.cache.size');
+	//const getServerCount = async () => {
+	//	const req = await client.shard.fetchClientValues('guilds.cache.size');
 
-		return req.reduce((p, n) => p + n, 0);
-	};
+	//	return req.reduce((p, n) => p + n, 0);
+	//};
 
 	const getUserCount = async () => {
 		return client.guilds.cache.map(guild => guild.memberCount).reduce((a, b) => a + b, 0);
 	};
 
-	const servers = await getServerCount();
+	//const servers = await getServerCount();
 	const users = await getUserCount();
 
 	let days = Math.floor(process.uptime() / 86400);
@@ -41,13 +41,7 @@ async function updateBotStatus() {
 					'minute',
 				)}`,
 			)
-			.addField(
-				'Bot Info',
-				`<:GuildIcon:896947200008019978> Server Count: ${servers.toLocaleString()}\n<:ShardCount:896952210171261010> Shard Count: ${
-					client.config.discord.shards
-				}`,
-				true,
-			)
+			.addField('Bot Info', `<:ShardCount:896952210171261010> Shard Count: ${client.config.discord.shards}`, true)
 			.addField(
 				'Process Info',
 				`<:CPU:896972486766366741> CPU Usage: ${cpu
