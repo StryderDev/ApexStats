@@ -164,7 +164,10 @@ module.exports = {
 			await interaction.followUp({ embeds: [userStats] }).catch(e => interaction.editReply(e));
 		} catch (error) {
 			if (!error.response) {
-				return console.error(chalk`{red.bold [${timeLogs}] Error: ${error}}`);
+				console.error(chalk`{red.bold [${timeLogs}] Error: ${error}}`);
+				return await interaction
+					.followUp({ content: 'There was an error processing your stats. Please try again.' })
+					.catch(e => interaction.editReply(e));
 			}
 
 			console.error(
