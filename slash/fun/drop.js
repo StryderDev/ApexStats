@@ -26,6 +26,10 @@ module.exports = {
 					name: 'Olympus',
 					value: 'Olympus',
 				},
+				{
+					name: 'Storm Point',
+					value: 'StormPoint',
+				},
 			],
 		},
 	],
@@ -46,6 +50,7 @@ module.exports = {
 				function mapName(name) {
 					if (name == 'Kings Canyon') return 'KingsCanyon';
 					if (name == "World's Edge") return 'WorldsEdge';
+					if (name == 'Storm Point') return 'StormPoint';
 
 					return name;
 				}
@@ -77,6 +82,7 @@ module.exports = {
 			function mapName(name) {
 				if (name == 'KingsCanyon') return 'Kings Canyon';
 				if (name == 'WorldsEdge') return "World's Edge";
+				if (name == 'StormPoint') return 'Storm Point';
 
 				return name;
 			}
