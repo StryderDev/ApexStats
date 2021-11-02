@@ -89,7 +89,7 @@ module.exports = {
 			if (!account.battlepass.history || account.battlepass.history == undefined) {
 				var seasonBP = '0';
 			} else {
-				var seasonBP = account.battlepass.history.season10;
+				var seasonBP = account.battlepass.history.season11;
 			}
 
 			// Battle Royale Ranked Data
@@ -129,7 +129,7 @@ module.exports = {
 					true,
 				)
 				.addField(
-					':small_blue_diamond: Emergence BattlePass',
+					':small_blue_diamond: Escape BattlePass',
 					`:small_orange_diamond: Level ${BPLevel(
 						currentBP,
 						seasonBP,

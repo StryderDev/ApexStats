@@ -58,10 +58,11 @@ module.exports = {
 			'Fuse',
 			'Valkyrie',
 			'Seer',
+			'Ash',
 		];
 		const legend = legends[Math.floor(Math.random() * legends.length)];
 
-		const offensiveList = ['Bloodhound', 'Wraith', 'Mirage', 'Octane', 'Revenant', 'Horizon', 'Fuse'];
+		const offensiveList = ['Bloodhound', 'Wraith', 'Mirage', 'Octane', 'Revenant', 'Horizon', 'Fuse', 'Ash'];
 		const offensive = offensiveList[Math.floor(Math.random() * offensiveList.length)];
 
 		const defensiveList = ['Gibraltar', 'Caustic', 'Wattson', 'Rampart'];
