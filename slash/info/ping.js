@@ -17,7 +17,7 @@ module.exports = {
 				interaction.editReply(
 					`**API Latency:** \`${Math.round(client.ws.ping)}ms\`\n**Message Latency:** \`${
 						i.createdTimestamp - interaction.createdTimestamp
-					}ms.\``,
+					}ms\``,
 				),
 			)
 			.catch(e => interaction.reply(e));
