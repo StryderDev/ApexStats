@@ -1,7 +1,7 @@
-const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
-const axios = require('axios');
+const got = require('got');
 const chalk = require('chalk');
 const { DateTime } = require('luxon');
+const { Client, CommandInteraction, MessageEmbed } = require('discord.js');
 
 module.exports = {
 	name: 'map',
@@ -22,8 +22,8 @@ module.exports = {
 	 * @param {String[]} args
 	 */
 	run: async (client, interaction, args) => {
-		const amount = args[0];
 		const timeLogs = DateTime.local().toFormat('hh:mm:ss');
+		const amount = args[0];
 
 		function checkAmount(amount) {
 			if (amount == null || amount == undefined) return '1';
@@ -34,53 +34,79 @@ module.exports = {
 		}
 
 		try {
-			const response = await axios.get(`https://fn.alphaleagues.com/v2/apex/map/?next=${checkAmount(amount)}`);
+			got.get(`https://fn.alphaleagues.com/v2/apex/map/?next=${checkAmount(amount)}`, {
+				responseType: 'json',
+			})
+				.then(res => {
+					// General Data
+					var data = res.body;
 
-			function nextMaps() {
-				return response.data.br.next
-					.map(
-						x =>
-							`**${x.map}**\nStarts in <t:${x.timestamp}:R> and lasts for **${x.duration} minutes**.\n\n`,
-					)
-					.join(``);
-			}
+					function nextMaps() {
+						return data.br.next
+							.map(
+								x =>
+									`**${x.map}**\nStarts in <t:${x.timestamp}:R> and lasts for **${x.duration} minutes**.\n\n`,
+							)
+							.join(``);
+					}
 
-			function mapImageName(name) {
-				if (name == 'Kings Canyon') return 'KingsCanyon';
-				if (name == "World's Edge") return 'WorldsEdge';
-				if (name == 'Storm Point') return 'StormPoint';
+					function mapImageName(name) {
+						if (name == 'Kings Canyon') return 'KingsCanyon';
+						if (name == "World's Edge") return 'WorldsEdge';
+						if (name == 'Storm Point') return 'StormPoint';
 
-				return name;
-			}
+						return name;
+					}
 
-			const current = new MessageEmbed()
-				.setDescription(
-					`The current map is **${response.data.br.map}** and ends <t:${response.data.br.times.next}:R>.\nThe next map is **${response.data.br.next[0].map}** for ${response.data.br.next[0].duration} minutes.\nThe current ranked map is **${response.data.br.ranked.map}** and ends <t:${response.data.br.ranked.end}:R>.`,
-				)
-				.setImage(
-					`https://cdn.apexstats.dev/Maps/Season%2011/BR/${mapImageName(response.data.br.map)}_00${
-						response.data.br.ranked.split
-					}.gif`,
-				);
+					const current = new MessageEmbed()
+						.setDescription(
+							`The current map is **${data.br.map}** and ends <t:${data.br.times.next}:R>.\nThe next map is **${data.br.next[0].map}** for ${data.br.next[0].duration} minutes.\nThe current ranked map is **${data.br.ranked.map}** and ends <t:${data.br.ranked.end}:R>.`,
+						)
+						.setImage(
+							`https://cdn.apexstats.dev/Maps/Season%2011/BR/${mapImageName(data.br.map)}_00${
+								data.br.ranked.split
+							}.gif`,
+						);
 
-			const future = new MessageEmbed().setDescription(nextMaps());
+					const future = new MessageEmbed().setDescription(nextMaps());
 
-			if (checkAmount(amount) == 1) {
-				await interaction
-					.followUp({ content: 'Getting current map from map rotation API...', embeds: [] })
-					.then(i => interaction.editReply({ content: '\u200b', embeds: [current] }))
-					.catch(e => interaction.editReply(e));
-			} else {
-				await interaction
-					.followUp({ content: 'Getting future map rotations from map rotation API...', embeds: [] })
-					.then(i => interaction.editReply({ content: '\u200b', embeds: [future] }))
-					.catch(e => interaction.editReply(e));
-			}
-		} catch (error) {
-			console.error(chalk`{red.bold [${timeLogs}] Error: ${error} on Map Rotation API in Map Command.}`);
-			await interaction.followUp({
-				content: 'There was an error loading the Map Rotation API. Try again in a few minutes.',
-			});
+					if (checkAmount(amount) == 1) {
+						interaction
+							.followUp({ content: 'Getting current map from map rotation API...', embeds: [] })
+							.then(i => interaction.editReply({ content: '\u200b', embeds: [current] }))
+							.catch(e => interaction.editReply(e));
+					} else {
+						interaction
+							.followUp({ content: 'Getting future map rotations from map rotation API...', embeds: [] })
+							.then(i => interaction.editReply({ content: '\u200b', embeds: [future] }))
+							.catch(e => interaction.editReply(e));
+					}
+				})
+				.catch(err => {
+					if (err.response) {
+						console.log(chalk`{red.bold [${timeLogs}] Error: ${err.response.body.error}}`);
+						return interaction
+							.followUp({
+								content: `There was an error processing your request\n\`${err.response.body.error}\``,
+							})
+							.catch(e => interaction.followUp(e));
+					} else {
+						console.log(chalk`{red.bold [${timeLogs}] Error: ${err.message}}`);
+						return interaction
+							.followUp({
+								content: `There was an error processing your request\n\`${err.message}\``,
+							})
+							.catch(e => interaction.followUp(e));
+					}
+				});
+		} catch (e) {
+			console.error(chalk`{red.bold [${timeLogs}] Error: ${e}}`);
+
+			return await interaction
+				.followUp({
+					content: `There was an error processing your request\n\`${e}\``,
+				})
+				.catch(err => interaction.followUp(err));
 		}
 	},
 };
