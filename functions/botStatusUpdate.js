@@ -41,7 +41,11 @@ async function updateBotStatus() {
 					'minute',
 				)}`,
 			)
-			.addField('Bot Info', `<:ShardCount:896952210171261010> Shard Count: ${client.config.discord.shards}`, true)
+			.addField(
+				'Bot Info',
+				`<:ShardCount:896952210171261010> Shard Count: ${client.config.discord.shards}\n<:ID:896980819736928276> API Ping: ${client.ws.ping}ms`,
+				true,
+			)
 			.addField(
 				'Process Info',
 				`<:CPU:896972486766366741> CPU Usage: ${cpu
