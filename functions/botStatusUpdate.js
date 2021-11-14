@@ -5,8 +5,8 @@ const { DateTime } = require('luxon');
 const { MessageEmbed } = require('discord.js');
 const { version } = require('../package.json');
 const { isPlural } = require('./misc.js');
-const axios = require('axios');
 const gauge = require('cpu-gauge');
+const got = require('got');
 
 var cpu = gauge.start();
 
@@ -31,55 +31,57 @@ async function updateBotStatus() {
 	var memoryUsage = process.memoryUsage().heapUsed / (1024 * 1024);
 
 	try {
-		const apiCount = await axios.get('https://api.apexstats.dev/playerCount');
+		got.get(`https://api.apexstats.dev/playerCount`, {
+			responseType: 'json',
+		}).then(res => {
+			const map = new MessageEmbed()
+				.setTitle(`Apex Legends Stats Bot \`V${version}\``)
+				.setDescription(
+					`<:Uptime:896958688781283329> Uptime: ${isPlural(days, 'day')}, ${isPlural(
+						hours,
+						'hour',
+					)}, ${isPlural(minutes, 'minute')}`,
+				)
+				.addField(
+					'Bot Info',
+					`<:ShardCount:896952210171261010> Shard Count: ${client.config.discord.shards}\n<:ID:896980819736928276> API Ping: ${client.ws.ping}ms`,
+					true,
+				)
+				.addField(
+					'Process Info',
+					`<:CPU:896972486766366741> CPU Usage: ${cpu
+						.usage()
+						.percent.toFixed(2)}%\n<:RAM:896972691737837598> RAM Usage: ${memoryUsage.toFixed(2)} MB`,
+					true,
+				)
+				.addField(
+					'API Info',
+					`<:UserCount:896957419840753684> Players Tracked: ${res.body.count.toLocaleString()}`,
+					true,
+				)
+				.setTimestamp();
 
-		const map = new MessageEmbed()
-			.setTitle(`Apex Legends Stats Bot \`V${version}\``)
-			.setDescription(
-				`<:Uptime:896958688781283329> Uptime: ${isPlural(days, 'day')}, ${isPlural(hours, 'hour')}, ${isPlural(
-					minutes,
-					'minute',
-				)}`,
-			)
-			.addField(
-				'Bot Info',
-				`<:ShardCount:896952210171261010> Shard Count: ${client.config.discord.shards}\n<:ID:896980819736928276> API Ping: ${client.ws.ping}ms`,
-				true,
-			)
-			.addField(
-				'Process Info',
-				`<:CPU:896972486766366741> CPU Usage: ${cpu
-					.usage()
-					.percent.toFixed(2)}%\n<:RAM:896972691737837598> RAM Usage: ${memoryUsage.toFixed(2)} MB`,
-				true,
-			)
-			.addField(
-				'API Info',
-				`<:UserCount:896957419840753684> Players Tracked: ${apiCount.data.count.toLocaleString()}`,
-				true,
-			)
-			.setTimestamp();
+			const guild = client.guilds.cache.get(botStatus.guild);
+			if (!guild) return;
 
-		const guild = client.guilds.cache.get(botStatus.guild);
-		if (!guild) return;
+			const channel = guild.channels.cache.find(c => c.id === botStatus.channel && c.type === 'GUILD_TEXT');
+			if (!channel) return;
 
-		const channel = guild.channels.cache.find(c => c.id === botStatus.channel && c.type === 'GUILD_TEXT');
-		if (!channel) return;
+			try {
+				const message = channel.messages.fetch(botStatus.message);
+				if (!message) return; // console.log('Unable to find message.');
 
-		try {
-			const message = channel.messages.fetch(botStatus.message);
-			if (!message) return; // console.log('Unable to find message.');
+				channel.messages.fetch(botStatus.message).then(msg => {
+					msg.edit({ embeds: [map] });
+				});
 
-			channel.messages.fetch(botStatus.message).then(msg => {
-				msg.edit({ embeds: [map] });
-			});
-
-			console.log(chalk`{blue.bold [${DateTime.local().toFormat('hh:mm:ss')}] Updated Bot Status Embed}`);
-		} catch (err) {
-			console.error(`Other Error: ${err}`);
-		}
+				console.log(chalk`{blue.bold [${DateTime.local().toFormat('hh:mm:ss')}] Updated Bot Status Embed}`);
+			} catch (err) {
+				console.error(`Other Error: ${err}`);
+			}
+		});
 	} catch (err) {
-		console.log(`Axios Error: ${err}`);
+		console.log(`Got Error: ${err}`);
 	}
 }
 

@@ -1,5 +1,5 @@
 const { Client, CommandInteraction } = require('discord.js');
-const axios = require('axios');
+const got = require('got');
 const chalk = require('chalk');
 const { DateTime } = require('luxon');
 
@@ -45,35 +45,37 @@ module.exports = {
 
 		if (!map) {
 			try {
-				const response = await axios.get('https://fn.alphaleagues.com/v2/apex/map/?next=1');
+				got.get(`https://fn.alphaleagues.com/v2/apex/map/?next=1`, {
+					responseType: 'json',
+				}).then(res => {
+					var data = res.body;
 
-				function mapName(name) {
-					if (name == 'Kings Canyon') return 'KingsCanyon';
-					if (name == "World's Edge") return 'WorldsEdge';
-					if (name == 'Storm Point') return 'StormPoint';
+					function mapName(name) {
+						if (name == 'Kings Canyon') return 'KingsCanyon';
+						if (name == "World's Edge") return 'WorldsEdge';
+						if (name == 'Storm Point') return 'StormPoint';
 
-					return name;
-				}
+						return name;
+					}
 
-				const mapFile = require(`../../data/maps/${mapName(response.data.br.map)}.json`);
+					const mapFile = require(`../../data/maps/${mapName(data.br.map)}.json`);
 
-				await interaction
-					.followUp({ content: 'Choosing a spot to drop...' })
-					.then(i =>
-						interaction.editReply(
-							`Drop in **${mapFile[Math.floor(Math.random() * mapFile.length)]}** on **${
-								response.data.br.map
-							}**.`,
-						),
-					)
-					.catch(e => interaction.editReply(e));
+					interaction
+						.followUp({ content: 'Choosing a spot to drop...' })
+						.then(i =>
+							interaction.editReply(
+								`Drop in **${mapFile[Math.floor(Math.random() * mapFile.length)]}** on **${
+									data.br.map
+								}**.`,
+							),
+						)
+						.catch(e => interaction.editReply(e));
+				});
 			} catch (error) {
-				console.error(
-					chalk`{red.bold [${timeLogs}] Error: ${error.code} on Map Rotation API in Drop Command.}`,
-				);
-				await interaction.followUp({
+				console.error(chalk`{red.bold [${timeLogs}] Error: ${error} on Map Rotation API in Drop Command.}`);
+				interaction.followUp({
 					content:
-						'There was an error loading the Map Rotation API. Try `/drop Kings Canyon` for a manual drop spot.',
+						'There was an error loading the Map Rotation API. Try `/drop Storm Point` for a manual drop spot.',
 				});
 			}
 		} else {
