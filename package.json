@@ -27,6 +27,7 @@
 		"glob": "^7.2.0",
 		"got": "^11.8.2",
 		"luxon": "^2.1.1",
-		"promisify": "^0.0.3"
+		"promisify": "^0.0.3",
+		"topgg-autoposter": "^2.0.0"
 	}
 }
