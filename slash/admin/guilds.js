@@ -23,7 +23,7 @@ module.exports = {
 					embed.addField(
 						`📡 Shard ${data[0]}`,
 						`**Status:** ${data[1]}\n**Ping:** ${data[2]}ms\n**Guilds:** ${data[3]}`,
-						false,
+						true,
 					);
 				});
 				interaction.followUp({ embeds: [embed] });
