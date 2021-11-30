@@ -41,4 +41,4 @@ jobs:
                       npm prune
                       npm ci
                       npm audit fix
-                      pm2 reload 0
+                      pm2 reload 7
