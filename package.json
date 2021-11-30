@@ -23,7 +23,6 @@
 		"@discordjs/rest": "^0.1.0-canary.0",
 		"axios": "^0.24.0",
 		"discord-api-types": "^0.25.0",
-		"discord-hybrid-sharding": "^1.3.5",
 		"discord.js": "^13.3.1"
 	},
 	"devDependencies": {

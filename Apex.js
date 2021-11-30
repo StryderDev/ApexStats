@@ -1,4 +1,3 @@
-const Cluster = require('discord-hybrid-sharding');
 const fs = require('fs');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
@@ -8,8 +7,6 @@ let { debug, token } = require('./config.json');
 
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
-	shards: Cluster.data.SHARD_LIST,
-	shardCount: Cluster.data.TOTAL_SHARDS,
 });
 
 const commandFiles = fs.readdirSync('./slash').filter(file => file.endsWith('.js'));
@@ -72,5 +69,4 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
-client.cluster = new Cluster.Client(client, true);
 client.login(token);

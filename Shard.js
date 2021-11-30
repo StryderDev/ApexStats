@@ -1,13 +1,9 @@
-const Cluster = require('discord-hybrid-sharding');
+const { ShardingManager } = require('discord.js');
 
 let { token } = require('./config.json');
 
-const manager = new Cluster.Manager(`${__dirname}/Apex.js`, {
-	totalShards: 'auto',
-	mode: 'process',
-	token: token,
-	usev13: true,
-});
+const manager = new ShardingManager('./Apex.js', { token: token });
 
-manager.on('clusterCreate', cluster => console.log(`Launched Cluster ${cluster.id}`));
-manager.spawn(undefined, undefined, -1);
+manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
+
+manager.spawn();
