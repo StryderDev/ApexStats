@@ -1,6 +1,6 @@
 {
 	"name": "apex-stats-bot",
-	"version": "0.9.6-8",
+	"version": "0.9.6-9",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
