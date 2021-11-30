@@ -1,28 +1,76 @@
+const Cluster = require('discord-hybrid-sharding');
+const fs = require('fs');
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
 const { Client, Intents, Collection } = require('discord.js');
-const chalk = require('chalk');
+
+let { debug, token } = require('./config.json');
 
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+	shards: Cluster.data.SHARD_LIST,
+	shardCount: Cluster.data.TOTAL_SHARDS,
 });
-module.exports = client;
 
-// Global Variables
-client.slashCommands = new Collection();
-client.config = require('./config.json');
+const commandFiles = fs.readdirSync('./slash').filter(file => file.endsWith('.js'));
 
-// Initializing the project
-require('./handler/handler.js')(client);
+const commands = [];
 
-process.on('unhandledRejection', (reason, promise) => {
-	console.log(chalk`{red.bold [FATAL] Possible Unhandled Rejection Error. Reason: ${reason.message}.}`);
+client.commands = new Collection();
 
-	if (client.config.debug == true) {
-		console.log(chalk`{red.bold [FATAL] Possible Unhandled Rejection Error. Reason: ${reason}.}`);
+for (const file of commandFiles) {
+	const command = require(`./slash/${file}`);
+
+	commands.push(command.data.toJSON());
+
+	client.commands.set(command.data.name, command);
+}
+
+client.once('ready', () => {
+	console.log('Apex Stats: Online');
+
+	const CLIENT_ID = client.user.id;
+
+	const rest = new REST({
+		version: '9',
+	}).setToken(token);
+
+	(async () => {
+		try {
+			if (debug == false) {
+				await rest.put(Routes.applicationCommands(CLIENT_ID), {
+					body: commands,
+				});
+
+				console.log('Registered commands globally.');
+			} else {
+				await rest.put(Routes.applicationGuildCommands(CLIENT_ID, '893227807667273738'), {
+					body: commands,
+				});
+
+				console.log('Registered commands locally.');
+			}
+		} catch (err) {
+			if (err) console.log(err);
+		}
+	})();
+});
+
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand) return;
+
+	const command = client.commands.get(interaction.commandName);
+
+	if (!command) return;
+
+	try {
+		await command.execute(client, interaction);
+	} catch (err) {
+		if (err) console.log(err);
+
+		await interaction.reply({ content: 'An error occured.', ephemeral: true });
 	}
 });
 
-process.on('unhandledRejection', up => {
-	throw up;
-});
-
-client.login(client.config.discord.token);
+client.cluster = new Cluster.Client(client, true);
+client.login(token);
