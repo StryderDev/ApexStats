@@ -1,6 +1,6 @@
 {
 	"name": "apex-stats-bot",
-	"version": "0.9.6-9",
+	"version": "0.10.0-1",
 	"description": "",
 	"main": "Shard.js",
 	"scripts": {
