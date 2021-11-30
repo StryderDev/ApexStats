@@ -4,9 +4,9 @@ const { DateTime } = require('luxon');
 const chalk = require('chalk');
 
 client.on('interactionCreate', async interaction => {
-	const webhookClient = new WebhookClient({
-		url: client.config.logs.interaction,
-	});
+	// const webhookClient = new WebhookClient({
+	// 	url: client.config.logs.interaction,
+	// });
 	const timeLogs = DateTime.local().toFormat('hh:mm:ss');
 
 	// Slash Command Handling
@@ -16,9 +16,9 @@ client.on('interactionCreate', async interaction => {
 		const cmd = client.slashCommands.get(interaction.commandName);
 		if (!cmd) return interaction.followUp({ content: 'An error has occured ' });
 
-		webhookClient.send({
-			content: `**User:** ${interaction.user.username}\n**Command:** /${interaction.commandName}`,
-		});
+		// webhookClient.send({
+		///	content: `**User:** ${interaction.user.username}\n**Command:** /${interaction.commandName}`,
+		// });
 
 		console.log(
 			chalk`{blue.bold [${timeLogs}] User ${interaction.user.username} ran command /${interaction.commandName}}`,

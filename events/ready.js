@@ -17,13 +17,13 @@ client.on('ready', () => {
 	console.log(chalk`{green [${timeLogs}] Logged in as ${client.user.username}}`);
 
 	// Send a webhook that the bot has logged in
-	const webhookClient = new WebhookClient({
-		url: client.config.logs.ready,
-	});
+	// const webhookClient = new WebhookClient({
+	// 	url: client.config.logs.ready,
+	// });
 
-	webhookClient.send({
-		content: `<t:${Math.floor(time / 1000)}:R> :white_check_mark: Bot Ready`,
-	});
+	// webhookClient.send({
+	// 	content: `<t:${Math.floor(time / 1000)}:R> :white_check_mark: Bot Ready`,
+	// });
 
 	client.user.setPresence({
 		status: 'dnd',
