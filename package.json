@@ -1,11 +1,6 @@
 {
 	"name": "apex-stats-bot",
-<<<<<<< HEAD
 	"version": "0.9.6-10",
-=======
-	"version": "0.10.0-3",
->>>>>>> 17e05f04bb637c2eb86d5cab2770b78b362a913e
-	"description": "",
 	"main": "Shard.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
