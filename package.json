@@ -1,8 +1,12 @@
 {
 	"name": "apex-stats-bot",
+<<<<<<< HEAD
 	"version": "0.9.6-10",
+=======
+	"version": "0.10.0-3",
+>>>>>>> 17e05f04bb637c2eb86d5cab2770b78b362a913e
 	"description": "",
-	"main": "index.js",
+	"main": "Shard.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "nodemon Shard.js"
@@ -19,15 +23,13 @@
 	},
 	"homepage": "https://github.com/SDCore/Apex-Stats-Bot#readme",
 	"dependencies": {
-		"ascii-table": "^0.0.9",
+		"@discordjs/builders": "^0.8.2",
+		"@discordjs/rest": "^0.1.0-canary.0",
 		"axios": "^0.24.0",
-		"chalk": "^4.1.2",
-		"cpu-gauge": "^1.1.0",
-		"discord.js": "^13.3.1",
-		"glob": "^7.2.0",
-		"got": "^11.8.2",
-		"luxon": "^2.1.1",
-		"promisify": "^0.0.3",
-		"topgg-autoposter": "^2.0.0"
+		"discord-api-types": "^0.25.0",
+		"discord.js": "^13.3.1"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.15"
 	}
 }
