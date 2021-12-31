@@ -5,6 +5,8 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.once('ready', () => {
 	console.log('Ready!');
+
+	client.user.setPresence({ activities: [{ name: 'you play Apex', type: 'WATCHING' }] }, { status: 'dnd' });
 });
 
 client.login(discord.token);
