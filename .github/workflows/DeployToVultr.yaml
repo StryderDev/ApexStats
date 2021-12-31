@@ -3,7 +3,7 @@ name: Deploy to Vultr
 
 on:
     push:
-        branches: [production]
+        branches: [prod]
 
 jobs:
     Setup:
@@ -26,7 +26,7 @@ jobs:
     Deploy-Bot:
         runs-on: ubuntu-latest
         needs: Setup
-        if: github.ref == 'refs/heads/production'
+        if: github.ref == 'refs/heads/prod'
         steps:
             - name: Deploying to Vultr
               uses: appleboy/ssh-action@master
