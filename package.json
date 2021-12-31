@@ -3,7 +3,6 @@
 	"version": "0.11.0",
 	"main": "Shard.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "nodemon Shard.js"
 	},
 	"repository": {
@@ -17,8 +16,11 @@
 		"url": "https://github.com/SDCore/Apex-Stats-Bot/issues"
 	},
 	"homepage": "https://github.com/SDCore/Apex-Stats-Bot#readme",
-	"dependencies": {},
 	"devDependencies": {
 		"nodemon": "^2.0.15"
+	},
+	"description": "",
+	"dependencies": {
+		"discord.js": "^13.5.0"
 	}
 }
