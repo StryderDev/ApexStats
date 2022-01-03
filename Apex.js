@@ -1,12 +1,53 @@
-const { Client, Intents } = require('discord.js');
-const { discord } = require('./config.json');
+const { Client, Intents, Collection } = require('discord.js');
+const { debug, discord } = require('./config.json');
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
+
+const fs = require('fs');
+const chalk = require('chalk');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-client.once('ready', () => {
-	console.log('Ready!');
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-	client.user.setPresence({ activities: [{ name: 'you play Apex', type: 'WATCHING' }] }, { status: 'dnd' });
+const commands = [];
+
+client.commands = new Collection();
+
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	commands.push(command.data.toJSON());
+	client.commands.set(command.data.name, command);
+}
+
+client.once('ready', () => {
+	const CLIENT_ID = client.user.id;
+	const rest = new REST({ version: '9' }).setToken(discord.token);
+
+	console.log(chalk`{yellow [>> Logging in...]}`);
+	console.log(chalk`{green [>> Logged in as ${client.user.username}. Ready!]}`);
+
+	client.user.setPresence({ activities: [{ name: 'you play Apex Legends', type: 'WATCHING' }] }, { status: 'dnd' });
+
+	(async () => {
+		try {
+			if (debug.true == false) {
+				await rest.put(Routes.applicationCommands(CLIENT_ID), {
+					body: commands,
+				});
+
+				console.log(chalk`{blue.bold [>> Successfully registered global slash commands]}`);
+			} else {
+				await rest.put(Routes.applicationCommands(CLIENT_ID, debug.guild), {
+					body: commands,
+				});
+
+				console.log(chalk`{blue.bold [>> Successfully registered local slash commands]}`);
+			}
+		} catch (error) {
+			if (error) console.log(error);
+		}
+	})();
 });
 
 client.login(discord.token);
