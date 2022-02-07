@@ -38,7 +38,7 @@ client.once('ready', () => {
 
 				console.log(chalk`{blue.bold [>> Successfully registered global slash commands]}`);
 			} else {
-				await rest.put(Routes.applicationCommands(CLIENT_ID, debug.guild), {
+				await rest.put(Routes.applicationGuildCommands(CLIENT_ID, debug.guild), {
 					body: commands,
 				});
 
@@ -48,6 +48,22 @@ client.once('ready', () => {
 			if (error) console.log(error);
 		}
 	})();
+});
+
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	const command = client.commands.get(interaction.commandName);
+
+	if (!command) return;
+
+	try {
+		await command.execute(interaction);
+	} catch (err) {
+		if (err) console.error(err);
+
+		await interaction.reply({ content: 'An error has occured.', ephemeral: true });
+	}
 });
 
 client.login(discord.token);
