@@ -62,7 +62,7 @@ client.on('interactionCreate', async interaction => {
 	} catch (err) {
 		if (err) console.error(err);
 
-		await interaction.reply({ content: 'An error has occured.', ephemeral: true });
+		await interaction.editReply({ content: 'An error has occured.', ephemeral: true });
 	}
 });
 
