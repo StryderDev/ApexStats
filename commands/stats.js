@@ -39,7 +39,7 @@ module.exports = {
 		await interaction.reply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.apexstats.dev/stats?platform=${platform}&player=${decodeURIComponent(username)}`)
+			.get(`https://api.apexstats.dev/stats?platform=${platform}&player=${encodeURIComponent(username)}`)
 			.then(response => {
 				const data = response.data;
 
@@ -141,7 +141,11 @@ module.exports = {
 						`${trackerValue(trackers[2].id, trackers[2].value)}`,
 						true,
 					)
-					.setImage(`https://cdn.apexstats.dev/LegendBanners/${legends[data.active.legend]}.png`)
+					.setImage(
+						`https://cdn.apexstats.dev/LegendBanners/${encodeURIComponent(
+							legends[data.active.legend],
+						)}.png`,
+					)
 					.setFooter({
 						text: `User ID: ${data.user.id} · https://apexstats.dev/\nBattle Pass level incorrect? Equip the badge in-game!`,
 					});
