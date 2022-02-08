@@ -48,7 +48,9 @@ module.exports = {
 
 				const embed = new MessageEmbed()
 					.setTitle(
-						`<:BlackDot:909363272447311872> Stats for ${data.user.username} on ${platformName(platform)}`,
+						`<:BlackDot:909363272447311872> Stats for ${data.user.username} on ${platformName(
+							platform,
+						)} playing ${legends[data.active.legend]}`,
 					)
 					.addField(
 						`Account`,
