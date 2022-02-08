@@ -39,24 +39,49 @@ module.exports = {
 		await interaction.reply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.apexstats.dev/stats?platform=PC&player=${decodeURIComponent(username)}`)
+			.get(`https://api.apexstats.dev/stats?platform=${platform}&player=${decodeURIComponent(username)}`)
 			.then(response => {
 				const data = response.data;
 
 				const ranked = data.ranked;
 				const trackers = data.active.trackers;
+				const legend = data.active.legend;
 
 				function bpLevel(battlepass) {
-					if (!battlepass.history) return battlepass.level;
+					if (!battlepass.history) {
+						if (battlepass.level > 110) return 110;
 
-					return battlepass.history.season11;
+						return battlepass.level;
+					}
+
+					if (battlepass.history.season12 > 111) return 110;
+
+					return battlepass.history.season12;
+				}
+
+				function trackerID(legend, id) {
+					const legendName = require('../data/legends.json');
+
+					if (id == '1905735931') return 'No Data';
+
+					const legendTracker = require(`../data/trackers/${legendName[legend]}.json`);
+
+					if (legendTracker[id] == 'undefined' || legendTracker[id] == null) return id;
+
+					return legendTracker[id];
+				}
+
+				function trackerValue(id, value) {
+					if (id == '1905735931') return '-';
+
+					return value.toLocaleString();
 				}
 
 				const embed = new MessageEmbed()
 					.setTitle(
 						`<:BlackDot:909363272447311872> Stats for ${data.user.username} on ${platformName(
 							platform,
-						)} playing ${legends[data.active.legend]}`,
+						)} playing ${legends[legend]}`,
 					)
 					.addField(
 						`Account`,
@@ -66,7 +91,7 @@ module.exports = {
 						true,
 					)
 					.addField(
-						`Escape BattlePass`,
+						`Defiance Battle Pass`,
 						`Level ${bpLevel(data.account.battlepass)}\n\n**Arenas Ranked**\n[#${
 							ranked.Arenas.ladderPos
 						}] ${ranked.Arenas.name} ${
@@ -75,9 +100,21 @@ module.exports = {
 						true,
 					)
 					.addField(`\u200b`, '**Current Equipped Trackers**')
-					.addField(`${trackers[0].id}`, `${trackers[0].value}`, true)
-					.addField(`${trackers[1].id}`, `${trackers[1].value}`, true)
-					.addField(`${trackers[2].id}`, `${trackers[2].value}`, true)
+					.addField(
+						`${trackerID(legend, trackers[0].id)}`,
+						`${trackerValue(trackers[0].id, trackers[0].value)}`,
+						true,
+					)
+					.addField(
+						`${trackerID(legend, trackers[1].id)}`,
+						`${trackerValue(trackers[1].id, trackers[1].value)}`,
+						true,
+					)
+					.addField(
+						`${trackerID(legend, trackers[2].id)}`,
+						`${trackerValue(trackers[2].id, trackers[2].value)}`,
+						true,
+					)
 					.setImage(`https://cdn.apexstats.dev/LegendBanners/${legends[data.active.legend]}.png`)
 					.setFooter({
 						text: `User ID: ${data.user.id} · https://apexstats.dev/`,
