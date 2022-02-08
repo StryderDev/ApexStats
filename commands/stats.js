@@ -46,6 +46,12 @@ module.exports = {
 				const ranked = data.ranked;
 				const trackers = data.active.trackers;
 
+				function bpLevel(battlepass) {
+					if (!battlepass.history) return battlepass.level;
+
+					return battlepass.history.season11;
+				}
+
 				const embed = new MessageEmbed()
 					.setTitle(
 						`<:BlackDot:909363272447311872> Stats for ${data.user.username} on ${platformName(
@@ -61,9 +67,11 @@ module.exports = {
 					)
 					.addField(
 						`Escape BattlePass`,
-						`Level ${data.account.battlepass.level}\n\n**Arenas Ranked**\n[#${ranked.Arenas.ladderPos}] ${
-							ranked.Arenas.name
-						} ${ranked.Arenas.division} (${ranked.Arenas.score.toLocaleString()} AP)`,
+						`Level ${bpLevel(data.account.battlepass)}\n\n**Arenas Ranked**\n[#${
+							ranked.Arenas.ladderPos
+						}] ${ranked.Arenas.name} ${
+							ranked.Arenas.division
+						} (${ranked.Arenas.score.toLocaleString()} AP)`,
 						true,
 					)
 					.addField(`\u200b`, '**Current Equipped Trackers**')
@@ -72,7 +80,7 @@ module.exports = {
 					.addField(`${trackers[2].id}`, `${trackers[2].value}`, true)
 					.setImage(`https://cdn.apexstats.dev/LegendBanners/${legends[data.active.legend]}.png`)
 					.setFooter({
-						text: `UserID: ${data.user.id} · https://apexstats.dev/`,
+						text: `User ID: ${data.user.id} · https://apexstats.dev/`,
 					});
 
 				interaction.editReply({ embeds: [embed] });
