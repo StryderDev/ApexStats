@@ -74,6 +74,22 @@ module.exports = {
 					});
 
 				interaction.editReply({ embeds: [embed] });
+			})
+			.catch(error => {
+				// Request failed with a response outside of the 2xx range
+				if (error.response) {
+					console.log(error.response.data);
+					// console.log(error.response.status);
+					// console.log(error.response.headers);
+
+					interaction.editReply({ content: `Error: ${error.response.data.error}`, embeds: [] });
+				} else if (error.request) {
+					console.log(error.request);
+					interaction.editReply({ content: `Error: The request was not returned successfully.`, embeds: [] });
+				} else {
+					console.log(error.message);
+					interaction.editReply({ content: `Error: Unknown. Try again or tell SDCore#0001.`, embeds: [] });
+				}
 			});
 	},
 };
