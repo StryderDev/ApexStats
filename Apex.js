@@ -48,6 +48,22 @@ client.once('ready', () => {
 			if (error) console.log(error);
 		}
 	})();
+
+	async function uptimeCount() {
+		(function loop() {
+			console.log(
+				`[>>> Bot Uptime: ${Math.floor(process.uptime() / (60 * 60))} Hours, ${Math.floor(
+					(process.uptime() % (60 * 60)) / 60,
+				)} Minutes, ${Math.floor(process.uptime() % 60)} Seconds]`,
+			);
+
+			now = new Date();
+			var delay = 60000 - (now % 60000);
+			setTimeout(loop, delay);
+		})();
+	}
+
+	uptimeCount();
 });
 
 client.on('interactionCreate', async interaction => {
