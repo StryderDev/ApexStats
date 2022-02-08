@@ -43,7 +43,8 @@ module.exports = {
 			.then(response => {
 				const data = response.data;
 
-				const ranked = data.ranked;
+				const brRanked = data.ranked.BR;
+				const arenasRanked = data.ranked.Arenas;
 				const trackers = data.active.trackers;
 				const legend = data.active.legend;
 
@@ -77,6 +78,25 @@ module.exports = {
 					return value.toLocaleString();
 				}
 
+				function rankLayout(type, score, name, division, pos) {
+					function showDiv(name, div) {
+						if (name == 'Master' || name == 'Apex Predator' || name == 'Unranked') return '';
+
+						return div;
+					}
+
+					function showPos(name, pos) {
+						if (name == 'Apex Predator') return `[#${pos}]`;
+
+						return '';
+					}
+
+					return `${showPos(name, pos)} ${name} ${showDiv(
+						name,
+						division,
+					)}\n${score.toLocaleString()} ${type}`;
+				}
+
 				const embed = new MessageEmbed()
 					.setTitle(
 						`<:BlackDot:909363272447311872> Stats for ${data.user.username} on ${platformName(
@@ -85,18 +105,24 @@ module.exports = {
 					)
 					.addField(
 						`Account`,
-						`Level ${data.account.level.toLocaleString()}\n\n**Battle Royale Ranked**\n[#${
-							ranked.BR.ladderPos
-						}] ${ranked.BR.name} ${ranked.BR.division} (${ranked.BR.score.toLocaleString()} RP)`,
+						`Level ${data.account.level.toLocaleString()}\n\n**Battle Royale Ranked**\n${rankLayout(
+							'RP',
+							brRanked.score,
+							brRanked.name,
+							brRanked.division,
+							brRanked.ladderPos,
+						)}`,
 						true,
 					)
 					.addField(
 						`Defiance Battle Pass`,
-						`Level ${bpLevel(data.account.battlepass)}\n\n**Arenas Ranked**\n[#${
-							ranked.Arenas.ladderPos
-						}] ${ranked.Arenas.name} ${
-							ranked.Arenas.division
-						} (${ranked.Arenas.score.toLocaleString()} AP)`,
+						`Level ${bpLevel(data.account.battlepass)}\n\n**Arenas Ranked**\n${rankLayout(
+							'AP',
+							arenasRanked.score,
+							arenasRanked.name,
+							arenasRanked.division,
+							arenasRanked.ladderPos,
+						)}`,
 						true,
 					)
 					.addField(`\u200b`, '**Current Equipped Trackers**')
@@ -117,7 +143,7 @@ module.exports = {
 					)
 					.setImage(`https://cdn.apexstats.dev/LegendBanners/${legends[data.active.legend]}.png`)
 					.setFooter({
-						text: `User ID: ${data.user.id} · https://apexstats.dev/`,
+						text: `User ID: ${data.user.id} · https://apexstats.dev/\nBattle Pass level incorrect? Equip the badge in-game!`,
 					});
 
 				interaction.editReply({ embeds: [embed] });
@@ -129,13 +155,19 @@ module.exports = {
 					// console.log(error.response.status);
 					// console.log(error.response.headers);
 
-					interaction.editReply({ content: `Error: ${error.response.data.error}`, embeds: [] });
+					interaction.editReply({ content: `**Error**\n\`${error.response.data.error}\``, embeds: [] });
 				} else if (error.request) {
 					console.log(error.request);
-					interaction.editReply({ content: `Error: The request was not returned successfully.`, embeds: [] });
+					interaction.editReply({
+						content: `**Error**\n\`The request was not returned successfully.\``,
+						embeds: [],
+					});
 				} else {
 					console.log(error.message);
-					interaction.editReply({ content: `Error: Unknown. Try again or tell SDCore#0001.`, embeds: [] });
+					interaction.editReply({
+						content: `**Error**\n\`Unknown. Try again or tell SDCore#0001.\``,
+						embeds: [],
+					});
 				}
 			});
 	},
