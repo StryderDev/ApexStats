@@ -77,6 +77,7 @@ client.on('interactionCreate', async interaction => {
 
 	try {
 		await command.execute(interaction);
+		console.log(`[>>>> Command ran: /${interaction.commandName}]`);
 	} catch (err) {
 		if (err) console.error(err);
 
