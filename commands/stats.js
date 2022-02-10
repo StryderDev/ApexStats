@@ -142,7 +142,7 @@ module.exports = {
 						true,
 					)
 					.setImage(
-						`https://cdn.apexstats.dev/LegendBanners/${encodeURIComponent(
+						`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(
 							legends[data.active.legend],
 						)}.png`,
 					)
