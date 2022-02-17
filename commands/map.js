@@ -1,0 +1,52 @@
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const axios = require('axios');
+const { MessageEmbed } = require('discord.js');
+
+const { api } = require('../config.json');
+
+module.exports = {
+	data: new SlashCommandBuilder().setName('map').setDescription('Shows the current in-game map'),
+	async execute(interaction) {
+		const loadingEmbed = new MessageEmbed().setDescription(
+			`<a:ApexBot_Loading:940037271980220416> Loading current in-game map...`,
+		);
+
+		await interaction.reply({ embeds: [loadingEmbed] });
+
+		await axios
+			.get(`https://api.mozambiquehe.re/maprotation?version=5&auth=${api.apex}`)
+			.then(response => {
+				const br = response.data.battle_royale;
+
+				const mapEmbed = new MessageEmbed()
+					.setTitle(`Legends are currently dropping into **${br.current.map}**.`)
+					.setDescription(
+						`${br.current.map} Arena active until <t:${br.current.end}:t>, or for ${br.current.remainingMins} minutes.\n**Next up:** ${br.next.map} for ${br.next.DurationInMinutes} minutes.`,
+					);
+
+				interaction.editReply({ embeds: [mapEmbed] });
+			})
+			.catch(error => {
+				// Request failed with a response outside of the 2xx range
+				if (error.response) {
+					console.log(error.response.data);
+					// console.log(error.response.status);
+					// console.log(error.response.headers);
+
+					interaction.editReply({ content: `**Error**\n\`${error.response.data.error}\``, embeds: [] });
+				} else if (error.request) {
+					console.log(error.request);
+					interaction.editReply({
+						content: `**Error**\n\`The request was not returned successfully.\``,
+						embeds: [],
+					});
+				} else {
+					console.log(error.message);
+					interaction.editReply({
+						content: `**Error**\n\`Unknown. Try again or tell SDCore#0001.\``,
+						embeds: [],
+					});
+				}
+			});
+	},
+};
