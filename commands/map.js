@@ -17,11 +17,15 @@ module.exports = {
 			.get(`https://api.mozambiquehe.re/maprotation?version=5&auth=${api.apex}`)
 			.then(response => {
 				const br = response.data.battle_royale;
+				const brRanked = response.data.ranked;
 
 				const mapEmbed = new MessageEmbed()
 					.setTitle(`Legends are currently dropping into **${br.current.map}**.`)
 					.setDescription(
-						`${br.current.map} Arena active until <t:${br.current.end}:t>, or for ${br.current.remainingMins} minutes.\n**Next up:** ${br.next.map} for ${br.next.DurationInMinutes} minutes.`,
+						`${br.current.map} Arena active until <t:${br.current.end}:t>, or for ${br.current.remainingMins} minutes.\n**Next up:** ${br.next.map} for ${br.next.DurationInMinutes} minutes.\nThe current **Ranked Arena** is ${brRanked.current.map}.`,
+					)
+					.setImage(
+						`https://cdn.apexstats.dev/Bot/Maps/Season12/Split1/${encodeURIComponent(br.current.map)}.gif`,
 					);
 
 				interaction.editReply({ embeds: [mapEmbed] });
