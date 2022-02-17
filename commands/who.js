@@ -35,7 +35,7 @@ module.exports = {
 		const legend = Math.floor(Math.random() * legends.length);
 		const legendEmbed = new MessageEmbed()
 			.setDescription(`Play **${legends[legend]}** this round!`)
-			.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${legends[legend]}.png`);
+			.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legends[legend])}.png`);
 
 		await interaction.reply({ embeds: [loadingEmbed] });
 		await wait(1000);
