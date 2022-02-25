@@ -52,7 +52,7 @@ client.once('ready', () => {
 	async function uptimeCount() {
 		(function loop() {
 			console.log(
-				`[>>> Shard #${client.shard.ids[0]} Uptime: ${Math.floor(
+				`[>>> Shard #${client.shard.ids[0] + 1} Uptime: ${Math.floor(
 					process.uptime() / (60 * 60),
 				)} Hours, ${Math.floor((process.uptime() % (60 * 60)) / 60)} Minutes, ${Math.floor(
 					process.uptime() % 60,

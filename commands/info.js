@@ -11,6 +11,7 @@ module.exports = {
 			.setTitle('Apex Legends Stats Bot')
 			.setDescription('Legend stats, map info, and random legend picker.')
 			.addField('Version', `v${version} "${release.name}"`, true)
+			.addField('Shard', `ID: ${interaction.client.shard.ids[0] + 1}`, true)
 			.addField(
 				'Links',
 				'[GitHub](https://github.com/sdcore/apex-stats-bot)\n[Support Server](https://discord.gg/eH8VxssFW6)',

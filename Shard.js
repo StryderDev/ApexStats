@@ -7,7 +7,7 @@ const manager = new ShardingManager('./Apex.js', { token: discord.token });
 
 manager.on('shardCreate', shard => {
 	console.log(chalk`{yellow.bold [> Launching Shard...]}`);
-	console.log(chalk`{green.bold [> Shard #${shard.id} Launched]}`);
+	console.log(chalk`{green.bold [> Shard #${shard.id + 1} Launched]}`);
 });
 
 manager.spawn();
