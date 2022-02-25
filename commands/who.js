@@ -37,7 +37,7 @@ module.exports = {
 			.setDescription(`Play **${legends[legend]}** this round!`)
 			.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legends[legend])}.png`);
 
-		await interaction.reply({ embeds: [loadingEmbed] });
+		await interaction.editReply({ embeds: [loadingEmbed] });
 		await wait(1000);
 		await interaction.editReply({ embeds: [legendEmbed] });
 	},

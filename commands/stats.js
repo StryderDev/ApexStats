@@ -36,7 +36,7 @@ module.exports = {
 			`<a:ApexBot_Loading:940037271980220416> Loading stats for ${username} on ${platformName(platform)}...`,
 		);
 
-		await interaction.reply({ embeds: [loadingEmbed] });
+		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
 			.get(`https://api.apexstats.dev/stats?platform=${platform}&player=${encodeURIComponent(username)}`)

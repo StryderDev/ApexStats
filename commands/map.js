@@ -11,7 +11,7 @@ module.exports = {
 			`<a:ApexBot_Loading:940037271980220416> Loading current in-game map...`,
 		);
 
-		await interaction.reply({ embeds: [loadingEmbed] });
+		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
 			.get(`https://api.mozambiquehe.re/maprotation?version=5&auth=${api.apex}`)

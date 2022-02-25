@@ -71,6 +71,8 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
+	await interaction.deferReply();
+
 	const command = client.commands.get(interaction.commandName);
 
 	if (!command) return;
@@ -81,7 +83,7 @@ client.on('interactionCreate', async interaction => {
 	} catch (err) {
 		if (err) console.error(err);
 
-		await interaction.reply({ content: 'An error has occured.', ephemeral: true, embeds: [] });
+		await interaction.editReply({ content: 'An error has occured.', embeds: [] });
 	}
 });
 
