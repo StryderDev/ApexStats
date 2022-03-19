@@ -13,6 +13,23 @@ module.exports = {
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
+		function isPlural(number, word) {
+			if (number != 1) return `${word}s`;
+
+			return word;
+		}
+
+		function mapLength(minutes) {
+			if (minutes >= 60) {
+				const hrs = Math.floor(minutes / 60);
+				const mins = minutes % 60;
+
+				return `${hrs} ${isPlural(hrs, 'hour')}, ${mins} ${isPlural(mins, 'minute')}`;
+			} else {
+				return `${minutes} ${isPlural(minutes, 'minute')}`;
+			}
+		}
+
 		await axios
 			.get(`https://api.mozambiquehe.re/maprotation?version=5&auth=${api.apex}`)
 			.then(response => {
@@ -22,7 +39,11 @@ module.exports = {
 				const mapEmbed = new MessageEmbed()
 					.setTitle(`Legends are currently dropping into **${br.current.map}**.`)
 					.setDescription(
-						`${br.current.map} Arena active until <t:${br.current.end}:t>, or for ${br.current.remainingMins} minutes.\n**Next up:** ${br.next.map} for ${br.next.DurationInMinutes} minutes.\nThe current **Ranked Arena** is ${brRanked.current.map}.`,
+						`${br.current.map} Arena ends <t:${br.current.end}:R>, or at <t:${
+							br.current.end
+						}:t>.\n**Next up:** ${br.next.map} for ${mapLength(
+							br.next.DurationInMinutes,
+						)}.\nThe current **Ranked Arena** is ${brRanked.current.map}.`,
 					)
 					.setImage(
 						`https://cdn.apexstats.dev/Bot/Maps/Season12/Split1/${encodeURIComponent(br.current.map)}.gif`,
