@@ -5,10 +5,10 @@ const { MessageEmbed } = require('discord.js');
 const { api } = require('../config.json');
 
 module.exports = {
-	data: new SlashCommandBuilder().setName('map').setDescription('Shows the current in-game map.'),
+	data: new SlashCommandBuilder().setName('arenas').setDescription('Shows the current in-game arena.'),
 	async execute(interaction) {
 		const loadingEmbed = new MessageEmbed().setDescription(
-			`<a:ApexBot_Loading:940037271980220416> Loading current in-game map...`,
+			`<a:ApexBot_Loading:940037271980220416> Loading current in-game arena...`,
 		);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
@@ -16,17 +16,17 @@ module.exports = {
 		await axios
 			.get(`https://api.mozambiquehe.re/maprotation?version=5&auth=${api.apex}`)
 			.then(response => {
-				const br = response.data.battle_royale;
-				const brRanked = response.data.ranked;
+				const arena = response.data.arenas;
+				const arenaRanked = response.data.arenasRanked;
 
 				const mapEmbed = new MessageEmbed()
-					.setTitle(`Legends are currently dropping into **${br.current.map}**.`)
+					.setTitle(`Legends are currently competing in **${arena.current.map}**.`)
 					.setDescription(
-						`${br.current.map} Arena active until <t:${br.current.end}:t>, or for ${br.current.remainingMins} minutes.\n**Next up:** ${br.next.map} for ${br.next.DurationInMinutes} minutes.\nThe current **Ranked Arena** is ${brRanked.current.map}.`,
-					)
-					.setImage(
-						`https://cdn.apexstats.dev/Bot/Maps/Season12/Split1/${encodeURIComponent(br.current.map)}.gif`,
+						`${arena.current.map} Arena active until <t:${arena.current.end}:t>, or for ${arena.current.remainingMins} minutes.\n**Next up:** ${arena.next.map} for ${arena.next.DurationInMinutes} minutes.\nThe current **Ranked Arena** is ${arenaRanked.current.map}.`,
 					);
+				//.setImage(
+				//	`https://cdn.apexstats.dev/Bot/Maps/Season12/Split1/${encodeURIComponent(br.current.map)}.gif`,
+				//);
 
 				interaction.editReply({ embeds: [mapEmbed] });
 			})
