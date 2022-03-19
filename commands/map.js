@@ -43,10 +43,10 @@ module.exports = {
 							br.current.end
 						}:t>.\n**Next up:** ${br.next.map} for ${mapLength(
 							br.next.DurationInMinutes,
-						)}.\nThe current **Ranked Arena** is ${brRanked.current.map}.`,
+						)}.\n**Ranked Arena**: ${brRanked.current.map}`,
 					)
 					.setImage(
-						`https://cdn.apexstats.dev/Bot/Maps/Season12/Split1/${encodeURIComponent(br.current.map)}.gif`,
+						`https://cdn.apexstats.dev/Bot/Maps/Season12/BR/${encodeURIComponent(br.current.map)}.png`,
 					);
 
 				interaction.editReply({ embeds: [mapEmbed] });

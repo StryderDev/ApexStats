@@ -30,6 +30,12 @@ module.exports = {
 			}
 		}
 
+		function mapName(name) {
+			if (name == 'Phase runner') return 'Phase Runner';
+
+			return name;
+		}
+
 		await axios
 			.get(`https://api.mozambiquehe.re/maprotation?version=5&auth=${api.apex}`)
 			.then(response => {
@@ -37,19 +43,19 @@ module.exports = {
 				const arenaRanked = response.data.arenasRanked;
 
 				const mapEmbed = new MessageEmbed()
-					.setTitle(`Legends are currently competing in **${arena.current.map}**.`)
+					.setTitle(`Legends are currently competing in **${mapName(arena.current.map)}**.`)
 					.setDescription(
-						`${arena.current.map} Arena ends <t:${arena.current.end}:R>, or at <t:${
+						`${mapName(arena.current.map)} Arena ends <t:${arena.current.end}:R>, or at <t:${
 							arena.current.end
-						}:t>.\n**Next up:** ${arena.next.map} for ${mapLength(
+						}:t>.\n**Next up:** ${mapName(arena.next.map)} for ${mapLength(
 							arena.next.DurationInMinutes,
-						)}.\nThe current **Ranked Arena** is ${arenaRanked.current.map} and ends <t:${
-							arenaRanked.current.end
-						}:R>.`,
+						)}.\n**Ranked Arena**: ${mapName(arenaRanked.current.map)}`,
+					)
+					.setImage(
+						`https://cdn.apexstats.dev/Bot/Maps/Season12/Arenas/${encodeURIComponent(
+							mapName(arena.current.map),
+						)}.png`,
 					);
-				//.setImage(
-				//	`https://cdn.apexstats.dev/Bot/Maps/Season12/Split1/${encodeURIComponent(br.current.map)}.gif`,
-				//);
 
 				interaction.editReply({ embeds: [mapEmbed] });
 			})
