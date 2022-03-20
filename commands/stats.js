@@ -97,8 +97,20 @@ module.exports = {
 					const online = '<:ApexStats_GreenDot:955008202116845568>';
 					const inMatch = '<:ApexStats_YellowDot:955008542862110760>';
 
-					if (status.online == 1 && status.ingame == 0) return `${online} Online (Lobby)`;
-					if (status.online == 1 && status.ingame == 1) return `${inMatch} In a Match`;
+					seconds = Math.floor(status.matchLength % 60).toLocaleString(undefined, { minimumIntegerDigits: 2 });
+					minutes = Math.floor(status.matchLength / 60).toLocaleString(undefined, { minimumIntegerDigits: 2 });
+
+					if (status.online == 1 && status.ingame == 0) {
+						if (status.matchLength != -1) return `${online} Lobby (${minutes}:${seconds})`;
+
+						return `${online} Online (Lobby)`;
+					}
+
+					if (status.online == 1 && status.ingame == 1) {
+						if (status.matchLength != -1) return `${inMatch} In a Match (${minutes}:${seconds})`;
+
+						return `${inMatch} In a Match`;
+					}
 
 					return `${offline} Offline / Invite Only`;
 				}
