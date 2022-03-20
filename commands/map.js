@@ -7,9 +7,7 @@ const { api } = require('../config.json');
 module.exports = {
 	data: new SlashCommandBuilder().setName('map').setDescription('Shows the current in-game map.'),
 	async execute(interaction) {
-		const loadingEmbed = new MessageEmbed().setDescription(
-			`<a:ApexBot_Loading:940037271980220416> Loading current in-game map...`,
-		);
+		const loadingEmbed = new MessageEmbed().setDescription(`<a:ApexStats_Loading:940037271980220416> Loading current in-game map...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -39,15 +37,11 @@ module.exports = {
 				const mapEmbed = new MessageEmbed()
 					.setTitle(`Legends are currently dropping into **${br.current.map}**.`)
 					.setDescription(
-						`${br.current.map} Arena ends <t:${br.current.end}:R>, or at <t:${
-							br.current.end
-						}:t>.\n**Next up:** ${br.next.map} for ${mapLength(
+						`${br.current.map} Arena ends <t:${br.current.end}:R>, or at <t:${br.current.end}:t>.\n**Next up:** ${br.next.map} for ${mapLength(
 							br.next.DurationInMinutes,
 						)}.\n**Ranked Arena**: ${brRanked.current.map}`,
 					)
-					.setImage(
-						`https://cdn.apexstats.dev/Bot/Maps/Season12/BR/${encodeURIComponent(br.current.map)}.png`,
-					);
+					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/BR/${encodeURIComponent(br.current.map)}.png`);
 
 				interaction.editReply({ embeds: [mapEmbed] });
 			})

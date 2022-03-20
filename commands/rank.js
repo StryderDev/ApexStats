@@ -17,9 +17,7 @@ module.exports = {
 				.addChoice('Xbox', 'X1')
 				.addChoice('PlayStation', 'PS4'),
 		)
-		.addStringOption(option =>
-			option.setName('username').setDescription('Your in-game username.').setRequired(true),
-		),
+		.addStringOption(option => option.setName('username').setDescription('Your in-game username.').setRequired(true)),
 	async execute(interaction) {
 		// Options
 		const platform = interaction.options.getString('platform');
@@ -32,9 +30,7 @@ module.exports = {
 			return platform;
 		}
 
-		const loadingEmbed = new MessageEmbed().setDescription(
-			`<a:ApexBot_Loading:940037271980220416> Loading stats for ${username} on ${platformName(platform)}...`,
-		);
+		const loadingEmbed = new MessageEmbed().setDescription(`<a:ApexStats_Loading:940037271980220416> Loading stats for ${username} on ${platformName(platform)}...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -59,30 +55,13 @@ module.exports = {
 						return '';
 					}
 
-					return `${showPos(name, pos)} ${name} ${showDiv(
-						name,
-						division,
-					)}\n${score.toLocaleString()} ${type}`;
+					return `${showPos(name, pos)} ${name} ${showDiv(name, division)}\n${score.toLocaleString()} ${type}`;
 				}
 
 				const embed = new MessageEmbed()
 					.setTitle(`Rank Stats for ${data.user.username} on ${platformName(platform)}`)
-					.addField(
-						`Battle Royale Ranked`,
-						`${rankLayout('RP', brRanked.score, brRanked.name, brRanked.division, brRanked.ladderPos)}`,
-						true,
-					)
-					.addField(
-						`Arenas Ranked`,
-						`${rankLayout(
-							'AP',
-							arenasRanked.score,
-							arenasRanked.name,
-							arenasRanked.division,
-							arenasRanked.ladderPos,
-						)}`,
-						true,
-					)
+					.addField(`Battle Royale Ranked`, `${rankLayout('RP', brRanked.score, brRanked.name, brRanked.division, brRanked.ladderPos)}`, true)
+					.addField(`Arenas Ranked`, `${rankLayout('AP', arenasRanked.score, arenasRanked.name, arenasRanked.division, arenasRanked.ladderPos)}`, true)
 					.setFooter({
 						text: `User ID: ${data.user.id} · https://apexstats.dev/`,
 					});

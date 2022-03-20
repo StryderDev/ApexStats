@@ -20,7 +20,7 @@ module.exports = {
 		// Options
 		const type = interaction.options.getString('type');
 
-		const loadingEmbed = new MessageEmbed().setDescription(`<a:ApexBot_Loading:940037271980220416> Choosing a random legend...`);
+		const loadingEmbed = new MessageEmbed().setDescription(`<a:ApexStats_Loading:940037271980220416> Choosing a random legend...`);
 
 		const legends = [
 			'Bloodhound',

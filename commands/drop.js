@@ -7,7 +7,7 @@ const { api } = require('../config.json');
 module.exports = {
 	data: new SlashCommandBuilder().setName('drop').setDescription('Picks a random place to drop in the current map.'),
 	async execute(interaction) {
-		await interaction.editReply({ content: '<a:ApexBot_Loading:940037271980220416> Choosing a random place to drop...' });
+		await interaction.editReply({ content: '<a:ApexStats_Loading:940037271980220416> Choosing a random place to drop...' });
 		await wait(1000);
 
 		await axios
