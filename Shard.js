@@ -1,5 +1,5 @@
 const { ShardingManager } = require('discord.js');
-const { discord } = require('./config.json');
+const { discord, debug } = require('./config.json');
 
 const chalk = require('chalk');
 const { AutoPoster } = require('topgg-autoposter');
@@ -11,7 +11,7 @@ manager.on('shardCreate', shard => {
 	console.log(chalk`{green.bold [> Shard #${shard.id + 1} Launched]}`);
 });
 
-if (discord.debug == false) {
+if (debug.true == false) {
 	const poster = AutoPoster('topggtoken', sharder);
 
 	poster.on('posted', stats => {
