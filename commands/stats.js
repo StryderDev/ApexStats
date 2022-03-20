@@ -17,9 +17,7 @@ module.exports = {
 				.addChoice('Xbox', 'X1')
 				.addChoice('PlayStation', 'PS4'),
 		)
-		.addStringOption(option =>
-			option.setName('username').setDescription('Your in-game username.').setRequired(true),
-		),
+		.addStringOption(option => option.setName('username').setDescription('Your in-game username.').setRequired(true)),
 	async execute(interaction) {
 		// Options
 		const platform = interaction.options.getString('platform');
@@ -32,9 +30,7 @@ module.exports = {
 			return platform;
 		}
 
-		const loadingEmbed = new MessageEmbed().setDescription(
-			`<a:ApexBot_Loading:940037271980220416> Loading stats for ${username} on ${platformName(platform)}...`,
-		);
+		const loadingEmbed = new MessageEmbed().setDescription(`<a:ApexStats_Loading:940037271980220416> Loading stats for ${username} on ${platformName(platform)}...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -47,6 +43,7 @@ module.exports = {
 				const arenasRanked = data.ranked.Arenas;
 				const trackers = data.active.trackers;
 				const legend = data.active.legend;
+				const status = data.user.status;
 
 				function bpLevel(battlepass) {
 					if (!battlepass.history) {
@@ -91,21 +88,32 @@ module.exports = {
 						return '';
 					}
 
-					return `${showPos(name, pos)} ${name} ${showDiv(
-						name,
-						division,
-					)}\n${score.toLocaleString()} ${type}`;
+					return `${showPos(name, pos)} ${name} ${showDiv(name, division)}\n${score.toLocaleString()} ${type}`;
 				}
 
+				function getStatus(status) {
+					// Status Emotes
+					const offline = '<:ApexStats_BlackDot:955005604248838145>';
+					const online = '<:ApexStats_GreenDot:955008202116845568>';
+					const inMatch = '<:ApexStats_YellowDot:955008542862110760>';
+
+					if (status.online == 1 && status.ingame == 0) return `${online} Online (Lobby)`;
+					if (status.online == 1 && status.ingame == 1) return `${inMatch} In a Match`;
+
+					return `${offline} Offline / Invite Only`;
+				}
+
+				// Emotes
+				const accountLevel = '<:ApexStats_AccountLevel:909364972943999016>';
+				const battlePass = '<:ApexStats_Season12BP:955001758315323432>';
+
+				// Stats Embed
 				const embed = new MessageEmbed()
-					.setTitle(
-						`<:BlackDot:909363272447311872> Stats for ${data.user.username} on ${platformName(
-							platform,
-						)} playing ${legends[legend]}`,
-					)
+					.setTitle(`Stats for ${data.user.username} on ${platformName(platform)} playing ${legends[legend]}`)
+					.setDescription(`**Status**\n${getStatus(status)}`)
 					.addField(
 						`Account`,
-						`Level ${data.account.level.toLocaleString()}\n\n**Battle Royale Ranked**\n${rankLayout(
+						`${accountLevel} Level ${data.account.level.toLocaleString()}\n\n**Battle Royale Ranked**\n${rankLayout(
 							'RP',
 							brRanked.score,
 							brRanked.name,
@@ -116,7 +124,7 @@ module.exports = {
 					)
 					.addField(
 						`Defiance Battle Pass`,
-						`Level ${bpLevel(data.account.battlepass)}\n\n**Arenas Ranked**\n${rankLayout(
+						`${battlePass} Level ${bpLevel(data.account.battlepass)}\n\n**Arenas Ranked**\n${rankLayout(
 							'AP',
 							arenasRanked.score,
 							arenasRanked.name,
@@ -126,26 +134,10 @@ module.exports = {
 						true,
 					)
 					.addField(`\u200b`, '**Current Equipped Trackers**')
-					.addField(
-						`${trackerID(legend, trackers[0].id)}`,
-						`${trackerValue(trackers[0].id, trackers[0].value)}`,
-						true,
-					)
-					.addField(
-						`${trackerID(legend, trackers[1].id)}`,
-						`${trackerValue(trackers[1].id, trackers[1].value)}`,
-						true,
-					)
-					.addField(
-						`${trackerID(legend, trackers[2].id)}`,
-						`${trackerValue(trackers[2].id, trackers[2].value)}`,
-						true,
-					)
-					.setImage(
-						`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(
-							legends[data.active.legend],
-						)}.png`,
-					)
+					.addField(`${trackerID(legend, trackers[0].id)}`, `${trackerValue(trackers[0].id, trackers[0].value)}`, true)
+					.addField(`${trackerID(legend, trackers[1].id)}`, `${trackerValue(trackers[1].id, trackers[1].value)}`, true)
+					.addField(`${trackerID(legend, trackers[2].id)}`, `${trackerValue(trackers[2].id, trackers[2].value)}`, true)
+					.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legends[data.active.legend])}.png`)
 					.setFooter({
 						text: `User ID: ${data.user.id} · https://apexstats.dev/\nBattle Pass level incorrect? Equip the badge in-game!`,
 					});
