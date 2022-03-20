@@ -1,5 +1,5 @@
 const { ShardingManager } = require('discord.js');
-const { discord, debug } = require('./config.json');
+const { discord, debug, api } = require('./config.json');
 
 const chalk = require('chalk');
 const { AutoPoster } = require('topgg-autoposter');
@@ -12,7 +12,7 @@ manager.on('shardCreate', shard => {
 });
 
 if (debug.true == false) {
-	const poster = AutoPoster('topggtoken', manager);
+	const poster = AutoPoster(api.topgg, manager);
 
 	poster.on('posted', stats => {
 		console.log(`Posted stats to Top.gg | ${stats.serverCount} servers`);
