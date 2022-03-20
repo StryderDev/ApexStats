@@ -12,7 +12,7 @@ manager.on('shardCreate', shard => {
 });
 
 if (debug.true == false) {
-	const poster = AutoPoster('topggtoken', sharder);
+	const poster = AutoPoster('topggtoken', manager);
 
 	poster.on('posted', stats => {
 		console.log(`Posted stats to Top.gg | ${stats.serverCount} servers`);
