@@ -20,9 +20,7 @@ module.exports = {
 		// Options
 		const type = interaction.options.getString('type');
 
-		const loadingEmbed = new MessageEmbed().setDescription(
-			`<a:ApexBot_Loading:940037271980220416> Choosing a random legend...`,
-		);
+		const loadingEmbed = new MessageEmbed().setDescription(`<a:ApexBot_Loading:940037271980220416> Choosing a random legend...`);
 
 		const legends = [
 			'Bloodhound',
@@ -47,17 +45,7 @@ module.exports = {
 			'Mad Maggie',
 		];
 
-		const offensive = [
-			'Wraith',
-			'Bangalore',
-			'Mirage',
-			'Octane',
-			'Revenant',
-			'Horizon',
-			'Fuse',
-			'Ash',
-			'Mad Maggie',
-		];
+		const offensive = ['Wraith', 'Bangalore', 'Mirage', 'Octane', 'Revenant', 'Horizon', 'Fuse', 'Ash', 'Mad Maggie'];
 
 		const defensive = ['Gibraltar', 'Caustic', 'Wattson', 'Rampart'];
 
@@ -85,9 +73,7 @@ module.exports = {
 			const legend = Math.floor(Math.random() * legendType(type).length);
 			const legendEmbed = new MessageEmbed()
 				.setDescription(`Play **${legendType(type)[legend]}** this round!`)
-				.setImage(
-					`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legendType(type)[legend])}.png`,
-				);
+				.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legendType(type)[legend])}.png`);
 
 			await interaction.editReply({ embeds: [loadingEmbed] });
 			await wait(1000);
