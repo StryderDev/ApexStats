@@ -1,6 +1,6 @@
 # Apex Legends Stats Bot
 
-Providing accurate, up to date, and easy to find statistics.
+Get user stats, Battle Royale and Arenas map rotations, and more. Start by typing `/` for a list of commands.
 
 ## Current Features
 
@@ -10,3 +10,7 @@ Providing accurate, up to date, and easy to find statistics.
         -   Account level
         -   Battlepass level for the current season (assuming you have the badge equipped)
         -   Battle Royale and Arenas Rank
+    -   Also view just the current ranks of users
+-   View the current Battle Royale/Arenas Map
+-   Choose a random place to drop in the current map
+-   Choose a random legend to play
