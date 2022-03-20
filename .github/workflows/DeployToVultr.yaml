@@ -12,7 +12,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                node-version: [16.11.0]
+                node-version: [16.14.2]
 
         steps:
             - uses: actions/checkout@v2
@@ -38,6 +38,8 @@ jobs:
                   script: |
                       cd ${{ secrets.PATH }}
                       git pull
+                      export NVM_DIR=~/.nvm
+                      source ~/.nvm/nvm.sh
                       npm prune
                       npm ci
                       npm audit fix
