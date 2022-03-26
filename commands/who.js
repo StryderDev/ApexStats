@@ -5,7 +5,7 @@ const wait = require('util').promisify(setTimeout);
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('who')
-		.setDescription('Pick a random legend to play.')
+		.setDescription('Picks a random legend to play in-game.')
 		.addStringOption(option =>
 			option
 				.setName('type')
