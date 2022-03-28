@@ -1,0 +1,15 @@
+{
+	"debug": {
+		"true": true, // True enables some debug options and also disables data collection for the bot
+		"guild": "Guild ID" // The guild ID that is used for testing local guild commands
+	},
+	"discord": {
+		"token": "Discord Token" // Discord bot token
+	},
+	"api": {
+		"apex": "ApexLegendsAPI Key" // API key from ApexLegendsAPI.com
+	},
+	"release": {
+		"name": "Release Name" // Self Explanatory
+	}
+}
