@@ -65,9 +65,19 @@ module.exports = {
 					const legendTracker = require(`../data/trackers/${legendName[legend]}.json`);
 					const globalTrackers = require('../data/globalTrackers.json');
 
-					if (legendTracker[id] == 'undefined' || legendTracker[id] == null) return id;
-
-					return legendTracker[id];
+					if (globalTrackers[id] == null || globalTrackers[id] == 'undefined') {
+						// If the tracker ID doesn't exist in the global trackers file, check
+						// the legend specific tracker file
+						if (legendTracker[id] == null || legendTracker[id] == 'undefined') {
+							// If the tracker ID doesn't exist in the global or legend tracker
+							// files, just return the ID of the tracker
+							return id;
+						} else {
+							return legendTracker[id];
+						}
+					} else {
+						return globalTrackers[id];
+					}
 				}
 
 				function trackerValue(id, value) {
