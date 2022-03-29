@@ -63,6 +63,7 @@ module.exports = {
 					if (id == '1905735931') return 'No Data';
 
 					const legendTracker = require(`../data/trackers/${legendName[legend]}.json`);
+					const globalTrackers = require('../data/globalTrackers.json');
 
 					if (legendTracker[id] == 'undefined' || legendTracker[id] == null) return id;
 
