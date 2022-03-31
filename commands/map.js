@@ -29,19 +29,19 @@ module.exports = {
 		}
 
 		await axios
-			.get(`https://api.mozambiquehe.re/maprotation?version=5&auth=${api.apex}`)
+			.get(`https://fn.alphaleagues.com/v2/apex/map/?next=1`)
 			.then(response => {
-				const br = response.data.battle_royale;
-				const brRanked = response.data.ranked;
+				const br = response.data.br;
+				const brRanked = br.ranked;
 
 				const mapEmbed = new MessageEmbed()
-					.setTitle(`Legends are currently dropping into **${br.current.map}**.`)
+					.setTitle(`Legends are currently dropping into **${br.map}**.`)
 					.setDescription(
-						`${br.current.map} Arena ends <t:${br.current.end}:R>, or at <t:${br.current.end}:t>.\n**Next up:** ${br.next.map} for ${mapLength(
-							br.next.DurationInMinutes,
-						)}.\n**Ranked Arena**: ${brRanked.current.map}`,
+						`${br.map} Arena ends <t:${br.times.next}:R>, or at <t:${br.times.next}:t>.\n**Next up:** ${br.next[0].map} for ${mapLength(
+							br.next[0].duration,
+						)}.\n**Ranked Arena**: ${brRanked.map}`,
 					)
-					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/BR/${encodeURIComponent(br.current.map)}.png`);
+					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/BR/${encodeURIComponent(br.map)}.png?q=${Math.floor(Math.random() * 10)}`);
 
 				interaction.editReply({ embeds: [mapEmbed] });
 			})

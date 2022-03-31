@@ -28,26 +28,20 @@ module.exports = {
 			}
 		}
 
-		function mapName(name) {
-			if (name == 'Phase runner') return 'Phase Runner';
-
-			return name;
-		}
-
 		await axios
-			.get(`https://api.mozambiquehe.re/maprotation?version=5&auth=${api.apex}`)
+			.get(`https://fn.alphaleagues.com/v2/apex/map/?next=1`)
 			.then(response => {
-				const arena = response.data.arenas;
-				const arenaRanked = response.data.arenasRanked;
+				const arenas = response.data.arenas;
+				const arenasRanked = arenas.ranked;
 
 				const mapEmbed = new MessageEmbed()
-					.setTitle(`Legends are currently competing in **${mapName(arena.current.map)}**.`)
+					.setTitle(`Legends are currently competing in **${arenas.map}**.`)
 					.setDescription(
-						`${mapName(arena.current.map)} Arena ends <t:${arena.current.end}:R>, or at <t:${arena.current.end}:t>.\n**Next up:** ${mapName(
-							arena.next.map,
-						)} for ${mapLength(arena.next.DurationInMinutes)}.\n**Ranked Arena**: ${mapName(arenaRanked.current.map)}`,
+						`${arenas.map} Arena ends <t:${arenas.times.next}:R>, or at <t:${arenas.times.next}:t>.\n**Next up:** ${arenas.next[0].map} for ${mapLength(
+							arenas.next[0].duration,
+						)}.\n**Ranked Arena**: ${arenasRanked.map} for <t:${arenasRanked.times.next}:R>.`,
 					)
-					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/Arenas/${encodeURIComponent(mapName(arena.current.map))}.png`);
+					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/Arenas/${encodeURIComponent(arenas.map)}.png?q=${Math.floor(Math.random() * 10)}`);
 
 				interaction.editReply({ embeds: [mapEmbed] });
 			})
