@@ -65,6 +65,10 @@ module.exports = {
 					const legendTracker = require(`../data/trackers/${legendName[legend]}.json`);
 					const globalTrackers = require('../data/globalTrackers.json');
 
+					function textCheck(text) {
+						return text ? text : '';
+					}
+
 					if (globalTrackers[id] == null || globalTrackers[id] == 'undefined') {
 						// If the tracker ID doesn't exist in the global trackers file, check
 						// the legend specific tracker file
@@ -73,7 +77,7 @@ module.exports = {
 							// files, just return the ID of the tracker
 							return id;
 						} else {
-							return legendTracker[id];
+							return `${textCheck(legendTracker[id].Emote)} ${textCheck(legendTracker[id].Type)} ${legendTracker[id].Name}`;
 						}
 					} else {
 						return globalTrackers[id];
