@@ -23,7 +23,7 @@
 	"220102889": { "Name": "Silence: Enemies Silenced", "Type": "", "Emote": "" },
 	"826894688": { "Name": "Silence: Silenced Knockdowns", "Type": "", "Emote": "" },
 	"1264787811": { "Name": "Death Totem: Activations", "Type": "", "Emote": "" },
-	"1880856613": { "Name": "Season 4 Wins", "Type": "BR", "Emote": "" },
+	"1880856613": { "Name": "Wins", "Type": "BR", "Emote": "Season_4" },
 	"1994761139": { "Name": "Kills", "Type": "BR", "Emote": "" },
 	"1326273286": { "Name": "Wins", "Type": "BR", "Emote": "" },
 	"215973989": { "Name": "Damage", "Type": "BR", "Emote": "" },

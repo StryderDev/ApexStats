@@ -28,7 +28,7 @@
 	"1173534360": { "Name": "Damage", "Type": "BR", "Emote": "Season_1" },
 	"290334183": { "Name": "Wins", "Type": "BR", "Emote": "Season_2" },
 	"1249249170": { "Name": "Wins", "Type": "BR", "Emote": "Season_3" },
-	"528040692": { "Name": "Season 4 Wins", "Type": "BR", "Emote": "" },
+	"528040692": { "Name": "Wins", "Type": "BR", "Emote": "Season_4" },
 	"614321666": { "Name": "Season 5 Wins", "Type": "BR", "Emote": "" },
 	"1925847835": { "Name": "Season 5 Kills", "Type": "BR", "Emote": "" },
 	"1087965224": { "Name": "Season 6 Wins", "Type": "BR", "Emote": "" },
