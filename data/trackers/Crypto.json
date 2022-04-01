@@ -23,7 +23,7 @@
 	"904232207": { "Name": "Neurolink: Enemies Scanned", "Type": "", "Emote": "" },
 	"722167627": { "Name": "Drone EMP: Shield Damage", "Type": "", "Emote": "" },
 	"1242479494": { "Name": "Drone EMP: Devices Hit", "Type": "", "Emote": "" },
-	"276577930": { "Name": "Season 3 Wins", "Type": "BR", "Emote": "" },
+	"276577930": { "Name": "Wins", "Type": "BR", "Emote": "Season_3" },
 	"1080918393": { "Name": "Season 4 Wins", "Type": "BR", "Emote": "" },
 	"384490082": { "Name": "Season 5 Wins", "Type": "BR", "Emote": "" },
 	"739490518": { "Name": "Season 5 Kills", "Type": "BR", "Emote": "" },
