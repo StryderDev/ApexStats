@@ -24,7 +24,7 @@
 	"1388333529": { "Name": "Breaches Detected", "Type": "", "Emote": "" },
 	"505855570": { "Name": "Friendly Shields Charged", "Type": "", "Emote": "" },
 	"1826314715": { "Name": "Enemy Ordnance Intercepted", "Type": "", "Emote": "" },
-	"706925895": { "Name": "Season 2 Wins", "Type": "BR", "Emote": "" },
+	"706925895": { "Name": "Wins", "Type": "BR", "Emote": "Season_2" },
 	"153803806": { "Name": "Season 3 Wins", "Type": "BR", "Emote": "" },
 	"1715709461": { "Name": "Season 4 Wins", "Type": "BR", "Emote": "" },
 	"1998546657": { "Name": "Season 5 Wins", "Type": "BR", "Emote": "" },
