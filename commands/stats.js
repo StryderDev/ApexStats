@@ -3,6 +3,7 @@ const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
 
 const legends = require('../data/legends.json');
+const { Season } = require('../data/icons.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -69,6 +70,14 @@ module.exports = {
 						return text ? text : '';
 					}
 
+					function emoteCheck(emote, icons) {
+						if (emote != null && emote != 'undefined' && emote.length != 0) {
+							return icons[emote];
+						} else {
+							return '';
+						}
+					}
+
 					if (globalTrackers[id] == null || globalTrackers[id] == 'undefined') {
 						// If the tracker ID doesn't exist in the global trackers file, check
 						// the legend specific tracker file
@@ -77,7 +86,7 @@ module.exports = {
 							// files, just return the ID of the tracker
 							return id;
 						} else {
-							return `${textCheck(legendTracker[id].Emote)} ${textCheck(legendTracker[id].Type)} ${legendTracker[id].Name}`;
+							return `${emoteCheck(legendTracker[id].Emote, Season)} ${textCheck(legendTracker[id].Type)} ${legendTracker[id].Name}`;
 						}
 					} else {
 						return globalTrackers[id];
