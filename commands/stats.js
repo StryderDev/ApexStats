@@ -3,7 +3,7 @@ const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
 
 const legends = require('../data/legends.json');
-const { Season } = require('../data/icons.json');
+const { Season } = require('../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
