@@ -12,5 +12,11 @@
 		"Season_10": "<:ApexStats_Season10:959676569515872297>",
 		"Season_11": "<:ApexStats_Season11:959678408269365279>",
 		"Season_12": "<:ApexStats_Season12:959680085043068948>"
+	},
+	"Misc": {
+		"Threshold_PC": "<:ApexStats_PC:959748102649159730>",
+		"Threshold_PlayStation": "<:ApexStats_PlayStation:959746627382423572>",
+		"Threshold_Xbox": "<:ApexStats_Xbox:959747366934687794>",
+		"Threshold_Switch": "<:ApexStats_Switch:959749050054365204>"
 	}
 }

@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
 
-const legends = require('../data/legends.json');
+const { Misc } = require('../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('threshold').setDescription('Shows the Apex Predator threshold for PC, PlayStation, and Xbox.'),
@@ -20,17 +20,22 @@ module.exports = {
 				const PC = data.PC;
 				const PS4 = data.PS4;
 				const X1 = data.X1;
+				const Switch = data.Switch;
 
 				const embed = new MessageEmbed()
 					.setTitle(`Apex Predator Threshold for Split ${season.split} of Apex Legends: ${season.name}`)
 					.addField(
 						'Battle Royale',
-						`PC (Steam/Origin): ${PC.Battle_Royale.toLocaleString()} RP\nPlayStation: ${PS4.Battle_Royale.toLocaleString()} RP\nXbox: ${X1.Battle_Royale.toLocaleString()} RP\n`,
+						`${Misc.Threshold_PC} PC: ${PC.Battle_Royale.toLocaleString()} RP\n${Misc.Threshold_Xbox} Xbox: ${X1.Battle_Royale.toLocaleString()} RP\n${
+							Misc.Threshold_PlayStation
+						} PlayStation: ${PS4.Battle_Royale.toLocaleString()} RP\n${Misc.Threshold_Switch} Nintendo Switch: ${Switch.Battle_Royale.toLocaleString()} RP`,
 						true,
 					)
 					.addField(
 						'Arenas',
-						`PC (Steam/Origin): ${PC.Arenas.toLocaleString()} AP\nPlayStation: ${PS4.Arenas.toLocaleString()} AP\nXbox: ${X1.Arenas.toLocaleString()} AP\n`,
+						`${Misc.Threshold_PC} PC: ${PC.Arenas.toLocaleString()} AP\n${Misc.Threshold_Xbox} Xbox: ${X1.Arenas.toLocaleString()} AP\n${
+							Misc.Threshold_PlayStation
+						} PlayStation: ${PS4.Arenas.toLocaleString()} AP\n${Misc.Threshold_Switch} Nintendo Switch: ${Switch.Arenas.toLocaleString()} AP`,
 						true,
 					)
 					.setFooter({ text: 'Data updated hourly.\nThis is an approximation and may not be entirely accurate.' });
