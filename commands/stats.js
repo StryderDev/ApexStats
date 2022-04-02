@@ -169,7 +169,7 @@ module.exports = {
 						)}`,
 						true,
 					)
-					.addField(`\u200b`, '**Current Equipped Trackers**')
+					.addField(`\u200b`, '**Currently Equipped Trackers**')
 					.addField(`${trackerID(legend, trackers[0].id)}`, `${trackerValue(trackers[0].id, trackers[0].value)}`, true)
 					.addField(`${trackerID(legend, trackers[1].id)}`, `${trackerValue(trackers[1].id, trackers[1].value)}`, true)
 					.addField(`${trackerID(legend, trackers[2].id)}`, `${trackerValue(trackers[2].id, trackers[2].value)}`, true)
