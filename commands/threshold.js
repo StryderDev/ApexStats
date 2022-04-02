@@ -22,15 +22,15 @@ module.exports = {
 				const X1 = data.X1;
 
 				const embed = new MessageEmbed()
-					.setTitle(`Apex Predator Threshold for Apex Legends: ${season.name} Split ${season.split}`)
+					.setTitle(`Apex Predator Threshold for Split ${season.split} of Apex Legends: ${season.name}`)
 					.addField(
 						'Battle Royale',
-						`PC (Steam/Origin): ${PC.min_BR_RP.toLocaleString()} RP\nPlayStation: ${PS4.min_BR_RP.toLocaleString()} RP\nXbox: ${X1.min_BR_RP.toLocaleString()} RP\n`,
+						`PC (Steam/Origin): ${PC.Battle_Royale.toLocaleString()} RP\nPlayStation: ${PS4.Battle_Royale.toLocaleString()} RP\nXbox: ${X1.Battle_Royale.toLocaleString()} RP\n`,
 						true,
 					)
 					.addField(
 						'Arenas',
-						`PC (Steam/Origin): ${PC.min_AR_AP.toLocaleString()} AP\nPlayStation: ${PS4.min_AR_AP.toLocaleString()} AP\nXbox: ${X1.min_AR_AP.toLocaleString()} AP\n`,
+						`PC (Steam/Origin): ${PC.Arenas.toLocaleString()} AP\nPlayStation: ${PS4.Arenas.toLocaleString()} AP\nXbox: ${X1.Arenas.toLocaleString()} AP\n`,
 						true,
 					)
 					.setFooter({ text: 'Data updated hourly.\nThis is an approximation and may not be entirely accurate.' });
