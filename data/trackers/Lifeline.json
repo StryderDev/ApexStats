@@ -53,6 +53,6 @@
 	"1656327819": { "Name": "Kills", "Type": "BR", "Emote": "" },
 	"668417164": { "Name": "D.O.C. Drone: Healing", "Type": "", "Emote": "" },
 	"1457817166": { "Name": "Damage", "Type": "BR", "Emote": "" },
-	"709705299": { "Name": "Season 12 Kills", "Type": "BR", "Emote": "" },
-	"184919548": { "Name": "Season 12 Wins", "Type": "BR", "Emote": "" }
+	"709705299": { "Name": "Kills", "Type": "BR", "Emote": "Season_12" },
+	"184919548": { "Name": "Wins", "Type": "BR", "Emote": "Season_12" }
 }

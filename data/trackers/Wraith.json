@@ -46,8 +46,8 @@
 	"1429828703": { "Name": "Wins", "Type": "BR", "Emote": "Season_10" },
 	"2391434": { "Name": "Kills", "Type": "BR", "Emote": "Season_11" },
 	"1168589469": { "Name": "Wins", "Type": "BR", "Emote": "Season_11" },
-	"1657278385": { "Name": "Season 12 Kills", "Type": "BR", "Emote": "" },
-	"939245945": { "Name": "Season 12 Wins", "Type": "BR", "Emote": "" },
+	"1657278385": { "Name": "Kills", "Type": "BR", "Emote": "Season_12" },
+	"939245945": { "Name": "Wins", "Type": "BR", "Emote": "Season_12" },
 	"1404029475": { "Name": "Kills", "Type": "BR", "Emote": "" },
 	"526250399": { "Name": "Into The Void: Time", "Type": "", "Emote": "" },
 	"1596439333": { "Name": "Damage", "Type": "BR", "Emote": "" }

@@ -35,8 +35,8 @@
 	"1735566209": { "Name": "Wins", "Type": "BR", "Emote": "Season_10" },
 	"434127071": { "Name": "Kills", "Type": "BR", "Emote": "Season_11" },
 	"2073694535": { "Name": "Wins", "Type": "BR", "Emote": "Season_11" },
-	"1850243880": { "Name": "Season 12 Kills", "Type": "BR", "Emote": "" },
-	"574828916": { "Name": "Season 12 Wins", "Type": "BR", "Emote": "" },
+	"1850243880": { "Name": "Kills", "Type": "BR", "Emote": "Season_12" },
+	"574828916": { "Name": "Wins", "Type": "BR", "Emote": "Season_12" },
 	"425607308": { "Name": "Kills", "Type": "BR", "Emote": "" },
 	"2075653396": { "Name": "Missile Swarm: Enemies Hit", "Type": "", "Emote": "" },
 	"1105714586": { "Name": "Damage", "Type": "BR", "Emote": "" }

@@ -37,6 +37,6 @@
 	"684416466": { "Name": "Kills", "Type": "BR", "Emote": "" },
 	"1804320440": { "Name": "Knuckle Cluster: Total Hits", "Type": "", "Emote": "" },
 	"910472006": { "Name": "Damage", "Type": "BR", "Emote": "" },
-	"912322227": { "Name": "Season 12 Kills", "Type": "BR", "Emote": "" },
-	"1751501018": { "Name": "Season 12 Wins", "Type": "BR", "Emote": "" }
+	"912322227": { "Name": "Kills", "Type": "BR", "Emote": "Season_12" },
+	"1751501018": { "Name": "Wins", "Type": "BR", "Emote": "Season_12" }
 }

@@ -23,8 +23,8 @@
 	"1437126858": { "Name": "Warlord's Ire: Highlight Time", "Type": "", "Emote": "" },
 	"1874927231": { "Name": "Riot Drill: Drill Distance", "Type": "", "Emote": "" },
 	"1383921756": { "Name": "Wrecking Ball: Boosted Travel Distance", "Type": "", "Emote": "" },
-	"583499648": { "Name": "Season 12 Kills", "Type": "BR", "Emote": "" },
-	"1006298960": { "Name": "Season 12 Wins", "Type": "BR", "Emote": "" },
+	"583499648": { "Name": "Kills", "Type": "BR", "Emote": "Season_12" },
+	"1006298960": { "Name": "Wins", "Type": "BR", "Emote": "Season_12" },
 	"175418370": { "Name": "Kills", "Type": "BR", "Emote": "" },
 	"1679240674": { "Name": "Wins", "Type": "BR", "Emote": "" },
 	"927425316": { "Name": "Damage", "Type": "BR", "Emote": "" }

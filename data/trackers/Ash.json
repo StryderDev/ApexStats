@@ -28,6 +28,6 @@
 	"2079108808": { "Name": "Kills", "Type": "BR", "Emote": "" },
 	"413126324": { "Name": "Arc Snare: Enemies Tethered", "Type": "", "Emote": "" },
 	"1585878493": { "Name": "Damage", "Type": "BR", "Emote": "" },
-	"1842187457": { "Name": "Season 12 Kills", "Type": "BR", "Emote": "" },
-	"1545736565": { "Name": "Season 12 Wins", "Type": "BR", "Emote": "" }
+	"1842187457": { "Name": "Kills", "Type": "BR", "Emote": "Season_12" },
+	"1545736565": { "Name": "Wins", "Type": "BR", "Emote": "Season_12" }
 }
