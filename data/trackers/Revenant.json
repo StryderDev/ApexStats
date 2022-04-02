@@ -42,8 +42,8 @@
 	"963539172": { "Name": "Kills", "Type": "BR", "Emote": "" },
 	"845761952": { "Name": "Silence: Enemies Silenced", "Type": "", "Emote": "" },
 	"1622995866": { "Name": "Damage", "Type": "BR", "Emote": "" },
-	"1686218601": { "Name": "Season 11 Kills", "Type": "BR", "Emote": "" },
-	"1980141079": { "Name": "Season 11 Wins", "Type": "BR", "Emote": "" },
+	"1686218601": { "Name": "Kills", "Type": "BR", "Emote": "Season_11" },
+	"1980141079": { "Name": "Wins", "Type": "BR", "Emote": "Season_11" },
 	"864710815": { "Name": "Season 12 Kills", "Type": "BR", "Emote": "" },
 	"1673334703": { "Name": "Season 12 Wins", "Type": "BR", "Emote": "" }
 }

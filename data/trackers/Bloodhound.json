@@ -47,8 +47,8 @@
 	"1572687095": { "Name": "Kills", "Type": "BR", "Emote": "" },
 	"1983286878": { "Name": "Eye: Enemies Scanned" },
 	"2056749197": { "Name": "Damage", "Type": "BR", "Emote": "" },
-	"1082690558": { "Name": "Season 11 Kills", "Type": "BR", "Emote": "" },
-	"796183546": { "Name": "Season 11 Wins", "Type": "BR", "Emote": "" },
+	"1082690558": { "Name": "Kills", "Type": "BR", "Emote": "Season_11" },
+	"796183546": { "Name": "Wins", "Type": "BR", "Emote": "Season_11" },
 	"937176056": { "Name": "Season 12 Kills", "Type": "BR", "Emote": "" },
 	"661134271": { "Name": "Season 12 Wins", "Type": "BR", "Emote": "" }
 }
