@@ -17,7 +17,7 @@ module.exports = {
 			.setTitle('Apex Legends Stats Bot')
 			.setDescription('Get user stats, Battle Royale and Arenas map rotations, news, and more. Start by typing `/` for a list of commands.')
 			.setThumbnail('https://cdn.apexstats.dev/Bot/Avatar/2022/Season%2012.png')
-			.addField('Links', '[Ko-Fi](https://ko-fi.com/sdcore)\n[GitHub](https://github.com/sdcore/apex-stats-bot)\n[Support Server](https://discord.gg/eH8VxssFW6)', true)
+			.addField('Links', '[Ko-Fi](https://ko-fi.com/sdcore)\n[GitHub](https://github.com/stryderdev/apex-stats-bot)\n[Support Server](https://discord.gg/eH8VxssFW6)', true)
 			.addField('Bot Info', `Shard ${interaction.client.shard.ids[0] + 1}/${interaction.client.shard.count}\nVersion ${version}\nCodename "${release.name}"`, true)
 			.addField('Uptime', `${days}d, ${hours}h, ${minutes}m, ${seconds}s`, true)
 			.setFooter({ text: 'Wanna add the bot to your server? Click the "Apex Stats" username and press "Add to Server"' });
