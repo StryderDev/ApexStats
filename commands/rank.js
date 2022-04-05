@@ -54,25 +54,26 @@ module.exports = {
 				interaction.editReply({ embeds: [stats] });
 			})
 			.catch(error => {
-				// Request failed with a response outside of the 2xx range
 				if (error.response) {
 					console.log(error.response.data);
-					// console.log(error.response.status);
-					// console.log(error.response.headers);
 
-					interaction.editReply({ content: `**Error**\n\`${error.response.data.error}\``, embeds: [] });
+					const errorEmbed = new MessageEmbed().setDescription(`**Lookup Error**\n\`\`\`${error.response.data.error}\`\`\``).setColor('D0342C');
+
+					interaction.editReply({ embeds: [errorEmbed] });
 				} else if (error.request) {
 					console.log(error.request);
-					interaction.editReply({
-						content: `**Error**\n\`The request was not returned successfully.\``,
-						embeds: [],
-					});
+
+					const errorEmbed = new MessageEmbed().setDescription(`**Lookup Error**\n\`\`\`The request was not returned successfully. Try again\`\`\``).setColor('D0342C');
+
+					interaction.editReply({ embeds: [errorEmbed] });
 				} else {
 					console.log(error.message);
-					interaction.editReply({
-						content: `**Error**\n\`Unknown. Try again or tell SDCore#0001.\``,
-						embeds: [],
-					});
+
+					const errorEmbed = new MessageEmbed()
+						.setDescription(`**Unknown Error**\n\`\`\`Unknown or uncaught error. Try again or contact SDCore#0001.\`\`\``)
+						.setColor('D0342C');
+
+					interaction.editReply({ embeds: [errorEmbed] });
 				}
 			});
 	},
