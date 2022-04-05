@@ -7,7 +7,7 @@ const { Misc } = require('../data/emotes.json');
 module.exports = {
 	data: new SlashCommandBuilder().setName('threshold').setDescription('Shows the Apex Predator threshold for PC, PlayStation, and Xbox.'),
 	async execute(interaction) {
-		const loadingEmbed = new MessageEmbed().setDescription(`<a:ApexStats_Loading:940037271980220416> Gathering data for Apex Predator threshold...`);
+		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Gathering data for Apex Predator threshold...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 

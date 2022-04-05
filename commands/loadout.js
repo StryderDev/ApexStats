@@ -3,11 +3,12 @@ const { MessageEmbed } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
 
 const guns = require('../data/guns.json');
+const { Misc } = require('../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('loadout').setDescription('Picks a random loadout to use in-game.'),
 	async execute(interaction) {
-		await interaction.editReply({ content: '<a:ApexStats_Loading:940037271980220416> Choosing a random loadout to use...' });
+		await interaction.editReply({ content: `${Misc.Loading} Choosing a random loadout to use...` });
 		await wait(1000);
 
 		const gunOne = Math.floor(Math.random() * guns.length);

@@ -2,6 +2,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
 
+const { Misc } = require('../data/emotes.json');
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('who')
@@ -20,7 +22,7 @@ module.exports = {
 		// Options
 		const type = interaction.options.getString('type');
 
-		const loadingEmbed = new MessageEmbed().setDescription(`<a:ApexStats_Loading:940037271980220416> Choosing a random legend...`);
+		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Choosing a random legend...`);
 
 		const legends = [
 			'Bloodhound',

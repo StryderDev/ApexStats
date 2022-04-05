@@ -3,6 +3,7 @@ const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
 
 const { api } = require('../config.json');
+const { Misc } = require('../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('control').setDescription('Shows the current in-game control map.'),
@@ -11,7 +12,7 @@ module.exports = {
 
 		// await interaction.editReply({ content: text });
 
-		const loadingEmbed = new MessageEmbed().setDescription(`<a:ApexStats_Loading:940037271980220416> Loading current in-game Control map...`);
+		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game Control map...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 

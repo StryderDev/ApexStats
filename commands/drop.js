@@ -3,6 +3,7 @@ const axios = require('axios');
 const wait = require('util').promisify(setTimeout);
 
 const { api } = require('../config.json');
+const { Misc } = require('../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -22,7 +23,7 @@ module.exports = {
 		// Options
 		const mapOption = interaction.options.getString('map');
 
-		await interaction.editReply({ content: '<a:ApexStats_Loading:940037271980220416> Choosing a random place to drop...' });
+		await interaction.editReply({ content: `${Misc.Loading} Choosing a random place to drop...` });
 		await wait(1000);
 
 		if (mapOption != null) {

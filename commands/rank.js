@@ -1,19 +1,21 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
+const axios = require('axios');
 
-const legends = require('../data/legends.json');
+const { platformName, getStatus, rankLayout } = require('./functions/stats.js');
+
+const { Misc, Status, Ranked } = require('../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('rank')
-		.setDescription('Shows rank for a specific user.')
+		.setDescription('Shows in-game Battle Royale and Arenas rank for a specific user.')
 		.addStringOption(option =>
 			option
 				.setName('platform')
-				.setDescription('The platform that you play Apex on.')
+				.setDescription('The platform you play Apex on.')
 				.setRequired(true)
-				.addChoice('PC (Steam/Origin)', 'PC')
+				.addChoice('PC (Steam / Origin)', 'PC')
 				.addChoice('Xbox', 'X1')
 				.addChoice('PlayStation', 'PS4'),
 		)
@@ -23,50 +25,33 @@ module.exports = {
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		function platformName(platform) {
-			if (platform == 'X1') return 'Xbox';
-			if (platform == 'PS4') return 'PlayStation';
+		const loading = new MessageEmbed().setDescription(`${Misc.Loading} Loading ranked data for ${username} on ${platformName(platform)}...`);
 
-			return platform;
-		}
-
-		const loadingEmbed = new MessageEmbed().setDescription(`<a:ApexStats_Loading:940037271980220416> Loading stats for ${username} on ${platformName(platform)}...`);
-
-		await interaction.editReply({ embeds: [loadingEmbed] });
+		await interaction.editReply({ embeds: [loading] });
 
 		await axios
 			.get(`https://api.apexstats.dev/stats?platform=${platform}&player=${encodeURIComponent(username)}`)
 			.then(response => {
 				const data = response.data;
 
-				const brRanked = data.ranked.BR;
-				const arenasRanked = data.ranked.Arenas;
+				// User data
+				const user = data.user;
+				const status = user.status;
 
-				function rankLayout(type, score, name, division, pos) {
-					function showDiv(name, div) {
-						if (name == 'Master' || name == 'Apex Predator' || name == 'Unranked') return '';
+				// Ranked Data
+				const ranked = data.ranked;
+				const br = ranked.BR;
+				const arenas = ranked.Arenas;
 
-						return div;
-					}
+				const stats = new MessageEmbed()
+					.setTitle(`Ranked Stats for ${user.username} on ${platformName(platform)}`)
+					.setDescription(`**Status**\n${getStatus(status, Status)}`)
+					.addField(`Battle Royale Ranked`, `${rankLayout('RP', br, Ranked)}`, true)
+					.addField('Arenas Ranked', `${rankLayout('AP', arenas, Ranked)}`, true)
+					.setFooter({ text: `ID: ${data.user.id} · https://apexstats.dev/` })
+					.setTimestamp();
 
-					function showPos(name, pos) {
-						if (name == 'Apex Predator') return `[#${pos}]`;
-
-						return '';
-					}
-
-					return `${showPos(name, pos)} ${name} ${showDiv(name, division)}\n${score.toLocaleString()} ${type}`;
-				}
-
-				const embed = new MessageEmbed()
-					.setTitle(`Rank Stats for ${data.user.username} on ${platformName(platform)}`)
-					.addField(`Battle Royale Ranked`, `${rankLayout('RP', brRanked.score, brRanked.name, brRanked.division, brRanked.ladderPos)}`, true)
-					.addField(`Arenas Ranked`, `${rankLayout('AP', arenasRanked.score, arenasRanked.name, arenasRanked.division, arenasRanked.ladderPos)}`, true)
-					.setFooter({
-						text: `User ID: ${data.user.id} · https://apexstats.dev/`,
-					});
-
-				interaction.editReply({ embeds: [embed] });
+				interaction.editReply({ embeds: [stats] });
 			})
 			.catch(error => {
 				// Request failed with a response outside of the 2xx range

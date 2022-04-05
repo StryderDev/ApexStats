@@ -2,12 +2,12 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
 
-const { api } = require('../config.json');
+const { Misc } = require('../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('arenas').setDescription('Shows the current in-game arena.'),
 	async execute(interaction) {
-		const loadingEmbed = new MessageEmbed().setDescription(`<a:ApexStats_Loading:940037271980220416> Loading current in-game arena...`);
+		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game arena...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
