@@ -1,20 +1,22 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
+const axios = require('axios');
 
+const { platformName, getStatus, battlepass, rankLayout, trackerName, trackerValue } = require('./functions/stats.js');
+
+const { Misc, Status, Account, Ranked, Season } = require('../data/emotes.json');
 const legends = require('../data/legends.json');
-const { Season } = require('../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('stats')
-		.setDescription('Shows stats for a specific user.')
+		.setDescription('Shows legend stats, account and rank info, and online status.')
 		.addStringOption(option =>
 			option
 				.setName('platform')
-				.setDescription('The platform that you play Apex on.')
+				.setDescription('The platform you play Apex on.')
 				.setRequired(true)
-				.addChoice('PC (Steam/Origin)', 'PC')
+				.addChoice('PC (Steam / Origin)', 'PC')
 				.addChoice('Xbox', 'X1')
 				.addChoice('PlayStation', 'PS4'),
 		)
@@ -24,182 +26,68 @@ module.exports = {
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		function platformName(platform) {
-			if (platform == 'X1') return 'Xbox';
-			if (platform == 'PS4') return 'PlayStation';
+		const loading = new MessageEmbed().setDescription(`${Misc.Loading} Loading data for ${username} on ${platformName(platform)}...`);
 
-			return platform;
-		}
-
-		const loadingEmbed = new MessageEmbed().setDescription(`<a:ApexStats_Loading:940037271980220416> Loading stats for ${username} on ${platformName(platform)}...`);
-
-		await interaction.editReply({ embeds: [loadingEmbed] });
+		await interaction.editReply({ embeds: [loading] });
 
 		await axios
 			.get(`https://api.apexstats.dev/stats?platform=${platform}&player=${encodeURIComponent(username)}`)
 			.then(response => {
 				const data = response.data;
 
-				const brRanked = data.ranked.BR;
-				const arenasRanked = data.ranked.Arenas;
-				const trackers = data.active.trackers;
+				// User data
+				const user = data.user;
+				const status = user.status;
 				const legend = data.active.legend;
-				const status = data.user.status;
 
-				function bpLevel(battlepass) {
-					if (!battlepass.history) {
-						if (battlepass.level > 110) return 110;
+				// Ranked Data
+				const ranked = data.ranked;
+				const br = ranked.BR;
+				const arenas = ranked.Arenas;
 
-						return battlepass.level;
-					}
+				// Tracker Data
+				const trackers = data.active.trackers;
 
-					if (battlepass.history.season12 > 111) return 110;
-
-					return battlepass.history.season12;
-				}
-
-				function trackerID(legend, id) {
-					const legendName = require('../data/legends.json');
-
-					if (id == '1905735931') return 'No Data';
-
-					const legendTracker = require(`../data/trackers/${legendName[legend]}.json`);
-					const globalTrackers = require('../data/globalTrackers.json');
-
-					function textCheck(text) {
-						return text ? text : '';
-					}
-
-					function emoteCheck(emote, icons) {
-						if (emote != null && emote != 'undefined' && emote.length != 0) {
-							return icons[emote];
-						} else {
-							return '';
-						}
-					}
-
-					if (globalTrackers[id] == null || globalTrackers[id] == 'undefined') {
-						// If the tracker ID doesn't exist in the global trackers file, check
-						// the legend specific tracker file
-						if (legendTracker[id] == null || legendTracker[id] == 'undefined') {
-							// If the tracker ID doesn't exist in the global or legend tracker
-							// files, just return the ID of the tracker
-							return id;
-						} else {
-							return `${emoteCheck(legendTracker[id].Emote, Season)} ${textCheck(legendTracker[id].Type)} ${legendTracker[id].Name}`;
-						}
-					} else {
-						return globalTrackers[id];
-					}
-				}
-
-				function trackerValue(id, value) {
-					if (id == '1905735931') return '-';
-
-					return value.toLocaleString();
-				}
-
-				function rankLayout(type, score, name, division, pos) {
-					function showDiv(name, div) {
-						if (name == 'Master' || name == 'Apex Predator' || name == 'Unranked') return '';
-
-						return div;
-					}
-
-					function showPos(name, pos) {
-						if (name == 'Apex Predator') return `[#${pos}]`;
-
-						return '';
-					}
-
-					return `${showPos(name, pos)} ${name} ${showDiv(name, division)}\n${score.toLocaleString()} ${type}`;
-				}
-
-				function getStatus(status) {
-					// Status Emotes
-					const offline = '<:ApexStats_BlackDot:955005604248838145>';
-					const online = '<:ApexStats_GreenDot:955008202116845568>';
-					const inMatch = '<:ApexStats_YellowDot:955008542862110760>';
-
-					seconds = Math.floor(status.matchLength % 60).toLocaleString(undefined, { minimumIntegerDigits: 2 });
-					minutes = Math.floor(status.matchLength / 60).toLocaleString(undefined, { minimumIntegerDigits: 2 });
-
-					if (status.online == 1 && status.ingame == 0) {
-						if (status.matchLength != -1) return `${online} Lobby (${minutes}:${seconds})`;
-
-						return `${online} Online (Lobby)`;
-					}
-
-					if (status.online == 1 && status.ingame == 1) {
-						if (status.matchLength != -1) return `${inMatch} In a Match (${minutes}:${seconds})`;
-
-						return `${inMatch} In a Match`;
-					}
-
-					return `${offline} Offline / Invite Only`;
-				}
-
-				// Emotes
-				const accountLevel = '<:ApexStats_AccountLevel:909364972943999016>';
-				const battlePass = '<:ApexStats_Season12BP:955001758315323432>';
-
-				// Stats Embed
-				const embed = new MessageEmbed()
-					.setTitle(`Stats for ${data.user.username} on ${platformName(platform)} playing ${legends[legend]}`)
-					.setDescription(`**Status**\n${getStatus(status)}`)
+				const stats = new MessageEmbed()
+					.setTitle(`Stats for ${user.username} on ${platformName(platform)} playing ${legends[legend]}`)
+					.setDescription(`**Status**\n${getStatus(status, Status)}`)
+					.addField(`Account`, `${Account.Level} Level ${data.account.level.toLocaleString()}\n\n**Battle Royale Ranked**\n${rankLayout('RP', br, Ranked)}`, true)
 					.addField(
-						`Account`,
-						`${accountLevel} Level ${data.account.level.toLocaleString()}\n\n**Battle Royale Ranked**\n${rankLayout(
-							'RP',
-							brRanked.score,
-							brRanked.name,
-							brRanked.division,
-							brRanked.ladderPos,
-						)}`,
-						true,
-					)
-					.addField(
-						`Defiance Battle Pass`,
-						`${battlePass} Level ${bpLevel(data.account.battlepass)}\n\n**Arenas Ranked**\n${rankLayout(
-							'AP',
-							arenasRanked.score,
-							arenasRanked.name,
-							arenasRanked.division,
-							arenasRanked.ladderPos,
-						)}`,
+						'Defiance Battle Pass',
+						`${Account.BattlePass} Level ${battlepass(data.account.battlepass)}\n\n**Arenas Ranked**\n${rankLayout('AP', arenas, Ranked)}`,
 						true,
 					)
 					.addField(`\u200b`, '**Currently Equipped Trackers**')
-					.addField(`${trackerID(legend, trackers[0].id)}`, `${trackerValue(trackers[0].id, trackers[0].value)}`, true)
-					.addField(`${trackerID(legend, trackers[1].id)}`, `${trackerValue(trackers[1].id, trackers[1].value)}`, true)
-					.addField(`${trackerID(legend, trackers[2].id)}`, `${trackerValue(trackers[2].id, trackers[2].value)}`, true)
-					.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legends[data.active.legend])}.png`)
-					.setFooter({
-						text: `User ID: ${data.user.id} · https://apexstats.dev/\nBattle Pass level incorrect? Equip the badge in-game!`,
-					});
+					.addField(`${trackerName(legends[legend], trackers[0].id, Season)}`, `${trackerValue(trackers[0].id, trackers[0].value)}`, true)
+					.addField(`${trackerName(legends[legend], trackers[1].id, Season)}`, `${trackerValue(trackers[1].id, trackers[1].value)}`, true)
+					.addField(`${trackerName(legends[legend], trackers[2].id, Season)}`, `${trackerValue(trackers[2].id, trackers[2].value)}`, true)
+					.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legends[legend])}.png`)
+					.setFooter({ text: `ID: ${data.user.id} · https://apexstats.dev/\nBattlePass level incorrect? Equip the badge in-game!` })
+					.setTimestamp();
 
-				interaction.editReply({ embeds: [embed] });
+				interaction.editReply({ embeds: [stats] });
 			})
 			.catch(error => {
-				// Request failed with a response outside of the 2xx range
 				if (error.response) {
 					console.log(error.response.data);
-					// console.log(error.response.status);
-					// console.log(error.response.headers);
 
-					interaction.editReply({ content: `**Error**\n\`${error.response.data.error}\``, embeds: [] });
+					const errorEmbed = new MessageEmbed().setDescription(`**Lookup Error**\n\`\`\`${error.response.data.error}\`\`\``).setColor('D0342C');
+
+					interaction.editReply({ embeds: [errorEmbed] });
 				} else if (error.request) {
 					console.log(error.request);
-					interaction.editReply({
-						content: `**Error**\n\`The request was not returned successfully.\``,
-						embeds: [],
-					});
+
+					const errorEmbed = new MessageEmbed().setDescription(`**Lookup Error**\n\`\`\`The request was not returned successfully. Try again\`\`\``).setColor('D0342C');
+
+					interaction.editReply({ embeds: [errorEmbed] });
 				} else {
 					console.log(error.message);
-					interaction.editReply({
-						content: `**Error**\n\`Unknown. Try again or tell SDCore#0001.\``,
-						embeds: [],
-					});
+
+					const errorEmbed = new MessageEmbed()
+						.setDescription(`**Unknown Error**\n\`\`\`Unknown or uncaught error. Try again or contact SDCore#0001.\`\`\``)
+						.setColor('D0342C');
+
+					interaction.editReply({ embeds: [errorEmbed] });
 				}
 			});
 	},

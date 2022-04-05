@@ -1,4 +1,23 @@
 {
+	"Account": {
+		"Level": "<:ApexStats_AccountLevel:909364972943999016>",
+		"BattlePass": "<:ApexStats_Season12BP:955001758315323432>"
+	},
+	"Ranked": {
+		"Unranked": "N/A",
+		"Bronze": "Bronze",
+		"Silver": "Silver",
+		"Gold": "Gold",
+		"Platinum": "Platinum",
+		"Diamond": "Diamond",
+		"Master": "Master",
+		"Apex Predator": "Apex Predator"
+	},
+	"Status": {
+		"Offline": "<:ApexStats_BlackDot:955005604248838145>",
+		"Online": "<:ApexStats_GreenDot:955008202116845568>",
+		"inGame": "<:ApexStats_YellowDot:955008542862110760>"
+	},
 	"Season": {
 		"Season_1": "<:ApexStats_Season1:959384756619980840>",
 		"Season_2": "<:ApexStats_Season2:959390017208352798>",
@@ -14,6 +33,7 @@
 		"Season_12": "<:ApexStats_Season12:959680085043068948>"
 	},
 	"Misc": {
+		"Loading": "<a:ApexStats_Loading:940037271980220416>",
 		"Threshold_PC": "<:ApexStats_PC:959748102649159730>",
 		"Threshold_PlayStation": "<:ApexStats_PlayStation:959746627382423572>",
 		"Threshold_Xbox": "<:ApexStats_Xbox:959747366934687794>",
