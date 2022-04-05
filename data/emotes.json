@@ -4,14 +4,14 @@
 		"BattlePass": "<:ApexStats_Season12BP:955001758315323432>"
 	},
 	"Ranked": {
-		"Unranked": "N/A",
-		"Bronze": "Bronze",
-		"Silver": "Silver",
-		"Gold": "Gold",
-		"Platinum": "Platinum",
-		"Diamond": "Diamond",
-		"Master": "Master",
-		"Apex Predator": "Apex Predator"
+		"Unranked": "<:ApexStats_Unranked:960732914344157324>",
+		"Bronze": "<:ApexStats_Bronze:960727831342616596>",
+		"Silver": "<:ApexStats_Silver:960727842235220038>",
+		"Gold": "<:ApexStats_Gold:960727851760488498>",
+		"Platinum": "<:ApexStats_Platinum:960727862686670918>",
+		"Diamond": "<:ApexStats_Diamond:960727873239547956>",
+		"Master": "<:ApexStats_Master:960727885625307186>",
+		"Apex Predator": "<:ApexStats_ApexPredator:960727895637110844>"
 	},
 	"Status": {
 		"Offline": "<:ApexStats_BlackDot:955005604248838145>",
