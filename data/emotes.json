@@ -32,6 +32,11 @@
 		"Season_11": "<:ApexStats_Season11:959678408269365279>",
 		"Season_12": "<:ApexStats_Season12:959680085043068948>"
 	},
+	"serverStatus": {
+		"Online": "<:ApexStats_GreenDot:955008202116845568>",
+		"Slow": "<:ApexStats_YellowDot:955008542862110760>",
+		"Down": "<:ApexStats_RedDot:962614426840756237>"
+	},
 	"Misc": {
 		"Loading": "<a:ApexStats_Loading:940037271980220416>",
 		"Threshold_PC": "<:ApexStats_PC:959748102649159730>",
