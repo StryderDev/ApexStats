@@ -13,6 +13,22 @@ module.exports = {
 
 		await interaction.editReply({ embeds: [loading] });
 
+		function statusLayout(type) {
+			function getEmote(status) {
+				if (status == 'UP') return serverStatus.Online;
+				if (status == 'SLOW') return serverStatus.Slow;
+				if (status == 'DOWN' || status == 'OVERLOADED') return serverStatus.Down;
+			}
+
+			return `${getEmote(type['US-East']['Status'])} **US East:** ${type['US-East']['ResponseTime']}ms\n${getEmote(type['US-Central']['Status'])} **US Central:** ${
+				type['US-Central']['ResponseTime']
+			}ms\n${getEmote(type['US-West']['Status'])} **US West:** ${type['US-West']['ResponseTime']}ms\n${getEmote(type['EU-East']['Status'])} **EU East:** ${
+				type['EU-East']['ResponseTime']
+			}ms\n${getEmote(type['EU-West']['Status'])} **EU West:** ${type['EU-West']['ResponseTime']}ms\n${getEmote(type['SouthAmerica']['Status'])} **South America:** ${
+				type['SouthAmerica']['ResponseTime']
+			}ms\n${getEmote(type['Asia']['Status'])} **Asia:** ${type['Asia']['ResponseTime']}ms`;
+		}
+
 		await axios
 			.get(`https://api.mozambiquehe.re/servers?auth=${api.apex}`)
 			.then(response => {
@@ -23,65 +39,13 @@ module.exports = {
 				const accounts = data['EA_accounts'];
 				const novafusion = data['EA_novafusion'];
 
-				function getEmote(status) {
-					if (status == 'UP') return serverStatus.Online;
-					if (status == 'SLOW') return serverStatus.Slow;
-					if (status == 'DOWN' || status == 'OVERLOADED') return serverStatus.Down;
-				}
-
 				const status = new MessageEmbed()
 					.setTitle('Apex Legends Server Status')
-					.addField(
-						'[Crossplay] Apex Login',
-						`${getEmote(apex['US-East']['Status'])} **US East:** ${apex['US-East']['ResponseTime']}ms\n${getEmote(apex['US-Central']['Status'])} **US Central:** ${
-							apex['US-Central']['ResponseTime']
-						}ms\n${getEmote(apex['US-West']['Status'])} **US West:** ${apex['US-West']['ResponseTime']}ms\n${getEmote(apex['EU-East']['Status'])} **EU East:** ${
-							apex['EU-East']['ResponseTime']
-						}ms\n${getEmote(apex['EU-West']['Status'])} **EU West:** ${apex['EU-West']['ResponseTime']}ms\n${getEmote(
-							apex['SouthAmerica']['Status'],
-						)} **South America:** ${apex['SouthAmerica']['ResponseTime']}ms\n${getEmote(apex['Asia']['Status'])} **Asia:** ${apex['Asia']['ResponseTime']}ms`,
-						true,
-					)
-					.addField(
-						'Origin Login',
-						`${getEmote(origin['US-East']['Status'])} **US East:** ${origin['US-East']['ResponseTime']}ms\n${getEmote(
-							origin['US-Central']['Status'],
-						)} **US Central:** ${origin['US-Central']['ResponseTime']}ms\n${getEmote(origin['US-West']['Status'])} **US West:** ${
-							origin['US-West']['ResponseTime']
-						}ms\n${getEmote(origin['EU-East']['Status'])} **EU East:** ${origin['EU-East']['ResponseTime']}ms\n${getEmote(origin['EU-West']['Status'])} **EU West:** ${
-							origin['EU-West']['ResponseTime']
-						}ms\n${getEmote(origin['SouthAmerica']['Status'])} **South America:** ${origin['SouthAmerica']['ResponseTime']}ms\n${getEmote(
-							origin['Asia']['Status'],
-						)} **Asia:** ${origin['Asia']['ResponseTime']}ms`,
-						true,
-					)
+					.addField('[Crossplay] Apex Login', statusLayout(apex), true)
+					.addField('[Crossplay] Apex Login', statusLayout(origin), true)
 					.addField(`\u200b`, `\u200b`, true)
-					.addField(
-						'EA Accounts',
-						`${getEmote(accounts['US-East']['Status'])} **US East:** ${accounts['US-East']['ResponseTime']}ms\n${getEmote(
-							accounts['US-Central']['Status'],
-						)} **US Central:** ${accounts['US-Central']['ResponseTime']}ms\n${getEmote(accounts['US-West']['Status'])} **US West:** ${
-							accounts['US-West']['ResponseTime']
-						}ms\n${getEmote(accounts['EU-East']['Status'])} **EU East:** ${accounts['EU-East']['ResponseTime']}ms\n${getEmote(
-							accounts['EU-West']['Status'],
-						)} **EU West:** ${accounts['EU-West']['ResponseTime']}ms\n${getEmote(accounts['SouthAmerica']['Status'])} **South America:** ${
-							accounts['SouthAmerica']['ResponseTime']
-						}ms\n${getEmote(accounts['Asia']['Status'])} **Asia:** ${accounts['Asia']['ResponseTime']}ms`,
-						true,
-					)
-					.addField(
-						'EA Novafusion',
-						`${getEmote(novafusion['US-East']['Status'])} **US East:** ${novafusion['US-East']['ResponseTime']}ms\n${getEmote(
-							novafusion['US-Central']['Status'],
-						)} **US Central:** ${novafusion['US-Central']['ResponseTime']}ms\n${getEmote(novafusion['US-West']['Status'])} **US West:** ${
-							novafusion['US-West']['ResponseTime']
-						}ms\n${getEmote(novafusion['EU-East']['Status'])} **EU East:** ${novafusion['EU-East']['ResponseTime']}ms\n${getEmote(
-							novafusion['EU-West']['Status'],
-						)} **EU West:** ${novafusion['EU-West']['ResponseTime']}ms\n${getEmote(novafusion['SouthAmerica']['Status'])} **South America:** ${
-							novafusion['SouthAmerica']['ResponseTime']
-						}ms\n${getEmote(novafusion['Asia']['Status'])} **Asia:** ${novafusion['Asia']['ResponseTime']}ms`,
-						true,
-					)
+					.addField('[Crossplay] Apex Login', statusLayout(accounts), true)
+					.addField('[Crossplay] Apex Login', statusLayout(novafusion), true)
 					.addField(`\u200b`, `\u200b`, true)
 					.setFooter({ text: 'Status data provided by https://apexlegendsstatus.com/' });
 
