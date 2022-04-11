@@ -42,10 +42,10 @@ module.exports = {
 				const status = new MessageEmbed()
 					.setTitle('Apex Legends Server Status')
 					.addField('[Crossplay] Apex Login', statusLayout(apex), true)
-					.addField('[Crossplay] Apex Login', statusLayout(origin), true)
+					.addField('Origin Login', statusLayout(origin), true)
 					.addField(`\u200b`, `\u200b`, true)
-					.addField('[Crossplay] Apex Login', statusLayout(accounts), true)
-					.addField('[Crossplay] Apex Login', statusLayout(novafusion), true)
+					.addField('EA Accounts', statusLayout(accounts), true)
+					.addField('EA Novafusion', statusLayout(novafusion), true)
 					.addField(`\u200b`, `\u200b`, true)
 					.setFooter({ text: 'Status data provided by https://apexlegendsstatus.com/' });
 
