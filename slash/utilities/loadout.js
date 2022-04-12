@@ -2,8 +2,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
 
-const guns = require('../data/guns.json');
-const { Misc } = require('../data/emotes.json');
+const guns = require('../../data/guns.json');
+const { Misc } = require('../../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('loadout').setDescription('Picks a random loadout to use in-game.'),

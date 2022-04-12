@@ -2,8 +2,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const axios = require('axios');
 const wait = require('util').promisify(setTimeout);
 
-const { api } = require('../config.json');
-const { Misc } = require('../data/emotes.json');
+const { api } = require('../../config.json');
+const { Misc } = require('../../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -28,7 +28,7 @@ module.exports = {
 
 		if (mapOption != null) {
 			function mapFilePath(map) {
-				return `../data/drops/Season 12/${map}.json`;
+				return `../../data/drops/Season 12/${map}.json`;
 			}
 
 			const mapFile = require(mapFilePath(mapOption));
@@ -44,7 +44,7 @@ module.exports = {
 					const br = response.data.battle_royale;
 
 					function mapFilePath(map) {
-						return `../data/drops/Season 12/${map}.json`;
+						return `../../data/drops/Season 12/${map}.json`;
 					}
 
 					const mapFile = require(mapFilePath(br.current.map));

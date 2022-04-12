@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
 
-const { Misc } = require('../data/emotes.json');
+const { Misc } = require('../../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()

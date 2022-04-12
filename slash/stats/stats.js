@@ -4,8 +4,8 @@ const axios = require('axios');
 
 const { platformName, getStatus, battlepass, rankLayout, trackerName, trackerValue } = require('./functions/stats.js');
 
-const { Misc, Status, Account, Ranked, Season } = require('../data/emotes.json');
-const legends = require('../data/legends.json');
+const { Misc, Status, Account, Ranked, Season } = require('../../data/emotes.json');
+const legends = require('../../data/legends.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()

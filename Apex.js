@@ -8,16 +8,21 @@ const chalk = require('chalk');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFolders = fs.readdirSync('./slash');
 
 const commands = [];
 
 client.commands = new Collection();
 
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	commands.push(command.data.toJSON());
-	client.commands.set(command.data.name, command);
+for (const folder of commandFolders) {
+	const commandFiles = fs.readdirSync(`./slash/${folder}`).filter(file => file.endsWith('.js'));
+
+	for (const file of commandFiles) {
+		const command = require(`./slash/${folder}/${file}`);
+
+		commands.push(command.data.toJSON());
+		client.commands.set(command.data.name, command);
+	}
 }
 
 client.once('ready', () => {
@@ -52,11 +57,9 @@ client.once('ready', () => {
 	async function uptimeCount() {
 		(function loop() {
 			console.log(
-				`[>>> Shard #${client.shard.ids[0] + 1} Uptime: ${Math.floor(
-					process.uptime() / (60 * 60),
-				)} Hours, ${Math.floor((process.uptime() % (60 * 60)) / 60)} Minutes, ${Math.floor(
-					process.uptime() % 60,
-				)} Seconds]`,
+				`[>>> Shard #${client.shard.ids[0] + 1} Uptime: ${Math.floor(process.uptime() / (60 * 60))} Hours, ${Math.floor(
+					(process.uptime() % (60 * 60)) / 60,
+				)} Minutes, ${Math.floor(process.uptime() % 60)} Seconds]`,
 			);
 
 			now = new Date();

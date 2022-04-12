@@ -2,12 +2,12 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
 
-const { Misc } = require('../data/emotes.json');
+const { Misc } = require('../../data/emotes.json');
 
 module.exports = {
-	data: new SlashCommandBuilder().setName('map').setDescription('Shows the current in-game map.'),
+	data: new SlashCommandBuilder().setName('arenas').setDescription('Shows the current in-game arena.'),
 	async execute(interaction) {
-		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game map...`);
+		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game arena...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -31,17 +31,17 @@ module.exports = {
 		await axios
 			.get(`https://fn.alphaleagues.com/v2/apex/map/?next=1`)
 			.then(response => {
-				const br = response.data.br;
-				const brRanked = br.ranked;
+				const arenas = response.data.arenas;
+				const arenasRanked = arenas.ranked;
 
 				const mapEmbed = new MessageEmbed()
-					.setTitle(`Legends are currently dropping into **${br.map}**.`)
+					.setTitle(`Legends are currently competing in **${arenas.map}**.`)
 					.setDescription(
-						`${br.map} Arena ends <t:${br.times.next}:R>, or at <t:${br.times.next}:t>.\n**Next up:** ${br.next[0].map} for ${mapLength(
-							br.next[0].duration,
-						)}.\n**Ranked Arena**: ${brRanked.map}`,
+						`${arenas.map} Arena ends <t:${arenas.times.next}:R>, or at <t:${arenas.times.next}:t>.\n**Next up:** ${arenas.next[0].map} for ${mapLength(
+							arenas.next[0].duration,
+						)}.\n**Ranked Arena**: ${arenasRanked.map} for <t:${arenasRanked.times.next}:R>.`,
 					)
-					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/BR/${encodeURIComponent(br.map)}.png?q=${Math.floor(Math.random() * 10)}`);
+					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/Arenas/${encodeURIComponent(arenas.map)}.png?q=${Math.floor(Math.random() * 10)}`);
 
 				interaction.editReply({ embeds: [mapEmbed] });
 			})

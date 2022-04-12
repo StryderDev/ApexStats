@@ -2,9 +2,9 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 const axios = require('axios');
 
-const { api } = require('../config.json');
+const { api } = require('../../config.json');
 
-const { Misc, serverStatus } = require('../data/emotes.json');
+const { Misc, serverStatus } = require('../../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('status').setDescription('Shows current in-game server status.'),

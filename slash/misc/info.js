@@ -1,8 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 
-const { release } = require('../config.json');
-const { version } = require('../package.json');
+const { release } = require('../../config.json');
+const { version } = require('../../package.json');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('info').setDescription('Shows info about the bot.'),

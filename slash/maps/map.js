@@ -2,17 +2,12 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
 
-const { api } = require('../config.json');
-const { Misc } = require('../data/emotes.json');
+const { Misc } = require('../../data/emotes.json');
 
 module.exports = {
-	data: new SlashCommandBuilder().setName('control').setDescription('Shows the current in-game control map.'),
+	data: new SlashCommandBuilder().setName('map').setDescription('Shows the current in-game map.'),
 	async execute(interaction) {
-		// const text = `The **Control LTM** is not currently active, but is set to return on <t:1648573200:F>, or <t:1648573200:R>.`;
-
-		// await interaction.editReply({ content: text });
-
-		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game Control map...`);
+		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game map...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -34,18 +29,19 @@ module.exports = {
 		}
 
 		await axios
-			.get(`https://api.mozambiquehe.re/maprotation?version=5&auth=${api.apex}`)
+			.get(`https://fn.alphaleagues.com/v2/apex/map/?next=1`)
 			.then(response => {
-				const control = response.data.control;
+				const br = response.data.br;
+				const brRanked = br.ranked;
 
 				const mapEmbed = new MessageEmbed()
-					.setTitle(`Legends are currently Taking Control in **${control.current.map}**.`)
+					.setTitle(`Legends are currently dropping into **${br.map}**.`)
 					.setDescription(
-						`${control.current.map} ends <t:${control.current.end}:R>, or at <t:${control.current.end}:t>.\n**Next up:** ${control.next.map} for ${mapLength(
-							control.next.DurationInMinutes,
-						)}.`,
+						`${br.map} Arena ends <t:${br.times.next}:R>, or at <t:${br.times.next}:t>.\n**Next up:** ${br.next[0].map} for ${mapLength(
+							br.next[0].duration,
+						)}.\n**Ranked Arena**: ${brRanked.map}`,
 					)
-					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/Control/${encodeURIComponent(control.current.map)}.png`);
+					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/BR/${encodeURIComponent(br.map)}.png?q=${Math.floor(Math.random() * 10)}`);
 
 				interaction.editReply({ embeds: [mapEmbed] });
 			})

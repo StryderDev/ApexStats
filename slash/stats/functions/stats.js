@@ -53,8 +53,8 @@ function rankLayout(type, rank, emote) {
 function trackerName(legend, id, emote) {
 	if (id == '1905735931') return 'No Data';
 
-	const legendTrackers = require(`../../data/trackers/${legend}.json`);
-	const globalTrackers = require('../../data/globalTrackers.json');
+	const legendTrackers = require(`../../../data/trackers/${legend}.json`);
+	const globalTrackers = require('../../../data/globalTrackers.json');
 
 	function text(text) {
 		return text ? text : '';
