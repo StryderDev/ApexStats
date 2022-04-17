@@ -5,9 +5,15 @@ const { MessageEmbed } = require('discord.js');
 const { Misc } = require('../../data/emotes.json');
 
 module.exports = {
-	data: new SlashCommandBuilder().setName('arenas').setDescription('Shows the current in-game arena.'),
+	data: new SlashCommandBuilder()
+		.setName('arenas')
+		.setDescription('Shows the current in-game arena.')
+		.addIntegerOption(option =>
+			option.setName('future').setDescription('Amount of future arenas rotations you would like to see.').setRequired(false).setMinValue(1).setMaxValue(10),
+		),
 	async execute(interaction) {
 		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game arena...`);
+		const future = interaction.options.getInteger('future');
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -28,11 +34,21 @@ module.exports = {
 			}
 		}
 
+		function futureLength(amount) {
+			if (!amount) return '1';
+
+			return amount;
+		}
+
 		await axios
-			.get(`https://fn.alphaleagues.com/v2/apex/map/?next=1`)
+			.get(`https://fn.alphaleagues.com/v2/apex/map/?next=${futureLength(future)}`)
 			.then(response => {
 				const arenas = response.data.arenas;
 				const arenasRanked = arenas.ranked;
+
+				function nextMaps() {
+					return arenas.next.map(x => `**${x.map}**\nStarts <t:${x.timestamp}:R> and lasts for **${mapLength(x.duration)}**.\n\n`).join('');
+				}
 
 				const mapEmbed = new MessageEmbed()
 					.setTitle(`Legends are currently competing in **${arenas.map}**.`)
@@ -43,7 +59,13 @@ module.exports = {
 					)
 					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/Arenas/${encodeURIComponent(arenas.map)}.png?q=${Math.floor(Math.random() * 10)}`);
 
-				interaction.editReply({ embeds: [mapEmbed] });
+				const futureEmbed = new MessageEmbed().setTitle('Future Arenas Rotation Schedule').setDescription(`\u200b${nextMaps()}`);
+
+				if (futureLength(future) == '1') {
+					interaction.editReply({ embeds: [mapEmbed] });
+				} else {
+					interaction.editReply({ embeds: [futureEmbed] });
+				}
 			})
 			.catch(error => {
 				// Request failed with a response outside of the 2xx range
