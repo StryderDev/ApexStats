@@ -1,6 +1,6 @@
 {
 	"name": "apex-stats-bot",
-	"version": "0.11.28",
+	"version": "0.11.28-1",
 	"main": "Shard.js",
 	"scripts": {
 		"dev": "nodemon Shard.js"
