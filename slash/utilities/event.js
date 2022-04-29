@@ -10,7 +10,7 @@ module.exports = {
 		.setDescription('Shows current or future event information.')
 		.addBooleanOption(option => option.setName('compact').setDescription('test').setRequired(false)),
 	async execute(interaction) {
-		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading in-game event information...`);
+		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading in-game event information...`).setColor('2F3136');
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -33,6 +33,7 @@ module.exports = {
 					.addField('Start Date', `<t:${data.time.startTimestamp}:f>\nor <t:${data.time.startTimestamp}:R>`, true)
 					.addField('End Date', `<t:${data.time.endTimestamp}:f>\nor <t:${data.time.endTimestamp}:R>`, true)
 					.setImage(data.assets.image)
+					.setColor('2F3136')
 					.setFooter({ text: 'Dates are formatted automatically for your timezone.' });
 
 				const activeEvent = new MessageEmbed()
@@ -42,15 +43,17 @@ module.exports = {
 					.addField('Start Date', `<t:${data.time.startTimestamp}:f>`, true)
 					.addField('End Date', `<t:${data.time.endTimestamp}:f>\nor <t:${data.time.endTimestamp}:R>`, true)
 					.setImage(data.assets.image)
+					.setColor('2F3136')
 					.setFooter({ text: 'Dates are formatted automatically for your timezone.' });
 
-				const postEvent = new MessageEmbed().setTitle('No Event Active').setDescription('No event is active or upcoming. Check back later for updates!');
+				const postEvent = new MessageEmbed().setTitle('No Event Active').setDescription('No event is active or upcoming. Check back later for updates!').setColor('2F3136');
 
 				const preEventCompact = new MessageEmbed()
 					.setTitle(`Countdown to ${data.name}`)
 					.setURL(data.assets.link)
 					.addField('Start Date', `<t:${data.time.startTimestamp}:f>\nor <t:${data.time.startTimestamp}:R>`, true)
 					.addField('End Date', `<t:${data.time.endTimestamp}:f>\nor <t:${data.time.endTimestamp}:R>`, true)
+					.setColor('2F3136')
 					.setFooter({ text: 'Dates are formatted automatically for your timezone.' });
 
 				const activeEventCompact = new MessageEmbed()
@@ -59,9 +62,13 @@ module.exports = {
 					.setDescription(`[Link to News](${data.assets.link})`)
 					.addField('Start Date', `<t:${data.time.startTimestamp}:f>`, true)
 					.addField('End Date', `<t:${data.time.endTimestamp}:f>\nor <t:${data.time.endTimestamp}:R>`, true)
+					.setColor('2F3136')
 					.setFooter({ text: 'Dates are formatted automatically for your timezone.' });
 
-				const postEventCompact = new MessageEmbed().setTitle('No Event Active').setDescription('No event is active or upcoming. Check back later for updates!');
+				const postEventCompact = new MessageEmbed()
+					.setTitle('No Event Active')
+					.setDescription('No event is active or upcoming. Check back later for updates!')
+					.setColor('2F3136');
 
 				// 0 = Pre-Event
 				// 1 = Event Active

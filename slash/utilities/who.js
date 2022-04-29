@@ -22,7 +22,7 @@ module.exports = {
 		// Options
 		const type = interaction.options.getString('type');
 
-		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Choosing a random legend...`);
+		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Choosing a random legend...`).setColor('2F3136');
 
 		const legends = [
 			'Bloodhound',
@@ -59,7 +59,8 @@ module.exports = {
 			const legend = Math.floor(Math.random() * legends.length);
 			const legendEmbed = new MessageEmbed()
 				.setDescription(`Play **${legends[legend]}** this round!`)
-				.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legends[legend])}.png`);
+				.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legends[legend])}.png`)
+				.setColor('2F3136');
 
 			await interaction.editReply({ embeds: [loadingEmbed] });
 			await wait(1000);
@@ -75,7 +76,8 @@ module.exports = {
 			const legend = Math.floor(Math.random() * legendType(type).length);
 			const legendEmbed = new MessageEmbed()
 				.setDescription(`Play **${legendType(type)[legend]}** this round!`)
-				.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legendType(type)[legend])}.png`);
+				.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legendType(type)[legend])}.png`)
+				.setColor('2F3136');
 
 			await interaction.editReply({ embeds: [loadingEmbed] });
 			await wait(1000);

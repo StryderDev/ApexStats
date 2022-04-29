@@ -20,6 +20,7 @@ module.exports = {
 			.addField('Links', '[Ko-Fi](https://ko-fi.com/sdcore)\n[GitHub](https://github.com/stryderdev/apex-stats-bot)\n[Support Server](https://discord.gg/eH8VxssFW6)', true)
 			.addField('Bot Info', `Shard ${interaction.client.shard.ids[0] + 1}/${interaction.client.shard.count}\nVersion ${version}\nCodename "${release.name}"`, true)
 			.addField('Uptime', `${days}d, ${hours}h, ${minutes}m, ${seconds}s`, true)
+			.setColor('2F3136')
 			.setFooter({ text: 'Wanna add the bot to your server? Click the "Apex Stats" username and press "Add to Server"' });
 
 		await interaction.editReply({ embeds: [info] });

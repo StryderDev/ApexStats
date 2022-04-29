@@ -26,7 +26,7 @@ module.exports = {
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		const loading = new MessageEmbed().setDescription(`${Misc.Loading} Loading data for ${username} on ${platformName(platform)}...`);
+		const loading = new MessageEmbed().setDescription(`${Misc.Loading} Loading data for ${username} on ${platformName(platform)}...`).setColor('2F3136');
 
 		await interaction.editReply({ embeds: [loading] });
 
@@ -62,6 +62,7 @@ module.exports = {
 					.addField(`${trackerName(legends[legend], trackers[1].id, Season)}`, `${trackerValue(trackers[1].id, trackers[1].value)}`, true)
 					.addField(`${trackerName(legends[legend], trackers[2].id, Season)}`, `${trackerValue(trackers[2].id, trackers[2].value)}`, true)
 					.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legends[legend])}.png`)
+					.setColor('2F3136')
 					.setFooter({ text: `ID: ${data.user.id} · https://apexstats.dev/\nBattlePass level incorrect? Equip the badge in-game!` })
 					.setTimestamp();
 

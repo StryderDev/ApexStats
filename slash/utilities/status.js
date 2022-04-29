@@ -9,7 +9,7 @@ const { Misc, serverStatus } = require('../../data/emotes.json');
 module.exports = {
 	data: new SlashCommandBuilder().setName('status').setDescription('Shows current in-game server status.'),
 	async execute(interaction) {
-		const loading = new MessageEmbed().setDescription(`${Misc.Loading} Loading server status data...`);
+		const loading = new MessageEmbed().setDescription(`${Misc.Loading} Loading server status data...`).setColor('2F3136');
 
 		await interaction.editReply({ embeds: [loading] });
 
@@ -29,6 +29,31 @@ module.exports = {
 			}ms\n${getEmote(type['Asia']['Status'])} **Asia:** ${type['Asia']['ResponseTime']}ms`;
 		}
 
+		function checkStatus(status) {
+			if (status['EU-West'].Status != 'UP') EUWest = 1;
+			else var EUWest = 0;
+
+			if (status['EU-East'].Status != 'UP') var EUEast = 1;
+			else var EUEast = 0;
+
+			if (status['US-West'].Status != 'UP') var USWest = 1;
+			else var USWest = 0;
+
+			if (status['US-East'].Status != 'UP') var USEast = 1;
+			else var USEast = 0;
+
+			if (status['US-Central'].Status != 'UP') var USCentral = 1;
+			else var USCentral = 0;
+
+			if (status['SouthAmerica'].Status != 'UP') var SouthAmerica = 1;
+			else var SouthAmerica = 0;
+
+			if (status['Asia'].Status != 'UP') var Asia = 1;
+			else var Asia = 0;
+
+			return EUWest + EUEast + USWest + USEast + USCentral + SouthAmerica + Asia;
+		}
+
 		await axios
 			.get(`https://api.mozambiquehe.re/servers?auth=${api.apex}`)
 			.then(response => {
@@ -39,6 +64,16 @@ module.exports = {
 				const accounts = data['EA_accounts'];
 				const novafusion = data['EA_novafusion'];
 
+				const statusAmount = checkStatus(origin) + checkStatus(apex) + checkStatus(accounts) + checkStatus(novafusion);
+
+				if (statusAmount <= 4) {
+					var embedColor = '43B581';
+				} else if (statusAmount <= 10) {
+					var embedColor = 'FAA61A';
+				} else {
+					var embedColor = 'F04747';
+				}
+
 				const status = new MessageEmbed()
 					.setTitle('Apex Legends Server Status')
 					.addField('[Crossplay] Apex Login', statusLayout(apex), true)
@@ -47,6 +82,7 @@ module.exports = {
 					.addField('EA Accounts', statusLayout(accounts), true)
 					.addField('Lobby & MatchMaking Services', statusLayout(novafusion), true)
 					.addField(`\u200b`, `\u200b`, true)
+					.setColor(embedColor)
 					.setFooter({ text: 'Status data provided by https://apexlegendsstatus.com/' });
 
 				// origin xbl psn

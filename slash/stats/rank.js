@@ -25,7 +25,7 @@ module.exports = {
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		const loading = new MessageEmbed().setDescription(`${Misc.Loading} Loading ranked data for ${username} on ${platformName(platform)}...`);
+		const loading = new MessageEmbed().setDescription(`${Misc.Loading} Loading ranked data for ${username} on ${platformName(platform)}...`).setColor('2F3136');
 
 		await interaction.editReply({ embeds: [loading] });
 
@@ -48,6 +48,7 @@ module.exports = {
 					.setDescription(`**Status**\n${getStatus(status, Status)}`)
 					.addField(`Battle Royale Ranked`, `${rankLayout('RP', br, Ranked)}`, true)
 					.addField('Arenas Ranked', `${rankLayout('AP', arenas, Ranked)}`, true)
+					.setColor('2F3136')
 					.setFooter({ text: `ID: ${data.user.id} · https://apexstats.dev/` })
 					.setTimestamp();
 

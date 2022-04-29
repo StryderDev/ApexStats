@@ -12,7 +12,7 @@ module.exports = {
 			option.setName('future').setDescription('Amount of future map rotations you would like to see.').setRequired(false).setMinValue(1).setMaxValue(10),
 		),
 	async execute(interaction) {
-		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game map...`);
+		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game map...`).setColor('2F3136');
 		const future = interaction.options.getInteger('future');
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
@@ -57,9 +57,10 @@ module.exports = {
 							br.next[0].duration,
 						)}.\n**Ranked Arena**: ${brRanked.map}`,
 					)
+					.setColor('2F3136')
 					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/BR/${encodeURIComponent(br.map)}.png?q=${Math.floor(Math.random() * 10)}`);
 
-				const futureEmbed = new MessageEmbed().setTitle('Future Map Rotation Schedule').setDescription(`\u200b${nextMaps()}`);
+				const futureEmbed = new MessageEmbed().setTitle('Future Map Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
 
 				if (futureLength(future) == '1') {
 					interaction.editReply({ embeds: [mapEmbed] });

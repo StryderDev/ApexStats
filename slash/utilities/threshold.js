@@ -7,7 +7,7 @@ const { Misc } = require('../../data/emotes.json');
 module.exports = {
 	data: new SlashCommandBuilder().setName('threshold').setDescription('Shows the Apex Predator threshold for PC, PlayStation, and Xbox.'),
 	async execute(interaction) {
-		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Gathering data for Apex Predator threshold...`);
+		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Gathering data for Apex Predator threshold...`).setColor('2F3136');
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -38,6 +38,7 @@ module.exports = {
 						} PlayStation: ${PS4.Arenas.toLocaleString()} AP\n${Misc.Threshold_Switch} Nintendo Switch: ${Switch.Arenas.toLocaleString()} AP`,
 						true,
 					)
+					.setColor('2F3136')
 					.setFooter({ text: 'Data updated hourly.\nThis is an approximation and may not be entirely accurate.' });
 
 				interaction.editReply({ embeds: [embed] });

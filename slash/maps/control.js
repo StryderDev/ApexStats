@@ -12,7 +12,7 @@ module.exports = {
 
 		await interaction.editReply({ content: text });
 
-		// const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game Control map...`);
+		// const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game Control map...`).setColor('2F3136');
 
 		// await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -45,6 +45,7 @@ module.exports = {
 		// 					control.next.DurationInMinutes,
 		// 				)}.`,
 		// 			)
+		//          .setColor('2F3136')
 		// 			.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/Control/${encodeURIComponent(control.current.map)}.png`);
 
 		// 		interaction.editReply({ embeds: [mapEmbed] });
