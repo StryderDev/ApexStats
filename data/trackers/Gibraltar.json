@@ -53,5 +53,7 @@
 	"1510065411": { "Name": "Wins", "Type": "BR", "Emote": "" },
 	"1964285242": { "Name": "Damage", "Type": "BR", "Emote": "" },
 	"1616244944": { "Name": "Kills", "Type": "BR", "Emote": "Season_12" },
-	"850586610": { "Name": "Wins", "Type": "BR", "Emote": "Season_12" }
+	"850586610": { "Name": "Wins", "Type": "BR", "Emote": "Season_12" },
+	"1793878216": { "Name": "Kills", "Type": "BR", "Emote": "Season_13" },
+	"1015521436": { "Name": "Wins", "Type": "BR", "Emote": "Season_13" }
 }

@@ -43,5 +43,7 @@
 	"898903853": { "Name": "Gravity Lift: Teammates Lifted", "Type": "", "Emote": "" },
 	"726787487": { "Name": "Damage", "Type": "BR", "Emote": "" },
 	"448396326": { "Name": "Kills", "Type": "BR", "Emote": "Season_12" },
-	"731871115": { "Name": "Wins", "Type": "BR", "Emote": "Season_12" }
+	"731871115": { "Name": "Wins", "Type": "BR", "Emote": "Season_12" },
+	"904621788": { "Name": "Kills", "Type": "BR", "Emote": "Season_13" },
+	"310808792": { "Name": "Wins", "Type": "BR", "Emote": "Season_13" }
 }

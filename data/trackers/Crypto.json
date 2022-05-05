@@ -46,5 +46,7 @@
 	"1831732126": { "Name": "Wins", "Type": "BR", "Emote": "Season_12" },
 	"1553580586": { "Name": "Kills", "Type": "BR", "Emote": "" },
 	"1577392893": { "Name": "Drone EMP: Shield Damage", "Type": "", "Emote": "" },
-	"1126937335": { "Name": "Damage", "Type": "BR", "Emote": "" }
+	"1126937335": { "Name": "Damage", "Type": "BR", "Emote": "" },
+	"2090569962": { "Name": "Kills", "Type": "BR", "Emote": "Season_13" },
+	"1589907834": { "Name": "Wins", "Type": "BR", "Emote": "Season_13" }
 }

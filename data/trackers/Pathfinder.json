@@ -56,5 +56,7 @@
 	"1907080334": { "Name": "Wins", "Type": "BR", "Emote": "Season_12" },
 	"563997831": { "Name": "Kills", "Type": "BR", "Emote": "" },
 	"837512119": { "Name": "Grapple: Travel Distance", "Type": "", "Emote": "" },
-	"1746636329": { "Name": "Damage", "Type": "BR", "Emote": "" }
+	"1746636329": { "Name": "Damage", "Type": "BR", "Emote": "" },
+	"1114610526": { "Name": "Kills", "Type": "BR", "Emote": "Season_13" },
+	"1678000735": { "Name": "Wins", "Type": "BR", "Emote": "Season_13" }
 }
