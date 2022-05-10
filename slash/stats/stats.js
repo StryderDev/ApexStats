@@ -53,7 +53,7 @@ module.exports = {
 					.setDescription(`**Status**\n${getStatus(status, Status)}`)
 					.addField(`Account`, `${Account.Level} Level ${data.account.level.toLocaleString()}\n\n**Battle Royale Ranked**\n${rankLayout('RP', br, Ranked)}`, true)
 					.addField(
-						'Defiance Battle Pass',
+						'Saviors Battle Pass',
 						`${Account.BattlePass} Level ${battlepass(data.account.battlepass)}\n\n**Arenas Ranked**\n${rankLayout('AP', arenas, Ranked)}`,
 						true,
 					)

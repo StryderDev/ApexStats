@@ -28,7 +28,7 @@ module.exports = {
 
 		if (mapOption != null) {
 			function mapFilePath(map) {
-				return `../../data/drops/Season 12/${map}.json`;
+				return `../../data/drops/Season 13/${map}.json`;
 			}
 
 			const mapFile = require(mapFilePath(mapOption));
