@@ -45,11 +45,12 @@ module.exports = {
 			'Seer',
 			'Ash',
 			'Mad Maggie',
+			'Newcastle',
 		];
 
 		const offensive = ['Wraith', 'Bangalore', 'Mirage', 'Octane', 'Revenant', 'Horizon', 'Fuse', 'Ash', 'Mad Maggie'];
 
-		const defensive = ['Gibraltar', 'Caustic', 'Wattson', 'Rampart'];
+		const defensive = ['Gibraltar', 'Caustic', 'Wattson', 'Rampart', 'Newcastle'];
 
 		const support = ['Lifeline', 'Loba'];
 
