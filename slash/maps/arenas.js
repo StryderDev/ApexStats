@@ -46,27 +46,29 @@ module.exports = {
 				const arenas = response.data.arenas;
 				const arenasRanked = arenas.ranked;
 
-				function nextMaps() {
-					return arenas.next.map(x => `**${x.map}**\nStarts <t:${x.timestamp}:R> and lasts for **${mapLength(x.duration)}**.\n\n`).join('');
-				}
+				//function nextMaps() {
+				//	return arenas.next.map(x => `**${x.map}**\nStarts <t:${x.timestamp}:R> and lasts for **${mapLength(x.duration)}**.\n\n`).join('');
+				//}
 
 				const mapEmbed = new MessageEmbed()
 					.setTitle(`Legends are currently competing in **${arenas.map}**.`)
 					.setDescription(
-						`${arenas.map} Arena ends <t:${arenas.times.next}:R>, or at <t:${arenas.times.next}:t>.\n**Next up:** ${arenas.next[0].map} for ${mapLength(
-							arenas.next[0].duration,
-						)}.\n**Ranked Arena**: ${arenasRanked.map} for <t:${arenasRanked.times.next}:R>.`,
+						`${arenas.map} Arena ends <t:${arenas.times.next}:R>, or at <t:${arenas.times.next}:t>.\n
+                        `,
+						//**Next up:** ${arenas.next[0].map} for ${mapLength(
+						//	arenas.next[0].duration,
+						//)}.\n**Ranked Arena**: ${arenasRanked.map} for <t:${arenasRanked.times.next}:R>.`,
 					)
 					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/Arenas/${encodeURIComponent(arenas.map)}.png?q=${Math.floor(Math.random() * 10)}`)
 					.setColor('2F3136');
 
-				const futureEmbed = new MessageEmbed().setTitle('Future Arenas Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
+				//const futureEmbed = new MessageEmbed().setTitle('Future Arenas Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
 
-				if (futureLength(future) == '1') {
-					interaction.editReply({ embeds: [mapEmbed] });
-				} else {
-					interaction.editReply({ embeds: [futureEmbed] });
-				}
+				//if (futureLength(future) == '1') {
+				interaction.editReply({ embeds: [mapEmbed] });
+				//} else {
+				//	interaction.editReply({ embeds: [futureEmbed] });
+				//}
 			})
 			.catch(error => {
 				// Request failed with a response outside of the 2xx range
