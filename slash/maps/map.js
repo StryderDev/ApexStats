@@ -55,7 +55,7 @@ module.exports = {
 					.setDescription(
 						`${br.map} Arena ends <t:${br.times.next}:R>, or at <t:${br.times.next}:t>.\n**Next up:** ${br.next[0].map} for ${mapLength(
 							br.next[0].duration,
-						)}.\n**Ranked Arena**: ${brRanked.map}`,
+						)}.\n**Ranked Arena**: Storm Point`,
 					)
 					.setColor('2F3136')
 					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/BR/${encodeURIComponent(br.map)}.png?q=${Math.floor(Math.random() * 10)}`);
