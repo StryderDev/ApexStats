@@ -59,7 +59,7 @@ module.exports = {
 						//	arenas.next[0].duration,
 						//)}.\n**Ranked Arena**: ${arenasRanked.map} for <t:${arenasRanked.times.next}:R>.`,
 					)
-					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/Arenas/${encodeURIComponent(arenas.map)}.png?q=${Math.floor(Math.random() * 10)}`)
+					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season13/Arenas/${encodeURIComponent(arenas.map)}.png?q=${Math.floor(Math.random() * 10)}`)
 					.setColor('2F3136');
 
 				//const futureEmbed = new MessageEmbed().setTitle('Future Arenas Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');

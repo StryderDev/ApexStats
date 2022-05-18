@@ -58,7 +58,7 @@ module.exports = {
 						)}.\n**Ranked Arena**: Storm Point`,
 					)
 					.setColor('2F3136')
-					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season12/BR/${encodeURIComponent(br.map)}.png?q=${Math.floor(Math.random() * 10)}`);
+					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season13/BR/${encodeURIComponent(br.map)}.png?q=${Math.floor(Math.random() * 10)}`);
 
 				const futureEmbed = new MessageEmbed().setTitle('Future Map Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
 
