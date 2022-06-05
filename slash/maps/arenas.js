@@ -5,12 +5,10 @@ const { MessageEmbed } = require('discord.js');
 const { Misc } = require('../../data/emotes.json');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('arenas')
-		.setDescription('Shows the current in-game arena.')
-		.addIntegerOption(option =>
-			option.setName('future').setDescription('Amount of future arenas rotations you would like to see.').setRequired(false).setMinValue(1).setMaxValue(10),
-		),
+	data: new SlashCommandBuilder().setName('arenas').setDescription('Shows the current in-game arena.'),
+	//.addIntegerOption(option =>
+	//	option.setName('future').setDescription('Amount of future arenas rotations you would like to see.').setRequired(false).setMinValue(1).setMaxValue(10),
+	//),
 	async execute(interaction) {
 		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game arena...`).setColor('2F3136');
 		const future = interaction.options.getInteger('future');
