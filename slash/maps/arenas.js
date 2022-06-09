@@ -1,72 +1,40 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const axios = require('axios');
+const { default: axios } = require('axios');
 const { MessageEmbed } = require('discord.js');
 
 const { Misc } = require('../../data/emotes.json');
+const { api } = require('../../config.json');
 
 module.exports = {
-	data: new SlashCommandBuilder().setName('arenas').setDescription('Shows the current in-game arena.'),
-	//.addIntegerOption(option =>
-	//	option.setName('future').setDescription('Amount of future arenas rotations you would like to see.').setRequired(false).setMinValue(1).setMaxValue(10),
-	//),
+	data: new SlashCommandBuilder().setName('arenas').setDescription('Shows the current in-game arena map.'),
+
 	async execute(interaction) {
-		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game arena...`).setColor('2F3136');
-		const future = interaction.options.getInteger('future');
+		const loading = new MessageEmbed().setDescription(`${Misc.Loading} Loading in-game arena map rotation...`);
 
-		await interaction.editReply({ embeds: [loadingEmbed] });
+		await interaction.editReply({ embeds: [loading] });
 
-		function isPlural(number, word) {
-			if (number != 1) return `${word}s`;
+		function checkMapName(name) {
+			if (name == 'Party crasher') return 'Party Crasher';
 
-			return word;
-		}
-
-		function mapLength(minutes) {
-			if (minutes >= 60) {
-				const hrs = Math.floor(minutes / 60);
-				const mins = minutes % 60;
-
-				return `${hrs} ${isPlural(hrs, 'hour')}, ${mins} ${isPlural(mins, 'minute')}`;
-			} else {
-				return `${minutes} ${isPlural(minutes, 'minute')}`;
-			}
-		}
-
-		function futureLength(amount) {
-			if (!amount) return '1';
-
-			return amount;
+			return name;
 		}
 
 		await axios
-			.get(`https://fn.alphaleagues.com/v2/apex/map/?next=${futureLength(future)}`)
+			.get(`https://api.mozambiquehe.re/maprotation?auth=${api.apex}&version=2`)
 			.then(response => {
 				const arenas = response.data.arenas;
-				const arenasRanked = arenas.ranked;
-
-				//function nextMaps() {
-				//	return arenas.next.map(x => `**${x.map}**\nStarts <t:${x.timestamp}:R> and lasts for **${mapLength(x.duration)}**.\n\n`).join('');
-				//}
 
 				const mapEmbed = new MessageEmbed()
-					.setTitle(`Legends are currently competing in **${arenas.map}**.`)
+					.setTitle(`Legends are currently competing in ${checkMapName(arenas.current.map)}.`)
 					.setDescription(
-						`${arenas.map} Arena ends <t:${arenas.times.next}:R>, or at <t:${arenas.times.next}:t>.\n
-                        `,
-						//**Next up:** ${arenas.next[0].map} for ${mapLength(
-						//	arenas.next[0].duration,
-						//)}.\n**Ranked Arena**: ${arenasRanked.map} for <t:${arenasRanked.times.next}:R>.`,
+						`${checkMapName(arenas.current.map)} Arena ends <t:${arenas.current.end}:R>, or at <t:${arenas.current.end}:t>.\n**Next Up:** ${checkMapName(
+							arenas.next.map,
+						)} for ${arenas.next.DurationInMinutes} minutes.`,
 					)
-					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season13/Arenas/${encodeURIComponent(arenas.map)}.png?q=${Math.floor(Math.random() * 10)}`)
+					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season13/Arenas/${encodeURIComponent(checkMapName(arenas.current.map))}.png?q=${Math.floor(Math.random() * 10)}`)
 					.setColor('2F3136');
 
-				//const futureEmbed = new MessageEmbed().setTitle('Future Arenas Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
-
-				//if (futureLength(future) == '1') {
 				interaction.editReply({ embeds: [mapEmbed] });
-				//} else {
-				//	interaction.editReply({ embeds: [futureEmbed] });
-				//}
 			})
 			.catch(error => {
 				// Request failed with a response outside of the 2xx range
