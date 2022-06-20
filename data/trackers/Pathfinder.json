@@ -58,5 +58,8 @@
 	"837512119": { "Name": "Grapple: Travel Distance", "Type": "", "Emote": "" },
 	"1746636329": { "Name": "Damage", "Type": "Apex", "Emote": "" },
 	"1114610526": { "Name": "Kills", "Type": "S13 Apex", "Emote": "Season_13" },
-	"1678000735": { "Name": "Wins", "Type": "S13 Apex", "Emote": "Season_13" }
+	"1678000735": { "Name": "Wins", "Type": "S13 Apex", "Emote": "Season_13" },
+	"1377206037": { "Name": "Kills", "Type": "Apex", "Emote": "" },
+	"195817917": { "Name": "Wins", "Type": "Apex", "Emote": "" },
+	"1004235725": { "Name": "Damage", "Type": "Apex", "Emote": "" }
 }

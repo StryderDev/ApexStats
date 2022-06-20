@@ -49,5 +49,8 @@
 	"1611397340": { "Name": "Kills", "Type": "S12 Apex", "Emote": "Season_12" },
 	"372818370": { "Name": "Wins", "Type": "S12 Apex", "Emote": "Season_12" },
 	"1749371361": { "Name": "Kills", "Type": "S13 Apex", "Emote": "Season_13" },
-	"1601337542": { "Name": "Wins", "Type": "S13 Apex", "Emote": "Season_13" }
+	"1601337542": { "Name": "Wins", "Type": "S13 Apex", "Emote": "Season_13" },
+	"619796697": { "Name": "Kills", "Type": "Apex", "Emote": "" },
+	"1063352942": { "Name": "Stim Distance Traveled", "Type": "", "Emote": "" },
+	"631624870": { "Name": "Damage", "Type": "Apex", "Emote": "" }
 }
