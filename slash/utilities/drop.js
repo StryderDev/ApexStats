@@ -44,7 +44,7 @@ module.exports = {
 					const br = response.data.battle_royale;
 
 					function mapFilePath(map) {
-						return `../../data/drops/Season 12/${map}.json`;
+						return `../../data/drops/Season 13/${map.replaceAll("'", '')}.json`;
 					}
 
 					const mapFile = require(mapFilePath(br.current.map));
