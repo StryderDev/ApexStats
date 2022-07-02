@@ -56,11 +56,13 @@ client.once('ready', () => {
 
 	async function uptimeCount() {
 		(function loop() {
-			console.log(
-				`[>>> Shard #${client.shard.ids[0] + 1} Uptime: ${Math.floor(process.uptime() / (60 * 60))} Hours, ${Math.floor(
-					(process.uptime() % (60 * 60)) / 60,
-				)} Minutes, ${Math.floor(process.uptime() % 60)} Seconds]`,
-			);
+			const uptime = process.uptime();
+			const seconds = Math.floor(uptime % 60);
+			const minutes = Math.floor((uptime % (60 * 60)) / 60);
+			const hours = Math.floor(uptime / (60 * 60));
+			const days = Math.floor(uptime / 86400);
+
+			console.log(`[>>> Shard #${client.shard.ids[0] + 1} Uptime: ${days} Days, ${hours} Hours, ${minutes} Minutes, ${seconds} Seconds]`);
 
 			now = new Date();
 			var delay = 60000 - (now % 60000);
