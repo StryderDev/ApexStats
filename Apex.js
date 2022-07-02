@@ -74,6 +74,11 @@ client.once('ready', () => {
 });
 
 client.on('interactionCreate', async interaction => {
+	//if (interaction.isSelectMenu()) {
+	//	await interaction.deferUpdate();
+	//	interaction.channel.send({ content: interaction.values[0] });
+	//}
+
 	if (!interaction.isCommand()) return;
 
 	await interaction.deferReply();
