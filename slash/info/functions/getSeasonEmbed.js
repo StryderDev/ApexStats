@@ -8,7 +8,8 @@ async function getSeasonEmbed(season) {
 	const embed = new MessageEmbed()
 		.setTitle(`Season ${data.info.number} - ${data.info.name}`)
 		.addField(`Featured Legend`, data.new.legend, true)
-		.addField(`Featured Weapon`, data.new.gun, true);
+		.addField(`Featured Weapon`, data.new.gun, true)
+		.addField(`Featured Map`, data.new.map, true);
 
 	return embed;
 }
