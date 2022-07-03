@@ -1,7 +1,9 @@
-const { Client, Intents, Collection } = require('discord.js');
+const { Client, Intents, Collection, MessageEmbed } = require('discord.js');
 const { debug, discord } = require('./config.json');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
+const { getSeasonEmbed } = require('./slash/info/functions/getSeasonEmbed.js');
+const axios = require('axios');
 
 const fs = require('fs');
 const chalk = require('chalk');
@@ -74,26 +76,35 @@ client.once('ready', () => {
 });
 
 client.on('interactionCreate', async interaction => {
-	//if (interaction.isSelectMenu()) {
-	//	await interaction.deferUpdate();
-	//	interaction.channel.send({ content: interaction.values[0] });
-	//}
+	if (interaction.isCommand()) {
+		await interaction.deferReply();
 
-	if (!interaction.isCommand()) return;
+		const command = client.commands.get(interaction.commandName);
 
-	await interaction.deferReply();
+		if (!command) return;
 
-	const command = client.commands.get(interaction.commandName);
+		try {
+			await command.execute(interaction);
+			console.log(`[>>>> Command ran: /${interaction.commandName}]`);
+		} catch (err) {
+			if (err) console.error(err);
 
-	if (!command) return;
+			await interaction.editReply({ content: 'An error has occured.', embeds: [] });
+		}
+	}
+	if (interaction.isSelectMenu()) {
+		if (interaction.customId == 'seasonInfo') {
+			await interaction.deferUpdate();
 
-	try {
-		await command.execute(interaction);
-		console.log(`[>>>> Command ran: /${interaction.commandName}]`);
-	} catch (err) {
-		if (err) console.error(err);
+			const seasonEmbed = await getSeasonEmbed(interaction.values[0]);
 
-		await interaction.editReply({ content: 'An error has occured.', embeds: [] });
+			interaction.editReply({
+				embeds: [seasonEmbed],
+				components: [],
+			});
+		}
+	} else {
+		return;
 	}
 });
 

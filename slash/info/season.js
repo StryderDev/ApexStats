@@ -10,8 +10,9 @@ module.exports = {
 
 		const seasonList = new MessageActionRow().addComponents(
 			new MessageSelectMenu()
-				.setCustomId('seasonName')
+				.setCustomId('seasonInfo')
 				.setPlaceholder('Select a Season')
+				.setMaxValues('1')
 				.addOptions([
 					{ label: 'Season 13 - Saviors', value: '13', emoji: Season['Season_13'] },
 					{ label: 'Season 12 - Defiance', value: '12', emoji: Season['Season_12'] },
@@ -29,14 +30,6 @@ module.exports = {
 					{ label: 'Season 0 - PreSeason', value: '0', emoji: Season['Season_1'] },
 				]),
 		);
-
-		const filter = interaction => interaction.isSelectMenu() && interaction.user.id == interaction.author.id;
-
-		const collector = interaction.createMessageComponentCollector({ filter, max: '2' });
-
-		collector.on('collect', async collected => {
-			console.log(collected);
-		});
 
 		await interaction.editReply({ embeds: [loading], components: [seasonList] });
 	},
