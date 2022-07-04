@@ -1,7 +1,7 @@
 const { MessageEmbed, MessageActionRow, MessageSelectMenu } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
-const { Misc, Season } = require('../../data/emotes.json');
+const { Season } = require('../../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('season').setDescription('Shows info about a selected season.'),
@@ -12,6 +12,7 @@ module.exports = {
 			new MessageSelectMenu()
 				.setCustomId('seasonInfo')
 				.setPlaceholder('Select a Season')
+				.setMinValues('1')
 				.setMaxValues('1')
 				.addOptions([
 					{ label: 'Season 13 - Saviors', value: '13', emoji: Season['Season_13'] },
@@ -27,7 +28,7 @@ module.exports = {
 					{ label: 'Season 3 - Meltdown', value: '3', emoji: Season['Season_3'] },
 					{ label: 'Season 2 - Battle Charge', value: '2', emoji: Season['Season_2'] },
 					{ label: 'Season 1 - The Wild Frontier', value: '1', emoji: Season['Season_1'] },
-					{ label: 'Season 0 - PreSeason', value: '0', emoji: Season['Season_1'] },
+					{ label: 'Season 0 - PreSeason', value: '0', emoji: Season['Season_0'] },
 				]),
 		);
 
