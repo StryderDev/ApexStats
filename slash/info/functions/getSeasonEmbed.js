@@ -8,12 +8,14 @@ async function getSeasonEmbed(season) {
 	const embed = new MessageEmbed()
 		.setTitle(`Season ${data.info.number} - ${data.info.name}`)
 		.setURL(data.misc.link)
-		.setDescription(data.info.tagline)
 		.addField(`Featured Legend`, data.new.legend, true)
 		.addField(`Featured Weapon`, data.new.gun, true)
 		.addField(`Featured Map`, data.new.map, true)
+		.addField(`Start Date`, `<t:${data.date.start}>`, true)
+		.addField(`End Date`, `<t:${data.date.end}>`, true)
 		.setImage(data.misc.mapImage)
-		.setColor('2F3136');
+		.setColor('2F3136')
+		.setFooter({ text: data.info.tagline });
 
 	return embed;
 }
