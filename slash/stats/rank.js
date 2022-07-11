@@ -15,9 +15,7 @@ module.exports = {
 				.setName('platform')
 				.setDescription('The platform you play Apex on.')
 				.setRequired(true)
-				.addChoice('PC (Steam / Origin)', 'PC')
-				.addChoice('Xbox', 'X1')
-				.addChoice('PlayStation', 'PS4'),
+				.addChoices({ name: 'PC (Steam / Origin)', value: 'PC' }, { name: 'Xbox', value: 'X1' }, { name: 'PlayStation', value: 'PS4' }),
 		)
 		.addStringOption(option => option.setName('username').setDescription('Your in-game username.').setRequired(true)),
 	async execute(interaction) {

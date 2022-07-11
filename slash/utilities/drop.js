@@ -14,10 +14,12 @@ module.exports = {
 				.setName('map')
 				.setDescription('Manually pick a map.')
 				.setRequired(false)
-				.addChoice('Kings Canyon', 'Kings Canyon')
-				.addChoice("World's Edge", 'Worlds Edge')
-				.addChoice('Olympus', 'Olympus')
-				.addChoice('Storm Point', 'Storm Point'),
+				.addChoices(
+					{ name: 'Kings Canyon', value: 'Kings Canyon' },
+					{ name: "World's Edge", value: 'Worlds Edge' },
+					{ name: 'Olympus', value: 'Olympus' },
+					{ name: 'Storm Point', value: 'Storm Point' },
+				),
 		),
 	async execute(interaction) {
 		// Options

@@ -13,10 +13,12 @@ module.exports = {
 				.setName('type')
 				.setDescription('Category of legends to choose from.')
 				.setRequired(false)
-				.addChoice('Offensive', 'Offensive')
-				.addChoice('Defensive', 'Defensive')
-				.addChoice('Support', 'Support')
-				.addChoice('Recon', 'Recon'),
+				.addChoices(
+					{ name: 'Offensive', value: 'Offensive' },
+					{ name: 'Defensive', value: 'Defensive' },
+					{ name: 'Support', value: 'Support' },
+					{ name: 'Recon', value: 'Recon' },
+				),
 		),
 	async execute(interaction) {
 		// Options
