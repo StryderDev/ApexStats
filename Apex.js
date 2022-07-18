@@ -34,7 +34,7 @@ client.once('ready', () => {
 	console.log(chalk`{yellow [>> Logging in...]}`);
 	console.log(chalk`{green [>> Logged in as ${client.user.username}. Ready!]}`);
 
-	client.user.setPresence({ activities: [{ name: 'you play Apex Legends', type: 'WATCHING' }] }, { status: 'dnd' });
+	client.user.setPresence({ activities: [{ name: 'you play Apex Legends', type: 'WATCHING' }] }, { status: 'online' });
 
 	(async () => {
 		try {
