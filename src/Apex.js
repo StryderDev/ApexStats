@@ -6,21 +6,22 @@ const { getSeasonEmbed } = require('./slash/info/functions/getSeasonEmbed.js');
 const axios = require('axios');
 
 const fs = require('fs');
+const path = require('path');
 const chalk = require('chalk');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-const commandFolders = fs.readdirSync('./src/slash');
+const commandFolders = fs.readdirSync(path.join(__dirname, '/slash'));
 
 const commands = [];
 
 client.commands = new Collection();
 
 for (const folder of commandFolders) {
-	const commandFiles = fs.readdirSync(`./src/slash/${folder}`).filter(file => file.endsWith('.js'));
+	const commandFiles = fs.readdirSync(path.join(__dirname, `/slash/${folder}`)).filter(file => file.endsWith('.js'));
 
 	for (const file of commandFiles) {
-		const command = require(`../src/slash/${folder}/${file}`);
+		const command = require(path.join(__dirname, `/slash/${folder}/${file}`));
 
 		commands.push(command.data.toJSON());
 		client.commands.set(command.data.name, command);
