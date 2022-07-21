@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 
 const { Misc, serverStatus } = require('../../data/emotes.json');
-const package = require('../../package.json');
+const package = require('../../../package.json');
 const { release } = require('../../config.json');
 
 module.exports = {

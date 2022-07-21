@@ -3,7 +3,7 @@
 	"version": "0.11.45",
 	"main": "Shard.js",
 	"scripts": {
-		"dev": "nodemon Shard.js"
+		"dev": "nodemon src/Shard.js"
 	},
 	"repository": {
 		"type": "git",

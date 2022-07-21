@@ -10,17 +10,17 @@ const chalk = require('chalk');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-const commandFolders = fs.readdirSync('./slash');
+const commandFolders = fs.readdirSync('./src/slash');
 
 const commands = [];
 
 client.commands = new Collection();
 
 for (const folder of commandFolders) {
-	const commandFiles = fs.readdirSync(`./slash/${folder}`).filter(file => file.endsWith('.js'));
+	const commandFiles = fs.readdirSync(`./src/slash/${folder}`).filter(file => file.endsWith('.js'));
 
 	for (const file of commandFiles) {
-		const command = require(`./slash/${folder}/${file}`);
+		const command = require(`../src/slash/${folder}/${file}`);
 
 		commands.push(command.data.toJSON());
 		client.commands.set(command.data.name, command);
