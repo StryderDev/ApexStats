@@ -1,3 +1,5 @@
+![Alt](https://repobeats.axiom.co/api/embed/afd15f3fa5597fbf94a7002a4516c978927f4b6b.svg 'Repobeats analytics image')
+
 # Apex Legends Stats Bot
 
 Get user stats, Battle Royale and Arenas map rotations, and more. Start by typing `/` for a list of commands.
@@ -8,13 +10,18 @@ Currently, the ability to contribute to this project is limited. Since some of t
 
 ## Current Features
 
--   User statistics for PC, PlayStation, and Xbox
+-   View live and up-to-date stats for PC, PlayStation, and Xbox
     -   View current:
         -   In-game selected legend and associated trackers
         -   Account level
-        -   Battlepass level for the current season (assuming you have the badge equipped)
+        -   Battlepass level for the current season (equip the badge in-game to update it)
         -   Battle Royale and Arenas Rank
-    -   Also view just the current ranks of users
+-   View Apex Legends Server Status
 -   View the current Battle Royale/Arenas Map
+    -   Also view the current map rotation for any current in-game events
 -   Choose a random place to drop in the current map
 -   Choose a random legend to play
+-   Pick a random loadout to play
+-   Choose from a list of random fun facts
+-   Get info about current or future in-game events
+-   Tiew the threshold for Apex Preadotr on PC, PlayStation, Xbox, and Nintendo Switch
