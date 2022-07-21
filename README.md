@@ -8,11 +8,11 @@ Get user stats, Battle Royale and Arenas map rotations, and more. Start by typin
 
 ## Contribute
 
-Currently, the ability to contribute to this project is limited. Since some of the APIs are locked behind my own servers, it's not possible to get (as much) data from them, and therefor the bot might not work as intended. I do plan on changing this in the future, but at the moment it's not meant to scale to multiple bots at once. Please keep any contributions to fixing errors or updating info in the /data/ folder. Thanks!
+Currently, the ability to contribute to this project is limited. Since some of the APIs are locked behind my own servers, it's not possible to get (as much) data from them, and therefor the bot might not work as intended. I do plan on changing this in the future, but at the moment it's not meant to scale to multiple bots at once. Please keep any contributions to fixing errors or updating info in the /src/data/ folder. Thanks!
 
 ## Current Features
 
--   View live, up-to-date stats for PC, PlayStation, and Xbox
+-   View live, up-to-date stats for players on Steam, Origin, PlayStation, and Xbox
     -   View current:
         -   In-game selected legend and associated trackers
         -   Account level
