@@ -1,10 +1,12 @@
 const { ShardingManager } = require('discord.js');
 const { discord, debug, api } = require('./config.json');
 
+const fs = require('fs');
+const path = require('path');
 const chalk = require('chalk');
 const { AutoPoster } = require('topgg-autoposter');
 
-const manager = new ShardingManager('./src/Apex.js', { token: discord.token, totalShards: discord.shardCount });
+const manager = new ShardingManager(path.join(__dirname, '/Apex.js'), { token: discord.token, totalShards: discord.shardCount });
 
 manager.on('shardCreate', shard => {
 	console.log(chalk`{yellow.bold [> Launching Shard...]}`);
