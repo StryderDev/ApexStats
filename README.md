@@ -12,7 +12,7 @@ Currently, the ability to contribute to this project is limited. Since some of t
 
 ## Current Features
 
--   View live and up-to-date stats for PC, PlayStation, and Xbox
+-   View live, up-to-date stats for PC, PlayStation, and Xbox
     -   View current:
         -   In-game selected legend and associated trackers
         -   Account level
@@ -26,4 +26,4 @@ Currently, the ability to contribute to this project is limited. Since some of t
 -   Pick a random loadout to play
 -   Choose from a list of random fun facts
 -   Get info about current or future in-game events
--   Tiew the threshold for Apex Predator on PC, PlayStation, Xbox, and Nintendo Switch
+-   View the threshold for Apex Predator in Battle Royale and Arenas on PC, PlayStation, Xbox, and Nintendo Switch
