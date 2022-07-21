@@ -26,4 +26,4 @@ Currently, the ability to contribute to this project is limited. Since some of t
 -   Pick a random loadout to play
 -   Choose from a list of random fun facts
 -   Get info about current or future in-game events
--   Tiew the threshold for Apex Preadotr on PC, PlayStation, Xbox, and Nintendo Switch
+-   Tiew the threshold for Apex Predator on PC, PlayStation, Xbox, and Nintendo Switch
