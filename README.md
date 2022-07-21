@@ -1,4 +1,6 @@
-![Alt](https://repobeats.axiom.co/api/embed/afd15f3fa5597fbf94a7002a4516c978927f4b6b.svg 'Repobeats analytics image')
+<p align="center">
+  <img src="https://repobeats.axiom.co/api/embed/afd15f3fa5597fbf94a7002a4516c978927f4b6b.svg">
+</p>
 
 # Apex Legends Stats Bot
 
