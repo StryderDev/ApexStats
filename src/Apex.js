@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, Collection } = require('discord.js');
+const { Client, GatewayIntentBits, Collection, ActivityType } = require('discord.js');
 const { debug, discord } = require('./config.json');
 const { REST } = require('@discordjs/rest');
 const { Routes, InteractionType } = require('discord-api-types/v9');
@@ -35,7 +35,7 @@ client.once('ready', () => {
 	console.log(chalk`{yellow [>> Logging in...]}`);
 	console.log(chalk`{green [>> Logged in as ${client.user.username}. Ready!]}`);
 
-	client.user.setPresence({ activities: [{ name: 'you play Apex Legends', type: 'WATCHING' }] }, { status: 'online' });
+	client.user.setPresence({ activities: [{ name: 'you play Apex Legends', type: ActivityType.Watching }] }, { status: 'online' });
 
 	(async () => {
 		try {
