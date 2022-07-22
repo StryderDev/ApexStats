@@ -1,12 +1,11 @@
-const { MessageEmbed, MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { EmbedBuilder, MessageActionRow, MessageSelectMenu, SlashCommandBuilder } = require('discord.js');
 
 const { Season } = require('../../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('season').setDescription('Shows info about a selected season.'),
 	async execute(interaction) {
-		const loading = new MessageEmbed().setDescription(`Select a season from the dropdown list.`).setColor('2F3136');
+		const loading = new EmbedBuilder().setDescription(`Select a season from the dropdown list.`).setColor('2F3136');
 
 		const seasonList = new MessageActionRow().addComponents(
 			new MessageSelectMenu()

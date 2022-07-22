@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
 
 const guns = require('../../data/guns.json');

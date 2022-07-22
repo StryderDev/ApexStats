@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { Misc, serverStatus } = require('../../data/emotes.json');
 const package = require('../../../package.json');
@@ -11,7 +10,7 @@ module.exports = {
 		interaction.client.shard
 			.broadcastEval(client => [client.shard.ids, client.ws.status, client.ws.ping, client.guilds.cache.size, client.uptime])
 			.then(results => {
-				const embed = new MessageEmbed()
+				const embed = new EmbedBuilder()
 					.setTitle('Apex Stats - Shard Info')
 					.setColor('2F3136')
 					.setFooter({ text: `Stryder Dev - v${package.version} "${release.name}"` });
@@ -56,11 +55,15 @@ module.exports = {
 					const hours = Math.floor(uptime / (60 * 60)) % 24;
 					const days = Math.floor(uptime / 86400);
 
-					embed.addField(
-						`${Misc.Shard} Shard #${data[0]}`,
-						`**Status:** ${statusType}\n**Ping:** ${data[2]}ms\n**Guilds:** ${data[3].toLocaleString()}\n**Uptime**\n\`${days}d, ${hours}h, ${minutes}m, ${seconds}s\``,
-						true,
-					);
+					embed.addFields([
+						{
+							name: `${Misc.Shard} Shard #${data[0]}`,
+							value: `**Status:** ${statusType}\n**Ping:** ${
+								data[2]
+							}ms\n**Guilds:** ${data[3].toLocaleString()}\n**Uptime**\n\`${days}d, ${hours}h, ${minutes}m, ${seconds}s\``,
+							inline: true,
+						},
+					]);
 				});
 
 				interaction.editReply({ embeds: [embed] });

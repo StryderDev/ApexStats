@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
 const axios = require('axios');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { api } = require('../../config.json');
 const { Misc } = require('../../data/emotes.json');
@@ -12,7 +11,7 @@ module.exports = {
 
 		// await interaction.editReply({ content: text });
 
-		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game Control map...`).setColor('2F3136');
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading current in-game Control map...`).setColor('2F3136');
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -38,7 +37,7 @@ module.exports = {
 			.then(response => {
 				const control = response.data.control;
 
-				const mapEmbed = new MessageEmbed()
+				const mapEmbed = new EmbedBuilder()
 					.setTitle(`Legends are currently Taking Control in **${control.current.map}**.`)
 					.setDescription(
 						`${control.current.map} ends <t:${control.current.end}:R>, or at <t:${control.current.end}:t>.\n**Next up:** ${control.next.map} for ${mapLength(

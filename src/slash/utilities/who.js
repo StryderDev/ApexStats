@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
 
 const { Misc } = require('../../data/emotes.json');
@@ -24,7 +23,7 @@ module.exports = {
 		// Options
 		const type = interaction.options.getString('type');
 
-		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Choosing a random legend...`).setColor('2F3136');
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Choosing a random legend...`).setColor('2F3136');
 
 		const legends = [
 			'Bloodhound',
@@ -60,7 +59,7 @@ module.exports = {
 
 		if (!type) {
 			const legend = Math.floor(Math.random() * legends.length);
-			const legendEmbed = new MessageEmbed()
+			const legendEmbed = new EmbedBuilder()
 				.setDescription(`Play **${legends[legend]}** this round!`)
 				.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legends[legend])}.png`)
 				.setColor('2F3136');
@@ -77,7 +76,7 @@ module.exports = {
 			}
 
 			const legend = Math.floor(Math.random() * legendType(type).length);
-			const legendEmbed = new MessageEmbed()
+			const legendEmbed = new EmbedBuilder()
 				.setDescription(`Play **${legendType(type)[legend]}** this round!`)
 				.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legendType(type)[legend])}.png`)
 				.setColor('2F3136');

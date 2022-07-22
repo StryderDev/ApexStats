@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
 const axios = require('axios');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { api } = require('../../config.json');
 const { Misc } = require('../../data/emotes.json');
@@ -8,7 +7,7 @@ const { Misc } = require('../../data/emotes.json');
 module.exports = {
 	data: new SlashCommandBuilder().setName('armed-and-dangerous').setDescription('Shows the current in-game Armed & Dangerous map.'),
 	async execute(interaction) {
-		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game Armed & Dangerous map...`).setColor('2F3136');
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading current in-game Armed & Dangerous map...`).setColor('2F3136');
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -34,7 +33,7 @@ module.exports = {
 			.then(response => {
 				const ltm = response.data.ltm;
 
-				const mapEmbed = new MessageEmbed()
+				const mapEmbed = new EmbedBuilder()
 					.setTitle(`Legends are currently Armed & Dangerous in **${ltm.current.map}**.`)
 					.setDescription(
 						`${ltm.current.map} ends <t:${ltm.current.end}:R>, or at <t:${ltm.current.end}:t>.\n**Next up:** ${ltm.next.map} for ${mapLength(

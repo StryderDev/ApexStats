@@ -1,7 +1,7 @@
-const { Client, Intents, Collection, MessageEmbed } = require('discord.js');
+const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const { debug, discord } = require('./config.json');
 const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { Routes, InteractionType } = require('discord-api-types/v9');
 const { getSeasonEmbed } = require('./slash/info/functions/getSeasonEmbed.js');
 const axios = require('axios');
 
@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const commandFolders = fs.readdirSync(path.join(__dirname, '/slash'));
 
@@ -77,7 +77,7 @@ client.once('ready', () => {
 });
 
 client.on('interactionCreate', async interaction => {
-	if (interaction.isCommand()) {
+	if (interaction.type === InteractionType.ApplicationCommand) {
 		await interaction.deferReply();
 
 		const command = client.commands.get(interaction.commandName);

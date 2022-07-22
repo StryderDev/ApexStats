@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const axios = require('axios');
 
 const { platformName, getStatus, rankLayout } = require('./functions/stats.js');
@@ -23,7 +22,7 @@ module.exports = {
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		const loading = new MessageEmbed().setDescription(`${Misc.Loading} Loading ranked data for ${username} on ${platformName(platform)}...`).setColor('2F3136');
+		const loading = new EmbedBuilder().setDescription(`${Misc.Loading} Loading ranked data for ${username} on ${platformName(platform)}...`).setColor('2F3136');
 
 		await interaction.editReply({ embeds: [loading] });
 
@@ -41,11 +40,23 @@ module.exports = {
 				const br = ranked.BR;
 				const arenas = ranked.Arenas;
 
-				const stats = new MessageEmbed()
+				const stats = new EmbedBuilder()
 					.setTitle(`Ranked Stats for ${user.username} on ${platformName(platform)}`)
 					.setDescription(`**Status**\n${getStatus(status, Status)}`)
-					.addField(`Battle Royale Ranked`, `${rankLayout('RP', br, Ranked)}`, true)
-					.addField('Arenas Ranked', `${rankLayout('AP', arenas, Ranked)}`, true)
+					.addFields([
+						{
+							name: 'Battle Royale Ranked',
+							value: rankLayout('RP', br, Ranked),
+							inline: true,
+						},
+						{
+							name: 'Arenas Ranked',
+							value: rankLayout('AP', arenas, Ranked),
+							inline: true,
+						},
+					])
+					//.addField(`Battle Royale Ranked`, `${rankLayout('RP', br, Ranked)}`, true)
+					//.addField('Arenas Ranked', `${rankLayout('AP', arenas, Ranked)}`, true)
 					.setColor('2F3136')
 					.setFooter({ text: `ID: ${data.user.id} · https://apexstats.dev/` })
 					.setTimestamp();
@@ -56,19 +67,19 @@ module.exports = {
 				if (error.response) {
 					console.log(error.response.data);
 
-					const errorEmbed = new MessageEmbed().setDescription(`**Lookup Error**\n\`\`\`${error.response.data.error}\`\`\``).setColor('D0342C');
+					const errorEmbed = new EmbedBuilder().setDescription(`**Lookup Error**\n\`\`\`${error.response.data.error}\`\`\``).setColor('D0342C');
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				} else if (error.request) {
 					console.log(error.request);
 
-					const errorEmbed = new MessageEmbed().setDescription(`**Lookup Error**\n\`\`\`The request was not returned successfully. Try again\`\`\``).setColor('D0342C');
+					const errorEmbed = new EmbedBuilder().setDescription(`**Lookup Error**\n\`\`\`The request was not returned successfully. Try again\`\`\``).setColor('D0342C');
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				} else {
 					console.log(error.message);
 
-					const errorEmbed = new MessageEmbed()
+					const errorEmbed = new EmbedBuilder()
 						.setDescription(`**Unknown Error**\n\`\`\`Unknown or uncaught error. Try again or contact SDCore#0001.\`\`\``)
 						.setColor('D0342C');
 

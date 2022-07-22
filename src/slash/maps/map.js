@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
 const axios = require('axios');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { Misc } = require('../../data/emotes.json');
 
@@ -12,7 +11,7 @@ module.exports = {
 			option.setName('future').setDescription('Amount of future map rotations you would like to see.').setRequired(false).setMinValue(1).setMaxValue(10),
 		),
 	async execute(interaction) {
-		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading current in-game map...`).setColor('2F3136');
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading current in-game map...`).setColor('2F3136');
 		const future = interaction.options.getInteger('future');
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
@@ -50,7 +49,7 @@ module.exports = {
 					return br.next.map(x => `**${x.map}**\nStarts <t:${x.timestamp}:R> and lasts for **${mapLength(x.duration)}**.\n\n`).join('');
 				}
 
-				const mapEmbed = new MessageEmbed()
+				const mapEmbed = new EmbedBuilder()
 					.setTitle(`Legends are currently dropping into **${br.map}**.`)
 					.setDescription(
 						`${br.map} Arena ends <t:${br.times.next}:R>, or at <t:${br.times.next}:t>.\n**Next up:** ${br.next[0].map} for ${mapLength(
@@ -60,7 +59,7 @@ module.exports = {
 					.setColor('2F3136')
 					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season13/BR/${encodeURIComponent(br.map)}.png?q=${Math.floor(Math.random() * 10)}`);
 
-				const futureEmbed = new MessageEmbed().setTitle('Future Map Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
+				const futureEmbed = new EmbedBuilder().setTitle('Future Map Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
 
 				if (futureLength(future) == '1') {
 					interaction.editReply({ embeds: [mapEmbed] });

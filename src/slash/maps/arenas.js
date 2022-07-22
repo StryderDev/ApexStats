@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
 const { default: axios } = require('axios');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { Misc } = require('../../data/emotes.json');
 const { api } = require('../../config.json');
@@ -9,7 +8,7 @@ module.exports = {
 	data: new SlashCommandBuilder().setName('arenas').setDescription('Shows the current in-game arena map.'),
 
 	async execute(interaction) {
-		const loading = new MessageEmbed().setDescription(`${Misc.Loading} Loading in-game arena map rotation...`);
+		const loading = new EmbedBuilder().setDescription(`${Misc.Loading} Loading in-game arena map rotation...`);
 
 		await interaction.editReply({ embeds: [loading] });
 
@@ -24,7 +23,7 @@ module.exports = {
 			.then(response => {
 				const arenas = response.data.arenas;
 
-				const mapEmbed = new MessageEmbed()
+				const mapEmbed = new EmbedBuilder()
 					.setTitle(`Legends are currently competing in ${checkMapName(arenas.current.map)}.`)
 					.setDescription(
 						`${checkMapName(arenas.current.map)} Arena ends <t:${arenas.current.end}:R>, or at <t:${arenas.current.end}:t>.\n**Next Up:** ${checkMapName(

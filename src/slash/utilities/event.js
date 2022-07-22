@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
 const axios = require('axios');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { Misc } = require('../../data/emotes.json');
 
@@ -10,7 +9,7 @@ module.exports = {
 		.setDescription('Shows current or future event information.')
 		.addBooleanOption(option => option.setName('compact').setDescription('test').setRequired(false)),
 	async execute(interaction) {
-		const loadingEmbed = new MessageEmbed().setDescription(`${Misc.Loading} Loading in-game event information...`).setColor('2F3136');
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading in-game event information...`).setColor('2F3136');
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -26,46 +25,70 @@ module.exports = {
 			.then(response => {
 				const data = response.data.event;
 
-				const preEvent = new MessageEmbed()
+				const preEvent = new EmbedBuilder()
 					.setTitle(`Countdown to ${data.name}`)
 					.setURL(data.assets.link)
 					.setDescription(`${data.description}\n\n[Link to Article](${data.assets.link})`)
-					.addField('Start Date', `<t:${data.time.startTimestamp}:f>\nor <t:${data.time.startTimestamp}:R>`, true)
-					.addField('End Date', `<t:${data.time.endTimestamp}:f>\nor <t:${data.time.endTimestamp}:R>`, true)
+					.addFields([
+						{ name: 'Start Date', value: `<t:${data.time.startTimestamp}:f>\nor <t:${data.time.startTimestamp}:R>`, inline: true },
+						{
+							name: 'End Date',
+							value: `<t:${data.time.endTimestamp}:f>\nor <t:${data.time.endTimestamp}:R>`,
+							inline: true,
+						},
+					])
 					.setImage(data.assets.image)
 					.setColor('2F3136')
 					.setFooter({ text: 'Dates are formatted automatically for your timezone.' });
 
-				const activeEvent = new MessageEmbed()
+				const activeEvent = new EmbedBuilder()
 					.setTitle(data.name)
 					.setURL(data.assets.link)
 					.setDescription(`${data.description}\n\n[Link to Article](${data.assets.link})`)
-					.addField('Start Date', `<t:${data.time.startTimestamp}:f>`, true)
-					.addField('End Date', `<t:${data.time.endTimestamp}:f>\nor <t:${data.time.endTimestamp}:R>`, true)
+					.addFields([
+						{ name: 'Start Date', value: `<t:${data.time.startTimestamp}:f>`, inline: true },
+						{
+							name: 'End Date',
+							value: `<t:${data.time.endTimestamp}:f>\nor <t:${data.time.endTimestamp}:R>`,
+							inline: true,
+						},
+					])
 					.setImage(data.assets.image)
 					.setColor('2F3136')
 					.setFooter({ text: 'Dates are formatted automatically for your timezone.' });
 
-				const postEvent = new MessageEmbed().setTitle('No Event Active').setDescription('No event is active or upcoming. Check back later for updates!').setColor('2F3136');
+				const postEvent = new EmbedBuilder().setTitle('No Event Active').setDescription('No event is active or upcoming. Check back later for updates!').setColor('2F3136');
 
-				const preEventCompact = new MessageEmbed()
+				const preEventCompact = new EmbedBuilder()
 					.setTitle(`Countdown to ${data.name}`)
 					.setURL(data.assets.link)
-					.addField('Start Date', `<t:${data.time.startTimestamp}:f>\nor <t:${data.time.startTimestamp}:R>`, true)
-					.addField('End Date', `<t:${data.time.endTimestamp}:f>\nor <t:${data.time.endTimestamp}:R>`, true)
+					.addFields([
+						{ name: 'Start Date', value: `<t:${data.time.startTimestamp}:f>\nor <t:${data.time.startTimestamp}:R>`, inline: true },
+						{
+							name: 'End Date',
+							value: `<t:${data.time.endTimestamp}:f>\nor <t:${data.time.endTimestamp}:R>`,
+							inline: true,
+						},
+					])
 					.setColor('2F3136')
 					.setFooter({ text: 'Dates are formatted automatically for your timezone.' });
 
-				const activeEventCompact = new MessageEmbed()
+				const activeEventCompact = new EmbedBuilder()
 					.setTitle(data.name)
 					.setURL(data.assets.link)
 					.setDescription(`[Link to News](${data.assets.link})`)
-					.addField('Start Date', `<t:${data.time.startTimestamp}:f>`, true)
-					.addField('End Date', `<t:${data.time.endTimestamp}:f>\nor <t:${data.time.endTimestamp}:R>`, true)
+					.addFields([
+						{ name: 'Start Date', value: `<t:${data.time.startTimestamp}:f>`, inline: true },
+						{
+							name: 'End Date',
+							value: `<t:${data.time.endTimestamp}:f>\nor <t:${data.time.endTimestamp}:R>`,
+							inline: true,
+						},
+					])
 					.setColor('2F3136')
 					.setFooter({ text: 'Dates are formatted automatically for your timezone.' });
 
-				const postEventCompact = new MessageEmbed()
+				const postEventCompact = new EmbedBuilder()
 					.setTitle('No Event Active')
 					.setDescription('No event is active or upcoming. Check back later for updates!')
 					.setColor('2F3136');

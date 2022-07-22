@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const axios = require('axios');
 
 const { api } = require('../../config.json');
@@ -9,7 +8,7 @@ const { Misc, serverStatus } = require('../../data/emotes.json');
 module.exports = {
 	data: new SlashCommandBuilder().setName('status').setDescription('Shows current in-game server status.'),
 	async execute(interaction) {
-		const loading = new MessageEmbed().setDescription(`${Misc.Loading} Loading server status data...`).setColor('2F3136');
+		const loading = new EmbedBuilder().setDescription(`${Misc.Loading} Loading server status data...`).setColor('2F3136');
 
 		await interaction.editReply({ embeds: [loading] });
 
@@ -74,14 +73,40 @@ module.exports = {
 					var embedColor = 'F04747';
 				}
 
-				const status = new MessageEmbed()
+				const status = new EmbedBuilder()
 					.setTitle('Apex Legends Server Status')
-					.addField('[Crossplay] Apex Login', statusLayout(apex), true)
-					.addField('Origin Login', statusLayout(origin), true)
-					.addField(`\u200b`, `\u200b`, true)
-					.addField('EA Accounts', statusLayout(accounts), true)
-					.addField('Lobby & MatchMaking Services', statusLayout(novafusion), true)
-					.addField(`\u200b`, `\u200b`, true)
+					.addFields([
+						{
+							name: '[Crossplay] Apex Login',
+							value: statusLayout(apex),
+							inline: true,
+						},
+						{
+							name: 'Origin Login',
+							value: statusLayout(origin),
+							inline: true,
+						},
+						{
+							name: '\u200b',
+							value: '\u200b',
+							inline: true,
+						},
+						{
+							name: 'EA Accounts',
+							value: statusLayout(accounts),
+							inline: true,
+						},
+						{
+							name: 'Lobby & Matchmaking Services',
+							value: statusLayout(novafusion),
+							inline: true,
+						},
+						{
+							name: '\u200b',
+							value: '\u200b',
+							inline: true,
+						},
+					])
 					.setColor(embedColor)
 					.setFooter({ text: 'Status data provided by https://apexlegendsstatus.com/' });
 
@@ -95,19 +120,19 @@ module.exports = {
 				if (error.response) {
 					console.log(error.response.data);
 
-					const errorEmbed = new MessageEmbed().setDescription(`**Error**\n\`\`\`${error.response.data.error}\`\`\``).setColor('D0342C');
+					const errorEmbed = new EmbedBuilder().setDescription(`**Error**\n\`\`\`${error.response.data.error}\`\`\``).setColor('D0342C');
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				} else if (error.request) {
 					console.log(error.request);
 
-					const errorEmbed = new MessageEmbed().setDescription(`**Error**\n\`\`\`The request was not returned successfully. Try again\`\`\``).setColor('D0342C');
+					const errorEmbed = new EmbedBuilder().setDescription(`**Error**\n\`\`\`The request was not returned successfully. Try again\`\`\``).setColor('D0342C');
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				} else {
 					console.log(error.message);
 
-					const errorEmbed = new MessageEmbed()
+					const errorEmbed = new EmbedBuilder()
 						.setDescription(`**Unknown Error**\n\`\`\`Unknown or uncaught error. Try again or contact SDCore#0001.\`\`\``)
 						.setColor('D0342C');
 
