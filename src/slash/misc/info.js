@@ -15,7 +15,7 @@ module.exports = {
 		const info = new EmbedBuilder()
 			.setTitle('Apex Legends Stats Bot')
 			.setDescription('Get user stats, Battle Royale and Arenas map rotations, news, and more. Start by typing `/` for a list of commands.')
-			.setThumbnail(`https://cdn.apexstats.dev/Bot/Avatar/2022/Season%2013.png?q=${Math.floor(Math.random())}`)
+			.setThumbnail(`https://cdn.jumpmaster.xyz/Bot/Avatar/Season%2013.png`)
 			.addFields([
 				{
 					name: 'Links',
