@@ -14,7 +14,7 @@ module.exports = {
 			.setTitle(`Legends are currently auto-healing in\n**FlashPoint: Olympus**.`)
 			.setDescription(`FlashPoint: Olympus ends <t:1651597200:R>, or at <t:1651597200:f>.`)
 			.setColor('2F3136')
-			.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season13/FlashPoint/Olympus.png`);
+			.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2013/FlashPoint/Olympus.png`);
 
 		interaction.editReply({ embeds: [mapEmbed] });
 	},

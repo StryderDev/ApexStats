@@ -45,7 +45,7 @@ module.exports = {
 						)}.`,
 					)
 					.setColor('2F3136')
-					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season13/Control/${encodeURIComponent(control.current.map)}.png`);
+					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2013/Control/${encodeURIComponent(control.current.map)}.png`);
 
 				interaction.editReply({ embeds: [mapEmbed] });
 			})

@@ -41,7 +41,7 @@ module.exports = {
 						)}.`,
 					)
 					.setColor('2F3136')
-					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season13/BR/${encodeURIComponent(ltm.current.map)}.png`);
+					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2013/Armed%20And%20Dangerous/${encodeURIComponent(ltm.current.map)}.png`);
 
 				interaction.editReply({ embeds: [mapEmbed] });
 			})

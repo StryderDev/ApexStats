@@ -57,7 +57,7 @@ module.exports = {
 						)}.\n**Ranked Arena**: Worlds Edge. Ends <t:1660064400:R>`,
 					)
 					.setColor('2F3136')
-					.setImage(`https://cdn.apexstats.dev/Bot/Maps/Season13/BR/${encodeURIComponent(br.map)}.png?q=${Math.floor(Math.random() * 10)}`);
+					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2013/Battle%20Royale/${encodeURIComponent(br.map)}.png`);
 
 				const futureEmbed = new EmbedBuilder().setTitle('Future Map Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
 
