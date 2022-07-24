@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://repobeats.axiom.co/api/embed/afd15f3fa5597fbf94a7002a4516c978927f4b6b.svg">
+  <img src="https://repobeats.axiom.co/api/embed/1155b47e64fbd1bede07234f9c015bd80baf61c3.svg">
 </p>
 
 # Apex Legends Stats Bot
