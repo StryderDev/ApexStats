@@ -1,21 +1,27 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const axios = require('axios');
 
 async function getSeasonEmbed(season) {
-	const response = await axios.get(`https://api.apexstats.dev/seasonData?season=${season}`);
+	const response = await axios.get(`https://api.jumpmaster.xyz/misc/Seasons?season=${season}`);
 	const data = response.data;
 
-	const embed = new MessageEmbed()
-		.setTitle(`Season ${data.info.number} - ${data.info.name}`)
-		.setURL(data.misc.link)
-		.addField(`Featured Legend`, data.new.legend, true)
-		.addField(`Featured Weapon`, data.new.gun, true)
-		.addField(`Featured Map`, data.new.map, true)
-		.addField(`Start Date`, `<t:${data.date.start}>`, true)
-		.addField(`End Date`, `<t:${data.date.end}>`, true)
-		.setImage(data.misc.mapImage)
-		.setColor('2F3136')
-		.setFooter({ text: data.info.tagline });
+	// TODO
+	// Fix the image background to be transparent instead of normal discord gray
+	// Add custom colours to DB for each season
+
+	const embed = new EmbedBuilder()
+		.setTitle(`Season ${data.info.ID} - ${data.info.Name}`)
+		.setURL(data.misc.Link)
+		.addFields([
+			{ name: 'Featured Legend', value: data.new.Legend, inline: true },
+			{ name: 'Featured Weapon', value: data.new.Weapon, inline: true },
+			{ name: 'Featured Map', value: data.new.Map, inline: true },
+			{ name: 'Start Date', value: `<t:${data.dates.Start}>`, inline: true },
+			{ name: 'End Date', value: `<t:${data.dates.End}>`, inline: true },
+		])
+		.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/SeasonMaps/Season%20${data.info.ID}.png`)
+		.setColor(data.misc.Color)
+		.setFooter({ text: data.info.Tagline });
 
 	return embed;
 }
