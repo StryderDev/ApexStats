@@ -15,6 +15,7 @@ module.exports = {
 		function checkMapName(name) {
 			if (name == 'Party crasher') return 'Party Crasher';
 			if (name == 'Drop Off') return 'Drop-Off';
+			if (name == 'Habitat') return 'Habitat 4';
 
 			return name;
 		}
@@ -31,7 +32,7 @@ module.exports = {
 							arenas.next.map,
 						)} for ${arenas.next.DurationInMinutes} minutes.`,
 					)
-					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2013/Arenas/${encodeURIComponent(checkMapName(arenas.current.map))}.png}`)
+					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2013/Arenas/${encodeURIComponent(checkMapName(arenas.current.map))}.png`)
 					.setColor('2F3136');
 
 				interaction.editReply({ embeds: [mapEmbed] });
