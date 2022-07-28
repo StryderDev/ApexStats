@@ -1,9 +1,12 @@
-const { Client, Collection } = require('discord.js');
+const { Client, Collection, ActivityType } = require('discord.js');
 const chalk = require('chalk');
 const { REST } = require('@discordjs/rest');
 const { discord, debug } = require('../../config.json');
 const { Routes } = require('discord-api-types/v10');
 const fs = require('fs');
+const { uptime } = require('../../functions/uptime.js');
+const axios = require('axios');
+const wait = require('util').promisify(setTimeout);
 
 const commandFolders = fs.readdirSync('./src/slash');
 
@@ -52,22 +55,28 @@ module.exports = {
 			}
 		})();
 
-		async function uptime() {
-			(function loop() {
-				const uptime = process.uptime();
-				const seconds = Math.floor(uptime % 60);
-				const minutes = Math.floor((uptime % (60 * 60)) / 60);
-				const hours = Math.floor(uptime / (60 * 60));
-				const days = Math.floor(uptime / 86400);
-
-				console.log(chalk`{blue [>>> Shard #${client.shard.ids[0] + 1} Uptime: ${days} Days, ${hours} Hours, ${minutes} Minutes, ${seconds} Seconds]}`);
-
-				now = new Date();
-				var delay = 60000 - (now % 60000);
-				setTimeout(loop, delay);
-			})();
-		}
-
+		// Count Uptime in Console
 		uptime();
+
+		// Rotating Map Presence
+		(async function presenceLoop() {
+			const date = new Date();
+			let minutes = date.getMinutes();
+
+			if (minutes % 1 == 0) {
+				await wait(1000);
+
+				axios.get('https://fn.alphaleagues.com/v2/apex/map/').then(function (res) {
+					const data = res.data.br.map;
+
+					client.user.setPresence({ activities: [{ name: `on ${data}` }], status: 'online' });
+					console.log(chalk`{cyan.bold [>>>> Updated bot presence. Set to "Playing on ${data}"]`);
+				});
+			}
+
+			var delay = 60000 - (date % 60000);
+			setTimeout(presenceLoop, delay);
+			// console.log('Checking for Presence');
+		})();
 	},
 };
