@@ -1,3 +1,5 @@
+const chalk = require('chalk');
+
 function loadEvents(client) {
 	const fs = require('fs');
 
@@ -23,7 +25,7 @@ function loadEvents(client) {
 				}
 			}
 
-			console.log(`${file} Loaded`);
+			console.log(chalk`{yellow.bold [>> ${file} Event Loaded]}`);
 		}
 	}
 }
