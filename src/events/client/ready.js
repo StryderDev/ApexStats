@@ -8,7 +8,7 @@ const { uptime } = require('../../functions/uptime.js');
 const axios = require('axios');
 const wait = require('util').promisify(setTimeout);
 
-const commandFolders = fs.readdirSync('./src/slash');
+const commandFolders = fs.readdirSync(__dirname + '/../../slash');
 
 const commands = [];
 
@@ -23,7 +23,7 @@ module.exports = {
 		client.commands = new Collection();
 
 		for (const folder of commandFolders) {
-			const commandFiles = fs.readdirSync(`./src/slash/${folder}`).filter(file => file.endsWith('.js'));
+			const commandFiles = fs.readdirSync(__dirname + `/../../slash/${folder}`).filter(file => file.endsWith('.js'));
 
 			for (const file of commandFiles) {
 				const command = require(`../../slash/${folder}/${file}`);
@@ -63,7 +63,7 @@ module.exports = {
 			const date = new Date();
 			let minutes = date.getMinutes();
 
-			if (minutes % 1 == 0) {
+			if (minutes % 5 == 0) {
 				await wait(1000);
 
 				axios.get('https://fn.alphaleagues.com/v2/apex/map/').then(function (res) {

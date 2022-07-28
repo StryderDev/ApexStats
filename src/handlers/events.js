@@ -3,10 +3,10 @@ const chalk = require('chalk');
 function loadEvents(client) {
 	const fs = require('fs');
 
-	const folders = fs.readdirSync(__dirname + '/../../src/events');
+	const folders = fs.readdirSync(__dirname + '/../events');
 
 	for (const folder of folders) {
-		const eventFiles = fs.readdirSync(__dirname + `/../../src/events/${folder}`).filter(file => file.endsWith('.js'));
+		const eventFiles = fs.readdirSync(__dirname + `/../events/${folder}`).filter(file => file.endsWith('.js'));
 
 		for (const file of eventFiles) {
 			const event = require(`../events/${folder}/${file}`);
