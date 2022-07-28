@@ -70,7 +70,7 @@ module.exports = {
 					const data = res.data.br.map;
 
 					client.user.setPresence({ activities: [{ name: `on ${data}` }], status: 'online' });
-					console.log(chalk`{cyan.bold [>>>> Updated bot presence. Set to "Playing on ${data}"]`);
+					console.log(chalk`{cyan.bold [>>>> Updated bot presence. Set to "Playing on ${data}"]}`);
 				});
 			}
 
