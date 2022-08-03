@@ -3,7 +3,8 @@
 	"version": "0.14.4",
 	"main": "Shard.js",
 	"scripts": {
-		"dev": "nodemon src/Shard.js"
+		"dev": "nodemon src/Shard.js",
+		"prod": "pm2 reload 0"
 	},
 	"repository": {
 		"type": "git",
