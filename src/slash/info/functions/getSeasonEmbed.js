@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 const axios = require('axios');
 
 async function getSeasonEmbed(season) {
-	const response = await axios.get(`https://api.jumpmaster.xyz/misc/Seasons?season=${season}`);
+	const response = await axios.get(`https://api.jumpmaster.xyz/seasons/Info?season=${season}`);
 	const data = response.data;
 
 	// TODO
