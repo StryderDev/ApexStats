@@ -14,6 +14,7 @@ module.exports = {
 
 		function checkMapName(name) {
 			if (name == 'Party crasher') return 'Party Crasher';
+			if (name == 'Phase Runner') return 'Phase Runner';
 			if (name == 'Drop Off') return 'Drop-Off';
 			if (name == 'Habitat') return 'Habitat 4';
 
