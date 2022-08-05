@@ -28,7 +28,7 @@ module.exports = {
 		await interaction.editReply({ embeds: [loading] });
 
 		await axios
-			.get(`https://api.apexstats.dev/stats?platform=${platform}&player=${encodeURIComponent(username)}`)
+			.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}`)
 			.then(response => {
 				const data = response.data;
 
@@ -46,7 +46,7 @@ module.exports = {
 				const trackers = data.active.trackers;
 
 				const stats = new EmbedBuilder()
-					.setTitle(`Stats for ${user.username} on ${platformName(platform)} playing ${legends[legend]}`)
+					.setTitle(`Stats for ${user.username} on ${user.platform} playing ${legends[legend]}`)
 					.setDescription(`**Status**\n${getStatus(status, Status)}`)
 					.addFields([
 						{
@@ -82,8 +82,7 @@ module.exports = {
 					])
 					.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legends[legend])}.png`)
 					.setColor('2F3136')
-					.setFooter({ text: `ID: ${data.user.id} · https://apexstats.dev/\nBattlePass level incorrect? Equip the badge in-game!` })
-					.setTimestamp();
+					.setFooter({ text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nEquip the BattlePass badge to update it!` });
 
 				interaction.editReply({ embeds: [stats] });
 			})

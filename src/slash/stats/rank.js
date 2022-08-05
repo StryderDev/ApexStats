@@ -22,12 +22,12 @@ module.exports = {
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		const loading = new EmbedBuilder().setDescription(`${Misc.Loading} Loading ranked data for ${username} on ${platformName(platform)}...`).setColor('2F3136');
+		const loading = new EmbedBuilder().setDescription(`${Misc.Loading} Loading data for ${username} on ${platformName(platform)}...`).setColor('2F3136');
 
 		await interaction.editReply({ embeds: [loading] });
 
 		await axios
-			.get(`https://api.apexstats.dev/stats?platform=${platform}&player=${encodeURIComponent(username)}`)
+			.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}`)
 			.then(response => {
 				const data = response.data;
 
@@ -41,7 +41,7 @@ module.exports = {
 				const arenas = ranked.Arenas;
 
 				const stats = new EmbedBuilder()
-					.setTitle(`Ranked Stats for ${user.username} on ${platformName(platform)}`)
+					.setTitle(`Stats for ${user.username} on ${user.platform}`)
 					.setDescription(`**Status**\n${getStatus(status, Status)}`)
 					.addFields([
 						{
@@ -55,11 +55,8 @@ module.exports = {
 							inline: true,
 						},
 					])
-					//.addField(`Battle Royale Ranked`, `${rankLayout('RP', br, Ranked)}`, true)
-					//.addField('Arenas Ranked', `${rankLayout('AP', arenas, Ranked)}`, true)
 					.setColor('2F3136')
-					.setFooter({ text: `ID: ${data.user.id} · https://apexstats.dev/` })
-					.setTimestamp();
+					.setFooter({ text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}` });
 
 				interaction.editReply({ embeds: [stats] });
 			})
