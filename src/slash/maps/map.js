@@ -45,27 +45,27 @@ module.exports = {
 				const br = response.data.br;
 				const brRanked = br.ranked;
 
-				function nextMaps() {
-					return br.next.map(x => `**${x.map}**\nStarts <t:${x.timestamp}:R> and lasts for **${mapLength(x.duration)}**.\n\n`).join('');
-				}
+				//function nextMaps() {
+				//	return br.next.map(x => `**${x.map}**\nStarts <t:${x.timestamp}:R> and lasts for **${mapLength(x.duration)}**.\n\n`).join('');
+				//}
 
 				const mapEmbed = new EmbedBuilder()
 					.setTitle(`Legends are currently dropping into **${br.map}**.`)
-					.setDescription(
-						`${br.map} Arena ends <t:${br.times.next}:R>, or at <t:${br.times.next}:t>.\n**Next up:** ${br.next[0].map} for ${mapLength(
-							br.next[0].duration,
-						)}.\n**Ranked Arena**: Worlds Edge. Ends <t:1660064400:R>`,
-					)
+					.setDescription(`${br.map} Arena ends <t:${br.times.next}:R>, or at <t:${br.times.next}:t>.\n**Ranked Arena**: Worlds Edge. Ends <t:1660064400:R>`)
 					.setColor('2F3136')
 					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2013/Battle%20Royale/${encodeURIComponent(br.map)}.png`);
 
-				const futureEmbed = new EmbedBuilder().setTitle('Future Map Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
+				// **Next up:** ${br.next[0].map} for ${mapLength(
+				//			br.next[0].duration,
+				//            )}.\n
 
-				if (futureLength(future) == '1') {
-					interaction.editReply({ embeds: [mapEmbed] });
-				} else {
-					interaction.editReply({ embeds: [futureEmbed] });
-				}
+				//const futureEmbed = new EmbedBuilder().setTitle('Future Map Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
+
+				//if (futureLength(future) == '1') {
+				interaction.editReply({ embeds: [mapEmbed] });
+				//} else {
+				//interaction.editReply({ embeds: [futureEmbed] });
+				//}
 			})
 			.catch(error => {
 				// Request failed with a response outside of the 2xx range
