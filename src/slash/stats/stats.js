@@ -80,7 +80,7 @@ module.exports = {
 							inline: true,
 						},
 					])
-					.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legends[legend])}.png`)
+					.setImage(`https://cdn.jumpmaster.xyz/Bot/Legends/Banners/${encodeURIComponent(legends[legend])}.png`)
 					.setColor('2F3136')
 					.setFooter({ text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nEquip the BattlePass badge to update it!` });
 

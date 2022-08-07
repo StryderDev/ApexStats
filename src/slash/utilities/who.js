@@ -61,7 +61,7 @@ module.exports = {
 			const legend = Math.floor(Math.random() * legends.length);
 			const legendEmbed = new EmbedBuilder()
 				.setDescription(`Play **${legends[legend]}** this round!`)
-				.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legends[legend])}.png`)
+				.setImage(`https://cdn.jumpmaster.xyz/Bot/Legends/Banners/${encodeURIComponent(legends[legend])}.png`)
 				.setColor('2F3136');
 
 			await interaction.editReply({ embeds: [loadingEmbed] });
@@ -78,7 +78,7 @@ module.exports = {
 			const legend = Math.floor(Math.random() * legendType(type).length);
 			const legendEmbed = new EmbedBuilder()
 				.setDescription(`Play **${legendType(type)[legend]}** this round!`)
-				.setImage(`https://cdn.apexstats.dev/Bot/Legends/Banners/${encodeURIComponent(legendType(type)[legend])}.png`)
+				.setImage(`https://cdn.jumpmaster.xyz/Bot/Legends/Banners/${encodeURIComponent(legendType(type)[legend])}.png`)
 				.setColor('2F3136');
 
 			await interaction.editReply({ embeds: [loadingEmbed] });
