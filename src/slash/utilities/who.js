@@ -47,6 +47,7 @@ module.exports = {
 			'Ash',
 			'Mad Maggie',
 			'Newcastle',
+			'Vantage',
 		];
 
 		const offensive = ['Wraith', 'Bangalore', 'Mirage', 'Octane', 'Revenant', 'Horizon', 'Fuse', 'Ash', 'Mad Maggie'];
@@ -55,7 +56,7 @@ module.exports = {
 
 		const support = ['Lifeline', 'Loba'];
 
-		const recon = ['Bloodhound', 'Pathfinder', 'Crypto', 'Valkyrie', 'Seer'];
+		const recon = ['Bloodhound', 'Pathfinder', 'Crypto', 'Valkyrie', 'Seer', 'Vantage'];
 
 		if (!type) {
 			const legend = Math.floor(Math.random() * legends.length);

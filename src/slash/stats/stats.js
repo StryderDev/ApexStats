@@ -55,7 +55,7 @@ module.exports = {
 							inline: true,
 						},
 						{
-							name: 'Saviors Battle Pass',
+							name: 'Hunted Battle Pass',
 							value: `${Account.BattlePass} Level ${battlepass(data.account.battlepass)}\n\n**Arenas Ranked**\n${rankLayout('AP', arenas, Ranked)}`,
 							inline: true,
 						},

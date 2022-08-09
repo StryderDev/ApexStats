@@ -29,9 +29,9 @@ function getStatus(status, emotes) {
 }
 
 function battlepass(data) {
-	if (!data.history.season13) return data.level;
+	if (!data.history.Hunted) return data.level;
 
-	return data.history.season13;
+	return data.history.Hunted;
 }
 
 function rankLayout(type, rank, emote) {
