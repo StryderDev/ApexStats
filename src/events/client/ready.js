@@ -1,7 +1,7 @@
 const { Client, Collection, ActivityType } = require('discord.js');
 const chalk = require('chalk');
 const { REST } = require('@discordjs/rest');
-const { discord, debug } = require('../../config.json');
+const { discord, debug, api } = require('../../config.json');
 const { Routes } = require('discord-api-types/v10');
 const fs = require('fs');
 const { uptime } = require('../../functions/uptime.js');
@@ -66,8 +66,8 @@ module.exports = {
 			if (minutes % 5 == 0) {
 				await wait(1000);
 
-				axios.get('https://fn.alphaleagues.com/v2/apex/map/').then(function (res) {
-					const data = res.data.br.map;
+				axios.get(`https://api.mozambiquehe.re/maprotation?auth=${api.apex}&version=2`).then(function (res) {
+					const data = res.data.battle_royale.current.map;
 
 					client.user.setPresence({ activities: [{ name: `on ${data}` }], status: 'online' });
 					console.log(chalk`{cyan.bold [>>>> Updated bot presence. Set to "Playing on ${data}"]}`);
