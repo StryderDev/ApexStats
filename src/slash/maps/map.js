@@ -4,15 +4,13 @@ const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const { Misc } = require('../../data/emotes.json');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('map')
-		.setDescription('Shows the current in-game map.')
-		.addIntegerOption(option =>
-			option.setName('future').setDescription('Amount of future map rotations you would like to see.').setRequired(false).setMinValue(1).setMaxValue(10),
-		),
+	data: new SlashCommandBuilder().setName('map').setDescription('Shows the current in-game map.'),
+	//.addIntegerOption(option =>
+	//	option.setName('future').setDescription('Amount of future map rotations you would like to see.').setRequired(false).setMinValue(1).setMaxValue(10),
+	//),
 	async execute(interaction) {
 		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading current in-game map...`).setColor('2F3136');
-		const future = interaction.options.getInteger('future');
+		//const future = interaction.options.getInteger('future');
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -40,32 +38,32 @@ module.exports = {
 		}
 
 		await axios
-			.get(`https://fn.alphaleagues.com/v2/apex/map/?next=${futureLength(future)}`)
+			.get(`https://fn.alphaleagues.com/v2/apex/map/?next=1`)
 			.then(response => {
 				const br = response.data.br;
 				const brRanked = br.ranked;
 
-				function nextMaps() {
-					return br.next.map(x => `**${x.map}**\nStarts <t:${x.timestamp}:R> and lasts for **${mapLength(x.duration)}**.\n\n`).join('');
-				}
+				//function nextMaps() {
+				//	return br.next.map(x => `**${x.map}**\nStarts <t:${x.timestamp}:R> and lasts for **${mapLength(x.duration)}**.\n\n`).join('');
+				//}
 
 				const mapEmbed = new EmbedBuilder()
 					.setTitle(`Legends are currently dropping into **${br.map}**.`)
-					.setDescription(
-						`${br.map} Arena ends <t:${br.times.next}:R>, or at <t:${br.times.next}:t>.\n**Next up:** ${br.next[0].map} for ${mapLength(
-							br.next[0].duration,
-						)}.\n**Ranked Arena**: Worlds Edge. Ends <t:1660064400:R>`,
-					)
+					.setDescription(`${br.map} ends <t:${br.times.next}:R>, or at <t:${br.times.next}:t>.\n**Ranked**: Worlds Edge. Ends <t:1660064400:R>`)
 					.setColor('2F3136')
 					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2013/Battle%20Royale/${encodeURIComponent(br.map)}.png`);
 
-				const futureEmbed = new EmbedBuilder().setTitle('Future Map Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
+				// **Next up:** ${br.next[0].map} for ${mapLength(
+				//		br.next[0].duration,
+				//        )}.\n
 
-				if (futureLength(future) == '1') {
-					interaction.editReply({ embeds: [mapEmbed] });
-				} else {
-					interaction.editReply({ embeds: [futureEmbed] });
-				}
+				//const futureEmbed = new EmbedBuilder().setTitle('Future Map Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
+
+				//if (futureLength(future) == '1') {
+				interaction.editReply({ embeds: [mapEmbed] });
+				//} else {
+				//	interaction.editReply({ embeds: [futureEmbed] });
+				//}
 			})
 			.catch(error => {
 				// Request failed with a response outside of the 2xx range
