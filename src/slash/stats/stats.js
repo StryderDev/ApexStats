@@ -45,18 +45,21 @@ module.exports = {
 				// Tracker Data
 				const trackers = data.active.trackers;
 
+				// Stats Embed
 				const stats = new EmbedBuilder()
 					.setTitle(`Stats for ${user.username} on ${user.platform} playing ${legends[legend]}`)
 					.setDescription(`**Status**\n${getStatus(status, Status)}`)
 					.addFields([
 						{
-							name: 'Account',
-							value: `${Account.Level} Level ${data.account.level.toLocaleString()}\n\n**Battle Royale Ranked**\n${rankLayout('RP', br, Ranked)}`,
+							name: `${Account.Level} Account`,
+							value: `${Misc.Blank} Level ${data.account.level.current.toLocaleString()}\n${Misc.Blank} Prestige ${
+								data.account.level.prestige
+							}\n\n**Battle Royale Ranked**\n${rankLayout('RP', br, Ranked)}`,
 							inline: true,
 						},
 						{
-							name: 'Hunted Battle Pass',
-							value: `${Account.BattlePass} Level ${battlepass(data.account.battlepass)}\n\n**Arenas Ranked**\n${rankLayout('AP', arenas, Ranked)}`,
+							name: `${Account.BattlePass} Hunted Battle Pass`,
+							value: `${Misc.Blank} Level ${battlepass(data.account.battlepass)}\n\n\n**Arenas Ranked**\n${rankLayout('AP', arenas, Ranked)}`,
 							inline: true,
 						},
 						{

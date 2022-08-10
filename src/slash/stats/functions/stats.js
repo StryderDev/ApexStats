@@ -1,3 +1,5 @@
+const { Misc } = require('../../../data/emotes.json');
+
 function platformName(name) {
 	if (name == 'PS4') return 'PlayStation';
 	if (name == 'X1') return 'Xbox';
@@ -20,7 +22,7 @@ function getStatus(status, emotes) {
 	}
 
 	if (status.online == 1 && status.ingame == 1) {
-		if (status.matchLength != -1) return `${inGame} In a Match (${minutes}m ${seconds}s)`;
+		if (status.matchLength != 0) return `${inGame} In a Match (${minutes}m ${seconds}s)`;
 
 		return `${inGame} In a Match`;
 	}
@@ -47,7 +49,9 @@ function rankLayout(type, rank, emote) {
 		return '';
 	}
 
-	return `${emote[rank.name]} ${showPos(rank.name, rank.ladderPos)} ${rank.name} ${showDiv(rank.name, rank.division)}\n${rank.score.toLocaleString()} ${type}`;
+	return `${Misc.Blank} ${emote[rank.name]} ${showPos(rank.name, rank.ladderPos)} ${rank.name} ${showDiv(rank.name, rank.division)}\n${
+		Misc.Blank
+	} ${rank.score.toLocaleString()} ${type}`;
 }
 
 function trackerName(legend, id, emote) {

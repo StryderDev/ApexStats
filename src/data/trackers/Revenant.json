@@ -50,5 +50,7 @@
 	"34986855": { "Name": "Wins", "Type": "S13 Apex", "Emote": "Season_13" },
 	"1741550569": { "Name": "Kills", "Type": "Apex", "Emote": "" },
 	"663532653": { "Name": "Silence: Enemies Silenced", "Type": "", "Emote": "" },
-	"1391572381": { "Name": "Damage", "Type": "Apex", "Emote": "" }
+	"1391572381": { "Name": "Damage", "Type": "Apex", "Emote": "" },
+	"1040578186": { "Name": "Kills", "Type": "S14 Apex", "Emote": "Season_14" },
+	"232603666": { "Name": "Wins", "Type": "S14 Apex", "Emote": "Season_14" }
 }

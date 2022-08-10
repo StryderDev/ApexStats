@@ -52,5 +52,10 @@
 	"483251263": { "Name": "Kills", "Type": "S12 Apex", "Emote": "Season_12" },
 	"803056903": { "Name": "Wins", "Type": "S12 Apex", "Emote": "Season_12" },
 	"1453078508": { "Name": "Kills", "Type": "S13 Apex", "Emote": "Season_13" },
-	"1269629754": { "Name": "Wins", "Type": "S13 Apex", "Emote": "Season_13" }
+	"1269629754": { "Name": "Wins", "Type": "S13 Apex", "Emote": "Season_13" },
+	"1357286627": { "Name": "Kills", "Type": "Apex", "Emote": "" },
+	"606399537": { "Name": "Wins", "Type": "Apex", "Emote": "" },
+	"766796826": { "Name": "Damage", "Type": "Apex", "Emote": "" },
+	"1156905554": { "Name": "Kills", "Type": "S14 Apex", "Emote": "Season_14" },
+	"987304404": { "Name": "Wins", "Type": "S14 Apex", "Emote": "Season_14" }
 }

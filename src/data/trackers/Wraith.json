@@ -52,5 +52,10 @@
 	"526250399": { "Name": "Into The Void: Time", "Type": "", "Emote": "" },
 	"1596439333": { "Name": "Damage", "Type": "Apex", "Emote": "" },
 	"1341632551": { "Name": "Kills", "Type": "S13 Apex", "Emote": "Season_13" },
-	"1812891603": { "Name": "Wins", "Type": "S13 Apex", "Emote": "Season_13" }
+	"1812891603": { "Name": "Wins", "Type": "S13 Apex", "Emote": "Season_13" },
+	"2082286599": { "Name": "Kills", "Type": "S14 Apex", "Emote": "Season_14" },
+	"2122290305": { "Name": "Wins", "Type": "S14 Apex", "Emote": "Season_14" },
+	"2108001555": { "Name": "Damage", "Type": "Apex", "Emote": "" },
+	"1105771409": { "Name": "Kills", "Type": "Apex", "Emote": "" },
+	"1769399470": { "Name": "Wins", "Type": "Apex", "Emote": "" }
 }

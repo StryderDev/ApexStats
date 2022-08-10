@@ -24,5 +24,7 @@
 	"487748396": { "Name": "Mobile Shield: Damage Blocked", "Type": "Apex", "Emote": "" },
 	"1411753488": { "Name": "Castle Wall: Allies Rescued", "Type": "Apex", "Emote": "" },
 	"269708909": { "Name": "Kills", "Type": "S13 Apex", "Emote": "Season_13" },
-	"1338126143": { "Name": "Wins", "Type": "S13 Apex", "Emote": "Season_13" }
+	"1338126143": { "Name": "Wins", "Type": "S13 Apex", "Emote": "Season_13" },
+	"618571499": { "Name": "Kills", "Type": "S14 Apex", "Emote": "Season_14" },
+	"1749908605": { "Name": "Wins", "Type": "S14 Apex", "Emote": "Season_14" }
 }

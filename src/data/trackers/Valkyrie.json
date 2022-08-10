@@ -41,5 +41,7 @@
 	"2075653396": { "Name": "Missile Swarm: Enemies Hit", "Type": "", "Emote": "" },
 	"1105714586": { "Name": "Damage", "Type": "Apex", "Emote": "" },
 	"268174317": { "Name": "Kills", "Type": "S13 Apex", "Emote": "Season_13" },
-	"31363039": { "Name": "Wins", "Type": "S13 Apex", "Emote": "Season_13" }
+	"31363039": { "Name": "Wins", "Type": "S13 Apex", "Emote": "Season_13" },
+	"90204676": { "Name": "Kills", "Type": "S14 Apex", "Emote": "Season_14" },
+	"1596668281": { "Name": "Wins", "Type": "S14 Apex", "Emote": "Season_14" }
 }
