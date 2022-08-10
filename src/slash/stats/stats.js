@@ -47,7 +47,7 @@ module.exports = {
 
 				// Stats Embed
 				const stats = new EmbedBuilder()
-					.setTitle(`Stats for ${user.username} on ${user.platform} playing ${legends[legend]}`)
+					.setTitle(`Stats for ${user.username} on ${user.platform} playing ${legend}`)
 					.setDescription(`**Status**\n${getStatus(status, Status)}`)
 					.addFields([
 						{
@@ -68,22 +68,22 @@ module.exports = {
 							inline: false,
 						},
 						{
-							name: trackerName(legends[legend], trackers[0].id, Season),
-							value: trackerValue(trackers[0].id, trackers[0].value),
+							name: trackers[0].id.toLocaleString(),
+							value: trackers[0].value.toLocaleString(),
 							inline: true,
 						},
 						{
-							name: trackerName(legends[legend], trackers[1].id, Season),
-							value: trackerValue(trackers[1].id, trackers[1].value),
+							name: trackers[1].id.toLocaleString(),
+							value: trackers[1].value.toLocaleString(),
 							inline: true,
 						},
 						{
-							name: trackerName(legends[legend], trackers[2].id, Season),
-							value: trackerValue(trackers[2].id, trackers[2].value),
+							name: trackers[2].id.toLocaleString(),
+							value: trackers[2].value.toLocaleString(),
 							inline: true,
 						},
 					])
-					.setImage(`https://cdn.jumpmaster.xyz/Bot/Legends/Banners/${encodeURIComponent(legends[legend])}.png`)
+					.setImage(`https://cdn.jumpmaster.xyz/Bot/Legends/Banners/${encodeURIComponent(legend)}.png`)
 					.setColor('2F3136')
 					.setFooter({ text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nEquip the BattlePass badge to update it!` });
 
