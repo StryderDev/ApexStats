@@ -49,9 +49,7 @@ function rankLayout(type, rank, emote) {
 		return '';
 	}
 
-	return `${Misc.Blank} ${emote[rank.name]} ${showPos(rank.name, rank.ladderPos)} ${rank.name} ${showDiv(rank.name, rank.division)}\n${
-		Misc.Blank
-	} ${rank.score.toLocaleString()} ${type}`;
+	return `${emote[rank.name]} ${showPos(rank.name, rank.ladderPos)} ${rank.name} ${showDiv(rank.name, rank.division)}\n${Misc.GrayBlank} ${rank.score.toLocaleString()} ${type}`;
 }
 
 function trackerName(legend, id, emote) {

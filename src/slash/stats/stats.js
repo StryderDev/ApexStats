@@ -52,14 +52,14 @@ module.exports = {
 					.addFields([
 						{
 							name: `${Account.Level} Account`,
-							value: `${Misc.Blank} Level ${data.account.level.current.toLocaleString()}\n${Misc.Blank} Prestige ${
+							value: `${Misc.GrayBlank} Level ${data.account.level.current.toLocaleString()}\n${Misc.GrayBlank}  Prestige ${
 								data.account.level.prestige
 							}\n\n**Battle Royale Ranked**\n${rankLayout('RP', br, Ranked)}`,
 							inline: true,
 						},
 						{
 							name: `${Account.BattlePass} Hunted Battle Pass`,
-							value: `${Misc.Blank} Level ${battlepass(data.account.battlepass)}\n\n\n**Arenas Ranked**\n${rankLayout('AP', arenas, Ranked)}`,
+							value: `${Misc.GrayBlank} Level ${battlepass(data.account.battlepass)}\n\n\n**Arenas Ranked**\n${rankLayout('AP', arenas, Ranked)}`,
 							inline: true,
 						},
 						{
