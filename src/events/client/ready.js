@@ -66,8 +66,8 @@ module.exports = {
 			if (minutes % 5 == 0) {
 				await wait(1000);
 
-				axios.get(`https://api.mozambiquehe.re/maprotation?auth=${api.apex}&version=2`).then(function (res) {
-					const data = res.data.battle_royale.current.map;
+				axios.get(`https://fn.alphaleagues.com/v2/apex/map/`).then(function (res) {
+					const data = res.data.br.map;
 
 					client.user.setPresence({ activities: [{ name: `on ${data}` }], status: 'online' });
 					console.log(chalk`{cyan.bold [>>>> Updated bot presence. Set to "Playing on ${data}"]}`);
