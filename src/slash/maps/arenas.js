@@ -33,7 +33,7 @@ module.exports = {
 							arenas.next.map,
 						)} for ${arenas.next.DurationInMinutes} minutes.`,
 					)
-					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2013/Arenas/${encodeURIComponent(checkMapName(arenas.current.map))}.png`)
+					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2014/Arenas/${encodeURIComponent(checkMapName(arenas.current.map))}.png`)
 					.setColor('2F3136');
 
 				interaction.editReply({ embeds: [mapEmbed] });

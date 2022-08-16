@@ -30,7 +30,7 @@ module.exports = {
 
 		if (mapOption != null) {
 			function mapFilePath(map) {
-				return `../../data/drops/Season 13/${map}.json`;
+				return `../../data/drops/Season 14/${map}.json`;
 			}
 
 			const mapFile = require(mapFilePath(mapOption));
@@ -41,18 +41,18 @@ module.exports = {
 			interaction.editReply({ content: dropText });
 		} else {
 			await axios
-				.get(`https://api.mozambiquehe.re/maprotation?version=5&auth=${api.apex}`)
+				.get(`https://fn.alphaleagues.com/v2/apex/map/`)
 				.then(response => {
-					const br = response.data.battle_royale;
+					const br = response.data.br;
 
 					function mapFilePath(map) {
-						return `../../data/drops/Season 13/${map.replaceAll("'", '')}.json`;
+						return `../../data/drops/Season 14/${map.replaceAll("'", '')}.json`;
 					}
 
-					const mapFile = require(mapFilePath(br.current.map));
+					const mapFile = require(mapFilePath(br.map));
 					const map = Math.floor(Math.random() * mapFile.length);
 
-					const dropText = `Drop into **${mapFile[map]}** on ${br.current.map}.`;
+					const dropText = `Drop into **${mapFile[map]}** on ${br.map}.`;
 
 					interaction.editReply({ content: dropText });
 				})

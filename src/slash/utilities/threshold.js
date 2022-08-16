@@ -11,7 +11,7 @@ module.exports = {
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.apexstats.dev/minPred`)
+			.get(`https://api.jumpmaster.xyz/misc/predThreshold`)
 			.then(response => {
 				const data = response.data;
 
