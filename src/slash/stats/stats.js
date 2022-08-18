@@ -1,6 +1,8 @@
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const axios = require('axios');
 
+const { debug } = require('../../config.json');
+
 const { platformName, getStatus, battlepass, rankLayout, trackerName, trackerValue } = require('./functions/stats.js');
 
 const { Misc, Status, Account, Ranked, Season } = require('../../data/emotes.json');
@@ -87,6 +89,8 @@ module.exports = {
 					.setColor('2F3136')
 					.setFooter({ text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nEquip the BattlePass badge to update it!` });
 
+				axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=success&dev=${debug.true}`);
+
 				interaction.editReply({ embeds: [stats] });
 			})
 			.catch(error => {
@@ -94,6 +98,8 @@ module.exports = {
 					console.log(error.response.data);
 
 					const errorEmbed = new EmbedBuilder().setDescription(`**Lookup Error**\n\`\`\`${error.response.data.error}\`\`\``).setColor('D0342C');
+
+					axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=error&dev=${debug.true}`);
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				} else if (error.request) {
