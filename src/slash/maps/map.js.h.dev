@@ -48,6 +48,8 @@ module.exports = {
 					.setColor('2F3136')
 					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2014/Battle%20Royale/${encodeURIComponent(br.current.map)}.png`);
 
+                axios.get(`https://api.jumpmaster.xyz/logs/MapBR?dev=${debug.true}`);
+
 				interaction.editReply({ embeds: [mapEmbed] });
 			})
 			.catch(error => {

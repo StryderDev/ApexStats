@@ -58,6 +58,8 @@ module.exports = {
 					.setColor('2F3136')
 					.setFooter({ text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}` });
 
+				axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=success&dev=${debug.true}`);
+
 				interaction.editReply({ embeds: [stats] });
 			})
 			.catch(error => {
@@ -65,6 +67,8 @@ module.exports = {
 					console.log(error.response.data);
 
 					const errorEmbed = new EmbedBuilder().setDescription(`**Lookup Error**\n\`\`\`${error.response.data.error}\`\`\``).setColor('D0342C');
+
+					axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=success&dev=${debug.true}`);
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				} else if (error.request) {

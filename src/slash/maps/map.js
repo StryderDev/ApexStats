@@ -1,6 +1,8 @@
 const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
+const { debug } = require('../../config.json');
+
 const { Misc } = require('../../data/emotes.json');
 
 module.exports = {
@@ -60,6 +62,8 @@ module.exports = {
 					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2014/Battle%20Royale/${encodeURIComponent(br.map)}.png`);
 
 				const futureEmbed = new EmbedBuilder().setTitle('Future Map Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
+
+				axios.get(`https://api.jumpmaster.xyz/logs/MapBR?dev=${debug.true}`);
 
 				if (futureLength(future) == '1') {
 					interaction.editReply({ embeds: [mapEmbed] });

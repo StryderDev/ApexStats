@@ -13,7 +13,7 @@ manager.on('shardCreate', shard => {
 	console.log(chalk`{green.bold [> Shard #${shard.id + 1} Launched]}`);
 });
 
-if (debug.true == false) {
+if (debug.true == false && api.topgg != 0) {
 	const poster = AutoPoster(api.topgg, manager);
 
 	poster.on('posted', stats => {

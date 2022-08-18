@@ -2,7 +2,7 @@ const { default: axios } = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { Misc } = require('../../data/emotes.json');
-const { api } = require('../../config.json');
+const { api, debug } = require('../../config.json');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('arenas').setDescription('Shows the current in-game arena map.'),
@@ -35,6 +35,8 @@ module.exports = {
 					)
 					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2014/Arenas/${encodeURIComponent(checkMapName(arenas.current.map))}.png`)
 					.setColor('2F3136');
+
+				axios.get(`https://api.jumpmaster.xyz/logs/MapArenas?dev=${debug.true}`);
 
 				interaction.editReply({ embeds: [mapEmbed] });
 			})
