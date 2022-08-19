@@ -14,7 +14,7 @@ module.exports = {
 				.setMinValues(1)
 				.setMaxValues(1)
 				.addOptions([
-					{ label: 'Season 14 - Hunted', value: '14', emoji: Season['Season_0'] },
+					{ label: 'Season 14 - Hunted', value: '14', emoji: Season['Season_14'] },
 					{ label: 'Season 13 - Saviors', value: '13', emoji: Season['Season_13'] },
 					{ label: 'Season 12 - Defiance', value: '12', emoji: Season['Season_12'] },
 					{ label: 'Season 11 - Escape', value: '11', emoji: Season['Season_11'] },
