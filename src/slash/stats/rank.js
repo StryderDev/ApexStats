@@ -1,5 +1,6 @@
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const axios = require('axios');
+const { debug } = require('../../config.json');
 
 const { platformName, getStatus, rankLayout } = require('./functions/stats.js');
 
