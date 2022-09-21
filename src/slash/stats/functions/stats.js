@@ -45,6 +45,7 @@ function rankLayout(type, rank, emote) {
 
 	function showPos(name, pos) {
 		if (name == 'Apex Predator') return `**[#${pos}]**`;
+		if (name == 'Master') return `**[#${pos}]**`;
 
 		return '';
 	}

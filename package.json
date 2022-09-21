@@ -1,6 +1,6 @@
 {
 	"name": "apex-stats-bot",
-	"version": "0.14.19-1",
+	"version": "0.14.23",
 	"main": "Shard.js",
 	"scripts": {
 		"dev": "nodemon src/Shard.js",
@@ -8,15 +8,15 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://sdcore: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@github.com/SDCore/Apex-Stats-Bot.git"
+		"url": "https://github.com/StryderDev/ApexStats"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/SDCore/Apex-Stats-Bot/issues"
+		"url": "https://github.com/StryderDev/ApexStats/issues"
 	},
-	"homepage": "https://github.com/SDCore/Apex-Stats-Bot#readme",
+	"homepage": "https://github.com/StryderDev/ApexStats#readme",
 	"dependencies": {
 		"@discordjs/rest": "0.5.0",
 		"axios": "0.27.2",

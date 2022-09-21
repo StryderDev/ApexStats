@@ -6,7 +6,7 @@ async function uptime() {
 		const uptime = process.uptime();
 		const seconds = Math.floor(uptime % 60);
 		const minutes = Math.floor((uptime % (60 * 60)) / 60);
-		const hours = Math.floor(uptime / (60 * 60));
+		const hours = Math.floor(uptime / (60 * 60)) % 24;
 		const days = Math.floor(uptime / 86400);
 
 		console.log(chalk`{blue [>>> Shard #${client.shard.ids[0] + 1} Uptime: ${days} Days, ${hours} Hours, ${minutes} Minutes, ${seconds} Seconds]}`);

@@ -1,6 +1,10 @@
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
 
+const { debug } = require('../../config.json');
+
+const axios = require('axios');
+
 const { Misc } = require('../../data/emotes.json');
 
 module.exports = {
@@ -58,6 +62,31 @@ module.exports = {
 
 		const recon = ['Bloodhound', 'Pathfinder', 'Crypto', 'Valkyrie', 'Seer', 'Vantage'];
 
+		const typeList = {
+			Bloodhound: 'Recon',
+			Gibraltar: 'Defensive',
+			Lifeline: 'Support',
+			Pathfinder: 'Recon',
+			Wraith: 'Offensive',
+			Bangalore: 'Offensive',
+			Caustic: 'Defensive',
+			Mirage: 'Offensive',
+			Octane: 'Offensive',
+			Wattson: 'Defensive',
+			Crypto: 'Defensive',
+			Revenant: 'Defensive',
+			Loba: 'Support',
+			Rampart: 'Defensive',
+			Horizon: 'Offensive',
+			Fuse: 'Offensive',
+			Valkyrie: 'Recon',
+			Seer: 'Recon',
+			Ash: 'Offensive',
+			'Mad Maggie': 'Offensive',
+			Newcastle: 'Defensive',
+			Vantage: 'Recon',
+		};
+
 		if (!type) {
 			const legend = Math.floor(Math.random() * legends.length);
 			const legendEmbed = new EmbedBuilder()
@@ -68,6 +97,8 @@ module.exports = {
 			await interaction.editReply({ embeds: [loadingEmbed] });
 			await wait(1000);
 			await interaction.editReply({ embeds: [legendEmbed] });
+
+			axios.get(`https://api.jumpmaster.xyz/logs/Who?legend=${legends[legend]}&type=${typeList[legends[legend]]}&dev=${debug.true}`);
 		} else {
 			function legendType(type) {
 				if (type == 'Offensive') return offensive;
@@ -85,6 +116,8 @@ module.exports = {
 			await interaction.editReply({ embeds: [loadingEmbed] });
 			await wait(1000);
 			await interaction.editReply({ embeds: [legendEmbed] });
+
+			axios.get(`https://api.jumpmaster.xyz/logs/Who?legend=${legendType(type)[legend]}&type=${typeList[legendType(type)[legend]]}&dev=${debug.true}`);
 		}
 	},
 };
