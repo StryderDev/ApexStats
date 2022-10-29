@@ -7,13 +7,13 @@ const { Misc } = require('../../data/emotes.json');
 module.exports = {
 	data: new SlashCommandBuilder().setName('control').setDescription('Shows the current in-game control map.'),
 	async execute(interaction) {
-		// const text = `The **Control LTM** is not currently active. Check back when Control is set to return in the future!`;
-
-		// await interaction.editReply({ content: text });
-
 		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading current in-game Control map...`).setColor('2F3136');
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
+
+		function mapImage(map) {
+			if (map == 'Hammond Labs After Dark') return 'Hammond Labs';
+		}
 
 		function isPlural(number, word) {
 			if (number != 1) return `${word}s`;
@@ -35,7 +35,7 @@ module.exports = {
 		await axios
 			.get(`https://api.mozambiquehe.re/maprotation?version=5&auth=${api.apex}`)
 			.then(response => {
-				const control = response.data.control;
+				const control = response.data.ltm;
 
 				const mapEmbed = new EmbedBuilder()
 					.setTitle(`Legends are currently Taking Control in **${control.current.map}**.`)
