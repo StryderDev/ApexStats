@@ -31,9 +31,9 @@ function getStatus(status, emotes) {
 }
 
 function battlepass(data) {
-	if (!data.history.Hunted) return data.level;
+	if (!data.history.Eclipse) return data.level;
 
-	return data.history.Hunted;
+	return data.history.Eclipse;
 }
 
 function rankLayout(type, rank, emote) {
