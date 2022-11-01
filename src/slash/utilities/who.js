@@ -52,11 +52,12 @@ module.exports = {
 			'Mad Maggie',
 			'Newcastle',
 			'Vantage',
+			'Catalyst',
 		];
 
 		const offensive = ['Wraith', 'Bangalore', 'Mirage', 'Octane', 'Revenant', 'Horizon', 'Fuse', 'Ash', 'Mad Maggie'];
 
-		const defensive = ['Gibraltar', 'Caustic', 'Wattson', 'Rampart', 'Newcastle'];
+		const defensive = ['Gibraltar', 'Caustic', 'Wattson', 'Rampart', 'Newcastle', 'Catalyst'];
 
 		const support = ['Lifeline', 'Loba'];
 
@@ -85,6 +86,7 @@ module.exports = {
 			'Mad Maggie': 'Offensive',
 			Newcastle: 'Defensive',
 			Vantage: 'Recon',
+			Catalyst: 'Defensive',
 		};
 
 		if (!type) {

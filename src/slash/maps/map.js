@@ -59,7 +59,7 @@ module.exports = {
 						)}.\n**Ranked**: Kings Canyon. Ends <t:1664298000:R>.`,
 					)
 					.setColor('2F3136')
-					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2014/Battle%20Royale/${encodeURIComponent(br.map)}.png`);
+					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2015/Battle%20Royale/${encodeURIComponent(br.map)}.png`);
 
 				const futureEmbed = new EmbedBuilder().setTitle('Future Map Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
 

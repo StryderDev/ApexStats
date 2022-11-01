@@ -19,6 +19,7 @@ module.exports = {
 					{ name: "World's Edge", value: 'Worlds Edge' },
 					{ name: 'Olympus', value: 'Olympus' },
 					{ name: 'Storm Point', value: 'Storm Point' },
+					{ name: 'Broken Moon', value: 'Broken Moon' },
 				),
 		),
 	async execute(interaction) {
@@ -30,6 +31,7 @@ module.exports = {
 			if (map == 'Worlds Edge') return 'Worlds_Edge';
 			if (map == "World's Edge") return 'Worlds_Edge';
 			if (map == 'Storm Point') return 'Storm_Point';
+			if (map == 'Storm Point') return 'Broken_Moon';
 
 			return map;
 		}
@@ -39,7 +41,7 @@ module.exports = {
 
 		if (mapOption != null) {
 			function mapFilePath(map) {
-				return `../../data/drops/Season 14/${map}.json`;
+				return `../../data/drops/Season 15/${map}.json`;
 			}
 
 			const mapFile = require(mapFilePath(mapOption));

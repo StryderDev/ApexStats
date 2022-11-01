@@ -1,7 +1,7 @@
 {
 	"Account": {
 		"Level": "<:ApexStats_AccountLevel:909364972943999016>",
-		"BattlePass": "<:ApexStats_Season14:1006494927687012407>"
+		"BattlePass": "<:ApexStats_Season0:993334223354216459>"
 	},
 	"Ranked": {
 		"Unranked": "<:ApexStats_Unranked:960732914344157324>",
@@ -34,7 +34,8 @@
 		"Season_11": "<:ApexStats_Season11:959678408269365279>",
 		"Season_12": "<:ApexStats_Season12:959680085043068948>",
 		"Season_13": "<:ApexStats_Season13:971661012421976084>",
-		"Season_14": "<:ApexStats_Season14:1006494927687012407>"
+		"Season_14": "<:ApexStats_Season14:1006494927687012407>",
+		"Season_15": "<:ApexStats_Season0:993334223354216459>"
 	},
 	"serverStatus": {
 		"Online": "<:ApexStats_GreenDot:955008202116845568>",
