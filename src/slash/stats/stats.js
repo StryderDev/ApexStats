@@ -3,10 +3,9 @@ const axios = require('axios');
 
 const { debug } = require('../../config.json');
 
-const { platformName, getStatus, battlepass, rankLayout, trackerName, trackerValue } = require('./functions/stats.js');
+const { platformName, getStatus, battlepass, rankLayout, getPlatformEmote } = require('./functions/stats.js');
 
-const { Misc, Status, Account, Ranked, Season } = require('../../data/emotes.json');
-const legends = require('../../data/legends.json');
+const { Misc, Status, Account, Ranked } = require('../../data/emotes.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -49,7 +48,7 @@ module.exports = {
 
 				// Stats Embed
 				const stats = new EmbedBuilder()
-					.setTitle(`Stats for ${user.username} on ${user.platform} playing ${legend}`)
+					.setTitle(`${getPlatformEmote(user.platform)} ${user.username} playing ${legend}`)
 					.setDescription(`**Status**\n${getStatus(status, Status)}`)
 					.addFields([
 						{
@@ -66,7 +65,7 @@ module.exports = {
 						},
 						{
 							name: `\u200b`,
-							value: '**Currently Equipped Trackers**',
+							value: '**Active Trackers**',
 							inline: false,
 						},
 						{

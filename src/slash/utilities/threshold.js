@@ -26,16 +26,16 @@ module.exports = {
 					.addFields([
 						{
 							name: 'Battle Royale',
-							value: `${Misc.Threshold_PC} PC: ${PC.Battle_Royale.toLocaleString()} RP\n${Misc.Threshold_Xbox} Xbox: ${X1.Battle_Royale.toLocaleString()} RP\n${
-								Misc.Threshold_PlayStation
-							} PlayStation: ${PS4.Battle_Royale.toLocaleString()} RP\n${Misc.Threshold_Switch} Nintendo Switch: ${Switch.Battle_Royale.toLocaleString()} RP`,
+							value: `${Misc.Platform_PC} PC: ${PC.Battle_Royale.toLocaleString()} RP\n${Misc.Platform_Xbox} Xbox: ${X1.Battle_Royale.toLocaleString()} RP\n${
+								Misc.Platform_PlayStation
+							} PlayStation: ${PS4.Battle_Royale.toLocaleString()} RP\n${Misc.Platform_Switch} Nintendo Switch: ${Switch.Battle_Royale.toLocaleString()} RP`,
 							inline: true,
 						},
 						{
 							name: 'Arenas',
-							value: `${Misc.Threshold_PC} PC: ${PC.Arenas.toLocaleString()} AP\n${Misc.Threshold_Xbox} Xbox: ${X1.Arenas.toLocaleString()} AP\n${
-								Misc.Threshold_PlayStation
-							} PlayStation: ${PS4.Arenas.toLocaleString()} AP\n${Misc.Threshold_Switch} Nintendo Switch: ${Switch.Arenas.toLocaleString()} AP`,
+							value: `${Misc.Platform_PC} PC: ${PC.Arenas.toLocaleString()} AP\n${Misc.Platform_Xbox} Xbox: ${X1.Arenas.toLocaleString()} AP\n${
+								Misc.Platform_PlayStation
+							} PlayStation: ${PS4.Arenas.toLocaleString()} AP\n${Misc.Platform_Switch} Nintendo Switch: ${Switch.Arenas.toLocaleString()} AP`,
 							inline: true,
 						},
 					])

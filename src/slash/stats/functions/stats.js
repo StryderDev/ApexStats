@@ -53,40 +53,10 @@ function rankLayout(type, rank, emote) {
 	return `${emote[rank.name]} ${showPos(rank.name, rank.ladderPos)} ${rank.name} ${showDiv(rank.name, rank.division)}\n${Misc.GrayBlank} ${rank.score.toLocaleString()} ${type}`;
 }
 
-function trackerName(legend, id, emote) {
-	if (id == '1905735931') return 'No Data';
-
-	const legendTrackers = require(`../../../data/trackers/${legend}.json`);
-	const globalTrackers = require('../../../data/globalTrackers.json');
-
-	function text(text) {
-		return text ? text : '';
-	}
-
-	function checkEmote(emote, icons) {
-		if (emote != null && emote != 'undefined' && emote.length != 0) return icons[emote];
-
-		return '';
-	}
-
-	if (globalTrackers[id] == null || globalTrackers[id] == 'undefined') {
-		// If the tracker ID doesn't exist in the global trackers file, check the legend trackers file
-		if (legendTrackers[id] == null || legendTrackers[id] == 'undefined') {
-			// If the tracker ID doesn't exist in the legend trackers file, just return the ID of the tracker
-			return id;
-		} else {
-			// The tracker ID exists in the legend trackers file
-			return `${checkEmote(legendTrackers[id].Emote, emote)} ${text(legendTrackers[id].Type)} ${legendTrackers[id].Name}`;
-		}
-	} else {
-		return globalTrackers[id];
-	}
+function getPlatformEmote(platform) {
+	if (platform == 'PC') return Misc.Platform_PC;
+	if (platform == 'Xbox') return Misc.Platform_Xbox;
+	if (platform == 'PlayStation') return Misc.Platform_PlayStation;
 }
 
-function trackerValue(id, value) {
-	if (id == '1905735931') return '-';
-
-	return value.toLocaleString();
-}
-
-module.exports = { platformName, getStatus, battlepass, rankLayout, trackerName, trackerValue };
+module.exports = { platformName, getStatus, battlepass, rankLayout, getPlatformEmote };

@@ -2,7 +2,7 @@ const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const axios = require('axios');
 const { debug } = require('../../config.json');
 
-const { platformName, getStatus, rankLayout } = require('./functions/stats.js');
+const { platformName, getStatus, rankLayout, getPlatformEmote } = require('./functions/stats.js');
 
 const { Misc, Status, Ranked } = require('../../data/emotes.json');
 
@@ -42,7 +42,7 @@ module.exports = {
 				const arenas = ranked.Arenas;
 
 				const stats = new EmbedBuilder()
-					.setTitle(`Stats for ${user.username} on ${user.platform}`)
+					.setTitle(`${getPlatformEmote(user.platform)} ${user.username}`)
 					.setDescription(`**Status**\n${getStatus(status, Status)}`)
 					.addFields([
 						{
