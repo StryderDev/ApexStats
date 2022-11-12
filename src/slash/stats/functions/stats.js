@@ -15,19 +15,34 @@ function getStatus(status, emotes) {
 	const seconds = Math.floor(status.matchLength % 60);
 	const minutes = Math.floor(status.matchLength / 60);
 
-	if (status.online == 1 && status.ingame == 0) {
-		if (status.matchLength != -1) return `${online} Lobby (${minutes}m ${seconds}s)`;
+	// if (status.online == 1 && status.ingame == 0 && status.partyInMatch == 0) {
+	// 	if (status.matchLength != -1) return `${online} Lobby (${minutes}m ${seconds}s)`;
 
-		return `${online} Online (Lobby)`;
+	// 	return `${online} Online (Lobby)`;
+	// }
+
+	// if (status.online == 1 && status.ingame == 1) {
+	//	if (status.matchLength != 0) return `${inGame} In a Match (${minutes}m ${seconds}s)`;
+
+	//	return `${inGame} In a Match`;
+	//}
+
+	if (status.online == 1) {
+		// Player is online but not in a match
+		if (status.ingame == 0 && status.partyInMatch == 0) {
+			if (status.matchLength == 0) return `${online} Online (Lobby)`; // Player is in a closed lobby
+
+			return `${online} Lobby (${minutes}m ${seconds}s)`; // Player is in an open lobby
+		}
+
+		if (status.ingame == 1 || status.partyInMatch == 1) {
+			if (status.matchLength == 0) return `${inGame} In a Match`; // Player is in a closed match
+
+			return `${inGame} In a Match (${minutes}m ${seconds}s)`; // Player is in an open match
+		}
 	}
 
-	if (status.online == 1 && status.ingame == 1) {
-		if (status.matchLength != 0) return `${inGame} In a Match (${minutes}m ${seconds}s)`;
-
-		return `${inGame} In a Match`;
-	}
-
-	return `${offline} Offline / Invite Only`;
+	return `${offline} Offline`;
 }
 
 function battlepass(data) {
