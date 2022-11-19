@@ -1,13 +1,13 @@
 {
-	"debug": true, // True or false
-	"release": "Draconis", // Release codename
-	"als_token": "bJStKT35rF8trAelsnaa", // Token from Apex Legends Status
+	"debug": true or false,
+	"release": "Release Codename",
+	"als_token": "Token from Apex Legends Status",
 	"discord": {
-		"devGuild": "893227807667273738", // Test guild for testing commands
-		"token": "Nzg1MDA4OTAwNTMzMzg3MjY1.X8xmgg.r6r0M0IYNOhu9T_SPjLawbiIJV8" // Bot token
+		"devGuild": "Guild ID for Testing Slash Commands",
+		"token": "Discord Bot Token"
 	},
 	"topgg": {
-		"enabled": false, // TopGG API
-		"token": "0" // TopGG API Token
+		"enabled": true or false,
+		"token": "TopGG API Token"
 	}
 }
