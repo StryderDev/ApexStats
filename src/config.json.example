@@ -1,15 +1,13 @@
 {
-	"debug": {
-		"true": true, // True enables some debug options and also disables data collection for the bot
-		"guild": "Guild ID" // The guild ID that is used for testing local guild commands
-	},
+	"debug": true, // True or false
+	"release": "Draconis", // Release codename
+	"als_token": "bJStKT35rF8trAelsnaa", // Token from Apex Legends Status
 	"discord": {
-		"token": "Discord Token" // Discord bot token
+		"devGuild": "893227807667273738", // Test guild for testing commands
+		"token": "Nzg1MDA4OTAwNTMzMzg3MjY1.X8xmgg.r6r0M0IYNOhu9T_SPjLawbiIJV8" // Bot token
 	},
-	"api": {
-		"apex": "ApexLegendsAPI Key" // API key from ApexLegendsAPI.com
-	},
-	"release": {
-		"name": "Release Name" // Self Explanatory
+	"topgg": {
+		"enabled": false, // TopGG API
+		"token": "0" // TopGG API Token
 	}
 }
