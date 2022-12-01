@@ -6,9 +6,9 @@
 	"scripts": {
 		"rimraf": "./node_modules/rimraf/bin.js",
 		"clean": "rimraf build",
-		"build": "npm run clean && tsc",
+		"build": "npm run clean",
 		"start": "node build/Shard.js",
-		"dev": "concurrently \"tsc -w\" \"nodemon build/Shard.js\""
+		"dev": "concurrently \"tsc\" \"node build/Shard.js\""
 	},
 	"repository": {
 		"type": "git",
