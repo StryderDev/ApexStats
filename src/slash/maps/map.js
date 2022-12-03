@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { api } = require('../../config.json');
+const { debug, api } = require('../../config.json');
 const { Misc } = require('../../data/emotes.json');
 
 module.exports = {
@@ -48,7 +48,7 @@ module.exports = {
 					.setColor('2F3136')
 					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2014/Battle%20Royale/${encodeURIComponent(br.current.map)}.png`);
 
-                axios.get(`https://api.jumpmaster.xyz/logs/MapBR?dev=${debug.true}`);
+				axios.get(`https://api.jumpmaster.xyz/logs/MapBR?dev=${debug.true}`);
 
 				interaction.editReply({ embeds: [mapEmbed] });
 			})
