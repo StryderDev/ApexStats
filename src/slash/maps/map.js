@@ -1,21 +1,13 @@
 const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { debug } = require('../../config.json');
-
+const { api } = require('../../config.json');
 const { Misc } = require('../../data/emotes.json');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('map')
-		.setDescription('Shows the current in-game map.')
-		.addIntegerOption(option =>
-			option.setName('future').setDescription('Amount of future map rotations you would like to see.').setRequired(false).setMinValue(1).setMaxValue(10),
-		),
+	data: new SlashCommandBuilder().setName('map').setDescription('Shows the current in-game map.'),
 	async execute(interaction) {
 		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading current in-game map...`).setColor('2F3136');
-		const future = interaction.options.getInteger('future');
-
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		function isPlural(number, word) {
@@ -42,34 +34,23 @@ module.exports = {
 		}
 
 		await axios
-			.get(`https://fn.alphaleagues.com/v2/apex/map/?next=${futureLength(future)}`)
+			.get(`https://api.mozambiquehe.re/maprotation?auth=${api.apex}&version=2`)
 			.then(response => {
-				const br = response.data.br;
-				const brRanked = br.ranked;
-
-				function nextMaps() {
-					return br.next.map(x => `**${x.map}**\nStarts <t:${x.timestamp}:R> and lasts for **${mapLength(x.duration)}**.\n\n`).join('');
-				}
-
+				const br = response.data.battle_royale;
+				const ranked = response.data.ranked;
 				const mapEmbed = new EmbedBuilder()
-					.setTitle(`Legends are currently dropping into **${br.map}**.`)
+					.setTitle(`Legends are currently dropping into **${br.current.map}**.`)
 					.setDescription(
-						`${br.map} ends <t:${br.times.next}:R>, or at <t:${br.times.next}:t>.\n**Next up:** ${br.next[0].map} for ${mapLength(
-							br.next[0].duration,
-						)}.\n**Ranked**: Broken Moon. Ends <t:1673978400:R>.`,
+						`${br.current.map} ends <t:${br.current.end}:R>, or at <t:${br.current.end}:t>.\n**Next Up:** ${br.next.map} for ${mapLength(
+							br.next.DurationInMinutes,
+						)}.\n**Ranked**: Kings Canyon. Ends <t:1664298000:R>.`,
 					)
 					.setColor('2F3136')
-					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2015/Battle%20Royale/${encodeURIComponent(br.map)}.png`);
+					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2014/Battle%20Royale/${encodeURIComponent(br.current.map)}.png`);
 
-				const futureEmbed = new EmbedBuilder().setTitle('Future Map Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
+                axios.get(`https://api.jumpmaster.xyz/logs/MapBR?dev=${debug.true}`);
 
-				axios.get(`https://api.jumpmaster.xyz/logs/MapBR?dev=${debug.true}`);
-
-				if (futureLength(future) == '1') {
-					interaction.editReply({ embeds: [mapEmbed] });
-				} else {
-					interaction.editReply({ embeds: [futureEmbed] });
-				}
+				interaction.editReply({ embeds: [mapEmbed] });
 			})
 			.catch(error => {
 				// Request failed with a response outside of the 2xx range
