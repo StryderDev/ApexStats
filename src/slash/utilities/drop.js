@@ -31,7 +31,7 @@ module.exports = {
 			if (map == 'Worlds Edge') return 'Worlds_Edge';
 			if (map == "World's Edge") return 'Worlds_Edge';
 			if (map == 'Storm Point') return 'Storm_Point';
-			if (map == 'Storm Point') return 'Broken_Moon';
+			if (map == 'Broken Moon') return 'Broken_Moon';
 
 			return map;
 		}
