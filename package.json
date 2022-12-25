@@ -18,12 +18,13 @@
 	},
 	"homepage": "https://github.com/StryderDev/ApexStats#readme",
 	"dependencies": {
-		"axios": "1.2.1",
-		"chalk": "4.1.2",
-		"discord.js": "14.7.1",
 		"@discordjs/rest": "1.5.0",
-		"topgg-autoposter": "2.0.1",
-		"discord-api-types": "0.37.24"
+		"axios": "1.2.1",
+		"canvas": "^2.11.0",
+		"chalk": "4.1.2",
+		"discord-api-types": "0.37.24",
+		"discord.js": "14.7.1",
+		"topgg-autoposter": "2.0.1"
 	},
 	"devDependencies": {
 		"nodemon": "2.0.20"
