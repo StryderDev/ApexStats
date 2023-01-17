@@ -56,7 +56,7 @@ module.exports = {
 					.setDescription(
 						`${br.map} ends <t:${br.times.next}:R>, or at <t:${br.times.next}:t>.\n**Next up:** ${br.next[0].map} for ${mapLength(
 							br.next[0].duration,
-						)}.\n**Ranked**: Broken Moon. Ends <t:1673978400:R>.`,
+						)}.\n**Ranked**: Olympus. Ends <t:1676395800:R>.`,
 					)
 					.setColor('2F3136')
 					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2015/Battle%20Royale/${encodeURIComponent(br.map)}.png`);
