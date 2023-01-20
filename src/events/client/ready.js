@@ -59,7 +59,7 @@ module.exports = {
 		uptime();
 
 		// Static Map Presence
-		// client.user.setPresence({ activities: [{ name: `on Broken Moon` }], status: 'online' });
+		client.user.setPresence({ activities: [{ name: `Apex Legends` }], status: 'online' });
 
 		//  Rotating Map Presence
 		// (async function presenceLoop() {
@@ -81,25 +81,5 @@ module.exports = {
 		// 	setTimeout(presenceLoop, delay);
 		// 	console.log('Checking for Presence');
 		// })();
-
-		(async function presenceLoop() {
-			const date = new Date();
-			let minutes = date.getMinutes();
-
-			if (minutes % 5 == 0) {
-				await wait(1000);
-
-				axios.get(`https://api.mozambiquehe.re/maprotation?auth=${api.apex}&version=2`).then(function (res) {
-					const data = res.data.battle_royale.current.map;
-
-					client.user.setPresence({ activities: [{ name: `on ${data}` }], status: 'online' });
-					console.log(chalk`{cyan.bold [>>>> Updated bot presence. Set to "Playing on ${data}"]}`);
-				});
-			}
-
-			var delay = 60000 - (date % 60000);
-			setTimeout(presenceLoop, delay);
-			console.log('Checking for Presence');
-		})();
 	},
 };
