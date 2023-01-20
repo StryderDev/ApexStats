@@ -43,7 +43,7 @@ module.exports = {
 					.setDescription(
 						`${br.current.map} ends <t:${br.current.end}:R>, or at <t:${br.current.end}:t>.\n**Next Up:** ${br.next.map} for ${mapLength(
 							br.next.DurationInMinutes,
-						)}.\n**Ranked**: Kings Canyon. Ends <t:1664298000:R>.`,
+						)}.\n**Ranked**: ~~Olympus. Ends <t:1676395800:R>.~~ Temporarily: Worlds Edge. See [this tweet for more info.](https://twitter.com/Respawn/status/1616187991705399296)`,
 					)
 					.setColor('2F3136')
 					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2015/Battle%20Royale/${encodeURIComponent(br.current.map)}.png`);
