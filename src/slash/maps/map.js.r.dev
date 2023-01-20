@@ -1,13 +1,21 @@
 const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { debug, api } = require('../../config.json');
+const { debug } = require('../../config.json');
+
 const { Misc } = require('../../data/emotes.json');
 
 module.exports = {
-	data: new SlashCommandBuilder().setName('map').setDescription('Shows the current in-game map.'),
+	data: new SlashCommandBuilder()
+		.setName('map')
+		.setDescription('Shows the current in-game map.')
+		.addIntegerOption(option =>
+			option.setName('future').setDescription('Amount of future map rotations you would like to see.').setRequired(false).setMinValue(1).setMaxValue(10),
+		),
 	async execute(interaction) {
 		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading current in-game map...`).setColor('2F3136');
+		const future = interaction.options.getInteger('future');
+
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		function isPlural(number, word) {
@@ -34,23 +42,34 @@ module.exports = {
 		}
 
 		await axios
-			.get(`https://api.mozambiquehe.re/maprotation?auth=${api.apex}&version=2`)
+			.get(`https://fn.alphaleagues.com/v2/apex/map/?next=${futureLength(future)}`)
 			.then(response => {
-				const br = response.data.battle_royale;
-				const ranked = response.data.ranked;
+				const br = response.data.br;
+				const brRanked = br.ranked;
+
+				function nextMaps() {
+					return br.next.map(x => `**${x.map}**\nStarts <t:${x.timestamp}:R> and lasts for **${mapLength(x.duration)}**.\n\n`).join('');
+				}
+
 				const mapEmbed = new EmbedBuilder()
-					.setTitle(`Legends are currently dropping into **${br.current.map}**.`)
+					.setTitle(`Legends are currently dropping into **${br.map}**.`)
 					.setDescription(
-						`${br.current.map} ends <t:${br.current.end}:R>, or at <t:${br.current.end}:t>.\n**Next Up:** ${br.next.map} for ${mapLength(
-							br.next.DurationInMinutes,
-						)}.\n**Ranked**: Kings Canyon. Ends <t:1664298000:R>.`,
+						`${br.map} ends <t:${br.times.next}:R>, or at <t:${br.times.next}:t>.\n**Next up:** ${br.next[0].map} for ${mapLength(
+							br.next[0].duration,
+						)}.\n**Ranked**: ~~Olympus. Ends <t:1676395800:R>.~~ Temporarily: Worlds Edge. See [this tweet for more info.](https://twitter.com/Respawn/status/1616187991705399296)`,
 					)
 					.setColor('2F3136')
-					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2015/Battle%20Royale/${encodeURIComponent(br.current.map)}.png`);
+					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2015/Battle%20Royale/${encodeURIComponent(br.map)}.png`);
+
+				const futureEmbed = new EmbedBuilder().setTitle('Future Map Rotation Schedule').setDescription(`\u200b${nextMaps()}`).setColor('2F3136');
 
 				axios.get(`https://api.jumpmaster.xyz/logs/MapBR?dev=${debug.true}`);
 
-				interaction.editReply({ embeds: [mapEmbed] });
+				if (futureLength(future) == '1') {
+					interaction.editReply({ embeds: [mapEmbed] });
+				} else {
+					interaction.editReply({ embeds: [futureEmbed] });
+				}
 			})
 			.catch(error => {
 				// Request failed with a response outside of the 2xx range
