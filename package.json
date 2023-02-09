@@ -19,9 +19,7 @@
 	"homepage": "https://github.com/StryderDev/ApexStats#readme",
 	"dependencies": {
 		"discord.js": "14.7.1",
-		"@discordjs/rest": "1.5.0",
-		"topgg-autoposter": "2.0.1",
-		"discord-api-types": "0.37.31"
+		"topgg-autoposter": "2.0.1"
 	},
 	"devDependencies": {
 		"nodemon": "2.0.20"
