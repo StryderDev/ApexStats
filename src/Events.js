@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function loadEvents() {
+function loadEvents(client) {
 	const folders = fs.readdirSync(`${__dirname}/events`);
 
 	for (const folder of folders) {
