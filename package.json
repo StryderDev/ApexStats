@@ -2,27 +2,28 @@
 	"name": "apex-stats-bot",
 	"version": "0.14.34",
 	"description": "A Discord bot to show off in-game content and information for Apex Legends.",
-	"main": "src/Apex.js",
+	"main": "src/Shard.js",
 	"scripts": {
 		"start": "node .",
 		"dev": "nodemon ."
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/StryderDev/Apex-Stats-Bot.git"
+		"url": "git+https://github.com/StryderDev/ApexStats.git"
 	},
 	"author": "SDCore",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/StryderDev/Apex-Stats-Bot/issues"
+		"url": "https://github.com/StryderDev/ApexStats/issues"
 	},
-	"homepage": "https://github.com/StryderDev/Apex-Stats-Bot#readme",
+	"homepage": "https://github.com/StryderDev/ApexStats#readme",
 	"dependencies": {
-		"@discordjs/rest": "^1.3.0",
-		"discord-api-types": "^0.37.18",
-		"discord.js": "^14.6.0"
+		"discord.js": "14.7.1",
+		"@discordjs/rest": "1.5.0",
+		"topgg-autoposter": "2.0.1",
+		"discord-api-types": "0.37.31"
 	},
 	"devDependencies": {
-		"nodemon": "^2.0.20"
+		"nodemon": "2.0.20"
 	}
 }
