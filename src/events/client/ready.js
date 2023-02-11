@@ -1,4 +1,6 @@
 const fs = require('fs');
+const axios = require('axios');
+const wait = require('util').promisify(setTimeout);
 const { Collection, REST, Routes } = require('discord.js');
 
 const { debug, discord } = require('../../config.json');
@@ -23,10 +25,27 @@ module.exports = {
 	name: 'ready',
 	once: true,
 	execute(client) {
-		// Set bot presence
-		client.user.setPresence({
-			activities: [{ name: `Apex Legends` }],
-		});
+		// Set rotating bot presence
+		(async function mapPrecenseLoop() {
+			const date = new Date();
+			let minutes = date.getMinutes();
+
+			// Check and update every 5 minutes
+			if (minutes % 5 == 0) {
+				await wait(1000);
+
+				axios.get(`https://api.jumpmaster.xyz/map/`).then(res => {
+					const data = res.data.br;
+
+					client.user.setPresence({ activities: [{ name: `on ${data.map.name} for ${data.times.remaining.minutes + 1} minutes` }] });
+					console.log(`[>> Updated Presence Map to ${data.map.name} <<]`);
+				});
+			}
+
+			var delay = 60000 - (date % 60000);
+			setTimeout(mapPrecenseLoop, delay);
+			console.log('Checking for presence...');
+		})();
 
 		// Display bot uptime in console
 		uptime();
