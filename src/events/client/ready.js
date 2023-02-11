@@ -28,7 +28,7 @@ module.exports = {
 			activities: [{ name: `Apex Legends` }],
 		});
 
-		// Display bot uptime in consolel
+		// Display bot uptime in console
 		uptime();
 
 		// Register slash commands
@@ -57,6 +57,19 @@ module.exports = {
 
 					console.log(`[>> Successfully registered global slash commands <<]`);
 				} else {
+					// // Delete all guild-base commands
+					// await rest
+					// 	.put(Routes.applicationGuildCommands(clientID, discord.devGuild), { body: [] })
+					// 	.then(() => console.log('Successfully deleted all guild commands.'))
+					// 	.catch(console.error);
+
+					// // Delete all global commands
+					// await rest
+					// 	.put(Routes.applicationCommands(clientID), { body: [] })
+					// 	.then(() => console.log('Successfully deleted all application commands.'))
+					// 	.catch(console.error);
+
+					// Deploy all guild-based commands
 					await rest.put(Routes.applicationGuildCommands(clientID, discord.devGuild), { body: commands });
 
 					console.log(`[>> Successfully registered local slash commands <<]`);
