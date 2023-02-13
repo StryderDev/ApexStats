@@ -3,12 +3,12 @@ const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { debug } = require('../../config.json');
 const { embedColor, Emotes } = require('../../data/utilities.json');
-const { getStatus, rankLayout, battlepass, platformName, platformEmote } = require('../../utilities/stats.js');
+const { getStatus, rankLayout, platformName, platformEmote } = require('../../utilities/stats.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('stats')
-		.setDescription('Show currently equipped legend and trackers, account and ranked info, and online status.')
+		.setName('rank')
+		.setDescription('Shows your current in-game Battle Royale rank')
 		.addStringOption(option =>
 			option.setName('platform').setDescription('The platform you play on').setRequired(true).addChoices(
 				{
@@ -32,7 +32,7 @@ module.exports = {
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Loading Data for ${username} on ${platformName(platform)}...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Loading Ranked Data for ${username} on ${platformName(platform)}...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -43,60 +43,34 @@ module.exports = {
 
 				// User Data
 				const user = data.user;
-				const legend = data.active.legend;
 				const status = user.status;
 				const ranked = data.ranked.BR;
 
-				// Trackers
-				const trackers = data.active.trackers;
-
-				// Stats Embed
-				const stats = new EmbedBuilder()
-					.setTitle(`${platformEmote(user.platform)} ${user.username} playing ${legend}`)
+				// Rank Embed
+				const rank = new EmbedBuilder()
+					.setTitle(`${platformEmote(user.platform)} ${user.username}`)
 					.setDescription(`[**Status:** ${getStatus(status)}]`)
 					.addFields([
 						{
 							name: `${Emotes.Account.Level} Account`,
-							value: `${Emotes.Misc.GrayBlank} Level ${data.account.level.current.toLocaleString()}\n${Emotes.Misc.GrayBlank} Prestige ${
-								data.account.level.prestige
-							}`,
-							inline: true,
-						},
-						{
-							name: `${Emotes.Account.BattlePass} Revelry Battle Pass`,
-							value: `${Emotes.Misc.GrayBlank} Level ${battlepass(data.account.battlepass)}`,
+							value: `${Emotes.Misc.GrayBlank} Level ${data.account.level.current}\n${Emotes.Misc.GrayBlank} Prestige ${data.account.level.prestige}`,
 							inline: true,
 						},
 						{
 							name: `Battle Royale Ranked`,
-							value: `${rankLayout(ranked)}\n\n**Active Trackers**`,
-						},
-						{
-							name: trackers[0].id,
-							value: trackers[0].value.toLocaleString(),
-							inline: true,
-						},
-						{
-							name: trackers[1].id,
-							value: trackers[1].value.toLocaleString(),
-							inline: true,
-						},
-						{
-							name: trackers[2].id,
-							value: trackers[2].value.toLocaleString(),
+							value: rankLayout(ranked),
 							inline: true,
 						},
 					])
-					.setImage(`https://cdn.jumpmaster.xyz/Bot/Legends/Banners/${encodeURIComponent(legend)}.png?t=${Math.floor(Math.random() * 10)}`)
 					.setColor(embedColor)
 					.setFooter({
-						text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nEquip the Battle Pass badge to update it!`,
+						text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}`,
 					});
 
 				// Logging
 				axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=success&dev=${debug}`);
 
-				interaction.editReply({ embeds: [stats] });
+				interaction.editReply({ embeds: [rank] });
 			})
 			.catch(error => {
 				if (error.response) {
