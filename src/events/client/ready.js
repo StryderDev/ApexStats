@@ -1,7 +1,9 @@
 const fs = require('fs');
 const axios = require('axios');
+const { REST } = require('@discordjs/rest');
+const { Collection } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
-const { Collection, REST, Routes } = require('discord.js');
+const { Routes } = require('discord-api-types/v10');
 
 const { debug, discord } = require('../../config.json');
 
