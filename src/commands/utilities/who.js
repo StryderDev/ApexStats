@@ -25,7 +25,7 @@ module.exports = {
 		// Slash Command Options
 		const type = interaction.options.getString('type');
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Selecting a random loadout...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Selecting a random legend...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
