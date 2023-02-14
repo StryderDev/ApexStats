@@ -1,23 +1,20 @@
-const { ShardingManager } = require('discord.js');
-const { discord, debug, api } = require('./config.json');
-
-const fs = require('fs');
 const path = require('path');
-const chalk = require('chalk');
+const { ShardingManager } = require('discord.js');
 const { AutoPoster } = require('topgg-autoposter');
 
-const manager = new ShardingManager(path.join(__dirname, '/Apex.js'), { token: discord.token, totalShards: discord.shardCount });
+const { discord, topgg } = require('./config.json');
+
+const manager = new ShardingManager(path.join(__dirname, 'Apex.js'), { token: discord.token, totalShards: 'auto' });
 
 manager.on('shardCreate', shard => {
-	console.log(chalk`{yellow.bold [> Launching Shard...]}`);
-	console.log(chalk`{green.bold [> Shard #${shard.id + 1} Launched]}`);
+	console.log(`Launched Shard #${shard.id + 1}`);
 });
 
-if (debug.true == false && api.topgg != 0) {
-	const poster = AutoPoster(api.topgg, manager);
+if (topgg.enabled == true) {
+	const poster = AutoPoster(topgg.token, manager);
 
 	poster.on('posted', stats => {
-		console.log(`Posted stats to Top.gg | ${stats.serverCount} servers`);
+		console.log(`[> Posted Bot Stats to TopGG - ${stats.serverCount} Servers - ${stats.shardCount} Shards <]`);
 	});
 }
 

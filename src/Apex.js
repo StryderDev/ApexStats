@@ -1,19 +1,17 @@
-const { Client, GatewayIntentBits, Partials } = require('discord.js');
-
-const { Guilds } = GatewayIntentBits;
-const {} = Partials;
+const { Client, GatewayIntentBits } = require('discord.js');
 
 const { discord } = require('./config.json');
+const { loadEvents } = require('./Events.js');
 
-const client = new Client({ intents: [Guilds] });
-
-const { loadEvents } = require('./handlers/events.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client
 	.login(discord.token)
 	.then(() => {
 		loadEvents(client);
 	})
-	.catch(err => console.log(err));
+	.catch(error => {
+		console.log(`Error loading bot for login: ${error}`);
+	});
 
 module.exports = { client };
