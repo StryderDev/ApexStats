@@ -40,7 +40,7 @@
 			"Season_15": "<:ApexStats_Season15:1040022816860405810>",
 			"Season_16": "<:ApexStats_Season16:1073848108162764830>"
 		},
-		"serverStatus": {
+		"ServerStatus": {
 			"Online": "<:ApexStats_GreenDot:955008202116845568>",
 			"Slow": "<:ApexStats_YellowDot:955008542862110760>",
 			"Down": "<:ApexStats_RedDot:962614426840756237>"
