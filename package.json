@@ -1,6 +1,6 @@
 {
 	"name": "apex-stats-bot",
-	"version": "0.14.4-1",
+	"version": "1.14.4-1",
 	"description": "A Discord bot to show off in-game content and information for Apex Legends.",
 	"main": "src/Shard.js",
 	"scripts": {
