@@ -1,4 +1,5 @@
 const axios = require('axios');
+const ProgressBar = require('progress');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { debug } = require('../../config.json');
@@ -50,6 +51,9 @@ module.exports = {
 				// Trackers
 				const trackers = data.active.trackers;
 
+				// Battle Pass Completion Percent
+				const battlepassPercent = Math.floor((battlepass(data.account.battlepass) / 110) * 100);
+
 				// Stats Embed
 				const stats = new EmbedBuilder()
 					.setTitle(`${platformEmote(user.platform)} ${user.username} playing ${legend}`)
@@ -64,7 +68,7 @@ module.exports = {
 						},
 						{
 							name: `${Emotes.Account.BattlePass} Revelry Battle Pass`,
-							value: `${Emotes.Misc.GrayBlank} Level ${battlepass(data.account.battlepass)}`,
+							value: `${Emotes.Misc.GrayBlank} Level ${battlepass(data.account.battlepass)} (${battlepassPercent}%)`,
 							inline: true,
 						},
 						{

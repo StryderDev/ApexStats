@@ -7,13 +7,13 @@ function getEmote(status) {
 }
 
 function statusLayout(type) {
-	return `${getEmote(type['US-East']['Status'])} **US East** ${type['US-East']['ResponseTime']}ms
-    ${getEmote(type['US-Central']['Status'])} **US Central** ${type['US-Central']['ResponseTime']}ms
-    ${getEmote(type['US-West']['Status'])} **US West** ${type['US-West']['ResponseTime']}ms
-    ${getEmote(type['EU-East']['Status'])} **EU East** ${type['EU-East']['ResponseTime']}ms
-    ${getEmote(type['EU-West']['Status'])} **EU West** ${type['EU-West']['ResponseTime']}ms
-    ${getEmote(type['SouthAmerica']['Status'])} **South America** ${type['SouthAmerica']['ResponseTime']}ms
-    ${getEmote(type['Asia']['Status'])} **Asia** ${type['Asia']['ResponseTime']}ms`;
+	return `${getEmote(type['US-East']['Status'])} **US East** ${type['US-East']['ResponseTime']}ms\n${getEmote(type['US-Central']['Status'])} **US Central** ${
+		type['US-Central']['ResponseTime']
+	}ms\n${getEmote(type['US-West']['Status'])} **US West** ${type['US-West']['ResponseTime']}ms\n${getEmote(type['EU-East']['Status'])} **EU East** ${
+		type['EU-East']['ResponseTime']
+	}ms\n${getEmote(type['EU-West']['Status'])} **EU West** ${type['EU-West']['ResponseTime']}ms\n${getEmote(type['SouthAmerica']['Status'])} **South America** ${
+		type['SouthAmerica']['ResponseTime']
+	}ms\n${getEmote(type['Asia']['Status'])} **Asia** ${type['Asia']['ResponseTime']}ms`;
 }
 
 function statusCount(status) {
