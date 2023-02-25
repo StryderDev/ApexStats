@@ -5,7 +5,7 @@ const { Collection } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
 const { Routes } = require('discord-api-types/v10');
 
-const { debug, discord } = require('../../config.json');
+const { debug, interval, discord } = require('../../config.json');
 
 function uptime() {
 	(function loop() {
@@ -32,15 +32,17 @@ module.exports = {
 			const date = new Date();
 			let minutes = date.getMinutes();
 
-			// Check and update every 5 minutes
-			if (minutes % 5 == 0) {
+			// Check and update every x minutes ('interval' in config)
+			if (minutes % interval == 0) {
 				await wait(1000);
 
 				axios.get(`https://api.jumpmaster.xyz/map/`).then(res => {
-					const data = res.data.br;
+					const br = res.data.br.map.name;
+					const ranked = res.data.ranked.map.name;
+					const mixtape = res.data.mixtape.map;
 
-					client.user.setPresence({ activities: [{ name: `on ${data.map.name} for ${data.times.remaining.minutes + 1} minutes` }] });
-					console.log(`[>> Updated Presence Map to ${data.map.name} <<]`);
+					client.user.setPresence({ activities: [{ name: `BR: ${br} / Ranked: ${ranked} / Mixtape: ${mixtape.type} - ${mixtape.name}` }] });
+					console.log(`[>> Updated Presence Map to "BR: ${br} / Ranked: ${ranked}" <<]`);
 				});
 			}
 

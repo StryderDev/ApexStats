@@ -1,5 +1,4 @@
 const axios = require('axios');
-const ProgressBar = require('progress');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { debug } = require('../../config.json');
@@ -47,12 +46,15 @@ module.exports = {
 				const legend = data.active.legend;
 				const status = user.status;
 				const ranked = data.ranked.BR;
+				const account = data.account;
 
 				// Trackers
 				const trackers = data.active.trackers;
 
-				// Battle Pass Completion Percent
-				const battlepassPercent = Math.floor((battlepass(data.account.battlepass) / 110) * 100);
+				// Calculate account, prestige, and battle pass level completion
+				const accountCompletion = Math.floor((account.level.current / 500) * 100);
+				const prestigeCompletion = Math.floor((account.level.total / 2000) * 100);
+				const battlepassCompletion = Math.floor((battlepass(account.battlepass) / 110) * 100);
 
 				// Stats Embed
 				const stats = new EmbedBuilder()
@@ -61,14 +63,14 @@ module.exports = {
 					.addFields([
 						{
 							name: `${Emotes.Account.Level} Account`,
-							value: `${Emotes.Misc.GrayBlank} Level ${data.account.level.current.toLocaleString()}\n${Emotes.Misc.GrayBlank} Prestige ${
-								data.account.level.prestige
-							}`,
+							value: `${Emotes.Misc.GrayBlank} Level ${account.level.current.toLocaleString()} (${accountCompletion}%)\n${Emotes.Misc.GrayBlank} Prestige ${
+								account.level.prestige
+							} (${prestigeCompletion}%)`,
 							inline: true,
 						},
 						{
 							name: `${Emotes.Account.BattlePass} Revelry Battle Pass`,
-							value: `${Emotes.Misc.GrayBlank} Level ${battlepass(data.account.battlepass)} (${battlepassPercent}%)`,
+							value: `${Emotes.Misc.GrayBlank} Level ${battlepass(account.battlepass)} (${battlepassCompletion}%)`,
 							inline: true,
 						},
 						{
