@@ -42,7 +42,7 @@ module.exports = {
 					const mixtape = res.data.mixtape.map;
 
 					client.user.setPresence({ activities: [{ name: `BR: ${br} / Ranked: ${ranked} / Mixtape: ${mixtape.type} - ${mixtape.name}` }] });
-					console.log(`[>> Updated Presence Map to "BR: ${br} / Ranked: ${ranked}" <<]`);
+					console.log(`[>> Updated Presence Map to "BR: ${br} / Ranked: ${ranked} / Mixtape: ${mixtape.type} - ${mixtape.name}" <<]`);
 				});
 			}
 
