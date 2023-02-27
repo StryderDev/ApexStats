@@ -6,26 +6,16 @@ on:
             - prod
 
 jobs:
-    build:
+    build-and-deploy:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v1
-            - name: Copy repository contents via scp
-              uses: appleboy/scp-action@master
-              env:
-                  HOST: ${{ secrets.HOST }}
-                  USERNAME: ${{ secrets.USERNAME }}
-                  PORT: ${{ secrets.PORT }}
-                  KEY: ${{ secrets.SSHKEY }}
-              with:
-                  source: '.'
-                  target: '~/Bots/ApexStats'
-
-            - name: Executing remote command
+            - name: checkout repo
+              uses: actions/checkout@v2
+            - name: ssh and deploy
               uses: appleboy/ssh-action@master
               with:
-                  host: ${{ secrets.HOST }}
-                  USERNAME: ${{ secrets.USERNAME }}
-                  PORT: ${{ secrets.PORT }}
-                  KEY: ${{ secrets.SSHKEY }}
-                  script: ls
+                  host: ${{ secrets.HOSt }}
+                  username: ${{ secrets.USERNAME }}
+                  key: ${{ secrets.SSHKEY }}
+                  source: '.'
+                  target: '~/Bots/ApexStats'
