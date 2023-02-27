@@ -14,8 +14,9 @@ jobs:
             - name: ssh and deploy
               uses: appleboy/ssh-action@master
               with:
-                  host: ${{ secrets.HOSt }}
-                  username: ${{ secrets.USERNAME }}
-                  key: ${{ secrets.SSHKEY }}
+                  HOST: ${{ secrets.HOST }}
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PORT: ${{ secrets.PORT }}
+                  KEY: ${{ secrets.SSHKEY }}
                   source: '.'
                   target: '~/Bots/ApexStats'
