@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Node.js CD
+name: Deploy
 
 # Controls when the action will run.
 on:
@@ -11,13 +11,13 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
     # This workflow contains a single job called "build"
-    build:
+    deploy:
         # The type of runner that the job will run on
         runs-on: ubuntu-latest
 
         # Steps represent a sequence of tasks that will be executed as part of the job
         steps:
-            - name: Deploy using ssh
+            - name: Deploy
               uses: appleboy/ssh-action@master
               with:
                   host: ${{ secrets.HOST }}
@@ -25,7 +25,7 @@ jobs:
                   port: ${{ secrets.PORT }}
                   key: ${{ secrets.SSHKEY }}
                   script: |
-                      cd ~/Bots/ApexStats
+                      cd ${{ secrets.PATH }}
                       git pull origin prod
                       git status
                       npm install --only=prod
