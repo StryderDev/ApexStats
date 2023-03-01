@@ -1,7 +1,6 @@
-[![Deploy](https://github.com/StryderDev/ApexStats/actions/workflows/deploy.yaml/badge.svg)](https://github.com/StryderDev/ApexStats/actions/workflows/deploy.yaml)
-
 <p align="center">
-  <img src="https://repobeats.axiom.co/api/embed/1155b47e64fbd1bede07234f9c015bd80baf61c3.svg">
+    [![Deploy](https://github.com/StryderDev/ApexStats/actions/workflows/deploy.yaml/badge.svg)](https://github.com/StryderDev/ApexStats/actions/workflows/deploy.yaml)
+    <img src="https://repobeats.axiom.co/api/embed/1155b47e64fbd1bede07234f9c015bd80baf61c3.svg">
 </p>
 
 # Apex Legends Stats Bot
