@@ -1,6 +1,7 @@
 <div align="center">
 
-[![Deploy](https://github.com/StryderDev/ApexStats/actions/workflows/deploy.yaml/badge.svg)](https://github.com/StryderDev/ApexStats/actions/workflows/deploy.yaml)
+[![Deploy](https://img.shields.io/github/actions/workflow/status/stryderdev/apexstats/deploy.yaml?branch=prod&label=Deploy)](https://img.shields.io/github/actions/workflow/status/stryderdev/apexstats/deploy.yaml?branch=prod&label=Deploy)
+[![Version](https://img.shields.io/github/package-json/v/stryderdev/apexstats?label=Version)](https://img.shields.io/github/package-json/v/stryderdev/apexstats?lavel=Version)
 
 </div>
 
