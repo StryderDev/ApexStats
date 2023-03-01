@@ -1,7 +1,9 @@
 {
 	"debug": true or false,
+    "interval": "Time in minutes for bot status updates",
 	"release": "Release Codename",
 	"als_token": "Token from Apex Legends Status",
+    "api_token": "API Token",
 	"discord": {
 		"devGuild": "Guild ID for Testing Slash Commands",
         "devClient": "Client ID for the bot",

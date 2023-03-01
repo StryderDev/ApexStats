@@ -11,7 +11,7 @@ client
 		loadEvents(client);
 	})
 	.catch(error => {
-		console.log(`Error loading bot for login: ${error}`);
+		console.log(`Error loading bot during login: ${error}`);
 	});
 
 module.exports = { client };
