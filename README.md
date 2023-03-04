@@ -2,6 +2,7 @@
 
 [![Deploy](https://img.shields.io/github/actions/workflow/status/stryderdev/apexstats/deploy.yaml?branch=prod&label=Deploy)](https://img.shields.io/github/actions/workflow/status/stryderdev/apexstats/deploy.yaml?branch=prod&label=Deploy)
 [![Version](https://img.shields.io/github/package-json/v/stryderdev/apexstats?label=Version)](https://img.shields.io/github/package-json/v/stryderdev/apexstats?lavel=Version)
+[![WakaTime](https://wakatime.com/badge/github/StryderDev/ApexStats.svg)](https://wakatime.com/badge/github/StryderDev/ApexStats.svg)
 
 </div>
 
