@@ -1,4 +1,5 @@
 const fs = require('fs');
+const db = require('sqlite3');
 const axios = require('axios');
 const { REST } = require('@discordjs/rest');
 const { Collection } = require('discord.js');
@@ -73,9 +74,12 @@ module.exports = {
 			}
 		}
 
+		// Push the commands to Discord
 		(async () => {
 			try {
 				if (debug == false) {
+					// If debug is disabled, assume production
+					// bot and register global slash commands
 					await rest.put(Routes.applicationCommands(clientID), { body: commands });
 
 					console.log(`[>> Successfully registered global slash commands <<]`);
@@ -92,7 +96,8 @@ module.exports = {
 					// 	.then(() => console.log('Successfully deleted all application commands.'))
 					// 	.catch(console.error);
 
-					// Deploy all guild-based commands
+					// If debug is enabled, assume dev environment
+					// and only register slash commands for dev build
 					await rest.put(Routes.applicationGuildCommands(clientID, discord.devGuild), { body: commands });
 
 					console.log(`[>> Successfully registered local slash commands <<]`);
@@ -101,5 +106,8 @@ module.exports = {
 				if (error) console.log(error);
 			}
 		})();
+
+		// Register DB
+		let userDB = new db.Database('./src/database/spyglass.db', db.OPEN_READWRITE | db.OPEN_CREATE);
 	},
 };
