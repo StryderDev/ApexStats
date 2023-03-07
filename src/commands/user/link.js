@@ -1,3 +1,4 @@
+const db = require('sqlite3');
 const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
@@ -7,8 +8,8 @@ const { getStatus, rankLayout, platformName, platformEmote } = require('../../ut
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('rank')
-		.setDescription('Shows your current in-game Battle Royale rank.')
+		.setName('link')
+		.setDescription('Link an existing Apex account to your Discord account.')
 		.addStringOption(option =>
 			option.setName('platform').setDescription('The platform you play on').setRequired(true).addChoices(
 				{
@@ -28,11 +29,20 @@ module.exports = {
 		.addStringOption(option => option.setName('username').setDescription("Your in-game username. If this doesn't work, try a previous username").setRequired(true)),
 
 	async execute(interaction) {
+		// Load DB
+		let userDB = new db.Database('./src/database/spyglass.db', db.OPEN_READWRITE, err => {
+			if (err) {
+				console.error(err.message);
+			}
+		});
+
+		userDB.run('CREATE TABLE IF NOT EXISTS userLinks(discordID TEXT NOT NULL, playerID TEXT NOT NULL, platform TEXT NOT NULL)');
+
 		// Slash Command Options
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Loading Ranked Data for ${username} on ${platformName(platform)}...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Loading data for selected account...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -42,41 +52,46 @@ module.exports = {
 				const data = response.data;
 
 				// User Data
-				const user = data.user;
-				const status = user.status;
-				const ranked = data.ranked.BR;
+				const playerID = data.user.id;
+				const discordID = interaction.user.id;
 
-				// Rank Embed
-				const rank = new EmbedBuilder()
-					.setTitle(`${platformEmote(user.platform)} ${user.username}`)
-					.setDescription(`[**Status:** ${getStatus(status)}]`)
-					.addFields([
-						{
-							name: `${Emotes.Account.Level} Account`,
-							value: `${Emotes.Misc.GrayBlank} Level ${data.account.level.current}\n${Emotes.Misc.GrayBlank} Prestige ${data.account.level.prestige}`,
-							inline: true,
-						},
-						{
-							name: `Battle Royale Ranked`,
-							value: rankLayout(ranked),
-							inline: true,
-						},
-					])
-					.setColor(embedColor)
-					.setFooter({
-						text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}`,
-					});
+				let linkQuery = 'SELECT * FROM userLinks WHERE discordID = ?';
 
-				// Logging
-				axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=success&dev=${debug}`);
+				userDB.get(linkQuery, [discordID], (err, row) => {
+					if (err) {
+						console.log(err);
+						return interaction.editReply({ content: 'There was a database error.', embeds: [] });
+					}
 
-				interaction.editReply({ embeds: [rank] });
+					if (row === undefined) {
+						// User does not have an account linked, link it
+						let insertUserLink = userDB.prepare(`INSERT INTO userLinks VALUES(?, ?, ?)`);
+
+						insertUserLink.run(discordID, playerID, platform);
+
+						insertUserLink.finalize();
+
+						userDB.close();
+
+						return interaction.editReply({ content: `Linked \`${data.user.username}\` to discord account \`@${interaction.user.tag}\``, embeds: [] });
+					} else {
+						// User already has an account linked
+						return interaction.editReply({
+							content: 'You already have a linked account. Use `/me` to see your linked account or `/unlink` to unlink your account.',
+							embeds: [],
+						});
+					}
+				});
 			})
 			.catch(error => {
 				if (error.response) {
 					console.log(error.response.data);
 
-					const errorEmbed = new EmbedBuilder().setTitle('Player Lookup Error').setDescription(error.response.data.error).setColor('D0342C').setTimestamp();
+					const errorEmbed = new EmbedBuilder()
+						.setTitle('Player Lookup Error')
+						.setDescription(`There was an error finding your account, linking to your discord account has been canceled.\n\n${error.response.data.error}`)
+						.setColor('D0342C')
+						.setTimestamp();
 
 					axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=error&dev=${debug}`);
 
@@ -86,7 +101,9 @@ module.exports = {
 
 					const errorEmbed = new EmbedBuilder()
 						.setTitle('Site Lookup Error')
-						.setDescription(`The request was not returned successfully.\nThis is potentially an error with the API.\nPlease try again shortly.`)
+						.setDescription(
+							`There was an error finding your account, linking to your discord account has been canceled.\n\nThe request was not returned successfully.\nThis is potentially an error with the API.\nPlease try again shortly.`,
+						)
 						.setColor('D0342C')
 						.setTimestamp();
 
