@@ -108,6 +108,6 @@ module.exports = {
 		})();
 
 		// Register DB
-		let userDB = new db.Database('./src/database/spyglass.db', db.OPEN_READWRITE | db.OPEN_CREATE);
+		let userDB = new db.Database(__dirname + '/../../database/spyglass.db', db.OPEN_READWRITE | db.OPEN_CREATE);
 	},
 };
