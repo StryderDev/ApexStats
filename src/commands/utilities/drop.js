@@ -2,6 +2,7 @@ const axios = require('axios');
 const wait = require('util').promisify(setTimeout);
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
+const { api_token } = require('../../config.json');
 const { embedColor, Emotes } = require('../../data/utilities.json');
 
 module.exports = {
@@ -39,7 +40,7 @@ module.exports = {
 			interaction.editReply({ content: `Drop into ${mapFile[map]} on ${mapOption}!`, embeds: [] });
 		} else {
 			await axios
-				.get('https://api.jumpmaster.xyz/map/')
+				.get(`https://api.jumpmaster.xyz/map/?key=${api_token}`)
 				.then(response => {
 					const br = response.data.br.map;
 
