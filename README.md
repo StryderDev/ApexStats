@@ -12,7 +12,7 @@
 
 # Apex Legends Stats Bot
 
-Get user stats, Battle Royale and Arenas map rotations, and more. Start by typing `/` for a list of commands.
+Get user stats, Battle Royale and Mixtape map rotations, and more. Start by typing `/` for a list of commands.
 
 ## Contribute
 
@@ -25,13 +25,13 @@ Currently, the ability to contribute to this project is limited. Since some of t
         -   In-game selected legend and associated trackers
         -   Account level
         -   Battlepass level for the current season (equip the badge in-game to update it)
-        -   Battle Royale and Arenas Rank
+        -   Battle Royale Rank
 -   View Apex Legends Server Status
--   View the current Battle Royale/Arenas Map
+-   View the current Battle Royale/Mixtape Map
     -   Also view the current map rotation for any current in-game events
 -   Choose a random place to drop in the current map
 -   Choose a random legend to play
 -   Pick a random loadout to play
 -   Choose from a list of random fun facts
 -   Get info about current or future in-game events
--   View the threshold for Apex Predator in Battle Royale and Arenas on PC, PlayStation, Xbox, and Nintendo Switch
+-   View the threshold for Apex Predator in Battle Royale on PC, PlayStation, Xbox, and Nintendo Switch
