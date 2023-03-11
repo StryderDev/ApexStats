@@ -6,7 +6,7 @@ const { Collection } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
 const { Routes } = require('discord-api-types/v10');
 
-const { debug, interval, discord, api_key } = require('../../config.json');
+const { debug, interval, discord, api_token } = require('../../config.json');
 
 function uptime() {
 	(function loop() {
