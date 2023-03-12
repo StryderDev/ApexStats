@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { debug, api_token } = require('../../config.json');
+const { debug, api } = require('../../config.json');
 const { embedColor, Emotes } = require('../../data/utilities.json');
 const { getStatus, rankLayout, battlepass, platformName, platformEmote } = require('../../utilities/stats.js');
 
@@ -37,7 +37,7 @@ module.exports = {
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${api_token}`)
+			.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${api.spyglass}`)
 			.then(response => {
 				const data = response.data;
 

@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { api_token } = require('../../config.json');
+const { api } = require('../../config.json');
 const { embedColor, Emotes } = require('../../data/utilities.json');
 
 module.exports = {
@@ -13,12 +13,12 @@ module.exports = {
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.jumpmaster.xyz/map/?next=1&key=${api_token}`)
+			.get(`https://api.jumpmaster.xyz/map/?next=1&key=${api.spyglass}`)
 			.then(response => {
 				const map = response.data.ranked;
 
 				const mapEmbed = new EmbedBuilder()
-					.setTitle(`Ranked Squads are currently competing in ${map.map.name}`)
+					.setTitle(`Ranked Squads are currently competing on ${map.map.name}`)
 					.setDescription(`**${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Next Up:** ${map.next[0].map.name} for 24 hours.`)
 					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2016/Ranked/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
 					.setColor(embedColor);

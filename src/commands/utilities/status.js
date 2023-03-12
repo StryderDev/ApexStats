@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { als_token } = require('../../config.json');
+const { api } = require('../../config.json');
 const { embedColor, Emotes } = require('../../data/utilities.json');
 const { statusLayout, statusCount, statusColor } = require('../../utilities/status.js');
 
@@ -14,7 +14,7 @@ module.exports = {
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.mozambiquehe.re/servers?auth=${als_token}`)
+			.get(`https://api.mozambiquehe.re/servers?auth=${api.als}`)
 			.then(async response => {
 				const status = response.data;
 

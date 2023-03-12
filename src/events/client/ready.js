@@ -6,7 +6,7 @@ const { Collection } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
 const { Routes } = require('discord-api-types/v10');
 
-const { debug, interval, discord, api_token } = require('../../config.json');
+const { debug, interval, discord, api } = require('../../config.json');
 
 function uptime() {
 	(function loop() {
@@ -37,7 +37,7 @@ module.exports = {
 			if (minutes % interval == 0) {
 				await wait(1000);
 
-				axios.get(`https://api.jumpmaster.xyz/map/?key=${api_token}`).then(res => {
+				axios.get(`https://api.jumpmaster.xyz/map/?key=${api.spyglass}`).then(res => {
 					const br = res.data.br.map.name;
 					const ranked = res.data.ranked.map.name;
 					const mixtape = res.data.mixtape.map;
