@@ -9,7 +9,7 @@ module.exports = {
 		.setDescription('Select a random legend to play.')
 		.addStringOption(option =>
 			option
-				.setName('type')
+				.setName('class')
 				.setDescription('Class of legend to choose from.')
 				.setRequired(false)
 				.addChoices(
