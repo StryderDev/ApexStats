@@ -39,9 +39,9 @@ function getStatus(status) {
 }
 
 function battlepass(data) {
-	if (!data.history.Revelry) return data.level;
+	if (!data.history.Arsenal) return data.level;
 
-	return data.history.Revelry;
+	return data.history.Arsenal;
 }
 
 function rankLayout(rank) {
@@ -60,7 +60,7 @@ function rankLayout(rank) {
 
 	return `${Emotes.Ranked[rank.name]} ${showPosition(rank.name, rank.ladderPos)} ${rank.name} ${showDivision(rank.name, rank.division)}\n${
 		Emotes.Misc.GrayBlank
-	} ${rank.score.toLocaleString()} RP`;
+	} ${rank.score.toLocaleString()} LP`;
 }
 
 module.exports = { platformName, platformEmote, getStatus, battlepass, rankLayout };

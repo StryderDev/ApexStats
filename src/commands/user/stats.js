@@ -69,7 +69,7 @@ module.exports = {
 							inline: true,
 						},
 						{
-							name: `${Emotes.Account.BattlePass} Revelry Battle Pass`,
+							name: `${Emotes.Account.BattlePass} Arsenal Battle Pass`,
 							value: `${Emotes.Misc.GrayBlank} Level ${battlepass(account.battlepass)} (${battlepassCompletion}%)`,
 							inline: true,
 						},
@@ -96,7 +96,9 @@ module.exports = {
 					.setImage(`https://cdn.jumpmaster.xyz/Bot/Legends/Banners/${encodeURIComponent(legend)}.png?t=${Math.floor(Math.random() * 10)}`)
 					.setColor(embedColor)
 					.setFooter({
-						text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nEquip the Battle Pass badge to update it!`,
+						text: `Player Added: ${new Date(
+							user.userAdded * 1000,
+						).toUTCString()}\nEquip the Battle Pass badge to update it!\nAs of Season 17 (Arsenal), "Ranked Points" are now "Ladder Points" or "LP".`,
 					});
 
 				// Logging

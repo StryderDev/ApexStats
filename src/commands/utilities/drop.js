@@ -44,7 +44,7 @@ module.exports = {
 				.then(response => {
 					const br = response.data.br.map;
 
-					const mapFile = require(`../../data/drops/Season 16/${br.name}.json`);
+					const mapFile = require(`../../data/drops/Season 17/${br.name}.json`);
 					const map = Math.floor(Math.random() * mapFile.length);
 
 					interaction.editReply({ content: `Drop into ${mapFile[map]} on ${br.name}`, embeds: [] });

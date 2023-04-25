@@ -45,6 +45,11 @@ module.exports = {
 				const user = data.user;
 				const status = user.status;
 				const ranked = data.ranked.BR;
+				const account = data.account;
+
+				// Calculate account and prestige level completion
+				const accountCompletion = Math.floor((account.level.current / 500) * 100);
+				const prestigeCompletion = Math.floor((account.level.total / 2000) * 100);
 
 				// Rank Embed
 				const rank = new EmbedBuilder()
@@ -53,7 +58,7 @@ module.exports = {
 					.addFields([
 						{
 							name: `${Emotes.Account.Level} Account`,
-							value: `${Emotes.Misc.GrayBlank} Level ${data.account.level.current}\n${Emotes.Misc.GrayBlank} Prestige ${data.account.level.prestige}`,
+							value: `${Emotes.Misc.GrayBlank} Level ${account.level.current} (${accountCompletion}%)\n${Emotes.Misc.GrayBlank} Prestige ${account.level.prestige} (${prestigeCompletion}%)`,
 							inline: true,
 						},
 						{
@@ -64,7 +69,7 @@ module.exports = {
 					])
 					.setColor(embedColor)
 					.setFooter({
-						text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}`,
+						text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nAs of Season 17 (Arsenal), "Ranked Points" are now "Ladder Points" or "LP".`,
 					});
 
 				// Logging
