@@ -2,13 +2,13 @@ const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { api } = require('../../config.json');
-const { embedColor, Emotes } = require('../../data/utilities.json');
+const { embedColor, Misc } = require('../../data/utilities.json');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('mixtape').setDescription('Shows the current and next Mixtape map rotation.'),
 
 	async execute(interaction) {
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Grabbing mixtape map data from API...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Grabbing mixtape map data from API...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 

@@ -1,9 +1,9 @@
-const { Emotes } = require('../data/utilities.json');
+const { ServerStatus } = require('../data/utilities.json');
 
 function getEmote(status) {
-	if (status == 'UP') return Emotes.ServerStatus.Online;
-	if (status == 'SLOW') return Emotes.ServerStatus.Slow;
-	if (status == 'DOWN' || status == 'OVERLOADED') return Emotes.ServerStatus.Down;
+	if (status == 'UP') return ServerStatus.Online;
+	if (status == 'SLOW') return ServerStatus.Slow;
+	if (status == 'DOWN' || status == 'OVERLOADED') return ServerStatus.Down;
 }
 
 function statusLayout(type) {

@@ -2,7 +2,7 @@ const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { debug, api } = require('../../config.json');
-const { embedColor, Emotes } = require('../../data/utilities.json');
+const { embedColor, Account, Misc } = require('../../data/utilities.json');
 const { getStatus, rankLayout, platformName, platformEmote } = require('../../utilities/stats.js');
 
 module.exports = {
@@ -32,7 +32,7 @@ module.exports = {
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Loading Ranked Data for ${username} on ${platformName(platform)}...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading Ranked Data for ${username} on ${platformName(platform)}...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -57,8 +57,8 @@ module.exports = {
 					.setDescription(`[**Status:** ${getStatus(status)}]`)
 					.addFields([
 						{
-							name: `${Emotes.Account.Level} Account`,
-							value: `${Emotes.Misc.GrayBlank} Level ${account.level.current} (${accountCompletion}%)\n${Emotes.Misc.GrayBlank} Prestige ${account.level.prestige} (${prestigeCompletion}%)`,
+							name: `${Account.Level} Account`,
+							value: `${Misc.GrayBlank} Level ${account.level.current} (${accountCompletion}%)\n${Misc.GrayBlank} Prestige ${account.level.prestige} (${prestigeCompletion}%)`,
 							inline: true,
 						},
 						{

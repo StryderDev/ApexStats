@@ -2,14 +2,14 @@ const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { api } = require('../../config.json');
-const { embedColor, Emotes } = require('../../data/utilities.json');
+const { embedColor, Misc } = require('../../data/utilities.json');
 const { statusLayout, statusCount, statusColor } = require('../../utilities/status.js');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('status').setDescription('Shows the status of login and matchmaking servers. Not always indicative of server status.'),
 
 	async execute(interaction) {
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Fetching Apex server status...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Fetching Apex server status...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 

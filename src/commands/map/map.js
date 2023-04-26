@@ -3,13 +3,13 @@ const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { api } = require('../../config.json');
 const { nextMapLength } = require('../../utilities/map.js');
-const { embedColor, Emotes } = require('../../data/utilities.json');
+const { embedColor, Misc } = require('../../data/utilities.json');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('map').setDescription('Shows the current and next Battle Royale map rotation.'),
 
 	async execute(interaction) {
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Grabbing map data from API...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Grabbing map data from API...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
