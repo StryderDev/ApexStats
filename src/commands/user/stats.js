@@ -3,7 +3,7 @@ const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { debug, api } = require('../../config.json');
 const { embedColor, Misc, Account } = require('../../data/utilities.json');
-const { getStatus, rankLayout, battlepass, platformName, platformEmote } = require('../../utilities/stats.js');
+const { getStatus, rankLayout, battlepass, platformName, platformEmote, checkUserBan } = require('../../utilities/stats.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -59,7 +59,7 @@ module.exports = {
 				// Stats Embed
 				const stats = new EmbedBuilder()
 					.setTitle(`${platformEmote(user.platform)} ${user.username} playing ${legend}`)
-					.setDescription(`[**Status:** ${getStatus(status)}]`)
+					.setDescription(`[**Status:** ${getStatus(status)}]${checkUserBan(user.bans)}`)
 					.addFields([
 						{
 							name: `${Account.Level} Account`,

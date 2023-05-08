@@ -63,4 +63,12 @@ function rankLayout(rank) {
 	} ${rank.score.toLocaleString()} LP`;
 }
 
-module.exports = { platformName, platformEmote, getStatus, battlepass, rankLayout };
+function checkUserBan(bans) {
+	var banUntil = Math.floor(Date.now() / 1000 + bans.length);
+
+	if (bans.active == 1) return `\n:no_entry: Banned until <t:${banUntil}:F>`;
+
+	return '';
+}
+
+module.exports = { platformName, platformEmote, getStatus, battlepass, rankLayout, checkUserBan };

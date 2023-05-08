@@ -3,7 +3,7 @@ const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { debug, api } = require('../../config.json');
 const { embedColor, Account, Misc } = require('../../data/utilities.json');
-const { getStatus, rankLayout, platformName, platformEmote } = require('../../utilities/stats.js');
+const { getStatus, rankLayout, platformName, platformEmote, checkUserBan } = require('../../utilities/stats.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -54,7 +54,7 @@ module.exports = {
 				// Rank Embed
 				const rank = new EmbedBuilder()
 					.setTitle(`${platformEmote(user.platform)} ${user.username}`)
-					.setDescription(`[**Status:** ${getStatus(status)}]`)
+					.setDescription(`[**Status:** ${getStatus(status)}]${checkUserBan(user.bans)}`)
 					.addFields([
 						{
 							name: `${Account.Level} Account`,
