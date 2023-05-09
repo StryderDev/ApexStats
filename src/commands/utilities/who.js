@@ -1,7 +1,7 @@
 const wait = require('util').promisify(setTimeout);
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { embedColor, Emotes } = require('../../data/utilities.json');
+const { embedColor, Misc } = require('../../data/utilities.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -25,7 +25,7 @@ module.exports = {
 		// Slash Command Options
 		const type = interaction.options.getString('type');
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Selecting a random legend...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Selecting a random legend...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 

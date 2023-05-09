@@ -2,13 +2,13 @@ const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { api } = require('../../config.json');
-const { embedColor, Emotes } = require('../../data/utilities.json');
+const { embedColor, Misc } = require('../../data/utilities.json');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('mixtape').setDescription('Shows the current and next Mixtape map rotation.'),
 
 	async execute(interaction) {
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Grabbing mixtape map data from API...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Grabbing mixtape map data from API...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -22,7 +22,7 @@ module.exports = {
 					.setDescription(
 						`**${map.map.type} - ${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Next Up:** ${map.next[0].map.type} - ${map.next[0].map.name} for 15 minutes.`,
 					)
-					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2016/Mixtape/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
+					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2017/Mixtape/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
 					.setColor(embedColor);
 
 				interaction.editReply({ embeds: [mapEmbed] });

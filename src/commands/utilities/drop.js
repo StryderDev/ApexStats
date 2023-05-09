@@ -3,7 +3,7 @@ const wait = require('util').promisify(setTimeout);
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { api } = require('../../config.json');
-const { embedColor, Emotes } = require('../../data/utilities.json');
+const { embedColor, Misc } = require('../../data/utilities.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -27,7 +27,7 @@ module.exports = {
 		// Slash Command Options
 		const mapOption = interaction.options.getString('map');
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Selecting a random place to drop...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Selecting a random place to drop...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -44,7 +44,7 @@ module.exports = {
 				.then(response => {
 					const br = response.data.br.map;
 
-					const mapFile = require(`../../data/drops/Season 16/${br.name}.json`);
+					const mapFile = require(`../../data/drops/Season 17/${br.name}.json`);
 					const map = Math.floor(Math.random() * mapFile.length);
 
 					interaction.editReply({ content: `Drop into ${mapFile[map]} on ${br.name}`, embeds: [] });

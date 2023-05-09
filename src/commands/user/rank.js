@@ -2,8 +2,8 @@ const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { debug, api } = require('../../config.json');
-const { embedColor, Emotes } = require('../../data/utilities.json');
-const { getStatus, rankLayout, platformName, platformEmote } = require('../../utilities/stats.js');
+const { embedColor, Account, Misc } = require('../../data/utilities.json');
+const { getStatus, rankLayout, platformName, platformEmote, checkUserBan } = require('../../utilities/stats.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -32,7 +32,7 @@ module.exports = {
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Loading Ranked Data for ${username} on ${platformName(platform)}...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading Ranked Data for ${username} on ${platformName(platform)}...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -45,15 +45,20 @@ module.exports = {
 				const user = data.user;
 				const status = user.status;
 				const ranked = data.ranked.BR;
+				const account = data.account;
+
+				// Calculate account and prestige level completion
+				const accountCompletion = Math.floor((account.level.current / 500) * 100);
+				const prestigeCompletion = Math.floor((account.level.total / 2000) * 100);
 
 				// Rank Embed
 				const rank = new EmbedBuilder()
 					.setTitle(`${platformEmote(user.platform)} ${user.username}`)
-					.setDescription(`[**Status:** ${getStatus(status)}]`)
+					.setDescription(`[**Status:** ${getStatus(status)}]${checkUserBan(user.bans)}`)
 					.addFields([
 						{
-							name: `${Emotes.Account.Level} Account`,
-							value: `${Emotes.Misc.GrayBlank} Level ${data.account.level.current}\n${Emotes.Misc.GrayBlank} Prestige ${data.account.level.prestige}`,
+							name: `${Account.Level} Account`,
+							value: `${Misc.GrayBlank} Level ${account.level.current} (${accountCompletion}%)\n${Misc.GrayBlank} Prestige ${account.level.prestige} (${prestigeCompletion}%)`,
 							inline: true,
 						},
 						{
@@ -64,7 +69,7 @@ module.exports = {
 					])
 					.setColor(embedColor)
 					.setFooter({
-						text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}`,
+						text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nAs of Season 17 (Arsenal), "Ranked Points" are now "Ladder Points" or "LP".`,
 					});
 
 				// Logging

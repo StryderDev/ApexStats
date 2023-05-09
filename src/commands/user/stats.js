@@ -2,8 +2,8 @@ const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { debug, api } = require('../../config.json');
-const { embedColor, Emotes } = require('../../data/utilities.json');
-const { getStatus, rankLayout, battlepass, platformName, platformEmote } = require('../../utilities/stats.js');
+const { embedColor, Misc, Account } = require('../../data/utilities.json');
+const { getStatus, rankLayout, battlepass, platformName, platformEmote, checkUserBan } = require('../../utilities/stats.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -32,7 +32,7 @@ module.exports = {
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Loading Data for ${username} on ${platformName(platform)}...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading Data for ${username} on ${platformName(platform)}...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -59,18 +59,18 @@ module.exports = {
 				// Stats Embed
 				const stats = new EmbedBuilder()
 					.setTitle(`${platformEmote(user.platform)} ${user.username} playing ${legend}`)
-					.setDescription(`[**Status:** ${getStatus(status)}]`)
+					.setDescription(`[**Status:** ${getStatus(status)}]${checkUserBan(user.bans)}`)
 					.addFields([
 						{
-							name: `${Emotes.Account.Level} Account`,
-							value: `${Emotes.Misc.GrayBlank} Level ${account.level.current.toLocaleString()} (${accountCompletion}%)\n${Emotes.Misc.GrayBlank} Prestige ${
+							name: `${Account.Level} Account`,
+							value: `${Misc.GrayBlank} Level ${account.level.current.toLocaleString()} (${accountCompletion}%)\n${Misc.GrayBlank} Prestige ${
 								account.level.prestige
 							} (${prestigeCompletion}%)`,
 							inline: true,
 						},
 						{
-							name: `${Emotes.Account.BattlePass} Revelry Battle Pass`,
-							value: `${Emotes.Misc.GrayBlank} Level ${battlepass(account.battlepass)} (${battlepassCompletion}%)`,
+							name: `${Account.BattlePass} Arsenal Battle Pass`,
+							value: `${Misc.GrayBlank} Level ${battlepass(account.battlepass)} (${battlepassCompletion}%)`,
 							inline: true,
 						},
 						{
@@ -96,7 +96,9 @@ module.exports = {
 					.setImage(`https://cdn.jumpmaster.xyz/Bot/Legends/Banners/${encodeURIComponent(legend)}.png?t=${Math.floor(Math.random() * 10)}`)
 					.setColor(embedColor)
 					.setFooter({
-						text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nEquip the Battle Pass badge to update it!`,
+						text: `Player Added: ${new Date(
+							user.userAdded * 1000,
+						).toUTCString()}\nEquip the Battle Pass badge to update it!\nAs of Season 17 (Arsenal), "Ranked Points" are now "Ladder Points" or "LP".`,
 					});
 
 				// Logging

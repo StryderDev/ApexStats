@@ -2,13 +2,13 @@ const wait = require('util').promisify(setTimeout);
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const guns = require('../../data/guns.json');
-const { embedColor, Emotes } = require('../../data/utilities.json');
+const { embedColor, Misc } = require('../../data/utilities.json');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('loadout').setDescription('Select a random gun loadout from the available in-game guns.'),
 
 	async execute(interaction) {
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Selecting a random loadout...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Selecting a random loadout...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
