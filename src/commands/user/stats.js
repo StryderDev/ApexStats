@@ -78,17 +78,17 @@ module.exports = {
 							value: `${rankLayout(ranked)}\n\n**Active Trackers**`,
 						},
 						{
-							name: trackers[0].id,
+							name: trackers[0].id.toString(),
 							value: trackers[0].value.toLocaleString(),
 							inline: true,
 						},
 						{
-							name: trackers[1].id,
+							name: trackers[1].id.toString(),
 							value: trackers[1].value.toLocaleString(),
 							inline: true,
 						},
 						{
-							name: trackers[2].id,
+							name: trackers[2].id.toString(),
 							value: trackers[2].value.toLocaleString(),
 							inline: true,
 						},
