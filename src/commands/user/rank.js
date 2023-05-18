@@ -12,7 +12,7 @@ module.exports = {
 		.addStringOption(option =>
 			option.setName('platform').setDescription('The platform you play on').setRequired(true).addChoices(
 				{
-					name: 'PC (Steam/Origin)',
+					name: 'PC (Steam/EA App)',
 					value: 'PC',
 				},
 				{
@@ -54,7 +54,7 @@ module.exports = {
 				// Rank Embed
 				const rank = new EmbedBuilder()
 					.setTitle(`${platformEmote(user.platform)} ${user.username}`)
-					.setDescription(`[**Status:** ${getStatus(status)}]${checkUserBan(user.bans)}`)
+					.setDescription(`**Status:** ${getStatus(status)}\n${checkUserBan(user.bans)}`)
 					.addFields([
 						{
 							name: `${Account.Level} Account`,

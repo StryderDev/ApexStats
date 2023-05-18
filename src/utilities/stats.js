@@ -66,7 +66,7 @@ function rankLayout(rank) {
 function checkUserBan(bans) {
 	var banUntil = Math.floor(Date.now() / 1000 + bans.length);
 
-	if (bans.active == 1) return `\n:no_entry: Banned until <t:${banUntil}:F>`;
+	if (bans.active == 1) return `:no_entry: Banned until <t:${banUntil}:F>`;
 
 	return '';
 }

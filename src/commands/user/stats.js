@@ -12,7 +12,7 @@ module.exports = {
 		.addStringOption(option =>
 			option.setName('platform').setDescription('The platform you play on').setRequired(true).addChoices(
 				{
-					name: 'PC (Steam/Origin)',
+					name: 'PC (Steam/EA App)',
 					value: 'PC',
 				},
 				{
@@ -36,76 +36,53 @@ module.exports = {
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
+		const playerAPI = axios.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${api.spyglass}`);
+		const predAPI = axios.get(`https://api.mozambiquehe.re/predator?auth=${api.als}`);
+
 		await axios
-			.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${api.spyglass}`)
-			.then(response => {
-				const data = response.data;
+			.all([playerAPI, predAPI])
+			.then(
+				axios.spread((...res) => {
+					// Grabbing the data from the axios requests
+					const playerData = res[0].data;
+					const predData = res[1].data;
 
-				// User Data
-				const user = data.user;
-				const legend = data.active.legend;
-				const status = user.status;
-				const ranked = data.ranked.BR;
-				const account = data.account;
+					// Main user data
+					const user = playerData.user;
+					const legend = playerData.active.legend;
+					const status = user.status;
+					const account = playerData.account;
 
-				// Trackers
-				const trackers = data.active.trackers;
+					// Calculate account, prestige, and battle pass level completion
+					const accountCompletion = Math.floor((account.level.current / 500) * 100);
 
-				// Calculate account, prestige, and battle pass level completion
-				const accountCompletion = Math.floor((account.level.current / 500) * 100);
-				const prestigeCompletion = Math.floor((account.level.total / 2000) * 100);
-				const battlepassCompletion = Math.floor((battlepass(account.battlepass) / 110) * 100);
+					function checkPrestigeCompletion(amount) {
+						if (amount >= 2000) {
+							return 2000;
+						} else {
+							return amount;
+						}
+					}
 
-				// Stats Embed
-				const stats = new EmbedBuilder()
-					.setTitle(`${platformEmote(user.platform)} ${user.username} playing ${legend}`)
-					.setDescription(`[**Status:** ${getStatus(status)}]${checkUserBan(user.bans)}`)
-					.addFields([
-						{
-							name: `${Account.Level} Account`,
-							value: `${Misc.GrayBlank} Level ${account.level.current.toLocaleString()} (${accountCompletion}%)\n${Misc.GrayBlank} Prestige ${
-								account.level.prestige
-							} (${prestigeCompletion}%)`,
-							inline: true,
-						},
-						{
-							name: `${Account.BattlePass} Arsenal Battle Pass`,
-							value: `${Misc.GrayBlank} Level ${battlepass(account.battlepass)} (${battlepassCompletion}%)`,
-							inline: true,
-						},
-						{
-							name: `Battle Royale Ranked`,
-							value: `${rankLayout(ranked)}\n\n**Active Trackers**`,
-						},
-						{
-							name: trackers[0].id.toString(),
-							value: trackers[0].value.toLocaleString(),
-							inline: true,
-						},
-						{
-							name: trackers[1].id.toString(),
-							value: trackers[1].value.toLocaleString(),
-							inline: true,
-						},
-						{
-							name: trackers[2].id.toString(),
-							value: trackers[2].value.toLocaleString(),
-							inline: true,
-						},
-					])
-					.setImage(`https://cdn.jumpmaster.xyz/Bot/Legends/Banners/${encodeURIComponent(legend)}.png?t=${Math.floor(Math.random() * 10)}`)
-					.setColor(embedColor)
-					.setFooter({
-						text: `Player Added: ${new Date(
-							user.userAdded * 1000,
-						).toUTCString()}\nEquip the Battle Pass badge to update it!\nAs of Season 17 (Arsenal), "Ranked Points" are now "Ladder Points" or "LP".`,
-					});
+					const prestigeCompletion = Math.floor((checkPrestigeCompletion(account.level.total) / 2000) * 100);
 
-				// Logging
-				axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=success&dev=${debug}`);
+					const battlepassCompletion = Math.floor((battlepass(account.battlepass) / 110) * 100);
 
-				interaction.editReply({ embeds: [stats] });
-			})
+					const stats = new EmbedBuilder()
+						.setTitle(`${platformEmote(user.platform)} ${user.username} playing ${legend}`)
+						.setDescription(`**Status:** ${getStatus(status)}\n${checkUserBan(user.bans)}`)
+						.addFields([
+							{
+								name: `${Account.Level} Account`,
+								value: `${Misc.GrayBlank} Level ${account.level.current.toLocaleString()} (${accountCompletion}%)\n${Misc.GrayBlank} Prestige ${
+									account.level.prestige
+								} (${prestigeCompletion}%)`,
+							},
+						]);
+
+					interaction.editReply({ embeds: [stats] });
+				}),
+			)
 			.catch(error => {
 				if (error.response) {
 					console.log(error.response.data);
