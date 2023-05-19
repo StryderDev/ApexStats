@@ -63,6 +63,13 @@ function rankLayout(rank) {
 	} ${rank.score.toLocaleString()} LP`;
 }
 
+function getRankName(rank) {
+	if (rank.name == 'Apex Predator') return `${Ranked[rank.name]} **[#${rank.ladderPos}]** ${rank.name}`;
+	if (rank.name == 'Master') return `${Ranked[rank.name]} **[#${rank.ladderPos.toLocaleString()}]** ${rank.name}`;
+
+	return `${Ranked[rank.name]} ${rank.name} ${rank.division}`;
+}
+
 function checkUserBan(bans) {
 	var banUntil = Math.floor(Date.now() / 1000 + bans.length);
 
@@ -71,4 +78,28 @@ function checkUserBan(bans) {
 	return '';
 }
 
-module.exports = { platformName, platformEmote, getStatus, battlepass, rankLayout, checkUserBan };
+function calcTillMaster(player) {
+	const tillMaster = 24000 - player.score;
+
+	if (tillMaster <= 0) return `0 LP`;
+
+	return `${tillMaster.toLocaleString()} LP`;
+}
+
+function calcTillPred(player, pred, platform) {
+	const tillPred = pred.RP[platform].val - player.score;
+
+	if (tillPred <= 0) return `0 LP`;
+
+	return `${tillPred.toLocaleString()} LP`;
+}
+
+function getDivisionCount(rank) {
+	// return rank.score and remove all characters except for the 3 at the end
+	return rank.score
+		.toString()
+		.replace(/[^0-9]/g, '')
+		.slice(-3);
+}
+
+module.exports = { platformName, platformEmote, getStatus, battlepass, rankLayout, checkUserBan, calcTillMaster, calcTillPred, getRankName, getDivisionCount };

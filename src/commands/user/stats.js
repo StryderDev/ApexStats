@@ -3,7 +3,7 @@ const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { debug, api } = require('../../config.json');
 const { embedColor, Misc, Account } = require('../../data/utilities.json');
-const { getStatus, rankLayout, battlepass, platformName, platformEmote, checkUserBan } = require('../../utilities/stats.js');
+const { getStatus, battlepass, platformName, platformEmote, checkUserBan, calcTillMaster, calcTillPred, getRankName, getDivisionCount } = require('../../utilities/stats.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -52,6 +52,8 @@ module.exports = {
 					const legend = playerData.active.legend;
 					const status = user.status;
 					const account = playerData.account;
+					const ranked = playerData.ranked.BR;
+					const trackers = playerData.active.trackers;
 
 					// Calculate account, prestige, and battle pass level completion
 					const accountCompletion = Math.floor((account.level.current / 500) * 100);
@@ -77,8 +79,56 @@ module.exports = {
 								value: `${Misc.GrayBlank} Level ${account.level.current.toLocaleString()} (${accountCompletion}%)\n${Misc.GrayBlank} Prestige ${
 									account.level.prestige
 								} (${prestigeCompletion}%)`,
+								inline: true,
 							},
-						]);
+							{
+								name: `${Account.BattlePass} Arsenal Battle Pass`,
+								value: `${Misc.GrayBlank} Level ${battlepass(account.battlepass)} (${battlepassCompletion}%)`,
+								inline: true,
+							},
+							{
+								name: `\u200b`,
+								value: `**Battle Royale Ranked**`,
+							},
+							{
+								name: getRankName(ranked),
+								value: `${Misc.GrayBlank} Division: ${getDivisionCount(ranked)}/1000 LP\n${Misc.GrayBlank} Total: ${ranked.score.toLocaleString()} LP`,
+								inline: true,
+							},
+							{
+								name: `\u200b`,
+								value: `${Misc.GrayBlank} Till Master: ${calcTillMaster(ranked)}\n${Misc.GrayBlank} Till Apex Predator: ${calcTillPred(
+									ranked,
+									predData,
+									platform,
+								)}`,
+								inline: true,
+							},
+							{
+								name: `\u200b`,
+								value: '**Active Trackers**',
+							},
+							{
+								name: trackers[0].id.toString(),
+								value: trackers[0].value.toLocaleString(),
+								inline: true,
+							},
+							{
+								name: trackers[1].id.toString(),
+								value: trackers[1].value.toLocaleString(),
+								inline: true,
+							},
+							{
+								name: trackers[2].id.toString(),
+								value: trackers[2].value.toLocaleString(),
+								inline: true,
+							},
+						])
+						.setImage(`https://cdn.jumpmaster.xyz/Bot/Legends/Banners/${encodeURIComponent(legend)}.png?t=${Math.floor(Math.random() * 10)}}`)
+						.setColor(embedColor)
+						.setFooter({
+							text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nEquip the Battle Pass badge in-game to update it!`,
+						});
 
 					interaction.editReply({ embeds: [stats] });
 				}),
