@@ -3,7 +3,7 @@ const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { debug, api } = require('../../config.json');
 const { embedColor, Account, Misc } = require('../../data/utilities.json');
-const { getStatus, rankLayout, platformName, platformEmote, checkUserBan } = require('../../utilities/stats.js');
+const { getStatus, rankLayout, platformName, platformEmote, checkUserBan, getRankName, getDivisionCount, calcTillMaster, calcTillPred } = require('../../utilities/stats.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -36,47 +36,62 @@ module.exports = {
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
+		const playerAPI = axios.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${api.spyglass}`);
+		const predAPI = axios.get(`https://api.mozambiquehe.re/predator?auth=${api.als}`);
+
 		await axios
-			.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${api.spyglass}`)
-			.then(response => {
-				const data = response.data;
+			.all([playerAPI, predAPI])
+			.then(
+				axios.spread((...res) => {
+					// Grabbing the data from the axios requests
+					const playerData = res[0].data;
+					const predData = res[1].data;
 
-				// User Data
-				const user = data.user;
-				const status = user.status;
-				const ranked = data.ranked.BR;
-				const account = data.account;
+					// User Data
+					const user = playerData.user;
+					const status = user.status;
+					const ranked = playerData.ranked.BR;
+					const account = playerData.account;
 
-				// Calculate account and prestige level completion
-				const accountCompletion = Math.floor((account.level.current / 500) * 100);
-				const prestigeCompletion = Math.floor((account.level.total / 2000) * 100);
+					// Calculate account and prestige level completion
+					const accountCompletion = Math.floor((account.level.current / 500) * 100);
+					const prestigeCompletion = Math.floor((account.level.total / 2000) * 100);
 
-				// Rank Embed
-				const rank = new EmbedBuilder()
-					.setTitle(`${platformEmote(user.platform)} ${user.username}`)
-					.setDescription(`**Status:** ${getStatus(status)}\n${checkUserBan(user.bans)}`)
-					.addFields([
-						{
-							name: `${Account.Level} Account`,
-							value: `${Misc.GrayBlank} Level ${account.level.current} (${accountCompletion}%)\n${Misc.GrayBlank} Prestige ${account.level.prestige} (${prestigeCompletion}%)`,
-							inline: true,
-						},
-						{
-							name: `Battle Royale Ranked`,
-							value: rankLayout(ranked),
-							inline: true,
-						},
-					])
-					.setColor(embedColor)
-					.setFooter({
-						text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nAs of Season 17 (Arsenal), "Ranked Points" are now "Ladder Points" or "LP".`,
-					});
+					// Rank Embed
+					const rank = new EmbedBuilder()
+						.setTitle(`${platformEmote(user.platform)} ${user.username}`)
+						.setDescription(`**Status:** ${getStatus(status)}\n${checkUserBan(user.bans)}`)
+						.addFields([
+							{
+								name: `${Account.Level} Account`,
+								value: `${Misc.GrayBlank} Level ${account.level.current} (${accountCompletion}%)\n${Misc.GrayBlank} Prestige ${account.level.prestige} (${prestigeCompletion}%)\n\n**Battle Royale Ranked**`,
+							},
+							{
+								name: getRankName(ranked),
+								value: `${Misc.GrayBlank} Division: ${getDivisionCount(ranked)}/1000 LP\n${Misc.GrayBlank} Total: ${ranked.score.toLocaleString()} LP`,
+								inline: true,
+							},
+							{
+								name: `\u200b`,
+								value: `${Misc.GrayBlank} Till Master: ${calcTillMaster(ranked)}\n${Misc.GrayBlank} Till Apex Predator: ${calcTillPred(
+									ranked,
+									predData,
+									platform,
+								)}`,
+								inline: true,
+							},
+						])
+						.setColor(embedColor)
+						.setFooter({
+							text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}`,
+						});
 
-				// Logging
-				axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=success&dev=${debug}`);
+					// Logging
+					axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=success&dev=${debug}`);
 
-				interaction.editReply({ embeds: [rank] });
-			})
+					interaction.editReply({ embeds: [rank] });
+				}),
+			)
 			.catch(error => {
 				if (error.response) {
 					console.log(error.response.data);
