@@ -51,7 +51,7 @@ module.exports = {
 						.setColor(embedColor)
 						.setTimestamp();
 
-					const guild = client.guilds.cache.get(status.guild);
+					const guild = client.guilds.cache.get(status.server);
 					if (!guild) return console.log('Guild not available.');
 
 					const channel = guild.channels.cache.find(c => c.id === status.channel);
@@ -75,7 +75,7 @@ module.exports = {
 				now = new Date();
 				var delay = 60000 - (now % 60000);
 				setTimeout(loop, delay);
-				console.log('Checking bot status...');
+				console.log('Updating bot status...');
 			})();
 		}
 

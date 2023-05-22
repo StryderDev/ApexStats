@@ -49,7 +49,7 @@ module.exports = {
 
 			var delay = 60000 - (date % 60000);
 			setTimeout(mapPrecenseLoop, delay);
-			console.log('Checking for presence...');
+			console.log('Checking for presence updates...');
 		})();
 
 		// Display bot uptime in console
