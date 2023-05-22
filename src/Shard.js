@@ -18,4 +18,4 @@ if (topgg.enabled == true) {
 	});
 }
 
-manager.spawn();
+manager.spawn().catch(err => console.log(`Error: ${err.statusText}`));
