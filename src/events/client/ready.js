@@ -6,8 +6,6 @@ const { Collection } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
 const { Routes } = require('discord-api-types/v10');
 
-const { debug, interval, discord, api } = require('../../config.json');
-
 function uptime() {
 	(function loop() {
 		const uptime = process.uptime();
@@ -34,10 +32,10 @@ module.exports = {
 			let minutes = date.getMinutes();
 
 			// Check and update every x minutes ('interval' in config)
-			if (minutes % interval == 0) {
+			if (minutes % 1 == 0) {
 				await wait(1000);
 
-				axios.get(`https://api.jumpmaster.xyz/map/?key=${api.spyglass}`).then(res => {
+				axios.get(`https://api.jumpmaster.xyz/map/?key=${process.env.SPYGLASS}`).then(res => {
 					const br = res.data.br.map.name;
 					const ranked = res.data.ranked.map.name;
 					const mixtape = res.data.mixtape.map;
@@ -58,7 +56,7 @@ module.exports = {
 		// Register slash commands
 		const commands = [];
 		const clientID = client.user.id;
-		const rest = new REST({ version: 10 }).setToken(discord.token);
+		const rest = new REST({ version: 10 }).setToken(process.env.DISCORD_TOKEN);
 		const folders = fs.readdirSync(`${__dirname}/../../commands`);
 
 		client.commands = new Collection();
@@ -77,10 +75,10 @@ module.exports = {
 		// Push the commands to Discord
 		(async () => {
 			try {
-				if (debug == false) {
+				if (process.env.DEBUG == 'false') {
 					// If debug is disabled, assume production
 					// bot and register global slash commands
-					await rest.put(Routes.applicationCommands(clientID), { body: commands });
+					// await rest.put(Routes.applicationCommands(clientID), { body: commands });
 
 					console.log(`[>> Successfully registered global slash commands <<]`);
 				} else {
@@ -98,7 +96,7 @@ module.exports = {
 
 					// If debug is enabled, assume dev environment
 					// and only register slash commands for dev build
-					await rest.put(Routes.applicationGuildCommands(clientID, discord.devGuild), { body: commands });
+					await rest.put(Routes.applicationGuildCommands(clientID, process.env.DEVGUILD), { body: commands });
 
 					console.log(`[>> Successfully registered local slash commands <<]`);
 				}

@@ -2,7 +2,6 @@ const axios = require('axios');
 const wait = require('util').promisify(setTimeout);
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { api } = require('../../config.json');
 const { embedColor, Misc } = require('../../data/utilities.json');
 
 module.exports = {
@@ -40,7 +39,7 @@ module.exports = {
 			interaction.editReply({ content: `Drop into ${mapFile[map]} on ${mapOption}!`, embeds: [] });
 		} else {
 			await axios
-				.get(`https://api.jumpmaster.xyz/map/?key=${api.spyglass}`)
+				.get(`https://api.jumpmaster.xyz/map/?key=${process.env.SPYGLASS}`)
 				.then(response => {
 					const br = response.data.br.map;
 
@@ -55,7 +54,7 @@ module.exports = {
 
 						const errorEmbed = new EmbedBuilder().setTitle('Map Lookup Error').setDescription(error.response.data.error).setColor('D0342C').setTimestamp();
 
-						axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=error&dev=${debug}`);
+						// axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=error&dev=${debug}`);
 
 						interaction.editReply({ embeds: [errorEmbed] });
 					} else if (error.request) {

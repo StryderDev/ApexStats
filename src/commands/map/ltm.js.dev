@@ -1,7 +1,6 @@
 const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { api } = require('../../config.json');
 const { embedColor, Misc } = require('../../data/utilities.json');
 
 module.exports = {
@@ -13,7 +12,7 @@ module.exports = {
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.jumpmaster.xyz/map/?next=1&key=${api.spyglass}`)
+			.get(`https://api.jumpmaster.xyz/map/?next=1&key=${process.env.SPYGLASS}`)
 			.then(response => {
 				const map = response.data.ltm;
 

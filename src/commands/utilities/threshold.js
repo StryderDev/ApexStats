@@ -1,7 +1,6 @@
 const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { api } = require('../../config.json');
 const { embedColor, Misc } = require('../../data/utilities.json');
 
 module.exports = {
@@ -13,7 +12,7 @@ module.exports = {
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.mozambiquehe.re/predator?auth=${api.als}`)
+			.get(`https://api.mozambiquehe.re/predator?auth=${process.env.ALS}`)
 			.then(async response => {
 				const data = response.data;
 
