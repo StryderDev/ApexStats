@@ -1,7 +1,6 @@
 const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { debug, api } = require('../../config.json');
 const { embedColor, Account, Misc } = require('../../data/utilities.json');
 const { getStatus, rankLayout, platformName, platformEmote, checkUserBan, getRankName, getDivisionCount, calcTillMaster, calcTillPred } = require('../../utilities/stats.js');
 
@@ -36,8 +35,8 @@ module.exports = {
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
-		const playerAPI = axios.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${api.spyglass}`);
-		const predAPI = axios.get(`https://api.mozambiquehe.re/predator?auth=${api.als}`);
+		const playerAPI = axios.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${process.env.SPYGLASS}`);
+		const predAPI = axios.get(`https://api.mozambiquehe.re/predator?auth=${process.env.ALS}`);
 
 		await axios
 			.all([playerAPI, predAPI])
@@ -87,7 +86,7 @@ module.exports = {
 						});
 
 					// Logging
-					axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=success&dev=${debug}`);
+					// axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=success&dev=${debug}`);
 
 					interaction.editReply({ embeds: [rank] });
 				}),
@@ -98,7 +97,7 @@ module.exports = {
 
 					const errorEmbed = new EmbedBuilder().setTitle('Player Lookup Error').setDescription(error.response.data.error).setColor('D0342C').setTimestamp();
 
-					axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=error&dev=${debug}`);
+					// axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=error&dev=${debug}`);
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				} else if (error.request) {

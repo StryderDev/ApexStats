@@ -1,6 +1,5 @@
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { release } = require('../../config.json');
 const { version } = require('../../../package.json');
 const { embedColor } = require('../../data/utilities.json');
 
@@ -26,7 +25,7 @@ module.exports = {
 				},
 				{
 					name: 'Bot Info',
-					value: `Shard ${interaction.client.shard.ids[0] + 1}/${interaction.client.shard.count}\nVersion ${version}\nCodename "${release}"`,
+					value: `Shard ${interaction.client.shard.ids[0] + 1}/${interaction.client.shard.count}\nVersion ${version}\nCodename "${process.env.RELEASE}"`,
 					inline: true,
 				},
 				{

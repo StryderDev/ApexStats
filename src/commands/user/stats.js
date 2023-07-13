@@ -1,7 +1,6 @@
 const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { debug, api } = require('../../config.json');
 const { embedColor, Misc, Account } = require('../../data/utilities.json');
 const { getStatus, battlepass, platformName, platformEmote, checkUserBan, calcTillMaster, calcTillPred, getRankName, getDivisionCount } = require('../../utilities/stats.js');
 
@@ -36,8 +35,8 @@ module.exports = {
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
-		const playerAPI = axios.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${api.spyglass}`);
-		const predAPI = axios.get(`https://api.mozambiquehe.re/predator?auth=${api.als}`);
+		const playerAPI = axios.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${process.env.SPYGLASS}`);
+		const predAPI = axios.get(`https://api.mozambiquehe.re/predator?auth=${process.env.ALS}`);
 
 		await axios
 			.all([playerAPI, predAPI])
@@ -139,7 +138,7 @@ module.exports = {
 
 					const errorEmbed = new EmbedBuilder().setTitle('Player Lookup Error').setDescription(error.response.data.error).setColor('D0342C').setTimestamp();
 
-					axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=error&dev=${debug}`);
+					// axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=error&dev=${debug}`);
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				} else if (error.request) {
