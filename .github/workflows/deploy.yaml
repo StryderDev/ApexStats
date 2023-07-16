@@ -29,4 +29,4 @@ jobs:
                       git pull origin prod
                       git status
                       npm install --only=prod
-                      pm2 reload 1
+                      pm2 reload 9
