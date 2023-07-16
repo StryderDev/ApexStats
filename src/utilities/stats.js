@@ -87,7 +87,10 @@ function calcTillMaster(player) {
 }
 
 function calcTillPred(player, pred, platform) {
-	const tillPred = pred.RP[platform].val - player.score;
+	if (platform == 'X1') platform = 'Xbox';
+	if (platform == 'PS4') platform = 'Playstation';
+
+	const tillPred = pred[platform].value - player.score;
 
 	if (tillPred <= 0) return `0 LP`;
 
