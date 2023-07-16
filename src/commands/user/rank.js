@@ -36,7 +36,7 @@ module.exports = {
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		const playerAPI = axios.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${process.env.SPYGLASS}`);
-		const predAPI = axios.get(`https://api.mozambiquehe.re/predator?auth=${process.env.ALS}`);
+		const predAPI = axios.get(`https://api.jumpmaster.xyz/misc/predThreshold`);
 
 		await axios
 			.all([playerAPI, predAPI])

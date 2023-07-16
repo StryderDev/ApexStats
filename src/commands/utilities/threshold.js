@@ -12,24 +12,25 @@ module.exports = {
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.mozambiquehe.re/predator?auth=${process.env.ALS}`)
+			.get(`https://api.jumpmaster.xyz/misc/predThreshold`)
 			.then(async response => {
 				const data = response.data;
 
 				const thresholdEmbed = new EmbedBuilder()
 					.setTitle('Apex Predator Ladder Point Threshold')
+					.setDescription(`**Last Updated:** <t:${data['timestamp']}:R>`)
 					.addFields([
 						{
 							name: `${Misc.Platform_PC} PC (Steam / EA App)`,
-							value: `${Misc.GrayBlank} Threshold: ${data['RP']['PC']['val'].toLocaleString()} LP\n${Misc.GrayBlank} Player Count: ${data['RP']['PC'][
-								'totalMastersAndPreds'
+							value: `${Misc.GrayBlank} Threshold: ${data['PC']['value'].toLocaleString()} LP\n${Misc.GrayBlank} Player Count: ${data['PC'][
+								'count'
 							].toLocaleString()}`,
 							inline: true,
 						},
 						{
 							name: `${Misc.Platform_PlayStation} PlayStation`,
-							value: `${Misc.GrayBlank} Threshold: ${data['RP']['PS4']['val'].toLocaleString()} LP\n${Misc.GrayBlank} Player Count: ${data['RP']['PS4'][
-								'totalMastersAndPreds'
+							value: `${Misc.GrayBlank} Threshold: ${data['Playstation']['value'].toLocaleString()} LP\n${Misc.GrayBlank} Player Count: ${data['Playstation'][
+								'count'
 							].toLocaleString()}`,
 							inline: true,
 						},
@@ -40,15 +41,15 @@ module.exports = {
 						},
 						{
 							name: `${Misc.Platform_Xbox} Xbox`,
-							value: `${Misc.GrayBlank} Threshold: ${data['RP']['X1']['val'].toLocaleString()} LP\n${Misc.GrayBlank} Player Count: ${data['RP']['X1'][
-								'totalMastersAndPreds'
+							value: `${Misc.GrayBlank} Threshold: ${data['Xbox']['value'].toLocaleString()} LP\n${Misc.GrayBlank} Player Count: ${data['Xbox'][
+								'count'
 							].toLocaleString()}`,
 							inline: true,
 						},
 						{
 							name: `${Misc.Platform_Switch} Nintendo Switch`,
-							value: `${Misc.GrayBlank} Threshold: ${data['RP']['SWITCH']['val'].toLocaleString()} LP\n${Misc.GrayBlank} Player Count: ${data['RP']['SWITCH'][
-								'totalMastersAndPreds'
+							value: `${Misc.GrayBlank} Threshold: ${data['Switch']['value'].toLocaleString()} LP\n${Misc.GrayBlank} Player Count: ${data['Switch'][
+								'count'
 							].toLocaleString()}`,
 							inline: true,
 						},
