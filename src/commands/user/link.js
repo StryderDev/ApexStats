@@ -1,9 +1,10 @@
-const db = require('sqlite3');
+// const db = require('sqlite3');
 const axios = require('axios');
+const db = require('../../utilities/database.js');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { debug, api } = require('../../config.json');
-const { embedColor, Emotes } = require('../../data/utilities.json');
+const { embedColor, Misc } = require('../../data/utilities.json');
 const { getStatus, rankLayout, platformName, platformEmote } = require('../../utilities/stats.js');
 
 module.exports = {
@@ -29,20 +30,11 @@ module.exports = {
 		.addStringOption(option => option.setName('username').setDescription("Your in-game username. If this doesn't work, try a previous username").setRequired(true)),
 
 	async execute(interaction) {
-		// Load DB
-		let userDB = new db.Database('./src/database/spyglass.db', db.OPEN_READWRITE, err => {
-			if (err) {
-				console.error(err.message);
-			}
-		});
-
-		userDB.run('CREATE TABLE IF NOT EXISTS userLinks(discordID TEXT NOT NULL, playerID TEXT NOT NULL, platform TEXT NOT NULL)');
-
 		// Slash Command Options
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Loading data for selected account...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading data for selected account...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -55,27 +47,24 @@ module.exports = {
 				const playerID = data.user.id;
 				const discordID = interaction.user.id;
 
-				let linkQuery = 'SELECT * FROM userLinks WHERE discordID = ?';
+				let linkQuery = 'SELECT * FROM specter_dev WHERE discordID = ?';
 
-				userDB.get(linkQuery, [discordID], (err, row) => {
+				db.query(linkQuery, [discordID], (err, row) => {
 					if (err) {
 						console.log(err);
 						return interaction.editReply({ content: 'There was a database error.', embeds: [] });
 					}
 
-					if (row === undefined) {
-						// User does not have an account linked, link it
-						let insertUserLink = userDB.prepare(`INSERT INTO userLinks VALUES(?, ?, ?)`);
+					if (row.length === 0) {
+						let insertUserLink = `INSERT INTO specter_dev (discordID, playerID, platform) VALUES(?, ?, ?)`;
 
-						insertUserLink.run(discordID, playerID, platform);
+						db.query(insertUserLink, [discordID, playerID, platform]);
 
-						insertUserLink.finalize();
-
-						userDB.close();
-
-						return interaction.editReply({ content: `Linked \`${data.user.username}\` to discord account \`@${interaction.user.tag}\``, embeds: [] });
+						return interaction.editReply({
+							content: `Linked player \`${data.user.username}\` to discord account \`${interaction.user.tag}\`. Use \`/me\` to view your linked account.`,
+							embeds: [],
+						});
 					} else {
-						// User already has an account linked
 						return interaction.editReply({
 							content: 'You already have a linked account. Use `/me` to see your linked account or `/unlink` to unlink your account.',
 							embeds: [],
