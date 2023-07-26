@@ -3,7 +3,6 @@ const axios = require('axios');
 const db = require('../../utilities/database.js');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { debug, api } = require('../../config.json');
 const { embedColor, Account, Misc } = require('../../data/utilities.json');
 const { getStatus, rankLayout, battlepass, platformName, platformEmote } = require('../../utilities/stats.js');
 
@@ -30,7 +29,7 @@ module.exports = {
 			} else {
 				// User already has an account linked
 				axios
-					.get(`https://api.jumpmaster.xyz/user/Player?platform=${row[0].platform}&ID=${encodeURIComponent(row[0].playerID)}&key=${api.spyglass}`)
+					.get(`https://api.jumpmaster.xyz/user/Player?platform=${row[0].platform}&ID=${encodeURIComponent(row[0].playerID)}&key=${process.env.SPYGLASS}`)
 					.then(response => {
 						const data = response.data;
 
@@ -93,7 +92,7 @@ module.exports = {
 							});
 
 						// Logging
-						axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=success&dev=${debug}`);
+						// axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=success&dev=${debug}`);
 
 						interaction.editReply({ embeds: [stats] });
 					})
@@ -103,7 +102,7 @@ module.exports = {
 
 							const errorEmbed = new EmbedBuilder().setTitle('Player Lookup Error').setDescription(error.response.data.error).setColor('D0342C').setTimestamp();
 
-							axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=error&dev=${debug}`);
+							// axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=error&dev=${debug}`);
 
 							interaction.editReply({ embeds: [errorEmbed] });
 						} else if (error.request) {
