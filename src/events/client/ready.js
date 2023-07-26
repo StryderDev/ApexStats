@@ -1,5 +1,4 @@
 const fs = require('fs');
-const db = require('sqlite3');
 const axios = require('axios');
 const { REST } = require('@discordjs/rest');
 const { Collection } = require('discord.js');
@@ -104,8 +103,5 @@ module.exports = {
 				if (error) console.log(error);
 			}
 		})();
-
-		// Register DB
-		let userDB = new db.Database(__dirname + '/../../database/spyglass.db', db.OPEN_READWRITE | db.OPEN_CREATE);
 	},
 };

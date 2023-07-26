@@ -1,47 +1,36 @@
-const db = require('sqlite3');
+// const db = require('sqlite3');
 const axios = require('axios');
+const db = require('../../utilities/database.js');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { debug, api } = require('../../config.json');
-const { embedColor, Emotes } = require('../../data/utilities.json');
+const { embedColor, Account, Misc } = require('../../data/utilities.json');
 const { getStatus, rankLayout, battlepass, platformName, platformEmote } = require('../../utilities/stats.js');
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('me').setDescription('Shows the stats of your linked Apex account.'),
 
 	async execute(interaction) {
-		// Load DB
-		let userDB = new db.Database('./src/database/spyglass.db', db.OPEN_READWRITE, err => {
-			if (err) {
-				console.error(err.message);
-			}
-		});
-
-		userDB.run('CREATE TABLE IF NOT EXISTS userLinks(discordID TEXT NOT NULL, playerID TEXT NOT NULL, platform TEXT NOT NULL)');
-
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Emotes.Misc.Loading} Loading data for selected account...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading data for selected account...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
-		let linkQuery = 'SELECT * FROM userLinks WHERE discordID = ?';
+		let linkQuery = 'SELECT * FROM specter WHERE discordID = ?';
 
 		const discordID = interaction.user.id;
 
-		userDB.get(linkQuery, [discordID], (err, row) => {
+		db.query(linkQuery, [discordID], (err, row) => {
 			if (err) {
 				console.log(err);
 				return interaction.editReply({ content: 'There was a database error.', embeds: [] });
 			}
 
-			if (row === undefined) {
-				// User does not have an account linked
-				userDB.close();
-
+			if (row.length === 0) {
 				return interaction.editReply({ content: `You do not have a linked account. Use \`/link\` to link an Apex account to your Discord account.`, embeds: [] });
 			} else {
 				// User already has an account linked
 				axios
-					.get(`https://api.jumpmaster.xyz/user/Player?platform=${row.platform}&ID=${encodeURIComponent(row.playerID)}&key=${api.spyglass}`)
+					.get(`https://api.jumpmaster.xyz/user/Player?platform=${row[0].platform}&ID=${encodeURIComponent(row[0].playerID)}&key=${api.spyglass}`)
 					.then(response => {
 						const data = response.data;
 
@@ -66,15 +55,15 @@ module.exports = {
 							.setDescription(`[**Status:** ${getStatus(status)}]`)
 							.addFields([
 								{
-									name: `${Emotes.Account.Level} Account`,
-									value: `${Emotes.Misc.GrayBlank} Level ${account.level.current.toLocaleString()} (${accountCompletion}%)\n${Emotes.Misc.GrayBlank} Prestige ${
+									name: `${Account.Level} Account`,
+									value: `${Misc.GrayBlank} Level ${account.level.current.toLocaleString()} (${accountCompletion}%)\n${Misc.GrayBlank} Prestige ${
 										account.level.prestige
 									} (${prestigeCompletion}%)`,
 									inline: true,
 								},
 								{
-									name: `${Emotes.Account.BattlePass} Revelry Battle Pass`,
-									value: `${Emotes.Misc.GrayBlank} Level ${battlepass(account.battlepass)} (${battlepassCompletion}%)`,
+									name: `${Account.BattlePass} Revelry Battle Pass`,
+									value: `${Misc.GrayBlank} Level ${battlepass(account.battlepass)} (${battlepassCompletion}%)`,
 									inline: true,
 								},
 								{
@@ -138,8 +127,6 @@ module.exports = {
 							interaction.editReply({ embeds: [errorEmbed] });
 						}
 					});
-
-				userDB.close();
 			}
 		});
 	},
