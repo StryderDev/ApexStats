@@ -4,17 +4,18 @@ var db;
 function databaseConnection() {
 	if (!db) {
 		db = database.createPool({
-			host: 'containers-us-west-156.railway.app',
-			database: 'railway',
-			user: 'root',
-			password: 'c4IR9a921Xq5Mw9SNSTA',
-			port: 5978,
+			host: 'aws.connect.psdb.cloud',
+			database: 'dev',
+			user: '4ryeuysbuhyuot3ryrqw',
+			password: 'pscale_pw_iGuDgvlq6Xyf1CHPqayw8l7nm8DnetcTwCo1XhsmZbZ',
+			port: 3306,
 			waitForConnections: true,
 			connectionLimit: 10,
 			queueLimit: 0,
 			maxIdle: 10,
 			idleTimeout: 30000,
 			enableKeepAlive: true,
+			ssl: {},
 		});
 
 		db.getConnection(err => {
