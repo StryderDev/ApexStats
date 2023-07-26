@@ -47,7 +47,7 @@ module.exports = {
 				const playerID = data.user.id;
 				const discordID = interaction.user.id;
 
-				let linkQuery = 'SELECT * FROM specter_dev WHERE discordID = ?';
+				let linkQuery = 'SELECT * FROM specter WHERE discordID = ?';
 
 				db.query(linkQuery, [discordID], (err, row) => {
 					if (err) {
@@ -55,10 +55,14 @@ module.exports = {
 						return interaction.editReply({ content: 'There was a database error.', embeds: [] });
 					}
 
-					if (row.length === 0) {
-						let insertUserLink = `INSERT INTO specter_dev (discordID, playerID, platform) VALUES(?, ?, ?)`;
+					console.log(row);
 
-						db.query(insertUserLink, [discordID, playerID, platform]);
+					if (row.length === 0) {
+						let insertUserLink = `INSERT INTO specter (discordID, playerID, platform) VALUES(?, ?, ?)`;
+
+						db.query(insertUserLink, [discordID, playerID, platform], (err, row) => {
+							if (err) return console.log(err);
+						});
 
 						return interaction.editReply({
 							content: `Linked player \`${data.user.username}\` to discord account \`${interaction.user.tag}\`. Use \`/me\` to view your linked account.`,

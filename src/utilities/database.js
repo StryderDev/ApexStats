@@ -4,10 +4,10 @@ var db;
 function databaseConnection() {
 	if (!db) {
 		db = database.createPool({
-			host: 'aws.connect.psdb.cloud',
-			database: 'dev',
-			user: '4ryeuysbuhyuot3ryrqw',
-			password: 'pscale_pw_iGuDgvlq6Xyf1CHPqayw8l7nm8DnetcTwCo1XhsmZbZ',
+			host: process.env.DB_HOST,
+			database: process.env.DB_NAME,
+			user: process.env.DB_USER,
+			password: process.env.DB_PASS,
 			port: 3306,
 			waitForConnections: true,
 			connectionLimit: 10,

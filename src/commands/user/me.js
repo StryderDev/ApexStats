@@ -15,7 +15,7 @@ module.exports = {
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
-		let linkQuery = 'SELECT * FROM specter_dev WHERE discordID = ?';
+		let linkQuery = 'SELECT * FROM specter WHERE discordID = ?';
 
 		const discordID = interaction.user.id;
 
