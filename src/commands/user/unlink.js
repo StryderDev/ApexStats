@@ -3,7 +3,6 @@ const axios = require('axios');
 const db = require('../../utilities/database.js');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { debug, api } = require('../../config.json');
 const { embedColor, Misc } = require('../../data/utilities.json');
 const { getStatus, rankLayout, battlepass, platformName, platformEmote } = require('../../utilities/stats.js');
 

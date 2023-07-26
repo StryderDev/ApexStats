@@ -3,7 +3,6 @@ const axios = require('axios');
 const db = require('../../utilities/database.js');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
-const { debug, api } = require('../../config.json');
 const { embedColor, Misc } = require('../../data/utilities.json');
 const { getStatus, rankLayout, platformName, platformEmote } = require('../../utilities/stats.js');
 
@@ -39,7 +38,7 @@ module.exports = {
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${api.spyglass}`)
+			.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${process.env.SPYGLASS}`)
 			.then(response => {
 				const data = response.data;
 
@@ -86,7 +85,7 @@ module.exports = {
 						.setColor('D0342C')
 						.setTimestamp();
 
-					axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=error&dev=${debug}`);
+					// axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=error&dev=${debug}`);
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				} else if (error.request) {
