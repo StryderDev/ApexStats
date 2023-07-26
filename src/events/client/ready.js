@@ -77,7 +77,7 @@ module.exports = {
 				if (process.env.DEBUG == 'false') {
 					// If debug is disabled, assume production
 					// bot and register global slash commands
-					// await rest.put(Routes.applicationCommands(clientID), { body: commands });
+					await rest.put(Routes.applicationCommands(clientID), { body: commands });
 
 					console.log(`[>> Successfully registered global slash commands <<]`);
 				} else {
