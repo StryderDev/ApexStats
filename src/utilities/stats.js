@@ -9,8 +9,8 @@ function platformName(name) {
 
 function platformEmote(name) {
 	if (name == 'PC') return Misc.Platform_PC;
-	if (name == 'Xbox') return Misc.Platform_Xbox;
-	if (name == 'PlayStation') return Misc.Platform_PlayStation;
+	if (name == 'Xbox' || name == 'X1') return Misc.Platform_Xbox;
+	if (name == 'PlayStation' || name == 'PS4') return Misc.Platform_PlayStation;
 }
 
 function getStatus(status) {
