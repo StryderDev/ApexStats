@@ -39,9 +39,9 @@ function getStatus(status) {
 }
 
 function battlepass(data) {
-	if (!data.history.Arsenal) return data.level;
+	if (!data.history.Resurrection) return data.level;
 
-	return data.history.Arsenal;
+	return data.history.Resurrection;
 }
 
 function rankLayout(rank) {
