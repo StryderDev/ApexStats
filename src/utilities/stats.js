@@ -9,8 +9,8 @@ function platformName(name) {
 
 function platformEmote(name) {
 	if (name == 'PC') return Misc.Platform_PC;
-	if (name == 'Xbox') return Misc.Platform_Xbox;
-	if (name == 'PlayStation') return Misc.Platform_PlayStation;
+	if (name == 'Xbox' || name == 'X1') return Misc.Platform_Xbox;
+	if (name == 'PlayStation' || name == 'PS4') return Misc.Platform_PlayStation;
 }
 
 function getStatus(status) {
@@ -39,9 +39,9 @@ function getStatus(status) {
 }
 
 function battlepass(data) {
-	if (!data.history.Arsenal) return data.level;
+	if (!data.history.Resurrection) return data.level;
 
-	return data.history.Arsenal;
+	return data.history.Resurrection;
 }
 
 function rankLayout(rank) {

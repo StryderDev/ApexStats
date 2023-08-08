@@ -20,7 +20,7 @@ module.exports = {
 			.addFields([
 				{
 					name: 'Links',
-					value: `[Ko-Fi](https://ko-fi.com/sdcore)\n[GitHub](https://github.com/stryderdev/apex-stats-bot)\n[Support Server](https://discord.gg/eH8VxssFW6)`,
+					value: `[Ko-Fi](https://ko-fi.com/sdcore)\n[GitHub](https://github.com/StryderDev/ApexStats)\n[Support Server](https://discord.gg/eH8VxssFW6)`,
 					inline: true,
 				},
 				{

@@ -18,7 +18,7 @@ module.exports = {
 				.setTitle(`Apex Legends: ${season.info.title}`)
 				.setURL(season.info.data.url)
 				.setDescription(
-					'Show your caliber in Apex Legends: Arsenal. The ultimate competitor of the original Thunderdome Games, new Legend Ballistic has come out of retirement to teach the young pups some respect - though it’s a lesson few survive unhurt.',
+					'A shattered mind fills Revenant with even more rage, bringing him a killer new look and deadly new abilities. Revenant is unlocked for all players all season; complete quests before the season ends to unlock him permanently.',
 				)
 				.addFields(
 					{
