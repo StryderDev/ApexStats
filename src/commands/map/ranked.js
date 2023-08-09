@@ -19,7 +19,7 @@ module.exports = {
 				const mapEmbed = new EmbedBuilder()
 					.setTitle(`Ranked Squads are currently competing on ${map.map.name}`)
 					.setDescription(`**${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Next Up:** ${map.next[0].map.name} for 24 hours.`)
-					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2017/Ranked/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
+					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2018/Ranked/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
 					.setColor(embedColor);
 
 				interaction.editReply({ embeds: [mapEmbed] });
