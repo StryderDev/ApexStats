@@ -9,6 +9,12 @@ const db_mapIndex = new Database(`${__dirname}/databases/mapIndex.sqlite`);
 
 dotenv.config();
 
+// Create tables if they don't exist
+const createMapIndexTable = `CREATE TABLE IF NOT EXISTS currentMapIndex (id TEXT, brMapIndex INTEGER NOT NULL DEFAULT "0", rankedMapIndex INTEGER NOT NULL DEFAULT "0", PRIMARY KEY (id));`;
+
+// Execute the queries to create the tables
+db_mapIndex.exec(createMapIndexTable);
+
 const manager = new ShardingManager(path.join(__dirname, 'Apex.js'), { token: process.env.DISCORD_TOKEN, totalShards: 2 });
 
 manager.on('shardCreate', shard => {
