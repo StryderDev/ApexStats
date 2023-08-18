@@ -1,25 +1,13 @@
 const fs = require('fs');
 const axios = require('axios');
+const chalk = require('chalk');
+const Database = require('better-sqlite3');
 const { REST } = require('@discordjs/rest');
-const { Collection, ActivityType } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
 const { Routes } = require('discord-api-types/v10');
+const { Collection, ActivityType } = require('discord.js');
 
-function uptime() {
-	(function loop() {
-		const uptime = process.uptime();
-		const seconds = `${Math.floor(uptime % 60)} Seconds`;
-		const minutes = `${Math.floor((uptime % (60 * 60)) / 60)} Minutes`;
-		const hours = `${Math.floor((uptime / (60 * 60)) % 24)} Hours`;
-		const days = `${Math.floor(uptime / 86400)} Days`;
-
-		console.log(`Bot Uptime: ${days}, ${hours}, ${minutes}, ${seconds}`);
-
-		now = new Date();
-		var delay = 60000 - (now % 60000);
-		setTimeout(loop, delay);
-	})();
-}
+const db_mapIndex = new Database(`${__dirname}/../../databases/mapIndex.sqlite`);
 
 module.exports = {
 	name: 'ready',
@@ -31,27 +19,35 @@ module.exports = {
 			let minutes = date.getMinutes();
 
 			// Check and update every x minutes ('interval' in config)
-			if (minutes % 1 == 0) {
+			if (minutes % 5 == 0) {
 				await wait(1000);
 
 				axios.get(`https://api.jumpmaster.xyz/map/?key=${process.env.SPYGLASS}`).then(res => {
-					const br = res.data.br.map.name;
-					const ranked = res.data.ranked.map.name;
-					const mixtape = res.data.mixtape.map;
+					const br = res.data.br;
+					const ranked = res.data.ranked;
 
-					client.user.setActivity(`${br} / ${ranked}`, { type: ActivityType.Custom });
+					// select brMapIndex and rankedMapIndex from currentMapIndex where
+					// the ID is equal to the current shard ID + 1
+					const mapIndex = db_mapIndex.prepare(`SELECT brMapIndex, rankedMapIndex FROM currentMapIndex WHERE id = ${client.shard.ids[0] + 1}`).get();
 
-					console.log(`[>> Updated Presence Map to "${br} / ${ranked}" <<]`);
+					if (mapIndex.brMapIndex != br['_index'] || mapIndex.rankedMapIndex != ranked['_index']) {
+						console.log(chalk.yellow(`${chalk.bold('PRESENCE:')} Checking for map rotation updates...`));
+
+						client.user.setActivity(`${br.map.name} / ${ranked.map.name}`, { type: ActivityType.Custom });
+
+						console.log(chalk.blue(`${chalk.bold('PRESENCE:')} Map rotation updates found, updated presence to "${br.map.name} / ${ranked.map.name}"`));
+
+						// Update the mapIndex table with the new map indexes
+						db_mapIndex
+							.prepare(`INSERT OR REPLACE INTO currentMapIndex (id, brMapIndex, rankedMapIndex) VALUES (?, ?, ?)`)
+							.run((client.shard.ids[0] + 1).toString(), br['_index'], ranked['_index']);
+					}
 				});
 			}
 
 			var delay = 60000 - (date % 60000);
 			setTimeout(mapPrecenseLoop, delay);
-			console.log('Checking for presence updates...');
 		})();
-
-		// Display bot uptime in console
-		uptime();
 
 		// Register slash commands
 		const commands = [];

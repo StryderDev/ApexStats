@@ -1,6 +1,9 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
 function loadEvents(client) {
+	console.log(chalk.yellow(`${chalk.bold('BOT:')} Loading Event Handler...`));
+
 	const folders = fs.readdirSync(`${__dirname}/events`);
 
 	for (const folder of folders) {
@@ -23,7 +26,7 @@ function loadEvents(client) {
 				}
 			}
 
-			console.log(`Loaded ${file} Event`);
+			console.log(chalk.green(`${chalk.bold('BOT:')} Loaded ${file} Event Handler`));
 		}
 	}
 }
