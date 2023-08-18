@@ -26,4 +26,10 @@ if (process.env.TOPGG_TOKEN != '0') {
 	});
 }
 
-manager.spawn().catch(err => console.log(chalk.red(`${chalk.bold('BOT:')} ${err.statusText}`)));
+manager.spawn().catch(err => {
+	if (err.statusText) {
+		console.log(chalk.red(`${chalk.bold('BOT:')} ${err.statusText}`));
+	} else {
+		console.log(chalk.red(`${chalk.bold('BOT:')} ${err}`));
+	}
+});
