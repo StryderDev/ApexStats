@@ -39,9 +39,9 @@ module.exports = {
 					const ranked = res.data.ranked.map.name;
 					const mixtape = res.data.mixtape.map;
 
-					client.user.setActivity(`BR: ${br} / Ranked: ${ranked}`, { type: ActivityType.Custom });
+					client.user.setActivity(`${br} / ${ranked}`, { type: ActivityType.Custom });
 
-					console.log(`[>> Updated Presence Map to "BR: ${br} / Ranked: ${ranked}" <<]`);
+					console.log(`[>> Updated Presence Map to "${br} / ${ranked}" <<]`);
 				});
 			}
 
