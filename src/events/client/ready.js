@@ -1,7 +1,7 @@
 const fs = require('fs');
 const axios = require('axios');
 const { REST } = require('@discordjs/rest');
-const { Collection } = require('discord.js');
+const { Collection, ActivityType } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
 const { Routes } = require('discord-api-types/v10');
 
@@ -39,8 +39,9 @@ module.exports = {
 					const ranked = res.data.ranked.map.name;
 					const mixtape = res.data.mixtape.map;
 
-					client.user.setPresence({ activities: [{ name: `BR: ${br} / Ranked: ${ranked} / Mixtape: ${mixtape.type} - ${mixtape.name}` }] });
-					console.log(`[>> Updated Presence Map to "BR: ${br} / Ranked: ${ranked} / Mixtape: ${mixtape.type} - ${mixtape.name}" <<]`);
+					client.user.setActivity(`BR: ${br} / Ranked: ${ranked}`, { type: ActivityType.Custom });
+
+					console.log(`[>> Updated Presence Map to "BR: ${br} / Ranked: ${ranked}" <<]`);
 				});
 			}
 
