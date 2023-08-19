@@ -16,7 +16,7 @@ module.exports = {
 		const info = new EmbedBuilder()
 			.setTitle('Apex Legends Stats Bot')
 			.setDescription('User and ranked stats, map rotations, news, random loadout & drop locations, and more. Start by typing `/` for a list of commands!')
-			.setThumbnail(`https://cdn.jumpmaster.xyz/Bot/Avatar/Revelry.png`)
+			.setThumbnail(`https://cdn.jumpmaster.xyz/Bot/Avatar/Resurrection.png`)
 			.addFields([
 				{
 					name: 'Links',
