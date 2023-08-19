@@ -4,7 +4,6 @@
 	"description": "A Discord bot to show off in-game content and information for Apex Legends.",
 	"main": "src/Shard.js",
 	"scripts": {
-		"start": "node .",
 		"dev": "nodemon ."
 	},
 	"repository": {
@@ -15,6 +14,9 @@
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/StryderDev/ApexStats/issues"
+	},
+	"engine": {
+		"node": "18.12.1"
 	},
 	"homepage": "https://github.com/StryderDev/ApexStats#readme",
 	"dependencies": {
