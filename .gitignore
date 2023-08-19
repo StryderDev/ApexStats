@@ -1,6 +1,3 @@
 node_modules
-config.json
-config.json.old
-spyglass.db
 .env
 *.sqlite
