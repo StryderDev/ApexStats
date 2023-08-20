@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const { InteractionType } = require('discord.js');
 
 module.exports = {
@@ -13,7 +14,7 @@ module.exports = {
 
 			try {
 				await command.execute(interaction);
-				console.log(`[>>> ${interaction.user.tag} used /${interaction.commandName} <<<]`);
+				console.log(chalk.blue(`${chalk.bold('COMMAND:')} ${interaction.user.username} used /${interaction.commandName}`));
 			} catch (error) {
 				console.log(error);
 			}
