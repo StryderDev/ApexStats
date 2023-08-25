@@ -76,7 +76,7 @@ module.exports = {
 					// bot and register global slash commands
 					await rest.put(Routes.applicationCommands(clientID), { body: commands });
 
-					console.log(`[>> Successfully registered global slash commands <<]`);
+					console.log(chalk.green(`${chalk.bold('BOT:')} Successfully registered global slash commands`));
 				} else {
 					// // Delete all guild-base commands
 					// await rest
@@ -94,7 +94,7 @@ module.exports = {
 					// and only register slash commands for dev build
 					await rest.put(Routes.applicationGuildCommands(clientID, process.env.DEVGUILD), { body: commands });
 
-					console.log(`[>> Successfully registered local slash commands <<]`);
+					console.log(chalk.yellow(`${chalk.bold('BOT:')} Successfully registered local slash commands`));
 				}
 			} catch (error) {
 				if (error) console.log(error);
