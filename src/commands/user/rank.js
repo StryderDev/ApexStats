@@ -49,7 +49,7 @@ module.exports = {
 					// User Data
 					const user = playerData.user;
 					const status = user.status;
-					const ranked = playerData.ranked.BR;
+					const ranked = playerData.ranked;
 					const account = playerData.account;
 
 					// Calculate account and prestige level completion
