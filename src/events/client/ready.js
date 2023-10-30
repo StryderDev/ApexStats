@@ -31,11 +31,11 @@ module.exports = {
 					const mapIndex = db_mapIndex.prepare(`SELECT brMapIndex, rankedMapIndex FROM currentMapIndex WHERE id = ${client.shard.ids[0] + 1}`).get();
 
 					if (mapIndex.brMapIndex != br['_index'] || mapIndex.rankedMapIndex != ranked['_index']) {
-						console.log(chalk.yellow(`${chalk.bold('PRESENCE:')} Checking for map rotation updates...`));
+						console.log(chalk.yellow(`${chalk.bold('[PRESENCE]')} Checking for map rotation updates...`));
 
 						client.user.setActivity(`${br.map.name} / ${ranked.map.name}`, { type: ActivityType.Custom });
 
-						console.log(chalk.blue(`${chalk.bold('PRESENCE:')} Map rotation updates found, updated presence to "${br.map.name} / ${ranked.map.name}"`));
+						console.log(chalk.blue(`${chalk.bold('[PRESENCE]')} Map rotation updates found, updated presence to "${br.map.name} / ${ranked.map.name}"`));
 
 						// Update the mapIndex table with the new map indexes
 						db_mapIndex
@@ -76,7 +76,7 @@ module.exports = {
 					// bot and register global slash commands
 					await rest.put(Routes.applicationCommands(clientID), { body: commands });
 
-					console.log(chalk.green(`${chalk.bold('BOT:')} Successfully registered global slash commands`));
+					console.log(chalk.green(`${chalk.bold('[BOT]')} Successfully registered global slash commands`));
 				} else {
 					// // Delete all guild-base commands
 					// await rest
@@ -94,7 +94,7 @@ module.exports = {
 					// and only register slash commands for dev build
 					await rest.put(Routes.applicationGuildCommands(clientID, process.env.DEVGUILD), { body: commands });
 
-					console.log(chalk.yellow(`${chalk.bold('BOT:')} Successfully registered local slash commands`));
+					console.log(chalk.yellow(`${chalk.bold('[BOT]')} Successfully registered local slash commands`));
 				}
 			} catch (error) {
 				if (error) console.log(error);

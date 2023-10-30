@@ -12,7 +12,7 @@ client
 		loadEvents(client);
 	})
 	.catch(error => {
-		console.log(chalk.red(`${chalk.bold('BOT:')} Error during login: ${error}`));
+		console.log(chalk.red(`${chalk.bold('[BOT]')} Error during login: ${error}`));
 	});
 
 uptime(client);
