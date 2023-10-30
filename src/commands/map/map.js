@@ -25,9 +25,8 @@ module.exports = {
 							map.next[0].duration.hours,
 						)}.`,
 					)
-					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2018/Battle%20Royale/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
-					.setColor(embedColor)
-					.setFooter({ text: 'Ranked map data has been moved to the `/ranked` command.' });
+					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2019/Battle%20Royale/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
+					.setColor(embedColor);
 
 				interaction.editReply({ embeds: [mapEmbed] });
 			})
