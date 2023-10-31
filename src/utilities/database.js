@@ -22,9 +22,9 @@ function databaseConnection() {
 
 		db.getConnection(err => {
 			if (err) {
-				console.log(chalk.red(`${chalk.bold('SPYGLASS:')} Error connecting to database: ${err}`));
+				console.log(chalk.red(`${chalk.bold('[SPYGLASS]')} Error connecting to database: ${err}`));
 			} else {
-				console.log(chalk.blue(`${chalk.bold('SPYGLASS:')} Database connection complete. Spyglass operational.`));
+				console.log(chalk.blue(`${chalk.bold('[SPYGLASS]')} Database connection complete. Spyglass operational.`));
 			}
 		});
 	}

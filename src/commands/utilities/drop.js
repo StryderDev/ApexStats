@@ -33,7 +33,7 @@ module.exports = {
 		await wait(1000);
 
 		if (mapOption != null) {
-			const mapFile = require(`../../data/drops/Season 16/${mapOption}.json`);
+			const mapFile = require(`../../data/drops/Season 19/${mapOption}.json`);
 			const map = Math.floor(Math.random() * mapFile.length);
 
 			interaction.editReply({ content: `Drop into ${mapFile[map]} on ${mapOption}!`, embeds: [] });
@@ -43,7 +43,7 @@ module.exports = {
 				.then(response => {
 					const br = response.data.br.map;
 
-					const mapFile = require(`../../data/drops/Season 17/${br.name}.json`);
+					const mapFile = require(`../../data/drops/Season 19/${br.name}.json`);
 					const map = Math.floor(Math.random() * mapFile.length);
 
 					interaction.editReply({ content: `Drop into ${mapFile[map]} on ${br.name}`, embeds: [] });

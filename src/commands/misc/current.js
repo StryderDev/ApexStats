@@ -17,23 +17,21 @@ module.exports = {
 			const currentSeason = new EmbedBuilder()
 				.setTitle(`Apex Legends: ${season.info.title}`)
 				.setURL(season.info.data.url)
-				.setDescription(
-					'A shattered mind fills Revenant with even more rage, bringing him a killer new look and deadly new abilities. Revenant is unlocked for all players all season; complete quests before the season ends to unlock him permanently.',
-				)
+				.setDescription(season.info.description)
 				.addFields(
 					{
 						name: 'Season Start Date',
-						value: `<t:${season.dates.start.timestamp}:f>\n<t:${season.dates.start.timestamp}:R>`,
+						value: `<t:${season.dates.start.timestamp}:D>\n<t:${season.dates.start.timestamp}:t>\n<t:${season.dates.start.timestamp}:R>`,
 						inline: true,
 					},
 					{
 						name: 'Season End Date',
-						value: `<t:${season.dates.end.timestamp}:f>\n<t:${season.dates.end.timestamp}:R>`,
+						value: `<t:${season.dates.end.timestamp}:D>\n<t:${season.dates.end.timestamp}:t>\n<t:${season.dates.end.timestamp}:R>`,
 						inline: true,
 					},
 					{
 						name: 'Ranked End Date',
-						value: `<t:${season.dates.end.rankedEnd}:f>\n<t:${season.dates.end.rankedEnd}:R>`,
+						value: `<t:${season.dates.end.rankedEnd}:D>\n<t:${season.dates.end.rankedEnd}:t>\n<t:${season.dates.end.rankedEnd}:R>`,
 						inline: true,
 					},
 				)

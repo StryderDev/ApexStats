@@ -81,7 +81,7 @@ module.exports = {
 								inline: true,
 							},
 							{
-								name: `${Account.BattlePass} Resurrection Battle Pass`,
+								name: `${Account.BattlePass} Ignite Battle Pass`,
 								value: `${Misc.GrayBlank} Level ${battlepass(account.battlepass)} (${battlepassCompletion}%)`,
 								inline: true,
 							},
