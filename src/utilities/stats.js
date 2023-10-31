@@ -39,9 +39,9 @@ function getStatus(status) {
 }
 
 function battlepass(data) {
-	if (!data.history.Resurrection) return data.level;
+	if (!data.history.Ignite) return data.level;
 
-	return data.history.Resurrection;
+	return data.history.Ignite;
 }
 
 function rankLayout(rank) {
