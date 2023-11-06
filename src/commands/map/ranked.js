@@ -11,19 +11,30 @@ module.exports = {
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
+		const mapAPI = axios.get(`https://api.jumpmaster.xyz/map/?next=1&key=${process.env.SPYGLASS}`);
+		const seasonAPI = axios.get(`https://api.jumpmaster.xyz/seasons/Current?version=2`);
+
 		await axios
-			.get(`https://api.jumpmaster.xyz/map/?next=1&key=${process.env.SPYGLASS}`)
-			.then(response => {
-				const map = response.data.ranked;
+			.all([mapAPI, seasonAPI])
+			.then(
+				axios.spread((...res) => {
+					const mapData = res[0].data.ranked;
+					const seasonData = res[1].data;
 
-				const mapEmbed = new EmbedBuilder()
-					.setTitle(`Ranked Squads are currently competing on ${map.map.name}`)
-					.setDescription(`**${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Next Up:** ${map.next[0].map.name} for 24 hours.`)
-					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2019/Ranked/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
-					.setColor(embedColor);
+					// Season Data
+					const rankedEnd = seasonData.dates.end.rankedEnd;
 
-				interaction.editReply({ embeds: [mapEmbed] });
-			})
+					const mapEmbed = new EmbedBuilder()
+						.setTitle(`Ranked Squads are currently competing on ${mapData.map.name}`)
+						.setDescription(
+							`**${mapData.map.name}** ends <t:${mapData.times.next}:R> at <t:${mapData.times.next}:t>.\n**Next Up:** ${mapData.next[0].map.name} for 24 hours.\n**Ranked Period:** Ends <t:${rankedEnd}:D> at <t:${rankedEnd}:t>.`,
+						)
+						.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2019/Ranked/${encodeURIComponent(mapData.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
+						.setColor(embedColor);
+
+					interaction.editReply({ embeds: [mapEmbed] });
+				}),
+			)
 			.catch(error => {
 				if (error.response) {
 					console.log(error.response.data);

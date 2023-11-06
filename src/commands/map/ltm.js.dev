@@ -19,7 +19,7 @@ module.exports = {
 				const mapEmbed = new EmbedBuilder()
 					.setTitle(`Current LTM: ${map.map.type} - ${map.map.name}`)
 					.setDescription(
-						`**${map.map.type} - ${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Next Up:** ${map.next[0].map.type} - ${map.next[0].map.name} for ${map.next[0].duration.total} minutes.`,
+						`**${map.map.type} - ${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Up Next:** ${map.next[0].map.type} - ${map.next[0].map.name} for ${map.next[0].duration.total} minutes.`,
 					)
 					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2018/LTM/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
 					.setColor(embedColor);
