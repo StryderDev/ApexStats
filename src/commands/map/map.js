@@ -20,7 +20,7 @@ module.exports = {
 				const mapEmbed = new EmbedBuilder()
 					.setTitle(`Legends are currently dropping into ${map.map.name}`)
 					.setDescription(
-						`**${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Next Up:** ${map.next[0].map.name} for ${nextMapLength(
+						`**${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Up Next:** ${map.next[0].map.name} for ${nextMapLength(
 							map.next[0].duration.minutes,
 							map.next[0].duration.hours,
 						)}.`,

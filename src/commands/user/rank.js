@@ -37,20 +37,25 @@ module.exports = {
 
 		const playerAPI = axios.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${process.env.SPYGLASS}`);
 		const predAPI = axios.get(`https://api.jumpmaster.xyz/misc/predThreshold`);
+		const seasonAPI = axios.get(`https://api.jumpmaster.xyz/seasons/Current?version=2`);
 
 		await axios
-			.all([playerAPI, predAPI])
+			.all([playerAPI, predAPI, seasonAPI])
 			.then(
 				axios.spread((...res) => {
 					// Grabbing the data from the axios requests
 					const playerData = res[0].data;
 					const predData = res[1].data;
+					const seasonData = res[2].data;
 
 					// User Data
 					const user = playerData.user;
 					const status = user.status;
 					const ranked = playerData.ranked;
 					const account = playerData.account;
+
+					// Season Data
+					const rankedEnd = seasonData.dates.end.rankedEnd;
 
 					// Calculate account and prestige level completion
 					const accountCompletion = Math.floor((account.level.current / 500) * 100);
@@ -59,7 +64,7 @@ module.exports = {
 					// Rank Embed
 					const rank = new EmbedBuilder()
 						.setTitle(`${platformEmote(user.platform)} ${user.username}`)
-						.setDescription(`**Status:** ${getStatus(status)}\n${checkUserBan(user.bans)}`)
+						.setDescription(`**Status:** ${getStatus(status)}\n**Ranked Period:** Ends <t:${rankedEnd}:D> at <t:${rankedEnd}:t>.\n${checkUserBan(user.bans)}`)
 						.addFields([
 							{
 								name: `${Account.Level} Account`,
