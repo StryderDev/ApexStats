@@ -54,7 +54,7 @@ module.exports = {
 						return interaction.editReply({ content: 'There was a database error.', embeds: [] });
 					}
 
-					console.log(row);
+					// console.log(row);
 
 					if (row.length === 0) {
 						let insertUserLink = `INSERT INTO specter (discordID, playerID, platform) VALUES(?, ?, ?)`;

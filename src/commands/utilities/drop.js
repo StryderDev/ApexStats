@@ -36,7 +36,7 @@ module.exports = {
 			const mapFile = require(`../../data/drops/Season 19/${mapOption}.json`);
 			const map = Math.floor(Math.random() * mapFile.length);
 
-			interaction.editReply({ content: `Drop into ${mapFile[map]} on ${mapOption}!`, embeds: [] });
+			interaction.editReply({ content: `Drop into **${mapFile[map]}** on ${mapOption}!`, embeds: [] });
 		} else {
 			await axios
 				.get(`https://api.jumpmaster.xyz/map/?key=${process.env.SPYGLASS}`)
@@ -46,7 +46,7 @@ module.exports = {
 					const mapFile = require(`../../data/drops/Season 19/${br.name}.json`);
 					const map = Math.floor(Math.random() * mapFile.length);
 
-					interaction.editReply({ content: `Drop into ${mapFile[map]} on ${br.name}`, embeds: [] });
+					interaction.editReply({ content: `Drop into **${mapFile[map]}** on ${br.name}`, embeds: [] });
 				})
 				.catch(error => {
 					if (error.response) {
