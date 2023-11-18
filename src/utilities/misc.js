@@ -1,12 +1,21 @@
 const chalk = require('chalk');
 
-function uptime(length) {
-	const seconds = `${Math.floor(length % 60)} Seconds`;
-	const minutes = `${Math.floor((length % (60 * 60)) / 60)} Minutes`;
-	const hours = `${Math.floor((length / (60 * 60)) % 24)} Hours`;
-	const days = `${Math.floor(length / 86400)} Days`;
+function uptime(client) {
+	(function loop() {
+		const uptime = process.uptime();
+		const seconds = `${Math.floor(uptime % 60)} Seconds`;
+		const minutes = `${Math.floor((uptime % (60 * 60)) / 60)} Minutes`;
+		const hours = `${Math.floor((uptime / (60 * 60)) % 24)} Hours`;
+		const days = `${Math.floor(uptime / 86400)} Days`;
 
-	return `Uptime: ${days}, ${hours}, ${minutes}`;
+		if (client.shard.ids[0] == 0) {
+			console.log(chalk.blue(`${chalk.bold('[BOT]')} Uptime: ${days}, ${hours}, ${minutes}, ${seconds}`));
+		}
+
+		now = new Date();
+		var delay = 60000 - (now % 60000);
+		setTimeout(loop, delay);
+	})();
 }
 
 module.exports = { uptime };

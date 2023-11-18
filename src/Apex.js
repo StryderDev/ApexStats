@@ -2,6 +2,7 @@ const chalk = require('chalk');
 const { Client, GatewayIntentBits } = require('discord.js');
 
 const { loadEvents } = require('./Events.js');
+const { uptime } = require('./utilities/misc.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -14,11 +15,6 @@ client
 		console.log(chalk.red(`${chalk.bold('[BOT]')} Error during login: ${error}`));
 	});
 
-setInterval(() => {
-	const { uptime } = require('./utilities/misc.js');
-
-	let uptimeLength = Math.floor(process.uptime());
-	console.log(chalk.blue(`${chalk.bold('[BOT]')} ${uptime(uptimeLength)}`));
-}, 60000);
+uptime(client);
 
 module.exports = { client };
