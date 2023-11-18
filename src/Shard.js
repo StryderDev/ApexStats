@@ -15,7 +15,7 @@ const createMapIndexTable = `CREATE TABLE IF NOT EXISTS currentMapIndex (id TEXT
 // Execute the queries to create the tables
 db_mapIndex.exec(createMapIndexTable);
 
-const manager = new ShardingManager(path.join(__dirname, 'Apex.js'), { token: process.env.DISCORD_TOKEN, totalShards: parseInt(process.env.SHARD_COUNT) });
+const manager = new ShardingManager(path.join(__dirname, 'Apex.js'), { token: process.env.DISCORD_TOKEN, totalShards: parseInt(process.env.SHARD_COUNT, process.env.SHARD_COUNT) });
 
 manager.on('shardCreate', shard => {
 	console.log(chalk.yellow(`${chalk.bold('[SHARD]')} Launched Shard #${shard.id + 1}`));
