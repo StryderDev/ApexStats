@@ -17,16 +17,16 @@ function getStatus(status) {
 	const seconds = Math.floor(status.matchLength % 60);
 	const minutes = Math.floor(status.matchLength / 60);
 
-	if (status.online == 1) {
+	if (status.online === 1) {
 		// Player is online but not in a match
-		if (status.ingame == 0 && status.partyInMatch == 0) {
-			if (status.matchLength == 0) return `${Status.Online} Online (Lobby)`;
+		if (status.ingame === 0 && status.partyInMatch === 0) {
+			if (status.matchLength == 0) return `${Status.Online} Online`;
 
 			// Player is in an open lobby
 			return `${Status.Online} Lobby (${minutes}m ${seconds}s)`;
 		}
 
-		if (status.ingame == 1 || status.partyInMatch == 1) {
+		if (status.ingame === 1 || status.partyInMatch === 1) {
 			// Player is in a lobby with invite only enabled
 			if (status.matchLength == 0) return `${Status.inGame} In a Match`;
 
@@ -73,7 +73,7 @@ function getRankName(rank) {
 function checkUserBan(bans) {
 	var banUntil = Math.floor(Date.now() / 1000 + bans.length);
 
-	if (bans.active == 1) return `:no_entry: Banned until <t:${banUntil}:F>`;
+	if (bans.active === 1) return `:no_entry: Banned until <t:${banUntil}:F>`;
 
 	return '';
 }

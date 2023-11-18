@@ -8,7 +8,7 @@ function uptime(client) {
 		const hours = `${Math.floor((uptime / (60 * 60)) % 24)} Hours`;
 		const days = `${Math.floor(uptime / 86400)} Days`;
 
-		if (client.shard.ids[0] == 0) {
+		if (client.shard.ids[0] === 0) {
 			console.log(chalk.blue(`${chalk.bold('[BOT]')} Uptime: ${days}, ${hours}, ${minutes}, ${seconds}`));
 		}
 
