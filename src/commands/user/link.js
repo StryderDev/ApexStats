@@ -1,5 +1,6 @@
 // const db = require('sqlite3');
 const axios = require('axios');
+const chalk = require('chalk');
 const db = require('../../utilities/database.js');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
@@ -77,7 +78,7 @@ module.exports = {
 			})
 			.catch(error => {
 				if (error.response) {
-					console.log(error.response.data);
+					console.error(chalk.yellow(`${chalk.bold('[PLAYER LOOKUP ERROR]')} ${error.response.data.errorShort}`));
 
 					const errorEmbed = new EmbedBuilder()
 						.setTitle('Player Lookup Error')

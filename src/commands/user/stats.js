@@ -1,4 +1,5 @@
 const axios = require('axios');
+const chalk = require('chalk');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { embedColor, Misc, Account } = require('../../data/utilities.json');
@@ -134,7 +135,7 @@ module.exports = {
 			)
 			.catch(error => {
 				if (error.response) {
-					console.log(error.response.data);
+					console.error(chalk.yellow(`${chalk.bold('[PLAYER LOOKUP ERROR]')} ${error.response.data.errorShort}`));
 
 					const errorEmbed = new EmbedBuilder().setTitle('Player Lookup Error').setDescription(error.response.data.error).setColor('D0342C').setTimestamp();
 
