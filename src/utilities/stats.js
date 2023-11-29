@@ -70,6 +70,12 @@ function getRankName(rank) {
 	return `${Ranked[rank.name]} ${rank.name} ${rank.division}`;
 }
 
+function getRankNameNoIcon(rank) {
+	if (rank.name == 'Apex Predator' || rank.name == 'Master') return rank.name;
+
+	return `${rank.name} ${rank.division}`;
+}
+
 function checkUserBan(bans) {
 	var banUntil = Math.floor(Date.now() / 1000 + bans.length);
 
@@ -105,4 +111,4 @@ function getDivisionCount(rank) {
 		.slice(-3);
 }
 
-module.exports = { platformName, platformEmote, getStatus, battlepass, rankLayout, checkUserBan, calcTillMaster, calcTillPred, getRankName, getDivisionCount };
+module.exports = { platformName, platformEmote, getStatus, battlepass, rankLayout, checkUserBan, calcTillMaster, calcTillPred, getRankName, getDivisionCount, getRankNameNoIcon };

@@ -1,9 +1,15 @@
 const axios = require('axios');
 const chalk = require('chalk');
+const { Axiom } = require('@axiomhq/js');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { embedColor, Misc, Account } = require('../../data/utilities.json');
 const { getStatus, battlepass, platformName, platformEmote, checkUserBan, calcTillMaster, calcTillPred, getRankName, getDivisionCount } = require('../../utilities/stats.js');
+
+const axiomIngest = new Axiom({
+	token: process.env.AXIOM_TOKEN,
+	orgId: process.env.AXIOM_ORG,
+});
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -129,6 +135,8 @@ module.exports = {
 						.setFooter({
 							text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nEquip the Battle Pass badge in-game to update it!`,
 						});
+
+					axiomIngest.ingest('apex.stats', [{ platform: user.platform, legend: legend }]);
 
 					interaction.editReply({ embeds: [stats] });
 				}),
