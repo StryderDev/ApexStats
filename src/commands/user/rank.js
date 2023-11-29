@@ -1,9 +1,25 @@
 const axios = require('axios');
 const chalk = require('chalk');
+const { Axiom } = require('@axiomhq/js');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { embedColor, Account, Misc } = require('../../data/utilities.json');
-const { getStatus, rankLayout, platformName, platformEmote, checkUserBan, getRankName, getDivisionCount, calcTillMaster, calcTillPred } = require('../../utilities/stats.js');
+const {
+	getStatus,
+	platformName,
+	platformEmote,
+	checkUserBan,
+	getRankName,
+	getDivisionCount,
+	calcTillMaster,
+	calcTillPred,
+	getRankNameNoIcon,
+} = require('../../utilities/stats.js');
+
+const axiomIngest = new Axiom({
+	token: process.env.AXIOM_TOKEN,
+	orgId: process.env.AXIOM_ORG,
+});
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -91,8 +107,7 @@ module.exports = {
 							text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}`,
 						});
 
-					// Logging
-					// axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=success&dev=${debug}`);
+					axiomIngest.ingest('apex.stats', [{ platform: user.platform, rank: getRankNameNoIcon(ranked) }]);
 
 					interaction.editReply({ embeds: [rank] });
 				}),

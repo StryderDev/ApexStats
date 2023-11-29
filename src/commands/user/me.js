@@ -1,10 +1,16 @@
 // const db = require('sqlite3');
 const axios = require('axios');
+const { Axiom } = require('@axiomhq/js');
 const db = require('../../utilities/database.js');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { embedColor, Account, Misc } = require('../../data/utilities.json');
 const { getStatus, battlepass, platformName, platformEmote, checkUserBan, calcTillMaster, calcTillPred, getRankName, getDivisionCount } = require('../../utilities/stats.js');
+
+const axiomIngest = new Axiom({
+	token: process.env.AXIOM_TOKEN,
+	orgId: process.env.AXIOM_ORG,
+});
 
 module.exports = {
 	data: new SlashCommandBuilder().setName('me').setDescription('Shows the stats of your linked Apex account.'),
@@ -123,6 +129,8 @@ module.exports = {
 								.setFooter({
 									text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nEquip the Battle Pass badge in-game to update it!`,
 								});
+
+							axiomIngest.ingest('apex.stats', [{ platform: row[0].platform, legend: legend }]);
 
 							interaction.editReply({ embeds: [stats] });
 						}),
