@@ -1,8 +1,14 @@
 const axios = require('axios');
+const { Axiom } = require('@axiomhq/js');
 const wait = require('util').promisify(setTimeout);
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { embedColor, Misc } = require('../../data/utilities.json');
+
+const axiomIngest = new Axiom({
+	token: process.env.AXIOM_TOKEN,
+	orgId: process.env.AXIOM_ORG,
+});
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -37,6 +43,8 @@ module.exports = {
 			const map = Math.floor(Math.random() * mapFile.length);
 
 			interaction.editReply({ content: `Drop into **${mapFile[map]}** on ${mapOption}!`, embeds: [] });
+
+			axiomIngest.ingest('apex.stats', [{ map: mapOption, mapDrop: mapFile[map] }]);
 		} else {
 			await axios
 				.get(`https://api.jumpmaster.xyz/map/?key=${process.env.SPYGLASS}`)
@@ -47,6 +55,8 @@ module.exports = {
 					const map = Math.floor(Math.random() * mapFile.length);
 
 					interaction.editReply({ content: `Drop into **${mapFile[map]}** on ${br.name}`, embeds: [] });
+
+					axiomIngest.ingest('apex.stats', [{ map: br.name, mapDrop: mapFile[map] }]);
 				})
 				.catch(error => {
 					if (error.response) {

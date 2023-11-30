@@ -130,7 +130,7 @@ module.exports = {
 									text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nEquip the Battle Pass badge in-game to update it!`,
 								});
 
-							axiomIngest.ingest('apex.stats', [{ platform: row[0].platform, legend: legend }]);
+							axiomIngest.ingest('apex.stats', [{ platform: platformName(row[0].platform), legend: legend }]);
 
 							interaction.editReply({ embeds: [stats] });
 						}),
