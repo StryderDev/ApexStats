@@ -5,30 +5,62 @@ const { nextMapLength } = require('../../utilities/map.js');
 const { embedColor, Misc } = require('../../data/utilities.json');
 
 module.exports = {
-	data: new SlashCommandBuilder().setName('map').setDescription('Shows the current and next Battle Royale map rotation.'),
+	data: new SlashCommandBuilder()
+		.setName('map')
+		.setDescription('Shows the current and next Battle Royale map rotation.')
+		.addNumberOption(option =>
+			option.setName('next').setDescription('Select the number of future map rotations you want to see').setMaxValue(1).setMaxValue(10).setRequired(false),
+		),
 
 	async execute(interaction) {
+		// Slash Command Options
+		const nextOption = interaction.options.getNumber('next');
+
+		// If the user doesn't specify a number, default to 1
+		const nextMapCount = nextOption == null ? 1 : nextOption;
+
 		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Grabbing map data from API...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.jumpmaster.xyz/map/?next=1&key=${process.env.SPYGLASS}`)
-			.then(response => {
+			.get(`https://api.jumpmaster.xyz/map/?next=${nextMapCount}&key=${process.env.SPYGLASS}`)
+			.then(async response => {
 				const map = response.data.br;
 
-				const mapEmbed = new EmbedBuilder()
-					.setTitle(`Legends are currently dropping into ${map.map.name}`)
-					.setDescription(
-						`**${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Up Next:** ${map.next[0].map.name} for ${nextMapLength(
-							map.next[0].duration.minutes,
-							map.next[0].duration.hours,
-						)}.`,
-					)
-					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2019/Battle%20Royale/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
-					.setColor(embedColor);
+				if (nextMapCount === 1) {
+					const mapEmbed = new EmbedBuilder()
+						.setTitle(`Legends are currently dropping into ${map.map.name}`)
+						.setDescription(
+							`**${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Up Next:** ${map.next[0].map.name} for ${nextMapLength(
+								map.next[0].duration.minutes,
+								map.next[0].duration.hours,
+							)}.`,
+						)
+						.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2019/Battle%20Royale/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
+						.setColor(embedColor);
 
-				interaction.editReply({ embeds: [mapEmbed] });
+					interaction.editReply({ embeds: [mapEmbed] });
+				} else {
+					// use the map.next to get the next nextMapCount maps
+					const nextMaps = map.next.slice(0, nextMapCount);
+
+					let nextMapString = '';
+
+					for (let i = 0; i < nextMaps.length; i++) {
+						nextMapString += `**${nextMaps[i].map.name}**\nStarts at <t:${nextMaps[i].start}:t> for ${nextMapLength(
+							nextMaps[i].duration.minutes,
+							nextMaps[i].duration.hours,
+						)}\n\n`;
+					}
+
+					const mapEmbed = new EmbedBuilder()
+						.setTitle(`Next ${nextMapCount} BR Map Rotations`)
+						.setDescription(`**Currently:** ${map.map.name}\nEnds <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n\n**Up Next:**\n${nextMapString}`)
+						.setColor(embedColor);
+
+					interaction.editReply({ embeds: [mapEmbed] });
+				}
 			})
 			.catch(error => {
 				if (error.response) {

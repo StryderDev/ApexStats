@@ -3,7 +3,9 @@ function nextMapLength(minutes, hours) {
 		return number !== 1 ? `${number} ${word}s` : `${number} ${word}`;
 	}
 
-	return hours === 0 ? isPlural(minutes, 'minute') : `${isPlural(hours, 'hour')} ${isPlural(minutes, 'minute')}`;
+	if (minutes === 0) return isPlural(hours, 'hour');
+	else if (hours === 0) return isPlural(minutes, 'minute');
+	else return `${isPlural(hours, 'hour')} ${isPlural(minutes, 'minute')}`;
 }
 
 module.exports = { nextMapLength };
