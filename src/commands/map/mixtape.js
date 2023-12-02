@@ -1,30 +1,65 @@
 const axios = require('axios');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
+const { nextMapLength } = require('../../utilities/map.js');
 const { embedColor, Misc } = require('../../data/utilities.json');
 
 module.exports = {
-	data: new SlashCommandBuilder().setName('mixtape').setDescription('Shows the current and next Mixtape map rotation.'),
+	data: new SlashCommandBuilder()
+		.setName('mixtape')
+		.setDescription('Shows the current and next Mixtape map rotation.')
+		.addNumberOption(option =>
+			option.setName('next').setDescription('Select the number of future map rotations you want to see').setMaxValue(1).setMaxValue(10).setRequired(false),
+		),
 
 	async execute(interaction) {
+		// Slash Command Options
+		const nextOption = interaction.options.getNumber('next');
+
+		// If the user doesn't specify a number, default to 1
+		const nextMapCount = nextOption == null ? 1 : nextOption;
+
 		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Grabbing mixtape map data from API...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.jumpmaster.xyz/map/?next=1&key=${process.env.SPYGLASS}`)
+			.get(`https://api.jumpmaster.xyz/map/?next=${nextMapCount}&key=${process.env.SPYGLASS}`)
 			.then(response => {
 				const map = response.data.mixtape;
 
-				const mapEmbed = new EmbedBuilder()
-					.setTitle(`Current Mixtape: ${map.map.type} - ${map.map.name}`)
-					.setDescription(
-						`**${map.map.type} - ${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Up Next:** ${map.next[0].map.type} - ${map.next[0].map.name} for 15 minutes.`,
-					)
-					.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2019/Mixtape/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
-					.setColor(embedColor);
+				if (nextMapCount === 1) {
+					const mapEmbed = new EmbedBuilder()
+						.setTitle(`Current Mixtape: ${map.map.type} - ${map.map.name}`)
+						.setDescription(
+							`**${map.map.type} - ${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Up Next:** ${map.next[0].map.type} - ${map.next[0].map.name} for 15 minutes.`,
+						)
+						.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2019/Mixtape/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
+						.setColor(embedColor);
 
-				interaction.editReply({ embeds: [mapEmbed] });
+					interaction.editReply({ embeds: [mapEmbed] });
+				} else {
+					// use the map.next to get the next nextMapCount maps
+					const nextMaps = map.next.slice(0, nextMapCount);
+
+					let nextMapString = '';
+
+					for (let i = 0; i < nextMaps.length; i++) {
+						nextMapString += `**${nextMaps[i].map.type} - ${nextMaps[i].map.name}**\nStarts at <t:${nextMaps[i].start}:t> for ${nextMapLength(
+							nextMaps[i].duration.minutes,
+							nextMaps[i].duration.hours,
+						)}\n\n`;
+					}
+
+					const mapEmbed = new EmbedBuilder()
+						.setTitle(`Next ${nextMapCount} Mixtape Map Rotations`)
+						.setDescription(
+							`**Currently:** ${map.map.type} - ${map.map.name}\nEnds <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n\n**Up Next:**\n${nextMapString}`,
+						)
+						.setColor(embedColor);
+
+					interaction.editReply({ embeds: [mapEmbed] });
+				}
 			})
 			.catch(error => {
 				if (error.response) {
