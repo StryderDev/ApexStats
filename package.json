@@ -23,7 +23,7 @@
 		"@axiomhq/js": "^1.0.0-rc.1",
 		"@discordjs/rest": "^2.2.0",
 		"axios": "^1.6.2",
-		"better-sqlite3": "^9.2.0",
+		"better-sqlite3": "^9.2.2",
 		"chalk": "4.1.2",
 		"discord-api-types": "^0.37.65",
 		"discord.js": "^14.14.1",
