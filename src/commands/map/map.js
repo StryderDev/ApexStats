@@ -37,7 +37,7 @@ module.exports = {
 								map.next[0].duration.hours,
 							)}.`,
 						)
-						.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2019/Battle%20Royale/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
+						.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2020/Battle%20Royale/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
 						.setColor(embedColor);
 
 					interaction.editReply({ embeds: [mapEmbed] });
@@ -67,8 +67,6 @@ module.exports = {
 					console.log(error.response.data);
 
 					const errorEmbed = new EmbedBuilder().setTitle('Map Lookup Error').setDescription(error.response.data.error).setColor('D0342C').setTimestamp();
-
-					axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=error&dev=${debug}`);
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				} else if (error.request) {

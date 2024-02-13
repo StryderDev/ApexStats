@@ -78,7 +78,7 @@ module.exports = {
 			})
 			.catch(error => {
 				if (error.response) {
-					console.error(chalk.yellow(`${chalk.bold('[PLAYER LOOKUP ERROR]')} ${error.response.data.errorShort}`));
+					console.log(chalk.yellow(`${chalk.bold('[PLAYER LOOKUP ERROR]')} ${error.response.data.errorShort}`));
 
 					const errorEmbed = new EmbedBuilder()
 						.setTitle('Player Lookup Error')
