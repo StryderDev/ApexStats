@@ -34,7 +34,7 @@ module.exports = {
 						.setDescription(
 							`**${map.map.type} - ${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Up Next:** ${map.next[0].map.type} - ${map.next[0].map.name} for 15 minutes.`,
 						)
-						.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2019/Mixtape/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
+						.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2020/Mixtape/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
 						.setColor(embedColor);
 
 					interaction.editReply({ embeds: [mapEmbed] });
@@ -66,8 +66,6 @@ module.exports = {
 					console.log(error.response.data);
 
 					const errorEmbed = new EmbedBuilder().setTitle('Map Lookup Error').setDescription(error.response.data.error).setColor('D0342C').setTimestamp();
-
-					axios.get(`https://api.jumpmaster.xyz/logs/Stats?type=error&dev=${debug}`);
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				} else if (error.request) {

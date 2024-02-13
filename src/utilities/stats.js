@@ -41,7 +41,7 @@ function getStatus(status) {
 function battlepass(data) {
 	if (!data.history.Ignite) return data.level;
 
-	return data.history.Ignite;
+	return data.history.Breakout;
 }
 
 function rankLayout(rank) {
