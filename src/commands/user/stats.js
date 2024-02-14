@@ -76,8 +76,11 @@ module.exports = {
 
 					const battlepassCompletion = Math.floor((battlepass(account.battlepass) / 110) * 100);
 
+					const userTag = user.tag ? `[${user.tag}]` : '';
+					const totalRankScore = ranked.score < 15000 ? `${ranked.score.toLocaleString()}/${ranked.nextScore.toLocaleString()}` : `${ranked.score.toLocaleString()}`;
+
 					const stats = new EmbedBuilder()
-						.setTitle(`${platformEmote(user.platform)} ${user.username} playing ${legend}`)
+						.setTitle(`${platformEmote(user.platform)} ${userTag} ${user.username} playing ${legend}`)
 						.setDescription(`**Status:** ${getStatus(status)}\n${checkUserBan(user.bans)}`)
 						.addFields([
 							{
@@ -98,7 +101,7 @@ module.exports = {
 							},
 							{
 								name: getRankName(ranked),
-								value: `${Misc.GrayBlank} Division: ${getDivisionCount(ranked)}/1000 LP\n${Misc.GrayBlank} Total: ${ranked.score.toLocaleString()} LP`,
+								value: `${Misc.GrayBlank} Division: ${getDivisionCount(ranked)} RP\n${Misc.GrayBlank} Total: ${totalRankScore} RP`,
 								inline: true,
 							},
 							{
