@@ -85,7 +85,7 @@ function checkUserBan(bans) {
 }
 
 function calcTillMaster(player) {
-	const tillMaster = 24000 - player.score;
+	const tillMaster = 15000 - player.score;
 
 	if (tillMaster <= 0) return `0 LP`;
 
