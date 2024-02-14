@@ -25,8 +25,13 @@ module.exports = {
 						inline: true,
 					},
 					{
-						name: 'Season End Date',
-						value: `<t:${season.dates.end.timestamp}:D>\n<t:${season.dates.end.timestamp}:t>\n<t:${season.dates.end.timestamp}:R>`,
+						name: 'Season Split Date',
+						value: `<t:${season.dates.split.timestamp}:D>\n<t:${season.dates.split.timestamp}:t>\n<t:${season.dates.split.timestamp}:R>`,
+						inline: true,
+					},
+					{
+						name: '\u200b',
+						value: `\u200b`,
 						inline: true,
 					},
 					{
@@ -34,9 +39,23 @@ module.exports = {
 						value: `<t:${season.dates.end.rankedEnd}:D>\n<t:${season.dates.end.rankedEnd}:t>\n<t:${season.dates.end.rankedEnd}:R>`,
 						inline: true,
 					},
+					{
+						name: 'Season End Date',
+						value: `<t:${season.dates.end.timestamp}:D>\n<t:${season.dates.end.timestamp}:t>\n<t:${season.dates.end.timestamp}:R>`,
+						inline: true,
+					},
+					{
+						name: '\u200b',
+						value: `\u200b`,
+						inline: true,
+					},
 				)
 				.setColor(embedColor)
-				.setFooter({ text: season.info.data.tagline, iconURL: `https://cdn.jumpmaster.xyz/Bot/Avatar/${season.info.title}.png` });
+				.setImage(`${encodeURI(season.info.data.image)}?t=${Math.floor(Math.random() * 10) + 1}`)
+				.setFooter({
+					text: season.info.data.tagline,
+					iconURL: `https://cdn.jumpmaster.xyz/Bot/Avatar/${encodeURIComponent(season.info.title)}.png?t=${Math.floor(Math.random() * 10) + 1}`,
+				});
 
 			interaction.editReply({ embeds: [currentSeason] });
 		});

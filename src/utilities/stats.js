@@ -60,7 +60,7 @@ function rankLayout(rank) {
 
 	return `${Ranked[rank.name]} ${showPosition(rank.name, rank.ladderPos)} ${rank.name} ${showDivision(rank.name, rank.division)}\n${
 		Misc.GrayBlank
-	} ${rank.score.toLocaleString()} LP`;
+	} ${rank.score.toLocaleString()} RP`;
 }
 
 function getRankName(rank) {
@@ -87,9 +87,9 @@ function checkUserBan(bans) {
 function calcTillMaster(player) {
 	const tillMaster = 15000 - player.score;
 
-	if (tillMaster <= 0) return `0 LP`;
+	if (tillMaster <= 0) return `0 RP`;
 
-	return `${tillMaster.toLocaleString()} LP`;
+	return `${tillMaster.toLocaleString()} RP`;
 }
 
 function calcTillPred(player, pred, platform) {
@@ -98,17 +98,32 @@ function calcTillPred(player, pred, platform) {
 
 	const tillPred = pred[platform].value - player.score;
 
-	if (tillPred <= 0) return `0 LP`;
+	if (tillPred <= 0) return `0 RP`;
 
-	return `${tillPred.toLocaleString()} LP`;
+	return `${tillPred.toLocaleString()} RP`;
 }
 
 function getDivisionCount(rank) {
 	// return rank.score and remove all characters except for the 3 at the end
-	return rank.score
-		.toString()
-		.replace(/[^0-9]/g, '')
-		.slice(-3);
+	// return rank.score
+	// 	.toString()
+	// 	.replace(/[^0-9]/g, '')
+	// 	.slice(-3);
+
+	const rankScore = rank.score.toString();
+	const rankNextDivision = rank.nextDivision.toString();
+	const rankNextScore = rank.nextScore.toString();
+
+	if (rankScore < 15000) {
+		const finalScore = rankNextDivision - (rankNextScore - rankScore);
+
+		return `${finalScore
+			.toString()
+			.replace(/[^0-9]/g, '')
+			.slice(-3)}/${rankNextDivision}`;
+	} else {
+		return `${rankScore.toLocaleString()}`;
+	}
 }
 
 module.exports = { platformName, platformEmote, getStatus, battlepass, rankLayout, checkUserBan, calcTillMaster, calcTillPred, getRankName, getDivisionCount, getRankNameNoIcon };

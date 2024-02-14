@@ -72,16 +72,26 @@ module.exports = {
 					const account = playerData.account;
 
 					// Season Data
+					const rankedSplit = seasonData.dates.split.timestamp;
 					const rankedEnd = seasonData.dates.end.rankedEnd;
 
 					// Calculate account and prestige level completion
 					const accountCompletion = Math.floor((account.level.current / 500) * 100);
 					const prestigeCompletion = Math.floor((account.level.total / 2000) * 100);
 
+					const userTag = user.tag ? `[${user.tag}]` : '';
+					const totalRankScore = ranked.score < 15000 ? `${ranked.score.toLocaleString()}/${ranked.nextScore.toLocaleString()}` : `${ranked.score.toLocaleString()}`;
+
 					// Rank Embed
 					const rank = new EmbedBuilder()
-						.setTitle(`${platformEmote(user.platform)} ${user.username}`)
-						.setDescription(`**Status:** ${getStatus(status)}\n**Ranked Period:** Ends <t:${rankedEnd}:D> at <t:${rankedEnd}:t>.\n${checkUserBan(user.bans)}`)
+						.setTitle(`${platformEmote(user.platform)} ${userTag} ${user.username}`)
+						.setDescription(
+							`**Status:** ${getStatus(
+								status,
+							)}\n**Ranked Period Split:** <t:${rankedSplit}:D> at <t:${rankedSplit}:t>, or <t:${rankedSplit}:R>.\n**Ranked Period End:** <t:${rankedEnd}:D> at <t:${rankedEnd}:t>, or <t:${rankedEnd}:R>.\n${checkUserBan(
+								user.bans,
+							)}`,
+						)
 						.addFields([
 							{
 								name: `${Account.Level} Account`,
@@ -89,7 +99,7 @@ module.exports = {
 							},
 							{
 								name: getRankName(ranked),
-								value: `${Misc.GrayBlank} Division: ${getDivisionCount(ranked)}/1000 LP\n${Misc.GrayBlank} Total: ${ranked.score.toLocaleString()} LP`,
+								value: `${Misc.GrayBlank} Division: ${getDivisionCount(ranked)} RP\n${Misc.GrayBlank} Total: ${totalRankScore} RP`,
 								inline: true,
 							},
 							{

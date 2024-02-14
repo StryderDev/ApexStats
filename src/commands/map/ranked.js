@@ -34,13 +34,14 @@ module.exports = {
 					const seasonData = res[1].data;
 
 					// Season Data
+					const rankedSplit = seasonData.dates.split.timestamp;
 					const rankedEnd = seasonData.dates.end.rankedEnd;
 
 					if (nextMapCount === 1) {
 						const mapEmbed = new EmbedBuilder()
 							.setTitle(`Ranked Squads are currently competing on ${mapData.map.name}`)
 							.setDescription(
-								`**${mapData.map.name}** ends <t:${mapData.times.next}:R> at <t:${mapData.times.next}:t>.\n**Next Up:** ${mapData.next[0].map.name} for 24 hours.\n**Ranked Period:** Ends <t:${rankedEnd}:D> at <t:${rankedEnd}:t>.`,
+								`**${mapData.map.name}** ends <t:${mapData.times.next}:R> at <t:${mapData.times.next}:t>.\n**Next Up:** ${mapData.next[0].map.name} for 24 hours.\n**Ranked Period Split:** <t:${rankedSplit}:D> at <t:${rankedSplit}:t>, or <t:${rankedSplit}:R>.\n**Ranked Period End:** <t:${rankedEnd}:D> at <t:${rankedEnd}:t>, or <t:${rankedEnd}:R>.`,
 							)
 							.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2020/Ranked/${encodeURIComponent(mapData.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
 							.setColor(embedColor);

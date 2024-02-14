@@ -4,10 +4,10 @@ const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 const { embedColor, Misc } = require('../../data/utilities.json');
 
 module.exports = {
-	data: new SlashCommandBuilder().setName('threshold').setDescription('Shows the current Apex Predator LP Threshold for ranked.'),
+	data: new SlashCommandBuilder().setName('threshold').setDescription('Shows the current Apex Predator RP Threshold for ranked.'),
 
 	async execute(interaction) {
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Fetching LP Threshold...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Fetching RP Threshold...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -17,19 +17,19 @@ module.exports = {
 				const data = response.data;
 
 				const thresholdEmbed = new EmbedBuilder()
-					.setTitle('Apex Predator Ladder Point Threshold')
+					.setTitle('Apex Predator Ranked Point Threshold')
 					.setDescription(`**Last Updated:** <t:${data['timestamp']}:R>`)
 					.addFields([
 						{
 							name: `${Misc.Platform_PC} PC (Steam / EA App)`,
-							value: `${Misc.GrayBlank} Threshold: ${data['PC']['value'].toLocaleString()} LP\n${Misc.GrayBlank} Player Count: ${data['PC'][
+							value: `${Misc.GrayBlank} Threshold: ${data['PC']['value'].toLocaleString()} RP\n${Misc.GrayBlank} Player Count: ${data['PC'][
 								'count'
 							].toLocaleString()}`,
 							inline: true,
 						},
 						{
 							name: `${Misc.Platform_PlayStation} PlayStation`,
-							value: `${Misc.GrayBlank} Threshold: ${data['Playstation']['value'].toLocaleString()} LP\n${Misc.GrayBlank} Player Count: ${data['Playstation'][
+							value: `${Misc.GrayBlank} Threshold: ${data['Playstation']['value'].toLocaleString()} RP\n${Misc.GrayBlank} Player Count: ${data['Playstation'][
 								'count'
 							].toLocaleString()}`,
 							inline: true,
@@ -41,14 +41,14 @@ module.exports = {
 						},
 						{
 							name: `${Misc.Platform_Xbox} Xbox`,
-							value: `${Misc.GrayBlank} Threshold: ${data['Xbox']['value'].toLocaleString()} LP\n${Misc.GrayBlank} Player Count: ${data['Xbox'][
+							value: `${Misc.GrayBlank} Threshold: ${data['Xbox']['value'].toLocaleString()} RP\n${Misc.GrayBlank} Player Count: ${data['Xbox'][
 								'count'
 							].toLocaleString()}`,
 							inline: true,
 						},
 						{
 							name: `${Misc.Platform_Switch} Nintendo Switch`,
-							value: `${Misc.GrayBlank} Threshold: ${data['Switch']['value'].toLocaleString()} LP\n${Misc.GrayBlank} Player Count: ${data['Switch'][
+							value: `${Misc.GrayBlank} Threshold: ${data['Switch']['value'].toLocaleString()} RP\n${Misc.GrayBlank} Player Count: ${data['Switch'][
 								'count'
 							].toLocaleString()}`,
 							inline: true,
@@ -61,7 +61,7 @@ module.exports = {
 					])
 					.setColor(embedColor)
 					.setFooter({
-						text: 'LP Threshold data provided by https://apexlegendsstatus.com.\nAs of Season 17 (Arsenal), "Ranked Points" are now "Ladder Points" or "LP".',
+						text: 'RP Threshold data provided by https://apexlegendsstatus.com.',
 					});
 
 				await interaction.editReply({ embeds: [thresholdEmbed] });
