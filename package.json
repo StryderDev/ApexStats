@@ -28,7 +28,7 @@
 		"discord-api-types": "^0.37.70",
 		"discord.js": "^14.14.1",
 		"dotenv": "^16.4.5",
-		"mysql2": "^3.9.1",
+		"mysql2": "^3.9.2",
 		"topgg-autoposter": "^2.0.2"
 	},
 	"devDependencies": {
