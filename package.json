@@ -25,13 +25,10 @@
 		"axios": "^1.6.7",
 		"better-sqlite3": "^9.4.3",
 		"chalk": "4.1.2",
-		"discord-api-types": "^0.37.70",
+		"discord-api-types": "^0.37.73",
 		"discord.js": "^14.14.1",
 		"dotenv": "^16.4.5",
-		"mysql2": "^3.9.1",
+		"mysql2": "^3.9.2",
 		"topgg-autoposter": "^2.0.2"
-	},
-	"devDependencies": {
-		"nodemon": "^3.0.3"
 	}
 }
