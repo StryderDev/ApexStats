@@ -10,14 +10,14 @@ function databaseConnection() {
 			database: process.env.DB_NAME,
 			user: process.env.DB_USER,
 			password: process.env.DB_PASS,
-			port: 3306,
+			port: process.env.DB_PORT,
 			waitForConnections: true,
 			connectionLimit: 10,
 			queueLimit: 0,
 			maxIdle: 10,
 			idleTimeout: 30000,
 			enableKeepAlive: true,
-			ssl: {},
+			ssl: { rejectUnauthorized: false },
 		});
 
 		db.getConnection(err => {
