@@ -47,7 +47,7 @@ module.exports = {
 				const playerID = data.user.id;
 				const discordID = interaction.user.id;
 
-				let linkQuery = 'SELECT * FROM specter WHERE discordID = ?';
+				let linkQuery = 'SELECT * FROM ApexStats_Specter WHERE discordID = ?';
 
 				db.query(linkQuery, [discordID], (err, row) => {
 					if (err) {
@@ -58,7 +58,7 @@ module.exports = {
 					// console.log(row);
 
 					if (row.length === 0) {
-						let insertUserLink = `INSERT INTO specter (discordID, playerID, platform) VALUES(?, ?, ?)`;
+						let insertUserLink = `INSERT INTO ApexStats_Specter (discordID, playerID, platform) VALUES(?, ?, ?)`;
 
 						db.query(insertUserLink, [discordID, playerID, platform], (err, row) => {
 							if (err) return console.log(err);

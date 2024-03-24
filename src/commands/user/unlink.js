@@ -14,7 +14,7 @@ module.exports = {
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
-		let linkQuery = 'SELECT * FROM specter WHERE discordID = ?';
+		let linkQuery = 'SELECT * FROM ApexStats_Specter WHERE discordID = ?';
 
 		const discordID = interaction.user.id;
 
@@ -28,7 +28,7 @@ module.exports = {
 				return interaction.editReply({ content: `You do not have a linked account. Use \`/link\` to link an Apex account to your Discord account.`, embeds: [] });
 			} else {
 				// User already has an account linked
-				let deleteUserLink = `DELETE FROM specter WHERE discordID = ?`;
+				let deleteUserLink = `DELETE FROM ApexStats_Specter WHERE discordID = ?`;
 
 				db.query(deleteUserLink, [discordID]);
 
