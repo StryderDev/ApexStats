@@ -24,15 +24,15 @@ module.exports = {
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.jumpmaster.xyz/map/?next=${nextMapCount}&key=${process.env.SPYGLASS}`)
+			.get(`https://solaris.apexstats.dev/beacon/map/br?key=${process.env.SPYGLASS}&next=${nextMapCount}`)
 			.then(async response => {
-				const map = response.data.br;
+				const map = response.data;
 
 				if (nextMapCount === 1) {
 					const mapEmbed = new EmbedBuilder()
 						.setTitle(`Legends are currently dropping into ${map.map.name}`)
 						.setDescription(
-							`**${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Up Next:** ${map.next[0].map.name} for ${nextMapLength(
+							`**${map.map.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n**Up Next:** ${map.next[0].map.name} for ${nextMapLength(
 								map.next[0].duration.minutes,
 								map.next[0].duration.hours,
 							)}.`,
@@ -56,7 +56,7 @@ module.exports = {
 
 					const mapEmbed = new EmbedBuilder()
 						.setTitle(`Next ${nextMapCount} BR Map Rotations`)
-						.setDescription(`**Currently:** ${map.map.name}\nEnds <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n\n**Up Next:**\n${nextMapString}`)
+						.setDescription(`**Currently:** ${map.map.name}\nEnds <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n\n**Up Next:**\n${nextMapString}`)
 						.setColor(embedColor);
 
 					interaction.editReply({ embeds: [mapEmbed] });

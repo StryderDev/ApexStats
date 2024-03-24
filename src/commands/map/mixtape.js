@@ -24,15 +24,15 @@ module.exports = {
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.jumpmaster.xyz/map/?next=${nextMapCount}&key=${process.env.SPYGLASS}`)
+			.get(`https://solaris.apexstats.dev/beacon/map/mixtape?key=${process.env.SPYGLASS}&next=${nextMapCount}`)
 			.then(response => {
-				const map = response.data.mixtape;
+				const map = response.data;
 
 				if (nextMapCount === 1) {
 					const mapEmbed = new EmbedBuilder()
 						.setTitle(`Current Mixtape: ${map.map.type} - ${map.map.name}`)
 						.setDescription(
-							`**${map.map.type} - ${map.map.name}** ends <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n**Up Next:** ${map.next[0].map.type} - ${map.next[0].map.name} for 15 minutes.`,
+							`**${map.map.type} - ${map.map.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n**Up Next:** ${map.next[0].map.type} - ${map.next[0].map.name} for 15 minutes.`,
 						)
 						.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2020/Mixtape/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
 						.setColor(embedColor);
@@ -54,7 +54,7 @@ module.exports = {
 					const mapEmbed = new EmbedBuilder()
 						.setTitle(`Next ${nextMapCount} Mixtape Map Rotations`)
 						.setDescription(
-							`**Currently:** ${map.map.type} - ${map.map.name}\nEnds <t:${map.times.next}:R> at <t:${map.times.next}:t>.\n\n**Up Next:**\n${nextMapString}`,
+							`**Currently:** ${map.map.type} - ${map.map.name}\nEnds <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n\n**Up Next:**\n${nextMapString}`,
 						)
 						.setColor(embedColor);
 

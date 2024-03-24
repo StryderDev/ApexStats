@@ -23,14 +23,14 @@ module.exports = {
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
-		const mapAPI = axios.get(`https://api.jumpmaster.xyz/map/?next=${nextMapCount}&key=${process.env.SPYGLASS}`);
+		const mapAPI = axios.get(`https://solaris.apexstats.dev/beacon/map/ranked?key=${process.env.SPYGLASS}&next=${nextMapCount}`);
 		const seasonAPI = axios.get(`https://api.jumpmaster.xyz/seasons/Current?version=2`);
 
 		await axios
 			.all([mapAPI, seasonAPI])
 			.then(
 				axios.spread((...res) => {
-					const mapData = res[0].data.ranked;
+					const mapData = res[0].data;
 					const seasonData = res[1].data;
 
 					// Season Data
@@ -41,7 +41,7 @@ module.exports = {
 						const mapEmbed = new EmbedBuilder()
 							.setTitle(`Ranked Squads are currently competing on ${mapData.map.name}`)
 							.setDescription(
-								`**${mapData.map.name}** ends <t:${mapData.times.next}:R> at <t:${mapData.times.next}:t>.\n**Next Up:** ${mapData.next[0].map.name} for 24 hours.\n**Ranked Period Split:** <t:${rankedSplit}:D> at <t:${rankedSplit}:t>, or <t:${rankedSplit}:R>.\n**Ranked Period End:** <t:${rankedEnd}:D> at <t:${rankedEnd}:t>, or <t:${rankedEnd}:R>.`,
+								`**${mapData.map.name}** ends <t:${mapData.times.nextMap}:R> at <t:${mapData.times.nextMap}:t>.\n**Next Up:** ${mapData.next[0].map.name} for 24 hours.\n**Ranked Period Split:** <t:${rankedSplit}:D> at <t:${rankedSplit}:t>, or <t:${rankedSplit}:R>.\n**Ranked Period End:** <t:${rankedEnd}:D> at <t:${rankedEnd}:t>, or <t:${rankedEnd}:R>.`,
 							)
 							.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2020/Ranked/${encodeURIComponent(mapData.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
 							.setColor(embedColor);
@@ -63,7 +63,7 @@ module.exports = {
 						const mapEmbed = new EmbedBuilder()
 							.setTitle(`Next ${nextMapCount} Rank Map Rotations`)
 							.setDescription(
-								`**Currently:** ${mapData.map.name}\nEnds <t:${mapData.times.next}:D> at <t:${mapData.times.next}:t>.\n**Ranked Period:** Ends <t:${rankedEnd}:D> at <t:${rankedEnd}:t>.\n\n**Up Next:**\n${nextMapString}`,
+								`**Currently:** ${mapData.map.name}\nEnds <t:${mapData.times.nextMap}:D> at <t:${mapData.times.nextMap}:t>.\n**Ranked Period:** Ends <t:${rankedEnd}:D> at <t:${rankedEnd}:t>.\n\n**Up Next:**\n${nextMapString}`,
 							)
 							.setColor(embedColor);
 
