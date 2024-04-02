@@ -37,7 +37,7 @@ module.exports = {
 								map.next[0].duration.hours,
 							)}.`,
 						)
-						.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2020/Battle%20Royale/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
+						.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${encodeURIComponent(map.map.image)}.png`)
 						.setColor(embedColor);
 
 					interaction.editReply({ embeds: [mapEmbed] });

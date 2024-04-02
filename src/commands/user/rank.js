@@ -1,5 +1,6 @@
 const axios = require('axios');
 const chalk = require('chalk');
+const { DateTime } = require('luxon');
 const { Axiom } = require('@axiomhq/js');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
@@ -82,6 +83,8 @@ module.exports = {
 					const userTag = user.tag ? `[${user.tag}]` : '';
 					const totalRankScore = ranked.score < 15000 ? `${ranked.score.toLocaleString()}/${ranked.nextScore.toLocaleString()}` : `${ranked.score.toLocaleString()}`;
 
+					const playerAddedDate = DateTime.fromSeconds(user.userAdded).toFormat('cccc, LLLL d, yyyy');
+
 					// Rank Embed
 					const rank = new EmbedBuilder()
 						.setTitle(`${platformEmote(user.platform)} ${userTag} ${user.username}`)
@@ -114,7 +117,7 @@ module.exports = {
 						])
 						.setColor(embedColor)
 						.setFooter({
-							text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}`,
+							text: `Player Added: ${playerAddedDate}`,
 						});
 
 					axiomIngest.ingest('apex.stats', [{ platform: user.platform, rank: getRankNameNoIcon(ranked) }]);

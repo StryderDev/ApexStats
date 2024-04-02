@@ -1,6 +1,6 @@
 {
 	"name": "apexstats",
-	"version": "1.14.59",
+	"version": "1.14.60",
 	"description": "A Discord bot to show off in-game content and information for Apex Legends.",
 	"main": "src/Shard.js",
 	"scripts": {
@@ -25,9 +25,10 @@
 		"axios": "^1.6.8",
 		"better-sqlite3": "^9.4.3",
 		"chalk": "4.1.2",
-		"discord-api-types": "^0.37.76",
+		"discord-api-types": "^0.37.78",
 		"discord.js": "^14.14.1",
 		"dotenv": "^16.4.5",
+		"luxon": "^3.4.4",
 		"mysql2": "^3.9.3",
 		"topgg-autoposter": "^2.0.2"
 	}

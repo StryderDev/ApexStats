@@ -41,7 +41,7 @@ module.exports = {
 
 		const legendEmbed = new EmbedBuilder()
 			.setDescription(`Play **${legendFile[legend]}** this round!`)
-			.setImage(`https://cdn.jumpmaster.xyz/Bot/Legends/Banners/${encodeURIComponent(legendFile[legend])}.png`)
+			.setImage(`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legendFile[legend])}.png`)
 			.setColor(embedColor);
 
 		await interaction.editReply({ embeds: [legendEmbed] });

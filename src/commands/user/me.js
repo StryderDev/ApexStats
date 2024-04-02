@@ -1,5 +1,6 @@
 // const db = require('sqlite3');
 const axios = require('axios');
+const { DateTime } = require('luxon');
 const { Axiom } = require('@axiomhq/js');
 const db = require('../../utilities/database.js');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
@@ -74,6 +75,8 @@ module.exports = {
 							const totalRankScore =
 								ranked.score < 15000 ? `${ranked.score.toLocaleString()}/${ranked.nextScore.toLocaleString()}` : `${ranked.score.toLocaleString()}`;
 
+							const playerAddedDate = DateTime.fromSeconds(user.userAdded).toFormat('cccc, LLLL d, yyyy');
+
 							const stats = new EmbedBuilder()
 								.setTitle(`${platformEmote(row[0].platform)} ${userTag} ${user.username} playing ${legend}`)
 								.setDescription(`**Status:** ${getStatus(status)}\n${checkUserBan(user.bans)}`)
@@ -128,10 +131,10 @@ module.exports = {
 										inline: true,
 									},
 								])
-								.setImage(`https://cdn.jumpmaster.xyz/Bot/Legends/Banners/${encodeURIComponent(legend)}.png?t=${Math.floor(Math.random() * 10)}}`)
+								.setImage(`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legend)}.png`)
 								.setColor(embedColor)
 								.setFooter({
-									text: `Player Added: ${new Date(user.userAdded * 1000).toUTCString()}\nEquip the Battle Pass badge in-game to update it!`,
+									text: `Player Added: ${playerAddedDate}\nEquip the Battle Pass badge in-game to update it!`,
 								});
 
 							axiomIngest.ingest('apex.stats', [{ platform: platformName(row[0].platform), legend: legend }]);
