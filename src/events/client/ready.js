@@ -14,40 +14,42 @@ module.exports = {
 	once: true,
 	execute(client) {
 		// Set rotating bot presence
-		(async function mapPrecenseLoop() {
-			const date = new Date();
-			let minutes = date.getMinutes();
+		// (async function mapPrecenseLoop() {
+		// 	const date = new Date();
+		// 	let minutes = date.getMinutes();
 
-			// Check and update every x minutes ('interval' in config)
-			if (minutes % 5 == 0) {
-				await wait(1000);
+		// 	// Check and update every x minutes ('interval' in config)
+		// 	if (minutes % 5 == 0) {
+		// 		await wait(1000);
 
-				axios.get(`https://api.jumpmaster.xyz/map/?key=${process.env.SPYGLASS}`).then(res => {
-					const br = res.data.br;
-					const ranked = res.data.ranked;
+		// 		axios.get(`https://solaris.apexstats.dev/beacon/map/br?key=${process.env.SPYGLASS}`).then(res => {
+		// 			const br = res.data.br;
+		// 			const ranked = res.data.ranked;
 
-					// select brMapIndex and rankedMapIndex from currentMapIndex where
-					// the ID is equal to the current shard ID + 1
-					const mapIndex = db_mapIndex.prepare(`SELECT brMapIndex, rankedMapIndex FROM currentMapIndex WHERE id = ${client.shard.ids[0] + 1}`).get();
+		// 			// select brMapIndex and rankedMapIndex from currentMapIndex where
+		// 			// the ID is equal to the current shard ID + 1
+		// 			const mapIndex = db_mapIndex.prepare(`SELECT brMapIndex, rankedMapIndex FROM currentMapIndex WHERE id = ${client.shard.ids[0] + 1}`).get();
 
-					if (mapIndex.brMapIndex != br['_index'] || mapIndex.rankedMapIndex != ranked['_index']) {
-						console.log(chalk.yellow(`${chalk.bold('[PRESENCE]')} Checking for map rotation updates...`));
+		// 			if (mapIndex.brMapIndex != br['_index'] || mapIndex.rankedMapIndex != ranked['_index']) {
+		// 				console.log(chalk.yellow(`${chalk.bold('[PRESENCE]')} Checking for map rotation updates...`));
 
-						client.user.setActivity(`${br.map.name} / ${ranked.map.name}`, { type: ActivityType.Custom });
+		// 				client.user.setActivity(`${br.map.name} / ${ranked.map.name}`, { type: ActivityType.Custom });
 
-						console.log(chalk.blue(`${chalk.bold('[PRESENCE]')} Map rotation updates found, updated presence to "${br.map.name} / ${ranked.map.name}"`));
+		// 				console.log(chalk.blue(`${chalk.bold('[PRESENCE]')} Map rotation updates found, updated presence to "${br.map.name} / ${ranked.map.name}"`));
 
-						// Update the mapIndex table with the new map indexes
-						db_mapIndex
-							.prepare(`INSERT OR REPLACE INTO currentMapIndex (id, brMapIndex, rankedMapIndex) VALUES (?, ?, ?)`)
-							.run((client.shard.ids[0] + 1).toString(), br['_index'], ranked['_index']);
-					}
-				});
-			}
+		// 				// Update the mapIndex table with the new map indexes
+		// 				db_mapIndex
+		// 					.prepare(`INSERT OR REPLACE INTO currentMapIndex (id, brMapIndex, rankedMapIndex) VALUES (?, ?, ?)`)
+		// 					.run((client.shard.ids[0] + 1).toString(), br['_index'], ranked['_index']);
+		// 			}
+		// 		});
+		// 	}
 
-			var delay = 60000 - (date % 60000);
-			setTimeout(mapPrecenseLoop, delay);
-		})();
+		// 	var delay = 60000 - (date % 60000);
+		// 	setTimeout(mapPrecenseLoop, delay);
+		// })();
+
+		client.user.setActivity(`Project: Atlas`, { type: ActivityType.Custom });
 
 		// Register slash commands
 		const commands = [];
