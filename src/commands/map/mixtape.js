@@ -34,7 +34,7 @@ module.exports = {
 						.setDescription(
 							`**${map.map.type} - ${map.map.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n**Up Next:** ${map.next[0].map.type} - ${map.next[0].map.name} for 15 minutes.`,
 						)
-						.setImage(`https://cdn.jumpmaster.xyz/Bot/Maps/Season%2020/Mixtape/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10)}`)
+						.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${encodeURIComponent(map.map.image)}.png`)
 						.setColor(embedColor);
 
 					interaction.editReply({ embeds: [mapEmbed] });
