@@ -102,7 +102,7 @@ module.exports = {
 							},
 							{
 								name: getRankName(ranked),
-								value: `${Misc.GrayBlank} Division: ${getDivisionCount(ranked)} RP\n${Misc.GrayBlank} Total: ${totalRankScore} RP`,
+								value: `${Misc.GrayBlank} Division: ${getDivisionCount(ranked)}\n${Misc.GrayBlank} Total: ${totalRankScore} RP`,
 								inline: true,
 							},
 							{

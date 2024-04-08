@@ -120,9 +120,9 @@ function getDivisionCount(rank) {
 		return `${finalScore
 			.toString()
 			.replace(/[^0-9]/g, '')
-			.slice(-3)}/${rankNextDivision}`;
+			.slice(-3)}/${rankNextDivision} RP`;
 	} else {
-		return `${rankScore.toLocaleString()}`;
+		return `-`;
 	}
 }
 
