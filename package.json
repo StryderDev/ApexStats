@@ -29,7 +29,7 @@
 		"discord.js": "^14.14.1",
 		"dotenv": "^16.4.5",
 		"luxon": "^3.4.4",
-		"mysql2": "^3.9.3",
+		"mysql2": "^3.9.4",
 		"topgg-autoposter": "^2.0.2"
 	}
 }
