@@ -26,7 +26,7 @@
 		"better-sqlite3": "^9.6.0",
 		"chalk": "4.1.2",
 		"discord-api-types": "^0.37.83",
-		"discord.js": "^14.14.1",
+		"discord.js": "^14.15.2",
 		"dotenv": "^16.4.5",
 		"luxon": "^3.4.4",
 		"mysql2": "^3.9.7",
