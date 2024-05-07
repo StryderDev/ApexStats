@@ -94,7 +94,7 @@ module.exports = {
 								inline: true,
 							},
 							{
-								name: `${Account.BattlePass} Breakout Battle Pass`,
+								name: `${Account.BattlePass} Upheaval Battle Pass`,
 								value: `${Misc.GrayBlank} Level ${battlepass(account.battlepass)} (${battlepassCompletion}%)`,
 								inline: true,
 							},
