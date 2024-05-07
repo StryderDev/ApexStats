@@ -2,7 +2,7 @@
 	"embedColor": "2B2D31",
 	"Account": {
 		"Level": "<:ApexStats_AccountLevel:909364972943999016>",
-		"BattlePass": "<:ApexStats_Season20:1207023861485277274>"
+		"BattlePass": "<:ApexStats_Season21:1237258979864744016> "
 	},
 	"Ranked": {
 		"Unranked": "<:ApexStats_Unranked:960732914344157324>",
@@ -41,7 +41,8 @@
 		"Season_17": "<:ApexStats_Season17:1105385039023329290>",
 		"Season_18": "<:ApexStats_Season18:1138553061724389547>",
 		"Season_19": "<:ApexStats_Season19:1168298599801696348>",
-		"Season_20": "<:ApexStats_Season20:1207023861485277274>"
+		"Season_20": "<:ApexStats_Season20:1207023861485277274>",
+		"Season_21": "<:ApexStats_Season21:1237258979864744016> "
 	},
 	"ServerStatus": {
 		"Online": "<:ApexStats_GreenDot:955008202116845568>",
