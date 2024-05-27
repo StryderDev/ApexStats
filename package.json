@@ -22,7 +22,7 @@
 	"dependencies": {
 		"@axiomhq/js": "^1.0.0-rc.3",
 		"@discordjs/rest": "^2.2.0",
-		"axios": "^1.6.8",
+		"axios": "^1.7.2",
 		"better-sqlite3": "^9.6.0",
 		"chalk": "4.1.2",
 		"discord-api-types": "^0.37.83",
