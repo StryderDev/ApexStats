@@ -43,7 +43,11 @@ module.exports = {
 							.setDescription(
 								`**${mapData.map.name}** ends <t:${mapData.times.nextMap}:R> at <t:${mapData.times.nextMap}:t>.\n**Next Up:** ${mapData.next[0].map.name} for 24 hours.\n**Ranked Period Split:** <t:${rankedSplit}:D> at <t:${rankedSplit}:t>, or <t:${rankedSplit}:R>.\n**Ranked Period End:** <t:${rankedEnd}:D> at <t:${rankedEnd}:t>, or <t:${rankedEnd}:R>.`,
 							)
-							.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${encodeURIComponent(mapData.map.image)}.png`)
+							.setImage(
+								`https://specter.apexstats.dev/ApexStats/Maps/${encodeURIComponent(mapData.map.image)}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${
+									process.env.SPECTER
+								}`,
+							)
 							.setColor(embedColor);
 
 						interaction.editReply({ embeds: [mapEmbed] });

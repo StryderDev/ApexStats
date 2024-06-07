@@ -27,7 +27,9 @@ module.exports = {
 				{ name: 'Legend', value: `- ${legendFile[legend]}`, inline: true },
 				{ name: 'Weapons', value: `- ${firstText}\n- ${secondText}`, inline: true },
 			])
-			.setImage(`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legendFile[legend])}.png`)
+			.setImage(
+				`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legendFile[legend])}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`,
+			)
 			.setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadoutEmbed] });

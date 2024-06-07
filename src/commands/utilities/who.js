@@ -41,7 +41,9 @@ module.exports = {
 
 		const legendEmbed = new EmbedBuilder()
 			.setDescription(`Play **${legendFile[legend]}** this round!`)
-			.setImage(`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legendFile[legend])}.png`)
+			.setImage(
+				`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legendFile[legend])}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`,
+			)
 			.setColor(embedColor);
 
 		await interaction.editReply({ embeds: [legendEmbed] });
