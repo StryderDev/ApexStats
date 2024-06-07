@@ -37,7 +37,11 @@ module.exports = {
 								map.next[0].duration.hours,
 							)}.`,
 						)
-						.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${encodeURIComponent(map.map.image)}.png`)
+						.setImage(
+							`https://specter.apexstats.dev/ApexStats/Maps/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${
+								process.env.SPECTER
+							}`,
+						)
 						.setColor(embedColor);
 
 					interaction.editReply({ embeds: [mapEmbed] });
