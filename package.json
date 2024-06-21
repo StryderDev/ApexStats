@@ -25,7 +25,7 @@
 		"axios": "^1.7.2",
 		"better-sqlite3": "^11.0.0",
 		"chalk": "4.1.2",
-		"discord-api-types": "^0.37.89",
+		"discord-api-types": "^0.37.90",
 		"discord.js": "^14.15.3",
 		"dotenv": "^16.4.5",
 		"luxon": "^3.4.4",
