@@ -20,7 +20,7 @@
 	},
 	"homepage": "https://github.com/StryderDev/ApexStats#readme",
 	"dependencies": {
-		"@axiomhq/js": "^1.0.0-rc.3",
+		"@axiomhq/js": "^1.0.0",
 		"@discordjs/rest": "^2.2.0",
 		"axios": "^1.7.2",
 		"better-sqlite3": "^11.0.0",
