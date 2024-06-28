@@ -59,7 +59,7 @@ module.exports = {
 					const legend = playerData.active.legend;
 					const status = user.status;
 					const account = playerData.account;
-					const ranked = playerData.ranked;
+					const ranked = playerData.ranked.BR;
 					const trackers = playerData.active.trackers;
 
 					// Calculate account, prestige, and battle pass level completion

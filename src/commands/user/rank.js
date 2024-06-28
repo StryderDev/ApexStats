@@ -69,7 +69,7 @@ module.exports = {
 					// User Data
 					const user = playerData.user;
 					const status = user.status;
-					const ranked = playerData.ranked;
+					const ranked = playerData.ranked.BR;
 					const account = playerData.account;
 
 					// Season Data
