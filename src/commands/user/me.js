@@ -35,9 +35,7 @@ module.exports = {
 				return interaction.editReply({ content: `You do not have a linked account. Use \`/link\` to link an Apex account to your Discord account.`, embeds: [] });
 			} else {
 				// User already has an account linked
-				const playerAPI = axios.get(
-					`https://api.jumpmaster.xyz/user/Player?platform=${row[0].platform}&ID=${encodeURIComponent(row[0].playerID)}&key=${process.env.SPYGLASS}`,
-				);
+				const playerAPI = axios.get(`https://api.jumpmaster.xyz/user/Player?platform=${row[0].platform}&ID=${encodeURIComponent(row[0].playerID)}&key=${process.env.SPYGLASS}`);
 				const predAPI = axios.get(`https://api.jumpmaster.xyz/misc/predThreshold`);
 
 				await axios
@@ -72,8 +70,7 @@ module.exports = {
 							const battlepassCompletion = Math.floor((battlepass(account.battlepass) / 110) * 100);
 
 							const userTag = user.tag ? `[${user.tag}]` : '';
-							const totalRankScore =
-								ranked.score < 15000 ? `${ranked.score.toLocaleString()}/${ranked.nextScore.toLocaleString()}` : `${ranked.score.toLocaleString()}`;
+							const totalRankScore = ranked.score < 15000 ? `${ranked.score.toLocaleString()}/${ranked.nextScore.toLocaleString()}` : `${ranked.score.toLocaleString()}`;
 
 							const playerAddedDate = DateTime.fromSeconds(user.userAdded).toFormat('cccc, LLLL d, yyyy');
 
@@ -83,13 +80,11 @@ module.exports = {
 								.addFields([
 									{
 										name: `${Account.Level} Account`,
-										value: `${Misc.GrayBlank} Level ${account.level.current.toLocaleString()} (${accountCompletion}%)\n${Misc.GrayBlank} Prestige ${
-											account.level.prestige
-										} (${prestigeCompletion}%)`,
+										value: `${Misc.GrayBlank} Level ${account.level.current.toLocaleString()} (${accountCompletion}%)\n${Misc.GrayBlank} Prestige ${account.level.prestige} (${prestigeCompletion}%)`,
 										inline: true,
 									},
 									{
-										name: `${Account.BattlePass} Upheaval Battle Pass`,
+										name: `${Account.BattlePass} Shockwave Battle Pass`,
 										value: `${Misc.GrayBlank} Level ${battlepass(account.battlepass)} (${battlepassCompletion}%)`,
 										inline: true,
 									},
@@ -104,11 +99,7 @@ module.exports = {
 									},
 									{
 										name: `\u200b`,
-										value: `${Misc.GrayBlank} Till Master: ${calcTillMaster(ranked)}\n${Misc.GrayBlank} Till Apex Predator: ${calcTillPred(
-											ranked,
-											predData,
-											row[0].platform,
-										)}`,
+										value: `${Misc.GrayBlank} Till Master: ${calcTillMaster(ranked)}\n${Misc.GrayBlank} Till Apex Predator: ${calcTillPred(ranked, predData, row[0].platform)}`,
 										inline: true,
 									},
 									{
@@ -131,11 +122,7 @@ module.exports = {
 										inline: true,
 									},
 								])
-								.setImage(
-									`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legend)}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${
-										process.env.SPECTER
-									}`,
-								)
+								.setImage(`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legend)}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`)
 								.setColor(embedColor)
 								.setFooter({
 									text: `Player Added: ${playerAddedDate}\nEquip the Battle Pass badge in-game to update it!`,
