@@ -41,7 +41,7 @@ function getStatus(status) {
 function battlepass(data) {
 	if (!data.history.Upheaval) return data.level;
 
-	return data.history.Upheaval;
+	return data.history.Shockwave;
 }
 
 function rankLayout(rank) {
@@ -58,9 +58,7 @@ function rankLayout(rank) {
 		return division;
 	}
 
-	return `${Ranked[rank.name]} ${showPosition(rank.name, rank.ladderPos)} ${rank.name} ${showDivision(rank.name, rank.division)}\n${
-		Misc.GrayBlank
-	} ${rank.score.toLocaleString()} RP`;
+	return `${Ranked[rank.name]} ${showPosition(rank.name, rank.ladderPos)} ${rank.name} ${showDivision(rank.name, rank.division)}\n${Misc.GrayBlank} ${rank.score.toLocaleString()} RP`;
 }
 
 function getRankName(rank) {

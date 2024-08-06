@@ -25,6 +25,7 @@ module.exports = {
 					{ name: 'Olympus', value: 'Olympus' },
 					{ name: 'Storm Point', value: 'Storm Point' },
 					{ name: 'Broken Moon', value: 'Broken Moon' },
+					{ name: 'E-District', value: 'E-District' },
 				),
 		),
 
@@ -39,7 +40,7 @@ module.exports = {
 		await wait(1000);
 
 		if (mapOption != null) {
-			const mapFile = require(`../../data/drops/Season 21/${mapOption}.json`);
+			const mapFile = require(`../../data/drops/Season 22/${mapOption}.json`);
 			const map = Math.floor(Math.random() * mapFile.length);
 
 			interaction.editReply({ content: `Drop into **${mapFile[map]}** on ${mapOption}!`, embeds: [] });
@@ -51,7 +52,7 @@ module.exports = {
 				.then(response => {
 					const br = response.data.br.map;
 
-					const mapFile = require(`../../data/drops/Season 21/${br.name}.json`);
+					const mapFile = require(`../../data/drops/Season 22/${br.name}.json`);
 					const map = Math.floor(Math.random() * mapFile.length);
 
 					interaction.editReply({ content: `Drop into **${mapFile[map]}** on ${br.name}`, embeds: [] });
@@ -80,10 +81,7 @@ module.exports = {
 					} else {
 						console.log(error.message);
 
-						const errorEmbed = new EmbedBuilder()
-							.setTitle('Unknown Error')
-							.setDescription(`This should never happen.\nIf you see this error, please contact <@360564818123554836> ASAP.`)
-							.setColor('D0342C');
+						const errorEmbed = new EmbedBuilder().setTitle('Unknown Error').setDescription(`This should never happen.\nIf you see this error, please contact <@360564818123554836> ASAP.`).setColor('D0342C');
 
 						interaction.editReply({ embeds: [errorEmbed] });
 					}

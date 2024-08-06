@@ -5,17 +5,7 @@ const { Axiom } = require('@axiomhq/js');
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 const { embedColor, Account, Misc } = require('../../data/utilities.json');
-const {
-	getStatus,
-	platformName,
-	platformEmote,
-	checkUserBan,
-	getRankName,
-	getDivisionCount,
-	calcTillMaster,
-	calcTillPred,
-	getRankNameNoIcon,
-} = require('../../utilities/stats.js');
+const { getStatus, platformName, platformEmote, checkUserBan, getRankName, getDivisionCount, calcTillMaster, calcTillPred, getRankNameNoIcon } = require('../../utilities/stats.js');
 
 const axiomIngest = new Axiom({
 	token: process.env.AXIOM_TOKEN,
@@ -97,22 +87,21 @@ module.exports = {
 						)
 						.addFields([
 							{
-								name: `${Account.Level} Account`,
-								value: `${Misc.GrayBlank} Level ${account.level.current} (${accountCompletion}%)\n${Misc.GrayBlank} Prestige ${account.level.prestige} (${prestigeCompletion}%)\n\n**Battle Royale Ranked**`,
-							},
-							{
-								name: getRankName(ranked),
-								value: `${Misc.GrayBlank} Division: ${getDivisionCount(ranked)}\n${Misc.GrayBlank} Total: ${totalRankScore} RP`,
+								name: `\u200b`,
+								value: `**Battle Royale Ranked <:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434>**\n**${getRankName(
+									ranked,
+								)}**\n${Misc.GrayBlank} Division: ${getDivisionCount(ranked)}\n${Misc.GrayBlank} Total: ${totalRankScore} RP`,
 								inline: true,
 							},
 							{
 								name: `\u200b`,
-								value: `${Misc.GrayBlank} Till Master: ${calcTillMaster(ranked)}\n${Misc.GrayBlank} Till Apex Predator: ${calcTillPred(
-									ranked,
-									predData,
-									platform,
-								)}`,
+								value: `\u200b\n\n${Misc.GrayBlank} Till Master: ${calcTillMaster(ranked)}\n${Misc.GrayBlank} Till Apex Predator: ${calcTillPred(ranked, predData, platform)}`,
 								inline: true,
+							},
+							{
+								name: `\u200b`,
+								value: `**Ranked Rumble <:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434><:ApexStats_LineEnd:1270165385215217785>**\n-# ⚠️ Ranked Rumble is currently inactive.`,
+								inline: false,
 							},
 						])
 						.setColor(embedColor)
@@ -147,10 +136,7 @@ module.exports = {
 				} else {
 					console.log(error.message);
 
-					const errorEmbed = new EmbedBuilder()
-						.setTitle('Unknown Error')
-						.setDescription(`This should never happen.\nIf you see this error, please contact <@360564818123554836> ASAP.`)
-						.setColor('D0342C');
+					const errorEmbed = new EmbedBuilder().setTitle('Unknown Error').setDescription(`This should never happen.\nIf you see this error, please contact <@360564818123554836> ASAP.`).setColor('D0342C');
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				}

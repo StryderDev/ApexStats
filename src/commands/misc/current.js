@@ -51,12 +51,11 @@ module.exports = {
 					},
 				)
 				.setColor(embedColor)
-				.setImage(`${encodeURI(season.info.data.image)}?t=${Math.floor(Math.random() * 10) + 1}`)
+				// .setImage(`${encodeURI(season.info.data.image)}?t=${Math.floor(Math.random() * 10) + 1}`)
+				.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${season.info.data.image}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`)
 				.setFooter({
 					text: season.info.data.tagline,
-					iconURL: `https://specter.apexstats.dev/ApexStats/Avatar/${encodeURIComponent(season.info.title)}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${
-						process.env.SPECTER
-					}`,
+					iconURL: `https://specter.apexstats.dev/ApexStats/Avatar/${encodeURIComponent(season.info.title)}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`,
 				});
 
 			interaction.editReply({ embeds: [currentSeason] });

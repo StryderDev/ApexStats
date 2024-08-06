@@ -88,13 +88,11 @@ module.exports = {
 						.addFields([
 							{
 								name: `${Account.Level} Account`,
-								value: `${Misc.GrayBlank} Level ${account.level.current.toLocaleString()} (${accountCompletion}%)\n${Misc.GrayBlank} Prestige ${
-									account.level.prestige
-								} (${prestigeCompletion}%)`,
+								value: `${Misc.GrayBlank} Level ${account.level.current.toLocaleString()} (${accountCompletion}%)\n${Misc.GrayBlank} Prestige ${account.level.prestige} (${prestigeCompletion}%)`,
 								inline: true,
 							},
 							{
-								name: `${Account.BattlePass} Upheaval Battle Pass`,
+								name: `${Account.BattlePass} Shockwave Battle Pass`,
 								value: `${Misc.GrayBlank} Level ${battlepass(account.battlepass)} (${battlepassCompletion}%)`,
 								inline: true,
 							},
@@ -109,11 +107,7 @@ module.exports = {
 							},
 							{
 								name: `\u200b`,
-								value: `${Misc.GrayBlank} Till Master: ${calcTillMaster(ranked)}\n${Misc.GrayBlank} Till Apex Predator: ${calcTillPred(
-									ranked,
-									predData,
-									platform,
-								)}`,
+								value: `${Misc.GrayBlank} Till Master: ${calcTillMaster(ranked)}\n${Misc.GrayBlank} Till Apex Predator: ${calcTillPred(ranked, predData, platform)}`,
 								inline: true,
 							},
 							{
@@ -136,9 +130,7 @@ module.exports = {
 								inline: true,
 							},
 						])
-						.setImage(
-							`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legend)}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`,
-						)
+						.setImage(`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legend)}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`)
 						.setColor(embedColor)
 						.setFooter({
 							text: `Player Added: ${playerAddedDate}\nEquip the Battle Pass badge in-game to update it!`,
@@ -171,10 +163,7 @@ module.exports = {
 				} else {
 					console.log(error.message);
 
-					const errorEmbed = new EmbedBuilder()
-						.setTitle('Unknown Error')
-						.setDescription(`This should never happen.\nIf you see this error, please contact <@360564818123554836> ASAP.`)
-						.setColor('D0342C');
+					const errorEmbed = new EmbedBuilder().setTitle('Unknown Error').setDescription(`This should never happen.\nIf you see this error, please contact <@360564818123554836> ASAP.`).setColor('D0342C');
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				}
