@@ -67,7 +67,8 @@ module.exports = {
 
 							const prestigeCompletion = Math.floor((checkPrestigeCompletion(account.level.total) / 2000) * 100);
 
-							const battlepassCompletion = Math.floor((battlepass(account.battlepass) / 110) * 100);
+							const battlepassCompletion = Math.floor((battlepass(account.battlepass) / 60) * 100);
+							const battlepassCompletionFull = Math.floor((battlepass(account.battlepass) / 100) * 100);
 
 							const userTag = user.tag ? `[${user.tag}]` : '';
 							const totalRankScore = ranked.score < 15000 ? `${ranked.score.toLocaleString()}/${ranked.nextScore.toLocaleString()}` : `${ranked.score.toLocaleString()}`;
@@ -85,7 +86,9 @@ module.exports = {
 									},
 									{
 										name: `${Account.BattlePass} Shockwave Battle Pass`,
-										value: `${Misc.GrayBlank} Level ${battlepass(account.battlepass)} (${battlepassCompletion}%)`,
+										value: `${Misc.GrayBlank} Reward Completion: ${battlepass(account.battlepass)}/60 (${battlepassCompletion}%)\n${Misc.GrayBlank} Badge Completion: ${battlepass(
+											account.battlepass,
+										)}/100 (${battlepassCompletionFull}%)\n`,
 										inline: true,
 									},
 									{
