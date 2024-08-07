@@ -39,9 +39,25 @@ function getStatus(status) {
 }
 
 function battlepass(data) {
-	if (!data.history.Upheaval) return data.level;
+	// if (!data.history.Shockwave) return data.level;
 
-	return data.history.Shockwave;
+	if (data.level >= 60) {
+		rewardLevel = 60;
+		rewardCompletion = 100;
+	} else {
+		rewardLevel = data.level;
+		rewardCompletion = Math.floor((data.level / 60) * 100);
+	}
+
+	if (data.level >= 100) {
+		badgeLevel = 100;
+		badgeCompletion = 100;
+	} else {
+		badgeLevel = data.level;
+		badgeCompletion = Math.floor((data.level / 100) * 100);
+	}
+
+	return `${Misc.GrayBlank} Reward Completion: ${rewardLevel}/60 (${rewardCompletion}%)\n${Misc.GrayBlank} Badge Completion: ${badgeLevel}/100 (${badgeCompletion}%)`;
 }
 
 function rankLayout(rank) {
