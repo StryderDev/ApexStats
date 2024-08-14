@@ -8,9 +8,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('ranked')
 		.setDescription('Shows the current and next Ranked Battle Royale map rotation.')
-		.addNumberOption(option =>
-			option.setName('next').setDescription('Select the number of future map rotations you want to see').setMaxValue(1).setMaxValue(10).setRequired(false),
-		),
+		.addNumberOption(option => option.setName('next').setDescription('Select the number of future map rotations you want to see').setMaxValue(1).setMaxValue(10).setRequired(false)),
 
 	async execute(interaction) {
 		// Slash Command Options
@@ -32,6 +30,7 @@ module.exports = {
 				axios.spread((...res) => {
 					const mapData = res[0].data;
 					const seasonData = res[1].data;
+					const mapImage = mapData.map.replace(/ /g, '').replace(/'/g, '');
 
 					// Season Data
 					const rankedSplit = seasonData.dates.split.timestamp;
@@ -39,15 +38,11 @@ module.exports = {
 
 					if (nextMapCount === 1) {
 						const mapEmbed = new EmbedBuilder()
-							.setTitle(`Ranked Squads are currently competing on ${mapData.map.name}`)
+							.setTitle(`Ranked Squads are currently competing on ${mapData.map}`)
 							.setDescription(
-								`**${mapData.map.name}** ends <t:${mapData.times.nextMap}:R> at <t:${mapData.times.nextMap}:t>.\n**Next Up:** ${mapData.next[0].map.name} for 24 hours.\n**Ranked Period Split:** <t:${rankedSplit}:D> at <t:${rankedSplit}:t>, or <t:${rankedSplit}:R>.\n**Ranked Period End:** <t:${rankedEnd}:D> at <t:${rankedEnd}:t>, or <t:${rankedEnd}:R>.`,
+								`**${mapData.map}** ends <t:${mapData.times.nextMap}:R> at <t:${mapData.times.nextMap}:t>.\n**Next Up:** ${mapData.next[0].map} for 24 hours.\n**Ranked Period Split:** <t:${rankedSplit}:D> at <t:${rankedSplit}:t>, or <t:${rankedSplit}:R>.\n**Ranked Period End:** <t:${rankedEnd}:D> at <t:${rankedEnd}:t>, or <t:${rankedEnd}:R>.`,
 							)
-							.setImage(
-								`https://specter.apexstats.dev/ApexStats/Maps/${encodeURIComponent(mapData.map.image)}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${
-									process.env.SPECTER
-								}`,
-							)
+							.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`)
 							.setColor(embedColor);
 
 						interaction.editReply({ embeds: [mapEmbed] });
@@ -58,16 +53,13 @@ module.exports = {
 						let nextMapString = '';
 
 						for (let i = 0; i < nextMaps.length; i++) {
-							nextMapString += `**${nextMaps[i].map.name}**\nStarts <t:${nextMaps[i].start}:D> at <t:${nextMaps[i].start}:t> for ${nextMapLength(
-								nextMaps[i].duration.minutes,
-								nextMaps[i].duration.hours,
-							)}\n\n`;
+							nextMapString += `**${nextMaps[i].map}**\nStarts <t:${nextMaps[i].start}:D> at <t:${nextMaps[i].start}:t> for ${nextMapLength(nextMaps[i].duration.minutes, nextMaps[i].duration.hours)}\n\n`;
 						}
 
 						const mapEmbed = new EmbedBuilder()
 							.setTitle(`Next ${nextMapCount} Rank Map Rotations`)
 							.setDescription(
-								`**Currently:** ${mapData.map.name}\nEnds <t:${mapData.times.nextMap}:D> at <t:${mapData.times.nextMap}:t>.\n**Ranked Period:** Ends <t:${rankedEnd}:D> at <t:${rankedEnd}:t>.\n\n**Up Next:**\n${nextMapString}`,
+								`**Currently:** ${mapData.map}\nEnds <t:${mapData.times.nextMap}:D> at <t:${mapData.times.nextMap}:t>.\n**Ranked Period:** Ends <t:${rankedEnd}:D> at <t:${rankedEnd}:t>.\n\n**Up Next:**\n${nextMapString}`,
 							)
 							.setColor(embedColor);
 
@@ -95,10 +87,7 @@ module.exports = {
 				} else {
 					console.log(error.message);
 
-					const errorEmbed = new EmbedBuilder()
-						.setTitle('Unknown Error')
-						.setDescription(`This should never happen.\nIf you see this error, please contact <@360564818123554836> ASAP.`)
-						.setColor('D0342C');
+					const errorEmbed = new EmbedBuilder().setTitle('Unknown Error').setDescription(`This should never happen.\nIf you see this error, please contact <@360564818123554836> ASAP.`).setColor('D0342C');
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				}

@@ -6,8 +6,8 @@ const { embedColor, Misc } = require('../../data/utilities.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('mixtape')
-		.setDescription('Shows the current and next Mixtape map rotation.')
+		.setName('ltm')
+		.setDescription('Shows the current and next LTM map rotation.')
 		.addNumberOption(option => option.setName('next').setDescription('Select the number of future map rotations you want to see').setMaxValue(1).setMaxValue(10).setRequired(false)),
 
 	async execute(interaction) {
@@ -17,19 +17,19 @@ module.exports = {
 		// If the user doesn't specify a number, default to 1
 		const nextMapCount = nextOption == null ? 1 : nextOption;
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Grabbing mixtape map data from API...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Grabbing map data from API...`).setColor(embedColor);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://solaris.apexstats.dev/beacon/map/mixtape?key=${process.env.SPYGLASS}&next=${nextMapCount}`)
-			.then(response => {
+			.get(`https://solaris.apexstats.dev/beacon/map/ltm?key=${process.env.SPYGLASS}&next=${nextMapCount}`)
+			.then(async response => {
 				const map = response.data;
 				const mapImage = map.map.name.replace(/ /g, '').replace(/'/g, '');
 
 				if (nextMapCount === 1) {
 					const mapEmbed = new EmbedBuilder()
-						.setTitle(`Current Mixtape: ${map.map.type} - ${map.map.name}`)
+						.setTitle(`Current LTM: ${map.map.type} - ${map.map.name}`)
 						.setDescription(
 							`**${map.map.type} - ${map.map.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n**Up Next:** ${map.next[0].map.type} - ${map.next[0].map.name} for 15 minutes.`,
 						)
