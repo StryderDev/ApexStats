@@ -8,9 +8,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('map')
 		.setDescription('Shows the current and next Battle Royale map rotation.')
-		.addNumberOption(option =>
-			option.setName('next').setDescription('Select the number of future map rotations you want to see').setMaxValue(1).setMaxValue(10).setRequired(false),
-		),
+		.addNumberOption(option => option.setName('next').setDescription('Select the number of future map rotations you want to see').setMaxValue(1).setMaxValue(10).setRequired(false)),
 
 	async execute(interaction) {
 		// Slash Command Options
@@ -27,21 +25,18 @@ module.exports = {
 			.get(`https://solaris.apexstats.dev/beacon/map/br?key=${process.env.SPYGLASS}&next=${nextMapCount}`)
 			.then(async response => {
 				const map = response.data;
+				const mapImage = map.map.replace(/ /g, '').replace(/'/g, '');
 
 				if (nextMapCount === 1) {
 					const mapEmbed = new EmbedBuilder()
-						.setTitle(`Legends are currently dropping into ${map.map.name}`)
+						.setTitle(`Legends are currently dropping into ${map.map}`)
 						.setDescription(
-							`**${map.map.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n**Up Next:** ${map.next[0].map.name} for ${nextMapLength(
+							`**${map.map}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n**Up Next:** ${map.next[0].map} for ${nextMapLength(
 								map.next[0].duration.minutes,
 								map.next[0].duration.hours,
 							)}.`,
 						)
-						.setImage(
-							`https://specter.apexstats.dev/ApexStats/Maps/${encodeURIComponent(map.map.image)}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${
-								process.env.SPECTER
-							}`,
-						)
+						.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`)
 						.setColor(embedColor);
 
 					interaction.editReply({ embeds: [mapEmbed] });
@@ -52,15 +47,12 @@ module.exports = {
 					let nextMapString = '';
 
 					for (let i = 0; i < nextMaps.length; i++) {
-						nextMapString += `**${nextMaps[i].map.name}**\nStarts at <t:${nextMaps[i].start}:t> for ${nextMapLength(
-							nextMaps[i].duration.minutes,
-							nextMaps[i].duration.hours,
-						)}\n\n`;
+						nextMapString += `**${nextMaps[i].map}**\nStarts at <t:${nextMaps[i].start}:t> for ${nextMapLength(nextMaps[i].duration.minutes, nextMaps[i].duration.hours)}\n\n`;
 					}
 
 					const mapEmbed = new EmbedBuilder()
 						.setTitle(`Next ${nextMapCount} BR Map Rotations`)
-						.setDescription(`**Currently:** ${map.map.name}\nEnds <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n\n**Up Next:**\n${nextMapString}`)
+						.setDescription(`**Currently:** ${map.map}\nEnds <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n\n**Up Next:**\n${nextMapString}`)
 						.setColor(embedColor);
 
 					interaction.editReply({ embeds: [mapEmbed] });
@@ -86,10 +78,7 @@ module.exports = {
 				} else {
 					console.log(error.message);
 
-					const errorEmbed = new EmbedBuilder()
-						.setTitle('Unknown Error')
-						.setDescription(`This should never happen.\nIf you see this error, please contact <@360564818123554836> ASAP.`)
-						.setColor('D0342C');
+					const errorEmbed = new EmbedBuilder().setTitle('Unknown Error').setDescription(`This should never happen.\nIf you see this error, please contact <@360564818123554836> ASAP.`).setColor('D0342C');
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				}

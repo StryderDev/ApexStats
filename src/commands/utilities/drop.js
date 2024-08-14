@@ -48,16 +48,16 @@ module.exports = {
 			axiomIngest.ingest('apex.stats', [{ map: mapOption, mapDrop: mapFile[map] }]);
 		} else {
 			await axios
-				.get(`https://api.jumpmaster.xyz/map/?key=${process.env.SPYGLASS}`)
+				.get(`https://solaris.apexstats.dev/beacon/map/br?key=${process.env.SPYGLASS}`)
 				.then(response => {
-					const br = response.data.br.map;
+					const br = response.data.map;
 
-					const mapFile = require(`../../data/drops/Season 22/${br.name}.json`);
+					const mapFile = require(`../../data/drops/Season 22/${br}.json`);
 					const map = Math.floor(Math.random() * mapFile.length);
 
-					interaction.editReply({ content: `Drop into **${mapFile[map]}** on ${br.name}`, embeds: [] });
+					interaction.editReply({ content: `Drop into **${mapFile[map]}** on ${br}`, embeds: [] });
 
-					axiomIngest.ingest('apex.stats', [{ map: br.name, mapDrop: mapFile[map] }]);
+					axiomIngest.ingest('apex.stats', [{ map: br, mapDrop: mapFile[map] }]);
 				})
 				.catch(error => {
 					if (error.response) {
