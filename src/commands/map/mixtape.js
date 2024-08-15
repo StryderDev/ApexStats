@@ -25,9 +25,14 @@ module.exports = {
 			.get(`https://solaris.apexstats.dev/beacon/map/mixtape?key=${process.env.SPYGLASS}&next=${nextMapCount}`)
 			.then(response => {
 				const map = response.data;
+				const active = map.active;
 				const mapImage = map.map.name.replace(/ /g, '').replace(/'/g, '');
 
-				if (nextMapCount === 1) {
+				if (active === false) {
+					const mapEmbed = new EmbedBuilder().setTitle('No Active Map').setDescription('There is currently no active map rotation.').setColor(embedColor);
+
+					interaction.editReply({ embeds: [mapEmbed] });
+				} else if (nextMapCount === 1) {
 					const mapEmbed = new EmbedBuilder()
 						.setTitle(`Current Mixtape: ${map.map.type} - ${map.map.name}`)
 						.setDescription(

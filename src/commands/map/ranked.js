@@ -30,13 +30,18 @@ module.exports = {
 				axios.spread((...res) => {
 					const mapData = res[0].data;
 					const seasonData = res[1].data;
+					const active = mapData.active;
 					const mapImage = mapData.map.replace(/ /g, '').replace(/'/g, '');
 
 					// Season Data
 					const rankedSplit = seasonData.dates.split.timestamp;
 					const rankedEnd = seasonData.dates.end.rankedEnd;
 
-					if (nextMapCount === 1) {
+					if (active === false) {
+						const mapEmbed = new EmbedBuilder().setTitle('No Active Map').setDescription('There is currently no active map rotation.').setColor(embedColor);
+
+						interaction.editReply({ embeds: [mapEmbed] });
+					} else if (nextMapCount === 1) {
 						const mapEmbed = new EmbedBuilder()
 							.setTitle(`Ranked Squads are currently competing on ${mapData.map}`)
 							.setDescription(

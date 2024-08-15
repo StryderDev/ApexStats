@@ -25,9 +25,14 @@ module.exports = {
 			.get(`https://solaris.apexstats.dev/beacon/map/br?key=${process.env.SPYGLASS}&next=${nextMapCount}`)
 			.then(async response => {
 				const map = response.data;
+				const active = map.active;
 				const mapImage = map.map.replace(/ /g, '').replace(/'/g, '');
 
-				if (nextMapCount === 1) {
+				if (active === false) {
+					const mapEmbed = new EmbedBuilder().setTitle('No Active Map').setDescription('There is currently no active map rotation.').setColor(embedColor);
+
+					interaction.editReply({ embeds: [mapEmbed] });
+				} else if (nextMapCount === 1) {
 					const mapEmbed = new EmbedBuilder()
 						.setTitle(`Legends are currently dropping into ${map.map}`)
 						.setDescription(
