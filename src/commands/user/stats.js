@@ -90,7 +90,7 @@ module.exports = {
 								inline: true,
 							},
 							{
-								name: `${Account.BattlePass} Shockwave Battle Pass`,
+								name: `${Account.BattlePass} Shockwave Split 2 Battle Pass`,
 								value: `${battlepass(account.battlepass)}`,
 								inline: true,
 							},
