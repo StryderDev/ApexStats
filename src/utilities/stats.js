@@ -39,22 +39,22 @@ function getStatus(status) {
 }
 
 function battlepass(data) {
-	// if (!data.history.Shockwave) return data.level;
+	// if (!data.history["Shockwave_2"]) return data.level;
 
-	if (data.level >= 60) {
+	if (data.history['Shockwave_2'] >= 60) {
 		rewardLevel = 60;
 		rewardCompletion = 100;
 	} else {
-		rewardLevel = data.level;
-		rewardCompletion = Math.floor((data.level / 60) * 100);
+		rewardLevel = data.history['Shockwave_2'];
+		rewardCompletion = Math.floor((data.history['Shockwave_2'] / 60) * 100);
 	}
 
-	if (data.level >= 100) {
+	if (data.history['Shockwave_2'] >= 100) {
 		badgeLevel = 100;
 		badgeCompletion = 100;
 	} else {
-		badgeLevel = data.level;
-		badgeCompletion = Math.floor((data.level / 100) * 100);
+		badgeLevel = data.history['Shockwave_2'];
+		badgeCompletion = Math.floor((data.history['Shockwave_2'] / 100) * 100);
 	}
 
 	return `${Misc.GrayBlank} Reward Completion: ${rewardLevel}/60 (${rewardCompletion}%)\n${Misc.GrayBlank} Badge Completion: ${badgeLevel}/100 (${badgeCompletion}%)`;
