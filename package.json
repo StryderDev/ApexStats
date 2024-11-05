@@ -20,16 +20,16 @@
 	},
 	"homepage": "https://github.com/StryderDev/ApexStats#readme",
 	"dependencies": {
-		"@axiomhq/js": "^1.1.1",
+		"@axiomhq/js": "^1.2.0",
 		"@discordjs/rest": "^2.4.0",
 		"axios": "^1.7.7",
-		"better-sqlite3": "^11.3.0",
+		"better-sqlite3": "^11.5.0",
 		"chalk": "4.1.2",
-		"discord-api-types": "^0.37.100",
-		"discord.js": "^14.16.2",
+		"discord-api-types": "^0.37.103",
+		"discord.js": "^14.16.3",
 		"dotenv": "^16.4.5",
 		"luxon": "^3.5.0",
-		"mysql2": "^3.11.2",
+		"mysql2": "^3.11.4",
 		"topgg-autoposter": "^2.0.2"
 	}
 }

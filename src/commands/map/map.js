@@ -26,13 +26,14 @@ module.exports = {
 			.then(async response => {
 				const map = response.data;
 				const active = map.active;
-				const mapImage = map.map.replace(/ /g, '').replace(/'/g, '');
 
-				if (active === false) {
+				if (active == false) {
 					const mapEmbed = new EmbedBuilder().setTitle('No Active Map').setDescription('There is currently no active map rotation.').setColor(embedColor);
 
 					interaction.editReply({ embeds: [mapEmbed] });
 				} else if (nextMapCount === 1) {
+					const mapImage = map.map.replace(/ /g, '').replace(/'/g, '');
+
 					const mapEmbed = new EmbedBuilder()
 						.setTitle(`Legends are currently dropping into ${map.map}`)
 						.setDescription(
@@ -48,6 +49,7 @@ module.exports = {
 				} else {
 					// use the map.next to get the next nextMapCount maps
 					const nextMaps = map.next.slice(0, nextMapCount);
+					const mapImage = map.map.replace(/ /g, '').replace(/'/g, '');
 
 					let nextMapString = '';
 
