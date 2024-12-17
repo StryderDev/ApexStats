@@ -9,7 +9,7 @@ module.exports = {
 	data: new SlashCommandBuilder().setName('loadout').setDescription('Select a random legend and gun loadout.'),
 
 	async execute(interaction) {
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Selecting a random loadout...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Selecting a random loadout...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -27,11 +27,7 @@ module.exports = {
 				{ name: 'Legend', value: `- ${legendFile[legend]}`, inline: true },
 				{ name: 'Weapons', value: `- ${firstText}\n- ${secondText}`, inline: true },
 			])
-			.setImage(
-				`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legendFile[legend])}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`,
-			)
-			.setColor(embedColor);
-
+			.setImage(`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legendFile[legend])}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`);
 		await interaction.editReply({ embeds: [loadoutEmbed] });
 	},
 };

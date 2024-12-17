@@ -39,7 +39,7 @@ module.exports = {
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading Data for ${username} on ${platformName(platform)}...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading Data for ${username} on ${platformName(platform)}...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -90,7 +90,7 @@ module.exports = {
 								inline: true,
 							},
 							{
-								name: `${Account.BattlePass} Shockwave Split 2 Battle Pass`,
+								name: `${Account.BattlePass} From the Rift Split 2 Battle Pass`,
 								value: `${battlepass(account.battlepass)}`,
 								inline: true,
 							},
@@ -129,7 +129,7 @@ module.exports = {
 							},
 						])
 						.setImage(`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legend)}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`)
-						.setColor(embedColor)
+
 						.setFooter({
 							text: `Player Added: ${playerAddedDate}\nEquip the Battle Pass badge in-game to update it!`,
 						});

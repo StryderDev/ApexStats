@@ -33,7 +33,7 @@ module.exports = {
 		// Slash Command Options
 		const mapOption = interaction.options.getString('map');
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Selecting a random place to drop...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Selecting a random place to drop...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 

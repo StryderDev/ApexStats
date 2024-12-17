@@ -34,7 +34,7 @@ module.exports = {
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading data for selected account...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading data for selected account...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -104,10 +104,7 @@ module.exports = {
 				} else {
 					console.log(error.message);
 
-					const errorEmbed = new EmbedBuilder()
-						.setTitle('Unknown Error')
-						.setDescription(`This should never happen.\nIf you see this error, please contact <@360564818123554836> ASAP.`)
-						.setColor('D0342C');
+					const errorEmbed = new EmbedBuilder().setTitle('Unknown Error').setDescription(`This should never happen.\nIf you see this error, please contact <@360564818123554836> ASAP.`).setColor('D0342C');
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				}

@@ -14,7 +14,7 @@ module.exports = {
 	data: new SlashCommandBuilder().setName('guns').setDescription('Select a random gun loadout.'),
 
 	async execute(interaction) {
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Selecting a random loadout...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Selecting a random loadout...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 

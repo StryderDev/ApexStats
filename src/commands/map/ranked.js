@@ -17,7 +17,7 @@ module.exports = {
 		// If the user doesn't specify a number, default to 1
 		const nextMapCount = nextOption == null ? 1 : nextOption;
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Grabbing ranked map data from API...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Grabbing ranked map data from API...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -38,7 +38,7 @@ module.exports = {
 					const rankedEnd = seasonData.dates.end.rankedEnd;
 
 					if (active === false) {
-						const mapEmbed = new EmbedBuilder().setTitle('No Active Map').setDescription('There is currently no active map rotation.').setColor(embedColor);
+						const mapEmbed = new EmbedBuilder().setTitle('No Active Map').setDescription('There is currently no active map rotation.');
 
 						interaction.editReply({ embeds: [mapEmbed] });
 					} else if (nextMapCount === 1) {
@@ -47,9 +47,7 @@ module.exports = {
 							.setDescription(
 								`**${mapData.map}** ends <t:${mapData.times.nextMap}:R> at <t:${mapData.times.nextMap}:t>.\n**Next Up:** ${mapData.next[0].map} for 24 hours.\n**Ranked Period Split:** <t:${rankedSplit}:D> at <t:${rankedSplit}:t>, or <t:${rankedSplit}:R>.\n**Ranked Period End:** <t:${rankedEnd}:D> at <t:${rankedEnd}:t>, or <t:${rankedEnd}:R>.`,
 							)
-							.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`)
-							.setColor(embedColor);
-
+							.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`);
 						interaction.editReply({ embeds: [mapEmbed] });
 					} else {
 						// use the map.next to get the next nextMapCount maps
@@ -65,9 +63,7 @@ module.exports = {
 							.setTitle(`Next ${nextMapCount} Rank Map Rotations`)
 							.setDescription(
 								`**Currently:** ${mapData.map}\nEnds <t:${mapData.times.nextMap}:D> at <t:${mapData.times.nextMap}:t>.\n**Ranked Period:** Ends <t:${rankedEnd}:D> at <t:${rankedEnd}:t>.\n\n**Up Next:**\n${nextMapString}`,
-							)
-							.setColor(embedColor);
-
+							);
 						interaction.editReply({ embeds: [mapEmbed] });
 					}
 				}),

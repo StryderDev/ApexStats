@@ -39,7 +39,7 @@ module.exports = {
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading Ranked Data for ${username} on ${platformName(platform)}...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading Ranked Data for ${username} on ${platformName(platform)}...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -104,7 +104,7 @@ module.exports = {
 								inline: false,
 							},
 						])
-						.setColor(embedColor)
+
 						.setFooter({
 							text: `Player Added: ${playerAddedDate}`,
 						});

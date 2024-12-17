@@ -34,7 +34,7 @@ module.exports = {
 					inline: true,
 				},
 			])
-			.setColor(embedColor)
+
 			.setFooter({ text: 'Wanna add the bot to your server? Click the "Apex Stats" username and press "Add to Server".' });
 
 		await interaction.editReply({ embeds: [info] });
