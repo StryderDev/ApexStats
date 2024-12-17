@@ -39,8 +39,6 @@ function getStatus(status) {
 }
 
 function battlepass(data) {
-	// if (!data.history["Shockwave_2"]) return data.level;
-
 	if (data.history['From_the_Rift'] >= 60) {
 		rewardLevel = 60;
 		rewardCompletion = 100;

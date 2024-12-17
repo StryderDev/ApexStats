@@ -8,7 +8,7 @@ module.exports = {
 	data: new SlashCommandBuilder().setName('status').setDescription('Shows the status of login and matchmaking servers. Not always indicative of server status.'),
 
 	async execute(interaction) {
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Fetching Apex server status...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Fetching Apex server status...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -84,10 +84,7 @@ module.exports = {
 				} else {
 					console.log(error.message);
 
-					const errorEmbed = new EmbedBuilder()
-						.setTitle('Unknown Error')
-						.setDescription(`This should never happen.\nIf you see this error, please contact <@360564818123554836> ASAP.`)
-						.setColor('D0342C');
+					const errorEmbed = new EmbedBuilder().setTitle('Unknown Error').setDescription(`This should never happen.\nIf you see this error, please contact <@360564818123554836> ASAP.`).setColor('D0342C');
 
 					interaction.editReply({ embeds: [errorEmbed] });
 				}

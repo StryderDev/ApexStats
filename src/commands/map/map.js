@@ -17,7 +17,7 @@ module.exports = {
 		// If the user doesn't specify a number, default to 1
 		const nextMapCount = nextOption == null ? 1 : nextOption;
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Grabbing map data from API...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Grabbing map data from API...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -28,7 +28,7 @@ module.exports = {
 				const active = map.active;
 
 				if (active == false) {
-					const mapEmbed = new EmbedBuilder().setTitle('No Active Map').setDescription('There is currently no active map rotation.').setColor(embedColor);
+					const mapEmbed = new EmbedBuilder().setTitle('No Active Map').setDescription('There is currently no active map rotation.');
 
 					interaction.editReply({ embeds: [mapEmbed] });
 				} else if (nextMapCount === 1) {
@@ -42,9 +42,7 @@ module.exports = {
 								map.next[0].duration.hours,
 							)}.`,
 						)
-						.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`)
-						.setColor(embedColor);
-
+						.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`);
 					interaction.editReply({ embeds: [mapEmbed] });
 				} else {
 					// use the map.next to get the next nextMapCount maps
@@ -59,9 +57,7 @@ module.exports = {
 
 					const mapEmbed = new EmbedBuilder()
 						.setTitle(`Next ${nextMapCount} BR Map Rotations`)
-						.setDescription(`**Currently:** ${map.map}\nEnds <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n\n**Up Next:**\n${nextMapString}`)
-						.setColor(embedColor);
-
+						.setDescription(`**Currently:** ${map.map}\nEnds <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n\n**Up Next:**\n${nextMapString}`);
 					interaction.editReply({ embeds: [mapEmbed] });
 				}
 			})

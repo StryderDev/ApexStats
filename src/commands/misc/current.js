@@ -7,7 +7,7 @@ module.exports = {
 	data: new SlashCommandBuilder().setName('current').setDescription('Information about the current season.'),
 
 	async execute(interaction) {
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading current season data...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading current season data...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -50,7 +50,7 @@ module.exports = {
 						inline: true,
 					},
 				)
-				.setColor(embedColor)
+
 				// .setImage(`${encodeURI(season.info.data.image)}?t=${Math.floor(Math.random() * 10) + 1}`)
 				.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${season.info.data.image}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`)
 				.setFooter({

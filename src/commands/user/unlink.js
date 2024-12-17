@@ -10,7 +10,7 @@ module.exports = {
 	data: new SlashCommandBuilder().setName('unlink').setDescription('Unlink your Apex account from your Discord account.'),
 
 	async execute(interaction) {
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading data for selected account...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading data for selected account...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 

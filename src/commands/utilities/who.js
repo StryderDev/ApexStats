@@ -25,7 +25,7 @@ module.exports = {
 		// Slash Command Options
 		const type = interaction.options.getString('type');
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Selecting a random legend...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Selecting a random legend...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -41,11 +41,7 @@ module.exports = {
 
 		const legendEmbed = new EmbedBuilder()
 			.setDescription(`Play **${legendFile[legend]}** this round!`)
-			.setImage(
-				`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legendFile[legend])}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`,
-			)
-			.setColor(embedColor);
-
+			.setImage(`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legendFile[legend])}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`);
 		await interaction.editReply({ embeds: [legendEmbed] });
 	},
 };

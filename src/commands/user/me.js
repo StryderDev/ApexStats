@@ -17,7 +17,7 @@ module.exports = {
 	data: new SlashCommandBuilder().setName('me').setDescription('Shows the stats of your linked Apex account.'),
 
 	async execute(interaction) {
-		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading data for selected account...`).setColor(embedColor);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${Misc.Loading} Loading data for selected account...`);
 
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
@@ -121,7 +121,7 @@ module.exports = {
 									},
 								])
 								.setImage(`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(legend)}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`)
-								.setColor(embedColor)
+
 								.setFooter({
 									text: `Player Added: ${playerAddedDate}\nEquip the Battle Pass badge in-game to update it!`,
 								});

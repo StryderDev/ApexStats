@@ -48,7 +48,6 @@ module.exports = {
 								inline: true,
 							},
 						])
-						.setColor(embedColor)
 						.setTimestamp();
 
 					const guild = client.guilds.cache.get(status.server);
