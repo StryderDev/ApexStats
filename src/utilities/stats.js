@@ -97,7 +97,7 @@ function checkUserBan(bans) {
 }
 
 function calcTillMaster(player) {
-	const tillMaster = 15000 - player.score;
+	const tillMaster = 16000 - player.score;
 
 	if (tillMaster <= 0) return `0 RP`;
 
@@ -108,7 +108,7 @@ function calcTillPred(player, pred, platform) {
 	if (platform == 'X1') platform = 'Xbox';
 	if (platform == 'PS4') platform = 'Playstation';
 
-	const tillPred = pred[platform].value - player.score;
+	const tillPred = pred[platform].value - player.score + 1000;
 
 	if (tillPred <= 0) return `0 RP`;
 
@@ -126,7 +126,7 @@ function getDivisionCount(rank) {
 	const rankNextDivision = rank.nextDivision.toString();
 	const rankNextScore = rank.nextScore.toString();
 
-	if (rankScore < 15000) {
+	if (rankScore < 16000) {
 		const finalScore = rankNextDivision - (rankNextScore - rankScore);
 
 		return `${finalScore
