@@ -1,6 +1,6 @@
 {
 	"name": "apexstats",
-	"version": "1.14.76",
+	"version": "1.14.77",
 	"description": "A Discord bot to show off in-game content and information for Apex Legends.",
 	"main": "src/Shard.js",
 	"scripts": {
@@ -14,9 +14,6 @@
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/StryderDev/ApexStats/issues"
-	},
-	"engine": {
-		"node": "18.18.2"
 	},
 	"homepage": "https://github.com/StryderDev/ApexStats#readme",
 	"dependencies": {
