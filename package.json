@@ -13,8 +13,14 @@
 	"license": "ISC",
 	"author": "SDCore",
 	"type": "commonjs",
-	"main": "shard.js",
+	"main": "src/shard.js",
 	"scripts": {
 		"dev": "nodemon ."
+	},
+	"dependencies": {
+		"better-sqlite3": "^11.8.1",
+		"chalk": "4.1.2",
+		"discord.js": "^14.14.1",
+		"dotenv": "^16.4.7"
 	}
 }
