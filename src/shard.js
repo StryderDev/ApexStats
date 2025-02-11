@@ -1,11 +1,12 @@
 const path = require('path');
 const chalk = require('chalk');
-const dotenv = require('dotenv');
-const db = require('./utilities/db.js');
 const { ShardingManager } = require('discord.js');
 
 // Load environment variables from .env file
-dotenv.config();
+require('dotenv').config();
+
+// Require DB Config after dotenv is loaded
+const db = require('./utilities/db.js');
 
 // If bot is in dev mode, show that in the console
 if (process.env.DEBUG === 'true') console.log(chalk.yellow(`${chalk.bold('[BOT]')} Bot started in debug environment`));
@@ -30,5 +31,9 @@ shardManager.on(`shardCreate`, shard => {
 });
 
 shardManager.spawn().catch(err => {
-	console.log(chalk.red(`${chalk.bold('[SHARD MANAGER]')} Error creating bot shards: ${err.statusText}`));
+	if (err.statusText) {
+		return console.log(chalk.red(`${chalk.bold('[SHARD MANAGER]')} Error creating bot shards: ${err.statusText}`));
+	} else {
+		return console.log(chalk.red(`${chalk.bold('[SHARD MANAGER]')} Error creating bot shards: ${err}`));
+	}
 });
