@@ -108,7 +108,7 @@ function calcTillPred(player, pred, platform) {
 	if (platform == 'X1') platform = 'Xbox';
 	if (platform == 'PS4') platform = 'Playstation';
 
-	const tillPred = pred[platform].value - player.score + 1000;
+	const tillPred = pred[platform].value - player.score;
 
 	if (tillPred <= 0) return `0 RP`;
 
