@@ -20,13 +20,13 @@ shardManager.on(`shardCreate`, shard => {
 	console.log(chalk.green(`${chalk.bold('[SHARD_' + shard.id + ']')} Shard ${shard.id} launched`));
 
 	// Create initial rows in database for logging
-	// the br and ranked map index for each shard
-	console.log(chalk.yellow(`${chalk.bold('[SPYGLASS]')} Adding row for BR and Ranked map index for Shard ${shard.id}...`));
+	// the map index for each shard
+	console.log(chalk.yellow(`${chalk.bold('[SPYGLASS]')} Adding row for map index for Shard ${shard.id}...`));
 
-	db.query('REPLACE INTO ApexStats_CurrentMapIndex (id, brMapIndex, rankedMapIndex) VALUES (?, 0, 0)', [shard.id], (err, row) => {
+	db.query('REPLACE INTO ApexStats_CurrentMapIndex (id, brMapIndex, rankedMapIndex) VALUES (?, 99, 99)', [shard.id], (err, row) => {
 		if (err) return console.log(chalk.red(`${chalk.bold('[SHARD_' + shard.id + ']')} Error updating CurrentMapIndex: ${err.sqlMessage} for Shard ${shard.id}`));
 
-		console.log(chalk.green(`${chalk.bold('[SPYGLASS]')} Updated CurrentMapIndex for BR and Ranked map index for Shard ${shard.id}`));
+		console.log(chalk.green(`${chalk.bold('[SPYGLASS]')} Updated CurrentMapIndex for Shard ${shard.id}`));
 	});
 });
 
