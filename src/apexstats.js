@@ -12,9 +12,9 @@ client
 	})
 	.catch(err => {
 		if (!err.statusText) {
-			console.log(chalk.red(`${chalk.bold('[BOT]')} Error logging into Discord: ${err}`));
+			console.error(chalk.red(`${chalk.bold('[BOT]')} Error logging into Discord: ${err}`));
 		} else {
-			console.log(chalk.red(`${chalk.bold('[BOT]')} Error logging into Discord: ${err.statusText}`));
+			console.error(chalk.red(`${chalk.bold('[BOT]')} Error logging into Discord: ${err.statusText}`));
 		}
 	});
 

@@ -35,7 +35,7 @@ module.exports = {
 								const updateMapIndex = `UPDATE ApexStats_CurrentMapIndex SET brMapIndex = ${brData.rotationIndex} WHERE id = ${client.shard.ids[0]}`;
 
 								db.query(updateMapIndex, (err, result) => {
-									if (err) return console.log(chalk.red(`${chalk.bold('[PRESENCE]')} Query error: ${err.code}`));
+									if (err) return console.error(chalk.red(`${chalk.bold('[PRESENCE]')} Query error: ${err.code}`));
 
 									console.log(chalk.green(`${chalk.bold('[PRESENCE]')} Updated map index to ${brData.rotationIndex}`));
 								});

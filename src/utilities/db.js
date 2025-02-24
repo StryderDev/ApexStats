@@ -26,10 +26,10 @@ function dbConnect() {
 			if (err) {
 				if (err.errors) {
 					err.errors.forEach(error => {
-						console.log(chalk.red(`${chalk.bold('[SPYGLASS]')} Error connecting to Spyglass: ${error.message}`));
+						console.error(chalk.red(`${chalk.bold('[SPYGLASS]')} Error connecting to Spyglass: ${error.message}`));
 					});
 				} else {
-					console.log(chalk.red(`${chalk.bold('[SPYGLASS]')} Error connecting to Spyglass: ${err.message}`));
+					console.error(chalk.red(`${chalk.bold('[SPYGLASS]')} Error connecting to Spyglass: ${err.message}`));
 				}
 
 				return;

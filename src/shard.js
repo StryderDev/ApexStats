@@ -24,7 +24,7 @@ shardManager.on(`shardCreate`, shard => {
 	console.log(chalk.yellow(`${chalk.bold('[SPYGLASS]')} Adding row for map index for Shard ${shard.id}...`));
 
 	db.query('REPLACE INTO ApexStats_CurrentMapIndex (id, brMapIndex, rankedMapIndex) VALUES (?, 99, 99)', [shard.id], (err, row) => {
-		if (err) return console.log(chalk.red(`${chalk.bold('[SHARD_' + shard.id + ']')} Error updating CurrentMapIndex: ${err.sqlMessage} for Shard ${shard.id}`));
+		if (err) return console.error(chalk.red(`${chalk.bold('[SHARD_' + shard.id + ']')} Error updating CurrentMapIndex: ${err.sqlMessage} for Shard ${shard.id}`));
 
 		console.log(chalk.green(`${chalk.bold('[SPYGLASS]')} Updated CurrentMapIndex for Shard ${shard.id}`));
 	});
@@ -32,8 +32,8 @@ shardManager.on(`shardCreate`, shard => {
 
 shardManager.spawn().catch(err => {
 	if (err.statusText) {
-		return console.log(chalk.red(`${chalk.bold('[SHARD MANAGER]')} Error creating bot shards: ${err.statusText}`));
+		return console.error(chalk.red(`${chalk.bold('[SHARD MANAGER]')} Error creating bot shards: ${err.statusText}`));
 	} else {
-		return console.log(chalk.red(`${chalk.bold('[SHARD MANAGER]')} Error creating bot shards: ${err}`));
+		return console.error(chalk.red(`${chalk.bold('[SHARD MANAGER]')} Error creating bot shards: ${err}`));
 	}
 });
