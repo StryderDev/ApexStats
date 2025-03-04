@@ -21,7 +21,7 @@ Currently, the ability to contribute to this project is limited. Since some of t
 
 ## Current Features
 
--   View live, up-to-date stats for players on Steam, Origin, PlayStation, and Xbox
+-   View live, up-to-date stats for players on PC (Steam/EA App/Epic Games), PlayStation, and Xbox
     -   View current:
         -   In-game selected legend and associated trackers
         -   Account level
@@ -33,6 +33,4 @@ Currently, the ability to contribute to this project is limited. Since some of t
 -   Choose a random place to drop in the current map
 -   Choose a random legend to play
 -   Pick a random loadout to play
--   Choose from a list of random fun facts
--   Get info about current or future in-game events
 -   View the threshold for Apex Predator in Battle Royale on PC, PlayStation, Xbox, and Nintendo Switch
