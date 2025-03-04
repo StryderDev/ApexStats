@@ -15,4 +15,14 @@ function uptime(client) {
 	})();
 }
 
-module.exports = { uptime };
+function isPlural(number, string) {
+	return number === 1 ? `${number} ${string}` : `${number} ${string}s`;
+}
+
+function emoteFile(debug) {
+	if (debug === 'true') return 'dev';
+
+	return 'prod';
+}
+
+module.exports = { uptime, isPlural, emoteFile };
