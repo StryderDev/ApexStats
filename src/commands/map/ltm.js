@@ -37,14 +37,16 @@ module.exports = {
 					const mapEmbed = new EmbedBuilder()
 						.setTitle(`Current LTM: ${map.map.type} - ${map.map.name}`)
 						.setDescription(
-							`**${map.map.type} - ${map.map.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n**Up Next:** ${map.next[0].map.type} - ${map.next[0].map.name} for 15 minutes.`,
+							`**${map.map.type} - ${map.map.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n**Up Next:** ${map.next[0].map.type} - ${map.next[0].map.name} for ${nextMapLength(
+								map.next[0].duration.minutes,
+								map.next[0].duration.hours,
+							)}.`,
 						)
 						.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`);
 					interaction.editReply({ embeds: [mapEmbed] });
 				} else {
 					// use the map.next to get the next nextMapCount maps
 					const nextMaps = map.next.slice(0, nextMapCount);
-					const mapImage = map.map.name.replace(/ /g, '').replace(/'/g, '');
 
 					let nextMapString = '';
 
@@ -53,7 +55,7 @@ module.exports = {
 					}
 
 					const mapEmbed = new EmbedBuilder()
-						.setTitle(`Next ${nextMapCount} Mixtape Map Rotations`)
+						.setTitle(`Next ${nextMapCount} LTM Map Rotations`)
 						.setDescription(`**Currently:** ${map.map.type} - ${map.map.name}\nEnds <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n\n**Up Next:**\n${nextMapString}`);
 					interaction.editReply({ embeds: [mapEmbed] });
 				}
