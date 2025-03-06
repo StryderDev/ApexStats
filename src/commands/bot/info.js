@@ -18,7 +18,7 @@ module.exports = {
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		const infoEmbed = new EmbedBuilder()
-			.setTitle('Apex Stats')
+			.setTitle(`${emotes.apexIcon} Apex Stats`)
 			.setDescription('Player stats and utilities for Apex Legends.')
 			.addFields([
 				{

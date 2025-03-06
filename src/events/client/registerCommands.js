@@ -2,8 +2,8 @@ const fs = require('fs');
 const chalk = require('chalk');
 const { REST } = require('@discordjs/rest');
 const { Collection } = require('discord.js');
-const { Routes } = require('discord-api-types/v10');
 const wait = require('util').promisify(setTimeout);
+const { Routes } = require('discord-api-types/v10');
 
 module.exports = {
 	name: 'ready',
