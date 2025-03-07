@@ -1,5 +1,7 @@
 {
 	"apexIcon": "<:ApexStats_ApexIcon:1347103640975835186>",
 	"loading": "<a:ApexStats_Loading:1346376573841838121>",
-	"listArrow": "<:ApexStats_ListArrow:1346381888692031602>"
+	"listArrow": "<:ApexStats_ListArrow:1346381888692031602>",
+	"online": "<:ApexStats_Online:1347463424149553223>",
+	"offline": "<:ApexStats_Offline:1347463456420397056>"
 }
