@@ -36,9 +36,9 @@ module.exports = {
 							if (mapIndex.brMapIndex != brMap['rotationIndex'] || mapIndex.rankedMapIndex != rankedMap['rotationIndex']) {
 								console.log(chalk.yellow(`${chalk.bold('[PRESENCE] Checking for map rotation updates...')}`));
 
-								client.user.setActivity(`${brMap['map']} / ${rankedMap['map']}`, { type: ActivityType.Custom });
+								client.user.setActivity(`${brMap['map']['name']} / ${rankedMap['map']['name']}`, { type: ActivityType.Custom });
 
-								console.log(chalk.blue(`${chalk.bold('[PRESENCE]')} Map rotation updates found, updated presence to "${brMap['map']} / ${rankedMap['map']}"`));
+								console.log(chalk.blue(`${chalk.bold('[PRESENCE]')} Map rotation updates found, updated presence to "${brMap['map']['name']} / ${rankedMap['map']['name']}"`));
 
 								db_mapIndex.prepare(`UPDATE currentMapIndex SET brMapIndex = ${brMap['rotationIndex']}, rankedMapIndex = ${rankedMap['rotationIndex']} WHERE id = ${client.shard.ids[0] + 1}`).run();
 							}
