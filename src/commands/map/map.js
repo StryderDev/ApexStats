@@ -47,7 +47,7 @@ module.exports = {
 				} else {
 					// use the map.next to get the next nextMapCount maps
 					const nextMaps = map.next.slice(0, nextMapCount);
-					const mapImage = map.map.replace(/ /g, '').replace(/'/g, '');
+					const mapImage = map.map.name.replace(/ /g, '').replace(/'/g, '');
 
 					let nextMapString = '';
 
