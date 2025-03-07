@@ -32,12 +32,12 @@ module.exports = {
 
 					interaction.editReply({ embeds: [mapEmbed] });
 				} else if (nextMapCount === 1) {
-					const mapImage = map.map.replace(/ /g, '').replace(/'/g, '');
+					const mapImage = map.map.name.replace(/ /g, '').replace(/'/g, '');
 
 					const mapEmbed = new EmbedBuilder()
-						.setTitle(`Legends are currently dropping into ${map.map}`)
+						.setTitle(`Legends are currently dropping into ${map.map.name}`)
 						.setDescription(
-							`**${map.map}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n**Up Next:** ${map.next[0].map} for ${nextMapLength(
+							`**${map.map.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n**Up Next:** ${map.next[0].map.name} for ${nextMapLength(
 								map.next[0].duration.minutes,
 								map.next[0].duration.hours,
 							)}.`,
@@ -52,12 +52,12 @@ module.exports = {
 					let nextMapString = '';
 
 					for (let i = 0; i < nextMaps.length; i++) {
-						nextMapString += `**${nextMaps[i].map}**\nStarts at <t:${nextMaps[i].start}:t> for ${nextMapLength(nextMaps[i].duration.minutes, nextMaps[i].duration.hours)}\n\n`;
+						nextMapString += `**${nextMaps[i].map.name}**\nStarts at <t:${nextMaps[i].start}:t> for ${nextMapLength(nextMaps[i].duration.minutes, nextMaps[i].duration.hours)}\n\n`;
 					}
 
 					const mapEmbed = new EmbedBuilder()
 						.setTitle(`Next ${nextMapCount} BR Map Rotations`)
-						.setDescription(`**Currently:** ${map.map}\nEnds <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n\n**Up Next:**\n${nextMapString}`);
+						.setDescription(`**Currently:** ${map.map.name}\nEnds <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n\n**Up Next:**\n${nextMapString}`);
 					interaction.editReply({ embeds: [mapEmbed] });
 				}
 			})
