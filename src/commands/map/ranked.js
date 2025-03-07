@@ -31,7 +31,7 @@ module.exports = {
 					const mapData = res[0].data;
 					const seasonData = res[1].data;
 					const active = mapData.active;
-					const mapImage = mapData.map.replace(/ /g, '').replace(/'/g, '');
+					const mapImage = mapData.map.name.replace(/ /g, '').replace(/'/g, '');
 
 					// Season Data
 					const rankedSplit = seasonData.dates.split.timestamp;
@@ -43,9 +43,9 @@ module.exports = {
 						interaction.editReply({ embeds: [mapEmbed] });
 					} else if (nextMapCount === 1) {
 						const mapEmbed = new EmbedBuilder()
-							.setTitle(`Ranked Squads are currently competing on ${mapData.map}`)
+							.setTitle(`Ranked Squads are currently competing on ${mapData.map.name}`)
 							.setDescription(
-								`**${mapData.map}** ends <t:${mapData.times.nextMap}:R> at <t:${mapData.times.nextMap}:t>.\n**Next Up:** ${mapData.next[0].map} for 24 hours.\n**Ranked Period Split:** <t:${rankedSplit}:D> at <t:${rankedSplit}:t>, or <t:${rankedSplit}:R>.\n**Ranked Period End:** <t:${rankedEnd}:D> at <t:${rankedEnd}:t>, or <t:${rankedEnd}:R>.`,
+								`**${mapData.map.name}** ends <t:${mapData.times.nextMap}:R> at <t:${mapData.times.nextMap}:t>.\n**Next Up:** ${mapData.next[0].map.name} for 24 hours.\n**Ranked Period Split:** <t:${rankedSplit}:D> at <t:${rankedSplit}:t>, or <t:${rankedSplit}:R>.\n**Ranked Period End:** <t:${rankedEnd}:D> at <t:${rankedEnd}:t>, or <t:${rankedEnd}:R>.`,
 							)
 							.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`);
 						interaction.editReply({ embeds: [mapEmbed] });
@@ -56,13 +56,16 @@ module.exports = {
 						let nextMapString = '';
 
 						for (let i = 0; i < nextMaps.length; i++) {
-							nextMapString += `**${nextMaps[i].map}**\nStarts <t:${nextMaps[i].start}:D> at <t:${nextMaps[i].start}:t> for ${nextMapLength(nextMaps[i].duration.minutes, nextMaps[i].duration.hours)}\n\n`;
+							nextMapString += `**${nextMaps[i].map.name}**\nStarts <t:${nextMaps[i].start}:D> at <t:${nextMaps[i].start}:t> for ${nextMapLength(
+								nextMaps[i].duration.minutes,
+								nextMaps[i].duration.hours,
+							)}\n\n`;
 						}
 
 						const mapEmbed = new EmbedBuilder()
 							.setTitle(`Next ${nextMapCount} Rank Map Rotations`)
 							.setDescription(
-								`**Currently:** ${mapData.map}\nEnds <t:${mapData.times.nextMap}:D> at <t:${mapData.times.nextMap}:t>.\n**Ranked Period:** Ends <t:${rankedEnd}:D> at <t:${rankedEnd}:t>.\n\n**Up Next:**\n${nextMapString}`,
+								`**Currently:** ${mapData.map.name}\nEnds <t:${mapData.times.nextMap}:D> at <t:${mapData.times.nextMap}:t>.\n**Ranked Period:** Ends <t:${rankedEnd}:D> at <t:${rankedEnd}:t>.\n\n**Up Next:**\n${nextMapString}`,
 							);
 						interaction.editReply({ embeds: [mapEmbed] });
 					}
