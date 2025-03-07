@@ -32,7 +32,7 @@ module.exports = {
 					const mapImage = mapInfo.name.replace(/ /g, '').replace(/'/g, ''); // Remove spaces and single quotes from name for image URL
 
 					const mapEmbed = new EmbedBuilder()
-						.setTitle(`${emotes.online} ${mapInfo.type}: ${mapInfo.name}`)
+						.setTitle(`${emotes.online} ${mapInfo.type} - ${mapInfo.name}`)
 						.setDescription(
 							`${emotes.listArrow} **${mapInfo.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>\n${emotes.listArrow} Up Next: **${map.next[0].map.name}** for ${nextMapLength(
 								map.next[0].duration,
