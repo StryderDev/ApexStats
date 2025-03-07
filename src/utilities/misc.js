@@ -26,7 +26,9 @@ function emoteFile(debug) {
 }
 
 function nextMapLength(duration) {
-	if (duration.hours === 0) return isPlural(duration.minutes, 'minute');
+	if (duration.minutes === 0 && duration.hours === 0) return '0 minutes';
+	if (duration.minutes === 0) return isPlural(duration.hours, 'hour');
+	else if (duration.hours === 0) return isPlural(duration.minutes, 'minute');
 	else return `${isPlural(duration.hours, 'hour')} ${isPlural(duration.minutes, 'minute')}`;
 }
 

@@ -7,25 +7,25 @@ const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('map')
-		.setDescription('View current and future Battle Royale map rotations')
+		.setName('ranked')
+		.setDescription('View current and future Ranked map rotations')
 		.addNumberOption(option => option.setName('next').setDescription('Amount of future map rotations').setMinValue(1).setMaxValue(10).setRequired(false)),
 
 	async execute(interaction) {
 		const amount = interaction.options.getNumber('next');
 		const nextAmount = amount == null ? 1 : amount;
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${emotes.loading} Loading Battle Royale map data...`);
+		const loadingEmbed = new EmbedBuilder().setDescription(`${emotes.loading} Loading Ranked map data...`);
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://solaris.apexstats.dev/beacon/map/br?key=${process.env.SPYGLASS}&next=${nextAmount}`)
+			.get(`https://solaris.apexstats.dev/beacon/map/ranked?key=${process.env.SPYGLASS}&next=${nextAmount}`)
 			.then(async resp => {
 				const map = resp.data;
 				const mapInfo = map.map;
 
 				if (map.active == false) {
-					const mapEmbed = new EmbedBuilder().setTitle(`${emotes.offline} No Active Map`).setDescription(`${emotes.listArrow} There is no active Battle Royale map in rotation.`);
+					const mapEmbed = new EmbedBuilder().setTitle(`${emotes.offline} No Active Map`).setDescription(`${emotes.listArrow} There is no active Ranked map in rotation.`);
 
 					interaction.editReply({ embeds: [mapEmbed] });
 				} else if (nextAmount === 1) {
