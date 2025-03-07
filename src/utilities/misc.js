@@ -25,4 +25,9 @@ function emoteFile(debug) {
 	return 'prod';
 }
 
-module.exports = { uptime, isPlural, emoteFile };
+function nextMapLength(duration) {
+	if (duration.hours === 0) return isPlural(duration.minutes, 'minute');
+	else return `${isPlural(duration.hours, 'hour')} ${isPlural(duration.minutes, 'minute')}`;
+}
+
+module.exports = { uptime, isPlural, emoteFile, nextMapLength };
