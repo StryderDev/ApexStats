@@ -1,8 +1,8 @@
 const axios = require('axios');
 const chalk = require('chalk');
 const { emoteFile } = require('../../utilities/misc.js');
-const { platformName, platformEmote, battlepassProgress } = require('../../utilities/stats.js');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { platformName, platformEmote, battlepassProgress } = require('../../utilities/stats.js');
 
 const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
@@ -54,6 +54,7 @@ module.exports = {
 
 					const statsEmbed = new EmbedBuilder()
 						.setTitle(`${platformEmote(user.platform)} ${playerTag} ${user.username} playing ${playerData.active.legend}`)
+						.setDescription(`Status: STATUS\n-# Player Added: <t:${user.userAdded}:d> - Last Updated: <t:${user.userUpdated}:d>`)
 						.addFields([
 							{
 								name: `${emotes.account} Account Level`,
@@ -68,7 +69,10 @@ module.exports = {
 								inline: true,
 							},
 						])
-						.setImage(`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(playerData.active.legend)}.png?key=${process.env.SPECTER}`);
+						.setImage(`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(playerData.active.legend)}.png?key=${process.env.SPECTER}`)
+						.setFooter({
+							text: `Equip the Battle Pass badge in-game to update it!`,
+						});
 
 					interaction.editReply({ embeds: [statsEmbed] });
 				}),
