@@ -1,7 +1,12 @@
 {
+	"pc": "<:ApexStats_PC:1347845935220391966>",
+	"playstation": "<:ApexStats_PlayStation:1347845945588449370>",
+	"xbox": "<:ApexStats_Xbox:1347845971366645771>",
+	"switch": "<:ApexStats_NintendoSwitch:1347845981462462546>",
 	"apexIcon": "<:ApexStats_ApexIcon:1347103482502713395>",
 	"loading": "<a:ApexStats_Loading:1346376654569869342>",
 	"listArrow": "<:ApexStats_ListArrow:1346381769821393009>",
 	"online": "<:ApexStats_Online:1347463117717897299>",
-	"offline": "<:ApexStats_Offline:1347463165037907998>"
+	"offline": "<:ApexStats_Offline:1347463165037907998>",
+	"account": "<:ApexStats_AccountLevel:1347852821126582344>"
 }
