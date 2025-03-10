@@ -75,6 +75,16 @@ module.exports = {
 								inline: false,
 							},
 							{
+								name: `Ranked Data`,
+								value: `Ranked Data Part 2`,
+								inline: true,
+							},
+							{
+								name: `\u200b`,
+								value: `RP Stuff`,
+								inline: true,
+							},
+							{
 								name: `\u200b`,
 								value: '**Active Trackers**',
 								inline: false,
