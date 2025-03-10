@@ -2,7 +2,7 @@ const axios = require('axios');
 const chalk = require('chalk');
 const { emoteFile } = require('../../utilities/misc.js');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { platformName, platformEmote, battlepassProgress } = require('../../utilities/stats.js');
+const { platformName, playerStatus, platformEmote, battlepassProgress } = require('../../utilities/stats.js');
 
 const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
@@ -49,12 +49,13 @@ module.exports = {
 
 					const user = playerData.user;
 					const account = playerData.account;
+					const trackers = playerData.active.trackers;
 
 					const playerTag = user.tag ? `[${user.tag}]` : '';
 
 					const statsEmbed = new EmbedBuilder()
 						.setTitle(`${platformEmote(user.platform)} ${playerTag} ${user.username} playing ${playerData.active.legend}`)
-						.setDescription(`Status: STATUS\n-# Player Added: <t:${user.userAdded}:d> - Last Updated: <t:${user.userUpdated}:d>`)
+						.setDescription(`**Status**: ${playerStatus(user.status)}\n-# **Player Added**: <t:${user.userAdded}:d> - **Last Updated**: <t:${user.userUpdated}:d>`)
 						.addFields([
 							{
 								name: `${emotes.account} Account Level`,
@@ -68,6 +69,31 @@ module.exports = {
 								value: `${battlepassProgress(account.battlepass, seasonData.info)}`,
 								inline: true,
 							},
+							{
+								name: `\u200b`,
+								value: '**Battle Royale Ranked**',
+								inline: false,
+							},
+							{
+								name: `\u200b`,
+								value: '**Active Trackers**',
+								inline: false,
+							},
+							{
+								name: trackers[0].id.toString(),
+								value: `${emotes.listArrow} ${trackers[0].value.toLocaleString()}`,
+								inline: true,
+							},
+							{
+								name: trackers[1].id.toString(),
+								value: `${emotes.listArrow} ${trackers[1].value.toLocaleString()}`,
+								inline: true,
+							},
+							{
+								name: trackers[2].id.toString(),
+								value: `${emotes.listArrow} ${trackers[2].value.toLocaleString()}`,
+								inline: true,
+							},
 						])
 						.setImage(`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(playerData.active.legend)}.png?key=${process.env.SPECTER}`)
 						.setFooter({
@@ -78,11 +104,19 @@ module.exports = {
 				}),
 			)
 			.catch(err => {
-				console.error(chalk.red(`${chalk.bold('[STATS]')} Axios error: ${err}`));
+				if (err.response) {
+					console.log(`${chalk.red(`${chalk.bold('[STATS]')} Axios error: ${err.response.data.errorShort}`)}`);
 
-				const errorEmbed = new EmbedBuilder().setDescription(`${emotes.listArrow} An error occurred while fetching player data. Please try again later.`);
+					const errorEmbed = new EmbedBuilder().setTitle('Player Lookup Error').setDescription(`${err.response.data.error}`);
 
-				interaction.editReply({ embeds: [errorEmbed] });
+					interaction.editReply({ embeds: [errorEmbed] });
+				} else {
+					console.error(chalk.red(`${chalk.bold('[STATS]')} Axios error: ${err}`));
+
+					const errorEmbed = new EmbedBuilder().setDescription(`${emotes.listArrow} An error occurred while fetching player data. Please try again later.`);
+
+					interaction.editReply({ embeds: [errorEmbed] });
+				}
 			});
 	},
 };
