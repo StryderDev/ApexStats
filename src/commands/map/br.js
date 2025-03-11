@@ -20,8 +20,8 @@ module.exports = {
 
 		await axios
 			.get(`https://solaris.apexstats.dev/beacon/map/br?key=${process.env.SPYGLASS}&next=${nextAmount}`)
-			.then(async resp => {
-				const map = resp.data;
+			.then(async res => {
+				const map = res.data;
 				const mapInfo = map.map;
 
 				if (map.active == false) {
