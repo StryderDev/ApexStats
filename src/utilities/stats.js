@@ -2,6 +2,19 @@ const { emoteFile } = require('./misc.js');
 
 const emotes = require(`../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
+function getRankName(rank) {
+	if (rank.name == 'Apex Predator') return `${emotes.ApexPredator} **[#${rank.ladderPos}]** ${rank.name}`;
+	if (rank.name == 'Master') return `${emotes.Master} ${rank.name}`;
+
+	return `${emotes[rank.name]} ${rank.name} ${rank.division}`;
+}
+
+function formatScore(rank) {
+	if (rank.score < 16000) return `${rank.score.toLocaleString()}/${rank.nextScore.toLocaleString()}`;
+
+	return `${rank.score.toLocaleString()}`;
+}
+
 function platformName(platform) {
 	if (platform === 'PC') return 'PC';
 	if (platform === 'PS4') return 'PlayStation';
@@ -36,6 +49,25 @@ function platformEmote(platform) {
 	return emotes.apexIcon;
 }
 
+function pointsTillMaster(player) {
+	const pointsTillMaster = 16000 - player.score;
+
+	if (pointsTillMaster <= 0) return '0';
+
+	return `${pointsTillMaster.toLocaleString()}`;
+}
+
+function pointsTillPredator(player, platform, ranked) {
+	if (platform == 'X1') platform = 'Xbox';
+	if (platform == 'PS4') platform = 'PlayStation';
+
+	const pointsTillPredator = ranked[platform].value - player.score;
+
+	if (pointsTillPredator <= 0) return '0';
+
+	return `${pointsTillPredator.toLocaleString()}`;
+}
+
 function battlepassProgress(battlepass, season) {
 	const seasonName = `${season.Name}_${season.Split}`;
 
@@ -47,4 +79,4 @@ function battlepassProgress(battlepass, season) {
 	return `${emotes.listArrow} Reward Completion: ${rewardLevel}/60 (${rewardPercent}%)\n${emotes.listArrow} Badge Completion: ${badgeLevel}/100 (${badgeLevel}%)`;
 }
 
-module.exports = { platformName, playerStatus, platformEmote, battlepassProgress };
+module.exports = { getRankName, formatScore, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress };

@@ -2,7 +2,7 @@ const axios = require('axios');
 const chalk = require('chalk');
 const { emoteFile } = require('../../utilities/misc.js');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { platformName, playerStatus, platformEmote, battlepassProgress } = require('../../utilities/stats.js');
+const { getRankName, formatScore, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress } = require('../../utilities/stats.js');
 
 const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
@@ -71,17 +71,21 @@ module.exports = {
 							},
 							{
 								name: `\u200b`,
-								value: '**Battle Royale Ranked**',
+								value: `${emotes.ranked} **Battle Royale Ranked**`,
 								inline: false,
 							},
 							{
-								name: `Ranked Data`,
-								value: `Ranked Data Part 2`,
+								name: `${getRankName(playerData.ranked.BR)}`,
+								value: `${emotes.listArrow} ${formatScore(playerData.ranked.BR)} RP`,
 								inline: true,
 							},
 							{
 								name: `\u200b`,
-								value: `RP Stuff`,
+								value: `${emotes.listArrow} **RP to Master** - ${pointsTillMaster(playerData.ranked.BR)} RP\n${emotes.listArrow} **RP to Apex Predator** - ${pointsTillPredator(
+									playerData.ranked.BR,
+									playerData.user.platform,
+									rankedData,
+								)} RP`,
 								inline: true,
 							},
 							{
