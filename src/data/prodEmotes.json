@@ -4,10 +4,20 @@
 	"xbox": "<:ApexStats_Xbox:1347846472980369479>",
 	"switch": "<:ApexStats_NintendoSwitch:1347846481801121812>",
 	"apexIcon": "<:ApexStats_ApexIcon:1347103640975835186>",
+	"ranked": "<:ApexStats_RankedIcon:1349273187803861022>",
 	"loading": "<a:ApexStats_Loading:1346376573841838121>",
 	"listArrow": "<:ApexStats_ListArrow:1346381888692031602>",
 	"online": "<:ApexStats_Online:1347463424149553223>",
 	"offline": "<:ApexStats_Offline:1347463456420397056>",
 	"busy": "<:ApexStats_Busy:1348549848198025237>",
-	"account": "<:ApexStats_AccountLevel:1347852966064816139>"
+	"account": "<:ApexStats_AccountLevel:1347852966064816139>",
+	"ApexPredator": "<:ApexStats_ApexPredator:1349282265603244085>",
+	"Master": "<:ApexStats_Master:1349282276667817994>",
+	"Diamond": "<:ApexStats_Diamond:1349282287031943200>",
+	"Platinum": "<:ApexStats_Platinum:1349282299287572481>",
+	"Gold": "<:ApexStats_Gold:1349282311203717193>",
+	"Silver": "<:ApexStats_Silver:1349282329746608208>",
+	"Bronze": "<:ApexStats_Bronze:1349282339930378352>",
+	"Rookie": "<:ApexStats_Rookie:1349282351141879810>",
+	"Unranked": "<:ApexStats_Unranked:1349282360662949960>"
 }
