@@ -5,6 +5,7 @@
 	"switch": "<:ApexStats_NintendoSwitch:1347846481801121812>",
 	"apexIcon": "<:ApexStats_ApexIcon:1347103640975835186>",
 	"ranked": "<:ApexStats_RankedIcon:1349273187803861022>",
+	"tracker": "<:ApexStats_Tracker:1351310526352855163>",
 	"loading": "<a:ApexStats_Loading:1346376573841838121>",
 	"listArrow": "<:ApexStats_ListArrow:1346381888692031602>",
 	"online": "<:ApexStats_Online:1347463424149553223>",
@@ -19,5 +20,6 @@
 	"Silver": "<:ApexStats_Silver:1349282329746608208>",
 	"Bronze": "<:ApexStats_Bronze:1349282339930378352>",
 	"Rookie": "<:ApexStats_Rookie:1349282351141879810>",
-	"Unranked": "<:ApexStats_Unranked:1349282360662949960>"
+	"Unranked": "<:ApexStats_Unranked:1349282360662949960>",
+	"divider": "<:ApexStats_Divider:1351312459063103498>"
 }

@@ -76,12 +76,12 @@ module.exports = {
 							},
 							{
 								name: `${getRankName(playerData.ranked.BR)}`,
-								value: `${emotes.listArrow} ${formatScore(playerData.ranked.BR)} RP`,
+								value: `${emotes.listArrow} **Total**: ${formatScore(playerData.ranked.BR)} RP`,
 								inline: true,
 							},
 							{
 								name: `\u200b`,
-								value: `${emotes.listArrow} **RP to Master** - ${pointsTillMaster(playerData.ranked.BR)} RP\n${emotes.listArrow} **RP to Apex Predator** - ${pointsTillPredator(
+								value: `${emotes.listArrow} **RP to Master**: ${pointsTillMaster(playerData.ranked.BR)} RP\n${emotes.listArrow} **RP to Apex Predator**: ${pointsTillPredator(
 									playerData.ranked.BR,
 									playerData.user.platform,
 									rankedData,
@@ -90,7 +90,7 @@ module.exports = {
 							},
 							{
 								name: `\u200b`,
-								value: '**Active Trackers**',
+								value: `${emotes.tracker} **Active Trackers**`,
 								inline: false,
 							},
 							{
