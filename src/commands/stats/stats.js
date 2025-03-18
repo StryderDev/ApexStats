@@ -2,7 +2,7 @@ const axios = require('axios');
 const chalk = require('chalk');
 const { emoteFile } = require('../../utilities/misc.js');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { getRankName, formatScore, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress } = require('../../utilities/stats.js');
+const { getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress } = require('../../utilities/stats.js');
 
 const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
@@ -76,7 +76,7 @@ module.exports = {
 							},
 							{
 								name: `${getRankName(playerData.ranked.BR)}`,
-								value: `${emotes.listArrow} **Total**: ${formatScore(playerData.ranked.BR)} RP`,
+								value: `${emotes.listArrow} **Division**: ${getDivision(playerData.ranked.BR)}\n${emotes.listArrow} **Total**: ${formatScore(playerData.ranked.BR)} RP`,
 								inline: true,
 							},
 							{

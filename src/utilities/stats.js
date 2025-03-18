@@ -15,6 +15,17 @@ function formatScore(rank) {
 	return `${rank.score.toLocaleString()}`;
 }
 
+function getDivision(rank) {
+	const finalScore = rank.nextDivision - (rank.nextScore - rank.score);
+
+	if (rank.score > 16000) return '-';
+
+	return `${finalScore
+		.toString()
+		.replace(/[^0-9]/g, '')
+		.slice(-3)}/${rank.nextDivision} RP`;
+}
+
 function platformName(platform) {
 	if (platform === 'PC') return 'PC';
 	if (platform === 'PS4') return 'PlayStation';
@@ -79,4 +90,4 @@ function battlepassProgress(battlepass, season) {
 	return `${emotes.listArrow} Reward Completion: ${rewardLevel}/60 (${rewardPercent}%)\n${emotes.listArrow} Badge Completion: ${badgeLevel}/100 (${badgeLevel}%)`;
 }
 
-module.exports = { getRankName, formatScore, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress };
+module.exports = { getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress };
