@@ -30,14 +30,11 @@ module.exports = {
 					interaction.editReply({ embeds: [mapEmbed] });
 				} else if (nextAmount === 1) {
 					const mapImage = mapInfo.name.replace(/ /g, '').replace(/'/g, ''); // Remove spaces and single quotes from name for image URL
+					const mapNextString = map.next[0] ? `\n${emotes.listArrow} Up Next: **${map.next[0].map.name}** for ${nextMapLength(map.next[0].duration)}` : ``;
 
 					const mapEmbed = new EmbedBuilder()
 						.setTitle(`${emotes.online} ${mapInfo.type} - ${mapInfo.name}`)
-						.setDescription(
-							`${emotes.listArrow} **${mapInfo.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>\n${emotes.listArrow} Up Next: **${map.next[0].map.name}** for ${nextMapLength(
-								map.next[0].duration,
-							)}`,
-						)
+						.setDescription(`${emotes.listArrow} **${mapInfo.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t> ${mapNextString}`)
 						.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?key=${process.env.SPECTER}`)
 						.setFooter({ text: 'Times are automatically converted to your local time' });
 

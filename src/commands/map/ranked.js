@@ -38,14 +38,11 @@ module.exports = {
 						interaction.editReply({ embeds: [mapEmbed] });
 					} else if (nextAmount === 1) {
 						const mapImage = mapInfo.name.replace(/ /g, '').replace(/'/g, ''); // Remove spaces and single quotes from name for image URL
+						const mapNextString = map.next[0] ? `\n${emotes.listArrow} Up Next: **${map.next[0].map.name}** for ${nextMapLength(map.next[0].duration)}` : ``;
 
 						const mapEmbed = new EmbedBuilder()
 							.setTitle(`${emotes.online} ${mapInfo.type} - ${mapInfo.name}`)
-							.setDescription(
-								`${emotes.listArrow} **${mapInfo.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>\n${emotes.listArrow} Up Next: **${map.next[0].map.name}** for ${nextMapLength(
-									map.next[0].duration,
-								)}`,
-							)
+							.setDescription(`${emotes.listArrow} **${mapInfo.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t> ${mapNextString}`)
 							.addFields([
 								{ name: ':calendar: Ranked Split', value: `${emotes.listArrow} <t:${split - 1800}:D>\n${emotes.listArrow} <t:${split - 1800}:t>`, inline: true },
 								{ name: ':calendar: Ranked End', value: `${emotes.listArrow} <t:${end}:D>\n${emotes.listArrow} <t:${end}:t>`, inline: true },
