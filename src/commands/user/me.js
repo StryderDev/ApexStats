@@ -82,7 +82,7 @@ module.exports = {
 										inline: true,
 									},
 									{
-										name: `${Account.BattlePass} Takeover Split 1 Battle Pass`,
+										name: `${Account.BattlePass} Takeover Split 2 Battle Pass`,
 										value: `${battlepass(account.battlepass)}`,
 										inline: true,
 									},
