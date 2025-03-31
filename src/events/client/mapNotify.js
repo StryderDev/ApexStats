@@ -13,8 +13,6 @@ module.exports = {
 		(async function mapNotifyLoop() {
 			const currentSecond = new Date().getSeconds();
 
-			// loop through the database for all the map reminders that are not expired
-			// limit it to 5 so we don't spam the database and discord api
 			const getReminders = 'SELECT * FROM ApexStats_MapReminders WHERE expired = 0 LIMIT 5';
 
 			db.query(getReminders, async (err, result) => {
@@ -23,7 +21,6 @@ module.exports = {
 				if (result.length > 0) {
 					console.log(chalk.yellow(`${chalk.bold('[NOTIFY]')} Checking map reminders...`));
 
-					// loop through the reminders and post them in the discord channel
 					for (const reminder of result) {
 						const rowId = reminder.id;
 						const mapType = reminder.map_type;
@@ -31,8 +28,6 @@ module.exports = {
 						const channelId = reminder.channel_id;
 						const serverId = reminder.server_id;
 						const mapIndex = reminder.map_index;
-						const notifyTime = reminder.timestamp;
-						const expired = reminder.expired;
 
 						await axios
 							.get(`https://solaris.apexstats.dev/beacon/map/${mapType}?next=1&key=${process.env.SPYGLASS}`)
@@ -49,7 +44,6 @@ module.exports = {
 								const mapEmbed = new EmbedBuilder()
 									.setTitle(`${emotes.online} ${mapInfo.type} - ${mapInfo.name}`)
 									.setDescription(`${emotes.listArrow} **${mapInfo.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t> ${mapNextString}`)
-									.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?key=${process.env.SPECTER}`)
 									.setFooter({ text: 'Times are automatically converted to your local time' });
 
 								// fetch the guild and channel from the DB
@@ -62,7 +56,7 @@ module.exports = {
 
 								// check if the channel is a text channel and we have permission to send messages
 								if (channel.type == 0 && channel.permissionsFor(guild.members.me).has('SendMessages')) {
-									await channel.send({ content: `<@${userId}>`, embeds: [mapEmbed] });
+									await channel.send({ content: `<@${userId}> ${mapInfo.type} map has changed`, embeds: [mapEmbed] });
 								} else {
 									console.log(chalk.red(`${chalk.bold('[NOTIFY]')} Channel is not a text channel or missing permissions`));
 								}
