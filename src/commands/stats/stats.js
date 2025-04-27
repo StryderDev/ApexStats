@@ -74,14 +74,30 @@ module.exports = {
 
 					const profileButton = new ButtonBuilder().setLabel('View Profile').setStyle(ButtonStyle.Link).setURL('https://apexstats.dev/').setDisabled(true);
 
-					const legendText = new TextDisplayBuilder().setContent([`# ${platformEmote(user.platform)} ${playerTag} SDCore`, `-# Status: ${playerStatus(user.status)}`].join('\n'));
+					const legendText = new TextDisplayBuilder().setContent([`# ${platformEmote(user.platform)} ${playerTag} SDCore`, `-# ${emotes.listArrow} Status: ${playerStatus(user.status)}`].join('\n'));
+
+					const accountText = new TextDisplayBuilder().setContent(['## Account', `${emotes.listArrow} Level: 250`, `${emotes.listArrow} Tier: 3`, `${emotes.listArrow} Total: 1350/2000`].join('\n'));
+					const battlepassText = new TextDisplayBuilder().setContent(
+						['## Takeover Split 2 Battlepass', `${emotes.listArrow} Reward Progress: 30/60 (50%)`, `${emotes.listArrow} Badge Progress: 50/100 (50%)`].join('\n'),
+					);
+					const rankText = new TextDisplayBuilder().setContent(['## Ranked', `${emotes.listArrow} Rank: Rank`, `${emotes.listArrow} Division: Division`, `${emotes.listArrow} Total: Total RP`].join('\n'));
 
 					const headerSection = new SectionBuilder().addTextDisplayComponents(legendText).setButtonAccessory(profileButton);
+
+					const accountSection = new SectionBuilder().addTextDisplayComponents(accountText).setThumbnailAccessory(thumbnail => thumbnail.setURL(`${interaction.user.avatarURL()}`));
+
+					const battlepassSection = new SectionBuilder().addTextDisplayComponents(battlepassText).setThumbnailAccessory(thumbnail => thumbnail.setURL(`${interaction.user.avatarURL()}`));
+
+					const rankedSection = new SectionBuilder().addTextDisplayComponents(rankText).setThumbnailAccessory(thumbnail => thumbnail.setURL(`${interaction.user.avatarURL()}`));
 
 					statsContainer.addMediaGalleryComponents(legendBanner);
 					statsContainer.addSectionComponents(headerSection);
 
 					statsContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
+
+					statsContainer.addSectionComponents(accountSection);
+					statsContainer.addSectionComponents(battlepassSection);
+					statsContainer.addSectionComponents(rankedSection);
 
 					// const statsEmbed = new EmbedBuilder()
 					// 	.setTitle(`${platformEmote(user.platform)} ${playerTag} ${user.username} playing ${playerData.active.legend}`)
