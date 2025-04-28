@@ -2,6 +2,14 @@ const { emoteFile } = require('./misc.js');
 
 const emotes = require(`../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
+function levelBadge(level) {
+	if (level < 501) return 500;
+	if (level < 1001) return 1000;
+	if (level < 1501) return 1500;
+
+	return 2000;
+}
+
 function getRankName(rank) {
 	if (rank.name == 'Apex Predator') return `${emotes.ApexPredator} **[#${rank.ladderPos}]** ${rank.name}`;
 	if (rank.name == 'Master') return `${emotes.Master} ${rank.name}`;
@@ -90,4 +98,4 @@ function battlepassProgress(battlepass, season) {
 	return `${emotes.listArrow} Reward Completion: ${rewardLevel}/60 (${rewardPercent}%)\n${emotes.listArrow} Badge Completion: ${badgeLevel}/100 (${badgeLevel}%)`;
 }
 
-module.exports = { getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress };
+module.exports = { levelBadge, getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress };

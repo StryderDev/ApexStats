@@ -1,7 +1,9 @@
 const axios = require('axios');
 const chalk = require('chalk');
+const { createCanvas, loadImage } = require('@napi-rs/canvas');
 const { emoteFile } = require('../../utilities/misc.js');
 const {
+	AttachmentBuilder,
 	SlashCommandBuilder,
 	EmbedBuilder,
 	SectionBuilder,
@@ -15,7 +17,7 @@ const {
 	MediaGalleryItem,
 	SeparatorSpacingSize,
 } = require('discord.js');
-const { getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress } = require('../../utilities/stats.js');
+const { levelBadge, getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress } = require('../../utilities/stats.js');
 
 const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
@@ -55,7 +57,7 @@ module.exports = {
 		await axios
 			.all([playerAPI, seasonAPI, rankedAPI])
 			.then(
-				axios.spread((...res) => {
+				axios.spread(async (...res) => {
 					const playerData = res[0].data;
 					const seasonData = res[1].data;
 					const rankedData = res[2].data;
@@ -72,11 +74,91 @@ module.exports = {
 						{ type: MediaGalleryItem, media: { url: 'https://specter.apexstats.dev/ApexStats/Legends/V2/Conduit.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc' } },
 					]);
 
+					const background = await loadImage('https://specter.apexstats.dev/ApexStats/Legends/Trackers/Background_3.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc');
+
+					// Canvas settings
+					const width = 1000;
+					const height = 100;
+					const canvas = createCanvas(width, height);
+					const ctx = canvas.getContext('2d');
+
+					// Text for each section
+					const sections = [
+						{ title: trackers[0].id.toString(), subtitle: trackers[0].value.toLocaleString() },
+						{ title: trackers[1].id.toString(), subtitle: trackers[1].value.toLocaleString() },
+						{ title: trackers[2].id.toString(), subtitle: trackers[2].value.toLocaleString() },
+					];
+
+					// Text layout settings
+					const sectionWidth = width / sections.length;
+					const paddingLeft = 20;
+					const baseY = 25;
+					const titleFontSize = 18;
+					const subtitleFontSize = 25;
+
+					// Text wrapping helper
+					function wrapText(ctx, text, maxWidth) {
+						const words = text.split(' ');
+						const lines = [];
+						let line = '';
+
+						for (let word of words) {
+							const testLine = line ? `${line} ${word}` : word;
+							const metrics = ctx.measureText(testLine);
+
+							if (metrics.width <= maxWidth) {
+								line = testLine;
+							} else {
+								if (line) lines.push(line);
+								line = word;
+							}
+						}
+
+						if (line) lines.push(line);
+						return lines;
+					}
+
+					ctx.drawImage(background, 0, 0, width, height);
+
+					sections.forEach((section, i) => {
+						const baseX = i * sectionWidth + paddingLeft;
+						const maxTextWidth = sectionWidth - 2 * paddingLeft;
+
+						// Draw title
+						ctx.font = `${titleFontSize}px sans-serif`;
+						ctx.fillStyle = 'white';
+						ctx.textAlign = 'left';
+						ctx.textBaseline = 'top';
+
+						const titleLines = wrapText(ctx, section.title, maxTextWidth);
+						titleLines.forEach((line, j) => {
+							ctx.fillText(line, baseX, baseY + j * (titleFontSize + 2));
+						});
+
+						// Draw subtitle
+						const titleHeight = titleLines.length * (titleFontSize + 2);
+						ctx.font = `bold ${subtitleFontSize}px sans-serif`;
+						ctx.fillText(section.subtitle, baseX, baseY + titleHeight + 6);
+					});
+
+					// Convert canvas to Discord attachment
+					const buffer = canvas.toBuffer('image/png');
+					const attachment = new AttachmentBuilder(buffer, { name: 'banner.png' });
+
+					const trackerBackground = new MediaGalleryBuilder().addItems([{ type: MediaGalleryItem, media: { url: `attachment://${attachment.name}` } }]);
+
 					const profileButton = new ButtonBuilder().setLabel('View Profile').setStyle(ButtonStyle.Link).setURL('https://apexstats.dev/').setDisabled(true);
 
 					const legendText = new TextDisplayBuilder().setContent([`# ${platformEmote(user.platform)} ${playerTag} SDCore`, `-# ${emotes.listArrow} Status: ${playerStatus(user.status)}`].join('\n'));
 
-					const accountText = new TextDisplayBuilder().setContent(['## Account', `${emotes.listArrow} Level: 250`, `${emotes.listArrow} Tier: 3`, `${emotes.listArrow} Total: 1350/2000`].join('\n'));
+					const accountText = new TextDisplayBuilder().setContent(
+						[
+							'## Account',
+							`${emotes.listArrow} Level: ${account.level.current}/500`,
+							`${emotes.listArrow} Tier: ${account.level.prestige + 1}`,
+							`${emotes.listArrow} Total: ${account.level.total.toLocaleString()}/2000`,
+						].join('\n'),
+					);
 					const battlepassText = new TextDisplayBuilder().setContent(
 						['## Takeover Split 2 Battlepass', `${emotes.listArrow} Reward Progress: 30/60 (50%)`, `${emotes.listArrow} Badge Progress: 50/100 (50%)`].join('\n'),
 					);
@@ -84,11 +166,17 @@ module.exports = {
 
 					const headerSection = new SectionBuilder().addTextDisplayComponents(legendText).setButtonAccessory(profileButton);
 
-					const accountSection = new SectionBuilder().addTextDisplayComponents(accountText).setThumbnailAccessory(thumbnail => thumbnail.setURL(`${interaction.user.avatarURL()}`));
+					const accountSection = new SectionBuilder()
+						.addTextDisplayComponents(accountText)
+						.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/${levelBadge(account.level.total)}.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc`));
 
-					const battlepassSection = new SectionBuilder().addTextDisplayComponents(battlepassText).setThumbnailAccessory(thumbnail => thumbnail.setURL(`${interaction.user.avatarURL()}`));
+					const battlepassSection = new SectionBuilder()
+						.addTextDisplayComponents(battlepassText)
+						.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Seasons/Takeover.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc`));
 
-					const rankedSection = new SectionBuilder().addTextDisplayComponents(rankText).setThumbnailAccessory(thumbnail => thumbnail.setURL(`${interaction.user.avatarURL()}`));
+					const rankedSection = new SectionBuilder()
+						.addTextDisplayComponents(rankText)
+						.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/2000.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc`));
 
 					statsContainer.addMediaGalleryComponents(legendBanner);
 					statsContainer.addSectionComponents(headerSection);
@@ -98,6 +186,10 @@ module.exports = {
 					statsContainer.addSectionComponents(accountSection);
 					statsContainer.addSectionComponents(battlepassSection);
 					statsContainer.addSectionComponents(rankedSection);
+
+					statsContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
+
+					statsContainer.addMediaGalleryComponents(trackerBackground);
 
 					// const statsEmbed = new EmbedBuilder()
 					// 	.setTitle(`${platformEmote(user.platform)} ${playerTag} ${user.username} playing ${playerData.active.legend}`)
@@ -165,6 +257,7 @@ module.exports = {
 					interaction.editReply({
 						embeds: [],
 						components: [statsContainer],
+						files: [attachment],
 						flags: MessageFlags.IsComponentsV2,
 					});
 				}),
