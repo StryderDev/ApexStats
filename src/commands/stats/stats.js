@@ -70,6 +70,10 @@ module.exports = {
 
 					const statsContainer = new ContainerBuilder();
 
+					const profileButton = new ButtonBuilder().setLabel('View Profile').setStyle(ButtonStyle.Link).setURL('https://apexstats.dev/').setDisabled(true);
+
+					const profileButtonDisplay = new TextDisplayBuilder().setContent(`\u200b`);
+
 					const legendBanner = new MediaGalleryBuilder().addItems([
 						{ type: MediaGalleryItem, media: { url: 'https://specter.apexstats.dev/ApexStats/Legends/V2/Conduit.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc' } },
 					]);
@@ -147,9 +151,13 @@ module.exports = {
 
 					const trackerBackground = new MediaGalleryBuilder().addItems([{ type: MediaGalleryItem, media: { url: `attachment://${attachment.name}` } }]);
 
-					const profileButton = new ButtonBuilder().setLabel('View Profile').setStyle(ButtonStyle.Link).setURL('https://apexstats.dev/').setDisabled(true);
-
-					const legendText = new TextDisplayBuilder().setContent([`# ${platformEmote(user.platform)} ${playerTag} SDCore`, `-# ${emotes.listArrow} Status: ${playerStatus(user.status)}`].join('\n'));
+					const legendText = new TextDisplayBuilder().setContent(
+						[
+							`# ${platformEmote(user.platform)} ${playerTag} SDCore`,
+							`-# ${emotes.listArrow} Status: ${playerStatus(user.status)}`,
+							`-# ${emotes.listArrow} Level ${account.level.current} · Tier: ${account.level.prestige + 1}/4 · Total: ${account.level.total.toLocaleString()}/2000`,
+						].join('\n'),
+					);
 
 					const accountText = new TextDisplayBuilder().setContent(
 						[
@@ -164,10 +172,10 @@ module.exports = {
 					);
 					const rankText = new TextDisplayBuilder().setContent(['## Ranked', `${emotes.listArrow} Rank: Rank`, `${emotes.listArrow} Division: Division`, `${emotes.listArrow} Total: Total RP`].join('\n'));
 
-					const headerSection = new SectionBuilder().addTextDisplayComponents(legendText).setButtonAccessory(profileButton);
+					const profileButtonSection = new SectionBuilder().addTextDisplayComponents(profileButtonDisplay).setButtonAccessory(profileButton);
 
-					const accountSection = new SectionBuilder()
-						.addTextDisplayComponents(accountText)
+					const headerSection = new SectionBuilder()
+						.addTextDisplayComponents(legendText)
 						.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/${levelBadge(account.level.total)}.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc`));
 
 					const battlepassSection = new SectionBuilder()
@@ -183,13 +191,14 @@ module.exports = {
 
 					statsContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
 
-					statsContainer.addSectionComponents(accountSection);
 					statsContainer.addSectionComponents(battlepassSection);
 					statsContainer.addSectionComponents(rankedSection);
 
 					statsContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
 
 					statsContainer.addMediaGalleryComponents(trackerBackground);
+
+					statsContainer.addSectionComponents(profileButtonSection);
 
 					// const statsEmbed = new EmbedBuilder()
 					// 	.setTitle(`${platformEmote(user.platform)} ${playerTag} ${user.username} playing ${playerData.active.legend}`)
