@@ -75,7 +75,7 @@ module.exports = {
 					const profileButtonDisplay = new TextDisplayBuilder().setContent(`\u200b`);
 
 					const legendBanner = new MediaGalleryBuilder().addItems([
-						{ type: MediaGalleryItem, media: { url: 'https://specter.apexstats.dev/ApexStats/Legends/V2/Conduit.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc' } },
+						{ type: MediaGalleryItem, media: { url: `https://specter.apexstats.dev/ApexStats/Legends/V2/${encodeURIComponent(playerData.active.legend)}.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc` } },
 					]);
 
 					const background = await loadImage('https://specter.apexstats.dev/ApexStats/Legends/Trackers/Background_3.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc');
@@ -153,7 +153,7 @@ module.exports = {
 
 					const legendText = new TextDisplayBuilder().setContent(
 						[
-							`# ${platformEmote(user.platform)} ${playerTag} SDCore`,
+							`# ${platformEmote(user.platform)} ${playerTag} ${user.username}`,
 							`-# ${emotes.listArrow} Status: ${playerStatus(user.status)}`,
 							`-# ${emotes.listArrow} Level ${account.level.current} · Tier: ${account.level.prestige + 1}/4 · Total: ${account.level.total.toLocaleString()}/2000`,
 						].join('\n'),
