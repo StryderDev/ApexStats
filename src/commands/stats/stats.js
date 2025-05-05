@@ -167,9 +167,7 @@ module.exports = {
 							`${emotes.listArrow} Total: ${account.level.total.toLocaleString()}/2000`,
 						].join('\n'),
 					);
-					const battlepassText = new TextDisplayBuilder().setContent(
-						['## Takeover Split 2 Battlepass', `${emotes.listArrow} Reward Progress: 30/60 (50%)`, `${emotes.listArrow} Badge Progress: 50/100 (50%)`].join('\n'),
-					);
+					const battlepassText = new TextDisplayBuilder().setContent(['## Takeover Split 2 Battlepass', `${battlepassProgress(account.battlepass, seasonData.info)}`].join('\n'));
 					const rankText = new TextDisplayBuilder().setContent(['## Ranked', `${emotes.listArrow} Rank: Rank`, `${emotes.listArrow} Division: Division`, `${emotes.listArrow} Total: Total RP`].join('\n'));
 
 					const profileButtonSection = new SectionBuilder().addTextDisplayComponents(profileButtonDisplay).setButtonAccessory(profileButton);
