@@ -18,11 +18,11 @@
 		"dev": "nodemon ."
 	},
 	"dependencies": {
-		"@napi-rs/canvas": "^0.1.69",
+		"@napi-rs/canvas": "^0.1.70",
 		"axios": "^1.9.0",
 		"better-sqlite3": "^11.9.1",
 		"chalk": "4.1.2",
-		"discord.js": "^14.19.2",
+		"discord.js": "^14.19.3",
 		"dotenv": "^16.5.0",
 		"mysql2": "^3.14.1"
 	}
