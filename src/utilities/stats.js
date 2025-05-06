@@ -88,7 +88,7 @@ function pointsTillPredator(player, platform, ranked) {
 }
 
 function battlepassProgress(battlepass, season) {
-	const seasonName = `${season.Name}_${season.Split}`;
+	const seasonName = `${season.title}_${season.split}`;
 
 	const rewardLevel = battlepass.history[seasonName] >= 60 ? 60 : battlepass.history[seasonName];
 	const rewardPercent = battlepass.history[seasonName] >= 60 ? 100 : Math.floor((battlepass.history[seasonName] / 60) * 100);

@@ -51,7 +51,7 @@ module.exports = {
 		// await interaction.editReply({ embeds: [loadingEmbed] });
 
 		const playerAPI = axios.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${process.env.SPYGLASS}`);
-		const seasonAPI = axios.get('https://api.jumpmaster.xyz/seasons/Current');
+		const seasonAPI = axios.get('https://api.jumpmaster.xyz/seasons/Current?version=2');
 		const rankedAPI = axios.get('https://api.jumpmaster.xyz/misc/predThreshold');
 
 		await axios
@@ -72,11 +72,11 @@ module.exports = {
 
 					const profileButton = new ButtonBuilder().setLabel('View Profile').setStyle(ButtonStyle.Link).setURL('https://apexstats.dev/').setDisabled(true);
 
-					const profileButtonDisplay = new TextDisplayBuilder().setContent(`\u200b`);
-
 					const legendBanner = new MediaGalleryBuilder().addItems([
 						{ type: MediaGalleryItem, media: { url: `https://specter.apexstats.dev/ApexStats/Legends/V2/${encodeURIComponent(playerData.active.legend)}.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc` } },
 					]);
+
+					// const progressBarTest = new MediaGalleryBuilder().addItems([{ type: MediaGalleryItem, media: { url: `https://images.sdcore.dev/2025/ProgressBar_2.png` } }]);
 
 					const background = await loadImage('https://specter.apexstats.dev/ApexStats/Legends/Trackers/Background_3.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc');
 
@@ -159,6 +159,8 @@ module.exports = {
 						].join('\n'),
 					);
 
+					const footerText = new TextDisplayBuilder().setContent(`-# Equip the Battle Pass badge in-game to update it!`);
+
 					const accountText = new TextDisplayBuilder().setContent(
 						[
 							'## Account',
@@ -167,10 +169,20 @@ module.exports = {
 							`${emotes.listArrow} Total: ${account.level.total.toLocaleString()}/2000`,
 						].join('\n'),
 					);
-					const battlepassText = new TextDisplayBuilder().setContent(['## Takeover Split 2 Battlepass', `${battlepassProgress(account.battlepass, seasonData.info)}`].join('\n'));
-					const rankText = new TextDisplayBuilder().setContent(['## Ranked', `${emotes.listArrow} Rank: Rank`, `${emotes.listArrow} Division: Division`, `${emotes.listArrow} Total: Total RP`].join('\n'));
+					const battlepassText = new TextDisplayBuilder().setContent(
+						[`## ${seasonData.info.title} Split ${seasonData.info.split} Battlepass`, `${battlepassProgress(account.battlepass, seasonData.info)}`].join('\n'),
+					);
+					const rankText = new TextDisplayBuilder().setContent(
+						[
+							`## Battle Royale Ranked - ${getRankName(playerData.ranked.BR)}`,
+							`${emotes.listArrow} **Division**: ${getDivision(playerData.ranked.BR)}`,
+							`${emotes.listArrow} **Total**: ${formatScore(playerData.ranked.BR)} RP`,
+							`${emotes.listArrow} **RP to Master**: ${pointsTillMaster(playerData.ranked.BR)} RP`,
+							`${emotes.listArrow} **RP to Apex Predator**: ${pointsTillPredator(playerData.ranked.BR, playerData.user.platform, rankedData)} RP`,
+						].join('\n'),
+					);
 
-					const profileButtonSection = new SectionBuilder().addTextDisplayComponents(profileButtonDisplay).setButtonAccessory(profileButton);
+					// const profileButtonSection = new SectionBuilder().addTextDisplayComponents(profileButtonDisplay).setButtonAccessory(profileButton);
 
 					const headerSection = new SectionBuilder()
 						.addTextDisplayComponents(legendText)
@@ -178,11 +190,15 @@ module.exports = {
 
 					const battlepassSection = new SectionBuilder()
 						.addTextDisplayComponents(battlepassText)
-						.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Seasons/Takeover.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc`));
+						.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Seasons/${seasonData.info.title}.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc`));
 
 					const rankedSection = new SectionBuilder()
 						.addTextDisplayComponents(rankText)
-						.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/2000.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc`));
+						.setThumbnailAccessory(thumbnail =>
+							thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Ranked/${playerData.ranked.BR.name}_${playerData.ranked.BR.division}.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc`),
+						);
+
+					const footerSection = new SectionBuilder().addTextDisplayComponents(footerText).setButtonAccessory(profileButton);
 
 					statsContainer.addMediaGalleryComponents(legendBanner);
 					statsContainer.addSectionComponents(headerSection);
@@ -191,12 +207,13 @@ module.exports = {
 
 					statsContainer.addSectionComponents(battlepassSection);
 					statsContainer.addSectionComponents(rankedSection);
+					// statsContainer.addMediaGalleryComponents(progressBarTest);
 
 					statsContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
 
 					statsContainer.addMediaGalleryComponents(trackerBackground);
 
-					statsContainer.addSectionComponents(profileButtonSection);
+					statsContainer.addSectionComponents(footerSection);
 
 					// const statsEmbed = new EmbedBuilder()
 					// 	.setTitle(`${platformEmote(user.platform)} ${playerTag} ${user.username} playing ${playerData.active.legend}`)
@@ -226,11 +243,11 @@ module.exports = {
 					// 		},
 					// 		{
 					// 			name: `\u200b`,
-					// 			value: `${emotes.listArrow} **RP to Master**: ${pointsTillMaster(playerData.ranked.BR)} RP\n${emotes.listArrow} **RP to Apex Predator**: ${pointsTillPredator(
-					// 				playerData.ranked.BR,
-					// 				playerData.user.platform,
-					// 				rankedData,
-					// 			)} RP`,
+					// value: `${emotes.listArrow} **RP to Master**: ${pointsTillMaster(playerData.ranked.BR)} RP\n${emotes.listArrow} **RP to Apex Predator**: ${pointsTillPredator(
+					// 	playerData.ranked.BR,
+					// 	playerData.user.platform,
+					// 	rankedData,
+					// )} RP`,
 					// 			inline: true,
 					// 		},
 					// 		{
