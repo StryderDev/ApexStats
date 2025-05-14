@@ -7,7 +7,6 @@ const {
 	SlashCommandBuilder,
 	EmbedBuilder,
 	SectionBuilder,
-	ComponentType,
 	ButtonBuilder,
 	MessageFlags,
 	ButtonStyle,
@@ -16,6 +15,9 @@ const {
 	TextDisplayBuilder,
 	MediaGalleryItem,
 	SeparatorSpacingSize,
+	StringSelectMenuBuilder,
+	StringSelectMenuOptionBuilder,
+	ActionRowBuilder,
 } = require('discord.js');
 const { levelBadge, getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress } = require('../../utilities/stats.js');
 
@@ -71,6 +73,12 @@ module.exports = {
 					const statsContainer = new ContainerBuilder();
 
 					const profileButton = new ButtonBuilder().setLabel('View Profile').setStyle(ButtonStyle.Link).setURL('https://apexstats.dev/').setDisabled(true);
+
+					const profileSelect = new StringSelectMenuBuilder().setCustomId('notification_roles').setMinValues(1).setMaxValues(2).addOptions(
+						new StringSelectMenuOptionBuilder().setLabel('Creator Notifications').setValue('1194780165713166347').setEmoji('🤝'),
+						new StringSelectMenuOptionBuilder().setLabel('Alliance Updates').setValue('1194781137885737092').setEmoji('🤝'),
+						// Ajouter d'autres options ici
+					);
 
 					const legendBanner = new MediaGalleryBuilder().addItems([
 						{ type: MediaGalleryItem, media: { url: `https://specter.apexstats.dev/ApexStats/Legends/V2/${encodeURIComponent(playerData.active.legend)}.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc` } },
@@ -199,6 +207,8 @@ module.exports = {
 						);
 
 					const footerSection = new SectionBuilder().addTextDisplayComponents(footerText).setButtonAccessory(profileButton);
+
+					statsContainer.addActionRowComponents(new ActionRowBuilder().addComponents(profileSelect));
 
 					statsContainer.addMediaGalleryComponents(legendBanner);
 					statsContainer.addSectionComponents(headerSection);
