@@ -11,10 +11,10 @@ function levelBadge(level) {
 }
 
 function getRankName(rank) {
-	if (rank.name == 'Apex Predator') return `${emotes.ApexPredator} **[#${rank.ladderPos}]** ${rank.name}`;
-	if (rank.name == 'Master') return `${emotes.Master} ${rank.name}`;
+	if (rank.name == 'Apex Predator') return `**[#${rank.ladderPos}]** ${rank.name}`;
+	if (rank.name == 'Master') return `${rank.name}`;
 
-	return `${emotes[rank.name]} ${rank.name} ${rank.division}`;
+	return `${rank.name} ${rank.division}`;
 }
 
 function formatScore(rank) {
@@ -98,4 +98,11 @@ function battlepassProgress(battlepass, season) {
 	return `${emotes.listArrow} Reward Completion: ${rewardLevel}/60 (${rewardPercent}%)\n${emotes.listArrow} Badge Completion: ${badgeLevel}/100 (${badgeLevel}%)`;
 }
 
-module.exports = { levelBadge, getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress };
+function rankBadgeImageName(rank) {
+	if (rank.name == 'Apex Predator') return 'Apex Predator';
+	if (rank.name == 'Master') return 'Master';
+
+	return `${rank.name}_${rank.division}`;
+}
+
+module.exports = { levelBadge, getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress, rankBadgeImageName };

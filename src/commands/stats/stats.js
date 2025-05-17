@@ -19,7 +19,7 @@ const {
 	StringSelectMenuOptionBuilder,
 	ActionRowBuilder,
 } = require('discord.js');
-const { levelBadge, getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress } = require('../../utilities/stats.js');
+const { levelBadge, getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress, rankBadgeImageName } = require('../../utilities/stats.js');
 
 const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
@@ -74,11 +74,15 @@ module.exports = {
 
 					const profileButton = new ButtonBuilder().setLabel('View Profile').setStyle(ButtonStyle.Link).setURL('https://apexstats.dev/').setDisabled(true);
 
-					const profileSelect = new StringSelectMenuBuilder().setCustomId('notification_roles').setMinValues(1).setMaxValues(2).addOptions(
-						new StringSelectMenuOptionBuilder().setLabel('Creator Notifications').setValue('1194780165713166347').setEmoji('🤝'),
-						new StringSelectMenuOptionBuilder().setLabel('Alliance Updates').setValue('1194781137885737092').setEmoji('🤝'),
-						// Ajouter d'autres options ici
-					);
+					const profileSelect = new StringSelectMenuBuilder()
+						.setCustomId('notification_roles')
+						.addOptions(
+							new StringSelectMenuOptionBuilder().setLabel('Banner Stats').setValue('1').setEmoji('⚔️'),
+							new StringSelectMenuOptionBuilder().setLabel('Battlepass History').setValue('2').setEmoji('⚔️'),
+							new StringSelectMenuOptionBuilder().setLabel('Ranked History').setValue('3').setEmoji('⚔️'),
+						);
+
+					const profileSelectDisplay = new ActionRowBuilder().addComponents(profileSelect);
 
 					const legendBanner = new MediaGalleryBuilder().addItems([
 						{ type: MediaGalleryItem, media: { url: `https://specter.apexstats.dev/ApexStats/Legends/V2/${encodeURIComponent(playerData.active.legend)}.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc` } },
@@ -203,12 +207,12 @@ module.exports = {
 					const rankedSection = new SectionBuilder()
 						.addTextDisplayComponents(rankText)
 						.setThumbnailAccessory(thumbnail =>
-							thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Ranked/${playerData.ranked.BR.name}_${playerData.ranked.BR.division}.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc`),
+							thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Ranked/${encodeURIComponent(rankBadgeImageName(playerData.ranked.BR))}.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc`),
 						);
 
 					const footerSection = new SectionBuilder().addTextDisplayComponents(footerText).setButtonAccessory(profileButton);
 
-					statsContainer.addActionRowComponents(new ActionRowBuilder().addComponents(profileSelect));
+					// statsContainer.addActionRowComponents(new ActionRowBuilder().addComponents(profileSelect));
 
 					statsContainer.addMediaGalleryComponents(legendBanner);
 					statsContainer.addSectionComponents(headerSection);
@@ -290,7 +294,7 @@ module.exports = {
 
 					interaction.editReply({
 						embeds: [],
-						components: [statsContainer],
+						components: [profileSelectDisplay, statsContainer],
 						files: [attachment],
 						flags: MessageFlags.IsComponentsV2,
 					});
