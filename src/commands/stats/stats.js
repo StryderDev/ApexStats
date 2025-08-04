@@ -1,36 +1,13 @@
-const axios = require('axios');
-const chalk = require('chalk');
-const { createCanvas, loadImage } = require('@napi-rs/canvas');
-const { emoteFile } = require('../../utilities/misc.js');
-const {
-	AttachmentBuilder,
-	SlashCommandBuilder,
-	EmbedBuilder,
-	SectionBuilder,
-	ButtonBuilder,
-	MessageFlags,
-	ButtonStyle,
-	MediaGalleryBuilder,
-	ContainerBuilder,
-	TextDisplayBuilder,
-	MediaGalleryItem,
-	SeparatorSpacingSize,
-	StringSelectMenuBuilder,
-	StringSelectMenuOptionBuilder,
-	ActionRowBuilder,
-} = require('discord.js');
-const { levelBadge, getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress, rankBadgeImageName } = require('../../utilities/stats.js');
-
-const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('stats')
-		.setDescription('View the in-game stats of your currently selected legend')
+		.setDescription('View the stats for your currently selected legend')
 		.addStringOption(option =>
-			option.setName('platform').setDescription('Which platform you play on. Note: For crossplay, use the platform you play on the most').setRequired(true).addChoices(
+			option.setName('platform').setDescription('The platform you play on. Note: For crossplay, use the platform you play on the most').setRequired(true).addChoices(
 				{
-					name: 'PC (Steam/EA App/Epic Games)',
+					name: 'PC',
 					value: 'PC',
 				},
 				{
@@ -43,7 +20,7 @@ module.exports = {
 				},
 			),
 		)
-		.addStringOption(option => option.setName('username').setDescription('Your in-game username').setRequired(true)),
+		.addStringOption(option => option.setName('username').setDescription('Your in-game username, usually the name linked directly to your EA account')),
 
 	async execute(interaction) {
 		const platform = interaction.options.getString('platform');
