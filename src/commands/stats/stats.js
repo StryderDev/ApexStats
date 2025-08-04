@@ -1,4 +1,27 @@
-const { SlashCommandBuilder } = require('discord.js');
+const axios = require('axios');
+const chalk = require('chalk');
+const { createCanvas, loadImage } = require('@napi-rs/canvas');
+const { emoteFile } = require('../../utilities/misc.js');
+const {
+	AttachmentBuilder,
+	SlashCommandBuilder,
+	EmbedBuilder,
+	SectionBuilder,
+	ButtonBuilder,
+	MessageFlags,
+	ButtonStyle,
+	MediaGalleryBuilder,
+	ContainerBuilder,
+	TextDisplayBuilder,
+	MediaGalleryItem,
+	SeparatorSpacingSize,
+	StringSelectMenuBuilder,
+	StringSelectMenuOptionBuilder,
+	ActionRowBuilder,
+} = require('discord.js');
+const { levelBadge, getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress, rankBadgeImageName } = require('../../utilities/stats.js');
+
+const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
 module.exports = {
 	data: new SlashCommandBuilder()
