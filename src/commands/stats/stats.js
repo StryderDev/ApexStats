@@ -1,25 +1,7 @@
 const axios = require('axios');
-const chalk = require('chalk');
-const { createCanvas, loadImage } = require('@napi-rs/canvas');
 const { emoteFile } = require('../../utilities/misc.js');
-const {
-	AttachmentBuilder,
-	SlashCommandBuilder,
-	EmbedBuilder,
-	SectionBuilder,
-	ButtonBuilder,
-	MessageFlags,
-	ButtonStyle,
-	MediaGalleryBuilder,
-	ContainerBuilder,
-	TextDisplayBuilder,
-	MediaGalleryItem,
-	SeparatorSpacingSize,
-	StringSelectMenuBuilder,
-	StringSelectMenuOptionBuilder,
-	ActionRowBuilder,
-} = require('discord.js');
-const { levelBadge, getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress, rankBadgeImageName } = require('../../utilities/stats.js');
+const { levelBadge, formatScore, getDivision, getRankName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, rankBadgeImageName, battlepassProgress } = require('../../utilities/stats.js');
+const { MessageFlags, SectionBuilder, MediaGalleryItem, ContainerBuilder, TextDisplayBuilder, MediaGalleryBuilder, SlashCommandBuilder, SeparatorSpacingSize } = require('discord.js');
 
 const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
@@ -49,278 +31,135 @@ module.exports = {
 		const platform = interaction.options.getString('platform');
 		const username = interaction.options.getString('username');
 
-		// const loadingEmbed = new EmbedBuilder().setDescription(`${emotes.loading} Loading player data for ${username} on ${platformName(platform)}...`);
-		// await interaction.editReply({ embeds: [loadingEmbed] });
-
 		const playerAPI = axios.get(`https://api.jumpmaster.xyz/user/Stats?platform=${platform}&player=${encodeURIComponent(username)}&key=${process.env.SPYGLASS}`);
 		const seasonAPI = axios.get('https://api.jumpmaster.xyz/seasons/Current?version=2');
 		const rankedAPI = axios.get('https://api.jumpmaster.xyz/misc/predThreshold');
 
-		await axios
-			.all([playerAPI, seasonAPI, rankedAPI])
-			.then(
-				axios.spread(async (...res) => {
-					const playerData = res[0].data;
-					const seasonData = res[1].data;
-					const rankedData = res[2].data;
+		const loadingContainer = new ContainerBuilder();
 
-					const user = playerData.user;
-					const account = playerData.account;
-					const trackers = playerData.active.trackers;
+		const legendBanner = new MediaGalleryBuilder().addItems([
+			{
+				type: MediaGalleryItem,
+				media: {
+					url: `https://specter.apexstats.dev/ApexStats/Legends/V2/Loading.png?key=${process.env.SPECTER}`,
+				},
+			},
+		]);
 
-					const playerTag = user.tag ? `[${user.tag}]` : '';
+		const legendText = new TextDisplayBuilder().setContent(
+			[`# ${platformEmote(platform)} Loading...`, `-# ${emotes.listArrow} Status: Loading...`, `-# ${emotes.listArrow} Level: Loading... · Tier: -/4 · Total: -/2000`].join('\n'),
+		);
 
-					const statsContainer = new ContainerBuilder();
+		const battlepassText = new TextDisplayBuilder().setContent([`## Battle Pass Loading...`, `${emotes.listArrow} Reward Completion: -/60 (0%)\n${emotes.listArrow} Badge Completion: -/100 (0%)`].join('\n'));
 
-					const profileButton = new ButtonBuilder().setLabel('View Profile').setStyle(ButtonStyle.Link).setURL('https://apexstats.dev/').setDisabled(true);
+		const rankedText = new TextDisplayBuilder().setContent(
+			[
+				`## Battle Royale Ranked - Loading...`,
+				`${emotes.listArrow} **Division**: - RP`,
+				`${emotes.listArrow} **Total**: - RP`,
+				`${emotes.listArrow} **RP to Master**: - RP`,
+				`${emotes.listArrow} **RP to Apex Predator**: - RP`,
+			].join('\n'),
+		);
 
-					const profileSelect = new StringSelectMenuBuilder()
-						.setCustomId('notification_roles')
-						.addOptions(
-							new StringSelectMenuOptionBuilder().setLabel('Banner Stats').setValue('1').setEmoji('⚔️'),
-							new StringSelectMenuOptionBuilder().setLabel('Battlepass History').setValue('2').setEmoji('⚔️'),
-							new StringSelectMenuOptionBuilder().setLabel('Ranked History').setValue('3').setEmoji('⚔️'),
-						);
+		const legendSection = new SectionBuilder()
+			.addTextDisplayComponents(legendText)
+			.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Empty.png?key=${process.env.SPECTER}`));
 
-					const profileSelectDisplay = new ActionRowBuilder().addComponents(profileSelect);
+		const battlepassSection = new SectionBuilder()
+			.addTextDisplayComponents(battlepassText)
+			.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Empty.png?key=${process.env.SPECTER}`));
 
-					const legendBanner = new MediaGalleryBuilder().addItems([
-						{ type: MediaGalleryItem, media: { url: `https://specter.apexstats.dev/ApexStats/Legends/V2/${encodeURIComponent(playerData.active.legend)}.png?key=${process.env.SPECTER}` } },
-					]);
+		const rankedSection = new SectionBuilder()
+			.addTextDisplayComponents(rankedText)
+			.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Empty.png?key=${process.env.SPECTER}`));
 
-					// const progressBarTest = new MediaGalleryBuilder().addItems([{ type: MediaGalleryItem, media: { url: `https://images.sdcore.dev/2025/ProgressBar_2.png` } }]);
+		loadingContainer.addMediaGalleryComponents(legendBanner);
+		loadingContainer.addSectionComponents(legendSection);
 
-					const background = await loadImage(`https://specter.apexstats.dev/ApexStats/Legends/Trackers/Background_7.png?key=${process.env.SPECTER}`);
+		loadingContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
 
-					// Canvas settings
-					const width = 1000;
-					const height = 100;
-					const canvas = createCanvas(width, height);
-					const ctx = canvas.getContext('2d');
+		loadingContainer.addSectionComponents(battlepassSection);
+		loadingContainer.addSectionComponents(rankedSection);
 
-					// Text for each section
-					const sections = [
-						{ title: trackers[0].name_short.toString(), subtitle: trackers[0].value.toLocaleString() },
-						{ title: trackers[1].name_short.toString(), subtitle: trackers[1].value.toLocaleString() },
-						{ title: trackers[2].name_short.toString(), subtitle: trackers[2].value.toLocaleString() },
-					];
+		interaction.editReply({
+			components: [loadingContainer],
+			flags: MessageFlags.IsComponentsV2,
+		});
 
-					// Text layout settings
-					const sectionWidth = width / sections.length;
-					const paddingLeft = 16;
-					const baseY = 18;
-					const titleFontSize = 18;
-					const subtitleFontSize = 25;
+		await axios.all([playerAPI, seasonAPI, rankedAPI]).then(
+			axios.spread(async (...res) => {
+				const playerData = res[0].data;
+				const seasonData = res[1].data;
+				const rankedData = res[2].data;
 
-					// Text wrapping helper
-					function wrapText(ctx, text, maxWidth) {
-						const words = text.split(' ');
-						const lines = [];
-						let line = '';
+				const user = playerData.user;
+				const account = playerData.account;
 
-						for (let word of words) {
-							const testLine = line ? `${line} ${word}` : word;
-							const metrics = ctx.measureText(testLine);
+				const playerTag = user.tag ? `[${user.tag}]` : '';
 
-							if (metrics.width <= maxWidth) {
-								line = testLine;
-							} else {
-								if (line) lines.push(line);
-								line = word;
-							}
-						}
+				const statsContainer = new ContainerBuilder();
 
-						if (line) lines.push(line);
-						return lines;
-					}
+				const legendBanner = new MediaGalleryBuilder().addItems([
+					{
+						type: MediaGalleryItem,
+						media: {
+							url: `https://specter.apexstats.dev/ApexStats/Legends/V2/${encodeURIComponent(playerData.active.legend)}.png?key=${process.env.SPECTER}`,
+						},
+					},
+				]);
 
-					ctx.drawImage(background, 0, 0, width, height);
+				const legendText = new TextDisplayBuilder().setContent(
+					[
+						`# ${platformEmote(platform)} ${playerTag} ${user.username}`,
+						`-# ${emotes.listArrow} Status: ${playerStatus(user.status)}`,
+						`-# ${emotes.listArrow} Level: ${account.level.current} · Tier: ${account.level.prestige + 1}/4 · Total: ${account.level.total.toLocaleString()}/2000`,
+					].join('\n'),
+				);
 
-					sections.forEach((section, i) => {
-						const baseX = i * sectionWidth + paddingLeft;
-						const maxTextWidth = sectionWidth - 2 * paddingLeft;
+				const battlepassText = new TextDisplayBuilder().setContent(
+					[`## ${seasonData.info.title} Split ${seasonData.info.split} Battle Pass`, `${battlepassProgress(account.battlepass, seasonData.info)}`].join('\n'),
+				);
 
-						// Draw title
-						ctx.font = `bold ${titleFontSize}px sans-serif`;
-						ctx.fillStyle = 'white';
-						ctx.textAlign = 'left';
-						ctx.textBaseline = 'top';
+				const rankedText = new TextDisplayBuilder().setContent(
+					[
+						`## Battle Royale Ranked - ${getRankName(playerData.ranked.BR)}`,
+						`${emotes.listArrow} **Division**: ${getDivision(playerData.ranked.BR)}`,
+						`${emotes.listArrow} **Total**: ${formatScore(playerData.ranked.BR)} RP`,
+						`${emotes.listArrow} **RP to Master**: ${pointsTillMaster(playerData.ranked.BR)} RP`,
+						`${emotes.listArrow} **RP to Apex Predator**: ${pointsTillPredator(playerData.ranked.BR, playerData.user.platform, rankedData)} RP`,
+					].join('\n'),
+				);
 
-						const titleLines = wrapText(ctx, section.title, maxTextWidth);
-						titleLines.forEach((line, j) => {
-							ctx.fillText(line, baseX, baseY + j * (titleFontSize + 2));
-						});
+				const legendSection = new SectionBuilder()
+					.addTextDisplayComponents(legendText)
+					.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/${levelBadge(account.level.total)}.png?key=${process.env.SPECTER}`));
 
-						// Draw subtitle
-						const titleHeight = titleLines.length * (titleFontSize + 2);
-						ctx.font = `bold ${subtitleFontSize}px sans-serif`;
-						ctx.fillText(section.subtitle, baseX, baseY + titleHeight + 6);
-					});
+				const battlepassSection = new SectionBuilder()
+					.addTextDisplayComponents(battlepassText)
+					.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Seasons/${seasonData.info.title}.png?key=${process.env.SPECTER}`));
 
-					// Convert canvas to Discord attachment
-					const buffer = canvas.toBuffer('image/png');
-					const attachment = new AttachmentBuilder(buffer, { name: 'banner.png' });
-
-					const trackerBackground = new MediaGalleryBuilder().addItems([{ type: MediaGalleryItem, media: { url: `attachment://${attachment.name}` } }]);
-
-					const legendText = new TextDisplayBuilder().setContent(
-						[
-							`# ${platformEmote(user.platform)} ${playerTag} ${user.username}`,
-							`-# ${emotes.listArrow} Status: ${playerStatus(user.status)}`,
-							`-# ${emotes.listArrow} Level ${account.level.current} · Tier: ${account.level.prestige + 1}/4 · Total: ${account.level.total.toLocaleString()}/2000`,
-						].join('\n'),
+				const rankedSection = new SectionBuilder()
+					.addTextDisplayComponents(rankedText)
+					.setThumbnailAccessory(thumbnail =>
+						thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Ranked/${encodeURIComponent(rankBadgeImageName(playerData.ranked.BR))}.png?key=${process.env.SPECTER}`),
 					);
 
-					const footerText = new TextDisplayBuilder().setContent(`-# Equip the Battle Pass badge in-game to update it!`);
+				statsContainer.addMediaGalleryComponents(legendBanner);
+				statsContainer.addSectionComponents(legendSection);
 
-					const accountText = new TextDisplayBuilder().setContent(
-						[
-							'## Account',
-							`${emotes.listArrow} Level: ${account.level.current}/500`,
-							`${emotes.listArrow} Tier: ${account.level.prestige + 1}`,
-							`${emotes.listArrow} Total: ${account.level.total.toLocaleString()}/2000`,
-						].join('\n'),
-					);
+				statsContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
 
-					const battlepassText = new TextDisplayBuilder().setContent(
-						[`## ${seasonData.info.title} Split ${seasonData.info.split} Battle Pass`, `${battlepassProgress(account.battlepass, seasonData.info)}`].join('\n'),
-					);
+				statsContainer.addSectionComponents(battlepassSection);
+				statsContainer.addSectionComponents(rankedSection);
 
-					const testText = new TextDisplayBuilder().setContent([`# Current Trackers`].join('\n'));
+				interaction.editReply({
+					components: [statsContainer],
+					flags: MessageFlags.IsComponentsV2,
+				});
+			}),
+		);
 
-					const rankText = new TextDisplayBuilder().setContent(
-						[
-							`## Battle Royale Ranked - ${getRankName(playerData.ranked.BR)}`,
-							`${emotes.listArrow} **Division**: ${getDivision(playerData.ranked.BR)}`,
-							`${emotes.listArrow} **Total**: ${formatScore(playerData.ranked.BR)} RP`,
-							`${emotes.listArrow} **RP to Master**: ${pointsTillMaster(playerData.ranked.BR)} RP`,
-							`${emotes.listArrow} **RP to Apex Predator**: ${pointsTillPredator(playerData.ranked.BR, playerData.user.platform, rankedData)} RP`,
-						].join('\n'),
-					);
-
-					// const profileButtonSection = new SectionBuilder().addTextDisplayComponents(profileButtonDisplay).setButtonAccessory(profileButton);
-
-					const headerSection = new SectionBuilder()
-						.addTextDisplayComponents(legendText)
-						.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/${levelBadge(account.level.total)}.png?key=${process.env.SPECTER}`));
-
-					const battlepassSection = new SectionBuilder()
-						.addTextDisplayComponents(battlepassText)
-						.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Seasons/${seasonData.info.title}.png?key=${process.env.SPECTER}`));
-
-					const rankedSection = new SectionBuilder()
-						.addTextDisplayComponents(rankText)
-						.setThumbnailAccessory(thumbnail =>
-							thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Ranked/${encodeURIComponent(rankBadgeImageName(playerData.ranked.BR))}.png?key=${process.env.SPECTER}`),
-						);
-
-					const footerSection = new SectionBuilder().addTextDisplayComponents(footerText).setButtonAccessory(profileButton);
-
-					// statsContainer.addActionRowComponents(new ActionRowBuilder().addComponents(profileSelect));
-
-					statsContainer.addMediaGalleryComponents(legendBanner);
-					statsContainer.addSectionComponents(headerSection);
-
-					statsContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
-
-					statsContainer.addSectionComponents(battlepassSection);
-					statsContainer.addSectionComponents(rankedSection);
-					// statsContainer.addMediaGalleryComponents(progressBarTest);
-
-					statsContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
-
-					statsContainer.addTextDisplayComponents(testText);
-
-					statsContainer.addMediaGalleryComponents(trackerBackground);
-
-					statsContainer.addSectionComponents(footerSection);
-
-					// const statsEmbed = new EmbedBuilder()
-					// 	.setTitle(`${platformEmote(user.platform)} ${playerTag} ${user.username} playing ${playerData.active.legend}`)
-					// 	.setDescription(`**Status**: ${playerStatus(user.status)}\n-# **Player Added**: <t:${user.userAdded}:d> - **Last Updated**: <t:${user.userUpdated}:d>`)
-					// 	.addFields([
-					// 		{
-					// 			name: `${emotes.account} Account Level`,
-					// 			value: `${emotes.listArrow} Current: ${account.level.current}/500\n${emotes.listArrow} Tier: ${account.level.prestige + 1}/4\n${
-					// 				emotes.listArrow
-					// 			} Total: ${account.level.total.toLocaleString()}/2,000`,
-					// 			inline: true,
-					// 		},
-					// 		{
-					// 			name: `${emotes.apexIcon} ${seasonData.info.Name} Split ${seasonData.info.Split} Battle Pass`,
-					// 			value: `${battlepassProgress(account.battlepass, seasonData.info)}`,
-					// 			inline: true,
-					// 		},
-					// 		{
-					// 			name: `\u200b`,
-					// 			value: `${emotes.ranked} **Battle Royale Ranked**`,
-					// 			inline: false,
-					// 		},
-					// 		{
-					// 			name: `${getRankName(playerData.ranked.BR)}`,
-					// 			value: `${emotes.listArrow} **Division**: ${getDivision(playerData.ranked.BR)}\n${emotes.listArrow} **Total**: ${formatScore(playerData.ranked.BR)} RP`,
-					// 			inline: true,
-					// 		},
-					// 		{
-					// 			name: `\u200b`,
-					// value: `${emotes.listArrow} **RP to Master**: ${pointsTillMaster(playerData.ranked.BR)} RP\n${emotes.listArrow} **RP to Apex Predator**: ${pointsTillPredator(
-					// 	playerData.ranked.BR,
-					// 	playerData.user.platform,
-					// 	rankedData,
-					// )} RP`,
-					// 			inline: true,
-					// 		},
-					// 		{
-					// 			name: `\u200b`,
-					// 			value: `${emotes.tracker} **Active Trackers**`,
-					// 			inline: false,
-					// 		},
-					// 		{
-					// 			name: trackers[0].id.toString(),
-					// 			value: `${emotes.listArrow} ${trackers[0].value.toLocaleString()}`,
-					// 			inline: true,
-					// 		},
-					// 		{
-					// 			name: trackers[1].id.toString(),
-					// 			value: `${emotes.listArrow} ${trackers[1].value.toLocaleString()}`,
-					// 			inline: true,
-					// 		},
-					// 		{
-					// 			name: trackers[2].id.toString(),
-					// 			value: `${emotes.listArrow} ${trackers[2].value.toLocaleString()}`,
-					// 			inline: true,
-					// 		},
-					// 	])
-					// 	.setImage(`https://specter.apexstats.dev/ApexStats/Legends/${encodeURIComponent(playerData.active.legend)}.png?key=${process.env.SPECTER}`)
-					// 	.setFooter({
-					// 		text: `Equip the Battle Pass badge in-game to update it!`,
-					// 	});
-
-					// interaction.editReply({ embeds: [statsEmbed] });
-
-					interaction.editReply({
-						embeds: [],
-						// components: [profileSelectDisplay, statsContainer],
-						components: [statsContainer],
-						files: [attachment],
-						flags: MessageFlags.IsComponentsV2,
-					});
-				}),
-			)
-			.catch(err => {
-				if (err.response) {
-					console.log(`${chalk.red(`${chalk.bold('[STATS]')} Axios error: ${err}`)}`);
-
-					const errorEmbed = new EmbedBuilder().setTitle('Player Lookup Error').setDescription(`${err.response.data.error}`);
-
-					interaction.editReply({ embeds: [errorEmbed] });
-				} else {
-					console.error(chalk.red(`${chalk.bold('[STATS]')} Axios error: ${err}`));
-
-					const errorEmbed = new EmbedBuilder().setDescription(`${emotes.listArrow} An error occurred while fetching player data. Please try again later.`);
-
-					interaction.editReply({ embeds: [errorEmbed] });
-				}
-			});
+		console.log('bread');
 	},
 };

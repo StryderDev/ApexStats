@@ -62,8 +62,8 @@ function playerStatus(status) {
 
 function platformEmote(platform) {
 	if (platform === 'PC') return emotes.pc;
-	if (platform === 'PlayStation') return emotes.playstation;
-	if (platform === 'Xbox') return emotes.xbox;
+	if (platform === 'PS4') return emotes.playstation;
+	if (platform === 'X1') return emotes.xbox;
 
 	return emotes.apexIcon;
 }
