@@ -63,7 +63,7 @@ module.exports = {
 						}
 
 						const mapEmbed = new EmbedBuilder()
-							.setTitle(`Next ${nextMapCount} Rank Map Rotations`)
+							.setTitle(`Next ${nextMapCount} Ranked Map Rotations`)
 							.setDescription(
 								`**Currently:** ${mapData.map.name}\nEnds <t:${mapData.times.nextMap}:D> at <t:${mapData.times.nextMap}:t>.\n**Ranked Period:** Ends <t:${rankedEnd}:D> at <t:${rankedEnd}:t>.\n\n**Up Next:**\n${nextMapString}`,
 							);

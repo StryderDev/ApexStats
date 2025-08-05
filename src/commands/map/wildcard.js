@@ -6,8 +6,8 @@ const { embedColor, Misc } = require('../../data/utilities.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('arenas')
-		.setDescription('Shows the current and next Arenas map rotation.')
+		.setName('wildcard')
+		.setDescription('Shows the current and next Wildcard map rotation.')
 		.addNumberOption(option => option.setName('next').setDescription('Select the number of future map rotations you want to see').setMaxValue(1).setMaxValue(10).setRequired(false)),
 
 	async execute(interaction) {
@@ -22,7 +22,7 @@ module.exports = {
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://solaris.apexstats.dev/beacon/map/arenas?key=${process.env.SPYGLASS}&next=${nextMapCount}`)
+			.get(`https://solaris.apexstats.dev/beacon/map/wildcard?key=${process.env.SPYGLASS}&next=${nextMapCount}`)
 			.then(async response => {
 				const map = response.data;
 				const active = map.active;
@@ -56,7 +56,7 @@ module.exports = {
 					}
 
 					const mapEmbed = new EmbedBuilder()
-						.setTitle(`Next ${nextMapCount} Arenas Map Rotations`)
+						.setTitle(`Next ${nextMapCount} Wildcard Map Rotations`)
 						.setDescription(`**Currently:** ${map.map.name}\nEnds <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t>.\n\n**Up Next:**\n${nextMapString}`);
 					interaction.editReply({ embeds: [mapEmbed] });
 				}
