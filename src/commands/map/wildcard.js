@@ -42,7 +42,7 @@ module.exports = {
 								map.next[0].duration.hours,
 							)}.`,
 						)
-						.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`);
+						.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}_Wildcard.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`);
 					interaction.editReply({ embeds: [mapEmbed] });
 				} else {
 					// use the map.next to get the next nextMapCount maps
