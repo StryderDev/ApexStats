@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { emoteFile } = require('../../utilities/misc.js');
 const { levelBadge, formatScore, getDivision, getRankName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, rankBadgeImageName, battlepassProgress } = require('../../utilities/stats.js');
-const { MessageFlags, SectionBuilder, MediaGalleryItem, ContainerBuilder, TextDisplayBuilder, MediaGalleryBuilder, SlashCommandBuilder, SeparatorSpacingSize } = require('discord.js');
+const { ButtonStyle, MessageFlags, ButtonBuilder, SectionBuilder, MediaGalleryItem, ContainerBuilder, TextDisplayBuilder, MediaGalleryBuilder, SlashCommandBuilder, SeparatorSpacingSize } = require('discord.js');
 
 const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
@@ -62,6 +62,10 @@ module.exports = {
 			].join('\n'),
 		);
 
+		const footerText = new TextDisplayBuilder().setContent(`-# Equip the Battle Pass badge in-game to update it!`);
+
+		const profileButton = new ButtonBuilder().setLabel('View Stats Profile').setStyle(ButtonStyle.Link).setURL('https://apexstats.dev/').setDisabled(true);
+
 		const legendSection = new SectionBuilder()
 			.addTextDisplayComponents(legendText)
 			.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Empty.png?key=${process.env.SPECTER}`));
@@ -74,6 +78,8 @@ module.exports = {
 			.addTextDisplayComponents(rankedText)
 			.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Empty.png?key=${process.env.SPECTER}`));
 
+		const footerSection = new SectionBuilder().addTextDisplayComponents(footerText).setButtonAccessory(profileButton);
+
 		loadingContainer.addMediaGalleryComponents(legendBanner);
 		loadingContainer.addSectionComponents(legendSection);
 
@@ -81,6 +87,10 @@ module.exports = {
 
 		loadingContainer.addSectionComponents(battlepassSection);
 		loadingContainer.addSectionComponents(rankedSection);
+
+		loadingContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
+
+		loadingContainer.addSectionComponents(footerSection);
 
 		interaction.editReply({
 			components: [loadingContainer],
@@ -131,6 +141,10 @@ module.exports = {
 					].join('\n'),
 				);
 
+				const footerText = new TextDisplayBuilder().setContent(`-# Equip the Battle Pass badge in-game to update it!`);
+
+				const profileButton = new ButtonBuilder().setLabel('View Stats Profile').setStyle(ButtonStyle.Link).setURL('https://apexstats.dev/').setDisabled(true);
+
 				const legendSection = new SectionBuilder()
 					.addTextDisplayComponents(legendText)
 					.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/${levelBadge(account.level.total)}.png?key=${process.env.SPECTER}`));
@@ -145,6 +159,8 @@ module.exports = {
 						thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Ranked/${encodeURIComponent(rankBadgeImageName(playerData.ranked.BR))}.png?key=${process.env.SPECTER}`),
 					);
 
+				const footerSection = new SectionBuilder().addTextDisplayComponents(footerText).setButtonAccessory(profileButton);
+
 				statsContainer.addMediaGalleryComponents(legendBanner);
 				statsContainer.addSectionComponents(legendSection);
 
@@ -152,6 +168,10 @@ module.exports = {
 
 				statsContainer.addSectionComponents(battlepassSection);
 				statsContainer.addSectionComponents(rankedSection);
+
+				statsContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
+
+				statsContainer.addSectionComponents(footerSection);
 
 				interaction.editReply({
 					components: [statsContainer],
