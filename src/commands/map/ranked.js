@@ -1,7 +1,7 @@
 const axios = require('axios');
 const chalk = require('chalk');
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { emoteFile, nextMapLength } = require('../../utilities/misc.js');
+const { MessageFlags, ContainerBuilder, SlashCommandBuilder } = require('discord.js');
 
 const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
@@ -15,66 +15,76 @@ module.exports = {
 		const amount = interaction.options.getNumber('next');
 		const nextAmount = amount == null ? 1 : amount;
 
-		const loadingEmbed = new EmbedBuilder().setDescription(`${emotes.loading} Loading Ranked map data...`);
-		await interaction.editReply({ embeds: [loadingEmbed] });
+		const loadingContainer = new ContainerBuilder().addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emotes.loading} Loading Ranked map data...`));
 
-		const rankedAPI = axios.get(`https://solaris.apexstats.dev/beacon/map/ranked?key=${process.env.SPYGLASS}&next=${nextAmount}`);
-		const seasonAPI = axios.get('https://api.jumpmaster.xyz/seasons/Current?version=2');
+		interaction.editReply({
+			components: [loadingContainer],
+			flags: MessageFlags.IsComponentsV2,
+		});
 
 		await axios
-			.all([rankedAPI, seasonAPI])
-			.then(
-				axios.spread((...res) => {
-					const map = res[0].data;
-					const ranked = res[1].data.dates;
+			.get(`https://solaris.apexstats.dev/beacon/map/ranked?key=${process.env.SPYGLASS}&next=${nextAmount}`)
+			.then(async res => {
+				const map = res.data;
+				const mapInfo = map.map;
 
-					const mapInfo = map.map;
-					const split = ranked.split.timestamp;
-					const end = ranked.end.rankedEnd;
+				if (map.active == false) {
+					const inactiveContainer = new ContainerBuilder().addTextDisplayComponents(textDisplay =>
+						textDisplay.setContent(`# Ranked Rotation Disabled\n${emotes.listArrow} There is no active Ranked map in rotation`),
+					);
 
-					if (map.active == false) {
-						const mapEmbed = new EmbedBuilder().setTitle(`${emotes.offline} No Active Map`).setDescription(`${emotes.listArrow} There is no active Ranked map in rotation.`);
+					return interaction.editReply({
+						components: [inactiveContainer],
+						flags: MessageFlags.IsComponentsV2,
+					});
+				}
 
-						interaction.editReply({ embeds: [mapEmbed] });
-					} else if (nextAmount === 1) {
-						const mapImage = mapInfo.name.replace(/ /g, '').replace(/'/g, ''); // Remove spaces and single quotes from name for image URL
-						const mapNextString = map.next[0] ? `\n${emotes.listArrow} Up Next: **${map.next[0].map.name}** for ${nextMapLength(map.next[0].duration)}` : ``;
+				const mapImage = mapInfo.name.replace(/ /g, '').replace(/'/g, ''); // Remove spaces and single quotes from name for image URL
+				const mapNextString = map.next[0] ? `\n${emotes.listArrow} Up Next: **${map.next[0].map.name} Ranked** for ${nextMapLength(map.next[0].duration)}` : ``;
 
-						const mapEmbed = new EmbedBuilder()
-							.setTitle(`${emotes.online} ${mapInfo.type} - ${mapInfo.name}`)
-							.setDescription(`${emotes.listArrow} **${mapInfo.name}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t> ${mapNextString}`)
-							.addFields([
-								{ name: ':calendar: Ranked Split', value: `${emotes.listArrow} <t:${split - 1800}:D>\n${emotes.listArrow} <t:${split - 1800}:t>`, inline: true },
-								{ name: ':calendar: Ranked End', value: `${emotes.listArrow} <t:${end}:D>\n${emotes.listArrow} <t:${end}:t>`, inline: true },
-							])
-							.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?key=${process.env.SPECTER}`)
-							.setFooter({ text: 'Times are automatically converted to your local time\nRanked ends 30 minutes before split & season end' });
+				if (nextAmount === 1) {
+					const singleMapContainer = new ContainerBuilder()
+						.addTextDisplayComponents(textDisplay =>
+							textDisplay.setContent(
+								`# ${emotes.online} ${mapInfo.name} Ranked\n${emotes.listArrow} **${mapInfo.name} Ranked** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t> ${mapNextString}`,
+							),
+						)
+						.addMediaGalleryComponents(mediaGallery =>
+							mediaGallery.addItems(mediaGalleryItem =>
+								mediaGalleryItem.setDescription('Map Image for the Ranked Mode').setURL(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?key=${process.env.SPECTER}`),
+							),
+						);
 
-						interaction.editReply({ embeds: [mapEmbed] });
-					} else {
-						const nextMaps = map.next.slice(0, nextAmount);
+					return interaction.editReply({
+						components: [singleMapContainer],
+						flags: MessageFlags.IsComponentsV2,
+					});
+				}
 
-						let nextMapString = '';
+				const nextMaps = map.next.slice(0, nextAmount);
 
-						for (let i = 0; i < nextMaps.length; i++) {
-							nextMapString += `${emotes.listArrow} **${nextMaps[i].map.name}**\n${emotes.listArrow} Starts at <t:${nextMaps[i].start}:t> and lasts ${nextMapLength(nextMaps[i].duration)}\n\n`;
-						}
+				let nextMapString = '';
 
-						const mapEmbed = new EmbedBuilder()
-							.setTitle(`${emotes.online} ${nextAmount} Next ${mapInfo.type} Map Rotations`)
-							.setDescription(`${emotes.listArrow} Currently: **${mapInfo.name}** for ${nextMapLength(map.times.remaining)}\n\n${nextMapString}`)
-							.setFooter({ text: 'Times are automatically converted to your local time' });
+				for (let i = 0; i < nextMaps.length; i++) {
+					nextMapString += `${emotes.listArrow} **${nextMaps[i].map.name} Ranked**\n${emotes.listArrow} Starts <t:${nextMaps[i].start}:f> and lasts ${nextMapLength(nextMaps[i].duration)}\n\n`;
+				}
 
-						interaction.editReply({ embeds: [mapEmbed] });
-					}
-				}),
-			)
+				const nextMapContainer = new ContainerBuilder().addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Upcoming Ranked Maps\n${nextMapString}`));
+
+				return interaction.editReply({
+					components: [nextMapContainer],
+					flags: MessageFlags.IsComponentsV2,
+				});
+			})
 			.catch(err => {
 				console.error(chalk.red(`${chalk.bold('[MAP]')} Axios error: ${err}`));
 
-				const errorEmbed = new EmbedBuilder().setDescription(`${emotes.listArrow} An error occurred while fetching map data. Please try again later.`);
+				const errorContainer = new ContainerBuilder().addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emotes.listArrow} An error occurred while fetching map data. Please try again later.`));
 
-				interaction.editReply({ embeds: [errorEmbed] });
+				return interaction.editReply({
+					components: [errorContainer],
+					flags: MessageFlags.IsComponentsV2,
+				});
 			});
 	},
 };

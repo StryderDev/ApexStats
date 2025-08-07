@@ -15,7 +15,7 @@ module.exports = {
 				.setName('type')
 				.setDescription('Which rotation to be notified about')
 				.setRequired(true)
-				.addChoices({ name: 'BR', value: 'br' }, { name: 'Ranked', value: 'ranked' }, { name: 'Mixtape', value: 'mixtape' }, { name: 'LTM', value: 'ltm' }),
+				.addChoices({ name: 'BR', value: 'br' }, { name: 'Ranked', value: 'ranked' }, { name: 'Mixtape', value: 'mixtape' }, { name: 'Arenas', value: 'arenas' }, { name: 'LTM', value: 'ltm' }),
 		),
 
 	async execute(interaction) {
@@ -29,6 +29,8 @@ module.exports = {
 			.then(res => {
 				const mapData = res.data;
 				const nextMapData = res.data.next;
+
+				// TODO: Check if there are any active rotations for the selected mode, do not create reminder if there is none
 
 				const mapQuery = 'INSERT INTO ApexStats_MapReminders (map_index, map_type, user_id, channel_id, server_id, timestamp) VALUES (?, ?, ?, ?, ?, ?)';
 

@@ -7,15 +7,15 @@ const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('map')
-		.setDescription('View current and future Battle Royale map rotations')
+		.setName('arenas')
+		.setDescription('View current and future Arenas map rotations')
 		.addNumberOption(option => option.setName('next').setDescription('Amount of future map rotations').setMinValue(1).setMaxValue(10).setRequired(false)),
 
 	async execute(interaction) {
 		const amount = interaction.options.getNumber('next');
 		const nextAmount = amount == null ? 1 : amount;
 
-		const loadingContainer = new ContainerBuilder().addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emotes.loading} Loading Battle Royale map data...`));
+		const loadingContainer = new ContainerBuilder().addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emotes.loading} Loading Arenas map data...`));
 
 		interaction.editReply({
 			components: [loadingContainer],
@@ -23,14 +23,14 @@ module.exports = {
 		});
 
 		await axios
-			.get(`https://solaris.apexstats.dev/beacon/map/br?key=${process.env.SPYGLASS}&next=${nextAmount}`)
+			.get(`https://solaris.apexstats.dev/beacon/map/arenas?key=${process.env.SPYGLASS}&next=${nextAmount}`)
 			.then(async res => {
 				const map = res.data;
 				const mapInfo = map.map;
 
 				if (map.active == false) {
 					const inactiveContainer = new ContainerBuilder().addTextDisplayComponents(textDisplay =>
-						textDisplay.setContent(`# Battle Royale Rotation Disabled\n${emotes.listArrow} There is no active Battle Royale map in rotation`),
+						textDisplay.setContent(`# Arenas Rotation Disabled\n${emotes.listArrow} There is no active Arenas map in rotation`),
 					);
 
 					return interaction.editReply({
@@ -49,7 +49,7 @@ module.exports = {
 						)
 						.addMediaGalleryComponents(mediaGallery =>
 							mediaGallery.addItems(mediaGalleryItem =>
-								mediaGalleryItem.setDescription('Map Image for the Battle Royale Mode').setURL(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?key=${process.env.SPECTER}`),
+								mediaGalleryItem.setDescription('Map Image for the Arenas Mode').setURL(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?key=${process.env.SPECTER}`),
 							),
 						);
 
@@ -67,7 +67,7 @@ module.exports = {
 					nextMapString += `${emotes.listArrow} **${nextMaps[i].map.name}**\n${emotes.listArrow} Starts at <t:${nextMaps[i].start}:t> and lasts ${nextMapLength(nextMaps[i].duration)}\n\n`;
 				}
 
-				const nextMapContainer = new ContainerBuilder().addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Upcoming Battle Royale Maps\n${nextMapString}`));
+				const nextMapContainer = new ContainerBuilder().addTextDisplayComponents(textDisplay => textDisplay.setContent(`# Upcoming Arenas Maps\n${nextMapString}`));
 
 				return interaction.editReply({
 					components: [nextMapContainer],
