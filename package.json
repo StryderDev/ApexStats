@@ -18,7 +18,7 @@
 		"dev": "nodemon ."
 	},
 	"dependencies": {
-		"@napi-rs/canvas": "^0.1.77",
+		"@napi-rs/canvas": "^0.1.76",
 		"axios": "^1.11.0",
 		"better-sqlite3": "^12.2.0",
 		"chalk": "4.1.2",
