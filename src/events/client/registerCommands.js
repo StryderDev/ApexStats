@@ -6,7 +6,7 @@ const wait = require('util').promisify(setTimeout);
 const { Routes } = require('discord-api-types/v10');
 
 module.exports = {
-	name: 'ready',
+	name: 'clientReady',
 	once: true,
 	execute(client) {
 		// Register Slash Commands

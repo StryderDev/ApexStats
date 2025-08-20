@@ -4,7 +4,7 @@ const db = require('../../utilities/db.js');
 const { ActivityType } = require('discord.js');
 
 module.exports = {
-	name: 'ready',
+	name: 'clientReady',
 	once: true,
 	execute(client) {
 		(async function mapPresenceLoop() {

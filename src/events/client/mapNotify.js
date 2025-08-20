@@ -7,7 +7,7 @@ const { emoteFile, nextMapLength } = require('../../utilities/misc.js');
 const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
 module.exports = {
-	name: 'ready',
+	name: 'clientReady',
 	once: true,
 	execute(client) {
 		(async function mapNotifyLoop() {
