@@ -46,7 +46,7 @@ module.exports = {
 					const singleMapContainer = new ContainerBuilder()
 						.addTextDisplayComponents(textDisplay =>
 							textDisplay.setContent(
-								`# ${emotes.online} ${mapInfo.name} Wildcard\n${emotes.listArrow} **${mapInfo.name} ${mapInfo.type}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t> ${mapNextString}`,
+								`# ${emotes.online} ${mapInfo.name} ${mapInfo.type}\n${emotes.listArrow} **${mapInfo.name} ${mapInfo.type}** ends <t:${map.times.nextMap}:R> at <t:${map.times.nextMap}:t> ${mapNextString}`,
 							),
 						)
 						.addMediaGalleryComponents(mediaGallery =>

@@ -22,6 +22,8 @@ module.exports = {
 			flags: MessageFlags.IsComponentsV2,
 		});
 
+		// TODO: Add split/ranked period end times
+
 		await axios
 			.get(`https://solaris.apexstats.dev/beacon/map/ranked?key=${process.env.SPYGLASS}&next=${nextAmount}`)
 			.then(async res => {
