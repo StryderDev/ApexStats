@@ -39,20 +39,20 @@ function getStatus(status) {
 }
 
 function battlepass(data) {
-	if (data.history['Showdown_1'] >= 60) {
+	if (data.history['Showdown_2'] >= 60) {
 		rewardLevel = 60;
 		rewardCompletion = 100;
 	} else {
-		rewardLevel = data.history['Showdown_1'];
-		rewardCompletion = Math.floor((data.history['Showdown_1'] / 60) * 100);
+		rewardLevel = data.history['Showdown_2'];
+		rewardCompletion = Math.floor((data.history['Showdown_2'] / 60) * 100);
 	}
 
-	if (data.history['Showdown_1'] >= 100) {
+	if (data.history['Showdown_2'] >= 100) {
 		badgeLevel = 100;
 		badgeCompletion = 100;
 	} else {
-		badgeLevel = data.history['Showdown_1'];
-		badgeCompletion = Math.floor((data.history['Showdown_1'] / 100) * 100);
+		badgeLevel = data.history['Showdown_2'];
+		badgeCompletion = Math.floor((data.history['Showdown_2'] / 100) * 100);
 	}
 
 	return `${Misc.GrayBlank} Reward Completion: ${rewardLevel}/60 (${rewardCompletion}%)\n${Misc.GrayBlank} Badge Completion: ${badgeLevel}/100 (${badgeCompletion}%)`;
