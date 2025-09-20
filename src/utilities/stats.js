@@ -105,4 +105,33 @@ function rankBadgeImageName(rank) {
 	return `${rank.name}_${rank.division}`;
 }
 
-module.exports = { levelBadge, getRankName, formatScore, getDivision, platformName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, battlepassProgress, rankBadgeImageName };
+function calcDailyBPLevelsTillCompletion(battlepass, seasonInfo) {
+	const currentTime = Math.floor(Date.now() / 1000);
+
+	if (currentTime < seasonInfo.dates.split.timestamp) {
+		const totalLevelsNeeded = 100 - (battlepass.history[`${seasonInfo.info.title}_${seasonInfo.info.split}`] || 1);
+		const daysLeft = Math.ceil((seasonInfo.dates.split.timestamp - currentTime) / 86400);
+
+		return `${Math.ceil(totalLevelsNeeded / daysLeft)}`;
+	} else {
+		const totalLevelsNeeded = 100 - (battlepass.history[`${seasonInfo.info.title}_${seasonInfo.info.split}`] || 1);
+		const daysLeft = Math.ceil((seasonInfo.dates.end.timestamp - currentTime) / 86400);
+
+		return `${Math.ceil(totalLevelsNeeded / daysLeft)}`;
+	}
+}
+
+module.exports = {
+	levelBadge,
+	getRankName,
+	formatScore,
+	getDivision,
+	platformName,
+	playerStatus,
+	platformEmote,
+	pointsTillMaster,
+	pointsTillPredator,
+	battlepassProgress,
+	rankBadgeImageName,
+	calcDailyBPLevelsTillCompletion,
+};

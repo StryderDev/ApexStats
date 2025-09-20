@@ -25,7 +25,7 @@ const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('stats')
+		.setName('stats_old')
 		.setDescription('View the in-game stats of your currently selected legend')
 		.addStringOption(option =>
 			option.setName('platform').setDescription('Which platform you play on. Note: For crossplay, use the platform you play on the most').setRequired(true).addChoices(

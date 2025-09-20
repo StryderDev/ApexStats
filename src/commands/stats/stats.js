@@ -1,6 +1,18 @@
 const axios = require('axios');
 const { emoteFile } = require('../../utilities/misc.js');
-const { levelBadge, formatScore, getDivision, getRankName, playerStatus, platformEmote, pointsTillMaster, pointsTillPredator, rankBadgeImageName, battlepassProgress } = require('../../utilities/stats.js');
+const {
+	levelBadge,
+	formatScore,
+	getDivision,
+	getRankName,
+	playerStatus,
+	platformEmote,
+	pointsTillMaster,
+	pointsTillPredator,
+	rankBadgeImageName,
+	battlepassProgress,
+	calcDailyBPLevelsTillCompletion,
+} = require('../../utilities/stats.js');
 const { ButtonStyle, MessageFlags, ButtonBuilder, SectionBuilder, MediaGalleryItem, ContainerBuilder, TextDisplayBuilder, MediaGalleryBuilder, SlashCommandBuilder, SeparatorSpacingSize } = require('discord.js');
 
 const emotes = require(`../../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
@@ -50,7 +62,11 @@ module.exports = {
 			[`# ${platformEmote(platform)} Loading...`, `-# ${emotes.listArrow} Status: Loading...`, `-# ${emotes.listArrow} Level: Loading... · Tier: -/4 · Total: -/2000`].join('\n'),
 		);
 
-		const battlepassText = new TextDisplayBuilder().setContent([`## Battle Pass Loading...`, `${emotes.listArrow} Reward Completion: -/60 (0%)\n${emotes.listArrow} Badge Completion: -/100 (0%)`].join('\n'));
+		const battlepassText = new TextDisplayBuilder().setContent(
+			[`## Battle Pass Loading...`, `${emotes.listArrow} Reward Completion: -/60 (0%)\n${emotes.listArrow} Badge Completion: -/100 (0%)`, `${emotes.listArrow} Required Daily Levels till Completion: -/day`].join(
+				'\n',
+			),
+		);
 
 		const rankedText = new TextDisplayBuilder().setContent(
 			[
@@ -128,7 +144,11 @@ module.exports = {
 				);
 
 				const battlepassText = new TextDisplayBuilder().setContent(
-					[`## ${seasonData.info.title} Split ${seasonData.info.split} Battle Pass`, `${battlepassProgress(account.battlepass, seasonData.info)}`].join('\n'),
+					[
+						`## ${seasonData.info.title} Split ${seasonData.info.split} Battle Pass`,
+						`${battlepassProgress(account.battlepass, seasonData.info)}`,
+						`${emotes.listArrow} ${calcDailyBPLevelsTillCompletion(account.battlepass, seasonData)} Levels/day till Completion`,
+					].join('\n'),
 				);
 
 				const rankedText = new TextDisplayBuilder().setContent(

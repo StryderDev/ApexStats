@@ -30,7 +30,7 @@ module.exports = {
 								if (err) return console.log(chalk.red(`${chalk.bold('[PRESENCE]')} Query error: ${err.code}`));
 
 								if (result[0].brMapIndex != brData.rotationIndex) {
-									client.user.setActivity(`${brData.map.name} / ${rankedData.map.name}`, { type: ActivityType.Custom });
+									client.user.setActivity(`🌎 ${brData.map.name} / 🥇 ${rankedData.map.name}`, { type: ActivityType.Custom });
 
 									console.log(chalk.green(`${chalk.bold('[PRESENCE]')} Updated bot presence, set to "${brData.map.name} / ${rankedData.map.name}"`));
 
