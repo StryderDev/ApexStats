@@ -78,7 +78,7 @@ module.exports = {
 			].join('\n'),
 		);
 
-		const footerText = new TextDisplayBuilder().setContent(`-# Equip the Battle Pass badge in-game to update it!`);
+		const footerText = new TextDisplayBuilder().setContent(`-# Equip the Battle Pass badge in-game to update it!\n-# Equip trackers in-game to update stats`);
 
 		const profileButton = new ButtonBuilder().setLabel('View Stats Profile').setStyle(ButtonStyle.Link).setURL('https://apexstats.dev/').setDisabled(true);
 
@@ -161,7 +161,7 @@ module.exports = {
 					].join('\n'),
 				);
 
-				const footerText = new TextDisplayBuilder().setContent(`-# Equip the Battle Pass badge in-game to update it!`);
+				const footerText = new TextDisplayBuilder().setContent(`-# Equip the Battle Pass badge in-game to update it!\n-# Equip trackers in-game to update stats!`);
 
 				const profileButton = new ButtonBuilder().setLabel('View Stats Profile').setStyle(ButtonStyle.Link).setURL('https://apexstats.dev/').setDisabled(true);
 
