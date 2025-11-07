@@ -50,7 +50,7 @@ module.exports = {
 				},
 			),
 		)
-		.addStringOption(option => option.setName('username').setDescription('Your in-game username, usually the name linked directly to your EA account')),
+		.addStringOption(option => option.setName('username').setDescription('Your in-game username, usually the name linked directly to your EA account').setRequired(true)),
 
 	async execute(interaction) {
 		const platform = interaction.options.getString('platform');
@@ -60,7 +60,7 @@ module.exports = {
 		const seasonAPI = axios.get('https://api.jumpmaster.xyz/seasons/Current?version=2');
 		const rankedAPI = axios.get('https://api.jumpmaster.xyz/misc/predThreshold');
 
-		const trackerBackground = await loadImage('https://specter.apexstats.dev/ApexStats/Legends/Trackers/Background_3.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc');
+		const trackerBackground = await loadImage('https://specter.apexstats.dev/ApexStats/Legends/Trackers/Background_8.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc');
 
 		const loadingContainer = new ContainerBuilder();
 
@@ -97,7 +97,7 @@ module.exports = {
 			{
 				type: MediaGalleryItem,
 				media: {
-					url: `https://specter.apexstats.dev/ApexStats/Legends/Trackers/Background_3.png?key=${process.env.SPECTER}`,
+					url: `https://specter.apexstats.dev/ApexStats/Legends/Trackers/Background_8.png?key=${process.env.SPECTER}`,
 				},
 			},
 		]);
@@ -149,6 +149,7 @@ module.exports = {
 
 				const user = playerData.user;
 				const account = playerData.account;
+				const trackers = playerData.active.trackers;
 
 				const playerTag = user.tag ? `[${user.tag}]` : '';
 
@@ -211,20 +212,60 @@ module.exports = {
 				const canvas = createCanvas(1200, 100);
 				const ctx = canvas.getContext('2d');
 
-				const sections = [{ title: 'Tracker 1', subtitle: 'Value 1' }];
+				const sections = [
+					{ title: trackers[0].name_short.toString(), subtitle: trackers[0].value.toLocaleString() },
+					{ title: trackers[1].name_short.toString(), subtitle: trackers[1].value.toLocaleString() },
+					{ title: trackers[2].name_short.toString(), subtitle: trackers[2].value.toLocaleString() },
+				];
 
 				const sectionWidth = 1200 / sections.length;
 				const padding = 20;
-				const baseY = 25;
-				const titleSize = 18;
-				const subtitleSize = 25;
+				const baseY = 30;
+				const titleSize = 25;
+				const subtitleSize = 45;
 
 				ctx.drawImage(trackerBackground, 0, 0, 1200, 100);
 
-				sections.forEach((section, i) => {
-					const baseX = 1;
+				function wrapText(ctx, text, max) {
+					const words = text.split(' ');
+					const lines = [];
+					let line = '';
 
-					ctx.fillText(section.title, baseX + padding, baseY);
+					for (let word of words) {
+						const testTextLength = line ? `${line} ${word}` : word;
+						const metrics = ctx.measureText(testTextLength);
+
+						if (metrics.width <= max) {
+							line = testTextLength;
+						} else {
+							lines.push(line);
+							line = word;
+						}
+					}
+
+					if (line) lines.push(line);
+
+					return lines;
+				}
+
+				sections.forEach((section, i) => {
+					const baseX = i * sectionWidth + padding;
+					const maxTextWidth = sectionWidth - 2 * padding;
+
+					ctx.font = `${titleSize}px sans-serif`;
+					ctx.fillStyle = 'white';
+
+					const titleLines = wrapText(ctx, section.title, maxTextWidth);
+
+					titleLines.forEach((line, j) => {
+						ctx.fillText(line, baseX, baseY + j * (titleSize + 2));
+					});
+
+					const subtitleHeight = titleLines.length * (subtitleSize + 2);
+
+					ctx.font = `bold ${subtitleSize}px sans-serif`;
+
+					ctx.fillText(section.subtitle, baseX, baseY + subtitleHeight + 6);
 				});
 
 				const imageBuffer = canvas.toBuffer('image/png');
@@ -265,7 +306,5 @@ module.exports = {
 				});
 			}),
 		);
-
-		console.log('bread');
 	},
 };
