@@ -77,8 +77,7 @@ function pointsTillMaster(player) {
 }
 
 function pointsTillPredator(player, platform, ranked) {
-	if (platform == 'X1') platform = 'Xbox';
-	if (platform == 'PS4') platform = 'PlayStation';
+	if (platform == 'PlayStation') platform = 'Playstation';
 
 	const pointsTillPredator = ranked[platform].value - player.score;
 
