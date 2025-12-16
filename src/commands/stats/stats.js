@@ -73,9 +73,7 @@ module.exports = {
 			},
 		]);
 
-		const legendText = new TextDisplayBuilder().setContent(
-			[`# ${platformEmote(platform)} Loading...`, `-# ${emotes.listArrow} Status: Loading...`, `-# ${emotes.listArrow} Level: Loading... · Tier: -/4 · Total: -/2000`].join('\n'),
-		);
+		const legendText = new TextDisplayBuilder().setContent([`# ${platformEmote(platform)} -`, `-# ${emotes.listArrow} Status: -`, `-# ${emotes.listArrow} Level: - · Tier: -/4 · Total: -/2000`].join('\n'));
 
 		const battlepassText = new TextDisplayBuilder().setContent(
 			[`## Battle Pass Loading...`, `${emotes.listArrow} Reward Completion: -/60 (0%)\n${emotes.listArrow} Badge Completion: -/100 (0%)`, `${emotes.listArrow} Required Daily Levels till Completion: -/day`].join(
