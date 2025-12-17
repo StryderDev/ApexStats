@@ -39,8 +39,15 @@ module.exports = {
 					});
 				}
 
-				const mapImage = mapInfo.name.replace(/ /g, '').replace(/'/g, ''); // Remove spaces and single quotes from name for image URL
+				function mapImageName(name, type) {
+					const fullName = `${name}_${type}`;
+
+					return fullName.replace(/ /g, '').replace(/'/g, '');
+				}
+
 				const mapNextString = map.next[0] ? `\n${emotes.listArrow} Up Next: **${map.next[0].map.name} ${map.next[0].map.type}** for ${nextMapLength(map.next[0].duration)}` : ``;
+
+				console.log(mapImageName(mapInfo.name, mapInfo.type));
 
 				if (nextAmount === 1) {
 					const singleMapContainer = new ContainerBuilder()
@@ -51,7 +58,9 @@ module.exports = {
 						)
 						.addMediaGalleryComponents(mediaGallery =>
 							mediaGallery.addItems(mediaGalleryItem =>
-								mediaGalleryItem.setDescription('Map Image for the Wildcard Mode').setURL(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}_Wildcard.png?key=${process.env.SPECTER}`),
+								mediaGalleryItem
+									.setDescription('Map Image for the Wildcard Mode')
+									.setURL(`https://specter.apexstats.dev/ApexStats/Maps/${mapImageName(mapInfo.name, mapInfo.type)}.png?key=${process.env.SPECTER}`),
 							),
 						);
 
