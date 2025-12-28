@@ -224,36 +224,35 @@ module.exports = {
 
 				ctx.drawImage(trackerBackground, 0, 0, 1200, 100);
 
-				function wrapText(ctx, text, max) {
+				function truncateText(text, amount) {
 					const words = text.split(' ');
 					const lines = [];
 					let line = '';
 
 					for (let word of words) {
 						const testTextLength = line ? `${line} ${word}` : word;
-						const metrics = ctx.measureText(testTextLength);
 
-						if (metrics.width <= max) {
+						if (testTextLength.length <= amount) {
 							line = testTextLength;
 						} else {
-							lines.push(line);
-							line = word;
+							break;
 						}
 					}
 
-					if (line) lines.push(line);
+					if (line.length < text.length) line += '...';
+
+					lines.push(line);
 
 					return lines;
 				}
 
 				sections.forEach((section, i) => {
 					const baseX = i * sectionWidth + padding;
-					const maxTextWidth = sectionWidth - 2 * padding;
 
 					ctx.font = `${titleSize}px sans-serif`;
 					ctx.fillStyle = 'white';
 
-					const titleLines = wrapText(ctx, section.title, maxTextWidth);
+					const titleLines = truncateText(section.title, 25);
 
 					titleLines.forEach((line, j) => {
 						ctx.fillText(line, baseX, baseY + j * (titleSize + 2));
