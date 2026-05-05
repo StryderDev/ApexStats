@@ -15,7 +15,7 @@ module.exports = {
 				.setName('type')
 				.setDescription('Which rotation to be notified about')
 				.setRequired(true)
-				.addChoices({ name: 'BR', value: 'br' }, { name: 'Ranked', value: 'ranked' }, { name: 'Mixtape', value: 'mixtape' }, { name: 'Arenas', value: 'arenas' }, { name: 'LTM', value: 'ltm' }),
+				.addChoices({ name: 'Battle Royale', value: 'br' }, { name: 'Ranked', value: 'ranked' }, { name: 'Mixtape', value: 'mixtape' }),
 		),
 
 	async execute(interaction) {
@@ -35,7 +35,7 @@ module.exports = {
 				const mapQuery = 'INSERT INTO ApexStats_MapReminders (map_index, map_type, user_id, channel_id, server_id, timestamp) VALUES (?, ?, ?, ?, ?, ?)';
 
 				db.query(mapQuery, [mapData.rotationIndex, mapType, interaction.user.id, interaction.channel.id, interaction.guild.id, Math.floor(Date.now())], (err, result) => {
-					if (err) return console.log(chalk.red(`${chalk.bold('[NOTIFY]')} Query error: ${err.code}`));
+					if (err) return console.log(`${chalk.red.bold('[APEXSTATS_MAP_NOTIFY]')} Query error: ${err.code}`);
 
 					const notifyEmbed = new EmbedBuilder()
 						.setTitle(`${emotes.check} Map Reminder Set`)
@@ -45,7 +45,7 @@ module.exports = {
 				});
 			})
 			.catch(err => {
-				console.error(chalk.red(`${chalk.bold('[NOTIFY]')} Axios error: ${err}`));
+				console.error(`${chalk.red.bold('[APEXSTATS_MAP_NOTIFY]')} Axios error: ${err}`);
 
 				const errorEmbed = new EmbedBuilder().setDescription(`${emotes.listArrow} An error occurred while fetching map data. Please try again later.`);
 

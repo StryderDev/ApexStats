@@ -16,10 +16,10 @@ module.exports = {
 			const getReminders = 'SELECT * FROM ApexStats_MapReminders WHERE expired = 0 LIMIT 5';
 
 			db.query(getReminders, async (err, result) => {
-				if (err) return console.log(chalk.red(`${chalk.bold('[NOTIFY]')} Query error: ${err.code}`));
+				if (err) return console.log(`${chalk.red.bold('[APEXSTATS_MAP_NOTIFY]')} Query error: ${err.code}`);
 
 				if (result.length > 0) {
-					console.log(chalk.yellow(`${chalk.bold('[NOTIFY]')} Checking map reminders...`));
+					console.log(`${chalk.yellow.bold('[APEXSTATS_MAP_NOTIFY]')} Checking map reminders...`);
 
 					for (const reminder of result) {
 						const rowId = reminder.id;
@@ -36,7 +36,7 @@ module.exports = {
 								const mapInfo = map.map;
 
 								// if map index from DB is equal to the map index from the API, skip the reminder
-								if (mapIndex == map.rotationIndex) return console.log(chalk.yellow(`${chalk.bold('[NOTIFY]')} Map index is the same, skipping...`));
+								if (mapIndex == map.rotationIndex) return console.log(`${chalk.yellow.bold('[APEXSTATS_MAP_NOTIFY]')} Map index is the same, skipping...`);
 
 								const mapImage = mapInfo.name.replace(/ /g, '').replace(/'/g, ''); // Remove spaces and single quotes from name for image URL
 								const mapNextString = map.next[0] ? `\n${emotes.listArrow} Up Next: **${map.next[0].map.name}** for ${nextMapLength(map.next[0].duration)}` : ``;
@@ -50,28 +50,28 @@ module.exports = {
 								const guild = client.guilds.cache.get(serverId);
 								const channel = guild.channels.cache.get(channelId);
 
-								if (!guild) return console.log(chalk.red(`${chalk.bold('[NOTIFY]')} Guild not found for server ID: ${serverId}`));
+								if (!guild) return console.log(`${chalk.red.bold('[APEXSTATS_MAP_NOTIFY]')} Guild not found for server ID: ${serverId}`);
 
-								if (!channel) return console.log(chalk.red(`${chalk.bold('[NOTIFY]')} Channel not found for channel ID: ${channelId}`));
+								if (!channel) return console.log(`${chalk.red.bold('[APEXSTATS_MAP_NOTIFY]')} Channel not found for channel ID: ${channelId}`);
 
 								// check if the channel is a text channel and we have permission to send messages
 								if (channel.type == 0 && channel.permissionsFor(guild.members.me).has('SendMessages')) {
-									await channel.send({ content: `<@${userId}> ${mapInfo.type} map has changed`, embeds: [mapEmbed] });
+									await channel.send({ content: `<@${userId}> Map rotation has updated!`, embeds: [mapEmbed] });
 								} else {
-									console.log(chalk.red(`${chalk.bold('[NOTIFY]')} Channel is not a text channel or missing permissions`));
+									console.log(`${chalk.red.bold('[APEXSTATS_MAP_NOTIFY]')} Channel is not a text channel or missing permissions`);
 								}
 
 								// update the reminder to be expired
 								const updateQuery = 'UPDATE ApexStats_MapReminders SET expired = 1 WHERE id = ?';
 
 								db.query(updateQuery, [rowId], (err, result) => {
-									if (err) return console.log(chalk.red(`${chalk.bold('[NOTIFY]')} Query error: ${err.code}`));
+									if (err) return console.log(`${chalk.red.bold('[APEXSTATS_MAP_NOTIFY]')} Query error: ${err.code}`);
 
-									console.log(chalk.green(`${chalk.bold('[NOTIFY]')} Map reminder expired for user ID: ${userId} in channel ID: ${channelId} for server ID: ${serverId}`));
+									console.log(`${chalk.green.bold('[APEXSTATS_MAP_NOTIFY]')} Map reminder expired for user ID: ${userId} in channel ID: ${channelId} for server ID: ${serverId}`);
 								});
 							})
 							.catch(err => {
-								return console.error(chalk.red(`${chalk.bold('[NOTIFY]')} Axios error: ${err}`));
+								return console.error(`${chalk.red.bold('[APEXSTATS_MAP_NOTIFY]')} Axios error: ${err}`);
 							});
 					}
 				}

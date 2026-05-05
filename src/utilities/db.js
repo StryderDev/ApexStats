@@ -4,7 +4,7 @@ var database = require('mysql2');
 var db;
 
 function dbConnect() {
-	console.log(chalk.yellow(`${chalk.bold('[SPYGLASS]')} Attemping connection to Spyglass...`));
+	console.log(`${chalk.yellow.bold('[SPYGLASS]')} Attemping connection to Spyglass...`);
 
 	if (!db) {
 		db = database.createPool({
@@ -26,16 +26,16 @@ function dbConnect() {
 			if (err) {
 				if (err.errors) {
 					err.errors.forEach(error => {
-						console.error(chalk.red(`${chalk.bold('[SPYGLASS]')} Error connecting to Spyglass: ${error.message}`));
+						console.error(`${chalk.red.bold('[SPYGLASS]')} Error connecting to Spyglass: ${error.message}`);
 					});
 				} else {
-					console.error(chalk.red(`${chalk.bold('[SPYGLASS]')} Error connecting to Spyglass: ${err.message}`));
+					console.error(`${chalk.red.bold('[SPYGLASS]')} Error connecting to Spyglass: ${err.message}`);
 				}
 
 				return;
 			}
 
-			console.log(chalk.green(`${chalk.bold('[SPYGLASS]')} Spyglass Connection Successful`));
+			console.log(`${chalk.green.bold('[SPYGLASS]')} Spyglass Connection Successful`);
 		});
 	}
 

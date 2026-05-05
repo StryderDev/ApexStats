@@ -15,9 +15,9 @@ module.exports = {
 			try {
 				await command.execute(interaction);
 
-				console.log(chalk.cyan(`${chalk.bold('[INTERACTION]')} ${interaction.user.username} used /${interaction.commandName}`));
+				console.log(`${chalk.cyan.bold('[APEXSTATS_INTERACTION]')} ${interaction.user.username} used /${interaction.commandName}`);
 			} catch (err) {
-				console.error(chalk.red(`${chalk.bold('[INTERACTION]')} Interaction Error: ${err}`));
+				console.error(`${chalk.red.bold('[APEXSTATS_INTERACTION]')} Interaction Error: ${err}`);
 			}
 		}
 	},
