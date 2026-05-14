@@ -98,11 +98,11 @@ module.exports = {
 								value: `\u200b\n\n${Misc.GrayBlank} Till Master: ${calcTillMaster(ranked)}\n${Misc.GrayBlank} Till Apex Predator: ${calcTillPred(ranked, predData, platform)}`,
 								inline: true,
 							},
-							{
-								name: `\u200b`,
-								value: `**Ranked Rumble <:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434><:ApexStats_LineEnd:1270165385215217785>**\n-# ⚠️ Ranked Rumble is currently inactive.`,
-								inline: false,
-							},
+							// {
+							// 	name: `\u200b`,
+							// 	value: `**Ranked Rumble <:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434><:ApexStats_LineFull:1270165386427367434><:ApexStats_LineEnd:1270165385215217785>**\n-# ⚠️ Ranked Rumble is currently inactive.`,
+							// 	inline: false,
+							// },
 						])
 
 						.setFooter({
