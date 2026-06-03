@@ -15,7 +15,7 @@ module.exports = {
 				.setName('type')
 				.setDescription('Which rotation to be notified about')
 				.setRequired(true)
-				.addChoices({ name: 'Battle Royale', value: 'br' }, { name: 'Ranked', value: 'ranked' }, { name: 'Mixtape', value: 'mixtape' }),
+				.addChoices({ name: 'Battle Royale', value: 'br' }, { name: 'Ranked', value: 'ranked' }, { name: 'Mixtape', value: 'mixtape' }, { name: 'Wildcard', value: 'wildcard' }),
 		),
 
 	async execute(interaction) {
