@@ -28,7 +28,7 @@ module.exports = {
 				interaction.editReply({ embeds: [steamEmbed] });
 			})
 			.catch(err => {
-				console.error(chalk.red(`${chalk.bold('[STEAM]')} Axios error: ${err}`));
+				console.error(`${chalk.red.bold('[APEXSTATS]')} Axios error: ${err}`);
 
 				const errorEmbed = new EmbedBuilder().setDescription(`${emotes.listArrow} An error occurred while fetching Steam data. Please try again later.`);
 

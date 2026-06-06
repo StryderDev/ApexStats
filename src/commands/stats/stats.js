@@ -13,6 +13,7 @@ const {
 	rankBadgeImageName,
 	battlepassProgress,
 	calcDailyBPLevelsTillCompletion,
+	testLoadEmbedThing,
 } = require('../../utilities/stats.js');
 const {
 	ButtonStyle,
@@ -62,80 +63,8 @@ module.exports = {
 
 		const trackerBackground = await loadImage('https://specter.apexstats.dev/ApexStats/Legends/Trackers/Background_8.png?key=LuH8KT5TxF5tPlQq9xVqkrNSxdPnwWYc');
 
-		const loadingContainer = new ContainerBuilder();
-
-		const legendBanner = new MediaGalleryBuilder().addItems([
-			{
-				type: MediaGalleryItem,
-				media: {
-					url: `https://specter.apexstats.dev/ApexStats/Legends/V2/Loading.png?key=${process.env.SPECTER}`,
-				},
-			},
-		]);
-
-		const legendText = new TextDisplayBuilder().setContent([`# ${platformEmote(platform)} -`, `-# ${emotes.listArrow} Status: -`, `-# ${emotes.listArrow} Level: - · Tier: -/4 · Total: -/2000`].join('\n'));
-
-		const battlepassText = new TextDisplayBuilder().setContent(
-			[`## Battle Pass Loading...`, `${emotes.listArrow} Reward Completion: -/60 (0%)\n${emotes.listArrow} Badge Completion: -/100 (0%)`, `${emotes.listArrow} Required Daily Levels till Completion: -/day`].join(
-				'\n',
-			),
-		);
-
-		const rankedText = new TextDisplayBuilder().setContent(
-			[
-				`## Battle Royale Ranked - Loading...`,
-				`${emotes.listArrow} **Division**: - RP`,
-				`${emotes.listArrow} **Total**: - RP`,
-				`${emotes.listArrow} **RP to Master**: - RP`,
-				`${emotes.listArrow} **RP to Apex Predator**: - RP`,
-			].join('\n'),
-		);
-
-		const trackerStatsBackground = new MediaGalleryBuilder().addItems([
-			{
-				type: MediaGalleryItem,
-				media: {
-					url: `https://specter.apexstats.dev/ApexStats/Legends/Trackers/Background_8.png?key=${process.env.SPECTER}`,
-				},
-			},
-		]);
-
-		const footerText = new TextDisplayBuilder().setContent(`-# Equip the Battle Pass badge in-game to update it!\n-# Equip trackers in-game to update stats`);
-
-		const profileButton = new ButtonBuilder().setLabel('View Stats Profile').setStyle(ButtonStyle.Link).setURL('https://apexstats.dev/').setDisabled(true);
-
-		const legendSection = new SectionBuilder()
-			.addTextDisplayComponents(legendText)
-			.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Empty.png?key=${process.env.SPECTER}`));
-
-		const battlepassSection = new SectionBuilder()
-			.addTextDisplayComponents(battlepassText)
-			.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Empty.png?key=${process.env.SPECTER}`));
-
-		const rankedSection = new SectionBuilder()
-			.addTextDisplayComponents(rankedText)
-			.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Empty.png?key=${process.env.SPECTER}`));
-
-		const footerSection = new SectionBuilder().addTextDisplayComponents(footerText).setButtonAccessory(profileButton);
-
-		loadingContainer.addMediaGalleryComponents(legendBanner);
-		loadingContainer.addSectionComponents(legendSection);
-
-		loadingContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
-
-		loadingContainer.addSectionComponents(battlepassSection);
-		loadingContainer.addSectionComponents(rankedSection);
-
-		loadingContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
-
-		loadingContainer.addMediaGalleryComponents(trackerStatsBackground);
-
-		loadingContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
-
-		loadingContainer.addSectionComponents(footerSection);
-
 		interaction.editReply({
-			components: [loadingContainer],
+			components: [testLoadEmbedThing(emotes, platform)],
 			flags: MessageFlags.IsComponentsV2,
 		});
 
@@ -210,10 +139,17 @@ module.exports = {
 				const canvas = createCanvas(1200, 100);
 				const ctx = canvas.getContext('2d');
 
+				// function to truncate text if its longer than 21 characters and add an elipsis at the end
+				function truncateText(text, length) {
+					if (text.length > length) return text.substring(0, length - 3) + '...';
+
+					return text;
+				}
+
 				const sections = [
-					{ title: trackers[0].name_short.toString(), subtitle: trackers[0].value.toLocaleString() },
-					{ title: trackers[1].name_short.toString(), subtitle: trackers[1].value.toLocaleString() },
-					{ title: trackers[2].name_short.toString(), subtitle: trackers[2].value.toLocaleString() },
+					{ title: truncateText(trackers[0].name_short.toString(), 25), subtitle: trackers[0].value.toLocaleString() },
+					{ title: truncateText(trackers[1].name_short.toString(), 25), subtitle: trackers[1].value.toLocaleString() },
+					{ title: truncateText(trackers[2].name_short.toString(), 25), subtitle: trackers[2].value.toLocaleString() },
 				];
 
 				const sectionWidth = 1200 / sections.length;

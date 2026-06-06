@@ -14,7 +14,7 @@ module.exports = {
 		const rest = new REST({ version: 10 }).setToken(process.env.DISCORD_TOKEN);
 		const commandFolders = fs.readdirSync(`${__dirname}/../../commands`);
 
-		console.log(chalk.yellow(`${chalk.bold('[BOT]')} Registering Slash Commands...`));
+		console.log(`${chalk.yellow.bold('[APEXSTATS]')} Registering Slash Commands...`);
 
 		client.commands = new Collection();
 
@@ -35,31 +35,31 @@ module.exports = {
 				// If debug is disabled, assume production
 				await rest.put(Routes.applicationCommands(client.user.id), { body: commands });
 
-				console.log(chalk.green(`${chalk.bold('[BOT]')} Successfully registered global slash commands`));
+				console.log(`${chalk.green.bold('[APEXSTATS]')} Successfully registered global slash commands`);
 			} else {
 				// Assume development
-				// console.log(chalk.red(`${chalk.bold('[BOT]')} Debug enabled, removing previous commands...`));
+				// console.log(`${chalk.red.bold('[APEXSTATS]')} Debug enabled, removing previous commands...`);
 
 				// await wait(500);
 
 				// await rest
 				// 	.put(Routes.applicationGuildCommands(client.user.id, process.env.TEST_SERVER), { body: [] })
-				// 	.then(console.log(chalk.yellow(`${chalk.bold('[BOT]')} Removed previous guild commands`)))
-				// 	.catch(error => console.error(chalk.red(`${chalk.bold('[BOT]')} Error removing previous guild commands: ${error}`)));
+				// 	.then(console.log(`${chalk.yellow.bold('[APEXSTATS]')} Removed previous guild commands`)))
+				// 	.catch(error => console.error(`${chalk.red.bold('[APEXSTATS]')} Error removing previous guild commands: ${error}`)));
 
 				// await wait(500);
 
 				// await rest
 				// 	.put(Routes.applicationCommands(client.user.id), { body: [] })
-				// 	.then(console.log(chalk.yellow(`${chalk.bold('[BOT]')} Removed previous global commands`)))
-				// 	.catch(error => console.error(chalk.red(`${chalk.bold('[BOT]')} Error removing previous global commands: ${error}`)));
+				// 	.then(console.log(`${chalk.yellow.bold('[APEXSTATS]')} Removed previous global commands`)))
+				// 	.catch(error => console.error(`${chalk.red.bold('[APEXSTATS]')} Error removing previous global commands: ${error}`)));
 
 				// await wait(5000);
 
 				// Register guild commands for test server
 				await rest.put(Routes.applicationGuildCommands(client.user.id, process.env.TEST_SERVER), { body: commands });
 
-				console.log(chalk.green(`${chalk.bold('[BOT]')} Successfully registered local slash commands`));
+				console.log(`${chalk.green.bold('[APEXSTATS]')} Successfully registered local slash commands`);
 			}
 		})();
 	},

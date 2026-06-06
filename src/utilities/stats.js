@@ -1,4 +1,5 @@
 const { emoteFile } = require('./misc.js');
+const { ButtonStyle, ButtonBuilder, SectionBuilder, ContainerBuilder, MediaGalleryItem, TextDisplayBuilder, MediaGalleryBuilder, SeparatorSpacingSize } = require('discord.js');
 
 const emotes = require(`../data/${emoteFile(process.env.DEBUG)}Emotes.json`);
 
@@ -120,6 +121,80 @@ function calcDailyBPLevelsTillCompletion(battlepass, seasonInfo) {
 	}
 }
 
+function testLoadEmbedThing(emotes, platform) {
+	const loadingContainer = new ContainerBuilder();
+
+	const legendBanner = new MediaGalleryBuilder().addItems([
+		{
+			type: MediaGalleryItem,
+			media: {
+				url: `https://specter.apexstats.dev/ApexStats/Legends/V2/Loading.png?key=${process.env.SPECTER}`,
+			},
+		},
+	]);
+
+	const legendText = new TextDisplayBuilder().setContent([`# ${platformEmote(platform)} -`, `-# ${emotes.listArrow} Status: -`, `-# ${emotes.listArrow} Level: - · Tier: -/4 · Total: -/2000`].join('\n'));
+
+	const battlepassText = new TextDisplayBuilder().setContent(
+		[`## Battle Pass Loading...`, `${emotes.listArrow} Reward Completion: -/60 (0%)\n${emotes.listArrow} Badge Completion: -/100 (0%)`, `${emotes.listArrow} Required Daily Levels till Completion: -/day`].join('\n'),
+	);
+
+	const rankedText = new TextDisplayBuilder().setContent(
+		[
+			`## Battle Royale Ranked - Loading...`,
+			`${emotes.listArrow} **Division**: - RP`,
+			`${emotes.listArrow} **Total**: - RP`,
+			`${emotes.listArrow} **RP to Master**: - RP`,
+			`${emotes.listArrow} **RP to Apex Predator**: - RP`,
+		].join('\n'),
+	);
+
+	const trackerStatsBackground = new MediaGalleryBuilder().addItems([
+		{
+			type: MediaGalleryItem,
+			media: {
+				url: `https://specter.apexstats.dev/ApexStats/Legends/Trackers/Background_8.png?key=${process.env.SPECTER}`,
+			},
+		},
+	]);
+
+	const footerText = new TextDisplayBuilder().setContent(`-# Equip the Battle Pass badge in-game to update it!\n-# Equip trackers in-game to update stats`);
+
+	const profileButton = new ButtonBuilder().setLabel('View Stats Profile').setStyle(ButtonStyle.Link).setURL('https://apexstats.dev/').setDisabled(true);
+
+	const legendSection = new SectionBuilder()
+		.addTextDisplayComponents(legendText)
+		.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Empty.png?key=${process.env.SPECTER}`));
+
+	const battlepassSection = new SectionBuilder()
+		.addTextDisplayComponents(battlepassText)
+		.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Empty.png?key=${process.env.SPECTER}`));
+
+	const rankedSection = new SectionBuilder()
+		.addTextDisplayComponents(rankedText)
+		.setThumbnailAccessory(thumbnail => thumbnail.setURL(`https://specter.apexstats.dev/ApexStats/Banners/Empty.png?key=${process.env.SPECTER}`));
+
+	const footerSection = new SectionBuilder().addTextDisplayComponents(footerText).setButtonAccessory(profileButton);
+
+	loadingContainer.addMediaGalleryComponents(legendBanner);
+	loadingContainer.addSectionComponents(legendSection);
+
+	loadingContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
+
+	loadingContainer.addSectionComponents(battlepassSection);
+	loadingContainer.addSectionComponents(rankedSection);
+
+	loadingContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
+
+	loadingContainer.addMediaGalleryComponents(trackerStatsBackground);
+
+	loadingContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Small));
+
+	loadingContainer.addSectionComponents(footerSection);
+
+	return loadingContainer;
+}
+
 module.exports = {
 	levelBadge,
 	getRankName,
@@ -133,4 +208,5 @@ module.exports = {
 	battlepassProgress,
 	rankBadgeImageName,
 	calcDailyBPLevelsTillCompletion,
+	testLoadEmbedThing,
 };

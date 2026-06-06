@@ -7,7 +7,7 @@ function uptime(client) {
 		const hours = `${Math.floor((uptime / (60 * 60)) % 24)} Hours`;
 		const days = `${Math.floor(uptime / 86400)} Days`;
 
-		if (client.shard.ids[0] === 0) console.log(chalk.blue(`${chalk.bold('[BOT]')} Uptime: ${days}, ${hours}, ${minutes}`));
+		if (client.shard.ids[0] === 0) console.log(`${chalk.blue.bold('[APEXSTATS]')} Uptime: ${days}, ${hours}, ${minutes}`);
 
 		now = new Date();
 		var delay = 60000 - (now % 60000);

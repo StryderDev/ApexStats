@@ -77,7 +77,7 @@ module.exports = {
 				});
 			})
 			.catch(err => {
-				console.error(chalk.red(`${chalk.bold('[MAP]')} Axios error: ${err}`));
+				console.error(`${chalk.red.bold('[APEXSTATS_MAP]')} Axios error: ${err}`);
 
 				const errorContainer = new ContainerBuilder().addTextDisplayComponents(textDisplay => textDisplay.setContent(`${emotes.listArrow} An error occurred while fetching map data. Please try again later.`));
 

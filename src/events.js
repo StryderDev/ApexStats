@@ -4,7 +4,7 @@ const chalk = require('chalk');
 function loadEvents(client) {
 	const folders = fs.readdirSync(`${__dirname}/events/`);
 
-	console.log(chalk.yellow(`${chalk.bold('[EVENTS]')} Loading event handler...`));
+	console.log(`${chalk.yellow.bold('[APEXSTATS_EVENTS]')} Loading event handler...`);
 
 	for (const folder of folders) {
 		const files = fs.readdirSync(`${__dirname}/events/${folder}/`).filter(file => file.endsWith('.js'));
@@ -26,7 +26,7 @@ function loadEvents(client) {
 				}
 			}
 
-			console.log(chalk.green(`${chalk.bold('[EVENTS]')} Loaded ${file} events`));
+			console.log(`${chalk.green.bold('[APEXSTATS_EVENTS]')} Loaded ${file} events`);
 		}
 	}
 }
