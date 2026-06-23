@@ -45,7 +45,7 @@ module.exports = {
 						const mapEmbed = new EmbedBuilder()
 							.setTitle(`Ranked Squads are currently competing on ${mapData.map.name}`)
 							.setDescription(
-								`**${mapData.map.name}** ends <t:${mapData.times.nextMap}:R> at <t:${mapData.times.nextMap}:t>.\n**Next Up:** ${mapData.next[0].map.name} for 4 hours and 30 minutes.\n**Ranked Period Split:** <t:${rankedSplit}:D> at <t:${rankedSplit}:t>, or <t:${rankedSplit}:R>.\n**Ranked Period End:** <t:${rankedEnd}:D> at <t:${rankedEnd}:t>, or <t:${rankedEnd}:R>.`,
+								`**${mapData.map.name}** ends <t:${mapData.times.nextMap}:R> at <t:${mapData.times.nextMap}:t>.\n**Next Up:** ${mapData.next[0].map.name} for 24 hours.\n**Ranked Period Split:** <t:${rankedSplit}:D> at <t:${rankedSplit}:t>, or <t:${rankedSplit}:R>.\n**Ranked Period End:** <t:${rankedEnd}:D> at <t:${rankedEnd}:t>, or <t:${rankedEnd}:R>.`,
 							)
 							.setImage(`https://specter.apexstats.dev/ApexStats/Maps/${mapImage}.png?t=${Math.floor(Math.random() * 10) + 1}&key=${process.env.SPECTER}`);
 						interaction.editReply({ embeds: [mapEmbed] });
