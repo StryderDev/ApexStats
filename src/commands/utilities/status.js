@@ -13,7 +13,7 @@ module.exports = {
 		await interaction.editReply({ embeds: [loadingEmbed] });
 
 		await axios
-			.get(`https://api.mozambiquehe.re/servers?auth=${process.env.ALS}`)
+			.get(`https://api.apexlegendsstatus.com/servers?auth=${process.env.ALS}`)
 			.then(async response => {
 				const status = response.data;
 
