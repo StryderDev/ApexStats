@@ -47,8 +47,6 @@ module.exports = {
 
 				const mapNextString = map.next[0] ? `\n${emotes.listArrow} Up Next: **${map.next[0].map.name} ${map.next[0].map.type}** for ${nextMapLength(map.next[0].duration)}` : ``;
 
-				console.log(mapImageName(mapInfo.name, mapInfo.type));
-
 				if (nextAmount === 1) {
 					const singleMapContainer = new ContainerBuilder()
 						.addTextDisplayComponents(textDisplay =>

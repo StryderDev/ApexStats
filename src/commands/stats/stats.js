@@ -161,7 +161,8 @@ module.exports = {
 				ctx.drawImage(trackerBackground, 0, 0, 1200, 100);
 
 				function truncateText(text, amount) {
-					const words = text.split(' ');
+					const textString = text.toString();
+					const words = textString.split(' ');
 					const lines = [];
 					let line = '';
 
@@ -175,7 +176,7 @@ module.exports = {
 						}
 					}
 
-					if (line.length < text.length) line += '...';
+					if (line.length < textString.length) line += '...';
 
 					lines.push(line);
 
