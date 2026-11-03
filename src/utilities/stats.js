@@ -47,12 +47,12 @@ function battlepass(data) {
 		rewardCompletion = Math.floor((data.history['Cipher_1'] / 60) * 100);
 	}
 
-	if (data.history['Cipher_2'] >= 100) {
+	if (data.history['Cipher_1'] >= 100) {
 		badgeLevel = 100;
 		badgeCompletion = 100;
 	} else {
-		badgeLevel = data.history['Cipher_2'];
-		badgeCompletion = Math.floor((data.history['Cipher_2'] / 100) * 100);
+		badgeLevel = data.history['Cipher_1'];
+		badgeCompletion = Math.floor((data.history['Cipher_1'] / 100) * 100);
 	}
 
 	return `${Misc.GrayBlank} Reward Completion: ${rewardLevel}/60 (${rewardCompletion}%)\n${Misc.GrayBlank} Badge Completion: ${badgeLevel}/100 (${badgeCompletion}%)`;
